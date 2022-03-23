@@ -1,6 +1,7 @@
 ! Title: uBlock filters
-! Expires: 4 days
 ! Description: Filters optimized for uBlock, to be used along EasyList
+! Expires: 4 days
+! Last updated: Wed, 23 Mar 2022 18:08:41 +0000
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! Licence: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! New filters from January 2022 to ->
@@ -1203,11 +1204,6 @@ masahub.net##+js(aopr, decodeURI)
 ! https://github.com/easylist/easylist/pull/11128/
 striptube.net##+js(aopr, loadTool)
 
-! tamilblasters.club ads/popup
-tamilblasters.club##+js(aost, Math, /(?=^(?!.*(tamilblasters|gstatic)))/)
-tamilblasters.club##+js(set, console.clear, noopFunc)
-*$script,3p,denyallow=google.com|gstatic.com,domain=tamilblasters.club
-
 ! https://github.com/AdguardTeam/AdguardFilters/issues/111673
 dulichkhanhhoa.net,noithatmyphu.vn##+js(no-fetch-if, googlesyndication)
 dulichkhanhhoa.net,noithatmyphu.vn###wpsafe-generate:style(display: block !important;)
@@ -1678,3 +1674,36 @@ kissasians.org##.banner
 hentaispark.com##+js(acis, JSON.parse, $.)
 ||mableyable.com^
 ||mambkooocango.com^
+
+! https://github.com/uBlockOrigin/uAssets/issues/12393
+tvanouvelles.ca##+js(no-fetch-if, doubleclick)
+
+! mavanimes. cc popups
+mavanimes.*##+js(acis, JSON.parse, Promise)
+
+! vanime. me popups
+vanime.*##+js(acis, JSON.parse, Promise)
+
+! coin-free.com anti-adb
+coin-free.com,kienthucrangmieng.com##+js(aost, document.write, onerror)
+
+! jardima.com timer
+jardima.com###wpsafe-generate:style(display: block !important;)
+jardima.com###wpsafe-link:style(display: block !important;)
+jardima.com##div[id^="wpsafe-wait"]
+jardima.com##.g1-slideup-wrap
+
+! zirof.com focus
+zirof.com##+js(set, blurred, false)
+
+! https://github.com/uBlockOrigin/uAssets/issues/12396
+! for-ad-inserter-sites
+||media.net^$object,redirect-rule=noopjs
+||google-analytics.com^$object,redirect-rule=noopjs
+||doubleclick.net^$object,redirect-rule=noopjs
+#@#.ad-inserter
+#@#.SponsorAds
+#@##banner-advert-container
+##.ad-inserter:not(#banner-advert-container)
+##.SponsorAds:not(.adsense)
+###banner-advert-container:not(.ad-inserter)
