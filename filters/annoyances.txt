@@ -2,7 +2,7 @@
 ! Description: Filters optimized for uBlock Origin, to be used with Fanboy's
 !              and/or Adguard's "Annoyances" list(s)
 ! Expires: 4 days
-! Last modified: Mon, 28 Mar 2022 09:29:38 +0000
+! Last modified: Tue, 29 Mar 2022 01:24:08 +0000
 ! License: https://creativecommons.org/licenses/by/3.0/
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! Forums: https://github.com/uBlockOrigin/uAssets/issues
@@ -2995,10 +2995,6 @@ loudersound.com##+js(aopr, _sp_._networkListenerData)
 ! https://github.com/NanoMeow/QuickReports/issues/3438
 kiminime.com##+js(aeld, keydown, ctrlKey)
 
-! okaeriworld .com right click, select, ctrl-U
-okaeriworld.com##+js(acis, document.oncontextmenu)
-okaeriworld.com##+js(acis, disableSelection, reEnable)
-
 ! https://github.com/uBlockOrigin/uAssets/issues/7176
 livedays.jp##p,ul,ol:style(-webkit-touch-callout: default !important; -webkit-user-select: text !important; -moz-user-select: text !important; -ms-user-select: text !important; user-select: text !important;)
 
@@ -3069,21 +3065,11 @@ kbdfans.com##html:style(overflow: auto !important;)
 kamerabudaya.com##+js(ra, onselectstart|ondragstart|onmousedown|onkeydown|oncontextmenu, body)
 kamerabudaya.com##body:style(-webkit-touch-callout: default !important; -webkit-user-select: text !important; -moz-user-select: text !important; -ms-user-select: text !important; user-select: text !important)
 
-! https://github.com/NanoMeow/QuickReports/issues/3532
-poisekai.site##+js(ra, onmousedown|onkeydown|oncontextmenu)
-poisekai.site##+js(acis, document.onmousedown)
-
 ! https://github.com/AdguardTeam/AdguardFilters/issues/53287 needed because of the ghide filter in uBO-filters
 de-baystars.doorblog.jp###gdpr-banner
 
 ! https://github.com/NanoMeow/QuickReports/issues/2587
 lumiafirmware.com###cookiesdirective
-
-! https://github.com/NanoMeow/QuickReports/issues/3533
-snowbeartranslation.com##+js(aeld, contextmenu)
-snowbeartranslation.com##+js(aopr, document.onkeydown)
-snowbeartranslation.com##body:style(-webkit-touch-callout: default !important; -webkit-user-select: text !important; -moz-user-select: text !important; -ms-user-select: text !important; user-select: text !important)
-snowbeartranslation.com##+js(set, document.onkeydown, null)
 
 ! https://github.com/NanoMeow/QuickReports/issues/3543
 anirocksite.com##+js(aopr, document.oncontextmenu)
@@ -3183,9 +3169,11 @@ day-hoc.org##html, .unselectable:style(-webkit-touch-callout: default !important
 day-hoc.org##+js(acis, disableSelection, reEnable)
 
 ! https://www.reddit.com/r/uBlockOrigin/comments/g5o8ov/how_to_over_ride_this_website_which_prevents/
-selfstudyhistory.com##+js(aopw, document.ondragstart)
+selfstudyhistory.com##+js(acis, document.ondragstart)
+selfstudyhistory.com##+js(aeld, dragstart|keydown/)
+selfstudyhistory.com##style:has-text(@media print):remove()
+selfstudyhistory.com##+js(aopw, disableEnterKey)
 selfstudyhistory.com##+js(aopw, document.onselectstart)
-selfstudyhistory.com##+js(acis, event, event.keyCode)
 selfstudyhistory.com##+js(acis, jQuery, contextmenu)
 selfstudyhistory.com##*:style(-webkit-touch-callout: default !important; -webkit-user-select: text !important; -moz-user-select: text !important; -ms-user-select: text !important; user-select: text !important;)
 
@@ -6450,3 +6438,6 @@ coolwallpapers.me##+js(nosiif, dfgh-adsbygoogle)
 ! https://github.com/AdguardTeam/AdguardFilters/issues/113837
 @@||freshersnow.com^$ghide
 freshersnow.com##.adsbygoogle
+
+! playerx.stream devtools detector
+/devtools-detector$script,domain=beastx.top|chillx.top|playerx.stream
