@@ -1,7 +1,7 @@
 ! Title: Quick fixes list
 ! Description: experimental filters 
 ! Expires: 1 days
-! Last modified: Sat, 09 Apr 2022 13:02:11 +0000
+! Last modified: Sat, 09 Apr 2022 17:56:12 +0000
 ! License: https://creativecommons.org/licenses/by/3.0/
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! Forums: https://github.com/uBlockOrigin/uAssets/issues
@@ -13,11 +13,12 @@ money.pl#@#+js()
 ||v.wpimg.pl/*.html$frame
 money.pl##:xpath(//*[string-length(@href) > 1600])
 money.pl#@#.ads
+@@||money.pl^$ghide
 ! wp.pl company anti adblock overlay and ads
-wp.pl,money.pl,o2.pl,parenting.pl,pudelek.pl,autokult.pl,gadzetomania.pl,fotoblogia.pl,komorkomania.pl,gadzetomania.pl##body:has(button:has-text(Zaloguj)) > [id] > [class]:matches-css(z-index:/2147483647/)
-wp.pl,money.pl,o2.pl,parenting.pl,pudelek.pl,autokult.pl,gadzetomania.pl,fotoblogia.pl,komorkomania.pl,gadzetomania.pl##body:has(button:has-text(Zaloguj)) > div:style(filter: none !important)
-wp.pl,money.pl,o2.pl,parenting.pl,pudelek.pl,autokult.pl,gadzetomania.pl,fotoblogia.pl,komorkomania.pl,gadzetomania.pl##body:has(button:has-text(Zaloguj)):style(overflow: auto !important)
-wp.pl,money.pl,pudelek.pl,gadzetomania.pl,fotoblogia.pl,gadzetomania.pl,o2.pl##body:has(button:has-text(Zaloguj)) div > style:has-text(flex: 0 0 100%) + div
+wp.pl,money.pl,o2.pl,parenting.pl,pudelek.pl,autokult.pl,gadzetomania.pl,fotoblogia.pl,komorkomania.pl##body:has(button:has-text(Zaloguj)) > [id] > [class]:matches-css(z-index:/2147483647/)
+wp.pl,money.pl,o2.pl,parenting.pl,pudelek.pl,autokult.pl,gadzetomania.pl,fotoblogia.pl,komorkomania.pl##body:has(button:has-text(Zaloguj)) > div:style(filter: none !important)
+wp.pl,money.pl,o2.pl,parenting.pl,pudelek.pl,autokult.pl,gadzetomania.pl,fotoblogia.pl,komorkomania.pl##body:has(button:has-text(Zaloguj)):style(overflow: auto !important)
+wp.pl,money.pl,pudelek.pl,gadzetomania.pl,fotoblogia.pl,o2.pl##body:has(button:has-text(Zaloguj)) div > style:has-text(flex: 0 0 100%) + div
 autokult.pl,fotoblogia.pl,kafeteria.pl,komorkomania.pl##body:has(button:has-text(Zaloguj)) a[href^="https://www.wp.pl"] > img[src^="https://v.wpimg.pl/"]:upward(3)
 fotoblogia.pl,kafeteria.pl##body:has(button:has-text(Zaloguj)) .article-sidebar-wrapper + div:has(a[href^="https://www.wp.pl"] > img[src^="https://v.wpimg.pl/"])
 wp.pl,money.pl##body:has(button:has-text(Zaloguj)) div[class] > div > div:empty + div > a[href*="wp.pl/"] > img[src^="https://v.wpimg.pl/"]:upward(4)
@@ -40,7 +41,8 @@ sportowefakty.wp.pl##body:has(button:has-text(Zaloguj)) div[class] > div[class] 
 sportowefakty.wp.pl##body:has(button:has-text(Zaloguj)) li:matches-css-after(content:/REKLAMA/)
 parenting.pl,abczdrowie.pl##body:has(button:has-text(Zaloguj)) main + div:has(a[href*=".pl/"] > img[src^="https://v.wpimg.pl/"])
 pudelek.pl,autokult.pl##body:has(button:has-text(Zaloguj)) div[style*="position: relative; top: 0px;"]:has(> a[href*=".pl/"] > div[style*="background-image"])
-parenting.pl##body:has(button:has-text(Zaloguj)) > div[class]:has(> div[style*="height: 184"] > a[href^="https://parenting.pl"])
+parenting.pl,abczdrowie.pl##body:has(button:has-text(Zaloguj)) > div[class]:has(> div[style*="height: 184"] > a[href*=".pl"])
+sportowefakty.wp.pl,fotoblogia.pl##body:has(button:has-text(Zaloguj)) div[class] > div[class] > div:empty + div[class] > a[href*="wp.pl/"]:has(img[src^="https://v.wpimg.pl/"]):upward(3)
 
 ! next-episode anti adb
 @@||next-episode.net^$script,1p
@@ -76,15 +78,16 @@ loawa.com##.adsbygoogle:style(height: 1px !important;)
 ||coupang.com/*addtag=*&pageType*&placementid*&impressionid$popup,3p
 
 ! https://github.com/uBlockOrigin/uAssets/issues/11152
-rjno1.com##style:not(:has-text(.qnx)):not(:has-text(.button)):not(:has-text(*,.x-----)):min-text-length(250):remove()
+rjno1.com##style:not(:has-text(.qnx)):not(:has-text(.button)):not(:has-text(x---)):min-text-length(250):remove()
 rjno1.com##div:matches-css(position:/fixed/)
 rjno1.com##div[id] > p:not([class]):not([id])
 rjno1.com##body > *:not(#site-top-bar):not(#page):not(iframe):not(.wp-die-message):not(p)
-rjno1.com##body > div > div *:style(height: unset !important; max-height: unset !important; overflow: default !important;)
+rjno1.com##body > *:style(min-height: unset !important; max-height: unset !important; overflow: auto !important;)
+rjno1.com##body > div *:style(height: unset !important; max-height: 500px !important; min-height: unset !important; overflow: auto !important;)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/9696
-||tpucdn.com/review/devuz*/images/*.jpg$image,domain=techpowerup.com
-||tpucdn.com/review/*56/images/*29-5953-35*.jpg$image,domain=techpowerup.com
+||tpucdn.com/review/xevuz*/images/*.jpg$image,domain=techpowerup.com
+||tpucdn.com/review/*49/images/*29-5953-35*.jpg$image,domain=techpowerup.com
 ||techpowerup.com/_ping$xhr
 !#if env_mobile
 techpowerup.com##:not(:matches-path(/forums/)) body:has(a[href*="/login"]) .apyrort > nav > div + aside[class]:has(> div:not([class]):not([id]) > div > a[href^="/review/"] > span > b > span > img):style(height: 1px !important; width: 1px !important; opacity: 0 !important; pointer-events: none !important;)
