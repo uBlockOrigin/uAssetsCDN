@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Expires: 4 days
-! Last modified: Mon, 25 Apr 2022 12:11:36 +0000
+! Last modified: Mon, 25 Apr 2022 15:31:42 +0000
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! Licence: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 !
@@ -1713,8 +1713,8 @@ zippyshare.com##.center:has-text(Advertisement)
 kimcartoon.*##+js(acis, $, adbWarn)
 kimcartoon.*##+js(aopw, Fingerprint2)
 kimcartoon.*###subcontent > div:has(.adsbyvli)
-kimcartoon.*##.adsbyvli:upward(div[style^="width: 300px; height: 250px"])
-kimcartoon.*##iframe[src^="/Ads/"]:upward(div[style^="width: 300px; height: 250px"])
+kimcartoon.*##div[style*="width: 300px; height: 250px"]
+kimcartoon.*##.kcAds1
 kimcartoon.*,kisscenter.net###ads-top-wrap
 ||kimcartoon.*/Ads/$frame
 ! https://www.reddit.com/r/uBlockOrigin/comments/nkuw0i/help_with_kimcartoon/
@@ -2505,7 +2505,7 @@ voyeurhit.com##.footer-banners
 upornia.com##+js(acis, adver)
 upornia.com##+js(nosiif, undefined)
 upornia.com##+js(nowoif)
-upornia.*##.jwplayer > .afs_ads + div[style="display:flex !important"]
+upornia.*##.jwplayer > div[style="display:flex !important"] > div
 upornia.*##.video-content > div[class] > div.text > a[href="#"]:upward(2)
 upornia.*##.videoplayer-wrapper + div > div[class]:only-child
 upornia.*##.app-banners
@@ -2583,10 +2583,12 @@ thegay.com##.underplayer__info > div:first-child:has(> div > div#und_ban)
 thegay.*##.video-page__content > .right
 ! privatehomeclips.com
 privatehomeclips.com##.footer-banners
-privatehomeclips.com##.jwplayer > .afs_ads + span[class]
+privatehomeclips.com##.jwplayer > div[style="display:flex !important"] > div
 privatehomeclips.com##.partners-wrap
 privatehomeclips.com##.video-page__content > .right
 privatehomeclips.com##.video-page__item
+privatehomeclips.com##.content > div > .wrapper + div[class]:not(.wrapper)
+privatehomeclips.com##.underplayer > div[class]:not([class*="_"]) > div[class]
 ! vxxx.com
 vxxx.com##+js(acis, ACtMan)
 vxxx.com###player-1 > div[style="display:flex !important"]
@@ -2621,10 +2623,12 @@ hclips.com##+js(aopr, ExoLoader)
 hclips.com##.adv-box-holder
 hclips.com##[class^="pl_"]
 hclips.com##iframe[src="javascript:false"]
-hclips.com##.jwplayer > .afs_ads + span[class]
+hclips.com##.jwplayer > div[style="display:flex !important"] > div
 hclips.com##.video-page__content > .right
 hclips.com##.video-page__item
 hclips.com##.content > div > .wrapper + div[class]:not(.wrapper)
+hclips.com##.underplayer > div[class]:not([class*="_"]) > div[class]
+hclips.com##.wrapper + .partners-wrap + div[class]
 *$script,3p,denyallow=recaptcha.net|gstatic.com,domain=hclips.com
 *$frame,3p,denyallow=google.com|gstatic.com,domain=hclips.com
 ! https://github.com/uBlockOrigin/uAssets/issues/8391
@@ -3912,11 +3916,6 @@ met.bz##+js(aopr, AaDetector)
 uploadhaven.com##+js(acis, globalThis, break;case)
 ||uploadhaven.com/sw.js$script,1p
 
-! backin.net anti adb + popups
-backin.net##+js(nostif, (), 3000)
-backin.net##+js(nano-sib)
-backin.net##+js(nowoif, !generating.php?)
-
 ! https://github.com/jspenguin2017/uBlockProtector/issues/840
 hideout.*##+js(acis, stop, adblock)
 
@@ -4157,7 +4156,6 @@ hindimean.com,streamcdn.*##+js(aopw, _pop)
 eplayer.to,hindimean.com##+js(nowebrtc)
 hindimean.com##+js(acis, Math, break;case $.)
 izlemac10.net,streamcdn.*##+js(aopr, open)
-sportzonline.xyz##+js(popads.net)
 wizhdsports.fi##+js(nowebrtc)
 ||stream2watch.*/sw.js$script,1p
 ||steptaik.net^$3p
@@ -4174,7 +4172,6 @@ daddylive.*##+js(aopr, afScript)
 ||daddylive.*/sw.js$script,1p
 daddylive.*###floatLayer1
 daddylive.*###html1
-||cadsats.com^
 
 ! https://github.com/uBlockOrigin/uAssets/issues/1618
 cnnamador.com##+js(noeval)
@@ -4194,9 +4191,7 @@ itdmusic.*##+js(acis, addEventListener, google_ad_client)
 itdmusic.*##+js(aopw, _pop)
 itdmusic.*##+js(nowebrtc)
 itdmusic.*##+js(popads-dummy)
-idsly.net##+js(aeld, load, onload)
 ##[href^="https://2go7v1nes8.com/"]
-idsly.net##[src*="/download"]
 
 ! https://github.com/uBlockOrigin/uAssets/pull/1623
 dirpy.com##a[href*="bit.ly"]
@@ -5181,6 +5176,7 @@ foxsports.com.au##+js(set, cxStartDetectionProcess, noopFunc)
 ! https://github.com/uBlockOrigin/uAssets/issues/2064
 thememypc.net##+js(acis, JSON.parse, break;case $.)
 thememypc.net##+js(aopr, Abd_Detector)
+thememypc.net##+js(nano-sib, counter, 2000)
 @@||thememypc.net^$ghide
 thememypc.net##.adsbygoogle
 kinoger.*##+js(aopr, __Y)
@@ -6122,6 +6118,8 @@ ebookmed.*##+js(aeld, load, 2000)
 appvn.com##+js(acis, JSON.parse, break;case $.)
 @@||appvn.com^$ghide
 appvn.com##.ads
+appvn.com##.downloadtitle
+appvn.com###info:style(display: block !important)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/2537
 @@||worldofbitco.in^$ghide
@@ -10646,7 +10644,7 @@ torrent9.*###vpnvpn
 
 ! https://github.com/uBlockOrigin/uAssets/issues/4630
 ilinks.in##+js(aopr, app_vars.force_disable_adblock)
-ilinks.in##+js(acis, JSON.parse, break;case $.)
+ilinks.in##+js(acis, parseInt, break;case $.)
 ilinks.in##+js(set, blurred, false)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/4632
@@ -12730,6 +12728,7 @@ imgdawgknuttz.com##+js(aopw, _pop)
 imgdawgknuttz.com##+js(aopr, Pub2a)
 imgdawgknuttz.com##^script[data-cfasync]:has-text(h=decodeURIComponent)
 ||imgdawgknuttz.com/*.php$script,1p
+||xxxwebdlxxx.org^$image,domain=imgdawgknuttz.com
 
 ! https://github.com/uBlockOrigin/uAssets/issues/5452
 informazionefiscale.it##+js(acis, document.createElement, admiral)
@@ -18360,7 +18359,7 @@ mobilecare107.com##+js(aopw, downloadJSAtOnload)
 @@||erai-raws.info^$ghide
 
 ! https://github.com/uBlockOrigin/uAssets/issues/10829
-cima4u.*##+js(acis, JSON.parse, break;case $.)
+cima4u.*##+js(acis, parseInt, break;case $.)
 ##[href*="//agacelebir.com"]
 ||fwlrdkhh.xyz^
 
