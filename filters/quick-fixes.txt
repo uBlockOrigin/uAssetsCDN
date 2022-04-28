@@ -1,7 +1,7 @@
 ! Title: Quick fixes list
 ! Description: experimental filters 
 ! Expires: 1 days
-! Last modified: Wed, 27 Apr 2022 20:43:04 +0000
+! Last modified: Thu, 28 Apr 2022 13:12:34 +0000
 ! License: https://creativecommons.org/licenses/by/3.0/
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! Forums: https://github.com/uBlockOrigin/uAssets/issues
@@ -101,14 +101,20 @@ rjno1.com##.menu-use-js
 ! https://github.com/uBlockOrigin/uAssets/issues/9696
 ||techpowerup.com/_botcheck$xhr
 !#if env_mobile
-techpowerup.com##body:not([data-template]) a[href^="/review/481/"] img[src^="https://tpucdn.com/review/"]:style(height: 1px !important; width: 1px !important; opacity: 0 !important; pointer-events: none !important;)
+techpowerup.com##div[class*="__"] + *[class^="07cc6"]:not(div, span)
 !#endif
-techpowerup.com##body:not([data-template]) *:not(header.clearfix + script + .text) > * > * > a img[src*=".com/review/"]
-techpowerup.com##body:not([data-template]) *:not(div[class^="responsive-image-"][style^="width:"]) > *:not(figure[style^="padding-top:7"]) > a img[src*=".com/review/"]
-techpowerup.com##body:not([data-template]) figure[style="padding-top:7px"] > a img[src*=".com/review/"]
-techpowerup.com##body:not([data-template]) a[data-wdh][data-height=""] > img[src*=".com/review/"][xheight]
-techpowerup.com##body:not([data-template]) figure > a:not([href^="/review/"]):has(img[src*=".com"])
-||www.techpowerup.com/*/b680$image,1p
+!#if env_chromium
+techpowerup.com##:matches-path(/29) body:not([data-template]):has(.imgcontainer) *:not(.imgcontainer) > a:not([href^="https://www.techpowerup.com/img/"]) > img:not([href^="https://tpucdn.com/img/"])
+techpowerup.com##:matches-path(/review/) body:not([data-template]) *:not(header.clearfix + script + .text) > * > *:not(.photo) > a img
+techpowerup.com##:matches-path(/gallery/) body:not([data-template]) a[data-height=""] > img[xheight=""]
+techpowerup.com##:matches-path(/vgabios/) body:not([data-template]) *:not(section.cardimage) > * > a img
+techpowerup.com##:matches-path(/gpu-specs/) body:not([data-template]) *:not(div[class^="gpudb-"]) > a img
+techpowerup.com##:matches-path(/cpu-specs/) body:not([data-template]) *:not(div[class="clearfix images"]) > * > a img
+techpowerup.com##:matches-path(/live/) body:not([data-template]) a[href^="/"]:not([href^="/live/images/"]) img[src^="/"]:not([src^="/live/images/"])
+techpowerup.com##:matches-path(/download/) body:not([data-template]) a:not([href^="https://tpucdn.com/download/images/"]) img[src^="/"]:not([src$=".png"])
+techpowerup.com##:matches-path(/articles/) body:not([data-template]) a:not([href^="http://www.techpowerup.com/articles/"]) img:not([src^="https://tpucdn.com/articles/"])
+!#endif
+||www.techpowerup.com/re*/b68*.j$image,1p
 
 ! https://github.com/uBlockOrigin/uAssets/issues/9932#issuecomment-1075139639
 nikita.tk##+js(aost, document.cookie)
@@ -141,6 +147,9 @@ search.seznam.cz##[class]:not([style]):matches-css(background-image: /url.*svg/)
 ads.ylilauta.org##html:style(max-height: 1px !important;)
 @@||adform.net^$script,xhr,domain=fcdn.lauta.media
 ||s1.adform.net/banners/Elements/$important,domain=fcdn.lauta.media
-fcdn.lauta.media##video:remove()
+fcdn.lauta.media##video:style(filter: opacity(0) !important;)
 fcdn.lauta.media##+js(aeld, click)
 fcdn.lauta.media##.error
+
+! https://github.com/easylist/easylist/pull/10813
+||hitomi.la/gg.js$badfilter
