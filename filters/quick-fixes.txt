@@ -1,7 +1,7 @@
 ! Title: Quick fixes list
 ! Description: experimental filters 
 ! Expires: 1 days
-! Last modified: Wed, 04 May 2022 19:25:14 +0000
+! Last modified: Thu, 05 May 2022 11:41:59 +0000
 ! License: https://creativecommons.org/licenses/by/3.0/
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! Forums: https://github.com/uBlockOrigin/uAssets/issues
@@ -37,6 +37,7 @@ www.wp.pl##div[class] > img[src^="https://v.wpimg.pl/"] + img[src^="https://v.wp
 @@||tlx.3lift.com/header/auction?$xhr,domain=aternos.org
 @@||c.amazon-adsystem.com/aax2/apstag.js$script,domain=aternos.org
 @@||c.amazon-adsystem.com/bao-csm/aps-comm/aps_csm.js$xhr,domain=aternos.org
+@@||c.amazon-adsystem.com/cdn/prod/config$xhr,domain=aternos.org
 @@||c.amazon-adsystem.com/e/dtb/bid?$xhr,domain=aternos.org
 @@||onetag-sys.com/prebid-request$xhr,domain=aternos.org
 @@||ib.adnxs.com/ut/v3/prebid$xhr,domain=aternos.org
@@ -61,6 +62,7 @@ www.wp.pl##div[class] > img[src^="https://v.wpimg.pl/"] + img[src^="https://v.wp
 @@||prg.smartadserver.com/prebid/v1$xhr,domain=aternos.org
 @@||static.criteo.net/js/ld/publishertag.prebid.js$xhr,domain=aternos.org
 @@||tpc.googlesyndication.com/sodar/sodar2.js$script,domain=aternos.org
+@@||cdn.id5-sync.com/api/*/id5-api.js$script,domain=aternos.org
 ||aternos.org/panel/ajax/reportDetection.php?$xhr,1p
 *$script,redirect-rule=noopjs,domain=aternos.org
 aternos.org##.ad:style(height: 1px !important; width: 1px !important; opacity: 0 !important;)
@@ -68,6 +70,10 @@ aternos.org##.ad-dfp:remove()
 aternos.org##.sidebar:remove()
 aternos.org##.header-link-exaroton [href]
 aternos.org##[id^="adngin-"]:remove()
+aternos.org##+js(set, Criteo, [])
+aternos.org##+js(set, ID5, [])
+aternos.org##+js(set, pbjs, [])
+aternos.org##+js(set, snigelPubConf, [])
 
 ! https://github.com/uBlockOrigin/uAssets/issues/12163
 *$script,redirect-rule=noopjs,domain=ppss.kr|ygosu.com|tgd.kr|inven.co.kr|loawa.com
@@ -92,8 +98,8 @@ aternos.org##[id^="adngin-"]:remove()
 @@||zicf.inven.co.kr/RealMedia/ads/adstream_sx.ads/$frame,domain=inven.co.kr|~zicf.inven.co.kr|~m.inven.co.kr
 @@||r-log.dable.io/s/ppss.kr/u/$script,domain=ppss.kr
 @@||wcs.naver.net/wcslog.js$script,domain=loawa.com
-ppss.kr,ygosu.com,tgd.kr,inven.co.kr,loawa.com##div[style="text-align: center;"]:style(-webkit-mask-image: linear-gradient(transparent, transparent) !important;)
-ppss.kr,ygosu.com,tgd.kr,inven.co.kr,loawa.com##+js(aeld, , catch_adblock_error)
+ppss.kr,ygosu.com,tgd.kr,inven.co.kr,loawa.com,feedclick.net##div[style="text-align: center;"]:style(-webkit-mask-image: linear-gradient(transparent, transparent) !important;)
+ppss.kr,ygosu.com,tgd.kr,inven.co.kr,loawa.com,feedclick.net##+js(aeld, , catch_adblock_error)
 ppss.kr#@#img[id^="ppss_title_bn"]
 ppss.kr##a[href*="president.go.kr"] > img:style(height: 600px !important; width: 160px !important;)
 ppss.kr##a[href*="cartax.biz"] > img:style(height: 87px !important; width: 630px !important;)
@@ -101,7 +107,7 @@ ppss.kr##a[href*="president.go.kr"]:style(pointer-events: none !important;)
 ppss.kr##a[href*="cartax.biz"]:style(pointer-events: none !important;)
 ||ppss.kr/wp-content/uploads/2021/09/ktx_*.png$image,domain=ppss.kr
 ||ppss.kr/wp-content/uploads/2022/02/cartax-*.jpg$image,domain=ppss.kr
-/\/[0-9a-zA-Z\_?\-]{19,}\.(?!png|jpg|gif|jpeg|html|htm|txt)/$document,popup,1p,domain=ppss.kr|ygosu.com|tgd.kr|inven.co.kr|loawa.com
+/\/[0-9a-zA-Z\_?\-]{19,}\.(?!png|jpg|gif|jpeg|html|htm|txt|php)/$document,popup,1p,domain=ppss.kr|ygosu.com|tgd.kr|inven.co.kr|loawa.com|feedclick.net
 ||coupang.com/*addtag=*&pageType*&placementid*&impressionid$popup,3p
 loawa.com#@#iframe[src^="https://googleads.g.doubleclick.net/pagead/ads"]:style(opacity: 0 !important;)
 
