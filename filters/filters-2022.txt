@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Expires: 4 days
-! Last modified: Fri, 20 May 2022 05:00:45 +0000
+! Last modified: Fri, 20 May 2022 12:37:37 +0000
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! Licence: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! New filters from January 2022 to ->
@@ -929,7 +929,7 @@ h-flash.com#@#.google-ads
 ||gratisbitcoin.my.id^$3p
 clickscoin.com##.d-sm-block.d-none
 clickscoin.com##a[href^="https://albeitinflame.com/"]
-||googletagmanager.com/gtag/js$script,redirect-rule=googletagmanager_gtm.js
+||googletagmanager.com/gtag/js$script,redirect-rule=googletagmanager_gtm.js:5
 
 ! new-porn.club popup
 new-porn.club##+js(acis, document.attachEvent, prt)
@@ -1751,9 +1751,11 @@ zirof.com##+js(set, blurred, false)
 #@#.ad-inserter
 #@#.SponsorAds
 #@##banner-advert-container
+#@#.sponsor-ad
 ##.ad-inserter:not(#banner-advert-container):not(.adsense)
 ##.SponsorAds:not(.adsense)
 ###banner-advert-container:not(.ad-inserter):not(.adsense)
+##.sponsor-ad:not(.adsense)
 
 ! https://www.reddit.com/r/uBlockOrigin/comments/tkvtro/foxcom_has_adblock_detector/
 fox.com##+js(no-xhr-if, googlesyndication)
@@ -2771,6 +2773,7 @@ freebitcoin.top##+js(acis, eval, decodeURIComponent)
 ! https://github.com/uBlockOrigin/uAssets/issues/13206
 outlook.live.com##.customScrollBar > div[class] > div[class]:empty
 outlook.live.com##.customScrollBar > div div.full:not([aria-label]):not([data-convid]):not([role="option"])
+outlook.live.com##.customScrollBar > div > div[class^="_"] > div > div.full:not([aria-label]):not([data-convid]):not([role="option"]):upward(2)
 
 ! amazon sponsored items .it, .in
 amazon.*##.s-sponsored-label-text:upward([data-asin])
@@ -3101,7 +3104,7 @@ erome.com##+js(set, tiPopAction, noopFunc)
 atomohd.com##+js(acis, parseInt, break;case $.)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/13314
-*$script,domain=pomponik.pl,redirect-rule=noopjs
+@@||g.doubleclick.net/tag/js/gpt.js$script,redirect-rule,domain=pomponik.pl
 
 ! https://github.com/AdguardTeam/AdguardFilters/issues/118844 
 trytutorial.com##+js(aopr, ai_run_scripts)
@@ -3114,3 +3117,9 @@ trytutorial.com##+js(aopr, ai_run_scripts)
 
 ! https://www.reddit.com/r/uBlockOrigin/comments/uth55k/im_getting_popups_for_streaming_site/
 fbox.to##+js(acis, parseInt, break;case $.)
+
+! https://github.com/uBlockOrigin/uAssets/issues/13320
+imdbembed.xyz##+js(nowoif)
+imdbembed.xyz###addiv
+||psurigrabi.com^
+||scrapethrillmostly.com^$all
