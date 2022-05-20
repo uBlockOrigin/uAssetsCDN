@@ -1,7 +1,7 @@
 ! Title: Quick fixes list
-! Description: experimental filters 
+! Description: experimental filters
 ! Expires: 1 days
-! Last modified: Thu, 19 May 2022 18:25:47 +0000
+! Last modified: Thu, 19 May 2022 21:08:48 +0000
 ! License: https://creativecommons.org/licenses/by/3.0/
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! Forums: https://github.com/uBlockOrigin/uAssets/issues
@@ -14,10 +14,12 @@ wp.pl,money.pl,o2.pl,parenting.pl,pudelek.pl,autokult.pl,gadzetomania.pl,fotoblo
 ||wp.pl^$frame,domain=wp.pl|money.pl|o2.pl|parenting.pl|pudelek.pl|autokult.pl|gadzetomania.pl|fotoblogia.pl|komorkomania.pl|polygamia.pl
 ||v.wpimg.pl/*.html$frame
 wp.pl,money.pl,o2.pl,parenting.pl,pudelek.pl,autokult.pl,gadzetomania.pl,fotoblogia.pl,komorkomania.pl,polygamia.pl,open.fm##:xpath(//*[string-length(@href) > 1600])
-autokult.pl,fotoblogia.pl,komorkomania.pl##[class*="article"] > div[class]:not([class*="article"]):has(> div[class] > div[class]:empty)
 wp.pl,money.pl,o2.pl,pudelek.pl,gadzetomania.pl,polygamia.pl,dobreprogramy.pl##div[class]:has(> img[src] + div > style:has-text(flex: 0 0 100%))
 autokult.pl,komorkomania.pl,fotoblogia.pl##div[class]:has(> div[class]:empty + img[src^="https://i.wpimg.pl/"])
 sportowefakty.wp.pl###matchtable + div:not([class], [id]):has(> div > div + div:empty)
+sportowefakty.wp.pl##article > div[class*=" "]:has(> div:empty:not([style]))
+sportowefakty.wp.pl###gallerybox_id > div:first-child:has(> div:empty)
+sportowefakty.wp.pl##.articleteasers__list > .articleteaser:has(> .inview + span > a[target="_blank"])
 o2.pl##div[class]:has(> h6:has-text(Oferty dla Ciebie) + div > img[src^="https://www.o2.pl/"][role="presentation"])
 o2.pl##div:has(> div[style="width:100%"] > div > img[src^="https://www.o2.pl/"][role="presentation"])
 www.wp.pl###app-content > div > div:not([class]):not([id])
@@ -74,11 +76,6 @@ aternos.org##[data-google-query-id]:upward(.responsive-leaderboard)
 aternos.org##ins[id^="gpt_unit_"]
 
 ! https://github.com/uBlockOrigin/uAssets/issues/12163
-*$script,redirect-rule=noopjs,domain=ppss.kr|ygosu.com|tgd.kr|inven.co.kr|loawa.com
-*$image,redirect-rule=1x1.gif,domain=ygosu.com|tgd.kr|inven.co.kr|loawa.com|feedclick.net
-*$image,redirect-rule=32x32.png,domain=ppss.kr
-*$xhr,redirect-rule=noopjs,domain=ppss.kr|ygosu.com|tgd.kr|inven.co.kr|loawa.com|feedclick.net
-*$frame,redirect-rule=noopframe,domain=ppss.kr|ygosu.com|tgd.kr|inven.co.kr|loawa.com|feedclick.net
 ||googletagmanager.com/gtag/js$script,redirect-rule=googletagmanager_gtm.js:5,domain=loawa.com
 @@*$ghide,domain=ppss.kr|ygosu.com|tgd.kr|inven.co.kr|loawa.com|feedclick.net
 @@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$script,domain=ppss.kr|ygosu.com|tgd.kr|inven.co.kr|loawa.com
@@ -107,11 +104,8 @@ ppss.kr##a[href*="president.go.kr"]:style(pointer-events: none !important;)
 ppss.kr##a[href*="cartax.biz"]:style(pointer-events: none !important;)
 ||ppss.kr/wp-content/uploads/2021/09/ktx_*.png$image,domain=ppss.kr
 ||ppss.kr/wp-content/uploads/2022/02/cartax-*.jpg$image,domain=ppss.kr
-/\/[0-9a-zA-Z\/\_?]{14,}\.(?!png|jpg|gif|jpeg|html|htm|txt|php|com|kr|net|svg)/$doc,popup,inline-script,1p,domain=ppss.kr|ygosu.com|tgd.kr|inven.co.kr|loawa.com|feedclick.net
-||coupang.com/*&addtag=*ptag=*&redirect=landing&traceid=*&placementid=*&impressionid=&campaigntype=$doc,popup
 loawa.com##div[id^="ad_"]:style(z-index: -10000 !important; position: absolute !important;)
 loawa.com##div[class="p-0 m-0 mb-2 d-none d-md-block text-center "]:style(z-index: -10000 !important; position: absolute !important;)
-ppss.kr,ygosu.com,tgd.kr,inven.co.kr,loawa.com,feedclick.net##+js(nostif, eval, 1000)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/11152
 *$script,redirect-rule=noopjs,domain=rjno1.com
