@@ -1,7 +1,7 @@
 ! Title: Quick fixes list
 ! Description: experimental filters
 ! Expires: 1 days
-! Last modified: Thu, 26 May 2022 14:59:37 +0000
+! Last modified: Fri, 27 May 2022 13:07:04 +0000
 ! License: https://creativecommons.org/licenses/by/3.0/
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! Forums: https://github.com/uBlockOrigin/uAssets/issues
@@ -69,7 +69,7 @@ www.wp.pl##div[class] > img[src^="https://v.wpimg.pl/"] + img[src^="https://v.wp
 *$script,redirect-rule=noopjs,domain=aternos.org
 aternos.org##.ad:style(opacity: 0.00105 !important; pointer-events: none !important;)
 aternos.org##.sidebar:remove()
-aternos.org##.header-link-exaroton *:style(opacity: 0.001203 !important; pointer-events: none !important;)
+aternos.org##.header-link-exaroton *:style(opacity: 0.001204 !important; pointer-events: none !important;)
 aternos.org##[id^="google_ads_iframe"]:style(max-height: 1px !important;)
 aternos.org##[data-google-query-id]:upward(.bottom):style(opacity: 0.00105 !important; pointer-events: none !important;)
 aternos.org##[data-google-query-id]:upward(.responsive-leaderboard)
@@ -77,8 +77,9 @@ aternos.org##ins[id^="gpt_unit_"]
 
 ! https://github.com/uBlockOrigin/uAssets/issues/12163
 ppss.kr,ygosu.com,tgd.kr,loawa.com,inven.co.kr,feedclick.net,dailian.co.kr##+js(nostif, , 10)
-loawa.com##div[id^="ad_"]:style(position: absolute !important; top: 100% !important;)
-loawa.com##div[class="p-0 m-0 mb-2 d-none d-md-block text-center "]:style(position: absolute !important; top: 100% !important;)
+loawa.com##div[id*="ad_"][style*="position: absolute; top:"]:style(top: 100% !important; position: absolute !important;)
+loawa.com##div[class*="p-0 m-0 mb-2 d-none d-md-block text-center "]:style(position: relative !important; top: -200px !important;)
+loawa.com###ad_center_v.adsense-ch:style(position: relative !important; top: 420px !important;)
 loawa.com###equip-info-modal:has(> .modal-dialog > .modal-content > .modal-body > button.close + button.float-right)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/11152
@@ -152,6 +153,7 @@ fcdn.lauta.media##+js(set, loadFailHandler, noopFunc)
 ! https://github.com/uBlockOrigin/uAssets/issues/11004
 @@||anydebrid.com^$ghide
 ||a.exoclick.com/ad_track.js$script,redirect-rule=noop.js,domain=anydebrid.com
+@@||cdn.adnxs.com^$script,domain=anydebrid.com
 
 ! https://github.com/uBlockOrigin/uAssets/issues/13284
 @@||assets.adobedtm.com/*-source.min.js$script,domain=currys.co.uk
@@ -166,3 +168,10 @@ fcdn.lauta.media##+js(set, loadFailHandler, noopFunc)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/13385
 ||nypost.com/blaize/$badfilter
+
+! https://github.com/uBlockOrigin/uAssets/issues/13424
+megaup.net#@#.metaRedirectWrapperBottomAds > div > a > img:style(opacity: 0.002 !important;)
+megaup.net##.metaRedirectWrapperBottomAds > div > a > img:style(opacity: 0.003 !important;)
+
+! https://forums.lanik.us/viewtopic.php?p=164232-https-apikey-wrld3d-com-generate-204#p164232
+@@||apikey.wrld3d.com/generate_204/$xhr
