@@ -1,7 +1,7 @@
 ! Title: Quick fixes list
 ! Description: experimental filters
 ! Expires: 1 days
-! Last modified: Thu, 30 Jun 2022 10:37:24 +0000
+! Last modified: Fri, 01 Jul 2022 13:21:02 +0000
 ! License: https://creativecommons.org/licenses/by/3.0/
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! Forums: https://github.com/uBlockOrigin/uAssets/issues
@@ -30,9 +30,15 @@ www.wp.pl##div[class] > img[src^="https://v.wpimg.pl/"] + img[src^="https://v.wp
 www.wp.pl##div[class][style="margin-bottom: 20px;"]:has(> div + div + div > img[src^="https://v.wpimg.pl/"][role="presentation"])
 www.wp.pl##div[class][style="margin-bottom: 20px;"]:has(div > div > a#undefined-0)
 
+! https://github.com/uBlockOrigin/uAssets/issues/13890
+/^https:\/\/[a-z]{2,14}\.wp\.pl\/[a-zA-Z0-9_-]{200,}/$script,domain=nowy.tlen.pl|poczta.o2.pl|profil.wp.pl,badfilter
+/^https:\/\/[a-z]{2,14}\.wp\.pl\/[a-zA-Z0-9_-]{200,915}$/$script,domain=nowy.tlen.pl|poczta.o2.pl|profil.wp.pl
+
 ! aternos anti adb
+@@||hb.vntsm.com/v3/live/ad-manager.min.js$script,domain=aternos.org
+@@||hb.vntsm.com/v2/live/$xhr,domain=aternos.org
 aternos.org##.ad:style(opacity: 0.00105 !important; pointer-events: none !important;)
-aternos.org##.sidebar:style(padding: 1.235px !important; min-width: 0px !important; width: 0.1px !important;)
+aternos.org##.sidebar:style(position: absolute !important; right: 10000px !important; pointer-events: none !important;)
 aternos.org##.header-link-exaroton *:style(opacity: 0.001220 !important; pointer-events: none !important;)
 aternos.org##[id^="google_ads_iframe"]:style(max-height: 1px !important;)
 aternos.org##[data-google-query-id]:upward(.bottom):style(opacity: 0.00105 !important; pointer-events: none !important;)
@@ -48,7 +54,7 @@ aternos.org##ins[id^="gpt_unit_"]
 algumon.com#@#div[class^="ad-"]
 !#if env_chromium
 @@||static.dable.io/dist/plugin.min.js$xhr,domain=ppss.kr|ygosu.com|feedclick.net|loawa.com|inven.co.kr|algumon.com
-@@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$xhr,domain=ygosu.com|inven.co.kr|algumon.com
+@@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$xhr,domain=ygosu.com|inven.co.kr
 @@||ad.doubleclick.net/ddm/adj/Bkne/Bdfs$xhr,domain=ppss.kr|ygosu.com|feedclick.net|loawa.com|inven.co.kr|algumon.com
 !#endif
 @@||pagead2.googlesyndication.com/pagead/managed/js/adsense/$script,domain=loawa.com|feedclick.net|ppss.kr|algumon.com
@@ -169,9 +175,6 @@ tamrieltradecentre.com##[id^="aswift_"]
 canale.live##+js(set, moneyAbovePrivacyByvCDN, true)
 canale.live##+js(nosiif, href)
 
-! file-upload .com malicious redirect
-file-upload.*##^meta[http-equiv="refresh"]
-
 ! hotfix https://github.com/uBlockOrigin/uAssets/issues/13782
 @@||marketingautomation.services/client/ss.js$script,domain=leeuwerik.nl
 @@||marketingautomation.services/*login$script,domain=leeuwerik.nl
@@ -182,3 +185,6 @@ forex-gold.net#@#.header-mnm
 ! vice. com 404 error after opening a article and the cookie banner reappear after every reload
 @@||widgets.outbrain.com/outbrain.js$script,redirect-rule=outbrain-widget.js:5,domain=vice.com
 ||sourcepoint.vice.com^$badfilter
+
+! https://github.com/AdguardTeam/AdguardFilters/issues/123169
+||vizcloud.store/E/$badfilter
