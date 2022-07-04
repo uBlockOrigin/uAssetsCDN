@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Expires: 4 days
-! Last modified: Mon, 04 Jul 2022 13:03:20 +0000
+! Last modified: Mon, 04 Jul 2022 18:51:13 +0000
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! Licence: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! New filters from January 2022 to ->
@@ -1007,6 +1007,7 @@ jav247.top##+js(aopr, __Y)
 vtube.to##+js(nowoif)
 vtube.to##+js(acis, RegExp, debugger)
 vtube.to##+js(aeld, popstate)
+vtube.to##+js(aopr, decodeURI)
 
 ! https://www.reddit.com/r/uBlockOrigin/comments/svkkgn/anti_adblock_on_website_98zerocom_how_can_i_solve/
 98zero.com##+js(aopr, adBlockDetected)
@@ -1226,9 +1227,9 @@ bigpixel.cn##.portal_ad
 ! nsfw hdvideosporn. com popups  
 hdvideosporn.com##+js(aopr, decodeURI)
 
-! uptobhai. com ads
-uptobhai.com##+js(acis, JSON.parse, break;case $.)
-||uptobhai.com^$csp=default-src 'self' *.favicon.cc *.google.com *.gstatic.com *.googleapis.com
+! uptobhai. com/info ads
+uptobhai.*##+js(acis, parseInt, break;case $.)
+||uptobhai.*^$csp=default-src 'self' *.favicon.cc *.google.com *.gstatic.com *.googleapis.com
 
 ! reeoov. tube popups 
 reeoov.tube##+js(aopr, __Y)
@@ -2047,7 +2048,6 @@ animesonline22.com##+js(acis, JSON.parse, break;case $.)
 ! nsfw watchomovies. co/.net ads
 watchomovies.*##+js(acis, parseInt, break;case $.)
 watchomovies.*##^script:has-text(break;case $.)
-||streamoupload.*/api/spots/$script
 ||a.streamoupload.^$script
 /^https:\/\/a\.[-0-9a-z]{4,16}\.(?:club|com|cyou|info|net|ru|site|top?|xxx|xyz)\/(?=[a-z]{0,6}[0-9A-Z])[0-9a-zA-Z]{7}\.js$/$script,match-case
 
@@ -3680,11 +3680,9 @@ moviewatch.com.pk##+js(acis, parseInt, break;case $.)
 moviewatch.com.pk##+js(aopw, _pop)
 moviewatch.com.pk##+js(aopw, atOptions)
 moviewatch.com.pk##^script:has-text(break;case $.)
-||catclawvines.com^
 ||cqwajn.com^
 ||haxbyq.com^
 ||mcqmall.com^$3p
-||sinewedretore.casa^
 ||soogandrooped.cam^
 
 ! https://github.com/uBlockOrigin/uAssets/issues/13798
@@ -3801,7 +3799,6 @@ apksafe.in##+js(no-fetch-if, ads)
 ! https://github.com/AdguardTeam/AdguardFilters/issues/123015
 xxx18.uno##+js(aopw, _pop)
 ||xxx18.uno/*-code.js
-||zdywcdjoerv.com^
 
 ! https://github.com/uBlockOrigin/uAssets/issues/13870
 !#if env_mobile
@@ -3863,12 +3860,11 @@ extrafreetv.com,smokelearned.net,sportsonline.to##+js(acis, setTimeout, admc)
 extrafreetv.com##+js(acis, Math, zfgloaded)
 extrafreetv.com##+js(aopw, _pop)
 *$script,3p,denyallow=jsdelivr.net|fastly.net|swarm.video,domain=sportsonline.to|smokelearned.net
-||eldrurjtsbl.com^
-||fpetwqpzqf.com^
 
 ! https://github.com/AdguardTeam/AdguardFilters/issues/123342
 speedynews.xyz,xmod.in##+js(nano-sib, updatePercentage, 100, 0.02)
 technemo.xyz##+js(set, blurred, false)
+speedynews.xyz##div[id^="speedynews_"]
 
 ! https://github.com/AdguardTeam/AdguardFilters/issues/123438
 ps2-bios.com##+js(acs, document.getElementById, innerHTML)
@@ -3896,3 +3892,6 @@ flixtormovies.co##+js(aopr, AaDetector)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/13917
 softonic.com##+js(aeld, , [native code])
+
+! https://github.com/uBlockOrigin/uAssets/issues/13926
+mhdtv.world##+js(nostif, show)
