@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Expires: 4 days
-! Last modified: Sat, 16 Jul 2022 12:42:49 +0000
+! Last modified: Sat, 16 Jul 2022 16:39:13 +0000
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! Licence: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! New filters from January 2022 to ->
@@ -241,10 +241,6 @@ ninja.io##+js(set, App.AdblockDetected, false)
 ! https://github.com/uBlockOrigin/uAssets/issues/11307
 goshow.tv##+js(acis, document.querySelectorAll, popMagic)
 goshow.tv##+js(aopr, ExoLoader)
-
-! tokyoblog.tv popup
-tokyoblog.tv##+js(aopw, _pop)
-tokyoblog.tv##+js(acis, decodeURI, decodeURIComponent)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/11322
 ! https://github.com/uBlockOrigin/uAssets/issues/12229
@@ -1562,7 +1558,8 @@ kissasians.org##.btn-success[href*="?key="]
 ||berangkasilmu.com^$3p
 
 ! https://github.com/easylist/easylist/pull/11409
-hentaispark.com##+js(acis, JSON.parse, $.)
+! https://github.com/uBlockOrigin/uAssets/issues/14047
+hentaispark.com##+js(aost, Math.random, inlineScript)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/12393
 journaldemontreal.com,tvanouvelles.ca##+js(no-fetch-if, doubleclick)
@@ -2221,6 +2218,8 @@ multiup.us##a[onclick="openAuc();"]
 techydino.net##+js(nostif, displayMessage)
 ||static.surfe.pro/js/net.js$script,redirect-rule=noop.js,domain=techydino.net
 @@||cdn.thisiswaldo.com/static/js$script,domain=techydino.net
+||pngimg.com/uploads/subscribe/$domain=mdn.world|techydino.net
+links.medipost.org##+js(set, blurred, false)
 
 ! https://www.reddit.com/r/uBlockOrigin/comments/u922hn/video_ads_showing_on_veblr_dot_com/
 ||vbcdn.com/cdn/video_advt/*$media,redirect=noopmp3-0.1s
@@ -2774,9 +2773,9 @@ animekhor.xyz##+js(aeld, DOMContentLoaded, adsBlocked)
 ! https://github.com/uBlockOrigin/uAssets/issues/13271
 ||japantimes.co.jp/wp-content/themes/jt_theme/library/css/piano.css
 
-! latinblog. tv popunders
-latinblog.tv##+js(aopw, _pop)
-latinblog.tv##+js(aopr, decodeURI)
+! latinblog. tv sister sites popunders
+amateurblog.tv,fashionblog.tv,idolsblog.tv,latinblog.tv,newstarblog.tv,silverblog.tv,tokyoblog.tv,xblog.tv##+js(aopw, _pop)
+amateurblog.tv,fashionblog.tv,idolsblog.tv,latinblog.tv,newstarblog.tv,silverblog.tv,tokyoblog.tv,xblog.tv##+js(aopr, decodeURI)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/13286
 @@||igirls.in^$ghide
@@ -3039,9 +3038,9 @@ mathportal.org##.googleOglasVrhCalculatorResp
 #@#.ad-placeholder
 #@#.BannerAd
 #@#.ads_1
-##.adbadge:not(#filter_ads_by_classname):not(#detect_ad_empire):not(#detect)
-##.ad-placeholder:not(#filter_ads_by_classname):not(#detect_ad_empire):not(#detect)
-##.BannerAd:not(#filter_ads_by_classname):not(#detect_ad_empire):not(#detect)
+##.adbadge:not(#filter_ads_by_classname):not(#detect_ad_empire):not(#detect):not(.adsbox)
+##.ad-placeholder:not(#filter_ads_by_classname):not(#detect_ad_empire):not(#detect):not(.adsbox)
+##.BannerAd:not(#filter_ads_by_classname):not(#detect_ad_empire):not(#detect):not(.adsbox)
 ##.ads_1:not(#filter_ads_by_classname):not(#detect_ad_empire):not(#detect)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/13516
@@ -3765,3 +3764,9 @@ mohammedkhc.com##+js(nano-sib, countdown)
 
 ! https://github.com/AdguardTeam/AdguardFilters/issues/124326
 cardscanner.co##+js(nostif, show)
+
+! cizzyscripts. com anti adb
+cizzyscripts.com##+js(no-fetch-if, ads)
+
+! https://github.com/uBlockOrigin/uAssets/issues/13770
+||aaxwall.com^
