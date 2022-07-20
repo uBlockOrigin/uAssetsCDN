@@ -1,7 +1,7 @@
 ! Title: Quick fixes list
 ! Description: experimental filters
 ! Expires: 1 days
-! Last modified: Tue, 19 Jul 2022 20:46:12 +0000
+! Last modified: Wed, 20 Jul 2022 09:31:29 +0000
 ! License: https://creativecommons.org/licenses/by/3.0/
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! Forums: https://github.com/uBlockOrigin/uAssets/issues
@@ -131,8 +131,13 @@ fcdn.lauta.media##+js(set, loadFailHandler, noopFunc)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/9849
 ! https://github.com/uBlockOrigin/uAssets/issues/11004
-anydebrid.com,hotdebrid.com##+js(set, skipABCheck, true)
-anydebrid.com,hotdebrid.com##+js(set, abCheck, true)
+@@||anydebrid.com^$ghide
+@@||hotdebrid.com^$ghide
+@@://*.*.*/$script,domain=anydebrid.com|hotdebrid.com
+||googletagmanager.com/gtag/js?id=UA-$important,domain=anydebrid.com|hotdebrid.com
+||mc.yandex.ru/metrika/tag.js|$important,domain=hotdebrid.com
+||pagead2.googlesyndication.com/pagead/managed/js/adsense/$important,domain=anydebrid.com|hotdebrid.com
+||pagead2.googlesyndication.com/pagead/sma8.js$important,redirect=noopjs,domain=anydebrid.com|hotdebrid.com
 
 ! https://github.com/uBlockOrigin/uAssets/issues/13424
 megaup.net##.metaRedirectWrapperBottomAds > div > a > img:style(transform: translateX(10000px) !important; pointer-events: none !important;)
@@ -160,9 +165,6 @@ canale.live##+js(nosiif, href)
 ! luscious. net anti adb
 @@*$xhr,domain=luscious.net,3p
 
-! https://github.com/uBlockOrigin/uAssets/issues/13931
-apkcombo.com##.ads-revamp
-
 ! https://github.com/easylist/easylist/commit/73701244b11d5d916bef99627dbfb409e7e14e44
 amazon.*#@#div[cel_widget_id^="sims-consolidated-"]
 amazon.*#@#div[cel_widget_id^="sims-mobile-consolidated-"]
@@ -185,12 +187,19 @@ buzz##div[id][style^="position: fixed; display: block; width: 100%; height: 15%;
 .top/*=https://imgair.net/vip/*.html$popup,3p,domain=buzz
 buzz#@#.ads2
 
-! https://github.com/uBlockOrigin/uAssets/issues/14030 youtube quick fix
-youtube.com#@#ytd-engagement-panel-section-list-renderer
-
 ! https://github.com/uBlockOrigin/uAssets/issues/13931#issuecomment-1186193894
 apkcombo.com##+js(aeld, DOMContentLoaded, clientHeight)
 apkcombo.com##[class*=-ad]
 
 ! https://www.reddit.com/r/uBlockOrigin/comments/w1tvat/seems_unbreak_filter_might_be_breaking_the_gbnews/
 @@||cmp.dmgmediaprivacy.co.uk^$domain=gbnews.uk
+
+! https://github.com/uBlockOrigin/uAssets/issues/14065
+@@||imasdk.googleapis.com/js/sdkloader/ima3.js$script,domain=colonist.io
+@@||services.vlitag.com/adv1/?q=$script,domain=colonist.io
+@@||tag.vlitag.com/v1/$script,domain=colonist.io
+@@||assets.vlitag.com/plugins/cmptcf2/cmp-v$script,domain=colonist.io
+@@||assets.vlitag.com/prebid/default/prebid-$script,domain=colonist.io
+@@||assets.vlitag.com/plugins/safeframe/src/js/sf_host.min.js$script,domain=colonist.io
+colonist.io#@#.adsbyvli
+colonist.io##.adsbyvli:style(height: 1px !important; opacity: 0 !important; pointer-events: none !important;)
