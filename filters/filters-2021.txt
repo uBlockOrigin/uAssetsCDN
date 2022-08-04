@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Expires: 4 days
-! Last modified: Wed, 03 Aug 2022 12:04:56 +0000
+! Last modified: Thu, 04 Aug 2022 11:51:07 +0000
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! Licence: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! New filters from January 2021 to ->
@@ -229,7 +229,7 @@ shegotass.info##+js(set, flashvars.adv_pre_vast, '')
 xxxshake.com##+js(set, flashvars.adv_pause_html, '')
 de-sexy-tube.ru,tubsxxx.com##+js(nostif, window.location.href)
 animeplanet.cc##+js(aopw, __C)
-536sdms.com##+js(acs, document.createElement, 'script')
+536sdms.com##+js(acs, document.createElement, /function\(__[a-z]+\)/)
 camlovers.tv##+js(acis, crakPopInParams)
 camlovers.tv##+js(set, flashvars.protect_block, '')
 mrpeepers.net##+js(acis, document.querySelectorAll, popMagic)
@@ -474,10 +474,13 @@ makaveli.xyz##+js(no-fetch-if, pop)
 makaveli.xyz##+js(nowoif)
 *.gif$domain=aagmaal.*,image
 
-! https://github.com/AdguardTeam/AdguardFilters/issues/75098
+! https://github.com/AdguardTeam/AdguardFilters/issues/126247
+taming.io##+js(no-xhr-if, adstracker)
 @@||api.adinplay.com/libs/aiptag/pub/NND/taming.io/tag.min.js^$script,domain=taming.io
 ||api.adinplay.com^$redirect-rule=noopjs,script,domain=taming.io
 taming.io###preroll
+taming.io###da-left
+taming.io###da-bottom
 
 ! y2mate.guru popups
 y2mate.guru##+js(nowoif)
@@ -871,7 +874,7 @@ vrporngalaxy.com##+js(nowoif)
 onlyfanesse.com##+js(nostif, scrollable)
 
 ! https://github.com/AdguardTeam/AdguardFilters/issues/73523
-simply-hentai.com##+js(acs, document.createElement, 'script')
+simply-hentai.com##+js(acs, document.createElement, /function\(__[a-z]+\)/)
 simply-hentai.com##.cam-container
 simply-hentai.com##.reader > div.mb-3 > div.mt-3
 
@@ -1183,18 +1186,11 @@ sunhope.it##+js(nosiif, document.getElementById, 10000)
 ! propeller crap
 hitmovies4u.com##+js(ra, onclick, a.thumb.mvi-cover)
 *$3p,denyallow=googleapis.com|gstatic.com,domain=filmyzilla.filmywap2021ganduworld.com|filmyzillafullmovie.waystohunt.info
-||gracaiko.net^
-||tarotien.com^
 hindilinks4u.to##.btn.stream-hd
 ||shortlinkto.*^$csp=default-src 'self' *.favicon.cc *.google.com *.gstatic.com *.googleapis.com
 fulltube.*##.mvic-btn
 247movie.net##.open.modal
 ||wifi4games.com/sw.js$script,1p
-||afriet.com^
-||clickallow.net^
-||edassiumw.xyz^
-||normanstaximan.com^
-||zumolery.xyz^
 
 ! vibehubs. com antiadb and ads
 vibehubs.com##+js(aost, jQuery, ai_adb)
@@ -1263,10 +1259,6 @@ beautifulero.com##+js(aopr, loadTool)
 
 ! babytorrent. ms popups
 babytorrent.*,eztv-torrent.net##+js(aopr, decodeURI)
-
-! https://github.com/uBlockOrigin/uAssets/issues/8599
-||gloolrey.com^
-||shaickox.com^
 
 ! pops.tv anti-adb
 pops.tv#@##adsContainer
@@ -1820,11 +1812,11 @@ ukrainesmodels.com##+js(aopw, atOptions)
 @@||netfi.me^$ghide
 
 ! onlinepornhub. net popups
-onlinepornhub.net##+js(acs, document.createElement, 'script')
+onlinepornhub.net##+js(acs, document.createElement, /function\(__[a-z]+\)/)
 *$script,3p,domain=onlinepornhub.net,denyallow=k2s.cc
 
 ! nepaliputi. net popups
-nepaliputi.net##+js(acs, document.createElement, 'script')
+nepaliputi.net##+js(acs, document.createElement, /function\(__[a-z]+\)/)
 
 ! https://www.reddit.com/r/uBlockOrigin/comments/ma5dih/how_can_i_bypass_this_horrid_red_thing/
 downloadcursos.top##+js(acis, eval, replace)
@@ -2073,8 +2065,6 @@ androidhexzone.blogspot.com##+js(aopr, absda)
 olympicstreams.me,vipboxtv.*##+js(nowoif, |)
 olympicstreams.me,vipboxtv.*##+js(aopw, _pop)
 ||raw.githubusercontent.com/*/just-detect-adblock/*$3p,xhr,redirect-rule=nooptext
-||cfbwxgsa.com^
-||eighes.com^
 *$script,3p,denyallow=cdn.liveply.me,domain=olympicstreams.me
 
 ! buffstreams. tv popups
@@ -6050,7 +6040,7 @@ rancah.com##+js(set, blurred, false)
 rancah.com##.separator
 
 ! https://github.com/uBlockOrigin/uAssets/issues/10443
-yifysubtitles.vip##+js(acs, document.createElement, 'script')
+yifysubtitles.vip##+js(acs, document.createElement, /function\(__[a-z]+\)/)
 
 ! movieweb.com anti-adblock
 movieweb.com##+js(acis, document.createElement, admiral)
@@ -7039,7 +7029,7 @@ mangastream.mobi###myModal
 #@##ad-banner
 #@#.ad-banner
 ###ad-banner:not([style="height: 5px; width: 5px; position: absolute; top: 0;"])
-##.ad-banner:not([style="height: 5px; width: 5px; position: absolute; top: 0;"]):not(.blocker-tester + .ad-banner)
+~ananweb.jp##.ad-banner:not([style="height: 5px; width: 5px; position: absolute; top: 0;"]):not(.blocker-tester + .ad-banner):not(:empty)
 ! generic absda fix
 #@#.adsBox
 ##.adsBox:not([style$="-99999px;"])
