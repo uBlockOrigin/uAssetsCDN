@@ -1,7 +1,7 @@
 ! Title: uBlock₀ filters
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Expires: 4 days
-! Last modified: Thu, 01 Sep 2022 06:21:25 +0000
+! Last modified: Thu, 01 Sep 2022 13:22:18 +0000
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! Licence: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! New filters from January 2022 to ->
@@ -4138,15 +4138,38 @@ tamarindoyam.com##+js(nostif, show)
 @@||crazygames.com/prebid.js$script,1p
 
 ! https://www.reddit.com/r/uBlockOrigin/comments/x2exom/
-*$frame,redirect-rule=empty,domain=thothd.com
-@@||thothd.com^$ghide
+thothd.com##+js(acs, document.querySelectorAll, popMagic)
+thothd.com##.table
+/player/player_ads.html?advertising_id=$frame,1p,redirect-rule=noop.html
+#@#.ads-iframe
+##.ads-iframe:not([style="position: absolute; left: -10px; top: -10px;"])
 
 ! https://github.com/uBlockOrigin/uAssets/issues/14610
 mafiatown.pl##+js(set, aLoad, noopFunc)
 mafiatown.pl##+js(set, mtCanRunAdsSoItCanStillBeOnTheWeb, true)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/14617
-@@||iocnt.net^$script,domain=www.rtl.de
-@@||googletagmanager.com/gtm.js$script,domain=www.rtl.de
-||ais-akamai.rtl.de/autoimg/*$subdocument,1p
+rtl.de##+js(nostif, null, 10)
+@@||iocnt.net^$script,domain=rtl.de
+@@||googletagmanager.com/gtm.js$script,domain=rtl.de
+||ais-akamai.rtl.de/autoimg/*$frame,1p
 rtl.de##[class*="superbanner"]:upward(article > div:not(#main))
+
+! https://www.reddit.com/r/uBlockOrigin/comments/wzwgpa/how_would_one_go_about_removing_this_countdown_so/
+@@||crdroid.net/js/peel1.js$script,1p
+crdroid.net##+js(no-fetch-if, googlesyndication)
+
+! https://github.com/AdguardTeam/AdguardFilters/issues/128451
+apl161.me##+js(nowoif)
+apl161.me###adbtm
+apl161.me###ads
+popofthestream.com##.overlay
+
+! https://github.com/uBlockOrigin/uAssets/issues/14622
+police.community##+js(nostif, adblock)
+
+! https://github.com/uBlockOrigin/uAssets/issues/14623
+archpaper.com##+js(aopw, adBlocked)
+
+! https://github.com/uBlockOrigin/uAssets/issues/14624
+gisarea.com##+js(nostif, adblock)
