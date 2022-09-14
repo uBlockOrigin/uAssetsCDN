@@ -1,7 +1,7 @@
 ! Title: uBlock₀ filters – Quick fixes
 ! Description: Immediate, temporary filters to fix websites
 ! Expires: 1 days
-! Last modified: Wed, 14 Sep 2022 06:30:52 +0000
+! Last modified: Wed, 14 Sep 2022 12:15:59 +0000
 ! License: https://creativecommons.org/licenses/by/3.0/
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! Forums: https://github.com/uBlockOrigin/uAssets/issues
@@ -40,7 +40,7 @@ aternos.org##.sidebar:style(width: 0px !important;)
 aternos.org##.header-link-exaroton:style(filter: opacity(0) !important;)
 aternos.org##.header-link-exaroton-link:style(pointer-events: none !important;)
 aternos.org###placement-takeover
-aternos.org##.ad-dfp:style(min-height: calc(3.22px + 0.02em) !important; height: calc(3.22px + 0.02em) !important; pointer-events: none !important;)
+aternos.org##.ad-dfp:style(min-height: calc(3.24px + 0.01em) !important; height: calc(3.24px + 0.01em) !important; pointer-events: none !important;)
 ||fastlane.rubiconproject.com^$removeparam,domain=aternos.org
 ||htlb.casalemedia.com^$removeparam=r,domain=aternos.org
 
@@ -123,7 +123,7 @@ mrlzqoe.buzz,utinwpqqui.buzz,pyotinle.buzz,xmbme.buzz,velnibug.buzz##div[class][
 @@/wp-content/plugins/agreeable-button/*$script,1p,domain=buzz
 
 ! https://github.com/uBlockOrigin/uAssets/issues/14296
-*$csp=script-src,domain=linkdoni.soft98.ir
+*$script,domain=linkdoni.soft98.ir
 soft98.ir,~forum.soft98.ir##+js(aeld, mousedown)
 soft98.ir,~forum.soft98.ir##+js(window-close-if, /link-)
 sysban.ir##+js(window-close-if, /telephone-service)
@@ -132,16 +132,21 @@ smostafa.ir##+js(window-close-if, /^/)
 ||cdn.hostdl.com^$image,redirect=1x1.gif,domain=soft98.ir|~forum.soft98.ir
 soft98.ir,~forum.soft98.ir##img[src*="file.soft98.ir"]:style(height: 90px !important; width: 728px !important;)
 ^utm_source=soft98^$removeparam=/^utm_/
+^utm_source=soft98^$all
 .ir^$popup,domain=soft98.ir|~forum.soft98.ir,3p
 ||iranick0d.ir^$all
 ||iranicard.ir^$all,domain=soft98.ir
 ||asiatech.ir^$all,domain=soft98.ir
 ||hostdl.com^$all,domain=soft98.ir
+cdn.hostdl.com##^responseheader(location)
 ||smostafa.ir^$all,domain=soft98.ir
 ||sysban.ir^$all,domain=soft98.ir
 soft98.ir,~forum.soft98.ir##*:has-text(@):has(a[href*="soft98.ir/user"]):not(body,html):remove()
 soft98.ir,~forum.soft98.ir##*:has-text(@):has(a[href*="s98.ir/"]):not(body,html):remove()
 linkdoni.soft98.ir##html:remove()
+!#if env_firefox
+linkdoni.soft98.ir##^body, title
+!#endif
 @@||soft98.ir^$ghide
 
 ! https://github.com/uBlockOrigin/uAssets/issues/14189
@@ -181,3 +186,6 @@ koushoku.org##+js(nostif, ()=>o())
 
 ! https://github.com/uBlockOrigin/uAssets/issues/14676#issuecomment-1241027781
 work.ink##+js(nostif, clientHeight)
+
+! https://github.com/AdguardTeam/AdguardFilters/issues/129664
+/google-ad-$badfilter
