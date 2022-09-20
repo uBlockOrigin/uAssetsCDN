@@ -1,7 +1,7 @@
 ! Title: uBlock₀ filters
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Expires: 4 days
-! Last modified: Tue, 20 Sep 2022 02:00:48 +0000
+! Last modified: Tue, 20 Sep 2022 18:46:04 +0000
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 !
@@ -113,7 +113,10 @@ www.google.*##.sh-sr__shop-result-group[data-hveid] .sh-sp__btn:matches-css(font
 www.google.*##c-wiz div[data-hveid] > div > div > ul:has(> li[style="max-width:200px;"] > div > div[data-hveid] > a[href*="/aclk"]):upward(3)
 
 ! https://www.reddit.com/r/uBlockOrigin/comments/p94hv9/google_maps_booking_dot_com_ad/
-www.google.com##div[data-section-id] > a[href^="/aclk"][href*="placesheetAdFix="][href*="adurl="]:upward(1)
+www.google.*##div[data-section-id] > a[href^="/aclk"][href*="placesheetAdFix="][href*="adurl="]:upward(1)
+
+! https://github.com/AdguardTeam/AdguardFilters/issues/129955#issuecomment-1250122703
+www.google.*##:matches-path(/travel/hotels/) div[data-is-promoted="true"]
 
 ! http://www.wilderssecurity.com/threads/ublock-a-lean-and-fast-blocker.365273/page-25#post-2461804
 ! Specific cosmetic filters for Youtube home page
@@ -2475,8 +2478,10 @@ voyeurhit.com##+js(acis, document.createElement, atob)
 voyeurhit.com##+js(aeld, , window.open)
 voyeurhit.com##+js(nosiif, document.readyState)
 voyeurhit.com##.content > div > .container + div
-voyeurhit.com##.afs_ads + div[class] > div[style=""]
 voyeurhit.com##.footer-banners
+voyeurhit.com##.video-page__content > div.left + div[class]:last-child
+voyeurhit.com##.video-page__underplayer > div[class]:first-child > div[class]
+voyeurhit.com##.video-related + div[class] > div[class]:only-child
 ##.__nat_link
 ||mysmokingmistress.com^$3p
 ! https://github.com/uBlockOrigin/uAssets/issues/957
@@ -3458,7 +3463,7 @@ gogoanime.*##+js(acis, atob, decodeURIComponent)
 gogoanime.*,gogoanimes.*##+js(nowoif)
 gogoanime.*##+js(set, console.clear, undefined)
 gogoanime.*##+js(set, check_adblock, true)
-gogoanime.*##+js(acs, document.createElement, /function\(__[a-z]+\)/)
+gogoanime.*##+js(acs, document.createElement, /l\.parentNode\.insertBefore\(s/)
 gogoanime.*##.banner_center
 gogoanime.*##.anime_video_body_cate > div[style]:has(> div[id] + script[src])
 gogoanime.*##.adx
@@ -4492,7 +4497,7 @@ apurogol.net###fakeplayer
 jpopsingles.eu##+js(aeld, , ads)
 jpopsingles.eu##+js(nano-sib, downloadTimer)
 jpopsingles.eu##+js(aopw, _pop)
-jpopsingles.eu##+js(acs, document.createElement, /function\(__[a-z]+\)/)
+jpopsingles.eu##+js(acs, document.createElement, /l\.parentNode\.insertBefore\(s/)
 @@||jpopsingles.eu^$ghide
 @@||jpopsingles.eu^$image,1p
 /ap-plugin-scripteo/frontend/img/728x90.png$image,redirect-rule=1x1.gif
@@ -11258,7 +11263,7 @@ pelisplay.*##[data-lang="Publicidad"]
 @@||chichester.co.uk^$ghide
 
 ! https://github.com/uBlockOrigin/uAssets/issues/4988
-hdfull.*##+js(acs, document.createElement, /function\(__[a-z]+\)/)
+hdfull.*##+js(acs, document.createElement, /l\.parentNode\.insertBefore\(s/)
 hdfull.*##+js(aeld, mousedown, !!{});)
 hdfull.*##+js(nano-stb)
 ||terrasdsdstd.com^$3p
@@ -12464,7 +12469,7 @@ sendvid.com###ftr
 
 ! https://github.com/uBlockOrigin/uAssets/issues/5448
 imgdawgknuttz.com##+js(aopw, atOptions)
-imgdawgknuttz.com##+js(acs, document.createElement, /function\(__[a-z]+\)/)
+imgdawgknuttz.com##+js(acs, document.createElement, /l\.parentNode\.insertBefore\(s/)
 imgdawgknuttz.com##+js(aopw, _pop)
 imgdawgknuttz.com##+js(aopr, Pub2a)
 imgdawgknuttz.com##^script[data-cfasync]:has-text(h=decodeURIComponent)
@@ -14602,10 +14607,10 @@ tubepornclassic.com##+js(nosiif, document.readyState)
 *$popunder,3p,domain=tubepornclassic.com
 tubepornclassic.com##.content > div > .container + div
 tubepornclassic.com##.video-page__adv
-tubepornclassic.com##.video-page__content > .right
 tubepornclassic.com##a[href^="http://www.theclassicporn.com/"]:upward(1)
 tubepornclassic.com##.video-page__content > div.left + div[class]:last-child
 tubepornclassic.com##div[style="display:flex !important"] > div
+tubepornclassic.com##.video-page__player + div[class] > div[class]
 
 ! https://github.com/uBlockOrigin/uAssets/issues/6144
 flashingjungle.com##+js(aeld, /^(click|mousedown|mousemove|touchstart|touchend|touchmove)/, system.popunder)
@@ -15106,7 +15111,7 @@ pornoxo.com##+js(popads-dummy)
 leechall.*###adBanner:style(height:25px !important;left:-3000px !important;position:absolute !important)
 leechall.*##+js(aopw, _pop)
 leechall.*##+js(nano-sib)
-leechall.com##+js(acs, document.createElement, /function\(__[a-z]+\)/)
+leechall.com##+js(acs, document.createElement, /l\.parentNode\.insertBefore\(s/)
 leechall.*##.text-center.alert-info.alert
 @@||leechall.download^$ghide
 @@||leechall.download^$script,1p
@@ -16166,7 +16171,6 @@ preisvergleich.pcgameshardware.de#@#+js(set-constant, CustomEvent, noopFunc)
 autobild.de,computerbild.de,golem.de,desired.de,t-online.de,stern.de,familie.de,tvnow.de,kino.de,spieletipps.de##+js(no-xhr-if, damoh)
 vip.de,rtl.de##+js(no-xhr-if, svonm)
 giga.de##+js(json-prune, ad_fallback)
-||damoh.gigade.svonm.com^$media
 
 ! https://github.com/uBlockOrigin/uAssets/issues/7508#issuecomment-659267224
 ||damoh.gmx.*/*$media,redirect=noop-0.1s.mp3,1p
@@ -17327,7 +17331,7 @@ streamz.*,streamzz.*#?#button:has(span:has-text(Skip))
 
 ! https://github.com/uBlockOrigin/uAssets/issues/6860
 javpornstreaming.com##+js(aopr, adBlockDetected)
-javpornstreaming.com##+js(acs, document.createElement, /function\(__[a-z]+\)/)
+javpornstreaming.com##+js(acs, document.createElement, /l\.parentNode\.insertBefore\(s/)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/6861
 @@||osuskins.net^$ghide
