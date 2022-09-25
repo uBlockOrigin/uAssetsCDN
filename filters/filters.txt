@@ -1,7 +1,7 @@
 ! Title: uBlock₀ filters
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Expires: 4 days
-! Last modified: Sun, 25 Sep 2022 01:21:39 +0000
+! Last modified: Sun, 25 Sep 2022 12:44:17 +0000
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 !
@@ -2595,10 +2595,12 @@ inporn.com##[style="display:flex !important"] > div > div:not(:last-child)
 mrgay.com,pornhits.com##.right
 ! senzuri.tube redirect
 senzuri.tube##+js(acis, adver)
-! txxxporn.tube PH
+! https://github.com/AdguardTeam/AdguardFilters/issues/130607
 txxxporn.tube##div[style="display:flex !important"] > div
 txxxporn.tube##.video-videos-slider + div[class] + div[class]
 txxxporn.tube##div.text:upward(1)
+txxxporn.tube##img[src^="https://tn.txxx.tube/contents/cst/"]:upward(.video-content > div > div)
+txxxporn.tube##.video-content > div:not(:has(.pplayer))
 ! https://github.com/uBlockOrigin/uAssets/issues/4234
 hclips.com##+js(acis, adver)
 hclips.com##+js(acis, document.getElementById, popunder)
@@ -9932,10 +9934,10 @@ wemakesites.net##+js(acis, $, adBlockChecker)
 ! https://www.reddit.com/r/uBlockOrigin/comments/eexi26/
 hulu.com##+js(set, Object.prototype._parseVAST, noopFunc)
 hulu.com##+js(set, Object.prototype.createAdBlocker, noopFunc)
-player.hulu.com##+js(set, Object.prototype.sS, trueFunc)
+hulu.com##+js(set, Object.prototype.isAdPeriod, falseFunc)
 ||assetshuluimcom-a.akamaihd.net/*.mp3$media,redirect=noopmp3-0.1s,domain=hulu.com
 ||ads-v-darwin.hulustream.com^$media,redirect=noopmp4-1s
-||akamaihd.net/prerolls$media,redirect=noopmp4-1s,domain=hulu.com
+!||akamaihd.net/prerolls$media,redirect=noopmp4-1s,domain=hulu.com
 @@||hulu.com^$ghide
 hulu.com###banner-ad-container
 hulu.com##.ad-choices
