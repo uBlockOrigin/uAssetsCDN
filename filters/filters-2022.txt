@@ -1,7 +1,7 @@
 ! Title: uBlock₀ filters
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Expires: 4 days
-! Last modified: Thu, 27 Oct 2022 12:30:51 +0000
+! Last modified: Thu, 27 Oct 2022 16:46:47 +0000
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! New filters from January 2022 to ->
@@ -1859,6 +1859,11 @@ top1iq.com###post-body > p
 !#if env_mobile
 ||playtamil.*^$csp=default-src 'self' *.imgur.com
 !#endif
+
+! antiadb iptvjournal. com
+iptvjournal.com##+js(no-fetch-if, googlesyndication)
+iptvjournal.com###wpsafe-generate, #wpsafe-link:style(display: block !important;)
+iptvjournal.com##div[id^="wpsafe-wait"]
 
 ! https://moviestars.to/movie/morbius-26813 popup
 moviestars.to##+js(set, count, 1)
@@ -5069,11 +5074,11 @@ karanpc.com##+js(acis, String.fromCharCode, eval)
 businessnamegenerator.com##+js(nostif, gclid)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/15404
-derstandard.at##+js(acis, document.createElement, Adblocker)
+@@||derstandard.at^$ghide
+@@||npttech.com/advertising.js$script,domain=derstandard.at
 
 ! https://github.com/uBlockOrigin/uAssets/issues/15407
 ||tirexo.blue^$csp=default-src 'unsafe-inline' 'self' *.gstatic.com *.googleapis.com *.jquery.com
-||tirexo.blue/main.js?
 
 ! https://github.com/AdguardTeam/AdguardFilters/issues/133135
 fembed9hd.com##+js(nowoif)
