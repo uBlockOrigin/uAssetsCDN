@@ -1,7 +1,7 @@
 ! Title: uBlock₀ filters – Quick fixes
 ! Description: Immediate, temporary filters to fix websites
 ! Expires: 1 days
-! Last modified: Sun, 06 Nov 2022 14:30:08 +0000
+! Last modified: Sun, 06 Nov 2022 21:07:24 +0000
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! Forums: https://github.com/uBlockOrigin/uAssets/issues
@@ -194,7 +194,12 @@ next-episode.net##+js(aost, document.createElement, /(?=^(?!.*(https|stopTrackin
 dragontea.ink##+js(nostif, /addClass|block|classList|console|gogo|having/)
 dragontea.ink##+js(nostif, , 3000)
 *$script,redirect-rule=noopjs,domain=dragontea.ink
-@@||stpd.cloud/saas/$xhr,domain=dragontea.ink
+dragontea.ink##+js(set, hiublock, noopFunc)
+dragontea.ink##script[id$="-js-extra"] + div[style^="display:block!important;background-color:"]
+!#if env_firefox
+dragontea.ink##^script:has-text(_0xd9e6)
+dragontea.ink##div[style*="display:block!important"]:has(.adblock_title)
+!#endif
 
 ! https://twitter.com/Aquavit/status/1581306309500030978
 tv-tokyo.co.jp#@#.ad
@@ -218,7 +223,7 @@ rocketnews24.com,youpouch.com#@#[id^="div-gpt-ad"]:style(width:1px!important;hei
 
 ! https://github.com/uBlockOrigin/uAssets/issues/6541
 giga.de,t-online.de##div[style$=" left: 0em; top: 0em; position: absolute;"]:has(iframe):style(visibility: collapse;)
-||damoh.$media,redirect=noopmp3-0.1s,domain=damoh.giga.de|damoh.t-online.de
+giga.de,t-online.de##+js(set, getVPAIDAd, undefined)
 fitforfun.de##+js(no-xhr-if, svonm)
 
 ! https://www.reddit.com/r/uBlockOrigin/comments/yeqghv/
