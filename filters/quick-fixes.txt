@@ -1,7 +1,7 @@
 ! Title: uBlock₀ filters – Quick fixes
 ! Description: Immediate, temporary filters to fix websites
 ! Expires: 1 days
-! Last modified: Thu, 10 Nov 2022 06:19:47 +0000
+! Last modified: Thu, 10 Nov 2022 13:24:42 +0000
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! Forums: https://github.com/uBlockOrigin/uAssets/issues
@@ -177,7 +177,8 @@ uniqueten.net##+js(nostif, console)
 *$script,redirect-rule=noopjs,domain=next-episode.net
 
 ! https://github.com/uBlockOrigin/uAssets/issues/15254
-dragontea.ink##+js(nostif, /addClass|block|classList|console|gogo|having/)
+!dragontea.ink##+js(nostif, /addClass|block|classList|console|gogo|having/)
+*$3p,script,xhr,frame,denyallow=cloudflare.com|cloudflare.net|gstatic.com|jsdelivr.net|ko-fi.com,domain=dragontea.ink
 *$script,redirect-rule=noopjs,domain=dragontea.ink
 @@||dragontea.ink^$ghide
 @@||hb-api.omnitagjs.com/hb-api/prebid/v1$xhr,domain=dragontea.ink
@@ -186,27 +187,12 @@ dragontea.ink##+js(nostif, /addClass|block|classList|console|gogo|having/)
 @@/\/prebid$/$xhr,domain=dragontea.ink
 @@||prebid-eu.creativecdn.com/bidder/prebid/bids$xhr,domain=dragontea.ink
 @@||tag.1rx.io/rmp/$xhr,domain=dragontea.ink
-dragontea.ink##+js(no-xhr-if, adsystem)
-||gum.criteo.com/sid/json?$important,domain=dragontea.ink
+@@/?callback=jQuery*$script,redirect-rule=noopjs,domain=dragontea.ink
+@@||stpd.cloud/saas/$script,domain=dragontea.ink
+@@||gum.criteo.com/sid/json$xhr,domain=dragontea.ink
+!dragontea.ink##+js(no-xhr-if, adsystem)
 dragontea.ink##html, body:style(overflow: auto !important;)
-!#if env_firefox
-dragontea.ink##h4:has-text(Ads Blocker Detected!!!):upward(div:not([id], [class], [style]))
-dragontea.ink##^script:has-text(/_0x|_1x|_2x|_3x|_4x|_5x|_6x|_7x|_8x|_9x|console\.log|MutationObserver/)
-!#endif
-!#if env_chromium
-!@@||securepubads.g.doubleclick.net/gpt/pubads_impl*$script,domain=dragontea.ink
-!@@||securepubads.g.doubleclick.net/pagead/ppub_config?ippd=dragontea.ink$xhr,domain=dragontea.ink
-!@@||securepubads.g.doubleclick.net/tag/js/gpt.js$script,domain=dragontea.ink
-!@@||stpd.cloud^$script,xhr,domain=dragontea.ink
-!@@||id5-sync.com/g/v2/*.json$xhr,domain=dragontea.ink
-!@@||prebid.a-mo.net/a/c$xhr,domain=dragontea.ink
-!@@||bidder.criteo.com/csm/events$xhr,domain=dragontea.ink
-!@@||bidder.criteo.com/cdb$xhr,domain=dragontea.ink
-!||bidder.criteo.com/cdb?*bundle$xhr,domain=dragontea.ink,important
-dragontea.ink##+js(nosiif, , 1001)
-dragontea.ink##+js(nosiif, googletag)
-dragontea.ink##body > div:not([id], [class], [style]) > div:not([id], [class], [style]) > div:not([id], [class], [style])
-!#endif
+dragontea.ink#@#+js()
 ||setupad.com^
 ||setupad.net^
 
@@ -258,13 +244,21 @@ realtime-chart.info#@#div[style="top:378px;width:120px;line-height:1.1;"] div[da
 realtime-chart.info#@#+js(ra, onclick, div[onclick="JumpDataHref(this)"][data-href], stay)
 sekai-kabuka.com#@#+js(ra, data-ih, , stay)
 realtime-chart.info##+js(ra, onclick, div[onclick*="JumpDataHref(this)"][data-href], stay)
-realtime-chart.info##+js(ra, href, a[href^="https://px.a8.net/svt/ejp?"])
 realtime-chart.info##+js(ra, href, a[href^="https://a.r10.to/"])
 realtime-chart.info,sekai-kabuka.com##div[data-js]:style(background: none !important; cursor: default !important;)
 realtime-chart.info##img[src*="/clip_"] + b:style(background: none !important; font-size: 0 !important;)
 sekai-kabuka.com##+js(ra, onclick, div[data-js][style*="background"], stay)
 sekai-kabuka.com##div[data-ih]:style(font-size: 0 !important;)
-sekai-kabuka.com##div[style="height: 20px;width:272px;top: 567px;line-height:1;background:#800;color:#fff;z-index:0;margin: 0 0 0 -374px;position: absolute;font-size: 22px;"]
+sekai-kabuka.com#@#div[style="height: 20px;width:272px;top: 567px;line-height:1;background:#800;color:#fff;z-index:0;margin: 0 0 0 -374px;position: absolute;font-size: 22px;"]
+sekai-kabuka.com##.佇ｰ騾ﾟ0傅咐ﾆ惻く韃o[style*="background:"][style*="font-size:"]:style(font-size: 0 !important; background: none !important;)
+realtime-chart.info#@#+js(ra, id, td > div[style="width:0px;height:0;display:inline-block;position:absolute;"] + div[style^="display:"])
+realtime-chart.info##div[data-ih*="広告"]:style(background: none !important; font-size: 0 !important; cursor: default !important;)
+realtime-chart.info##b[class^="amazon"] > b[style^="font-size:"]:style(font-size: 0 !important)
+realtime-chart.info##div[style="top:1422px"] > [style*="font-size"]:is(a, b, span):style(font-size: 0 !important;)
+realtime-chart.info##+js(ra, onclick, [onclick^="location.href=\'https://px.a8.net"])
+realtime-chart.info#@#+js(ra, href, a[href^="https://px.a8.net/svt/ejp?"])
+realtime-chart.info##a[href^="https://px.a8.net/svt/ejp?"]:style(pointer-events: none !important;)
+||x.sekai-kabuka.com/http/pr/$script
 
 ! https://github.com/uBlockOrigin/uAssets/issues/15234
 *$script,redirect-rule=noop.js,domain=soranews24.com
@@ -280,7 +274,8 @@ soranews24.com#@#.ad
 soranews24.com##.ads-relatedbottom
 soranews24.com#@#[id^="div-gpt-ad"]:style(width:1px!important;height:1px!important;min-width:1px!important;min-height:1px!important;margin:0!important;padding:0!important;overflow:hidden!important;opacity:0!important)
 soranews24.com#@#+js(set, parent.hasOwnProperty, falseFunc)
-soranews24.com##.ad300x250:style(min-height: 1px !important; height: 1px !important; overflow: hidden !important;)
+soranews24.com###div-gpt-ad-header
+soranews24.com##[id^="div-gpt-ad-side"]
 
 ! https://github.com/uBlockOrigin/uAssets/issues/15565
 ! https://github.com/uBlockOrigin/uAssets/issues/15572
