@@ -1,7 +1,7 @@
 ! Title: uBlock₀ filters – Quick fixes
 ! Description: Immediate, temporary filters to fix websites
 ! Expires: 1 days
-! Last modified: Sun, 13 Nov 2022 11:59:07 +0000
+! Last modified: Sun, 13 Nov 2022 16:37:27 +0000
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! Forums: https://github.com/uBlockOrigin/uAssets/issues
@@ -181,20 +181,33 @@ uniqueten.net##+js(nostif, console)
 !*$3p,script,xhr,frame,denyallow=cloudflare.com|cloudflare.net|gstatic.com|jsdelivr.net|ko-fi.com,domain=dragontea.ink
 *$script,redirect-rule=noopjs,domain=dragontea.ink
 @@||dragontea.ink^$ghide
-@@||hb-api.omnitagjs.com/hb-api/prebid/v1$xhr,domain=dragontea.ink
-@@/\/openrtb2\/auction$/$xhr,domain=dragontea.ink
-@@/\/openrtb$/$xhr,domain=dragontea.ink
-@@/\/prebid$/$xhr,domain=dragontea.ink
-@@||prebid-eu.creativecdn.com/bidder/prebid/bids$xhr,domain=dragontea.ink
-@@||tag.1rx.io/rmp/$xhr,domain=dragontea.ink
-@@/?callback=jQuery*$script,redirect-rule=noopjs,domain=dragontea.ink
 @@||stpd.cloud/saas/$script,domain=dragontea.ink
-@@||gum.criteo.com/sid/json$xhr,domain=dragontea.ink
+@@||c.amazon-adsystem.com/aax2/apstag.js$script,domain=dragontea.ink,badfilter
 @@||securepubads.g.doubleclick.net/tag/js/gpt.js$script,domain=dragontea.ink
 @@||securepubads.g.doubleclick.net/gpt/pubads_impl*$script,domain=dragontea.ink
-@@||c.amazon-adsystem.com/aax2/apstag.js$script,domain=dragontea.ink
+@@||securepubads.g.doubleclick.net/gampad/ads$xhr,domain=dragontea.ink
+||doubleclick.net^$removeparam=/^a/,important,domain=dragontea.ink
+||doubleclick.net^$removeparam=/^b/,important,domain=dragontea.ink
+||doubleclick.net^$removeparam=/^c/,important,domain=dragontea.ink
+||doubleclick.net^$removeparam=/^d/,important,domain=dragontea.ink
+||doubleclick.net^$removeparam=/^f/,important,domain=dragontea.ink
+||doubleclick.net^$removeparam=/^ga/,important,domain=dragontea.ink
+||doubleclick.net^$removeparam=/^id/,important,domain=dragontea.ink
+||doubleclick.net^$removeparam=/^m/,important,domain=dragontea.ink
+||doubleclick.net^$removeparam=/^n/,important,domain=dragontea.ink
+||doubleclick.net^$removeparam=/^r/,important,domain=dragontea.ink
+||doubleclick.net^$removeparam=/^s/,important,domain=dragontea.ink
+||doubleclick.net^$removeparam=/^u/,important,domain=dragontea.ink
+||doubleclick.net^$removeparam=eid,important,domain=dragontea.ink
+||doubleclick.net^$removeparam=gpic,important,domain=dragontea.ink
+||doubleclick.net^$removeparam=lmt,important,domain=dragontea.ink
+||doubleclick.net^$removeparam=ohw,important,domain=dragontea.ink
+||doubleclick.net^$removeparam=psts,important,domain=dragontea.ink
+||doubleclick.net^$removeparam=pvsid,important,domain=dragontea.ink
 ||securepubads.g.doubleclick.net/gpt/pubads_impl_page_level_ads*$script,domain=dragontea.ink,important
-!dragontea.ink##+js(no-xhr-if, adsystem)
+dragontea.ink##[id$=_anchor]
+dragontea.ink##.c-ads
+dragontea.ink##.widget_text.row
 dragontea.ink##html, body:style(overflow: auto !important;)
 ||setupad.com^
 ||setupad.net^
@@ -218,6 +231,7 @@ rocketnews24.com,youpouch.com#@#.native-ad
 ! https://github.com/uBlockOrigin/uAssets/issues/15234
 soranews24.com###div-gpt-ad-header
 soranews24.com##iframe[id^="google_ads_iframe"]
+@@||tpc.googlesyndication.com/simgad/$xhr,domain=soranews24.com
 
 ! https://github.com/uBlockOrigin/uAssets/issues/6541
 giga.de##div[style*="position: absolute;"][style*="background-color: rgb"][style*="margin-left: auto;"]:has(iframe[src*="damoh."]):style(opacity: 0 !important; pointer-events: none !important;)
@@ -237,7 +251,7 @@ sekai-kabuka.com##div[data-ih]:style(font-size: 0 !important;)
 sekai-kabuka.com#@#div[style="height: 20px;width:272px;top: 567px;line-height:1;background:#800;color:#fff;z-index:0;margin: 0 0 0 -374px;position: absolute;font-size: 22px;"]
 realtime-chart.info#@#+js(ra, id, td > div[style="width:0px;height:0;display:inline-block;position:absolute;"] + div[style^="display:"])
 realtime-chart.info#@#div[data-ih*="広告"]:style(background: none !important; font-size: 0 !important; cursor: default !important;)
-realtime-chart.info##b[class^="amazon"] > b[style^="font-size:"]:style(font-size: 0 !important)
+realtime-chart.info##div[class^="amazon"] > b[class^="amazon"] > b[style^="font-size:"]:style(font-size: 0 !important)
 realtime-chart.info##+js(ra, onclick, [onclick^="location.href=\'https://px.a8.net"])
 realtime-chart.info#@#+js(ra, href, a[href^="https://px.a8.net/svt/ejp?"])
 realtime-chart.info##a[href^="https://px.a8.net/svt/ejp?"]:style(pointer-events: none !important;)
@@ -247,7 +261,10 @@ realtime-chart.info##div[style="width:120px;line-height:1.1;position:relative;"]
 sekai-kabuka.com##div[style^="height:0px;width:"][style$="position:abusolute;margin: 0 auto;"] > div[class][style*="background:"][style*="font-size:"]:style(font-size: 0 !important; background: none !important;)
 realtime-chart.info##div[onclick][style*="cursor:pointer"]:style(pointer-events: none !important;)
 realtime-chart.info##div[onclick$="()"]:style(pointer-events: none !important;)
-sekai-kabuka.com##div[id][class][style^="position:relative;background:#000;"]:style(height: 1px !important; overflow: auto !important;)
+sekai-kabuka.com#@#div[id][class][style^="position:relative;background:#000;"]:style(height: 1px !important; overflow: auto !important;)
+sekai-kabuka.com##div[id][class][style^="position:relative;background:#000;"][style*="width:729px;"][style*="height: 90px;"]:style(height: 1px !important; overflow: auto !important;)
+sekai-kabuka.com##div[data-i3h]:style(font-size: 0 !important;)
+realtime-chart.info##+js(ra, onclick, .amazoom1[onclick^="clickcat"][target="_blank"])
 
 ! https://github.com/uBlockOrigin/uAssets/issues/15565
 ! https://github.com/uBlockOrigin/uAssets/issues/15572
