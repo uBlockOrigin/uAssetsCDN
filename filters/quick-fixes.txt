@@ -1,7 +1,7 @@
 ! Title: uBlock₀ filters – Quick fixes
 ! Description: Immediate, temporary filters to fix websites
 ! Expires: 1 days
-! Last modified: Tue, 06 Dec 2022 05:18:47 +0000
+! Last modified: Tue, 06 Dec 2022 12:44:45 +0000
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! Forums: https://github.com/uBlockOrigin/uAssets/issues
@@ -187,13 +187,12 @@ dragontea.ink#@#[id^="div-gpt-ad"]:style(width:1px!important;height:1px!importan
 dragontea.ink#@#div[id^="div-gpt-"]:not([id^="div-gpt-ad"]):style(width:1px!important;height:1px!important;min-width:1px!important;min-height:1px!important;margin:0!important;padding:0!important;overflow:hidden!important;opacity:0!important)
 *$script,redirect-rule=noopjs,domain=dragontea.ink
 *$frame,redirect-rule=noopframe,domain=dragontea.ink
-/\/[a-z]{8}\/[a-z]{8}/$image,redirect-rule=none:5,domain=dragontea.ink
-*$image,redirect-rule=1x1.gif,domain=dragontea.ink
+://*/*/$image,redirect-rule=1x1.gif,domain=dragontea.ink
 @@||dragontea.ink^$ghide
-dragontea.ink##html:has(script[src="https://dragontea.ink/wp-includes/js/jquery/jquery.min.js"]) .dtaf iframe[id^="google_ads_iframe_/"]:style(max-height: 0.1px !important; max-width: 0.1px !important; height: 0.1px !important;)
+dragontea.ink##html:has(script[src="https://dragontea.ink/wp-includes/js/jquery/jquery.min.js"]) .dtaf iframe[id^="google_ads_iframe_/"]:remove()
 dragontea.ink##html:has(script[src="https://dragontea.ink/wp-includes/js/jquery/jquery.min.js"]) + ins[id^="gpt_unit_/"]
 dragontea.ink##:not(:matches-path(tyc)) body[onload="init();"]:not(:has(iframe, img[src*="tpc.googlesyndication.com/simgad/"])) canvas:style(opacity: 0 !important; pointer-events: none !important;)
-dragontea.ink##html:has(script[src^="https://tagan.adlightning.com/setupad/b"]) body[class^="amp-animate "]:not(:has(iframe, .body-wrap)) *:style(opacity: 0 !important; pointer-events: none !important;)
+dragontea.ink##html:has(script[src^="https://tagan.adlightning.com/setupad/b"]) body[class^="amp-animate "]:not(:has(iframe, div[style^="background-color: transparent !important;"])) *:style(opacity: 0 !important; pointer-events: none !important;)
 ||setupad.com^
 ||setupad.net^
 ||tiiny.site^$frame,domain=dragontea.ink
@@ -203,15 +202,20 @@ dragontea.ink##html:has(script[src^="https://tagan.adlightning.com/setupad/b"]) 
 ! https://github.com/uBlockOrigin/uAssets/issues/15341
 ! https://github.com/AdguardTeam/AdguardFilters/issues/132525
 ! https://github.com/AdguardTeam/AdguardFilters/issues/132814
-rocketnews24.com,youpouch.com#@#iframe[id^="google_ads_iframe"]:style(width: 2px !important; overflow: auto !important;)
 rocketnews24.com,youpouch.com#@#div[id^="google_ads_iframe"]:style(width: 2px !important; overflow: auto !important;)
 rocketnews24.com,youpouch.com#@#div[id^="google_ads_iframe"]:style(max-height: 2px !important; overflow: auto !important;)
 rocketnews24.com,youpouch.com#@#div[id^="google_ads_iframe"]:style(clip-path: circle(1%) !important;)
-rocketnews24.com,youpouch.com##div[id^="google_ads_iframe"]:style(opacity: 0 !important; pointer-events: none !important;)
+rocketnews24.com,youpouch.com#@#div[id^="google_ads_iframe"]:style(opacity: 0 !important; pointer-events: none !important;)
+rocketnews24.com,youpouch.com#@#.ad:style(opacity: 0 !important; pointer-events: none !important;)
+rocketnews24.com,youpouch.com##.ad:style(height: 1px !important; overflow: hidden !important;)
 ! https://github.com/uBlockOrigin/uAssets/issues/15234
 soranews24.com###div-gpt-ad-header:style(opacity: 0 !important;)
-soranews24.com##div[id^="google_ads_iframe"]:style(opacity: 0 !important; pointer-events: none !important;)
+soranews24.com##.ad:style(height: 1px !important; overflow: hidden !important;)
 @@||tpc.googlesyndication.com/simgad/$xhr,domain=soranews24.com
+
+! https://github.com/AdguardTeam/AdguardFilters/issues/116093
+sekai-kabuka.com##table[width="762px"] > tbody > tr > td[class] > div[id][class] > div[style="width: 232px;"]:style(z-index: -1 !important;)
+realtime-chart.info##a[href^="https://bit.ly/3UB5LTX"]
 
 ! https://github.com/uBlockOrigin/uAssets/issues/6541
 ! https://github.com/uBlockOrigin/uAssets/issues/15698
@@ -267,3 +271,7 @@ magesy.*#@#^script:has-text(adBlockDetected)
 @@/wp-content/plugins/wordpress-popular-posts/assets/js/wpp.min.js?$script,1p,domain=magesy.blog|magesypro.pro|audiodoceo.com
 @@/wp-content/plugins/akismet/_inc/akismet-frontend.js?$script,domain=magesy.blog|magesypro.pro|audiodoceo.com
 @@/wp-content/plugins/megamenu/js/maxmegamenu.js?$script,1p,domain=magesy.blog|magesypro.pro|audiodoceo.com
+
+! https://github.com/uBlockOrigin/uAssets/issues/15918
+@@||adnxs.com^$domain=welt.de
+||adnxs.com/$xhr,domain=welt.de,removeparam,important
