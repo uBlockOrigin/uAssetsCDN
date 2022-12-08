@@ -1,7 +1,7 @@
 ! Title: uBlock₀ filters – Quick fixes
 ! Description: Immediate, temporary filters to fix websites
 ! Expires: 1 days
-! Last modified: Wed, 07 Dec 2022 21:07:06 +0000
+! Last modified: Thu, 08 Dec 2022 13:02:44 +0000
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! Forums: https://github.com/uBlockOrigin/uAssets/issues
@@ -80,8 +80,7 @@ ylilauta.org##iframe.a
 
 ! https://github.com/uBlockOrigin/uAssets/issues/13424
 ! https://github.com/uBlockOrigin/uAssets/issues/15411
-!megaup.net##.imgAds:style(clip-path: circle(1%) !important;)
-megaup.net##.metaRedirectWrapperBottomAds > div:style(clip-path: circle(1%) !important;)
+megaup.net##.metaRedirectWrapperBottomAds > div > .imgAds > img:style(clip-path: circle(0%) !important;)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/13544
 ! https://github.com/uBlockOrigin/uAssets/commit/6008194de5ebfb5f37abb375c8b6147f52d8bff3#commitcomment-76982803
@@ -176,6 +175,7 @@ uniqueten.net##+js(nostif, console)
 @@||pagead2.googlesyndication.com/bg/$script,domain=tpc.googlesyndication.com
 @@||tpc.googlesyndication.com/pagead/images/adchoices/*.png|$image,domain=dragontea.ink
 @@||onetag-sys.com/usync/|$frame,domain=dragontea.ink
+@@||tpc.googlesyndication.com/simgad/10326839138696801667$image,domain=dragontea.ink
 dragontea.ink#@#+js(addEventListener-defuser, DOMContentLoaded, Adblock)
 dragontea.ink#@#.div-gpt-ad:style(width:1px!important;height:1px!important;min-width:1px!important;min-height:1px!important;margin:0!important;padding:0!important;overflow:hidden!important;opacity:0!important)
 dragontea.ink#@#[class^="div-gpt-ad"]:style(width:1px!important;height:1px!important;min-width:1px!important;min-height:1px!important;margin:0!important;padding:0!important;overflow:hidden!important;opacity:0!important)
@@ -186,9 +186,9 @@ dragontea.ink#@#div[id^="div-gpt-"]:not([id^="div-gpt-ad"]):style(width:1px!impo
 *$image,redirect-rule=nooptext,domain=dragontea.ink
 ||tpc.googlesyndication.com/simgad/$redirect-rule=1x1.gif:5,domain=dragontea.ink
 @@||dragontea.ink^$ghide
-dragontea.ink##html:has(script[src="https://dragontea.ink/wp-includes/js/jquery/jquery.min.js"]) + ins[id^="gpt_unit_/"]
-dragontea.ink##:not(:matches-path(tyc)) body[onload="init();"]:not(:has(iframe, img[src*="tpc.googlesyndication.com/simgad/"])) canvas:style(opacity: 0 !important; pointer-events: none !important;)
-dragontea.ink##html:has(script[src^="https://www.googletagservices.com/activeview/js/current/rx_lidar.js?cache="])body[class^="amp-animate "][style]:not(:has(iframe, div[style^="background-color: transparent !important;"])) *:style(opacity: 0 !important; pointer-events: none !important;)
+dragontea.ink##html:has(script[src="https://dragontea.ink/wp-includes/js/jquery/jquery.min.js"]) + ins[id^="gpt_unit_/"]:style(max-height: 100px !importamt;)
+dragontea.ink##html[class*="adform"]:has(body[onload="init();"]:not(:has(iframe, img[src*="tpc.googlesyndication.com/simgad/"]))):style(opacity: 0 !important; pointer-events: none !important;)
+dragontea.ink##html:has(script[src="https://tagan.adlightning.com/setupad/b-8db6969-dbe151ed.js"]) body[class^="amp-animate "][style*="opacity: 1;"] > *:remove()
 ||setupad.com^
 ||setupad.net^
 ||tiiny.site^$frame,domain=dragontea.ink
@@ -205,10 +205,14 @@ rocketnews24.com,youpouch.com#@#.ad:style(opacity: 0 !important; pointer-events:
 rocketnews24.com,youpouch.com#@#.ad:style(height: 1px !important; overflow: hidden !important;)
 rocketnews24.com,youpouch.com#@#.ad:style(height: 1px !important; min-height: 1px !important; overflow: hidden !important;)
 rocketnews24.com,youpouch.com#@#.ad:style(position: absolute !important; left: -4000px !important;)
-rocketnews24.com,youpouch.com##.ad:style(transform: scaleY(0.0) !important; pointer-events: none important;)
+rocketnews24.com,youpouch.com#@#.ad:style(transform: scaleY(0.0) !important; pointer-events: none important;)
+rocketnews24.com,youpouch.com#@#.ad:style(filter: opacity(0) !important; pointer-events: none important;)
+rocketnews24.com,youpouch.com##a[href^="https://www.googleadservices.com"]
+rocketnews24.com,youpouch.com##a[href^="https://googleads.g.doubleclick.net"]
 ! https://github.com/uBlockOrigin/uAssets/issues/15234
 soranews24.com###div-gpt-ad-header:style(opacity: 0 !important;)
-soranews24.com##.ad, .ad300x250:style(transform: scaleY(0.0) !important; pointer-events: none important;)
+soranews24.com##a[href^="https://www.googleadservices.com"]
+soranews24.com##a[href^="https://googleads.g.doubleclick.net"]
 @@||tpc.googlesyndication.com/simgad/$xhr,domain=soranews24.com
 
 ! https://github.com/AdguardTeam/AdguardFilters/issues/116093
@@ -258,18 +262,14 @@ blog.cryptowidgets.net,blog.insurancegold.in,blog.wiki-topia.com##input[type="hi
 @@||magesy.blog^$ghide
 audiodoceo.com,audiotools.pro,magesy.*##+js(no-fetch-if, adsbygoogle)
 magesy.blog,magesypro.pro,audiodoceo.com##+js(noeval-if, deblocker)
-audiotools.pro##+js(nostif, adsBlocked)
 magesy.download##+js(acis, addEventListener, google_ad_client)
-audiotools.pro,audiodoceo.com,magesypro.pro,magesy.blog##div[class*="-blackout"][style*="background-color:"]:empty
-audiotools.pro,audiodoceo.com,magesypro.pro,magesy.blog##div[class*="-blackout"][style*="background-color:"]:empty + div:has(> div[style*="background-color:"])
-audiodoceo.com##body > *:style(filter: none !important;)
-magesy.*#@#^script:has-text(adBlockDetected)
-/wp-content/plugins/*@$script,1p,domain=magesy.blog|magesypro.pro|audiodoceo.com
-/wp-content/plugins/*($script,1p,domain=magesy.blog|magesypro.pro|audiodoceo.com
-/wp-content/plugins/*+$script,1p,domain=magesy.blog|magesypro.pro|audiodoceo.com
-@@/wp-content/plugins/wordpress-popular-posts/assets/js/wpp.min.js?$script,1p,domain=magesy.blog|magesypro.pro|audiodoceo.com
-@@/wp-content/plugins/akismet/_inc/akismet-frontend.js?$script,domain=magesy.blog|magesypro.pro|audiodoceo.com
-@@/wp-content/plugins/megamenu/js/maxmegamenu.js?$script,1p,domain=magesy.blog|magesypro.pro|audiodoceo.com
+magesy.download##+js(nobab)
+audiotools.pro,audiodoceo.com,magesypro.pro,magesy.blog##div[class$="active"][style*="background-color:"]:empty
+audiotools.pro,audiodoceo.com,magesypro.pro,magesy.blog##div[class$="active"][style*="background-color:"]:empty + div:has(> div[style*="background-color:"])
+audiotools.pro,audiodoceo.com,magesypro.pro##body > *:style(filter: none !important;)
+@*?ver=6.1.1$script,1p,domain=magesy.blog|magesypro.pro|audiodoceo.com|audiotools.pro
+)*?ver=6.1.1$script,1p,domain=magesy.blog|magesypro.pro|audiodoceo.com|audiotools.pro
++*?ver=6.1.1$script,1p,domain=magesy.blog|magesypro.pro|audiodoceo.com|audiotools.pro
 
 ! https://github.com/uBlockOrigin/uAssets/issues/15918
 @@||adnxs.com^$domain=welt.de
