@@ -1,7 +1,7 @@
 ! Title: uBlock₀ filters – Quick fixes
 ! Description: Immediate, temporary filters to fix websites
 ! Expires: 1 days
-! Last modified: Fri, 13 Jan 2023 10:30:57 +0000
+! Last modified: Fri, 13 Jan 2023 18:27:07 +0000
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! Forums: https://github.com/uBlockOrigin/uAssets/issues
@@ -60,17 +60,11 @@ rjno1.com##+js(acis, onload)
 ! ylilauta. org
 ! https://github.com/uBlockOrigin/uAssets/issues/14204
 *$image,domain=fcdn.lauta.media,redirect-rule=32x32.png
-||adform.net^$domain=fcdn.lauta.media,script,xhr,redirect-rule=noopjs
-||es.ylilauta.org/files/f0/d5/f0d5a578a9853e15.jpg
-||es.ylilauta.org/files/84/d3/84d37bcf7c1656d4.jpg
-@@||adform.net/banners/scripts/adx.js^$xhr,domain=lauta.media|ylilauta.org
-@@||adx.adform.net/adx/$script,xhr,domain=lauta.media|ylilauta.org
+@@||adform.net/banners/scripts/adx.js^$xhr,script,domain=fcdn.lauta.media
+@@||adx.adform.net/adx/$script,xhr,domain=fcdn.lauta.media
 @@||ads.ylilauta.org^$frame,1p
-@@||s1.adform.net/stoat/626/s1.adform.net/bootstrap.js$script,xhr,domain=ylilauta.org
-@@||track.adform.net/adf$script,xhr,domain=ylilauta.org
-@@||s1.adform.net/banners/scripts/mobile/adform.js?$script,xhr,domain=ylilauta.org
-ads.ylilauta.org##html:style(max-height: 1px !important;)
-@@||adform.net^$script,xhr,domain=fcdn.lauta.media
+@@||track.adform.net/adfscript$script,xhr,domain=fcdn.lauta.media
+@@||adform.net/banners/scripts/mobile/adform.js?$script,domain=fcdn.lauta.media
 ||s1.adform.net/banners/Elements/$important,domain=fcdn.lauta.media
 fcdn.lauta.media##+js(aeld, click)
 fcdn.lauta.media##body[style="background: rgb(238, 238, 238) none repeat scroll 0% 0%;"]
@@ -137,18 +131,14 @@ lightnovelpub.com,novelpub.com,webnovelpub.com##+js(aopr, ramp)
 lightnovelpub.com##style:has-text(/@media.*ad/):remove()
 lightnovelworld.com##[data-mobid]
 webnovelpub.com##.adsbygoogle:upward(div)
-lightnovelpub.com,novelpub.com,webnovelpub.com##+js(nostif, ads)
+lightnovelpub.com,lightnovelworld.com,novelpub.com,webnovelpub.com##+js(nostif, ads)
+lightnovelpub.com,lightnovelworld.com,novelpub.com,webnovelpub.com##+js(nostif, appendChild)
 novelpub.com##.comm-ads
 webnovelpub.com##script:has-text(ramp):upward(1)
 lightnovelpub.com##[data-ad-slot]:upward(1)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/14641
 @@||cdn.bluebillywig.com/apps/player/*/admanager$script,domain=digital-photography-school.com
-
-! https://github.com/uBlockOrigin/uAssets/issues/14676#issuecomment-1241027781
-!work.ink##+js(nostif, _0x, 100)
-!work.ink##+js(nostif, _0x, 150)
-!work.ink##+js(nostif, /\?0x|0x0|clientHeight|console/)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/14929
 allcryptoz.net,crewbase.net,crewus.net,shinbhu.net,shinchu.net,thumb8.net,thumb9.net,topcryptoz.net,uniqueten.net,ultraten.net##+js(acis, document.getElementById, /\$\('body'\)|\$\("body"\)/)
@@ -256,14 +246,6 @@ magesy.*,audiodoceo.com,magesypro.pro##+js(nobab)
 magesy.*##+js(nostif, show)
 *$xhr,redirect-rule=nooptext,domain=magesy.blog|audiotools.pro|audiodoceo.com|magesypro.pro
 
-! https://github.com/uBlockOrigin/uAssets/issues/15918
-@@||adnxs.com^$domain=welt.de
-||adnxs.com/$xhr,domain=welt.de,removeparam,important
-welt.de#@#+js(nostif, .call(null), 10)
-*$frame,domain=welt.de,redirect-rule=noopframe
-*$script,domain=welt.de,redirect-rule=noopjs
-welt.de##+js(aost, Object, /gdpr.*inlineScript/)
-
 ! https://twitter.com/Shigo_Tohri/status/1606671698757300224
 ! https://twitter.com/remon2207/status/1606508504160010240
 ! https://twitter.com/magic_hand619/status/1606650697956888577
@@ -273,19 +255,10 @@ twitter.com#?#article[data-testid="tweet"]:-abp-has(path[d$="10H8.996V8h7v7z"])
 twitter.com#?#div[data-testid="trend"]:-abp-has(path[d$="10H8.996V8h7v7z"])
 
 ! https://github.com/uBlockOrigin/uAssets/issues/16149
-sozcu.com.tr##+js(aopr, detectAdBlock)
 sozcu.com.tr##+js(no-fetch-if, /assets/js/prebid)
 
 ! https://github.com/AdguardTeam/AdguardFilters/issues/138429
 instagram.com#@#article[role="presentation"] > div[style]:has(span:has-text(/Gesponsert|Sponsored|Geborg|Sponzorováno|Sponsoreret|Χορηγούμενη|Publicidad|Sponsoroitu|Sponsorisé|Bersponsor|Sponsorizzato|広告|광고|Ditaja|Sponset|Gesponsord|Sponsorowane|Patrocinado|Реклама|Sponsrad|ได้รับการสนับสนุน|May Sponsor|Sponsorlu|赞助内容|贊助|প্রযোজিত|પ્રાયોજિત|स्पॉन्सर्ड|Sponzorirano|ಪ್ರಾಯೋಜಿತ|സ്‌പോൺസർ ചെയ്‌തത്|पुरस्‍कृत|प्रायोजित|ਪ੍ਰਾਯੋਜਿਤ|මුදල් ගෙවා ප්‍රචාරය කරන ලදි|Sponzorované|விளம்பரதாரர்கள்|స్పాన్సర్ చేసింది|Được tài trợ|Спонсорирано|Commandité|Sponsorizat|Спонзорисано/))
-
-! https://github.com/AdguardTeam/AdguardFilters/issues/138194
-@@||uma.pure-db.com/securepubads.g.doubleclick.net/tag/js/gpt.js$xhr,1p
-@@||yads.c.yimg.jp/uadf/yads_vimps.js$xhr,domain=uma.pure-db.com
-@@||yads.yjtag.yahoo.co.jp/tag$xhr,domain=uma.pure-db.com
-
-! https://jbbs.shitaraba.net/bbs/read.cgi/internet/25463/1652115193/564
-@@||dcard.docomo.ne.jp/st/common/js/googleTagManager.js
 
 ! https://github.com/uBlockOrigin/uAssets/issues/15341
 ! https://github.com/AdguardTeam/AdguardFilters/issues/132525
@@ -295,7 +268,6 @@ instagram.com#@#article[role="presentation"] > div[style]:has(span:has-text(/Ges
 ||g.doubleclick.net/gampad/ads?$xhr,removeparam=/^(cookie|ga_|u_)/,domain=rocketnews24.com|youpouch.com|soranews24.com
 
 ! https://github.com/AdguardTeam/AdguardFilters/issues/116093
-sekai-kabuka.com##+js(set, 偸筮紿鵑舸麩瀟蜊ﾟ0姆0, 0)
 sekai-kabuka.com#@#+js(set, 險倚く1盍蹲潭偬簔oﾛ, false)
 sekai-kabuka.com##+js(set, 笆ﾟ荵ﾞﾉ1ｴIolﾟ1, false)
 
