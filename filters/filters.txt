@@ -1,7 +1,7 @@
 ! Title: uBlock₀ filters
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Expires: 4 days
-! Last modified: Sun, 29 Jan 2023 13:46:55 +0000
+! Last modified: Mon, 30 Jan 2023 01:35:16 +0000
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 !
@@ -1374,12 +1374,15 @@ informer.com##+js(aopr, adblock_added)
 informer.com##.screen_ad
 
 ! https://github.com/uBlockOrigin/uAssets/issues/1286
+torlock.*,torlock2.*##+js(acs, setTimeout, admc)
 torlock.*##+js(aopw, _pop)
 ||torlock.*/sww.js$script,1p
 torlock.*##:xpath(//strong[contains(text(),"VPN")]/../../..)
 torlock.*,torlock2.*##+js(nowebrtc)
 torlock2.*##:xpath(//strong[contains(text(),"VPN")]/../../..)
 torlock.*,torlock2.*##.extneed
+/script/bootstrap.js$script,3p,domain=torlock.*|torlock2.*
+||ecorph.com^
 
 ! https://github.com/uBlockOrigin/uAssets/issues/582
 @@||inoreader.com^$ghide
@@ -5432,6 +5435,7 @@ freemegalinks.com##+js(nobab)
 ! https://github.com/uBlockOrigin/uAssets/issues/9814
 @@||frkn64modding.com^$ghide
 frkn64modding.com##+js(no-xhr-if, ad_)
+frkn64modding.com##.ezoic-ad
 
 ! https://github.com/uBlockOrigin/uAssets/issues/2350
 @@||cdn.vuplay.co.uk/*/comscore.$script,domain=sporza.be
@@ -11118,8 +11122,11 @@ ksta.de##.dm_ad
 ksta.de##.dm_ad-container
 
 ! https://github.com/uBlockOrigin/uAssets/issues/6773
-@@||frag-mutti.de^$ghide
-frag-mutti.de##.superbanner
+! https://github.com/uBlockOrigin/uAssets/issues/5052#issuecomment-1407771485
+frag-mutti.de##.intext-ad
+frag-mutti.de##.ad-loading:remove()
+frag-mutti.de###campaign-popup
+frag-mutti.de###fm-shadow
 
 ! https://www.reddit.com/r/uBlockOrigin/comments/ax3wtv/ads_in_videos_porn_site/
 porn-tube-club.com##+js(nowoif)
@@ -15132,7 +15139,8 @@ hl-live.de##+js(aeld, load, onload)
 hl-live.de##+js(nostif, getComputedStyle, 250)
 
 ! flsaudio.com anti adb
-@@||flsaudio.com^$ghide
+flsaudio.com##.adsbygoogle:upward(.widget)
+flsaudio.com##.altumcode-coupon-content
 ||flsaudio.com^$image,redirect-rule=1x1.gif,1p
 
 ! https://github.com/NanoMeow/QuickReports/issues/1997
