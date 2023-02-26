@@ -1,7 +1,7 @@
 ! Title: uBlock₀ filters
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Expires: 4 days
-! Last modified: Sat, 25 Feb 2023 05:11:02 +0000
+! Last modified: Sun, 26 Feb 2023 12:09:33 +0000
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 !
@@ -5634,7 +5634,6 @@ igg-games.com##[href^="https://tm-offers"]
 @@||igg-games.com^$ghide
 igg-games.com#@#.uk-panel.widget-text
 igg-games.com##.uk-panel.widget-text:style(height: 0px !important; visibility: collapse;)
-/^https:\/\/[a-z]{7,16}\.[a-z]{3,7}\/[a-z0-9]{14}\/\d{5}$/$3p,script
 
 ! https://github.com/uBlockOrigin/uAssets/issues/2458
 pornrabbit.com##+js(nowoif)
@@ -9161,7 +9160,7 @@ mixdrop.*,mixdrp.*##+js(nano-stb, disabled)
 ||mixdrop.*/sw.js$script,1p
 mixdrop.*##div[onclick^="$(this).remove"]
 mixdrp.*,mixdrop.*##body > div[style^="position: absolute;"][style*="z-index"]
-*$script,3p,denyallow=google.com|gstatic.com|hwcdn.net|jquery.com,domain=mixdrop.*|mixdrp.*
+*$script,3p,denyallow=dotblocking.dummy|google.com|gstatic.com|hwcdn.net|jquery.com,domain=mixdrop.*|mixdrp.*
 ||brightadnetwork.com^
 
 ! https://github.com/NanoMeow/QuickReports/issues/389
@@ -12125,10 +12124,12 @@ iphonetweak.fr##.bigPub
 
 ! https://github.com/uBlockOrigin/uAssets/issues/15586
 ! https://github.com/uBlockOrigin/uAssets/issues/16307
-duden.de#@#.ad-box
-@@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$xhr,domain=duden.de
 duden.de##[id*="billboard"]
 duden.de##.tabloid__side-column
+!#if !env_mobile
+~mentor.duden.de,duden.de##+js(aeld, DOMContentLoaded, isMobile)
+!#endif
+||duden.de/aab/assets/js/
 
 ! https://www.reddit.com/r/uBlockOrigin/comments/bhr1sj/adblocker_detected/
 faresgame.com##+js(aopr, adBlockDetected)
@@ -14368,7 +14369,7 @@ afilmywap.*,okhatrimaza.*##+js(popads-dummy)
 afilmywap.*,okhatrimaza.*##+js(aopr, glxopen)
 ||ilivaris.pw^
 ##[href^="http://smart.offers-tracking.com/"]
-/1clkn/*$script
+/1clkn/*$script,3p
 
 ! https://github.com/uBlockOrigin/uAssets/issues/4707
 clk.ink##+js(aopw, adBlockDetected)
@@ -19199,8 +19200,9 @@ techdracula.com##ins.adsbygoogle
 /[0-9a-f]{32}\/invoke\.js/$script,3p
 /^https?:\/\/(?:www\.|[0-9a-z]{7,10}\.)?[-0-9a-z]{5,}\.com\/\/?(?:[0-9a-f]{2}\/){2,3}[0-9a-f]{32}\.js/$script,xhr,3p
 ! https://github.com/easylist/easylist/issues/6476
-/^https?:\/\/(?:[a-z]{2}\.)?[0-9a-z]{7,16}\.com\/[a-z](?=[a-z]{0,25}[0-9A-Z])[0-9a-zA-Z]{3,26}\/(?:[1-6]\d{4}|[3-9]\d{3})\??(?:_=\d+|v=\d)?$/$frame,script,xhr,popup,3p,match-case
-/^https?:\/\/(?:[a-z]{2}\.)?[0-9a-z]{7,16}\.website\/[a-z](?=[a-z]{0,25}[0-9A-Z])[0-9a-zA-Z]{3,26}\/(?:[1-6]\d{4}|[3-9]\d{3})\??(?:_=\d+|v=\d)?$/$frame,script,xhr,popup,3p,match-case
+/^https?:\/\/(?:[a-z]{2}\.)?[0-9a-z]{7,16}\.[a-z]{3,7}\/[a-z](?=[a-z]{0,25}[0-9A-Z])[0-9a-zA-Z]{3,26}\/(?:[1-6]\d{4}|[3-9]\d{3})\??(?:_=\d+|v=\d)?$/$script,3p,match-case
+/^https?:\/\/(?:[a-z]{2}\.)?[0-9a-z]{7,16}\.com\/[a-z](?=[a-z]{0,25}[0-9A-Z])[0-9a-zA-Z]{3,26}\/(?:[1-6]\d{4}|[3-9]\d{3})\??(?:_=\d+|v=\d)?$/$frame,xhr,popup,3p,match-case
+/^https?:\/\/(?:[a-z]{2}\.)?[0-9a-z]{7,16}\.website\/[a-z](?=[a-z]{0,25}[0-9A-Z])[0-9a-zA-Z]{3,26}\/(?:[1-6]\d{4}|[3-9]\d{3})\??(?:_=\d+|v=\d)?$/$frame,xhr,popup,3p,match-case
 ! https://github.com/easylist/easylist/issues/6471
 /\/t\/[0-9]{3}\/[0-9]{3}\/a[0-9]{4,9}\.js$/$script
 /^https?:\/\/[0-9a-z]{13,14}\.cloudfront\.net\/\?[a-z]{3,5}=\d{6}$/$script,xhr,3p
