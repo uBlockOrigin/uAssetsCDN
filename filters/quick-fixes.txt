@@ -1,7 +1,7 @@
 ! Title: uBlock₀ filters – Quick fixes
 ! Description: Immediate, temporary filters to fix websites
 ! Expires: 1 days
-! Last modified: Tue, 07 Mar 2023 19:00:44 +0000
+! Last modified: Wed, 08 Mar 2023 12:41:41 +0000
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! Forums: https://github.com/uBlockOrigin/uAssets/issues
@@ -29,7 +29,6 @@ rjno1.com##^script:has-text(/window.location|getTimezoneOffset|google_global_cor
 rjno1.com##+js(nostif, /^/)
 rjno1.com##+js(acis, onload)
 
-! ylilauta. org
 ! https://github.com/uBlockOrigin/uAssets/issues/14204
 *$image,domain=fcdn.lauta.media,redirect-rule=32x32.png
 @@||adform.net/banners/scripts/adx.js^$xhr,script,domain=fcdn.lauta.media
@@ -42,9 +41,8 @@ fcdn.lauta.media##+js(aeld, click)
 fcdn.lauta.media##body[style="background: rgb(238, 238, 238) none repeat scroll 0% 0%;"]
 fcdn.lauta.media###adf-click:style(cursor: default !important;)
 fcdn.lauta.media##body::after:style(content: ''; display: block; position: absolute; left: 0; top: 0; height: 100%; width: 100%; background-color: white;)
-!#if env_chromium
-ylilauta.org##iframe.a
-!#endif
+ylilauta.org#@#iframe.a
+||es.ylilauta.org^$image,redirect=1x1.gif,domain=ylilauta.org
 
 ! https://github.com/uBlockOrigin/uAssets/issues/13544
 ! https://github.com/uBlockOrigin/uAssets/commit/6008194de5ebfb5f37abb375c8b6147f52d8bff3#commitcomment-76982803
@@ -178,16 +176,18 @@ techcyan.com###second-btn:style(display: block !important;)
 banaraswap.in,techcyan.com,kiktu.com##a[href*=".click"]
 banaraswap.in,techcyan.com##iframe[id^="google_ads_iframe"]:not([src^="https://www.google.com/recaptcha/api2/anchor?"])
 kiktu.com,techcyan.com##+js(aeld, DOMContentLoaded, _0x)
-techcyan.com,kiktu.com,banaraswap.in###xx[style="display: flex;"]:not(:has(a[href*=".click"]))
-techcyan.com,kiktu.com,banaraswap.in##body > [id][style="display: flex;"]:not(:has(a[href*=".click"]))
-techcyan.com,kiktu.com,banaraswap.in##[style="display: flex;"]:matches-css(position: fixed):not(:has(a[href*=".click"]))
-techcyan.com,kiktu.com,banaraswap.in##[style="display: flex;"]:matches-css(position: absolute):not(:has(a[href*=".click"]))
-techcyan.com,kiktu.com,banaraswap.in##body:style(overflow: visible !important;)
+techcyan.com,kiktu.com,banaraswap.in###xx[style="display: flex;"]:not(:has(iframe[src^="https://www.google.com/recaptcha/api"], #recap-btn))
+techcyan.com,kiktu.com,banaraswap.in##body > [id][style="display: flex;"]:not(:has(iframe[src^="https://www.google.com/recaptcha/api"], #recap-btn))
+techcyan.com,kiktu.com,banaraswap.in##[style="display: flex;"]:matches-css(position: fixed):not(:has(iframe[src^="https://www.google.com/recaptcha/api"], #recap-btn))
+techcyan.com,kiktu.com,banaraswap.in##[style="display: flex;"]:matches-css(position: absolute):not(:has(iframe[src^="https://www.google.com/recaptcha/api"], #recap-btn))
+techcyan.com,kiktu.com,banaraswap.in##body:style(overflow: visible !important;):not(:has(iframe[src^="https://www.google.com/recaptcha/api"], #recap-btn))
 ||click^$script,3p,domain=upshrink.com
 techcyan.com##+js(alert-buster)
-techcyan.com,kiktu.com##+js(aeld, DOMContentLoaded, lastChild)
-techcyan.com,kiktu.com##+js(aeld, DOMContentLoaded, upshrink)
-techcyan.com,kiktu.com##^script:has-text(/lastChild|kcolbax|Adblock|@upshrink|document.body.innerHTML/)
+techcyan.com,kiktu.com,banaraswap.in##+js(aeld, DOMContentLoaded, _7x)
+techcyan.com,kiktu.com,banaraswap.in##+js(aeld, DOMContentLoaded, upshrink)
+techcyan.com,kiktu.com,banaraswap.in##^script:has-text(/lastChild|kcolbax|Adblock|@upshrink|document.body.innerHTML/)
+techcyan.com,kiktu.com,banaraswap.in##+js(nostif, , 2500)
+techcyan.com,kiktu.com,banaraswap.in##+js(nostif, ==undefined)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/16750
 tamrieltradecentre.com#@#a[href*=".sjv.io"] > img:style(width: 1% !important; opacity: 0 !important;)
@@ -282,6 +282,7 @@ rocketnews24.com#@#.ad
 ! https://github.com/uBlockOrigin/uAssets/issues/17054
 *$media,redirect-rule=noopmp3-0.1s,domain=spiegel.de|t-online.de|giga.de
 @@||securepubads.g.doubleclick.net/tag/js/gpt.js$script,domain=spiegel.de|t-online.de|giga.de
+@@||imasdk.googleapis.com/js/sdkloader/ima3.js$script,domain=spiegel.de|t-online.de|giga.de
 @@||pubads.g.doubleclick.net/activity$xhr,domain=spiegel.de
 @@||ad.doubleclick.net/ddm/$xhr,domain=spiegel.de
 @@||ad.sxp.smartclip.net/select?$xhr,domain=spiegel.de
