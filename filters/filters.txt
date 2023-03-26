@@ -1,7 +1,7 @@
 ! Title: uBlock₀ filters
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Expires: 4 days
-! Last modified: Sun, 26 Mar 2023 06:00:09 +0000
+! Last modified: Sun, 26 Mar 2023 12:39:17 +0000
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 !
@@ -33,9 +33,6 @@ google.*##div[role="navigation"] + c-wiz > script + div > .kxhcC
 
 ! https://www.reddit.com/r/uBlockOrigin/comments/8xg7p0/ublock_origin_is_not_blocking_google_sponsored/
 google.*##.ads-ad
-
-! https://github.com/chrisaljoudi/uBlock/issues/381
-google.*###sqh
 
 ! https://github.com/uBlockOrigin/uAssets/issues/3482
 ! https://github.com/uBlockOrigin/uAssets/issues/10099
@@ -185,6 +182,9 @@ designbump.com,thedesigninspiration.com##+js(aost, Math.random, /(?=.*onerror)(?
 
 whatfinger.com##+js(set, oeo, noopFunc)
 @@*$ghide,domain=themattwalshblog.com
+||rddywd.com^$image,redirect-rule=1x1.gif
+@@||rddywd.com/advertising.js$script
+
 ! https://github.com/NanoMeow/QuickReports/issues/2493
 newser.com##+js(aeld, load, Object)
 funnyand.com##.ad-unit-desktop
@@ -493,15 +493,7 @@ facebook.com,facebookwkhpilnemxj7asaniu7vnjjbiltxjqhye3mhbshg7kx5tfyd.onion##div
 facebook.com,facebookwkhpilnemxj7asaniu7vnjjbiltxjqhye3mhbshg7kx5tfyd.onion##div[aria-describedby]:not([aria-posinset]) h4 > span > a[href]:not([href^="/groups/"]):not([href*="section_header_type"]):matches-attr(href="/__cft__\[0\]=[-\w]{270,}/"):upward(div[aria-describedby])
 
 ! mail.yahoo.com stuff
-! This removes blank space the right-hand side
-mail.yahoo.com###shellcontent:style(right: 0px !important;)
-! https://github.com/gorhill/uBlock/issues/2712
-mail.yahoo.com##iframe[src*="yimg.com/rq/darla/"]
-! https://github.com/jspenguin2017/uBlockProtector/issues/889
-mail.yahoo.com##div[aria-describedby="adblock-upsell-description"]
-! https://github.com/uBlockOrigin/uAssets/issues/8038
-mail.yahoo.com##.ab_C.I_Zjpytw:has-text(blocker)
-mail.yahoo.com##div#modal-outer[aria-labelledby="adblock-unblock-cue"]
+mail.yahoo.com##[data-test-id="right-rail-ad"]
 ! https://github.com/uBlockOrigin/uAssets/issues/13439
 mail.yahoo.com##[data-test-id="video-container"]
 
@@ -816,14 +808,6 @@ familyhandyman.com##.cm-ad-unit-section
 cwseed.com##+js(aopr, admrlWpJsonP)
 cwtv.com##+js(acis, document.createElement, admiral)
 cwtv.com##+js(noeval)
-
-! https://github.com/uBlockOrigin/uAssets/issues/280
-! https://github.com/jspenguin2017/uBlockProtector/issues/1070
-download.mokeedev.com##+js(set, adVerified, false)
-download.mokeedev.com##+js(nostif, adsbygoogle, 5000)
-download.mokeedev.com##+js(nostif, alert-danger-enabled)
-||download.mokeedev.com/js/jquery-common.js.*$1p,script,redirect=fuckadblock.js-3.2.0
-||googlesyndication.com^$script,redirect=noopjs,domain=download.mokeedev.com
 
 ! https://github.com/uBlockOrigin/uAssets/issues/278
 pocketnow.com##+js(aopr, InstallTrigger)
@@ -5193,15 +5177,10 @@ pornfay.*##.bottom-adv
 finofilipino.org##+js(set, caca, noopFunc)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/2249
-in.search.yahoo.com###right:has-text(/ ads /i)
 in.search.yahoo.com##.reg:has([href*="aclick"])
 in.search.yahoo.com##.reg:has([href*="clk"])
-yahoo.com##[data-test-locator="ntk-ad-link"]:upward(2)
 
 ! https://github.com/NanoMeow/QuickReports/issues/2244
-yahoo.com##.js-sidekick-item[data-ad-story-beacon]
-yahoo.com##.stream-ad
-yahoo.com##[id^="my-ads"]
 yahoo.com##.ys-mobileFeaturedAd
 ||cdn.yahoomedia.net/creatives/*/BlackFriday
 yahoo.com###HPSPON-ad
@@ -5209,10 +5188,6 @@ yahoo.com###HPSPON-ad
 ! https://forums.lanik.us/viewtopic.php?f=62&t=40733
 mypornstarbook.net##+js(aopr, ExoLoader.serve)
 mypornstarbook.net##table > tbody > tr:has-text(Advertisement)
-
-! https://github.com/uBlockOrigin/uAssets/issues/2252
-mbahhanif.site##+js(aopw, hidekeep)
-mbahhanif.site##+js(aeld, load, onload)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/2260
 grantorrent.*##+js(aeld, click, popMagic)
