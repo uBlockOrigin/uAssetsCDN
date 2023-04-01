@@ -1,7 +1,7 @@
 ! Title: uBlock₀ filters
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Expires: 4 days
-! Last modified: Sat, 01 Apr 2023 12:45:37 +0000
+! Last modified: Sat, 01 Apr 2023 17:44:14 +0000
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! New filters from January 2023 to ->
@@ -337,8 +337,9 @@ janfeb.stream##+js(nowoif)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/17239
 daemon-hentai.com##+js(nostif, nextFunction)
-daemon-hentai.com##+js(aopr, adsBlocked)
 daemon-hentai.com##+js(aopr, ai_run_scripts)
+daemon-hentai.com##+js(noeval-if, fairAdblock)
+@@||daemon-hentai.com^$ghide
 
 ! https://github.com/uBlockOrigin/uAssets/issues/16411
 coldfrm.org##+js(nostif, show)
@@ -1101,7 +1102,8 @@ claimcoins.site##^script:has-text(htmls)
 claimcoins.site##div[style] > [id^="adm-container"]:upward(1)
 
 ! https://twitter.com/SeriousHoax/status/1632033333394669571
-sportcast.life###pr
+! https://twitter.com/SeriousHoax/status/1642128335928172550
+buffsports.stream,sportcast.life###pr
 ||sportcast.life/img/ali3.png
 
 ! https://github.com/uBlockOrigin/uAssets/issues/16998
@@ -1236,6 +1238,7 @@ javsubindo.one###close-teaser
 ! https://github.com/uBlockOrigin/uAssets/issues/7897
 multiup.eu,multiup.org##+js(ra, type, [type="hidden"], stay)
 multiup.eu,multiup.org##+js(ra, action, [action*="multinews"], stay)
+multiup.org,multiup.eu##+js(ra, class, [class="hidden"], stay)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/17160
 coursedrive.org##+js(acs, eval, replace)
@@ -1521,3 +1524,27 @@ shineads.in##[href="https://app.toolsmeen.com/signup/semrush"]
 
 ! https://github.com/AdguardTeam/AdguardFilters/issues/146997
 globlenews.in##+js(no-fetch-if, googlesyndication)
+#@#.textads
+#@#.banner-ads
+#@#.banner_ads
+#@#.ad-zone
+#@#.ad-space
+#@#.adsbox
+##.textads:not(:empty)
+##.banner-ads:not(:empty)
+##.banner_ads:not(:empty)
+##.ad-zone:not(:empty)
+##.ad-space:not(:empty)
+##.adsbox:not(:empty)
+
+! https://github.com/AdguardTeam/AdguardFilters/issues/146901
+bravedown.com##+js(nostif, canRunAds)
+bravedown.com##+js(set, canRunAds, true)
+bravedown.com##^script:has-text(canRunAds)
+
+! watchfilmy .vip =>player.cloudfilmy. com popups
+player.cloudfilmy.com##+js(aopr, devtoolsDetector)
+||ezcgojaamg.com^
+
+! CHP v3.9.2+
+audiotrip.org,brulosophy.com,diskizone.com,flowsnet.com,hadakanonude.com,javboys.com,pasokau.com,poapan.xyz,reprezentacija.rs,saekita.com,tehnotone.com,telephone-soudan.com##+js(noeval-if, fairAdblock)
