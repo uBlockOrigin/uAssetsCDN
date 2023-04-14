@@ -1,7 +1,7 @@
 ! Title: uBlock₀ filters
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Expires: 4 days
-! Last modified: Fri, 14 Apr 2023 01:54:03 +0000
+! Last modified: Fri, 14 Apr 2023 12:09:16 +0000
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! New filters from January 2022 to ->
@@ -720,7 +720,7 @@ mp3juices.su##[href^="https://apkpure7.com/"]
 ! https://github.com/uBlockOrigin/uAssets/issues/11646
 ! https://github.com/uBlockOrigin/uAssets/issues/13928
 ! https://github.com/uBlockOrigin/uAssets/issues/15413
-etsy.com##body.no-touch li.wt-list-unstyled div.v2-listing-card__info > div.wt-text-caption.wt-text-gray > p:matches-css(display:inline-block):has-text(/^Ad/i):upward(li):remove()
+etsy.com##body.no-touch li.wt-list-unstyled div.v2-listing-card__info > div.wt-text-caption.wt-text-gray > span:not(.wt-icon):not([aria-role]):matches-css(display:inline-block):has-text(/^Ad/i):upward(li):remove()
 etsy.com##li:not(#ad-ubo) .listing-link[href*="ref=sc_gallery"]:upward(li)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/11648
@@ -4144,12 +4144,11 @@ canale.live##+js(nosiif, href)
 *$frame,redirect-rule=noopframe,domain=ygosu.com|loawa.com|feedclick.net|algumon.com|sportalkorea.com|ondemandkorea.com|hancinema.net|enetnews.co.kr
 *$script,xhr,redirect-rule=noopjs,domain=ygosu.com|loawa.com|feedclick.net|algumon.com|sportalkorea.com|ondemandkorea.com|hancinema.net|enetnews.co.kr
 *$image,redirect-rule=1x1.gif,domain=ygosu.com|loawa.com|feedclick.net|algumon.com|sportalkorea.com|ondemandkorea.com|hancinema.net|enetnews.co.kr
-@@*$ghide,domain=ygosu.com|loawa.com|feedclick.net|algumon.com|sportalkorea.com|ondemandkorea.com|hancinema.net|enetnews.co.kr
-@@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$script,xhr,domain=loawa.com|feedclick.net|algumon.com|ygosu.com|sportalkorea.com|ondemandkorea.com|hancinema.net|enetnews.co.kr
-@@||api.prod.ad-shield.io^$xhr,image,domain=ygosu.com|loawa.com|feedclick.net|algumon.com|sportalkorea.com|ondemandkorea.com|hancinema.net|enetnews.co.kr
+!@@*$ghide,domain=ygosu.com|loawa.com|feedclick.net|algumon.com|sportalkorea.com|ondemandkorea.com|hancinema.net|enetnews.co.kr
+!@@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$script,xhr,domain=loawa.com|feedclick.net|algumon.com|ygosu.com|sportalkorea.com|ondemandkorea.com|hancinema.net|enetnews.co.kr
+!@@||api.prod.ad-shield.io^$xhr,image,domain=ygosu.com|loawa.com|feedclick.net|algumon.com|sportalkorea.com|ondemandkorea.com|hancinema.net|enetnews.co.kr
 algumon.com#@#div[class^="ad-"]
 loawa.com,ygosu.com,feedclick.net,sportalkorea.com,algumon.com,ondemandkorea.com,hancinema.net,enetnews.co.kr##+js(set, dable, {})
-ygosu.com,loawa.com,feedclick.net,algumon.com,sportalkorea.com,ondemandkorea.com,hancinema.net,enetnews.co.kr##div[style$="px; display: flex; margin-right: auto; justify-content: center; max-width: 100%;"] > div[id]:style(pointer-events: none !important; user-select: none !important;)
 loawa.com,ygosu.com,feedclick.net,sportalkorea.com,algumon.com,ondemandkorea.com,hancinema.net,enetnews.co.kr##ad-shield-inventory
 loawa.com##a[href^="https://mini.m-able.app/@mini/loawa?tracking_template"]:remove()
 loawa.com##a[target="_blank"][data-href][data-banner-statics]:remove()
@@ -5643,8 +5642,12 @@ theporndude.com##body::before
 planhub.ca##.banner_iframe
 
 ! https://github.com/uBlockOrigin/uAssets/issues/15803
+! https://github.com/uBlockOrigin/uAssets/issues/17583
 snapinsta.app###dlModal
 snapinsta.app##body:style(overflow: auto !important;)
+snapinsta.app###adOverlay
+snapinsta.app##+js(set, app.showModalAd, noopFunc)
+snaptik.app##[onclick^="showAd"]:remove-attr(onclick)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/15805
 *$script,domain=blog.freeoseocheck.com|blog.coinscap.info|blog.cookinguide.net,redirect-rule=noopjs
