@@ -8,7 +8,6 @@ This site is used as a [Content Delivery Network](https://en.wikipedia.org/wiki/
 *   [uBlock filters](./filters/filters.min.txt) (default)
 *   [uBlock filters – Privacy](./filters/privacy.min.txt) (default)
 *   [uBlock filters – Badware risks](./filters/badware.txt) (default)
-*   [uBlock filters – Privacy](./filters/annoyances.txt) (default)
 *   [uBlock filters – Quick fixes](./filters/quick-fixes.txt) (default)
 *   [uBlock filters – Unbreak](./filters/unbreak.txt) (default)
 *   [Bad filter lists](./filters/badlists.txt) (internal)
