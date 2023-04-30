@@ -1,7 +1,7 @@
 ! Title: uBlock₀ filters
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Expires: 5 days
-! Last modified: Sat, 29 Apr 2023 17:35:00 +0000
+! Last modified: Sat, 29 Apr 2023 23:50:18 +0000
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 !
@@ -17,13 +17,12 @@
 !
 ! GitHub issues: https://github.com/uBlockOrigin/uAssets/issues
 ! GitHub pull requests: https://github.com/uBlockOrigin/uAssets/pulls
-www.google.*##.sh-sr__shop-result-group[data-hveid] .sh-sp__btn:matches-css(font-size: 13px):upward(.sh-sr__shop-result-group):has(a[href^="/aclk"][href$="adurl="])
-www.google.*##c-wiz div[data-hveid] > div > div > ul:has(> li[style="max-width:200px;"] > div > div[data-hveid] > a[href*="/aclk"]):upward(3)
-!#if env_mobile
-www.google.com##:matches-path(/^/search\?.*tbm=shop/) html[itemtype$="/SearchResultsPage"] #cnt div[class^="_-L"][class*="sh-sr__"]
-!#endif
-www.google.*##div[data-section-id] > a[href^="/aclk"][href*="placesheetAdFix="][href*="adurl="]:upward(1)
-www.google.*##:matches-path(/travel/hotels/) div[data-is-promoted="true"]
+! Can be removed after this is accepted: https://github.com/easylist/easylist/pull/15725
+www.google.*##html[itemtype="http://schema.org/SearchResultsPage"] .sh-sr__shop-result-group[data-hveid]
+! Can be removed after this is accepted: https://github.com/easylist/easylist/pull/15730
+www.google.*##html[itemtype="http://schema.org/Place"] .OcdnDb, .ltJjte.OQCnxd, .ltJjte.OQCnxd + [role="presentation"][style]
+! Can be removed after this is accepted: https://github.com/easylist/easylist/pull/15731
+www.google.*##body#yDmH0d [data-is-promoted="true"]
 ! http://www.wilderssecurity.com/threads/ublock-a-lean-and-fast-blocker.365273/page-25#post-2461804
 ! Specific cosmetic filters for Youtube home page
 youtube.com##.masthead-ad-control,.ad-div,.pyv-afc-ads-container
@@ -9943,19 +9942,15 @@ new-gomovies.*##+js(aopr, Date.prototype.toUTCString)
 ||fundingchoicesmessages.google.com^$3p
 ! google contributor anti adblock
 #@#.div-gpt-ad
-*##.div-gpt-ad:style(width:1px!important;height:1px!important;min-width:1px!important;min-height:1px!important;margin:0!important;padding:0!important;overflow:hidden!important;opacity:0!important)
 ! for the french list
 #@#div[class^="div-gpt-ad"]
 #@#[class^="div-gpt-ad"]
-*##[class^="div-gpt-ad"]:style(width:1px!important;height:1px!important;min-width:1px!important;min-height:1px!important;margin:0!important;padding:0!important;overflow:hidden!important;opacity:0!important)
 #@#[id^="div-gpt-ad"]
-~rocketnews24.com,~soranews24.com,~youpouch.com,*##[id^="div-gpt-ad"]:style(width:1px!important;height:1px!important;min-width:1px!important;min-height:1px!important;margin:0!important;padding:0!important;overflow:hidden!important;opacity:0!important)
 #@#div[id^="div-gpt-"]
-*##div[id^="div-gpt-"]:not([id^="div-gpt-ad"]):style(width:1px!important;height:1px!important;min-width:1px!important;min-height:1px!important;margin:0!important;padding:0!important;overflow:hidden!important;opacity:0!important)
-itabashi-times.com##.widget_pcadwidget:has(> div[id^="div-gpt-"])
-kabutan.jp##div[id^="div-gpt-ad"]
-javpornstreaming.com##+js(aopr, adBlockDetected)
-javpornstreaming.com##+js(acs, document.createElement, /l\.parentNode\.insertBefore\(s/)
+##.div-gpt-ad:not([style^="width: 1px; height: 1px; position: absolute; left: -10000px; top: -"])
+##[class^="div-gpt-ad"]:not([style^="width: 1px; height: 1px; position: absolute; left: -10000px; top: -"])
+##[id^="div-gpt-ad"]:not([style^="width: 1px; height: 1px; position: absolute; left: -10000px; top: -"])
+##div[id^="div-gpt-"]:not([style^="width: 1px; height: 1px; position: absolute; left: -10000px; top: -"])
 @@||osuskins.net^$ghide
 @@||demokrasistyle.blogspot.com^$ghide
 dloady.com##+js(acis, $, show)
@@ -11535,7 +11530,7 @@ skymovieshd.*##+js(aeld, , _0x)
 skymovieshd.*##+js(set, D4zz, noopFunc)
 flickr.com##+js(set, appContext.adManager.context.current.adFriendly, false)
 flickr.com##.sub-photo-submoola-view
-flickr.com##.search-container-w-sidebar-content [href^="/account/upgrade"]:upward(.search-container-w-sidebar-content>div)
+flickr.com##section:has([href*="istockphoto.com"])
 flickr.com##.sub-photo-right-view [href^="/account/upgrade"]:upward(.sub-photo-right-view>div)
 linkshrnk.com##+js(nosiif, visibility, 1000)
 linkshrnk.com##+js(aopr, app_vars.force_disable_adblock)
@@ -11600,7 +11595,6 @@ financemonk.net###vipada
 @@||securepubads.g.doubleclick.net/tag/js/gpt.js$script,domain=dropgalaxy.com
 @@||securepubads.g.doubleclick.net/gpt/pubads_impl_*.js$script,domain=dropgalaxy.com
 @@||player.aplhb.adipolo.com/prebidlink/$script,domain=dropgalaxy.com
-dropgalaxy.com#@#[id^="div-gpt-ad"]:style(width:1px!important;height:1px!important;min-width:1px!important;min-height:1px!important;margin:0!important;padding:0!important;overflow:hidden!important;opacity:0!important)
 @@||a2zapk.com^$script,xhr,3p,domain=dropgalaxy.com
 techthematter.xyz###app
 techthematter.xyz###msg
@@ -14267,6 +14261,7 @@ hentaihd.net##.active-item
 *##AMP-AD
 *##div[id*="ScriptRoot"]
 *##ins.adsbygoogle
+*##[id^="div-gpt-ad"]:not([style^="width: 1px; height: 1px; position: absolute; left: -10000px; top: -"])
 xnxx.com,xvideos.com###ad-header-mobile
 jprime.jp##.ad-overlay
 apkdone.com##.adplaceholder-top
@@ -23621,3 +23616,4 @@ bellesa.co##[href*="preroll"]:upward(2)
 netsportv158.com##+js(set, config.adv, {})
 @@||assettoworld.b-cdn.net^$script,domain=assettoworld.com
 satkurier.pl##+js(set, detectAdblock, noopFunc)
+@@||mailgen.biz^$script,1p
