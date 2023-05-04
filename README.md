@@ -21,4 +21,6 @@ This site is used as a [Content Delivery Network](https://en.wikipedia.org/wiki/
   * EasyList – Annoyances
     * [EasyList – Annoyances](./thirdparties/easylist-annoyances.txt)
     * [EasyList – Cookie Notices](./thirdparties/easylist-cookies.txt)
+    * [EasyList – Newsletter Notices](./thirdparties/easylist-newsletters.txt)
+    * [EasyList – Notifications](./thirdparties/easylist-notifications.txt)
     * [EasyList – Social Widgets](./thirdparties/easylist-social.txt)
