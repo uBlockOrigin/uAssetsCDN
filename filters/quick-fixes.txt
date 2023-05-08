@@ -1,7 +1,7 @@
 ! Title: uBlock₀ filters – Quick fixes
 ! Description: Immediate, temporary filters to fix websites
 ! Expires: 12 hours
-! Last modified: Mon, 08 May 2023 11:37:30 +0000
+! Last modified: Mon, 08 May 2023 17:09:35 +0000
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! Forums: https://github.com/uBlockOrigin/uAssets/issues
@@ -30,17 +30,10 @@ rjno1.com##+js(acs, onload)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/14204
 ylilauta.org#@#iframe.a
-||es.ylilauta.org/static/css/style.css?$css,1p
-||es.ylilauta.org^$ping,popup
-||es.ylilauta.org^$media
-!#if env_chromium
-ylilauta.org##iframe.a, #fake
-ylilauta.org##+js(set, confirm, noopFunc)
-ylilauta.org##+js(set, alert, noopFunc)
-ylilauta.org##div[data-a][data-d]
-ylilauta.org##.toast-root
-ylilauta.org##+js(call-nothrow, Object.defineProperty)
-!#endif
+||es.ylilauta.org^$media,css,ping,popup,frame
+||es.ylilauta.org^$image,redirect=1x1.gif
+||es.ylilauta.org/t/$xhr,1p
+ylilauta.org##+js(aeld, , ad-load-fail)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/13544
 ! https://github.com/uBlockOrigin/uAssets/commit/6008194de5ebfb5f37abb375c8b6147f52d8bff3#commitcomment-76982803
@@ -111,7 +104,7 @@ tamrieltradecentre.com##+js(nostif, ad)
 @@||googletagmanager.com/gtm.js$script,domain=abczdrowie.pl
 
 ! https://github.com/uBlockOrigin/uAssets/issues/17054
-spiegel.de,t-online.de,giga.de,welt.de,~dutyfarm.welt.de##+js(aopw, document.hd_ready)
+spiegel.de,t-online.de,giga.de,welt.de,~dutyfarm.welt.de##+js(aost, Math, onreadystatechange)
 
 ! https://github.com/uBlockOrigin/uBlock-discussions/discussions/765
 ! /^\x68\x74\x74\x70\x73\x3A\x2F\x2F\x77\x77\x77\x2E\x74\x65\x6C\x73\x75\x2E\x66\x69\x2F\x74\x70\x6D\x6D/$1p,xhr
@@ -171,9 +164,6 @@ $removeparam=lpurl,badfilter
 ||fingerprint.com^$strict3p,domain=fingerprint.com|~dev.fingerprint.com|~dashboard.fingerprint.com
 ||analytics2.dashboard.fingerprint.com^
 
-! https://github.com/AdguardTeam/AdguardFilters/issues/116093
-realtime-chart.info#?#td[style^="vertical-align"] div[id] [style*="top"]:matches-attr("style"="/^\s*top\s*:\s*3\d{2}\.?\d*px;?\s*/") ~ [class][onclick]:has(> [style^="top:1"]):matches-attr("style"="/top\s*:\s*1\d{3}\.?\d*px/"):not(:has(td > a))
-
 ! https://github.com/AdguardTeam/AdguardFilters/commit/a9e4a99e3d6d6ad8451837d6a5bdc11021c7ded4#r111970205
 ||so-zou.jp/js/ads.js
 ||5ch.net/js/ads.js
@@ -191,3 +181,8 @@ realtime-chart.info#?#td[style^="vertical-align"] div[id] [style*="top"]:matches
 
 ! https://github.com/AdguardTeam/AdguardFilters/pull/150176
 dailymotion.com##div[class^="NewWatchingDiscovery__adSection"]
+
+! https://github.com/AdguardTeam/FiltersCompiler/issues/178
+beautifullywhitening.work,mineralfoundation.work,contents-group.work,bridalgown.work,liquidfoundation.work,nailcolor.work,weddinghall.work,g-journal.jp,japan-indepth.jp,kuroyonhon.com,enno.jp###ad1
+bridalgown.work,contents-group.work,liquidfoundation.work,nailcolor.work,studioglass.work,teaceremony.work,weddinghall.work,heisei-housewarming.work,g-journal.jp,dtiblog.com,biz-journal.jp###ad2
+bridalgown.work,contents-group.work,liquidfoundation.work,nailcolor.work,studioglass.work,teaceremony.work,weddinghall.work,heisei-housewarming.work,g-journal.jp###ad3
