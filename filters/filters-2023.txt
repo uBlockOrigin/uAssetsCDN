@@ -1,6 +1,6 @@
 ! Title: uBlock₀ filters
 ! Description: Filters optimized for uBlock, to be used along EasyList
-! Last modified: Fri, 12 May 2023 12:44:22 +0000
+! Last modified: Fri, 12 May 2023 16:58:30 +0000
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! New filters from January 2023 to ->
@@ -1073,6 +1073,8 @@ lightnovelpub.*,webnovelpub.com##li[class] > ins.adsbygoogle:upward(li[class])
 lightnovelworld.com,novelpub.com##div[class][data-mobid] > div[class="vm-placement"][data-id]:upward(div[class])
 lightnovelpub.*##.cnx_container
 lightnovelpub.*##.adsbygoogle:upward(1)
+lightnovelpub.*,lightnovelspot.com,lightnovelworld.com,novelpub.com,webnovelpub.com##+js(nostif, , 3000)
+lightnovelspot.com,novelpub.com##*:matches-css-before(content: /Adv/)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/13805
 ! https://www.reddit.com/r/uBlockOrigin/comments/11dh4jm/
@@ -2046,7 +2048,7 @@ bellesa.co##[href*="preroll"]:upward(2)
 @@||assettoworld.b-cdn.net^$script,domain=assettoworld.com
 
 ! https://github.com/uBlockOrigin/uAssets/issues/17859
-satkurier.pl##+js(set, detectAdblock, noopFunc)
+satkurier.pl##+js(no-fetch-if, ads)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/17872
 @@||mailgen.biz^$script,1p
@@ -2320,3 +2322,30 @@ wellness4live.com##+js(no-fetch-if, googlesyndication)
 ! https://www.kindleku.com/2023/04/a-girl-called-samson-a-novel-amy-harmon-kindle-mobi.html
 /wpsafelink.js|$script
 /safelink.js|$script
+
+! moviesflix. cx
+moviesflix.*##+js(aopw, _pop)
+moviesflix.*##[href^="https://multipledrawers.com/"]
+||ads2550.bid^
+||rrjnjnioxfbqaj.com^
+
+! https://github.com/uBlockOrigin/uAssets/discussions/17361#discussioncomment-5741055
+btcbitco.in,btcsatoshi.net,cempakajaya.com,crypto4yu.com,readbitcoin.org,wiour.com##+js(set, document.hasFocus, trueFunc)
+gainl.ink##+js(set, blurred, false)
+gainl.ink##+js(nowoif)
+@@||acceptable.a-ads.com/1^$xhr,domain=gainl.ink
+@@||googletagmanager.com/gtm.js$domain=btcbitco.in|btcsatoshi.net|crypto4yu.com|gainl.ink|readbitcoin.org|wiour.com
+
+! https://github.com/uBlockOrigin/uAssets/issues/18054
+! https://github.com/uBlockOrigin/uAssets/issues/18055
+safego.cc,turbovid.me##+js(aopw, _pop)
+||unylgxxmrsbb.com^
+||ayvfzwttm.com^
+
+! https://github.com/uBlockOrigin/uAssets/discussions/17361#discussioncomment-5871745
+phineypet.com#@##adsiframe
+@@||ad.a-ads.com/*?size=320x50$object,domain=phineypet.com
+@@||banner.infoey.com/adbanner.png$domain=phineypet.com
+crewbase.net,phineypet.com###content > form[id]:has(> center > button):style(display: block !important;)
+||phineypet.com/2x.png
+||phineypet.com/300x600.png
