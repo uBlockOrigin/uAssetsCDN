@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Expires: 5 days
-! Last modified: Wed, 17 May 2023 06:47:01 +0000
+! Last modified: Wed, 17 May 2023 12:04:22 +0000
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 !
@@ -777,16 +777,13 @@ pornovore.fr##+js(aopw, popUrl)
 xstory-fr.com##+js(aopw, checkRealLoad)
 receive-sms-online.info##+js(aopr, ga.length)
 ||googlesyndication.com/pagead/js/adsbygoogle.js$script,redirect=googletagmanager.com/gtm.js:10,domain=breitbart.com
-hltv.org##+js(nowoif)
 ||gainskins.com^$frame,domain=hltv.org
-hltv.org##body:style(background: transparent !important;)
-||hltv.org/img/*?$image
 ||hltv.org/img/newwidgets/$image
 ||hltv.org/img/static/featured_bet_bg.png$image
-hltv.org##[data-seen-before]
-hltv.org##[style^="--"]
-hltv.org##.leftCol > div[style]
-hltv.org##.newMatches > .gtSmartphone-only
+hltv.org##+js(nowoif)
+hltv.org##body, body::before:style(background-image: unset !important;)
+hltv.org##:is(div, aside) > a[href^="/"][data-link-tracking-page="Widget"]:upward(1)
+hltv.org##.leftCol > div [data-link-tracking-page="Widget"]:upward(.leftCol > div)
 vidlox.*##+js(set, xRds, false)
 vidlox.*##+js(set, tRds, true)
 vidlox.*##+js(aopw, _pop)
@@ -1976,13 +1973,16 @@ sexu.com##.player-block__line
 sexu.com##.title--sm
 sexu.com##.player-block__square
 pussyspace.*##+js(aopr, open)
-pussyspace.com,pussyspace.net##+js(aost, document.createElement, ExoSupport)
-pussyspace.com,pussyspace.net##+js(aost, Node.prototype.appendChild, www.pussyspace.net/js/all.js)
+pussyspace.com,pussyspace.net##+js(aost, document.createElement, addZone)
+pussyspace.com,pussyspace.net##+js(aeld, load, exoJsPop101)
+pussyspace.com,pussyspace.net##+js(aeld, /^get/, loader)
+pussyspace.com,pussyspace.net##+js(norafif, exoframe)
 pussyspace.com,pussyspace.net##:matches-path(/vid-) [class] img:xpath(ancestor::*[string-length(@class) > 20])
 pussyspace.com,pussyspace.net##style ~ [id] [class]:only-child div:only-child > img
 pussyspace.com,pussyspace.net###alphabet, #channels, #divx-container, #hmenu, #inform, #nowlooking, #playerCamBox, #playerMenu, #qcat, #showPlayer, #tabel_tagslist, #video_content, #web_cam, .BaseRoomContents, .buttons, .carouselTopScroll, .carusel-keys-box-ps, .footerdesc, .in_top, .load_more_rel, .mainBoxTitle, .pagIno, .playerContent100pr, .relatedVideo, .right-160px, .videos-related, footer, header, [href^="/webcams.php"]:others()
 /^https:\/\/www\.pussyspace\.(?:com|net)\/(?!style\/).*/$image,1p,domain=pussyspace.*
-/\/all\.js\?v=\S{10,}/$script,1p,domain=pussyspace.com|pussyspace.net
+||pussyspace.*/js/all.js?v=gitcache_gulp_
+||pussyspace.net/lazyload.im
 java-forum.org##+js(nostif, nextFunction, 2000)
 java-forum.org###messageList > li.message:has-text(Anzeige)
 flashx.*##+js(acs, String.fromCharCode, decodeURIComponent)
@@ -8593,7 +8593,7 @@ sabervivirtv.com##.ad-sidebar
 aol.com##.maas-item:has-text(our Partners)
 @@||debridup.com^$script,xhr,1p
 4players.de,buffed.de,gamesaktuell.de,gamezone.de,pcgames.de,player.pcgameshardware.de,videogameszone.de,spieletipps.de##+js(set, CustomEvent, noopFunc)
-computerbild.de,golem.de,desired.de,tvnow.*##+js(no-xhr-if, damoh)
+computerbild.de,golem.de,tvnow.*##+js(no-xhr-if, damoh)
 vip.de,rtl.de,fitforfun.de##+js(no-xhr-if, svonm)
 welt.de##+js(aost, Object, /gdpr.*inlineScript/)
 ||damoh.gmx.*/*$media,redirect=noop-0.1s.mp3,1p
@@ -12559,7 +12559,7 @@ manga-raw.club##+js(acs, document.createElement, '+d+')
 aylink.co,gitizle.vip,shtms.co##+js(aopr, xmlhttp)
 aylink.co,gitizle.vip,shtms.co##+js(nano-sib)
 aylink.co,gitizle.vip,shtms.co##+js(ra, data-ppcnt_ads|onclick, #main)
-aylink.co,gitizle.vip,shtms.co##.alternative-ad
+aylink.co,gitlink.pro,gitizle.vip,shtms.co##.alternative-ad
 ! etcscrs .to popups
 etcscrs.to##+js(aopr, LieDetector)
 ! audizine.com anti adb
@@ -19566,10 +19566,6 @@ onlyhgames.com##+js(acs, document.getElementById, adsBlocked)
 onlyhgames.com##+js(nano-sib, i--)
 onlyhgames.com##+js(nano-stb, CountBack, 990)
 1ytmp3.com,bestmp3converter.com,clickmp3.com##+js(nowoif, !download)
-@@||blogupdated.com^$ghide
-blogupdated.com##+js(acs, eval, lazyadsense)
-blogupdated.com##+js(nano-sib, counter)
-blogupdated.com##.adsbygoogle:upward([id^="HTML"])
 amateur8.com,freeporn8.com,maturetubehere.com##+js(aeld, /click|mousedown/, catch)
 freeporn8.com###lotal
 freeporn8.com##.toble
@@ -19796,7 +19792,6 @@ illimite-streaming.com##^script:has-text(BetterJsPop.add)
 ! wowroms.com timer, PH
 wowroms.com##+js(nano-sib, second)
 wowroms.com##.ulromlist > .element > ul > li > .adsbygoogle:upward(3)
-hdking.vip##+js(aeld, DOMContentLoaded, Adblock)
 ! 'undefined' leftover e.g. chintpurni.angelfire.com
 ! doesn't work on Fireofx e.g. zhra.angelfire.com but no big matter
 angelfire.com##+js(acs, document.write, lycos_ad)
@@ -20116,8 +20111,8 @@ topphimhd.info##^ul[data-ads]
 ||topphimhd.info/logoi9bet.png$image
 topphimhd.info##.logomo
 ! nosteam popup
-nosteam.ro,nosteamgames.ro,185.82.172.143##+js(nowoif)
-185.82.172.143,nosteam.ro##+js(acs, jQuery, click)
+nosteam.ro,nosteamgames.ro##+js(nowoif)
+nosteam.ro##+js(acs, jQuery, click)
 @@||nosteam.ro/notcaptcha/adheader.js$domain=nosteamgames.ro
 nosteamgames.ro##+js(aopr, _wm)
 javenglish.me##+js(aopr, __Y)
@@ -20719,8 +20714,7 @@ iptvapps.net##[id*=id]:has([src*="/ads/"])
 cloudcomputingtopics.net##+js(set, distance, 0)
 ||pururin.to/assets/js/pop.js$script
 rapload.org##+js(aopw, _pop)
-! nullscripts.net anti-adb
-nullscripts.net##+js(nostif, show)
+null-scripts.net,nullscripts.net##+js(nostif, show)
 @@||nullscripts.net^$ghide
 video-to-mp3-converter.com##+js(nowoif, !/^\//)
 video-to-mp3-converter.com##.horizontal-area
@@ -20736,7 +20730,7 @@ weather.com##+js(no-fetch-if, doubleclick)
 crichd.*##+js(nowoif)
 livetvon.*##+js(aopw, u_cfg)
 koora-online.live##+js(aopw, _pop)
-video.netwrk.ru.com,fcfooty.com##+js(nostif, pop)
+fcfooty.com##+js(nostif, pop)
 *$3p,script,domain=streamgo.to|streamgoto.*
 *$script,3p,denyallow=cloudflare.net|fastly.net|peer5.com|jsdelivr.net|cloudflare.com,domain=wecast.to
 *$script,3p,denyallow=fastly.net|jsdelivr.net|cloudflare.net,domain=techclips.net
@@ -21469,8 +21463,8 @@ bootyexpo.net##+js(aopr, adsBlocked)
 bootyexpo.net##+js(acs, document.querySelectorAll, popMagic)
 ##.adde_modal_detector
 ##.adde_modal-overlay
-link.webshieldz.com,rolls.webshieldz.com,blog.nationapk.com,krishiloksewa.com,modzilla.in,itechmafiia.com,mb.feedale.com###wpsafe-link:style(display: block !important;)
-link.webshieldz.com,rolls.webshieldz.com,blog.nationapk.com,krishiloksewa.com,modzilla.in,itechmafiia.com,mb.feedale.com###wpsafe-link:others()
+blog.nationapk.com,krishiloksewa.com,modzilla.in,itechmafiia.com,mb.feedale.com###wpsafe-link:style(display: block !important;)
+blog.nationapk.com,krishiloksewa.com,modzilla.in,itechmafiia.com,mb.feedale.com###wpsafe-link:others()
 ipacrack.com##+js(nosiif, _0x)
 roadtrippin.fr##+js(set, test_adblock, noopFunc)
 ||hubu.cloud/app/js/index.php
@@ -21823,7 +21817,6 @@ techclips.net##+js(nostif, sadbl)
 ||hazicu.hothomefuck.com^
 ||letstry69.xyz^
 ||sdg.fwtrck.com^
-||statement.blauenseville.buzz^
 ||j45.webringporn.com^
 ||cdngcloud.com^
 ||pinetq.com^
@@ -21935,7 +21928,6 @@ nn.de###ad-Billboard:upward([style])
 ! wareme24.com popup
 wareme24.com##+js(noeval)
 /push/p.js?u=$3p
-||5.188.62.157^
 moegirl.org.cn##+js(nostif, offsetHeight)
 nhl66.ir##+js(nowoif)
 www.walmart.com##[data-stack-index] > section > div > div [data-item-id] > a[link-identifier][href^="https://wrd.walmart.com"]:upward(section > div > div)
@@ -22900,8 +22892,6 @@ techhelpbd.com##+js(nostif, adblocker)
 ac.ontools.net##+js(aeld, load, blocker)
 ||tvonline123.com^$1p,frame,redirect-rule=noop.html
 streamkiste.tv##+js(aopw, _pop)
-||suozmtcc.com^
-||vsmokhklbw.com^
 wellness4live.com##+js(no-fetch-if, googlesyndication)
 /wpsafelink.js|$script
 /safelink.js|$script
@@ -22950,3 +22940,6 @@ sisterasian.com##.adblock
 games.metv.com##[class*="DisplayAd__container"]
 games.metv.com##+js(nano-sib)
 apkdelisi.net##+js(noeval-if, show)
+@@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$script,domain=decrypt.day
+decrypt.day#@#ins.adsbygoogle
+decrypt.day##ins.adsbygoogle:style(height: 0px !important;)
