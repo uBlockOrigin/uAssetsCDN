@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Expires: 5 days
-! Last modified: Mon, 22 May 2023 18:41:55 +0000
+! Last modified: Mon, 22 May 2023 22:58:54 +0000
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 !
@@ -142,7 +142,6 @@ gellerreport.com##.__hinit
 */wp-adblock-$script,redirect=fuckadblock.js-3.2.0:5
 ||s3.amazonaws.com/homad-global-configs.schneevonmorgen.com/hd-main.js$script,domain=autobild.de|cinema.de|computerbild.de|cdnapi.kaltura.com|focus.de|spieleaffe.de|sueddeutsche.de,redirect=hd-main.js
 ||svonm.com/hd-main.js$script,redirect=hd-main.js,domain=cinema.de|cdnapi.kaltura.com
-||computerbild.de/assets/homad/*$xhr,redirect=nooptext,domain=computerbild.de
 ||i.auto-bild.de/assets/modules/homad/*$xhr,redirect=nooptext,domain=autobild.de
 tvspielfilm.de##.promo-box
 tvtoday.de##+js(nosiif, fireEvent, 500)
@@ -531,11 +530,6 @@ pocketnow.com##+js(aopr, InstallTrigger)
 ||adition.com^$important,domain=spiegel.de
 @@||ad.yieldlab.net^$script,domain=spiegel.de,badfilter
 ||cdn.prod.www.spiegel.de/public/spon/generated/web/js/header*.js$script,1p
-||amazonaws.com/homad-global-configs.schneevonmorgen.com$xhr,domain=spiegel.de
-||svonm.com/hd-main.j$xhr,domain=spiegel.de
-spiegel.de##+js(json-prune, enabled, config)
-spiegel.de##+js(json-prune, adBehavior)
-spiegel.de##+js(no-xhr-if, ads)
 spiele.spiegel.de###ad-gamepage-top
 spiele.spiegel.de##.ad
 spiele.spiegel.de##div#ad-gamepage-bottom
@@ -787,7 +781,6 @@ receive-sms-online.info##+js(aopr, ga.length)
 ||hltv.org/img/newwidgets/$image
 ||hltv.org/img/static/featured_bet_bg.png$image
 ||hltv.org/*.gif?ixlib=$image
-||hltv.org/*.jpg?ixlib=$image,1p
 hltv.org##+js(nowoif)
 hltv.org##body, body::before:style(background-image: unset !important;)
 hltv.org##:is(div, aside) > a[href^="/"][data-link-tracking-page="Widget"]:upward(1)
@@ -8560,7 +8553,10 @@ aol.com##.maas-item:has-text(our Partners)
 @@||debridup.com^$script,xhr,1p
 4players.de,buffed.de,gamesaktuell.de,gamezone.de,pcgames.de,player.pcgameshardware.de,videogameszone.de,spieletipps.de##+js(set, CustomEvent, noopFunc)
 computerbild.de,golem.de,tvnow.*##+js(no-xhr-if, damoh)
-vip.de,rtl.de,fitforfun.de##+js(no-xhr-if, svonm)
+vip.de,rtl.de,fitforfun.de,desired.de,kino.de##+js(no-xhr-if, svonm)
+desired.de##+js(ra, data-ivad-preroll-adtag, video, stay)
+||computer-bild.de/_static-assets/homad/homad.js
+||stern.de/__assets/homad
 welt.de##+js(aost, Object, /gdpr.*inlineScript/)
 ||damoh.gmx.*/*$media,redirect=noop-0.1s.mp3,1p
 ||damoh.web.de/*$media,redirect=noop-0.1s.mp3,1p
@@ -9994,8 +9990,7 @@ erofus.com##.row-content > .col-lg-2[style^="height"]
 ##.bloc-pub
 ##.bloc-pub2
 ###invideo_data
-*/api/spots/$frame,script
-/api/spots/*^fill=$xhr
+*/api/spots/$frame,script,xhr
 ###invideo_2
 ##.hor_banner
 ###invid_call
@@ -10871,8 +10866,6 @@ runmods.com##+js(nano-sib)
 gal-dem.com##+js(aopr, dsanity_ad_block_vars)
 *$xhr,3p,domain=gayforit.eu
 ||bestcontenttechnology.top^$3p
-kryptogator.com##+js(aopr, adBlockDetected)
-@@||kryptogator.com/$script,1p
 forumconstruire.com#?#.post_simple:has(.postsimple_pseudo:has-text(/promo/i))
 bleachmx.fr##+js(aopr, mdpDeBlocker)
 vstx.*##+js(nosiif, visibility, 1000)
@@ -21733,8 +21726,14 @@ techclips.net##+js(nostif, sadbl)
 ://a.*/click/$image
 ://a.*/splash/$xhr
 ://a.*/spots/$xhr
+/api/users/*&ev=$script
+||addin.icu^
+||jhfhdkhkh.site^
+||vidghjlgkuyfk.site^
+||spinna.shop^
 ! PopCash popcashjs.b-cdn.net CNAME adserver
 /^https?:\/\/cdn\.[a-z]{5,7}\.com\/app\.js$/$script,3p,match-case,domain=~edu|~gov
+/^https?:\/\/cdn\.[a-z]{4,6}\.xyz\/app\.js$/$script,3p,match-case
 ! eyeshot.live popup
 eyeshot.live##+js(acs, decodeURI, decodeURIComponent)
 eyeshot.live##+js(aopw, _pop)
@@ -22227,6 +22226,7 @@ telesrbija.com##+js(acs, Promise, Adb)
 ||api.lhkmedia.in^$3p
 ! javgg.net anti-adb on DL
 javgg.net#@##AD_160
+*$script,3p,domain=javgg.club|javgg.net
 paketmu.com##+js(no-fetch-if, googlesyndication)
 sinonimos.de##+js(rc, is-hidden)
 rapid-cloud.co##+js(set, navigator.brave, undefined)
@@ -22818,8 +22818,6 @@ embedgram.com##+js(nowoif)
 @@||ay.delivery/client-v2.js$script,domain=diep.io
 ! Anti adblock + ad
 cellmapper.net##+js(nostif, AD BLOCKER DETECTED)
-! temp disable, issues: https://bbs.io-tech.fi/threads/keskustelua-selainten-mainos-ja-yksityisyysestoista.692/page-21
-! cellmapper.net##.modal_dialog_base:has-text(Ads)
 medscape.com##+js(set, slideShow.displayInterstitial, true)
 hdrez.com##+js(nostif, displayMessage)
 ##.aoa_overlay
@@ -22864,8 +22862,7 @@ netchimp.co.uk##+js(aopr, ai_wait_for_jquery)
 @@||sharecast.ws/player-bundle.min.js$script,1p
 @@||sharecast.ws/clappr.min.js$script,1p
 thetimes.co.uk##+js(aopw, NREUM)
-vlr.gg##div[style] > .botd-n:upward(1)
-vlr.gg##a[href^="/out/botd/"]
+vlr.gg##a[href^="/out/"]:upward(1)
 freebnbcoin.com##+js(nostif, fetch)
 *$image,domain=freebnbcoin.com,redirect-rule=1x1.gif
 freebnbcoin.com##.adsflex
