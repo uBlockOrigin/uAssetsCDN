@@ -1,7 +1,7 @@
 ! Title: uBlock₀ filters – Quick fixes
 ! Description: Immediate, temporary filters to fix websites
 ! Expires: 12 hours
-! Last modified: Wed, 24 May 2023 06:42:41 +0000
+! Last modified: Wed, 24 May 2023 12:50:29 +0000
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! Forums: https://github.com/uBlockOrigin/uAssets/issues
@@ -25,7 +25,6 @@ rjno1.com##+js(set, _hmt.id, 1)
 rjno1.com##div:matches-css(position:/fixed/)
 rjno1.com##+js(ra, class|id, .breadcrumb + div, asap)
 rjno1.com##^script:has-text(/window.location|getTimezoneOffset|google_global_correlator|getElementById|dat1e24|parseHTML/)
-rjno1.com##+js(nostif, /^/)
 rjno1.com##+js(acs, onload)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/14204
@@ -107,6 +106,8 @@ tamrieltradecentre.com##+js(nostif, ad)
 ! https://github.com/uBlockOrigin/uAssets/issues/17054
 desired.de,kino.de##+js(no-xhr-if, svonm)
 desired.de##+js(ra, data-ivad-preroll-adtag, video, stay)
+spiegel.de##^script:has-text(homad)
+welt.de##+js(set, funkotron.config.page.videoAdTag, undefined)
 ||computer-bild.de/_static-assets/homad/homad.js
 ||stern.de/__assets/homad
 !#if !ext_devbuild
@@ -146,12 +147,11 @@ t-online.de##.ima-ad-container
 @@||js.stroeermediabrands.de/metaTag.min.$script,domain=giga.de
 ||doubleclick.net^$script,important,domain=spiegel.de,badfilter
 ||securepubads.g.doubleclick.net/gpt/pubads_impl_$script,important,domain=spiegel.de
-welt.de,~dutyfarm.welt.de##div[id][style^="z-index:"][style*=" margin-left: auto; margin-right: auto; background-color: rgb(0, 0, 0);"]:remove()
-spiegel.de##^script:has-text(homad)
 !#endif
 !#if ext_devbuild
 giga.de,kino.de##+js(sed, script, /\"homad\"\,/)
 t-online.de##+js(sed, script, /\"homad\":\{\"state\":\"enabled\"\}/, "homad":{"state":"disabled"})
+spiegel.de##+js(sed, script, /^\(function\(\)/, if(false))
 !#endif
 
 ! https://github.com/uBlockOrigin/uBlock-discussions/discussions/765
@@ -210,7 +210,7 @@ djxmaza.in,thecubexguide.com##+js(no-xhr-if, /a-mo\.net|adnxs\.com|prebid|creati
 ||fingerprint.com^$strict3p,domain=fingerprint.com|~dev.fingerprint.com|~dashboard.fingerprint.com
 ||dashboard.fingerprint.com^$strict3p,xhr,domain=dashboard.fingerprint.com
 /fingerprint\.com/[a-zA-Z0-9]{7}$/$xhr,1p,domain=dashboard.fingerprint.com
-/fingerprint\.com/[a-zA-Z0-9]{6}\/$/$xhr,1p,domain=fingerprint.com
+fingerprint.com,~dashboard.fingerprint.com,~dev.fingerprint.com##+js(no-xhr-if, method:POST)
 
 ! https://github.com/AdguardTeam/AdguardFilters/pull/150176
 dailymotion.com##div[class^="NewWatchingDiscovery__adSection"]
@@ -292,3 +292,7 @@ cellmapper.net#@#.modal_dialog_base:has-text(Ads)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/18190
 @@||datadoghq-browser-agent.com^$script,domain=hungryroot.com
+
+! https://github.com/uBlockOrigin/uAssets/issues/18213
+||trk.mail.ru^$badfilter
+||trk.mail.ru^$image,script

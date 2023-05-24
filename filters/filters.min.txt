@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Expires: 5 days
-! Last modified: Wed, 24 May 2023 06:31:04 +0000
+! Last modified: Wed, 24 May 2023 12:06:16 +0000
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 !
@@ -15047,8 +15047,11 @@ nudeof.com##div.happy-section
 dlpsgame.org##div.widget-content > .title
 ||rawcdn.githack.com/*/adbdetect.packed.js^$script
 @@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$domain=skmedix.pl
-@@||pagead2.googlesyndication.com/pagead/managed/js/adsense/*/show_ads_impl_with_ama_fy2021.js$script,domain=skmedix.pl
+@@||pagead2.googlesyndication.com/pagead/managed/js/adsense/*/show_ads_impl$script,domain=skmedix.pl
+@@||googleads.g.doubleclick.net/pagead/ads?*skmedix.pl&$subdocument,domain=skmedix.pl
 @@||skmedix.pl^$ghide
+skmedix.pl##.adsbygoogle, iframe[id^="aswift"]:style(height: 0px !important;)
+skmedix.pl##+js(nano-stb, runCounter, *, 0.2)
 yxoshort.com##+js(aopr, app_vars.force_disable_adblock)
 yxoshort.com##+js(set, blurred, false)
 yxoshort.com##.banner
@@ -15154,6 +15157,7 @@ garaveli.de##+js(acs, addEventListener, google_ad_client)
 ! linkvertise URL manipulation
 ||publisher.linkvertise.com^$3p,domain=~linkvertise.*
 /cdn/linkvertise.js$script,1p
+@@||linkvertise.*^$ghide
 thumpertalk.com##+js(ra, href|target|data-ipshover-target|data-ipshover|data-autolink|rel, a[href^="https://thumpertalk.com/link/click/"][target="_blank"])
 thumpertalk.com##.ipsType_richText a:style(color:currentcolor !important)
 zshort.*##+js(set, blurred, false)
@@ -15951,7 +15955,6 @@ flightsim.to##+js(nano-sib, timer)
 @@||pub.network/flightsim-to/pubfig.min.js$script,xhr,domain=flightsim.to
 moviemakeronline.com##+js(nosiif, adsbygoogle)
 moviemakeronline.com##.bbbOwner
-||imasdk.googleapis.com/js/sdkloader/ima3.js^$script,redirect-rule=noopjs,domain=gbnews.uk
 oncast.xyz##+js(aopw, _pop)
 cinemakottaga.*##+js(no-xhr-if, googlesyndication)
 cinemakottaga.*##+js(aeld, DOMContentLoaded, adsBlocked)
@@ -19207,8 +19210,8 @@ hotabis.com##[href^="https://axiadata.co.id"]
 ||cxm-api.fifa.com/fifaplusweb/api/video/*$xhr,removeparam=adConfig
 fifa.com##.theoplayer-ad-overlay-component
 fifa.com##[href^="https://pubads.g.doubleclick.net/"]
-@@||imasdk.googleapis.com/js/sdkloader/ima3.js$script,domain=fifa.com
-@@||pubads.g.doubleclick.net/*fifa.com$xhr,domain=imasdk.googleapis.com
+||imasdk.googleapis.com/js/sdkloader/ima3.js$redirect-rule=google-ima.js,domain=fifa.com
+||fifa.com/api/v*/ad-manager/$redirect=nooptext
 66ccff.work##+js(alert-buster)
 ||ytix.xyz/xyz.js$script,1p
 ||ytix.xyz^$csp=default-src 'unsafe-inline' 'self' *.bootstrapcdn.com *.gstatic.com *.googleapis.com *.ytimg.com
@@ -20356,6 +20359,7 @@ rtl.de##+js(nostif, null, 10)
 ||ais-akamai.rtl.de/autoimg/*$frame,1p
 rtl.de##[class*="superbanner"]:upward(article > div:not(#main))
 crdroid.net##+js(no-fetch-if, googlesyndication)
+crdroid.net##+js(set, detectAdBlock, noopFunc)
 apl161.me##+js(nowoif)
 apl161.me###adbtm
 apl161.me###ads
@@ -21180,14 +21184,13 @@ coinsvalue.net,cookinguide.net,freeoseocheck.com###ad.js
 *$script,domain=koamnewsnow.com,redirect-rule=noopjs
 kpkuang.org##+js(nostif, _0x)
 kpkuang.org###sterra-ad-onmid
-chip.de##div[id^="advertisment-"] + script + script + div[id][style*="min-height:"]
-chip.de##script + div[id^="advertisment-"] + script + div[id][style*="min-height:"]
+chip.de##div[id][style="min-width:1px;min-height:120px;"]
 chip.de##.DetailPage__Right-Column > .is-hidden-md:has(> div[style*="min-height:"])
 chip.de##.Main--Skyscraper > div[id]
 chip.de###banner_top_table
 ||nah-versorger.de^$image,domain=chip.de
 ||stopundstart.de^$image,domain=chip.de
-chip.de##^script:has-text(/pushAdTag|\"link_impression\"/)
+chip.de##^script:has-text(/pushAdTag|link_click|getAds/)
 chip.de##:root:style(--topbanner-height-min:unset!important;--topbanner-height-max:unset!important;)
 mega4upload.com##+js(ra, onclick, #direct_link > a[onclick])
 mega4upload.com##+js(nowoif)
@@ -22135,7 +22138,10 @@ hwzone.co.il##+js(nostif, site-access-popup)
 colearn.id##+js(json-prune, *.tanya_video_ads)
 ! anti adb gbnews. com
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$script,domain=gbnews.com,redirect-rule=google-ima.js
-@@||cmp.dmgmediaprivacy.co.uk/*.json$xhr,domain=gbnews.com
+||dailymail.co.uk/static/mol-adverts/$domain=gbnews.com
+||viafoura.net^$domain=gbnews.com
+||cmp.dmgprivacyint.co.uk/locationjson.html
+||simplestreamcdn.com/analytics/
 pornpics.app##main > .pics:first-child > li
 erodouga.me##main > .vids:first-child > li
 xerifetech.com##+js(nostif, 0x)
@@ -22904,3 +22910,6 @@ vgembed.com##body > a[id][href^="//"]
 ||compassionatecheek.com^$popunder
 /adblock_detector.$badfilter
 eska.pl,eskarock.pl,voxfm.pl##+js(nostif, adb)
+printablecreative.com##+js(nostif, chkADB)
+printablecreative.com##.gda-home-box
+||printablecreative.com/wp-content/uploads/pixel.gif
