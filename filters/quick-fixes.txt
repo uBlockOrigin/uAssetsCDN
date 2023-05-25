@@ -1,7 +1,7 @@
 ! Title: uBlock₀ filters – Quick fixes
 ! Description: Immediate, temporary filters to fix websites
 ! Expires: 12 hours
-! Last modified: Thu, 25 May 2023 09:21:52 +0000
+! Last modified: Thu, 25 May 2023 18:21:27 +0000
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! Forums: https://github.com/uBlockOrigin/uAssets/issues
@@ -153,9 +153,9 @@ t-online.de##.ima-ad-container
 ||securepubads.g.doubleclick.net/gpt/pubads_impl_$script,important,domain=spiegel.de
 !#endif
 !#if ext_devbuild
-giga.de,kino.de##+js(sed, script, /\"homad\"\,/)
-t-online.de##+js(sed, script, /\"homad\":\{\"state\":\"enabled\"\}/, "homad":{"state":"disabled"})
-spiegel.de##+js(sed, script, /^\(function\(\)/, if(false))
+giga.de,kino.de##+js(rpnt, script, /\"homad\"\,/)
+t-online.de##+js(rpnt, script, /\"homad\":\{\"state\":\"enabled\"\}/, "homad":{"state":"disabled"})
+spiegel.de##+js(rpnt, script, /^\(function\(\)/, if(false))
 !#endif
 
 ! https://github.com/uBlockOrigin/uBlock-discussions/discussions/765
@@ -177,7 +177,7 @@ megaup.net#@#a[href^="https://tm-offers.gamingadult.com/"]
 @@||megaup.net/imageads/$image,1p
 !#if ext_devbuild
 megaup.net##.metaRedirectWrapperBottomAds
-megaup.net##+js(sed, script, /if\(\$.*return;}/)
+megaup.net##+js(rpnt, script, /if\(\$.*return;}/)
 !#endif
 
 ! https://github.com/uBlockOrigin/uAssets/discussions/17361#discussioncomment-5565036
@@ -300,8 +300,9 @@ cellmapper.net#@#.modal_dialog_base:has-text(Ads)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/14480
 !#if ext_devbuild
-soft98.ir##+js(spoof-css, a[href*="s0ft98.ir" i], clip-path, none)
-soft98.ir##+js(spoof-css, article > aside, clip-path, none)
-soft98.ir##+js(spoof-css, a[href*="smostafa" i], clip-path, none)
+soft98.ir##+js(spoof-css, a[href*="s0ft98.ir"]\, article > aside\, a[href*="smostafa" i], clip-path, none)
 soft98.ir##a[href*="s0ft98.ir" i], article > aside, a[href*="smostafa" i]:style(clip-path: circle(0) !important;)
 !#endif
+
+! https://github.com/uBlockOrigin/uAssets/issues/18230
+||fast.appcues.com^$script,3p,badfilter
