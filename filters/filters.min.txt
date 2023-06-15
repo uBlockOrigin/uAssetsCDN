@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Expires: 5 days
-! Last modified: Wed, 14 Jun 2023 16:45:52 +0000
+! Last modified: Thu, 15 Jun 2023 10:33:57 +0000
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 !
@@ -1133,16 +1133,10 @@ apkmirror.com##.downloadCountdown
 apkmirror.com##.OUTBRAIN
 apkmirror.com##[id^="adtester-container"]:style(position: absolute !important;)
 apkmirror.com##+js(aost, document.querySelectorAll, /onload inlineScript|onload https/)
-!#if env_firefox
 apkmirror.com##.ains
 apkmirror.com##^script:has-text(secondsLeft)
-!#endif
-!#if env_chromium
-@@||ezojs.com/ezoic/sa.min.js$script,domain=apkmirror.com
-||ezodn.com^$important,domain=apkmirror.com
-apkmirror.com###ezmobfooter
-apkmirror.com##.ains:style(height: 1px !important; min-height: 1px !important; padding: 0px !important;)
-apkmirror.com##+js(aopr, ezAnalyticsDefine)
+!#if !cap_html_filtering
+apkmirror.com##+js(rmnt, script, secondsLeft)
 !#endif
 radio.at,radio.de,radio.dk,radio.es,radio.fr,radio.it,radio.net,radio.pl,radio.pt,radio.se##+js(nostif, .call(null), 10)
 radio.at,radio.de,radio.dk,radio.es,radio.fr,radio.it,radio.net,radio.pl,radio.pt,radio.se##^script:has-text(Inject=!)
@@ -4799,8 +4793,6 @@ searchenginereports.net##div[id^="mnm_s_"]
 plagiarismdetector.net##[style]:has([onclick*="open"])
 ||plagiarismdetector.net/pd-imgs/Grammarly_Square$image,1p
 ||plagiarismdetector.net/pd-imgs/Top_Grammarly_banner$image,1p
-||plagiarismdetector.net/pd-imgs/gram.png$image,1p
-||plagiarismdetector.net/pd-imgs/tgram.png$image,1p
 jagran.com##.ads
 picbaron.com##+js(aeld, , popMagic)
 picbaron.com##+js(aeld, , _0x)
@@ -5397,6 +5389,8 @@ pogo.com##+js(set, pogo.intermission.staticAdIntermissionPeriod, 0)
 @@||pogo.com^$ghide
 pogo.com##.hideableAd
 pogo.com###leaderboard-ad
+pogo.com##[class*="gameSkyscraperAd"]
+pogo.com##[class*="gameTopAd"]
 @@||torrent9.*^$ghide
 torrent9.*##+js(aeld, , _0x)
 torrent9.*###vpnvpn
@@ -5997,8 +5991,8 @@ safelinkunited.blogspot.com##ins.adsbygoogle
 ||ipla.pluscdn.pl/p/*$media,redirect=noopmp4-1s,domain=polsatsport.pl
 @@||redefineadpl.hit.gemius.pl^$xhr,domain=polsatsport.pl
 @@||gemius.pl^$script,xhr,domain=polsatnews.pl
-@@||imasdk.googleapis.com/js/sdkloader/ima3.js$script,domain=polsatnews.pl
 @@||hit.stat24.com/$xhr,domain=polsatnews.pl
+||imasdk.googleapis.com/js/sdkloader/ima3.js$script,redirect-rule=google-ima.js,domain=polsatnews.pl
 lookmovie.*##+js(aopr, adBlockDetected)
 @@||lookmovie.*^$ghide
 ||metrika.lookmovie.io^$important
@@ -22919,9 +22913,6 @@ telenovelas-turcas.com.es##+js(nowoif)
 /cuid/?f=https%$xhr,3p
 ||intrusgride.com^
 ||kuqfudazkn.com^
-||luddismwebworn.life^
-||taigasdoeskin.guru^
-||tubeskagos.life^
 @@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$script,domain=terabox.fun
 @@||terabox.fun^$ghide
 terabox.fun##body:style(overflow: auto !important;)
@@ -22999,7 +22990,6 @@ chat.nrj.fr##+js(nosiif, location)
 ! sdmoviespoint. rest popups
 *$script,3p,domain=sdmoviespoint.*,denyallow=disqus.com|disquscdn.com|disqus.map.fastlylb.net|media-imdb.com|media-amazon.com|cloudfront.net
 sdmoviespoint.rest###adfont
-||emqrjjveqnjjq.top^
 recipahi.com##+js(aeld, DOMContentLoaded, adsbygoogle)
 converter-btc.world##+js(acs, eval, replace)
 converter-btc.world##+js(nostif, offsetHeight, 100)
@@ -23027,3 +23017,7 @@ converter-btc.world##+js(nostif, offsetHeight, 100)
 /q/tdl/95/dnt/*
 /sc4fr/rwff/f9ef/*
 /t/9/heis/svewg/*
+truyentranhfull.net##^script:has-text(ai_adb)
+!#if !cap_html_filtering
+truyentranhfull.net##+js(rmnt, script, ai_adb)
+!#endif
