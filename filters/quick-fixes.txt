@@ -1,7 +1,7 @@
 ! Title: uBlock₀ filters – Quick fixes
 ! Description: Immediate, temporary filters to fix websites
 ! Expires: 12 hours
-! Last modified: Tue, 27 Jun 2023 11:57:22 +0000
+! Last modified: Tue, 27 Jun 2023 17:18:26 +0000
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! Forums: https://github.com/uBlockOrigin/uAssets/issues
@@ -11,11 +11,12 @@
 /^https:\/\/[a-z]{2,14}\.wp\.pl\/[a-zA-Z0-9_-]{200,915}$/$script,domain=nowy.tlen.pl|poczta.o2.pl|profil.wp.pl
 
 ! aternos anti adb
-aternos.org##.header-center:style(margin-top:-5004px !important;)
-aternos.org##.sidebar:style(width: 1.742px !important; padding: 0px !important;)
-aternos.org##.ad-dfp:style(min-height: 0.1475px !important; height: 0.1475px !important;)
+aternos.org##.header-center:style(margin-top:-504cm !important;)
+aternos.org##.sidebar:style(width: 1.744px !important; padding: 0px !important;)
+aternos.org##.ad-dfp:style(min-height: 0.1485px !important; height: 0.1485px !important;)
 aternos.org###placement-takeover
 aternos.org#@#.header-ad
+||aternos.org/ajax/account/report-detection
 
 ! https://github.com/uBlockOrigin/uAssets/issues/11152
 *$script,redirect-rule=noopjs,domain=rjno1.com
@@ -30,9 +31,15 @@ rjno1.com##+js(acs, onload)
 ylilauta.org#@#iframe.a
 ||es.ylilauta.org^$css,ping,popup,frame
 ||es.ylilauta.org/t/$xhr,1p
+ylilauta.org##+js(aeld, , ad-load-fail)
+!#if env_firefox
 ylilauta.org##iframe.a.a:style(visibility:hidden!important;position:absolute!important;width:initial!important)
 ylilauta.org##+js(spoof-css, iframe.a, position, static, visibility, visible)
-ylilauta.org##+js(aeld, , ad-load-fail)
+!#endif
+!#if !env_firefox
+ylilauta.org##iframe.a.a:style(visibility:hidden!important;width:initial!important)
+ylilauta.org##+js(spoof-css, iframe.a, visibility, visible)
+!#endif
 
 ! https://github.com/uBlockOrigin/uAssets/issues/13544
 ! https://github.com/uBlockOrigin/uAssets/commit/6008194de5ebfb5f37abb375c8b6147f52d8bff3#commitcomment-76982803
@@ -217,9 +224,8 @@ hulu.com##+js(xml-prune, xpath(//*[name()="MPD"]/@mediaPresentationDuration | //
 ! promoted tweet leftover
 twitter.com,twitter3e4tixl4xyajtrzo62zg5vztmjuricljdp2c5kshju4avyoid.onion##div[style^="transform"] h2 > div[style^="-webkit-line-clamp"] > span:has-text(/^(?:Promoted Tweet|プロモツイート|Promowany Tweet|Tweet promovat)$/):upward(3)
 
-! https://github.com/uBlockOrigin/uAssets/issues/18577
-investing.com##+js(nostif, offsetHeight)
-||investing.com/js/n/ad-blocker-popup$script,1p
+! https://github.com/uBlockOrigin/uAssets/issues/18704
+investing.com##+js(rpnt, script, /adb/, xxx)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/18588
 @@||nypost.com/blaize/datalayer$xhr,1p
