@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Expires: 5 days
-! Last modified: Fri, 30 Jun 2023 01:47:11 +0000
+! Last modified: Fri, 30 Jun 2023 06:22:01 +0000
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 !
@@ -1024,7 +1024,7 @@ kimcartoon.*##.kcAds1
 kimcartoon.*###ads-top-wrap
 ||kimcartoon.*/Ads/$frame
 *$script,redirect-rule=noopjs,domain=kimcartoon.*
-*$script,3p,domain=kimcartoon.li
+*$script,3p,from=kimcartoon.*|to=~jquery.com
 dailyuploads.net##+js(acs, document.getElementById, adblockinfo)
 dailyuploads.net##+js(aopr, parcelRequire)
 dailyuploads.net##+js(nowoif)
@@ -21032,7 +21032,7 @@ javchill.com##.thumb:style(cursor:pointer !important)
 ! FingerprintJS popups
 game3rb.com,manhwalist.com,nflstreams.me,s2dfree.to,secretlink.xyz,soap2day.*##+js(acs, navigator, FingerprintJS)
 manhwalist.com##+js(aost, btoa, /https|stackDepth:3/)
-*$script,3p,domain=soap2day.ac,denyallow=fastly.net|jwpcdn.com
+soap2day.*##+js(rmnt, script, Reflect)
 ! FingerprintJS servers
 ||1oldcdn.ml^$3p
 /utx?cb=$xhr,3p
@@ -22607,8 +22607,9 @@ parentcircle.com##body:remove-class(top_ads_add)
 parentcircle.com##+js(aeld, scroll, function(e))
 ||megaurl.win/js/full.js$3p
 vtbe.net##+js(nowoif)
-||vtbe.net/vtu_max.js
-||vtbe.net/vtu_mini.js
+||camcaps.to/vsx.js
+/vtu_max.js$domain=vtbe.net|vtplayer.net
+/vtu_mini.js$domain=vtbe.net|vtplayer.net
 *$xhr,3p,redirect-rule=nooptext,domain=uservideo.xyz
 manhwahentai.me##+js(aopw, _pop)
 ||rvxqnjsczubld.com^$3p
@@ -23096,6 +23097,11 @@ actvid.com##+js(rmnt, script, HTMLAllCollection)
 ||eqkjmvkkmvrvw.top^
 ||jnajyrqrqevny.top^
 /^https:\/\/[a-z]{4,5}\.[a-z]{10,14}\.top\/[a-z]{10,16}\/[a-z]{5,6}$/$script,3p,match-case
+bunkrr.*##^script:has-text(WebAssembly)
+!#if !cap_html_filtering
+bunkrr.*##+js(acs, WebAssembly, _0x)
+!#endif
+||xhykikamxas.com^
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$script,redirect-rule=google-ima.js,domain=24ur.com
 *$object,3p,redirect-rule=noopframe,domain=24ur.com
 @@||criptologico.com^$ghide
@@ -23107,3 +23113,8 @@ iwatchfriendsonline.net##+js(rmnt, script, liedetector)
 !#endif
 kimcilonly.top##+js(noeval-if, show)
 kimcilonly.top##+js(nowoif)
+encurtandourl.com##+js(nostif, getComputedStyle, 250)
+suaurl.com##+js(rmnt, script, /window\.open|window\.location\.href|\$\(document\)\.ready.*show/)
+suaurl.com##+js(aopr, document.oncontextmenu)
+suaurl.com##+js(aopr, shortcut)
+||suaurl.com^$csp=style-src *
