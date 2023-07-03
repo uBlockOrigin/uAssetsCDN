@@ -1,7 +1,7 @@
 ! Title: uBlock₀ filters – Quick fixes
 ! Description: Immediate, temporary filters to fix websites
 ! Expires: 12 hours
-! Last modified: Mon, 03 Jul 2023 01:38:13 +0000
+! Last modified: Mon, 03 Jul 2023 12:03:32 +0000
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! Forums: https://github.com/uBlockOrigin/uAssets/issues
@@ -11,7 +11,7 @@
 /^https:\/\/[a-z]{2,14}\.wp\.pl\/[a-zA-Z0-9_-]{200,915}$/$script,domain=nowy.tlen.pl|poczta.o2.pl|profil.wp.pl
 
 ! aternos anti adb
-aternos.org##.header-center:style(margin-top:-5000px !important;)
+aternos.org##.header-center:style(margin-top:-5002px !important;)
 aternos.org##.sidebar:style(width: 1.744px !important; padding: 0px !important;)
 aternos.org##.ad-dfp:style(min-height: 0.1485px !important; height: 0.1485px !important;)
 aternos.org###placement-takeover
@@ -148,6 +148,8 @@ linkneverdie.net#@#+js(nostif, t)
 ||adservice.google.com^$script,domain=client.falixnodes.net,important
 ||casalemedia.com^$xhr,important,domain=client.falixnodes.net
 @@*$image,domain=client.falixnodes.net
+client.falixnodes.net##body[topmargin="0"][marginwidth="0"][marginheight="0"][leftmargin="0"]
+client.falixnodes.net##html[amp4ads][i-amphtml-no-boilerplate]
 
 ! https://github.com/uBlockOrigin/uAssets/issues/18476
 sizyreelingly.com##+js(acs, $, /\.fadeIn|\.show\(.?\)/)
@@ -159,32 +161,31 @@ duplichecker.com,plagiarismchecker.co,plagiarismdetector.net,searchenginereports
 utm_source=*&utm_content=*&utm_term=$popup,domain=duplichecker.com|plagiarismchecker.co|plagiarismdetector.net|searchenginereports.net|smallseotools.com
 smallseotools.com##+js(rpnt, script, .css('display'), .css('opacity'))
 smallseotools.com##+js(rpnt, script, :visible, :hidden)
-||smallseotools.com/webimages/grammarly-logo.png$image,1p
-smallseotools.com##+js(set, rk_strt, false)
-!smallseotools.com##[class][rel]:matches-attr(/^/=/\(this\)/)
-!smallseotools.com###plagiarism-checker-form > *:has(> [class] > [rel])
-!smallseotools.com##.side_area > *:not(div)
-smallseotools.com##zbrka, .mold___sa_, [of-klik], [class*="_carousel_"], [id^="eyeshaa"], [rel*="noopener"][rel*="nofollow"][data-hylink], .d-block[style=""], sammp.text-center + span.d-block
+||smallseotools.com/webimages/grammarlylogo.png$image,1p
+smallseotools.com##+js(set, rk_starts, false)
+smallseotools.com##[class][rel]:matches-attr(/^/=/\(this\)/)
+smallseotools.com###plagiarism-checker-form > *:has(> [class] > [rel])
+smallseotools.com##.side_area > *:not(div)
+smallseotools.com##brka, .nold___sa_, [of-klick], [class*="_carousal_"], [id^="axrkdema_"], [rel*="noopener"][rel*="nofollow"][data-fylink], [data-abefore], samp.text-center + span.d-block
 !||plagiarismdetector.net/pd-imgs/*.png$image,1p
-||plagiarismdetector.net/img-pop$image,1p
+!||plagiarismdetector.net/img-pop$image,1p
 !@@||plagiarismdetector.net/pd-imgs/favicon.png$image,1p
 !@@||plagiarismdetector.net/pd-imgs/*logo*.png$image,1p
 !@@||plagiarismdetector.net/pd-imgs/delete-file.png$image,1p
 plagiarismdetector.net##[class^="my-"], [onclick*="window.open($(this)"], #img1, #img2, #img3, a[style="cursor: pointer;"][onclick][rel="nofollow noopener"]
-plagiarismchecker.co##+js(rpnt, script, ('display'\,'block'), ('display'\,'none'))
-plagiarismchecker.co##+js(rpnt, script, fadeIn(), empty(), condition, adsbygoogle)
 ||plagiarismchecker.co/design_images/grmly_bg.svg$image,1p
-||plagiarismchecker.co/imgget
-plagiarismchecker.co##div[class] > a[rel] > img[src^="https://www.plagiarismchecker.co/"]:not([src$=".png"], [src$=".gif"], [src$=".svg"])
-plagiarismchecker.co##div[style*="padding"][class^="col-md-"] > div[class]
-plagiarismchecker.co##form[action=""][method="post"] + div[class]:has(> a[rel])
-plagiarismchecker.co##article[id]:has(> script[src^="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"]):style(position: absolute !important; pointer-events: none !important;)
-plagiarismchecker.co##div[class^="myyy"]
+||plagiarismchecker.co/imggrmly
+plagiarismchecker.co##div[class] > a > img[src^="https://www.plagiarismchecker.co/"]:not([src$=".png"], [src$=".gif"], [src$=".svg"])
+plagiarismchecker.co##div[class="col-md-9 col-sm-12 col-xs-12 heading pl50"] > .sm_heading + div[class]
+plagiarismchecker.co##form[action=""][method="post"] + div[class]:has(> a > img[src^="https://www.plagiarismchecker.co/"])
+plagiarismchecker.co##div[class^="yyyy"]
 searchenginereports.net##+js(rmnt, script, /check_if_blocking|XMLHttpRequest|adkiller/)
 searchenginereports.net##+js(rpnt, script, max-height, width)
 ||searchenginereports.net/imgy_ig/
 searchenginereports.net##div[id^="showmeads_"], div[id^="imgy_imgy"], .showmeads, a[href="https://searchenginereports.net/for-gma-ad"]
 searchenginereports.net##div[id][style=""]:has(> a[href][target][rel])
+! https://github.com/uBlockOrigin/uAssets/commit/3eed67a7da29db9981b3ab69a26c814e92df79c2
+plagiarismdetector.net#@#+js(rmnt, script, adsbygoogle)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/18666
 apkmirror.com##+js(rmnt, script, .adslot:empty)
