@@ -1,7 +1,7 @@
 ! Title: uBlock₀ filters – Quick fixes
 ! Description: Immediate, temporary filters to fix websites
 ! Expires: 12 hours
-! Last modified: Mon, 03 Jul 2023 12:03:32 +0000
+! Last modified: Mon, 03 Jul 2023 18:03:51 +0000
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! Forums: https://github.com/uBlockOrigin/uAssets/issues
@@ -209,14 +209,6 @@ investing.com##+js(rpnt, script, /adb/i, xxx)
 ! https://www.reddit.com/r/uBlockOrigin/comments/14djjud/just_to_let_developers_know_that_investingcom/jqdzkm7/
 investing.com##[class^="ad-notification_ad-notification_"]
 
-! https://github.com/uBlockOrigin/uAssets/issues/18588
-@@||nypost.com/blaize/datalayer$xhr,1p
-
-! https://github.com/uBlockOrigin/uAssets/issues/18597
-! https://github.com/uBlockOrigin/uAssets/issues/18609
-||js.zohocdn.com^$third-party,badfilter
-||js.zohocdn.com^$third-party,domain=~zoho.com,badfilter
-
 ! https://github.com/AdguardTeam/AdguardFilters/issues/153183
 ||fc2.com/g/a/m/gamemod/1x-ie8.js
 ||fc2.com/g/a/m/gamemod/2x-ie9.js
@@ -257,13 +249,11 @@ fandom.com##+js(set, optimizely.initialized, true)
 fandom.com##+js(set, optimizely, {})
 
 ! https://github.com/uBlockOrigin/uAssets/issues/18739
-chip.de##body > script + div[id][style*="min-height:"]
-chip.de##.DetailPage__Right-Column > div[style*="min-height:"]:first-child
-chip.de##section.Subchapter.is-hidden-md > div[style^="margin-top:"]
-chip.de##div[id] > div.is-hidden-md > a[target][href^="https://x.chip.de/"]:upward(2)
-chip.de##div[id][style^="min-height:"][style*="min-width:"]:has(> a[href^="https://x.chip.de/"] > img[src^="https://im.chip.de/"])
+chip.de##div[style^="min-height:"][style*="min-width:"] > a[href^="https://x.chip.de/"] > img[src^="https://im.chip.de/"]:upward(2)
+chip.de##.is-hidden-md > a[href^="https://x.chip.de/"] > img[src^="https://im.chip.de/"]:upward(2)
 chip.de###A.A[style="display: block;"]
-||mein-organizer.de^$image,doc
+chip.de##.DetailPage__Right-Column > div[style*="min-height:"]:first-child
+chip.de#@##R1C2
 
 ! images hidden
 twitter.com,twitter3e4tixl4xyajtrzo62zg5vztmjuricljdp2c5kshju4avyoid.onion#@#div[style^="transform"] > div > div:empty
@@ -282,3 +272,6 @@ tweetdeck.twitter.com#@?#div[role="dialog"] >.r-1oszu61 > div[class="css-1dbjc4n
 *$script,3p,from=kimcartoon.*,badfilter
 *$script,3p,from=kimcartoon.*,to=~jquery.com,badfilter
 kimcartoon.*##+js(rmnt, script, Number.isSafeInteger)
+
+! https://github.com/uBlockOrigin/uAssets/discussions/17361#discussioncomment-6328782
+btcbitco.in,btcsatoshi.net,wiour.com##+js(acs, document.getElementById, ads)
