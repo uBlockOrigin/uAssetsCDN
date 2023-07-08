@@ -1,6 +1,6 @@
 ! Title: uBlock₀ filters
 ! Description: Filters optimized for uBlock, to be used along EasyList
-! Last modified: Sat, 08 Jul 2023 06:44:18 +0000
+! Last modified: Sat, 08 Jul 2023 10:56:59 +0000
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! New filters from January 2023 to ->
@@ -521,10 +521,6 @@ compromath.com##+js(no-fetch-if, ads)
 ||cmodmedia*.live.streamtheworld.com/media/*.mp3$media,redirect=noopmp3-0.1s,domain=deezer.com
 ! https://github.com/uBlockOrigin/uAssets/issues/17392
 deezer.com##+js(nostif, Ads)
-
-! https://www.reddit.com/r/uBlockOrigin/comments/10n2p0m/
-qtoptens.com##+js(aost, document.createElement, Admiral)
-qtoptens.com##^script:has-text(admiral)
 
 ! https://www.reddit.com/r/uBlockOrigin/comments/10n37i2/
 @@||wnacg.org/download$ghide
@@ -3100,10 +3096,12 @@ batchkun.com##+js(aopw, auto_safelink)
 koenime.top,lendrive.web.id##+js(aopr, btoa)
 
 ! adikanime antianti adblock & skip countdown
-adikhealth.xyz,bisnis.adigenius.com,mangindo.xyz##+js(set, adikAds, true)
-adikhealth.xyz,bisnis.adigenius.com,mangindo.xyz##+js(set, isAdBlockActive, false)
+adikhealth.xyz,bisnis.adigenius.com,mangindo.xyz##+js(rmnt, script, Pemblokir)
 adikhealth.xyz,bisnis.adigenius.com,mangindo.xyz##+js(nano-sib, , *)
 adikhealth.xyz,bisnis.adigenius.com,mangindo.xyz##+js(nano-stb, , *)
+adikhealth.xyz,bisnis.adigenius.com,mangindo.xyz##img[id$="wait"]:style(display: none !important)
+adikhealth.xyz,bisnis.adigenius.com,mangindo.xyz##img[id$="button"]:style(display: unset !important)
+adikhealth.xyz,bisnis.adigenius.com,mangindo.xyz##a[id="lite-start-sora-a"]:style(display: unset !important)
 
 ! https://github.com/AdguardTeam/AdguardFilters/issues/154228
 filmestorrent.tv##+js(noeval-if, adsBlocked)
@@ -3313,8 +3311,14 @@ an1me.*##ins.adsbygoogle
 ! https://github.com/uBlockOrigin/uAssets/issues/18760
 isekaipalace.com##+js(set, showAds, true)
 
+! https://www.reddit.com/r/uBlockOrigin/comments/10n2p0m/
 ! https://liveandletsfly.com anti-adb
-liveandletsfly.com##+js(rmnt, script, "-engaged")
+||qtoptens.com^$csp=worker-src 'none'
+qtoptens.com##+js(set, admiral, noopFunc)
+qtoptens.com,liveandletsfly.com##^script:has-text(-engaged)
+!#if !cap_html_filtering
+qtoptens.com,liveandletsfly.com##+js(rmnt, script, -engaged)
+!#endif
 
 ! https://www.reddit.com/r/uBlockOrigin/comments/14nkfum/
 sofmag.com##.adsBelowHeaderBannerContainer
@@ -3428,3 +3432,6 @@ faucettronn.click##+js(set, detectAdblock, noopFunc)
 ! https://github.com/uBlockOrigin/uAssets/issues/18882
 komikmanhwa.me##+js(rmnt, script, WebAssembly)
 ||arqrzyowta.com^
+
+! https://github.com/uBlockOrigin/uAssets/issues/18885
+||imasdk.googleapis.com/js/sdkloader/ima3$script,redirect-rule=google-ima.js,domain=nick.com
