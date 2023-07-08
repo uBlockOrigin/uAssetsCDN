@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Expires: 5 days
-! Last modified: Sat, 08 Jul 2023 11:18:21 +0000
+! Last modified: Sat, 08 Jul 2023 14:32:28 +0000
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 !
@@ -12817,8 +12817,8 @@ discoveryplus.*##+js(json-prune, data.attributes.config.freewheel data.attribute
 !#if !env_firefox
 ||h264.io/a/x-goog-token=Expires$xhr,redirect=nooptext,domain=discoveryplus.*,important
 !#endif
-discoveryplus.*##+js(json-prune, data.attributes.ssaiInfo.forecastTimeline data.attributes.ssaiInfo.vendorAttributes.nonLinearAds data.attributes.ssaiInfo.vendorAttributes.videoView data.attributes.ssaiInfo.vendorAttributes.breaks.[].ads.[].adMetadata data.attributes.ssaiInfo.vendorAttributes.breaks.[].ads.[].adParameters data.attributes.ssaiInfo.vendorAttributes.breaks.[].timeOffset)
-discoveryplus.*##+js(xml-prune, xpath(//*[name()="MPD"]/@mediaPresentationDuration | //*[name()="Period"][./*[name()="BaseURL" and contains(text()\,'dash_clear_fmp4')]]), , .mpd)
+discoveryplus.*,go.discovery.com##+js(json-prune, data.attributes.ssaiInfo.forecastTimeline data.attributes.ssaiInfo.vendorAttributes.nonLinearAds data.attributes.ssaiInfo.vendorAttributes.videoView data.attributes.ssaiInfo.vendorAttributes.breaks.[].ads.[].adMetadata data.attributes.ssaiInfo.vendorAttributes.breaks.[].ads.[].adParameters data.attributes.ssaiInfo.vendorAttributes.breaks.[].timeOffset)
+discoveryplus.*,go.discovery.com##+js(xml-prune, xpath(//*[name()="MPD"][.//*[name()="BaseURL" and contains(text()\,'dash_clear_fmp4')]]/@mediaPresentationDuration | //*[name()="Period"][./*[name()="BaseURL" and contains(text()\,'dash_clear_fmp4')]]), , .mpd)
 pureshort.*##+js(aopr, app_vars.force_disable_adblock)
 pureshort.*##+js(aopr, open)
 pureshort.*##+js(set, blurred, false)
@@ -19262,8 +19262,10 @@ trytutorial.com##+js(aopr, ai_run_scripts)
 @@||liveindex.org/wp-content/plugins/imedia-basic/*$script,1p
 imdbembed.xyz##+js(nowoif)
 imdbembed.xyz###addiv
-apkmody.io##+js(nano-stb, download_loading, *)
-apkmody.io##+js(nowoif)
+apkmody.*##+js(nano-stb, download_loading, *)
+apkmody.*##+js(nowoif)
+apkmody.*##.download-ads
+apkmody.*##.body-fixed-footer
 ! streamlare aliases ads
 slmaxed.com,sltube.org,slwatch.co##+js(nostif, 0x)
 golink.xaydungplus.com##+js(set, blurred, false)
@@ -21269,6 +21271,7 @@ seznam.cz##[class*="advert"]
 seznam.cz##+js(nostif, 0x)
 @@||seznam.cz^$ghide,badfilter
 ||sdn.cz/*/ad-*.mp4$media,domain=seznam.cz,redirect=noopmp3-0.1s
+@@||seznam.cz/ui/ui.html$subdocument,domain=search.seznam.cz
 proxer.me###stream_message_overlay
 allotech-dz.com##+js(acs, eval, replace)
 @@*$ghide,domain=btc25.org|doge25.in
