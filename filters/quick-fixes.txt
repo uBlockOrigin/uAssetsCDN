@@ -1,7 +1,7 @@
 ! Title: uBlock₀ filters – Quick fixes
 ! Description: Immediate, temporary filters to fix websites
 ! Expires: 12 hours
-! Last modified: Sun, 09 Jul 2023 11:58:01 +0000
+! Last modified: Sun, 09 Jul 2023 16:25:06 +0000
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! Forums: https://github.com/uBlockOrigin/uAssets/issues
@@ -11,7 +11,7 @@
 /^https:\/\/[a-z]{2,14}\.wp\.pl\/[a-zA-Z0-9_-]{200,915}$/$script,domain=nowy.tlen.pl|poczta.o2.pl|profil.wp.pl
 
 ! aternos anti adb
-aternos.org##.header-center:style(margin-top:-5004px !important;)
+aternos.org##.header-center:style(margin-top:-5000px !important;)
 aternos.org##.sidebar:style(width: 1.745px !important; padding: 0.08px !important;)
 aternos.org##.ad-dfp:style(min-height: 0.1485px !important; height: 0.1485px !important;)
 ||aternos.org/ajax/account/report-detection
@@ -56,9 +56,6 @@ imgmffg.sbs,imgmffgtr.sbs,imgnbg.sbs,imgngc.sbs,imgnmh.cfd,imgqte.sbs,imguthes.s
 ||im1.buzz/pdev/pdev.js
 
 ! https://github.com/uBlockOrigin/uAssets/issues/15246
-*$script,redirect-rule=noopjs,domain=next-episode.net
-next-episode.net##.adsbygoogle
-next-episode.net##[id=""]
 next-episode.net##+js(rmnt, script, /onerror|adsbygoogle/)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/15338
@@ -143,11 +140,12 @@ linkneverdie.net#@#+js(nostif, t)
 @@||static.ads-twitter.com^$xhr,domain=mqrio.dev
 ||analytics.twitter.com^$image,redirect-rule=1x1.gif
 @@*$image,script,xhr,domain=client.falixnodes.net
-@@||safeframe.googlesyndication.com/safeframe/*/html/container.html?ai=$frame,domain=client.falixnodes.net
+@@||safeframe.googlesyndication.com/safeframe/$frame,domain=client.falixnodes.net
 client.falixnodes.net##html:not([class]) > body[marginwidth="0"][marginheight="0"]
 client.falixnodes.net##html[amp4ads][i-amphtml-no-boilerplate]
 client.falixnodes.net##html:not([class]) > body[onload="window.avCallback();"][style]
 client.falixnodes.net##html:not([class]) > body:not([class]) div[id^="ftdiv"]
+client.falixnodes.net##html:not([class]) > .ad_unit
 ||ups.analytics.yahoo.com^$image,important,domain=client.falixnodes.net
 ||pr-bh.ybp.yahoo.com/sync/$image,important,domain=client.falixnodes.net
 ||facebook.com/tr/$image,important,domain=client.falixnodes.net
@@ -180,7 +178,7 @@ smallseotools.com##[class][rel]:has(img[alt="grammarly popup"])
 smallseotools.com##[class][rel] > div.bg-white.border1[style] > [data-ride]:upward(2)
 smallseotools.com##span[onclick*="https://smallseotools.com/deep_grammar.html"]
 smallseotools.com##span[onclick*="https://smallseotools.com/deep_pcgrammar.html"]
-||plagiarismdetector.net/mojo/$image,1p
+||plagiarismdetector.net/lm_do/$image,1p
 ||plagiarismdetector.net/img-pop$image,1p
 plagiarismdetector.net##.spacefix, [id^="mojo"], [style^="min-height:"][class][id]
 plagiarismdetector.net##a[id][class][rel] > img[class][src^="https://plagiarismdetector.net/"]:upward(1)
@@ -199,24 +197,12 @@ duplichecker.com##.container > .clearfix + *:not(div, span, [class], [id])
 
 ! https://github.com/uBlockOrigin/uAssets/issues/18666
 apkmirror.com##^script:has-text(.adslot:empty)
-!#if !cap_html_filtering
-apkmirror.com##+js(rmnt, script, .adslot:empty)
-!#endif
 
 ! https://github.com/uBlockOrigin/uAssets/issues/14480
 soft98.ir,~forum.soft98.ir##+js(rpnt, script, /^.*?(var url).*$/, (function(){'use strict';const safe={'log':window.console.log.bind(console)\,'addEventListener':self.EventTarget.prototype.addEventListener\,'setInterval':window.setInterval\,'querySelectorAll':document.querySelectorAll\,'clearInterval':window.clearInterval\,'dispatchEvent':document.dispatchEvent};let doIntervals=true\,doTimeouts=true;let mainCode='';let intervalID='';const hideAds=function(){safe.querySelectorAll.apply(document\,['a > img']).forEach(node=>{node.parentNode.style='display: none !important;'})};const showAds=function(){safe.querySelectorAll.apply(document\,['a > img']).forEach(node=>{node.parentNode.style=''})};const clearAll=function(){safe.clearInterval.apply(window\,[intervalID]);controller.abort();hideAds()};const genericGet=function(target\,thisArg\,args){if(thisArg==='toString'){return target.toString.bind(target)}return Reflect.get(target\,thisArg\,args)};window.eval=new Proxy(window.eval\,{apply(target\,thisArg\,args){mainCode=args[0];args[0]=function(){};window.eval=target;return Reflect.apply(target\,thisArg\,args)}\,get:genericGet});const controller=new AbortController();const{signal}=controller;self.EventTarget.prototype.addEventListener=new Proxy(self.EventTarget.prototype.addEventListener\,{apply(target\,thisArg\,args){if(args[0]!=='click'&&args[0]!=='transitionend'){args.push({signal})};if(args[0]==='focus'){const originalHandler=args[1];const wrappedHandler=function(event){showAds();originalHandler(event);hideAds()};args[1]=wrappedHandler};return Reflect.apply(target\,thisArg\,args)}\,get:genericGet});window.setInterval=new Proxy(window.setInterval\,{apply(target\,thisArg\,args){if(doIntervals===true){args[0]()};args[0]=function(){};return Reflect.apply(target\,thisArg\,args)}\,get:genericGet});window.setTimeout=new Proxy(window.setTimeout\,{apply(target\,thisArg\,args){if(doTimeouts===true){args[0]()};args[0]=function(){};return Reflect.apply(target\,thisArg\,args)}\,get:genericGet});function main(){hideAds();let originalScript='';const xhr=new XMLHttpRequest();xhr.open('GET'\,location.href\,false);xhr.onreadystatechange=function(){if(xhr.readyState===4&&xhr.status===200){const parser=new DOMParser();const doc=parser.parseFromString(xhr.responseText\,'text/html');let nodes=doc.querySelectorAll('script:not([src])');for(let i=0;i<nodes.length;i++){const node=nodes[i];if(node.innerText.includes('kaprila')){originalScript=node.innerText;break}};nodes=safe.querySelectorAll.apply(document\,['script:not([src])']);for(let i=0;i<nodes.length;i++){const node=nodes[i];if(node.innerText.includes('DOMContentLoaded')){node.innerText=originalScript;break}}}};xhr.send();if(location.href.endsWith('.html')===true){window.scrollTo(0\,document.body.scrollHeight);intervalID=safe.setInterval.apply(window\,[function(){if(mainCode!==''&&mainCode!=='Done'){showAds();window.eval(mainCode);mainCode='Done'};if(mainCode==='Done'){if(safe.querySelectorAll.apply(document\,['main article a[href*="ت"][href*="ب"]']).length===0){window.scrollTo(0\,0);clearAll()}}}\,1])}else{showAds();window.eval(mainCode);clearAll()}};if(document.readyState!=='loading'){main()}else{safe.addEventListener.apply(document\,['DOMContentLoaded'\,function(){main()}])}})();)
 ! soft98.ir,~forum.soft98.ir##+js(rmnt, aside, /(.*)[9][^\w]*[0][^\w]*[9][^\w]*[9][^\w]*[0][^\w]*[7][^\w]*[1][^\w]*[4][^\w]*[6][^\w]*[1][^\w]*(.*)/)
 ! soft98.ir,~forum.soft98.ir##+js(aeld, /contextmenu|mouseup|mousedown/, [native code])
 
-! https://github.com/uBlockOrigin/uAssets/issues/18547
-@@||ignboards.com^$ghide
-
-! https://github.com/uBlockOrigin/uAssets/issues/18582
-/adflow.$from=~adflow.com.au|~adflow.genoudsa.ch|~adflow.io|~adflow.marketing|~adflow.pl,badfilter
-/adflow.$from=~adflow.adstandards.ca|~adflow.com.au|~adflow.genoudsa.ch|~adflow.io|~adflow.marketing|~adflow.pl
-
-! https://github.com/uBlockOrigin/uAssets/issues/18704
-investing.com##+js(rpnt, script, /adb/i, xxx)
 ! https://github.com/uBlockOrigin/uAssets/issues/18731#issuecomment-1613121145
 ||investing.com/*/ad-notification-popup
 ! https://www.reddit.com/r/uBlockOrigin/comments/14djjud/just_to_let_developers_know_that_investingcom/jqdzkm7/
@@ -225,9 +211,6 @@ investing.com##[class^="ad-notification"]
 investing.com##[id^="adNotification"]
 
 ! https://github.com/AdguardTeam/AdguardFilters/issues/131648
-||fc2.com/h/e/l/helpsupport/z-ie8.js
-||fc2.com/h/e/l/helpsupport/z-ie9.js
-||fc2.com/h/e/l/helpsupport/z-user-comment.js
 helpsupport.blog.fc2.com##+js(nostif, /adsbygoogle|getComputedStyle/)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/18825
@@ -266,10 +249,6 @@ kimcartoon.*##+js(rmnt, script, Number.isSafeInteger)
 ! https://github.com/uBlockOrigin/uAssets/discussions/17361#discussioncomment-6328782
 btcbitco.in,btcsatoshi.net,wiour.com##+js(acs, document.getElementById, ads)
 
-! https://github.com/uBlockOrigin/uAssets/issues/18795
-grasshopper.com##+js(set, google_optimize, {})
-grasshopper.com##+js(set, google_optimize.get, noopFunc)
-
 ! https://github.com/AdguardTeam/AdguardFilters/issues/154732#issuecomment-1621761775
 ||sf16-scmcdn-sg.ibytedtos.com^$badfilter
 
@@ -283,3 +262,6 @@ techcyan.com###wg-genx > .disadb > .txtx
 ! https://github.com/uBlockOrigin/uAssets/discussions/17361#discussioncomment-6389857
 mdn.lol##+js(alert-buster)
 mdn.lol##+js(nostif, .innerHtml)
+
+! https://www.reddit.com/r/uBlockOrigin/comments/14pu01w/im_suddenly_starting_to_see_a_lot_of_shopping/
+google.ac,google.ae,google.at,google.be,google.bg,google.by,google.ca,google.ch,google.cl,google.co.id,google.co.il,google.co.in,google.co.jp,google.co.ke,google.co.kr,google.co.nz,google.co.th,google.co.uk,google.co.ve,google.co.za,google.com,google.com.ar,google.com.au,google.com.br,google.com.co,google.com.ec,google.com.eg,google.com.hk,google.com.mx,google.com.my,google.com.pe,google.com.ph,google.com.pk,google.com.py,google.com.sa,google.com.sg,google.com.tr,google.com.tw,google.com.ua,google.com.uy,google.com.vn,google.cz,google.de,google.dk,google.dz,google.ee,google.es,google.fi,google.fr,google.gr,google.hr,google.hu,google.ie,google.it,google.lt,google.lv,google.nl,google.no,google.pl,google.pt,google.ro,google.rs,google.ru,google.se,google.sk###atvcap > .cu-container div[data-pla="1"]
