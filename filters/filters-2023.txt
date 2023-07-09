@@ -1,6 +1,6 @@
 ! Title: uBlock₀ filters
 ! Description: Filters optimized for uBlock, to be used along EasyList
-! Last modified: Sun, 09 Jul 2023 02:20:48 +0000
+! Last modified: Sun, 09 Jul 2023 11:25:54 +0000
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! New filters from January 2023 to ->
@@ -549,6 +549,13 @@ ntuplay.xyz##+js(nowoif)
 /adpup/*.js$script,3p
 /t.salamus1.lol/*$script
 ||cdn.salamus1.lol^
+! https://github.com/AdguardTeam/AdguardFilters/issues/155863
+||ntuplay.xyz^$badfilter
+||advertising.ntuplay.xyz^
+ntuplay.xyz##^script:has-text(window.top)
+!#if !cap_html_filtering
+ntuplay.xyz##+js(rmnt, script, window.top)
+!#endif
 
 ! https://github.com/uBlockOrigin/uAssets/issues/16544 focus detection
 bloginguru.xyz##+js(set, blurred, false)
@@ -1682,7 +1689,8 @@ minecraftwild.com###jeg_off_canvas + div[id][class]
 carryflix.icu##+js(aopr, b2a)
 freshersgold.com###main-container + div[id][class]
 ! https://github.com/AdguardTeam/AdguardFilters/issues/131933
-snbc13.com##+js(aost, document.getElementById, fairAdblock)
+! https://github.com/AdguardTeam/AdguardFilters/issues/155801
+shinobijawi.id,snbc13.com##+js(aost, document.getElementById, fairAdblock)
 
 ! https://1link.vip/siuphamm fake download and timer
 ||1link.vip/download.jpg$image
@@ -3318,9 +3326,9 @@ isekaipalace.com##+js(set, showAds, true)
 ! https://liveandletsfly.com anti-adb
 ||qtoptens.com^$csp=worker-src 'none'
 qtoptens.com##+js(set, admiral, noopFunc)
-qtoptens.com,liveandletsfly.com##^script:has-text(-engaged)
+qtoptens.com,liveandletsfly.com,nordot.app##^script:has-text(_name+"-engaged")
 !#if !cap_html_filtering
-qtoptens.com,liveandletsfly.com##+js(rmnt, script, -engaged)
+qtoptens.com,liveandletsfly.com,nordot.app##+js(rmnt, script, _name+"-engaged")
 !#endif
 
 ! https://www.reddit.com/r/uBlockOrigin/comments/14nkfum/
@@ -3443,3 +3451,12 @@ komikmanhwa.me##+js(rmnt, script, WebAssembly)
 .gif$domain=thapcam.net
 thapcam.net##+js(nostif, modal)
 thapcam.net##.mmo
+
+! https://github.com/AdguardTeam/AdguardFilters/issues/155918
+pandasnovel.com##+js(set, pandaAdviewValidate, true)
+pandasnovel.com##.novel-ins2
+pandasnovel.com##a[href^="https://www.panda-novel.com/advertising"]:upward(.index-swiper)
+
+! https://github.com/AdguardTeam/AdguardFilters/issues/155887
+! https://github.com/AdguardTeam/AdguardFilters/issues/155883
+10minuteemails.com,luxusmail.org##+js(nostif, ad_block)
