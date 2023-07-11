@@ -1,6 +1,6 @@
 ! Title: uBlock₀ filters
 ! Description: Filters optimized for uBlock, to be used along EasyList
-! Last modified: Tue, 11 Jul 2023 13:03:35 +0000
+! Last modified: Tue, 11 Jul 2023 16:33:12 +0000
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! New filters from January 2023 to ->
@@ -3105,7 +3105,7 @@ batchkun.com##+js(aopw, auto_safelink)
 koenime.top,lendrive.web.id##+js(aopr, btoa)
 
 ! adikanime antianti adblock & skip countdown
-@@||adikpm.github.io/repo/assets/js-v2/prebid.js$script
+@@||adikpm.github.io^$script,domain=adikhealth.xyz|bisnis.adigenius.com|mangindo.xyz
 adikhealth.xyz,bisnis.adigenius.com,mangindo.xyz##+js(nano-sib, , *)
 adikhealth.xyz,bisnis.adigenius.com,mangindo.xyz##+js(nano-stb, , *)
 adikhealth.xyz,bisnis.adigenius.com,mangindo.xyz##img[id$="wait"]:style(display: none !important)
@@ -3390,8 +3390,9 @@ rgb.vn##+js(nostif, siteAccessPopup)
 www.google.com##div[aria-label="Why this ad?"]:upward([data-pla="1"])
 
 ! https://github.com/uBlockOrigin/uAssets/issues/18816
-totalcsgo.com##+js(rmnt, script, adConfigUrl)
-totalcsgo.com##body:style(background-image: unset !important; cursor: auto !important;)
+totalcsgo.com##+js(rmnt, script, /adconfig/i)
+totalcsgo.com##[style*="background-image: url"]:style(background-image: unset !important; cursor: auto !important;)
+||totalcsgo.com/*/site-takeover/$image
 
 ! https://www.reddit.com/r/uBlockOrigin/comments/14qvi2o/
 seriesperu.com##+js(noeval-if, adsBlocked)
@@ -3470,6 +3471,7 @@ w3cub.com##+js(nostif, /detectAdBlocker|window.open/)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/18908
 ravenscans.com##+js(acs, eval, replace)
+ravenscans.com###teaser3
 
 ! https://github.com/uBlockOrigin/uAssets/issues/18914
 fap-nation.org##+js(acs, eval, replace)
@@ -3491,3 +3493,24 @@ dgb.lol##+js(nostif, hasAdBlock)
 ! https://github.com/uBlockOrigin/uAssets/issues/18940
 manysex.com##+js(rmnt, script, is_antiblock_refresh)
 manysex.com##.afs_ads + span[style]
+
+! https://github.com/uBlockOrigin/uAssets/issues/18948
+bangpremier.com##+js(nostif, adBlockDetected)
+bangpremier.com##.presentation-bb-wrapper
+bangpremier.com##.panel-desktop-mdx
+bangpremier.com##.presentation-space
+bangpremier.com##.presentation-space-m-panel
+bangpremier.com###my-content:style(display: block !important;)
+
+! https://www.reddit.com/r/uBlockOrigin/comments/14wpihr/
+moviesapi.club##+js(set, S_Popup, 10)
+moviesapi.club##+js(aopr, my_pop)
+moviesapi.club##+js(nowoif)
+
+! https://github.com/uBlockOrigin/uAssets/discussions/17361#discussioncomment-6417241
+#@#.ad-box
+~job.inshokuten.com,~sexgr.net,~webbtelescope.org##.ad-box:not(#ad-banner)
+
+! Clickadu reinjection
+agupulsa.xyz,lovingsiren.com,mesex.pro,vlxyz.tv,xanimeporn.com##+js(aost, atob, _0x)
+/aas/r45d/vki/*$script,3p,redirect=noop.js
