@@ -1,7 +1,7 @@
 ! Title: uBlock₀ filters – Quick fixes
 ! Description: Immediate, temporary filters to fix websites
 ! Expires: 12 hours
-! Last modified: Wed, 12 Jul 2023 12:33:50 +0000
+! Last modified: Wed, 12 Jul 2023 18:27:28 +0000
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! Forums: https://github.com/uBlockOrigin/uAssets/issues
@@ -12,7 +12,7 @@
 
 ! aternos anti adb
 aternos.org##.header-center:style(margin-top:-5000px !important;)
-aternos.org##.sidebar:style(width: 1.745px !important; padding: 0.008px !important;)
+aternos.org##.sidebar:style(width: 1.745px !important; padding: 0.016px !important;)
 aternos.org##.ad-dfp:style(min-height: 0.1485mm !important; height: 0.1485mm !important;)
 ||aternos.org/ajax/account/report-detection
 
@@ -22,9 +22,9 @@ rjno1.com##^script:has-text(/_date|Date()|parseInt|banana|adblock|\'\).innerHTML
 rjno1.com##+js(rmnt, script, /_date|Date()|parseInt|banana|adblock|window.location|getElementsByClassName|google_global_correlator|window.onload|nextElementSibling|getElementsByTagName|parentNode.innerHTML/)
 !#endif
 rjno1.com##div:matches-css(position:/fixed/)
-rjno1.com##+js(rpnt, script, /else{, /if(true){)
+rjno1.com##+js(rpnt, script, }else/* -rpnt */{, }if(true){)
 rjno1.com##+js(rpnt, script, };, }; document.getElementById("mokuai-search-id").innerHTML = "<form role=\"search\" method=\"get\" class=\"search-form\" action=\"https://www.rjno1.com/\" itemprop=\"potentialAction\" itemscope itemtype=\"http://schema.org/SearchAction\">  <meta itemprop=\"target\" content=\"https://www.rjno1.com/?s=search%20\"/>  <span class=\"screen-reader-text\">搜索：</span> <i class=\"fa fa-search\"></i>  <input type=\"search\" class=\"search-field\" placeholder=\"搜索 &hellip;\" value=\"\" name=\"s\" title=\"Search\" required itemprop=\"query-input\">  <button type=\"submit\" class=\"search-submit\"> <span >搜索</span> </button></form>";)
-rjno1.com##+js(rpnt, script, var dl_buttom_id = document.getElementById(/* -rpnt */ "dl-buttom-id-for-js");,var dl_buttom_id = document.getElementById("dl-buttom-id-for-js" /* -rpnt */).innerHTML = "<a href=\"https://www.rjno1.com/" + document.location.href.replace("https://www.rjno1.com/"\, "") + "download-" + document.location.href.replace("https://www.rjno1.com/"\, "") + "\" class=\"post-download-address-button\"><i class=\"fa fa-download-button\"></i><span class=\"screen-reader-text\">下载地址</span>Download</a><div class=\"clear\"></div>";)
+rjno1.com##+js(rpnt, script, "};,"};var dl_buttom_id = document.getElementById("dl-buttom-id-for-js").innerHTML = "<a href=\"https://www.rjno1.com/" + document.location.href.replace("https://www.rjno1.com/"\, "") + "download-" + document.location.href.replace("https://www.rjno1.com/"\, "") + "\" class=\"post-download-address-button\"><i class=\"fa fa-download-button\"></i><span class=\"screen-reader-text\">下载地址</span>Download</a><div class=\"clear\"></div>";)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/14204
 ylilauta.org#@#iframe.a
@@ -201,7 +201,7 @@ smallseotools.com#@#div:not([id]) > div[class] > ._ap_apex_ad:upward(2)
 apkmirror.com##^script:has-text(.adslot:empty)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/14480
-soft98.ir,~forum.soft98.ir##+js(rpnt, script, /^/, if(typeof alreadyRun!=='undefined'&&alreadyRun===true){}else{alreadyRun=true;(function(){const safe={'log':window.console.log.bind(console)\,'addEventListener':self.EventTarget.prototype.addEventListener\,'setInterval':window.setInterval\,'querySelectorAll':document.querySelectorAll\,'clearInterval':window.clearInterval\,'adoptedStyleSheets':document.adoptedStyleSheets\,'createElement':document.createElement};document.createElement=function(){};let intervalID='';let mainCode='';const generateID=function(len){const dec2hex=function(dec){return dec.toString(16).padStart(2\,'0')};const arr=new Uint8Array((len||40)/2);window.crypto.getRandomValues(arr);const result=Array.from(arr\,dec2hex).join('').replace(/^\d+/g\,'');if(result.length<1){return generateID(len)};return result};const randomAttribute=generateID(15);const styleSheet=new CSSStyleSheet();styleSheet.replaceSync(`[${randomAttribute}]{display:none!important}`);safe.adoptedStyleSheets.push(styleSheet);Object.defineProperty(document\,'adoptedStyleSheets'\,{get:function(){let sheets=safe.adoptedStyleSheets;sheets.forEach(sheet=>{const rules=sheet.cssRules;for(let i=0;i<rules.length;i++){if(rules[i].cssText.includes(randomAttribute)){sheets.splice(sheets.indexOf(sheet)\,1);break}}});return sheets}});const modifyAds=function(mode){const processNode=function(node){if(mode==='hide'){node.setAttribute(randomAttribute\,'');if(node.className){node.setAttribute('tempclass'\,node.className);node.className=''}}else{node.removeAttribute(randomAttribute);if(node.getAttribute('tempclass')){node.className=node.getAttribute('tempclass');node.removeAttribute('tempclass')}}};safe.querySelectorAll.apply(document\,['a > img']).forEach(node=>{processNode(node.parentNode)});safe.querySelectorAll.apply(document\,['footer a[href*="smostafa" i]']).forEach(node=>{processNode(node.parentElement)});safe.querySelectorAll.apply(document\,['main article a']).forEach(node=>{if(node.innerText&&node.innerText.replace(/[^آ-ی]/g\,'').replace(/ـ/g\,'').replace(/[\u064B-\u065F\u0670]/g\,'')==='سیسبان'){processNode(node.parentElement)}})};const genericGet=function(target\,thisArg\,args){if(thisArg==='toString'){return target.toString.bind(target)};return Reflect.get(target\,thisArg\,args)};window.eval=new Proxy(window.eval\,{apply(target\,thisArg\,args){mainCode=args[0];args[0]=function(){};window.eval=target;return Reflect.apply(target\,thisArg\,args)}\,get:genericGet});const controller=new AbortController();const{signal}=controller;const goodEvents=['click'\,'transitionend'\,'scroll'\,'focus'];self.EventTarget.prototype.addEventListener=new Proxy(self.EventTarget.prototype.addEventListener\,{apply(target\,thisArg\,args){if(!goodEvents.includes(args[0])){args.push({signal})};const originalHandler=args[1];const wrappedHandler=function(event){modifyAds('show');originalHandler(event);modifyAds('hide')};args[1]=wrappedHandler;return Reflect.apply(target\,thisArg\,args)}\,get:genericGet});window.setInterval=new Proxy(window.setInterval\,{apply(target\,thisArg\,args){const originalFunction=args[0];const wrappedFunction=function(){modifyAds('show');originalFunction();modifyAds('hide')};args[0]=wrappedFunction;return Reflect.apply(target\,thisArg\,args)}\,get:genericGet});window.setTimeout=new Proxy(window.setTimeout\,{apply(target\,thisArg\,args){const originalFunction=args[0];const wrappedFunction=function(){modifyAds('show');originalFunction();modifyAds('hide')};args[0]=wrappedFunction;return Reflect.apply(target\,thisArg\,args)}\,get:genericGet});const main=function(){modifyAds('hide');window.scrollTo(0\,document.body.scrollHeight);let originalScripts=[];const xhr=new XMLHttpRequest();xhr.open('GET'\,location.href\,false);xhr.onreadystatechange=function(){if(xhr.readyState===4&&xhr.status===200){const parser=new DOMParser();const doc=parser.parseFromString(xhr.responseText\,'text/html');const originalNodes=doc.querySelectorAll('script');const modifiedNodes=safe.querySelectorAll.apply(document\,['script']);for(let i=0;i<modifiedNodes.length;i++){const originalNode=originalNodes[i];const modifiedNode=modifiedNodes[i];modifiedNode.innerText=originalNode.innerText;originalScripts.push(originalNode.innerText)}}};xhr.send();intervalID=safe.setInterval.apply(window\,[function(){if(mainCode!==''){safe.clearInterval.apply(window\,[intervalID]);delete window.alreadyRun;modifyAds('show');document.createElement=safe.createElement;originalScripts.forEach(originalScript=>{try{window.eval(originalScript)}catch(e){}});window.eval(mainCode);controller.abort();safe.querySelectorAll.apply(document\,['main article a[target]']).forEach(node=>{node.scrollIntoView()})}}\,1])};if(document.readyState!=='loading'){main()}else{safe.addEventListener.apply(document\,['DOMContentLoaded'\,function(){main()}])}})()};)
+soft98.ir,~forum.soft98.ir##+js(rpnt, script, /^/, if(typeof alreadyRun!=='undefined'&&alreadyRun===true){}else{alreadyRun=true;(function(){'use strict';const safe={'log':window.console.log.bind(console)\,'addEventListener':self.EventTarget.prototype.addEventListener\,'setInterval':window.setInterval\,'clearInterval':window.clearInterval\,'querySelectorAll':document.querySelectorAll\,'adoptedStyleSheets':document.adoptedStyleSheets\,'createElement':document.createElement\,'setAttribute':Element.prototype.setAttribute\,'removeAttribute':Element.prototype.removeAttribute\,'getAttribute':Element.prototype.getAttribute\,'scrollIntoView':Element.prototype.scrollIntoView\,'String_replace':String.prototype.replace\,'String_includes':String.prototype.includes\,'Array_includes':Array.prototype.includes\,'Array_push':Array.prototype.push\,'Array_splice':Array.prototype.splice\,'Array_indexOf':Array.prototype.indexOf};document.createElement=function(){};let intervalID='';let mainCode='';const generateID=function(len){const dec2hex=function(dec){return dec.toString(16).padStart(2\,'0')};const arr=new Uint8Array((len||40)/2);window.crypto.getRandomValues(arr);const result=Array.from(arr\,dec2hex).join('').replace(/^\d+/g\,'');if(result.length<1){return generateID(len)};return result};const randomAttribute=generateID(15);const styleSheet=new CSSStyleSheet();styleSheet.replaceSync(`[${randomAttribute}]{display:none!important}`);safe.adoptedStyleSheets.push(styleSheet);Object.defineProperty(document\,'adoptedStyleSheets'\,{get:function(){let sheets=[...safe.adoptedStyleSheets];sheets.forEach(sheet=>{const rules=sheet.cssRules;for(let i=0;i<rules.length;i++){if(safe.String_includes.call(rules[i].cssText\,randomAttribute)){safe.Array_splice.call(sheets\,safe.Array_indexOf.call(sheets\,sheet)\,1);break}}});return sheets}});const modifyAds=function(mode){const processNode=function(node){if(mode==='hide'){safe.setAttribute.apply(node\,[randomAttribute\,'']);if(node.className){safe.setAttribute.apply(node\,['tempclass'\,node.className]);node.className=''}}else{safe.removeAttribute.apply(node\,[randomAttribute]);if(safe.getAttribute.apply(node\,['tempclass'])){node.className=safe.getAttribute.apply(node\,['tempclass']);safe.removeAttribute.apply(node\,['tempclass'])}}};safe.querySelectorAll.apply(document\,['a > img']).forEach(node=>{processNode(node.parentNode)});safe.querySelectorAll.apply(document\,['footer a[href*="smostafa" i]']).forEach(node=>{processNode(node.parentElement)});safe.querySelectorAll.apply(document\,['main article a']).forEach(node=>{if(node.innerText&&safe.String_replace.call(node.innerText\,/[^آ-ی]|ـ|[\u064B-\u065F\u0670]/g\,'')==='سیسبان'){processNode(node.parentElement)}})};const genericGet=function(target\,thisArg\,args){if(thisArg==='toString'){return target.toString.bind(target)};return Reflect.get(target\,thisArg\,args)};window.eval=new Proxy(window.eval\,{apply(target\,thisArg\,args){mainCode=args[0];args[0]=function(){};window.eval=target;return Reflect.apply(target\,thisArg\,args)}\,get:genericGet});const controller=new AbortController();const{signal}=controller;const goodEvents=['click'\,'transitionend'\,'scroll'\,'focus'];self.EventTarget.prototype.addEventListener=new Proxy(self.EventTarget.prototype.addEventListener\,{apply(target\,thisArg\,args){if(!safe.Array_includes.call(goodEvents\,args[0])){safe.Array_push.call(args\,{signal})};const originalHandler=args[1];const wrappedHandler=function(event){modifyAds('show');originalHandler(event);modifyAds('hide')};args[1]=wrappedHandler;return Reflect.apply(target\,thisArg\,args)}\,get:genericGet});window.setInterval=new Proxy(window.setInterval\,{apply(target\,thisArg\,args){const originalFunction=args[0];const wrappedFunction=function(){modifyAds('show');originalFunction();modifyAds('hide')};args[0]=wrappedFunction;return Reflect.apply(target\,thisArg\,args)}\,get:genericGet});window.setTimeout=new Proxy(window.setTimeout\,{apply(target\,thisArg\,args){const originalFunction=args[0];const wrappedFunction=function(){modifyAds('show');originalFunction();modifyAds('hide')};args[0]=wrappedFunction;return Reflect.apply(target\,thisArg\,args)}\,get:genericGet});const main=function(){modifyAds('hide');window.scrollTo(0\,document.body.scrollHeight);let originalScripts=[];const xhr=new XMLHttpRequest();xhr.open('GET'\,location.href\,false);xhr.onreadystatechange=function(){if(xhr.readyState===4&&xhr.status===200){const parser=new DOMParser();const doc=parser.parseFromString(xhr.responseText\,'text/html');const originalNodes=doc.querySelectorAll('script');const modifiedNodes=safe.querySelectorAll.apply(document\,['script']);for(let i=0;i<modifiedNodes.length;i++){const originalNode=originalNodes[i];const modifiedNode=modifiedNodes[i];modifiedNode.innerText=originalNode.innerText;originalScripts.push(originalNode.innerText)}}};xhr.send();intervalID=safe.setInterval.apply(window\,[function(){if(mainCode!==''){safe.clearInterval.apply(window\,[intervalID]);delete window.alreadyRun;modifyAds('show');document.createElement=safe.createElement;originalScripts.forEach(originalScript=>{try{window.eval(originalScript)}catch(e){}});window.eval(mainCode);controller.abort();safe.querySelectorAll.apply(document\,['main article a[target]']).forEach(node=>{safe.scrollIntoView.call(node)})}}\,1])};if(document.readyState!=='loading'){main()}else{safe.addEventListener.apply(document\,['DOMContentLoaded'\,function(){main()}])}})()};)
 ! soft98.ir,~forum.soft98.ir##+js(rmnt, aside, /(.*)[9][^\w]*[0][^\w]*[9][^\w]*[9][^\w]*[0][^\w]*[7][^\w]*[1][^\w]*[4][^\w]*[6][^\w]*[1][^\w]*(.*)/)
 ! soft98.ir,~forum.soft98.ir##+js(aeld, /contextmenu|mouseup|mousedown/, [native code])
 
@@ -215,9 +215,6 @@ investing.com##[id^="adNotification"]
 investing.com##+js(set, adNotificationDetected, false)
 investing.com##[class*="notification_notification"]
 investing.com##div[class] > .ad-blockers-section:upward(1)
-
-! https://github.com/AdguardTeam/AdguardFilters/issues/131648
-helpsupport.blog.fc2.com##+js(nostif, /adsbygoogle|getComputedStyle/)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/18825
 autosport.com,motorsport.com##+js(cookie-remover, 4db7D3t3ctNb)
@@ -234,29 +231,14 @@ chip.de##.DetailPage__Right-Column > div[style*="min-height:"]:first-child
 chip.de##.aab1
 chip.de#@##R1C2
 
-! images hidden
-twitter.com,twitter3e4tixl4xyajtrzo62zg5vztmjuricljdp2c5kshju4avyoid.onion#@#div[style^="transform"] > div > div:empty
-
-! https://github.com/easylist/easylist/issues/16535
-@@||imasdk.googleapis.com/js/sdkloader/ima3.js$domain=lemino.docomo.ne.jp
-
 ! https://github.com/uBlockOrigin/uAssets/issues/18775
 @@||cdn.optimizely.com/datafiles/*.json$xhr,domain=fedex.com
 ||optimizely.com^$third-party,badfilter
-
-! https://github.com/AdguardTeam/AdguardFilters/issues/155251
-tweetdeck.twitter.com#@?#div[role="dialog"] >.r-1oszu61 > div[class="css-1dbjc4n r-1pz39u2 r-16y2uox r-1wbh5a2"] > div[role="group"][class="css-1dbjc4n r-1awozwy r-1kihuf0 r-18u37iz r-1pi2tsx r-1777fci r-1pjcn9w r-xr3zp9 r-1xcajam r-ipm5af r-g6jmlv"]:has(div:not([data-testid="IntentLoginSheet_Login_Sheet"]) > div > div[role="button"] + div[role="button"])
 
 ! https://www.reddit.com/r/uBlockOrigin/comments/14nubub/
 *$script,3p,from=kimcartoon.*,badfilter
 *$script,3p,from=kimcartoon.*,to=~jquery.com,badfilter
 kimcartoon.*##+js(rmnt, script, Number.isSafeInteger)
-
-! https://github.com/uBlockOrigin/uAssets/discussions/17361#discussioncomment-6328782
-btcbitco.in,btcsatoshi.net,wiour.com##+js(acs, document.getElementById, ads)
-
-! https://github.com/AdguardTeam/AdguardFilters/issues/154732#issuecomment-1621761775
-||sf16-scmcdn-sg.ibytedtos.com^$badfilter
 
 ! https://github.com/uBlockOrigin/uAssets/discussions/17361#discussioncomment-6389663
 oko.sh##+js(rmnt, script, document.createElement)
@@ -281,3 +263,6 @@ cryptowidgets.net##^script[data-script='CallAdBlock-script']:has-text(adBlockDet
 ! https://github.com/uBlockOrigin/uAssets/discussions/17361#discussioncomment-6417241
 #@#.ad-box
 ~job.inshokuten.com,~sexgr.net,~webbtelescope.org##.ad-box:not(#ad-banner)
+
+! sidebar hidden
+ekitan.com#@#.sidebar-ad:not(.adsbygoogle)
