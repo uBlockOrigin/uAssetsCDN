@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Expires: 5 days
-! Last modified: Mon, 17 Jul 2023 11:25:10 +0000
+! Last modified: Mon, 17 Jul 2023 16:20:34 +0000
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 !
@@ -1912,15 +1912,6 @@ pornsocket.com##+js(set, _site_ads_ns, true)
 ||adspaces.ero-advertising.com/adspace/*$script,redirect=noopjs,domain=pornsocket.com
 ! http://forum.chip.de/rund-um-online/werbeterror-spendenaufruf-pic-upload-de-microsoft-alarm-u-google-benachr-1879678.html
 pic-upload.de##+js(aopw, Fingerprint2)
-@@||biography.com^$ghide
-||amazon-adsystem.com/*/apstag.js$script,redirect=noopjs,domain=player.biography.com
-||mssl.fwmrm.net/*/AdManager.js$script,redirect=noopjs,domain=player.biography.com
-biography.com##.m-header-ad
-biography.com##.m-sidebar-ad--slot
-biography.com##.m-in-content-ad-row
-biography.com##.m-fixedbottom-ad
-biography.com##.l-content-recommendation
-biography.com#@#.square-advertisment-module-second-column
 limerickleader.ie###abr_purchase_div
 pornhd.com##+js(aopr, hasAdBlock)
 pornhd.com,pornhdin.com##+js(aopr, ExoLoader.serve)
@@ -7215,12 +7206,12 @@ shrink.*##.banner
 @@||shrink.*^$ghide
 bigbtc.win##div[style^="width:300px;height:250px"]
 @@||onceagain.mooo.com/prebid.js$script,domain=bigbtc.win
-bigbtc.win##^script:has-text(block-adb)
+bigbtc.win##^script:has-text(/block-adb|-0x/)
 !#if !cap_html_filtering
-bigbtc.win##+js(rmnt, script, block-adb)
+bigbtc.win##+js(rmnt, script, /block-adb|-0x/)
 !#endif
 @@||bigbtc.win^$ghide
-bigbtc.win###block-adb-enabled
+bigbtc.win###block-adb-enabled, #block-add-enabled
 bigbtc.win###main, #ielement:style(display: block !important;)
 bigbtc.win##div[style] > div[id] > script[src^="//ads.themoneytizer.com"]:upward(3)
 ||watson.de/js/tisoomi.js$script,1p
@@ -16869,7 +16860,7 @@ pcworld.es##.stickyAdWrapper
 nowtolove.com.au##.page__content-header:style(height: 50px !important)
 @@||anime-king.com^$ghide
 ! cdnondemand.org variants
-/^https?:\/\/[a-z]{5,6}\.com\/script/[a-z]{1,8}\d?(\.min)?\.js$/$script,3p,match-case,domain=~edu|~gov
+/^https?:\/\/[a-z]{5,6}\.com\/script/[0-9a-z]{1,8}(\.min)?\.js$/$script,3p,match-case,domain=~edu|~gov
 /script/atg.js$3p
 /script/atga.js$3p
 /script/suv4r.js$3p
@@ -17328,6 +17319,8 @@ live.cricket.com.au##.ad-placement, .yes
 ##[data-ad-manager-id]:not([style$="left: -10000px !important; top: -1000px !important;"]):not(.adsbygoogle)
 #@#.ad-slot
 ##.ad-slot:not(.adsbox):not(.adsbygoogle)
+#@#.ad-300x250
+##.ad-300x250:not(.ads)
 ||doubleclick.net^$xhr,redirect=noop.txt
 ||media.fastclick.net/|$xhr,3p,redirect-rule=noop.txt
 ||ads.facebook.com/|$xhr,3p,redirect-rule=noop.txt
@@ -20697,7 +20690,7 @@ gourmetscans.net##.widget_custom_html ins:upward(.widget_custom_html)
 gourmetscans.net##+js(set-cookie, __gads, OK, , reload, 1)
 !#endif
 noor-book.com##+js(no-fetch-if, ads)
-theporndude.com##+js(nowoif)
+theporndude.com##+js(set, initWallpaperScript, noopFunc)
 theporndude.com##body::before
 @@||planhub.ca^$ghide
 planhub.ca##.banner_iframe
@@ -23076,3 +23069,4 @@ top16.net##+js(aopw, _pop)
 @@||onceagain.mooo.com/prebid.js$script,domain=xapcom.eu
 hecker.likesyou.org###heck-form > p a[href]:remove-attr(href)
 hecker.likesyou.org###heck-form > p a:style(cursor: pointer !important;)
+||i.imgur.com/f0FSNTu.jpg
