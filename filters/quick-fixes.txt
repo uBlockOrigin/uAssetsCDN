@@ -1,7 +1,7 @@
 ! Title: uBlock₀ filters – Quick fixes
 ! Description: Immediate, temporary filters to fix websites
 ! Expires: 12 hours
-! Last modified: Thu, 20 Jul 2023 18:21:03 +0000
+! Last modified: Fri, 21 Jul 2023 06:34:07 +0000
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! Forums: https://github.com/uBlockOrigin/uAssets/issues
@@ -127,6 +127,8 @@ dropgalaxy.com###vi-smartbanner
 dropgalaxy.com#@#[id^="div-gpt-ad-"]:style(max-height: 2px !important; max-width: 1px !important; opacity: 0 !important;)
 dropgalaxy.com##[id^="div-gpt-ad-"]:style(opacity: 0 !important; pointer-events: none !important;)
 .xyz/|$xhr,domain=dropgalaxy.com
+! https://github.com/uBlockOrigin/uAssets/discussions/18185#discussioncomment-6500194
+dropgalaxy.com##+js(trusted-set, document.visibilityState, visible)
 
 ! novel
 lightnovelpub.*,lightnovelspot.com,lightnovelworld.com,novelpub.com,webnovelpub.com##+js(nostif, =>)
@@ -268,9 +270,15 @@ youtube.com,youtubekids.com,youtube-nocookie.com#@#+js(json-prune, [].playerResp
 youtube.com,youtubekids.com,youtube-nocookie.com#@#+js(json-prune, auxiliaryUi.messageRenderers.enforcementMessageViewModel)
 youtube.com,youtubekids.com,youtube-nocookie.com#@#+js(set, ytInitialPlayerResponse.auxiliaryUi.messageRenderers.enforcementMessageViewModel, undefined)
 
+! https://www.reddit.com/r/uBlockOrigin/comments/154vtwy/getting_ads_on_youtube/jsu299l/
+youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, ytInitialPlayerResponse.playerAds, undefined)
+
 ! https://github.com/AdguardTeam/AdguardFilters/issues/156357
 indiatimes.com#@#div:has(> div[id^="div-gpt-ad-"])
 indiatimes.com##.nonAppView > div div[class]:not([id]) > div[id^="div-gpt-ad"]:upward(1)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/19050#issuecomment-1637489820
 @@||googletagmanager.com/gtag/js$domain=oko.sh
+
+! https://github.com/uBlockOrigin/uAssets/issues/19093
+/v2/tracking/*$badfilter

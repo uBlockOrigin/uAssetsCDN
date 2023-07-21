@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Expires: 5 days
-! Last modified: Thu, 20 Jul 2023 18:15:51 +0000
+! Last modified: Fri, 21 Jul 2023 06:42:28 +0000
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 !
@@ -29,7 +29,7 @@ youtube.com,youtubekids.com,youtube-nocookie.com##+js(json-prune, playerResponse
 ! youtube.com,youtubekids.com,youtube-nocookie.com##+js(json-prune, auxiliaryUi.messageRenderers.enforcementMessageViewModel)
 ! youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, ytInitialPlayerResponse.auxiliaryUi.messageRenderers.enforcementMessageViewModel, undefined)
 ! youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, ytInitialPlayerResponse.auxiliaryUi.messageRenderers.bkaEnforcementMessageViewModel, undefined)
-!
+youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, ytInitialPlayerResponse.playerAds, undefined)
 youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, ytInitialPlayerResponse.adPlacements, undefined)
 youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, playerResponse.adPlacements, undefined)
 youtube.com##.ytlr-horizontal-list-renderer__items > .yt-virtual-list__container > .yt-virtual-list__item--visible.yt-virtual-list__item--selected.yt-virtual-list__item:has-text(Ad)
@@ -18388,11 +18388,11 @@ jardima.com##.g1-slideup-wrap
 ||secure.quantserve.com^$object,redirect-rule=noopjs
 ||amazon-adsystem.com^$object,redirect-rule=noopjs
 fox.com##+js(no-xhr-if, googlesyndication)
-fox.com##+js(json-prune, ads)
-fox.com##+js(m3u-prune, /is_ad|ohash=\w{300}/, .m3u8)
+fox.com,foxsports.com##+js(json-prune, ads)
+fox.com,foxsports.com##+js(m3u-prune, /is_ad|ohash=\w{300}/, .m3u8)
 !#if ext_devbuild
-fox.com#@#+js(m3u-prune, /is_ad|ohash=\w{300}/, .m3u8)
-fox.com##+js(m3u-prune, /\,ad\n.+?(?=#UPLYNK-SEGMENT)/gm, .m3u8)
+fox.com,foxsports.com#@#+js(m3u-prune, /is_ad|ohash=\w{300}/, .m3u8)
+fox.com,foxsports.com##+js(m3u-prune, /\,ad\n.+?(?=#UPLYNK-SEGMENT)/gm, .m3u8)
 !#endif
 ! movieswatch24.pk,watchonlinemovies15.pk popup
 movieswatch24.pk,watchonlinemovies15.pk##+js(nowoif)
@@ -21878,6 +21878,7 @@ welovecrypto.xyz##+js(no-fetch-if, googlesyndication)
 welovecrypto.xyz###wpsafe-generate, #wpsafe-link:style(display: block !important;)
 hentaikai.com##+js(acs, document.createElement, script.src)
 ! aliexpress.com##div[data-spm="main"] > a[class*="--container--"] span[class*="--ad--"]:upward(div[data-spm="main"] > a[class*="--container--"])
+aliexpress.com##a.search-card-item[href*="&aem_p4p_detail="]:has-text(/^AD/)
 mephimtv.cc##+js(m3u-prune, /#EXT-X-DISCONTINUITY.{1\,100}#EXT-X-DISCONTINUITY/gm, mixed.m3u8)
 ! dangerousminds.net antiadb
 ||htlbid.com/v3/dangerousminds.net/htlbid.js$script,redirect=noopjs,domain=dangerousminds.net
@@ -23104,3 +23105,11 @@ tobys.dk##+js(aopr, checkAds)
 tobys.dk#@#.abMessage
 automoto.it##+js(rmnt, script, app_checkext)
 automoto.it##+js(no-fetch-if, googlesyndication)
+sekaikomik.bio##+js(nowoif)
+sekaikomik.bio##^script:has-text(shown_at)
+!#if !cap_html_filtering
+sekaikomik.bio##+js(rmnt, script, shown_at)
+!#endif
+nyaa.iss.ink##+js(nostif, popUnder)
+/?zone=$script,3p,domain=nyaa.iss.ink
+||dawirax.com^
