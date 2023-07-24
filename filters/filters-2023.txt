@@ -1,6 +1,6 @@
 ! Title: uBlock₀ filters
 ! Description: Filters optimized for uBlock, to be used along EasyList
-! Last modified: Mon, 24 Jul 2023 01:30:45 +0000
+! Last modified: Mon, 24 Jul 2023 06:43:21 +0000
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! New filters from January 2023 to ->
@@ -59,6 +59,8 @@ dmcdn.xyz,dmcdn2.xyz##+js(nowoif)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/16240
 ddwloclawek.pl##+js(set, questpassGuard, noopFunc)
+ddwloclawek.pl##+js(set, isAdBlockerEnabled, false)
+||ddwloclawek.pl/pl/js/detect-adblock/$script,1p,redirect=noopjs
 
 ! https://github.com/uBlockOrigin/uAssets/issues/16253
 ! https://github.com/uBlockOrigin/uAssets/issues/16305
@@ -3107,6 +3109,10 @@ tonanmedia.my.id##+js(set, showAds, true)
 batchkun.com##+js(aopw, auto_safelink)
 koenime.top,lendrive.web.id,nimegami.id##+js(aopr, btoa)
 
+! adikanime anti-adb
+@@prebid.js$script,domain=adikhealth.xyz|bisnis.adigenius.com|mangindo.xyz|adikdrive.my.id
+@@*$ghide,domain=adikhealth.xyz|bisnis.adigenius.com|mangindo.xyz|adikdrive.my.id
+
 ! skiplink.me skip countdown
 ||google.com/recaptcha/api.js$script,domain=skiplink.me,important
 skiplink.me,~go.skiplink.me##+js(nano-sib)
@@ -3254,10 +3260,6 @@ actvid.com##+js(rmnt, script, HTMLAllCollection)
 ! https://github.com/AdguardTeam/AdguardFilters/issues/155031
 ! https://bunkrr.su/v/tPXzp5TtVyKyP popup
 ! https://www.homemoviestube.com/
-bunkrr.*,homemoviestube.com,netfapx.com##^script:has-text(WebAssembly)
-!#if !cap_html_filtering
-bunkrr.*,homemoviestube.com,netfapx.com##+js(acs, WebAssembly, _0x)
-!#endif
 ||obmoswarwc.com^
 ||xhykikamxas.com^
 
@@ -3424,10 +3426,6 @@ nasonga.co.ke##[id^="google_ads_iframe"]:remove()
 ! https://github.com/uBlockOrigin/uAssets/issues/18821
 faucettronn.click##+js(set, detectAdblock, noopFunc)
 
-! https://github.com/uBlockOrigin/uAssets/issues/18882
-komikmanhwa.me##+js(rmnt, script, WebAssembly)
-||arqrzyowta.com^
-
 ! https://github.com/uBlockOrigin/uAssets/issues/18885
 ||imasdk.googleapis.com/js/sdkloader/ima3$script,redirect-rule=google-ima.js,domain=nick.com
 
@@ -3495,8 +3493,9 @@ moviesapi.club##+js(nowoif)
 ~job.inshokuten.com,~sexgr.net,~u-yas.dev,~webbtelescope.org##.ad-box:not(#ad-banner)
 
 ! Clickadu reinjection
-agupulsa.xyz,klmanga.*,lovingsiren.com,manga1001.*,mangarawjp.*,mesex.pro,syosetu.*,vlxyz.tv,xanimeporn.com##+js(acs, WebAssembly, _0x)
+agupulsa.xyz,bunkrr.*,homemoviestube.com,klmanga.*,komikmanhwa.me,lovingsiren.com,manga1001.*,mangarawjp.*,mesex.pro,netfapx.com,syosetu.*,vlxyz.tv,xanimeporn.com##+js(acs, WebAssembly, _0x)
 /aas/r45d/vki/*$script,3p,redirect=noop.js
+||arqrzyowta.com^
 
 ! https://github.com/uBlockOrigin/uAssets/issues/18877
 gaminginfos.com##+js(rmnt, script, /userAgent|adb|htmls/)
@@ -3688,3 +3687,13 @@ codelivly.com##^script:has-text(clientHeight)
 !#if !cap_html_filtering
 codelivly.com##+js(rmnt, script, clientHeight)
 !#endif
+
+! https://github.com/uBlockOrigin/uAssets/issues/19146
+autotrader.com##.sticky-container
+autotrader.com##[data-cmp="alphaShowcase"][data-qaid="cntnr-alpha"]
+autotrader.com##div[data-qaid="cntnr-listings"] > .row > div:not(.display-flex)
+autotrader.com##div[data-qaid="cntnr-listings"] > .row > .display-flex > .bg-periwinkle:upward(1)
+
+! https://www.reddit.com/r/uBlockOrigin/comments/157utus/articles_on_mindbodygreencom_wont_load/
+www.mindbodygreen.com##div > section > .network-ad:upward(2)
+www.mindbodygreen.com##aside:style(background: transparent !important;)
