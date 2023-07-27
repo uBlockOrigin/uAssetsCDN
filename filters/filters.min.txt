@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Expires: 5 days
-! Last modified: Wed, 26 Jul 2023 19:40:07 +0000
+! Last modified: Thu, 27 Jul 2023 12:31:05 +0000
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 !
@@ -5133,7 +5133,7 @@ hulu.com##+js(set, Object.prototype.isAdPeriod, falseFunc)
 hulu.com###banner-ad-container
 hulu.com##.ad-choices
 hulu.com##+js(json-prune, breaks pause_ads video_metadata.end_credits_time, pause_ads)
-hulu.com##+js(xml-prune, xpath(//*[name()="MPD"]/@mediaPresentationDuration | //*[name()="Period"][starts-with(@id\, "Ad")] | //*[name()="Period"][starts-with(@id\, "ad")] | //*[name()="Period"]/@start), Period[id^="Ad"i], .mpd)
+hulu.com##+js(xml-prune, xpath(//*[name()="MPD"]/@mediaPresentationDuration | //*[name()="Period"][.//*[name()="BaseURL" and contains(text()\,'/ads-')]]), Period[id^="Ad"i], .mpd)
 @@||adserver.iprom.net/adserver7$xhr,domain=rtl.hr
 myjest.com##+js(nosiif, _$, 12345)
 *$frame,domain=9ig.de,3p
@@ -14066,7 +14066,7 @@ pornojenny.com###wa_10
 pornojenny.com##[href^="https://www.handy-sextreffen.info/"]:upward(.grid_box)
 mundowuxia.com##+js(aopw, _pop)
 ! kickass sites
-*$doc,csp=script-src *,domain=~kat.at|~kat.rip|~kickass.codes|~kickass.website|kat.*|katbay.*|kickass.*|kickasshydra.*|kickasskat.*|kickass2.*|kickasstorrents.*|kat2.*|kattracker.*|thekat.*|thekickass.*|kickassz.*|kickasstorrents2.*|topkickass.*|kickassgo.*|kkickass.*|kkat.*|kickasst.*|kick4ss.*|kickassbay.*|torrentkat.*|kickassuk.*|torrentskickass.*|kickasspk.*|kickasstrusty.*|katkickass.*|kickassindia.*|kickass-usa.*|kickassaustralia.*|kickassdb.*|kathydra.*|kickassminds.*|katkickass.*|kickassunlocked.*|kickassmovies.*|kickassfull.*|bigkickass.*|kickasstracker.*|katfreak.*
+*$doc,csp=script-src *,domain=~kat.at|~kat.rip|~kickass.codes|~kickass.website|kat.*|katbay.*|kickass.*|kickasshydra.*|kickasskat.*|kickass2.*|kat2.*|kattracker.*|thekat.*|thekickass.*|kickassz.*|kickasstorrents2.*|topkickass.*|kickassgo.*|kkickass.*|kkat.*|kickasst.*|kick4ss.*|kickassbay.*|torrentkat.*|kickassuk.*|torrentskickass.*|kickasspk.*|kickasstrusty.*|katkickass.*|kickassindia.*|kickass-usa.*|kickassaustralia.*|kickassdb.*|kathydra.*|kickassminds.*|katkickass.*|kickassunlocked.*|kickassmovies.*|kickassfull.*|bigkickass.*|kickasstracker.*|katfreak.*
 *$script,1p,domain=~kat.am|~kat.at|~kat.rip|~kickass.codes|~kickass.website|kat.*|katbay.*|kickass.*|kickasshydra.*|kickasskat.*|kickass2.*|kickasstorrents.*|kat2.*|kattracker.*|thekat.*|thekickass.*|kickassz.*|kickasstorrents2.*|topkickass.*|kickassgo.*|kkickass.*|kkat.*|kickasst.*|kick4ss.*|kickassbay.*|torrentkat.*|kickassuk.*|torrentskickass.*|kickasspk.*|kickasstrusty.*|katkickass.*|kickassindia.*|kickass-usa.*|kickassaustralia.*|kickassdb.*|kathydra.*|kickassminds.*|katkickass.*|kickassunlocked.*|kickassmovies.*|kickassfull.*|bigkickass.*|kickasstracker.*|katfreak.*
 kat.*,kickass.*,kickass2.*,kickasstorrents.*,kat2.*,kattracker.*,thekat.*,thekickass.*,kickassz.*,kickasstorrents2.*,topkickass.*,kickassgo.*,kkickass.*,kkat.*,kickasst.*,kick4ss.*,katbay.*,kickasshydra.*,kickasskat.*,kickassbay.*,torrentkat.*,kickassuk.*,torrentskickass.*,kickasspk.*,kickasstrusty.*,katkickass.*,kickassindia.*,kickass-usa.*,kickassaustralia.*,kickassdb.*,kathydra.*,kickassminds.*,katkickass.*,kickassunlocked.*,kickassmovies.*,kickassfull.*,bigkickass.*,kickasstracker.*,katfreak.*##[style*="decoration"]:not([style^="width"])
 kat.*,katbay.*,kickass.*,kickasshydra.*,kickasskat.*,kickass2.*,kickasstorrents.*,kat2.*,kattracker.*,thekat.*,thekickass.*,kickassz.*,kickasstorrents2.*,topkickass.*,kickassgo.*,kkickass.*,kkat.*,kickasst.*,kick4ss.*##[href="/k.php?q=q"]
@@ -17050,7 +17050,6 @@ itdmusics.com##+js(acs, eval, replace)
 ||prplads.com^$3p
 @@||itopmusic.org^$ghide
 itopmusic.org##+js(aopw, _pop)
-/banner.gif?$image,redirect-rule=1x1.gif
 bullfrag.com##+js(acs, eval, replace)
 pdfaid.com##+js(nostif, offsetHeight)
 persianhive.com##+js(no-xhr-if, adsbygoogle)
@@ -23129,3 +23128,4 @@ tchatche.com##+js(set, feedBack.showAffilaePromo, noopFunc)
 skill4ltu.eu##+js(aeld, load, adsbygoogle)
 194.110.247.242##+js(acs, eval, replace)
 194.110.247.242##.gmr-bannerpopup
+sotwe.com##.tweet-card .v-responsive.media-carousel-image .v-responsive__content img[alt]:not([alt*="https://t.co/"]):upward(.tweet-card)
