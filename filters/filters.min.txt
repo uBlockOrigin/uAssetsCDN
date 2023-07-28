@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Expires: 5 days
-! Last modified: Fri, 28 Jul 2023 01:36:09 +0000
+! Last modified: Fri, 28 Jul 2023 06:09:41 +0000
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 !
@@ -2290,13 +2290,6 @@ capshd.*,rojadirectatvlive.*##+js(nowoif)
 ekstrabladet.dk##.eb-placement
 webnovel.com##+js(set, adblockSuspected, false)
 @@||imasdk.googleapis.com/js/sdkloader/ima3.js$script,domain=webnovel.com
-! nbc anti adb https://forums.lanik.us/viewtopic.php?p=131769#p131769
-@@||doubleclick.net^$image,domain=nbc.com
-@@||googlesyndication.com^$image,domain=nbc.com
-player.theplatform.com##+js(disable-newtab-links)
-! breakage https://github.com/uBlockOrigin/uAssets/issues/16216
-!||player.theplatform.com^$frame,removeparam=params,domain=nbc.com
-player.theplatform.com##+js(m3u-prune, tvessaiprod.nbcuni.com, /theplatform\.com\/.*?\.m3u8/)
 @@||totaldebrid.org^$ghide
 *.gif#$image,redirect=1x1.gif,domain=totaldebrid.org
 totaldebrid.*##+js(nostif, nextFunction, 250)
@@ -3378,7 +3371,7 @@ igg-games.com##[href^="https://tm-offers"]
 @@||igg-games.com^$ghide
 igg-games.com#@#.uk-panel.widget-text
 igg-games.com##.uk-panel.widget-text:style(height: 0px !important; visibility: collapse;)
-igg-games.com##p[style] > a[href$=".html"]
+igg-games.com##p[style] > a[href^="https://igg-games.com/"]
 ||igg-games.com/*.gif$image
 pcgamestorrents.com##[href*="banner"]
 igg-games.g3g.ink##[href$=".php"]
@@ -5132,7 +5125,8 @@ hulu.com##+js(set, Object.prototype.isAdPeriod, falseFunc)
 hulu.com###banner-ad-container
 hulu.com##.ad-choices
 hulu.com##+js(json-prune, breaks pause_ads video_metadata.end_credits_time, pause_ads)
-hulu.com##+js(xml-prune, xpath(//*[name()="MPD"]/@mediaPresentationDuration | //*[name()="Period"][.//*[name()="BaseURL" and contains(text()\,'/ads-')]]), Period[id^="Ad"i], .mpd)
+hulu.com##+js(json-prune, breaks pause_ads video_metadata.end_credits_time, breaks)
+hulu.com##+js(xml-prune, xpath(//*[name()="MPD"]/@mediaPresentationDuration | //*[name()="Period"][.//*[name()="BaseURL" and contains(text()\,'/ads-')]] | //*[name()="Period"]/@start), Period[id^="Ad"i], .mpd)
 @@||adserver.iprom.net/adserver7$xhr,domain=rtl.hr
 myjest.com##+js(nosiif, _$, 12345)
 *$frame,domain=9ig.de,3p
@@ -8780,7 +8774,7 @@ work.ink##.waldo-display-unit
 *$popup,3p,domain=work.ink,to=~discord.*|~google.com|~workink.*|~youtu.be|~youtube.com
 workink.click##+js(nowoif, !direct)
 work.ink##+js(nosiif, a0b)
-work.ink##+js(no-fetch-if, /outbrain|criteo|thisiswaldo/)
+work.ink##+js(no-fetch-if, /outbrain|criteo|thisiswaldo|media\.net/)
 work.ink##body > div > a#link:upward(body > div)
 work.ink##.opera-container
 ||firefaucet.win/*.gif$image
@@ -11875,11 +11869,11 @@ nulleb.com##+js(acs, eval, replace)
 nulleb.com##+js(nano-sib, runDownload)
 nulleb.com##+js(nostif, showModal)
 *$xhr,redirect-rule=nooptext,domain=nulleb.com
-voe.sx,housecardsummerbutton.com,bigclatterhomesguideservice.com,metagnathtuggers.com,uptodatefinishconference.com,uptodatefinishconferenceroom.com,tinycat-voe-fashion.com##+js(acs, google)
-voe.sx,housecardsummerbutton.com,bigclatterhomesguideservice.com,metagnathtuggers.com,uptodatefinishconference.com,uptodatefinishconferenceroom.com,tinycat-voe-fashion.com##+js(aost, EventTarget.prototype.addEventListener, stackDepth:3)
-voe.sx,housecardsummerbutton.com,bigclatterhomesguideservice.com,metagnathtuggers.com,uptodatefinishconference.com,uptodatefinishconferenceroom.com,tinycat-voe-fashion.com##+js(acs, EventTarget.prototype.addEventListener, /\^http|test/)
-voe.sx,housecardsummerbutton.com,bigclatterhomesguideservice.com,metagnathtuggers.com,uptodatefinishconference.com,uptodatefinishconferenceroom.com,tinycat-voe-fashion.com##+js(acs, $, fadeIn)
-voe.sx,housecardsummerbutton.com,bigclatterhomesguideservice.com,metagnathtuggers.com,uptodatefinishconference.com,uptodatefinishconferenceroom.com,tinycat-voe-fashion.com##+js(nowebrtc)
+voe.sx,housecardsummerbutton.com,bigclatterhomesguideservice.com,uptodatefinishconference.com,uptodatefinishconferenceroom.com,tinycat-voe-fashion.com##+js(acs, google)
+voe.sx,housecardsummerbutton.com,bigclatterhomesguideservice.com,uptodatefinishconference.com,uptodatefinishconferenceroom.com,tinycat-voe-fashion.com##+js(aost, EventTarget.prototype.addEventListener, stackDepth:3)
+voe.sx,housecardsummerbutton.com,bigclatterhomesguideservice.com,uptodatefinishconference.com,uptodatefinishconferenceroom.com,tinycat-voe-fashion.com##+js(acs, EventTarget.prototype.addEventListener, /\^http|test/)
+voe.sx,housecardsummerbutton.com,bigclatterhomesguideservice.com,uptodatefinishconference.com,uptodatefinishconferenceroom.com,tinycat-voe-fashion.com##+js(acs, $, fadeIn)
+voe.sx,housecardsummerbutton.com,bigclatterhomesguideservice.com,uptodatefinishconference.com,uptodatefinishconferenceroom.com,tinycat-voe-fashion.com##+js(nowebrtc)
 voe.sx,housecardsummerbutton.com,bigclatterhomesguideservice.com,uptodatefinishconference.com,uptodatefinishconferenceroom.com,tinycat-voe-fashion.com##+js(set, console.clear, undefined)
 voe.sx##a[href^="https://glixaing.com/"]
 @@download=$popup,3p,domain=voe.sx
@@ -23130,3 +23124,13 @@ sotwe.com##.tweet-card .v-responsive.media-carousel-image .v-responsive__content
 ||d2zue0pgsssbc6.cloudfront.net/j/*-prod.js$script,3p
 *$frame,redirect-rule=noopframe,domain=megaup.net
 megaup.net##+js(rpnt, script, /;}\$\S+?:/, ;})
+player.theplatform.com##+js(disable-newtab-links)
+! breakage https://github.com/uBlockOrigin/uAssets/issues/16216
+!||player.theplatform.com^$frame,removeparam=params,domain=nbc.com
+player.theplatform.com##+js(m3u-prune, tvessaiprod.nbcuni.com, /theplatform\.com\/.*?\.m3u8/)
+@@||assets.adobedtm.com/extensions/*/AppMeasurement.min.js$script,domain=www.nbc.com
+nbc.com##+js(json-prune, avails)
+||designparty.sx/advertises/
+||kukaj.io/ooo/
+kukaj.io###gldprr
+kukaj.io##+js(nowoif)
