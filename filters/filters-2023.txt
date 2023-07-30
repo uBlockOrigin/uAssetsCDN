@@ -1,6 +1,6 @@
 ! Title: uBlock₀ filters
 ! Description: Filters optimized for uBlock, to be used along EasyList
-! Last modified: Sun, 30 Jul 2023 06:46:17 +0000
+! Last modified: Sun, 30 Jul 2023 11:27:25 +0000
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! New filters from January 2023 to ->
@@ -702,7 +702,7 @@ esopress.com##.adsbyvli:style(height: 0px !important;)
 /\/assets\/jquery\/jquery-\d\.\d\.(?:\d\.)?min\.js\?(?:v=2)?&?type=(?:adult|mainstream)$/$script,1p
 /asset/angular.min.js?t=$xhr,1p
 /asset/jquery/slim-3.2.min.js?*&t=$xhr,1p
-cloudrls.com,vidgo.top##+js(aopr, __Y)
+cloudrls.com,streamvid.top,vidgo.top##+js(aopr, __Y)
 
 ! https://www.reddit.com/r/uBlockOrigin/comments/110h4ye/
 wrestlinginc.com##+js(set, admiral, noopFunc)
@@ -2110,7 +2110,8 @@ tempumail.com##+js(nostif, detector)
 /js/friendbuy.min.js$script,redirect-rule=noopjs,domain=coursera.org
 
 ! https://github.com/AdguardTeam/AdguardFilters/issues/149595
-||zefoy.com/assets/bdac2cde6010f9503308249a0d7e9e54.js$redirect=noopjs
+zefoy.com##^script[onerror^="$('body')"]
+||zefoy.com/assets/30e57f8747e1a8398943ed27e94eceea.js$redirect=noopjs
 
 ! https://github.com/AdguardTeam/AdguardFilters/issues/140616
 alludemycourses.com##+js(aeld, DOMContentLoaded, adsBlocked)
@@ -2296,8 +2297,6 @@ vidello.net##+js(rmnt, script, popUnder)
 !#endif
 ||camcaps.to/vsx.js
 ||green4762.com^
-/vtu_max.js$domain=vtbe.net|vtplayer.net
-/vtu_mini.js$domain=vtbe.net|vtplayer.net
 
 ! https://github.com/AdguardTeam/AdguardFilters/issues/150286
 *$xhr,3p,redirect-rule=nooptext,domain=uservideo.xyz
@@ -2648,7 +2647,8 @@ idoitmyself.xyz##+js(rpnt, script, /devtoolsDetector\.launch\(\)\;/)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/18202
 ||acacdn.com^$script,redirect-rule=noopjs,domain=vgembed.com
-vgembed.com##body > a[id][href^="//"]
+vgembed.com##body > a[target="_blank"]
+vgembed.com##+js(nostif, afterOpen)
 
 ! https://www.jpvhub.com/ popunder on DL
 ||compassionatecheek.com^$popunder
@@ -3438,7 +3438,7 @@ moviesapi.club##+js(nowoif)
 ~job.inshokuten.com,~sexgr.net,~u-yas.dev,~webbtelescope.org##.ad-box:not(#ad-banner)
 
 ! Clickadu reinjection
-agupulsa.xyz,bunkrr.*,homemoviestube.com,klmanga.*,komikmanhwa.me,lovingsiren.com,manga1001.*,mangarawjp.*,mesex.pro,netfapx.com,syosetu.*,vlxyz.tv,xanimeporn.com##+js(acs, WebAssembly, _0x)
+agupulsa.xyz,bunkrr.*,homemoviestube.com,klmanga.*,komikmanhwa.me,lovingsiren.com,manga1001.*,mangaraw.*,mangarawjp.*,mesex.pro,netfapx.com,syosetu.*,vlxyz.tv,xanimeporn.com##+js(acs, WebAssembly, _0x)
 /aas/r45d/vki/*$script,3p,redirect=noop.js
 ||arqrzyowta.com^
 
@@ -3494,7 +3494,8 @@ asura.gg,asurascans.com##.serieslist > ul > li:has-text((AD))
 *$xhr,script,redirect-rule=empty,domain=4khd.com
 
 ! https://github.com/uBlockOrigin/uAssets/issues/19034
-svethardware.cz##+js(set, rabLimit, -1)
+! https://github.com/AdguardTeam/AdguardFilters/issues/157695
+digimanie.cz,svethardware.cz##+js(set, rabLimit, -1)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/19036
 romsmania.games##body:style(padding-bottom: 0 !important;)
@@ -3713,7 +3714,7 @@ adultdeepfakes.com##+js(rpnt, script, adv_, , condition, flashvars)
 ##.fp-player > div[style="position: absolute; inset: 0px; overflow: hidden; z-index: 160; background: transparent; display: block;"]
 
 ! https://github.com/uBlockOrigin/uAssets/discussions/17361#discussioncomment-6582008
-||bmcdn5.com^$script,redirect-rule=noop.js
+||bmcdn5.com^$script,redirect=noop.js
 
 ! https://github.com/NanoMeow/QuickReports/issues/3179
 money.cnn.com##section.column:has(> #moneySponsors)
@@ -3730,3 +3731,20 @@ cnn.com##.ad-slot-header__wrapper:style(display: none !important; top: 0 !import
 
 ! https://github.com/bogachenko/fuckfuckadblock/issues/446
 /adblocker.js$domain=gameophobias.com|hindimearticles.net|solution-hub.com
+
+! https://github.com/bogachenko/fuckfuckadblock/issues/440
+@@||advnetwork.net/advertising/*/advertising.js$xhr,domain=bsshotel.it
+
+! https://github.com/uBlockOrigin/uAssets/issues/19223
+stuff.tv##.wp-block-kelseymedia-blocks-block-squirrel-embed
+
+! https://github.com/AdguardTeam/AdguardFilters/issues/157701
+livebasah.eu.org##+js(acs, $, xepo_ads)
+
+! https://github.com/AdguardTeam/AdguardFilters/issues/157742
+yalla-shoots.tv#@##ads_top
+yalla-shoots.tv#@##content-left-ad
+yalla-shoots.tv#@##footer_ad_modules
+yalla-shoots.tv#@##google_ad_inline
+yalla-shoots.tv#@##top_wide_ad
+yalla-shoots.tv##.demand-supply
