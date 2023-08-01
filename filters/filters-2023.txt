@@ -1,6 +1,6 @@
 ! Title: uBlock₀ filters
 ! Description: Filters optimized for uBlock, to be used along EasyList
-! Last modified: Mon, 31 Jul 2023 17:18:54 +0000
+! Last modified: Tue, 01 Aug 2023 12:27:44 +0000
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! New filters from January 2023 to ->
@@ -2113,8 +2113,7 @@ tempumail.com##+js(nostif, detector)
 /js/friendbuy.min.js$script,redirect-rule=noopjs,domain=coursera.org
 
 ! https://github.com/AdguardTeam/AdguardFilters/issues/149595
-zefoy.com##^script[onerror^="$('body')"]
-||zefoy.com/assets/30e57f8747e1a8398943ed27e94eceea.js$redirect=noopjs
+zefoy.com##+js(aost, atob, /assets.+?:3:1/)
 
 ! https://github.com/AdguardTeam/AdguardFilters/issues/140616
 alludemycourses.com##+js(aeld, DOMContentLoaded, adsBlocked)
@@ -2170,7 +2169,8 @@ adultcomixxx.com##.adsnative
 
 ! https://github.com/uBlockOrigin/uAssets/issues/17876
 ! https://github.com/uBlockOrigin/uAssets/issues/17899
-||bytro.com^$image,domain=supremacy1914.*
+! https://github.com/uBlockOrigin/uAssets/issues/19249
+! ||bytro.com^$image,domain=supremacy1914.*
 
 ! https://oneupload. to popups
 *$script,3p,denyallow=cloudflare.com|fastly.net|jwpcdn.com,domain=oneupload.to
@@ -3783,3 +3783,18 @@ bitzite.com##div[id^="countdownText"]
 ! https://github.com/uBlockOrigin/uAssets/issues/19237
 lordchannel.com##+js(nostif, sadbl)
 ||nxt-psh.com^$script,3p
+
+! https://github.com/uBlockOrigin/uAssets/issues/19235
+apkupload.in##+js(no-fetch-if, ads)
+apkupload.in,dailynew.online###wpsafe-generate:style(display: block !important)
+apkupload.in,dailynew.online###wpsafe-wait1
+apkupload.in,dailynew.online###wpsafe-link:style(display: block !important)
+apkupload.in,dailynew.online###wpsafe-wait2
+
+! https://ryuugames. com/eng-knowledge-fever-uncensored/ download timer
+ryuugames.com###wpsafe-link:style(display: block !important;)
+ryuugames.com###wpsafe-wait1,#wpsafe-link:others()
+
+! https://github.com/uBlockOrigin/uAssets/issues/19245
+schools.snap.app##div.ant-modal-root:has(img[alt="Advertisement"])
+schools.snap.app##body:style(overflow: auto !important;)
