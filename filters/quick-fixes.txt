@@ -1,14 +1,14 @@
 ! Title: uBlock₀ filters – Quick fixes
 ! Description: Immediate, temporary filters to fix websites
 ! Expires: 12 hours
-! Last modified: Wed, 02 Aug 2023 10:17:59 +0000
+! Last modified: Wed, 02 Aug 2023 16:57:05 +0000
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! Forums: https://github.com/uBlockOrigin/uAssets/issues
 
 ! aternos anti adb
 aternos.org##.header-center:style(margin-top:-5000px !important;)
-aternos.org##.sidebar:style(width: 1.745px !important; padding: 0.0053px !important;)
+aternos.org##.sidebar:style(width: 1.745px !important; padding: 0.0050em !important;)
 aternos.org##.ad-dfp:style(min-height: 0.1485mm !important; height: 0.1485mm !important;)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/11152
@@ -30,8 +30,8 @@ ylilauta.org##iframe.a.a:style(visibility:hidden!important;position:absolute!imp
 ylilauta.org##+js(spoof-css, iframe.a, position, static, visibility, visible)
 !#endif
 !#if !env_firefox
-ylilauta.org##iframe.a.a:style(visibility:hidden!important;width:initial!important)
-ylilauta.org##+js(spoof-css, iframe.a, visibility, visible)
+ylilauta.org##iframe.a.a:style(opacity: 0 !important; pointer-events: none !important;)
+ylilauta.org##+js(spoof-css, iframe.a, opacity, 1, pointer-events, auto)
 !#endif
 
 ! pixsera
@@ -157,6 +157,8 @@ youtube.com,youtubekids.com,youtube-nocookie.com##+js(json-prune, playerResponse
 ! https://www.reddit.com/r/uBlockOrigin/comments/15ctytf/
 youtube.com,youtubekids.com,youtube-nocookie.com##+js(json-prune, playerResponse.adPlacements playerResponse.playerAds adPlacements playerAds, playabilityStatus.liveStreamability)
 youtube.com,youtubekids.com,youtube-nocookie.com##+js(json-prune, playerResponse.adPlacements playerResponse.playerAds adPlacements playerAds, playerResponse.playabilityStatus.liveStreamability)
+! https://github.com/uBlockOrigin/uBlock-discussions/discussions/789#discussioncomment-6617546
+www.youtube.com,www.youtubekids.com,www.youtube-nocookie.com##+js(aost, JSON.parse, /doEnqueue.+?polymer/)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/18476
 ! VOE sites
@@ -192,12 +194,6 @@ client.falixnodes.net##html:not([class]) #ad_unit
 *gdpr_consent$3p,image,removeparam,domain=client.falixnodes.net
 ||pagead2.googlesyndication.com^$xhr,important,domain=client.falixnodes.net
 
-! https://www.reddit.com/r/uBlockOrigin/comments/158nvca/not_blocking_hulu_ads/jti29qk/
-hulu.com##+js(json-prune, breaks pause_ads video_metadata.end_credits_time, breaks)
-hulu.com##+js(xml-prune, xpath(//*[name()="MPD"]/@mediaPresentationDuration | //*[name()="Period"][.//*[name()="BaseURL" and contains(text()\,'/ads-')]] | //*[name()="Period"]/@start), Period[id^="Ad"i], .mpd)
-hulu.com#@#+js(xml-prune, xpath(//*[name()="MPD"]/@mediaPresentationDuration | //*[name()="Period"][.//*[name()="BaseURL" and contains(text()\,'/ads-')]]), Period[id^="Ad"i], .mpd)
-hulu.com#@#+js(xml-prune, xpath(//*[name()="MPD"]/@mediaPresentationDuration | //*[name()="Period"][starts-with(@id\, "Ad")] | //*[name()="Period"][starts-with(@id\, "ad")] | //*[name()="Period"]/@start), Period[id^="Ad"i], .mpd)
-
 ! https://github.com/uBlockOrigin/uAssets/issues/16083
 @@||dragontea.ink^$ghide
 dragontea.ink##+js(ra, style, body > div, stay)
@@ -225,9 +221,6 @@ chip.de##a[href*="https://schneesommer.de/intern/dl/?url="] > img[src*="https://
 chip.de##.is-hidden-md[style*="min-height"] + div[class] > a[href*="/intern/dl/?url="] > img:upward(2)
 ||free.webcompanion.com/minime/de/index.php?partner=*&campaign=$popup,doc
 ||schneesommer.de^$image,3p
-
-! xh
-||cdn13.com/*.mp4?cdn_creation_time$badfilter
 
 ! https://github.com/easylist/easylist/issues/16874
 ||rebrand.ly^$badfilter
@@ -264,3 +257,9 @@ igg-games.com##div[style^="margin"] > a[href^="https://igg-games.com/"]
 ! https://github.com/easylist/easylist/commit/e37be6fb32ddb4903087210ab566ce1f6d9bf2d7
 welovemanga.one##+js(aopw, document.ready)
 welovemanga.one##.popup-wrap
+
+! https://github.com/easylist/easylist/commit/9359913bdfed8d865a09be8989f5eb434a06cd10
+sdf-event.sakura.ne.jp#@##ad_1
+sdf-event.sakura.ne.jp#@##ad_2
+sdf-event.sakura.ne.jp#@##ad_3
+sdf-event.sakura.ne.jp#@##ad_4
