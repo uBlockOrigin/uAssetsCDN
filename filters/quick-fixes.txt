@@ -1,7 +1,7 @@
 ! Title: uBlock₀ filters – Quick fixes
 ! Description: Immediate, temporary filters to fix websites
 ! Expires: 12 hours
-! Last modified: Wed, 02 Aug 2023 16:57:05 +0000
+! Last modified: Thu, 03 Aug 2023 00:58:31 +0000
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! Forums: https://github.com/uBlockOrigin/uAssets/issues
@@ -45,8 +45,7 @@ imgutiyu.online,imgutbbn.online,imgubfd.online,imgrei.online,imgqec.online##+js(
 imgutiyu.online,imgutbbn.online,imgubfd.online,imgrei.online,imgqec.online##div[class][style="display: block;"]
 
 ! https://github.com/uBlockOrigin/uAssets/issues/17054
-welt.de#@#+js(aost, Object, /gdpr.*inlineScript/)
-welt.de##+js(nostif, .call(null), 10)
+welt.de,~dutyfarm.welt.de##div[id][style^="z-index: 21474"][style$="px; position: absolute;"][style*="background-color"]:remove()
 
 ! https://github.com/uBlockOrigin/uAssets/issues/17125
 megaup.net#@#a[href^="https://tm-offers.gamingadult.com/"]
@@ -196,21 +195,19 @@ client.falixnodes.net##html:not([class]) #ad_unit
 
 ! https://github.com/uBlockOrigin/uAssets/issues/16083
 @@||dragontea.ink^$ghide
-dragontea.ink##+js(ra, style, body > div, stay)
-dragontea.ink##html, body:style(overflow: visible !important;)
-dragontea.ink##iframe[id^="google_ads_iframe"]
-dragontea.ink##+js(rpnt, script, "}});, "}}); window.setTimeout(function(){let t=document.createElement("link");t.setAttribute("rel"\,"stylesheet")\,t.setAttribute("href"\,"https://dragontea.ink/wp-content/cache/autoptimize/css/autoptimize_325679dd9090b57747bdd165077b8cc2.css")\,t.setAttribute("media"\,"all")\,document.head.append(t)}\,26e3);)
-
-! Ad-Shield
-*$frame,redirect-rule=noopframe,domain=isplus.com
-*$script,xhr,redirect-rule=noopjs,domain=isplus.com
-*$image,redirect-rule=1x1.gif,domain=isplus.com
-@@||isplus.com^$ghide
-isplus.com##+js(set, dable, {})
-isplus.com##ad-shield-inventory
-isplus.com##div[id^="div-gpt-ad-"]
-isplus.com##.adsbyadop
-isplus.com##div[class="box banner"]
+@@*$image,script,xhr,domain=dragontea.ink
+*$frame,redirect-rule=noopframe,domain=dragontea.ink
+||securepubads.g.doubleclick.net/pagead/adview?ai=$image,important,redirect=1x1.gif,domain=dragontea.ink
+||pagead2.googlesyndication.com/pcs/activeview?xai=$image,redirect=1x1.gif,important,domain=dragontea.ink
+||cm.adform.net/pixel?adform_pid=$image,important,redirect=1x1.gif,domain=dragontea.ink
+||www.google.com/pagead/drt/ui|$image,important,redirect=1x1.gif,domain=dragontea.ink
+||match.adsby.bidtheatre.com/adformmatch?adform_id=$image,redirect=1x1.gif,important,domain=dragontea.ink
+||google.*/ads/ga-audiences?t=sr&aip=$image,redirect=1x1.gif,important,domain=dragontea.ink
+||google-analytics.com^$image,redirect=1x1.gif,important,domain=dragontea.ink
+dragontea.ink##iframe[id^="google_ads_iframe_/"]:style(visibility: hidden !important;)
+dragontea.ink##ins[id^="gpt_unit_/"][style*="height: 100vh"]:style(visibility: hidden !important;)
+dragontea.ink##div[id^="dragontea.ink_1000x100_anchor"]:style(visibility: hidden !important;)
+dragontea.ink##+js(spoof-css, iframe[id^="google_ads_iframe_/"]\, ins[id^="gpt_unit_/"][style*="height: 100vh"]\, div[id^="dragontea.ink_1000x100_anchor"], visibility, visible)
 
 ! https://github.com/easylist/easylistgermany/issues/216
 chip.de##div[style*="min-height"] + div[class] > a[href*="https://x.chip.de/intern/dl/?url="] > img[src*="https://im.chip.de/"]:upward(2)
@@ -222,18 +219,10 @@ chip.de##.is-hidden-md[style*="min-height"] + div[class] > a[href*="/intern/dl/?
 ||free.webcompanion.com/minime/de/index.php?partner=*&campaign=$popup,doc
 ||schneesommer.de^$image,3p
 
-! https://github.com/easylist/easylist/issues/16874
-||rebrand.ly^$badfilter
-! https://github.com/easylist/easylist/commit/6b1c562ea9b166337caea996dd0e37056e60d4a5
-||rebrand.ly^$popup,badfilter
-
 ! https://github.com/AdguardTeam/AdguardFilters/issues/149595
 zefoy.com##+js(aost, atob, /zefoy\.com\S+:3:1/)
-
-! https://github.com/uBlockOrigin/uAssets/discussions/17361#discussioncomment-6582008
-earnhub.net##ins[style^="display:inline-block"]
-||bmcdn5.com^$script,redirect=noop.js
-||bmcdn6.com^
+zefoy.com##^script[onerror^="$('body')"]
+/^https:\/\/zefoy\.com\/[A-z0-9]{20,}\.js/$script,1p,redirect=noopjs
 
 ! https://github.com/uBlockOrigin/uAssets/discussions/17361#discussioncomment-6567326
 mdn.lol##+js(nostif, /\.innerHtml|offsetWidth/)
@@ -263,3 +252,7 @@ sdf-event.sakura.ne.jp#@##ad_1
 sdf-event.sakura.ne.jp#@##ad_2
 sdf-event.sakura.ne.jp#@##ad_3
 sdf-event.sakura.ne.jp#@##ad_4
+
+! https://github.com/uBlockOrigin/uAssets/issues/14676
+work.ink#@#.waldo-display-unit
+work.ink#@#.opera-container
