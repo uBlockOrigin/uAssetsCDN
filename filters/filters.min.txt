@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Expires: 5 days
-! Last modified: Fri, 04 Aug 2023 02:14:15 +0000
+! Last modified: Fri, 04 Aug 2023 12:18:59 +0000
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 !
@@ -29,6 +29,11 @@ youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, ytInitialPlayerRespon
 youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, ytInitialPlayerResponse.adPlacements, undefined)
 youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, playerResponse.adPlacements, undefined)
 www.youtube.com,www.youtubekids.com,www.youtube-nocookie.com##+js(aost, Promise.all, Wgb)
+!#if ext_devbuild
+www.youtube.com,www.youtubekids.com,www.youtube-nocookie.com#@#+js(aost, Promise.all, Wgb)
+youtube.com,youtubekids.com,youtube-nocookie.com#@#+js(json-prune, playerResponse.adPlacements playerResponse.playerAds adPlacements playerAds)
+youtube.com,youtubekids.com,youtube-nocookie.com##+js(json-prune, playerResponse.adPlacements playerResponse.playerAds adPlacements playerAds, , /^(?=.*\.js)(?!.*requestAnimationFrame)(?!.*doEnqueue).*/)
+!#endif
 youtube.com##.ytlr-horizontal-list-renderer__items > .yt-virtual-list__container > .yt-virtual-list__item--visible.yt-virtual-list__item--selected.yt-virtual-list__item:has-text(Ad)
 youtube.com###player [class*="suggested-action-badge-icon"]:upward(.ytp-suggested-action)
 ! bait
@@ -20666,10 +20671,11 @@ chip.de##.mt-md > div[class] > #A.A[style="display: block;"]:upward(1)
 chip.de###aabhor
 chip.de##.aab3
 praxistipps.chip.de##div[data-bc-data-trackvars]
-||nah-versorger.de^$image,3p
-||stopundstart.de^$image,3p
-||mein-organizer.de^$image,3p
-||schneesommer.de^$image,3p
+||nah-versorger.de^$3p
+||stopundstart.de^$3p
+||mein-organizer.de^$3p
+||schneesommer.de^$3p
+||free.webcompanion.com/minime/de/index.php?partner=*&campaign=$popup,doc
 chip.de##^script:has-text(/pushAdTag|link_click|getAds/)
 chip.de##:root:style(--topbanner-height-min:unset!important;--topbanner-height-max:unset!important;)
 praxistipps.chip.de,praxistipps.focus.de###G32:style(grid-template-rows: unset!important;)
@@ -23114,3 +23120,4 @@ torrentgalaxy.to##.alert
 ||wonkychickens.org/data/statics/sg/
 torrentgalaxy.to##a[href^="/hub.php?a=hotdea"]
 torrentgalaxy.to##.hotpicks a[target="_blank"]:upward(.hotpicks)
+gplastra.com##+js(noeval-if, ads)
