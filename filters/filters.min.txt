@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Expires: 5 days
-! Last modified: Thu, 03 Aug 2023 17:52:53 +0000
+! Last modified: Fri, 04 Aug 2023 01:18:56 +0000
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 !
@@ -28,7 +28,7 @@ youtube.com,youtubekids.com,youtube-nocookie.com##+js(json-prune, playerResponse
 youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, ytInitialPlayerResponse.playerAds, undefined)
 youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, ytInitialPlayerResponse.adPlacements, undefined)
 youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, playerResponse.adPlacements, undefined)
-www.youtube.com,www.youtubekids.com,www.youtube-nocookie.com##+js(aost, JSON.parse, Vgb)
+www.youtube.com,www.youtubekids.com,www.youtube-nocookie.com##+js(aost, Promise.all, Wgb)
 youtube.com##.ytlr-horizontal-list-renderer__items > .yt-virtual-list__container > .yt-virtual-list__item--visible.yt-virtual-list__item--selected.yt-virtual-list__item:has-text(Ad)
 youtube.com###player [class*="suggested-action-badge-icon"]:upward(.ytp-suggested-action)
 ! bait
@@ -982,7 +982,7 @@ mcloud.to,vizcloud.*##+js(ra, data-ad-img|data-ad-target, , stay)
 /\/[A-Z]{1,2}\/[-0-9a-z]{5,}\.com\/(?:[0-9a-f]{2}\/){3}[0-9a-f]{32}\.js$/$script,1p,match-case
 9anime.*##+js(aopw, _pop)
 mcloud.to,vidstream.pro##.aslot
-/lazymolecule/*.js$script,3p
+/lazymolecule/*.js$script
 youtubedownloader.*##+js(nowoif)
 computerbild.de##.startdownload > a[data-is-manager-usable="1"]
 torrentdownloads.*##+js(nowebrtc)
@@ -8301,11 +8301,6 @@ camcam.cc##+js(acs, document.querySelectorAll, popMagic)
 camcam.cc##+js(no-fetch-if, adsbygoogle)
 ihow.info##+js(nostif, getComputedStyle, 250)
 @@||eldia.com^$ghide
-torrentgalaxy.to##+js(aost, String.prototype.charCodeAt, $)
-*$script,3p,denyallow=bootstrapcdn.com|disqus.com|disquscdn.com|jsdelivr.net|jwpcdn.com|fastly.net|fastlylb.net|jquery.com|hwcdn.net|recaptcha.net|cloudflare.com|cloudflare.net|google.com|googleapis.com|gstatic.com,domain=torrentgalaxy.*
-torrentgalaxy.to##.alert
-||wonkychickens.org/data/statics/sg/
-torrentgalaxy.to##a[href^="/hub.php?a=hotdea"]
 givemereddit.stream##+js(aopw, _pop)
 givemereddit.stream##+js(nowebrtc)
 adshrink.it##+js(aeld, load, nextFunction)
@@ -19100,9 +19095,7 @@ bestcash2020.com##.banner-inner
 edummm.xyz##+js(nano-sib, timeLeft)
 edummm.xyz##.inst > div.text-left iframe[src^="//"]:upward(.inst)
 *$xhr,redirect-rule=nooptext,domain=vogel.de|elektronikpraxis.de
-magicgameworld.com##+js(aost, document.querySelectorAll, show)
-@@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$xhr,domain=magicgameworld.com
-@@||static.doubleclick.net/instream/ad_status.js$xhr,domain=magicgameworld.com
+magicgameworld.com##+js(aost, document.getElementById, adsBlocked)
 @@||up-cripto.com^$script,1p
 #@##iqadtile5
 ###iqadtile5:not(:empty)
@@ -22206,7 +22199,7 @@ tempumail.com##+js(nostif, detector)
 /js/friendbuy.min.js$script,redirect-rule=noopjs,domain=coursera.org
 zefoy.com##+js(aost, atob, /zefoy\.com\S+:3:1/)
 zefoy.com##^script[onerror^="$('body')"]
-/^https:\/\/zefoy\.com\/[^\/]{20,}\.js/$script,1p,redirect=noopjs
+/^https:\/\/zefoy\.com\/[^\/]+\.js/$redirect=noopjs
 alludemycourses.com##+js(aeld, DOMContentLoaded, adsBlocked)
 unitystr.com##+js(noeval-if, isFairAdBlocker)
 ! agfy. to & linkshub. to ads
@@ -23114,3 +23107,10 @@ dvm360.com##body:style(overflow:auto!important)
 dvm360.com##.welcome-ad-wrapper
 dvm360.com###welcome-ad-container
 paylaterin.com##+js(aost, decodeURIComponent, autoptimize)
+||interest.co.nz/modules/custom/presspatron/js/pp-ablock-banner.js$script
+torrentgalaxy.to##+js(aost, String.prototype.charCodeAt, $)
+*$script,3p,denyallow=bootstrapcdn.com|disqus.com|disquscdn.com|jsdelivr.net|jwpcdn.com|fastly.net|fastlylb.net|jquery.com|hwcdn.net|recaptcha.net|cloudflare.com|cloudflare.net|google.com|googleapis.com|gstatic.com,domain=torrentgalaxy.*
+torrentgalaxy.to##.alert
+||wonkychickens.org/data/statics/sg/
+torrentgalaxy.to##a[href^="/hub.php?a=hotdea"]
+torrentgalaxy.to##.hotpicks a[target="_blank"]:upward(.hotpicks)
