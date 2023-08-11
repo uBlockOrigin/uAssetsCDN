@@ -1,7 +1,7 @@
 ! Title: uBlock₀ filters
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Expires: 5 days
-! Last modified: Fri, 11 Aug 2023 02:24:32 +0000
+! Last modified: Fri, 11 Aug 2023 11:53:52 +0000
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 !
@@ -38,8 +38,11 @@ youtube.com,youtubekids.com,youtube-nocookie.com#@#+js(json-prune, playerRespons
 youtube.com,youtubekids.com,youtube-nocookie.com#@#+js(json-prune, playerResponse.adPlacements playerResponse.playerAds adPlacements playerAds, playerResponse.streamingData.adaptiveFormats.2)
 youtube.com,youtubekids.com,youtube-nocookie.com#@#+js(json-prune, playerResponse.adPlacements playerResponse.playerAds adPlacements playerAds, adPlacements.1)
 youtube.com,youtubekids.com,youtube-nocookie.com#@#+js(json-prune, playerResponse.adPlacements playerResponse.playerAds adPlacements playerAds, playerResponse.adPlacements.1)
-youtube.com,youtubekids.com,youtube-nocookie.com##+js(json-prune, playerResponse.adPlacements playerResponse.playerAds adPlacements playerAds, , /^(?=.*\.js)(?!.*requestAnimationFrame)(?!.*doEnqueue).*/)
+youtube.com,youtubekids.com,youtube-nocookie.com#@#+js(json-prune, playerResponse.adPlacements playerResponse.playerAds adPlacements playerAds, , /^(?=.*\.js)(?!.*requestAnimationFrame)(?!.*doEnqueue).*/)
+youtube.com,youtubekids.com,youtube-nocookie.com##+js(json-prune, playerResponse.adPlacements playerResponse.playerAds adPlacements playerAds, , /^(?=.*\.js)(?!.*[A-z]hb \S+polymer).*/)
 !#endif
+! https://github.com/uBlockOrigin/uAssets/issues/7636#issuecomment-1674303331
+music.youtube.com##+js(json-prune, playerResponse.adPlacements playerResponse.playerAds adPlacements playerAds important)
 ! https://github.com/uBlockOrigin/uAssets/issues/15632
 youtube.com##.ytlr-horizontal-list-renderer__items > .yt-virtual-list__container > .yt-virtual-list__item--visible.yt-virtual-list__item--selected.yt-virtual-list__item:has-text(Ad)
 ! https://github.com/uBlockOrigin/uAssets/issues/7636#issuecomment-1453088841
@@ -1421,6 +1424,7 @@ mcloud.to##+js(aopr, open)
 @@||mcloud.to^$ghide
 mcloud.to,vidstream.pro##+js(nowoif)
 vidstream.pro##+js(aopr, mm)
+vidstream.pro##+js(aopr, zfgstorage)
 mcloud.to##+js(aopr, __Y)
 mcloud.to##[target="_blank"][style]:upward([style])
 vidstream.pro##+js(nosiif, break)
@@ -1612,6 +1616,8 @@ vidsrc.*###pop_asdf
 ||katebugs.com^
 ||lpfulinotaherere.info^
 embed.smashystream.com###addiv
+*$script,3p,denyallow=gstatic.com,domain=streambucket.net
+||ijbgqlf.com^
 
 ! https://www.reddit.com/r/uBlockOrigin/comments/9vmhj2
 ||greedseed.world/vpaid/YtVpaid.php
@@ -3249,7 +3255,10 @@ readmng.com##.sideways
 *$script,redirect-rule=noopjs,domain=next-episode.net
 next-episode.net##.adsbygoogle
 next-episode.net##[id=""]
-next-episode.net##+js(rmnt, script, /onerror|adsbygoogle/)
+next-episode.net##^script:has-text(/onerror|adsbygoogle|popup/)
+!#if !cap_html_filtering
+next-episode.net##+js(rmnt, script, /onerror|adsbygoogle|popup/)
+!#endif
 
 ! https://github.com/uBlockOrigin/uAssets/issues/1402
 movie4k.is##+js(aopr, urlToShow)
@@ -3810,7 +3819,7 @@ seekingalpha.com##[id^="ad-slot-"]
 ! https://github.com/uBlockOrigin/uAssets/issues/4711
 ! https://github.com/uBlockOrigin/uAssets/issues/5919
 twitter.com,twitter3e4tixl4xyajtrzo62zg5vztmjuricljdp2c5kshju4avyoid.onion##[data-testid="trend"]:has-text(/Promoted|Gesponsert|Promocionado|Patrocinat|Sponsorisé|Sponsorizzato|Promowane|Promovido|Реклама|Uitgelicht|Sponsorlu|Promotert|Promoveret|Sponsrad|Mainostettu|Sponzorováno|Promovat|Ajánlott|Προωθημένο|Dipromosikan|Được quảng bá|推廣|推广|推薦|推荐|プロモーション|프로모션|ประชาสัมพันธ์|प्रचारित|বিজ্ঞাপিত|تشہیر شدہ|مُروَّج|تبلیغی|מקודם/):upward(1)
-twitter.com,twitter3e4tixl4xyajtrzo62zg5vztmjuricljdp2c5kshju4avyoid.onion##div[style^="transform"] h2 > div[style^="-webkit-line-clamp"] > span:has-text(/^(?:Promoted Tweet|プロモツイート|Promowany Tweet|Tweet promovat)$/):upward(3)
+twitter.com,twitter3e4tixl4xyajtrzo62zg5vztmjuricljdp2c5kshju4avyoid.onion##div[style^="transform"] h2 > div[style^="-webkit-line-clamp"] > span:has-text(/^(?:Promoted Post|Promowany Post|Post promovat)$/):upward(3)
 ! https://github.com/AdguardTeam/AdguardFilters/commit/b9e4a8dc042592f64b01d385415d6a80ffbb237b#commitcomment-97906383
 twitter3e4tixl4xyajtrzo62zg5vztmjuricljdp2c5kshju4avyoid.onion,twitter.com##div[data-testid="cellInnerDiv"] > div.css-1dbjc4n > div[class="css-1dbjc4n"] > div[class="css-1dbjc4n"][data-testid="placementTracking"]
 
@@ -16146,12 +16155,12 @@ rarlab.com##.tbar2:has-text(advert)
 ! https://github.com/uBlockOrigin/uAssets/issues/7343
 dood.*##+js(acs, adcashMacros)
 dood.*,dooood.*##+js(acs, document.createElement, 'script')
-dood.*,dooood.*##+js(aopw, _pop)
-dood.*,dooood.*##+js(aopw, DoodPop)
+dood.*,doods.pro,dooood.*##+js(aopw, _pop)
+dood.*,doods.pro,dooood.*##+js(aopw, DoodPop)
 dood.*##+js(nostif, debugger)
 dood.*##+js(acs, decodeURI, decodeURIComponent)
 dood.*##+js(aopr, __aaZoneid)
-/sw.js$script,domain=dood.*|dooood.*
+/sw.js$script,domain=dood.*|doods.pro|dooood.*
 
 ! https://github.com/uBlockOrigin/uAssets/issues/7175
 androgamer.org##+js(acs, jQuery, ai_adb)
