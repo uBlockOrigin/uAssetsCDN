@@ -1,7 +1,7 @@
 ! Title: uBlock₀ filters
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Expires: 5 days
-! Last modified: Wed, 16 Aug 2023 04:04:50 +0000
+! Last modified: Wed, 16 Aug 2023 11:49:58 +0000
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 !
@@ -25,6 +25,8 @@ youtube.com,youtubekids.com,youtube-nocookie.com##+js(json-prune, playerResponse
 youtube.com,youtubekids.com,youtube-nocookie.com##+js(json-prune, playerResponse.adPlacements playerResponse.playerAds adPlacements playerAds, playerResponse.playabilityStatus.liveStreamability)
 youtube.com,youtubekids.com,youtube-nocookie.com##+js(json-prune, playerResponse.adPlacements playerResponse.playerAds adPlacements playerAds, streamingData.adaptiveFormats.6)
 youtube.com,youtubekids.com,youtube-nocookie.com##+js(json-prune, playerResponse.adPlacements playerResponse.playerAds adPlacements playerAds, playerResponse.streamingData.adaptiveFormats.6)
+youtube.com,youtubekids.com,youtube-nocookie.com##+js(json-prune, playerResponse.adPlacements playerResponse.playerAds adPlacements playerAds, captions)
+youtube.com,youtubekids.com,youtube-nocookie.com##+js(json-prune, playerResponse.adPlacements playerResponse.playerAds adPlacements playerAds, playerResponse.captions)
 ! https://www.reddit.com/r/uBlockOrigin/comments/154vtwy/getting_ads_on_youtube/jsu299l/
 youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, ytInitialPlayerResponse.playerAds, undefined)
 youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, ytInitialPlayerResponse.adPlacements, undefined)
@@ -42,6 +44,8 @@ youtube.com,youtubekids.com,youtube-nocookie.com#@#+js(json-prune, playerRespons
 youtube.com,youtubekids.com,youtube-nocookie.com#@#+js(json-prune, playerResponse.adPlacements playerResponse.playerAds adPlacements playerAds, playerResponse.responseContext.serviceTrackingParams.1)
 youtube.com,youtubekids.com,youtube-nocookie.com#@#+js(json-prune, playerResponse.adPlacements playerResponse.playerAds adPlacements playerAds, streamingData.adaptiveFormats.6)
 youtube.com,youtubekids.com,youtube-nocookie.com#@#+js(json-prune, playerResponse.adPlacements playerResponse.playerAds adPlacements playerAds, playerResponse.streamingData.adaptiveFormats.6)
+youtube.com,youtubekids.com,youtube-nocookie.com#@#+js(json-prune, playerResponse.adPlacements playerResponse.playerAds adPlacements playerAds, captions)
+youtube.com,youtubekids.com,youtube-nocookie.com#@#+js(json-prune, playerResponse.adPlacements playerResponse.playerAds adPlacements playerAds, playerResponse.captions)
 youtube.com,youtubekids.com,youtube-nocookie.com#@#+js(json-prune, playerResponse.adPlacements playerResponse.playerAds adPlacements playerAds, , /^(?=.*\.js)(?!.*requestAnimationFrame)(?!.*doEnqueue).*/)
 youtube.com,youtubekids.com,youtube-nocookie.com##+js(json-prune, playerResponse.adPlacements playerResponse.playerAds adPlacements playerAds, , /^(?=.*\.js)(?!.*[A-z]hb \S+polymer).*/)
 !#endif
@@ -2789,8 +2793,10 @@ pussyspace.*##+js(aopr, open)
 pussyspace.com,pussyspace.net##+js(aost, document.createElement, /add.?Zone|detectCensorship/)
 pussyspace.com,pussyspace.net##+js(aeld, load, exoJsPop101)
 pussyspace.com,pussyspace.net##+js(norafif, exoframe)
-pussyspace.com,pussyspace.net##+js(aeld, /^roadexpert/)
-pussyspace.com,pussyspace.net##a[onmouseup^="setRealHref"]
+pussyspace.com,pussyspace.net##+js(aeld, /^roadex/)
+pussyspace.com,pussyspace.net##a[href="https://www.pussyspace.com/live/meet-and-fuck/"]
+pussyspace.com,pussyspace.net##a[rel-href]
+pussyspace.com,pussyspace.net##a:matches-attr("/on/"="/setReal/i")
 pussyspace.com,pussyspace.net###alphabet, #channels, #divx-container, #hmenu, #inform, #nowlooking, #playerCamBox, #playerMenu, #qcat, #showPlayer, #tabel_tagslist, #video_content, #web_cam, .BaseRoomContents, .buttons, .carouselTopScroll, .carusel-keys-box-ps, .footerdesc, .in_top, .load_more_rel, .mainBoxTitle, .pagIno, .playerContent100pr, .relatedVideo, .right-160px, .videos-related, footer, header, [href^="/webcams.php"]:others()
 ||pussyspace.$image,1p
 @@||www.pussyspace.*/favicon.ico|
@@ -2799,6 +2805,7 @@ pussyspace.com,pussyspace.net###alphabet, #channels, #divx-container, #hmenu, #i
 @@||www.pussyspace.*/class/captcha/arrow.png|
 @@||www.pussyspace.*/player/loading.gif|
 @@||www.pussyspace.*/style/img/abuse.email.png#|
+@@||www.pussyspace.*/style/img/navbg.hover.png|
 @@||www.pussyspace.*/upload/no_img.jpg|
 @@||st.pussyspace.*/player/playBTN.png|
 @@||st.pussyspace.*/favicon.ico|
@@ -2812,16 +2819,16 @@ pussyspace.com,pussyspace.net###alphabet, #channels, #divx-container, #hmenu, #i
 @@||st.pussyspace.*/style/10/img/logo.png|
 @@||st.pussyspace.*/style/10/img/logo_mobile.png|
 @@||st.pussyspace.*/style/webcam.jpg|
-@@/^https:\/\/i\.pussyspace\.(?:com|net)\/(?:yip|xvs)\/videos\/20\d{4}\/\d{2}\/\d{9}\/original\/\d{1,2}\(m=e8KSKgaaaa\)\(mh=[-0-9A-Za-z]{16}\)\.jpg$/$image,1p,domain=pussyspace.*
-@@/^https:\/\/i\.pussyspace\.(?:com|net)\/(?:yip|xvs)\/videos\/20\d{4}\/\d{2}\/\d{9}\/(?:original|thumbs_50)\/\d{1,2}\(m=e8KSKgaaaa\)\(mh=[-_0-9A-Za-z]{16}\)\.jpg$/$image,1p,domain=pussyspace.*
-@@/^https:\/\/i\.pussyspace\.(?:com|net)\/(?:yip|xvs)\/videos\/thumbs169l\/[0-9a-f]{2}\/[0-9a-f]{2}\/[0-9a-f]{2}\/[0-9a-f]{32}(-1)?\/[0-9a-f]{32}\.\d{1,2}\.jpg$/$image,1p,domain=pussyspace.*
-@@/^https:\/\/i\.pussyspace\.(?:com|net)\/jz\/[0-9a-f]\/[0-9a-f]\/[0-9a-f]\/[0-9a-f]{42}-(?:\d{3}|(?:\d{4}-){3}h264\.mp4-9)\.jpg$/$image,1p,domain=pussyspace.*
+@@/^https:\/\/i\.pussyspace\.(?:com|net)\/(?:yip?|xvs)\/videos\/20\d{4}\/\d{2}\/\d{9}\/(?:original|thumbs_\d{2})\/\d{1,2}(?:\(m=e[0-9A-Za-z]{5,7}aaaa\)\(mh=[-_0-9A-Za-z]{16}\))?\.jpg$/$image,1p,domain=pussyspace.*
+@@/^https:\/\/i\.pussyspace\.(?:com|net)\/(?:yip?|xvs)\/videos\/thumbs169l\/[0-9a-f]{2}\/[0-9a-f]{2}\/[0-9a-f]{2}\/[0-9a-f]{32}(?:-\d)?\/[0-9a-f]{32}\.\d{1,2}\.jpg$/$image,1p,domain=pussyspace.*
+@@/^https:\/\/i\.pussyspace\.(?:com|net)\/jz\/(?:[0-9a-f]\/){3,5}[0-9a-f]{42}-(?:\d{2,3}|(?:\d{3,4}-){3}h264\.(?:mp4-\d|flv-\d))\.jpg$/$image,1p,domain=pussyspace.*
 @@/^https:\/\/i\.pussyspace\.(?:com|net)\/sb\/t\/\d{6,8}\/\d\/\d\/w:300\/t\d{1,2}-enh\/(?:[0-9a-z]+-)*[0-9a-z]+\.jpg$/$image,1p,domain=pussyspace.*
-@@/^https:\/\/st\.pussyspace\.(?:com|net)\/upload\/cat\.image\/[_a-z]{2,16}\.jpg$/$image,1p,domain=pussyspace.*
+@@/^https:\/\/st\.pussyspace\.(?:com|net)\/upload\/cat\.image\/[_3a-z]{2,16}\.jpg$/$image,1p,domain=pussyspace.*
 @@/^https:\/\/st\.pussyspace\.(?:com|net)\/upload\/poster_img_url\/par\/c3Rhci9[%0-9A-Za-z]{16,32}&size_width\/par\/160\/l\.jpg$/$image,1p,domain=pussyspace.*
 ||pussyspace.*/js/all.js?v=gitcache_gulp_
 ||pussyspace.*/lazyload.im
 /click.php?$popup,3p,domain=pussyspace.com|pussyspace.net
+*$image,3p,denyallow=others-cdn.com|sb-cd.com|stream.highwebmedia.com|xvideos-cdn.com|youjizz.com|ypncdn.com,domain=pussyspace.com|pussyspace.net
 
 ! https://github.com/uBlockOrigin/uAssets/issues/1172
 java-forum.org##+js(nostif, nextFunction, 2000)
@@ -7860,17 +7867,6 @@ solarmovie.*##.jw-reset.jw-logo-top-left.jw-logo
 
 ! https://github.com/uBlockOrigin/uAssets/issues/4320
 movie8k.*##+js(aopw, _pop)
-
-! https://github.com/uBlockOrigin/uAssets/issues/9593
-@@||miniwebtool.com^$ghide
-miniwebtool.com###videoad:style(position:absolute !important;left:-3000px !important)
-miniwebtool.com##.attribution:has-text(ᴬᵈ)
-miniwebtool.com##[id*="banner"]
-miniwebtool.com###btop
-miniwebtool.com###adsbottom
-miniwebtool.com###div_topside_300x250
-miniwebtool.com###onetrust-consent-sdk
-miniwebtool.com###contain300-1
 
 ! https://github.com/uBlockOrigin/uAssets/issues/4326
 ! https://github.com/NanoAdblocker/NanoFilters/issues/503
