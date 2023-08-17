@@ -1,6 +1,6 @@
 ! Title: uBlock₀ filters
 ! Description: Filters optimized for uBlock, to be used along EasyList
-! Last modified: Wed, 16 Aug 2023 20:50:25 +0000
+! Last modified: Thu, 17 Aug 2023 06:09:55 +0000
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! New filters from January 2023 to ->
@@ -1138,6 +1138,7 @@ tii.la##+js(no-fetch-if, /googlesyndication|inklinkor/)
 tii.la##+js(no-xhr-if, /pagead2\.googlesyndication\.com|inklinkor\.com/)
 tii.la##+js(nostif, ads)
 tii.la##+js(acs, XMLHttpRequest, adb)
+tii.la##+js(rmnt, script, adb_detected)
 @@||tii.la/cloud_theme/ads/*$xhr,1p
 tii.la##.myads
 tii.la##.banner-inner:remove()
@@ -1645,7 +1646,8 @@ freshersgold.com###main-container + div[id][class]
 ! https://github.com/AdguardTeam/AdguardFilters/issues/131933
 ! https://github.com/AdguardTeam/AdguardFilters/issues/155801
 ! https://github.com/AdguardTeam/AdguardFilters/issues/158386
-bi-girl.net,shinobijawi.id,snbc13.com##+js(aost, document.getElementById, fairAdblock)
+! https://www.reddit.com/r/uBlockOrigin/comments/15tedig/block_if_id_size_exceeds_a_limit/
+bi-girl.net,medeberiyaa.com,shinobijawi.id,snbc13.com##+js(aost, document.getElementById, fairAdblock)
 ! https://github.com/AdguardTeam/AdguardFilters/issues/157539
 bitview.cloud##.code-block
 ||zacknation.net/*/ads-$image
@@ -3700,7 +3702,9 @@ skill4ltu.eu##+js(aeld, load, adsbygoogle)
 194.110.247.242##.gmr-bannerpopup
 
 ! https://www.reddit.com/r/uBlockOrigin/comments/15a5ta4/block_discreet_sotwe_ads/
-sotwe.com##.tweet-card .v-responsive.media-carousel-image .v-responsive__content img[alt]:not([alt*="https://t.co/"]):upward(.tweet-card)
+! https://github.com/uBlockOrigin/uAssets/issues/19354
+! sotwe.com##.tweet-card .v-responsive.media-carousel-image .v-responsive__content img[alt]:not([alt*="https://t.co/"]):upward(.tweet-card)
+sotwe.com##.tweet-card .v-responsive.media-carousel-image .v-responsive__content img[alt]:not(:matches-attr(alt="/.*\shttps:\/\/t\.co\/[\w]{10}$/")):upward(.tweet-card)
 
 ! https://www.reddit.com/r/uBlockOrigin/comments/14vx3pk/
 ! https://www.reddit.com/r/uBlockOrigin/comments/14obeil/
@@ -3863,8 +3867,9 @@ torrentgalaxy.to##.alert
 ||wonkychickens.org/data/statics/sg/
 torrentgalaxy.to##a[href*="offer="]
 ! https://www.reddit.com/r/uBlockOrigin/comments/15hcpfj/tgx_ads/
-torrentgalaxy.to###main a[href^="/hub.php?"]
-torrentgalaxy.to##.hotpicks [href^="/hub.php?"]:upward(.hotpicks)
+torrentgalaxy.to##div:is(.panel-body, [style]) > a[href^="/"] > img
+torrentgalaxy.to##div[style] > center > a[href^="/"] > img
+torrentgalaxy.to##.hotpicks a:not([onmouseover*="return overlib"]):upward(.hotpicks)
 
 ! https://forums.lanik.us/viewtopic.php?t=48204-gplastra-com
 gplastra.com##+js(noeval-if, ads)
@@ -3982,3 +3987,12 @@ freepikdownloader.com##+js(aeld, load, modal_blocker)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/19372
 *$script,redirect-rule=noopjs,domain=channel5.com
+
+! https://www.reddit.com/r/uBlockOrigin/comments/e8xapo/hide_ads_on_trakt/
+trakt.tv##:xpath("//*[(text()='Advertisement')]"):upward(1)
+! https://github.com/uBlockOrigin/uAssets/issues/19373
+trakt.tv##+js(set, hucksterInit, trueFunc)
+
+! https://www.reddit.com/r/uBlockOrigin/comments/15tco62/adblock_detected_at/
+deletedspeedstreams.blogspot.com##+js(nostif, adblock)
+||servedbyadbutler.com^$image,redirect-rule=1x1.gif,domain=deletedspeedstreams.blogspot.com
