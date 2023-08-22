@@ -1,6 +1,6 @@
 ! Title: uBlock₀ filters
 ! Description: Filters optimized for uBlock, to be used along EasyList
-! Last modified: Tue, 22 Aug 2023 05:55:33 +0000
+! Last modified: Tue, 22 Aug 2023 12:24:49 +0000
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! New filters from January 2023 to ->
@@ -120,6 +120,9 @@ moviesonlinefree.net##[href^="https://espionagegardenerthicket.com"]
 ! https://github.com/uBlockOrigin/uAssets/issues/16453
 sextb.net##.sextb_728
 *$script,3p,denyallow=cloudflare.com|cloudflare.net|fastly.net|jsdelivr.net|stripst.com|strpst.com|datatables.net,domain=javplayer.org|sextb.net
+! popup
+tuborstb.co##+js(nowoif)
+tuborstb.co##+js(trusted-set, premium, 1)
 
 ! https://github.com/easylist/easylist/pull/14565
 jizzbunker2.com##.partner-site
@@ -3891,7 +3894,7 @@ scripai.com##+js(nostif, /adblock/i)
 
 ! https://www.reddit.com/r/uBlockOrigin/comments/15nq2p4/ozulscans_anti_ad_block/
 ozulmanga.com##+js(set, checkAdBlocker, noopFunc)
-*$xhr,3p,method=head,redirect-rule=nooptext:-1,to=~adblockanalytics.com|~pagead2.googlesyndication.com
+*$xhr,3p,method=head,redirect-rule=nooptext:-1,to=~adblockanalytics.com|~doubleclick.net|~pagead2.googlesyndication.com
 
 ! https://github.com/uBlockOrigin/uAssets/discussions/17361#discussioncomment-6702755
 exactpay.online##+js(nostif, offsetWidth)
@@ -4109,5 +4112,21 @@ nicekkk.com##+js(aopw, _pop)
 ! https://github.com/AdguardTeam/AdguardFilters/issues/159736
 hes-goal.net##^script:has-text(ad block)
 !#if !cap_html_filtering
-apkmirror.com##+js(rmnt, script, ad block)
+hes-goal.net##+js(rmnt, script, ad block)
 !#endif
+
+! https://github.com/AdguardTeam/AdguardFilters/issues/159769
+freepdfcomic.com##+js(nostif, ad_display)
+freepdfcomic.com#@##adframe:not(frameset):not([style^="position: absolute; left: -5000px"])
+
+! https://github.com/AdguardTeam/AdguardFilters/issues/159520
+thestar.com##+js(aost, document.createElement, detect)
+thestar.com##+js(nano-stb, bFired, *)
+thestar.com##+js(nano-sib, scrollIncrement, *)
+thestar.com##.adLabelWrapper
+thestar.com##.adLabelWrapperManual
+thestar.com##.polarBlock
+thestar.com##.viafoura-engagement-starter
+thestar.com##.loadingLI:upward(.tncms-block)
+thestar.com##.main-sidebar > #sticky-side-secondary-spacer:upward(1)
+thestar.com###site-navbar-container, #site-top-nav-container:style(padding-top: 10px !important;)
