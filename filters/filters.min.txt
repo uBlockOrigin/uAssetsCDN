@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Expires: 5 days
-! Last modified: Thu, 31 Aug 2023 11:42:18 +0000
+! Last modified: Thu, 31 Aug 2023 17:26:16 +0000
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 !
@@ -2967,8 +2967,6 @@ tubsexer.*##+js(nostif, innerText, 2000)
 tubsexer.*##.advertising
 yourlust.com##+js(aopr, ExoLoader.serve)
 yourlust.com##+js(aeld, getexoloader)
-yourlust.com##+js(popads-dummy)
-yourlust.com##iframe[src="/im/footer.html"]
 audioz.cc,audioz.es##+js(nostif, modal)
 audioz.cc,audioz.es##+js(set, detectAdBlock, noopFunc)
 twitch.tv##+js(nowoif, amazon-adsystem)
@@ -7064,7 +7062,6 @@ ftopx.com##+js(acs, document.querySelectorAll, popMagic)
 @@||fwmrm.net/ad/*$xhr,domain=uktvplay.co.uk|uktvplay.uktv.co.uk
 ||cdn.http.anno.channel4.com/m/1/$media,domain=uktvplay.uktv.co.uk
 techhx.com##+js(set, google_jobrunner, true)
-biblestudytools.com##+js(aopr, googletag)
 1movietv.com##+js(refresh-defuser)
 1movietv.com##[target="_blank"][href$=".html"]
 ||ekdj30.com^
@@ -13884,7 +13881,7 @@ dudestream.com##body > div[id^="\30"][class^="popup0"][class$="wrap"]
 mobileporn.cam##+js(acs, document.querySelectorAll, popMagic)
 elektrikmen.com##+js(aopr, b2a)
 ||wheelwheel.space^$3p
-cybermania.ws##+js(noeval-if, show)
+cybermania.ws##+js(acs, document.getElementById, showModal, /^data:text\/javascript/)
 *$script,redirect-rule=noopjs,domain=cybermania.ws
 love4porn.com##+js(set, flashvars.popunder_url, '')
 love4porn.com##div[style="position: absolute; inset: 0px; overflow: hidden; z-index: 160; background: transparent none repeat scroll 0% 0%; display: block;"]
@@ -22775,6 +22772,7 @@ moviehab.asia##+js(rmnt, script, AdblockDetector)
 dafontvn.com##+js(acs, document.createElement, adblock)
 gumtree.com.au###leaderboard-header-banner
 gumtree.com.au###header-new:style(margin-top: 0px !important;)
+gumtree.com##div > article[data-q="search-result"] > a[data-q="search-result-anchor"] > div > figure.listing-tile-thumbnail-image + div:has-text(Featured):upward(article[data-q="search-result"])
 deviantart.com###deviantartcom_desktop-devpage-sidebar-300x250-atf:upward(div[role="complementary"] > div)
 ||fajstasfubit.com^
 *$script,3p,denyallow=cloudflare.com|fastly.net|jsdelivr.net,domain=animeunity.cc
@@ -23266,3 +23264,8 @@ viewfr.com##+js(set, blurred, false)
 animeszone.net##+js(set, detectAdBlock, noopFunc)
 animeszone.net##+js(no-fetch-if, googlesyndication)
 heavy.com##+js(no-fetch-if, ads)
+biblestudytools.com##^script:has-text(AdBlockEnabled)
+!#if !cap_html_filtering
+biblestudytools.com##+js(rmnt, script, AdBlockEnabled)
+!#endif
+mundowebtoon.com##+js(aost, atob, )
