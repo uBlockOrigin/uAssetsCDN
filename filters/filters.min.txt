@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Expires: 5 days
-! Last modified: Fri, 01 Sep 2023 05:45:01 +0000
+! Last modified: Fri, 01 Sep 2023 11:18:07 +0000
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 !
@@ -24,18 +24,19 @@ youtube.com###promotion-shelf
 *_ad_$media,domain=youtube.com,3p
 youtube.com##ytd-video-masthead-ad-advertiser-info-renderer,ytm-promoted-sparkles-web-renderer
 ! @@||youtube.com/get_video_info?*timedtext_editor$xhr,1p
-youtube.com,youtubekids.com,youtube-nocookie.com##+js(rpnt, script, (function serverContract(), 'const pruner=text=>{const json=JSON.parse(text);for(k of["playerAds","adPlacements","adSlots"]){json[k]=[];}return JSON.stringify(json);};const urlFromArg=arg=>{if(typeof arg==="string"){return arg;}if(arg instanceof Request){return arg.url;}return String(arg);};const realFetch=window.fetch;window.fetch=new Proxy(window.fetch,{apply:function(target,thisArg,args){if(!(urlFromArg(args[0]).includes("player?key="))){return Reflect.apply(target,thisArg,args);}return realFetch(...args).then(realResponse=>realResponse.text().then(text=>new Response(pruner(text),{status:realResponse.status,statusText:realResponse.statusText,headers:realResponse.headers,})));}}); (function serverContract()')
+youtube.com,youtubekids.com,youtube-nocookie.com##+js(rpnt, script, /(\(function serverContract\(\)|writeEmbed|var _F_cssRowKey)/, 'const pruner=text=>{let json=JSON.parse(text);for(k of["playerAds","adPlacements","adSlots"]){json[k]=[];}return JSON.stringify(json);};const urlFromArg=arg=>{if(typeof arg==="string"){return arg;}if(arg instanceof Request){return arg.url;}return String(arg);};const realFetch=window.fetch;window.fetch=new Proxy(window.fetch,{apply:function(target,thisArg,args){if(!(urlFromArg(args[0]).includes("player?key="))){return Reflect.apply(target,thisArg,args);}return realFetch(...args).then(realResponse=>realResponse.text().then(text=>new Response(pruner(text),{status:realResponse.status,statusText:realResponse.statusText,headers:realResponse.headers,})));}});window.XMLHttpRequest.prototype.open=new Proxy(window.XMLHttpRequest.prototype.open,{apply:async(target,thisArg,args)=>{if(!(urlFromArg(args[1]).includes("player?key="))){return Reflect.apply(target,thisArg,args);}thisArg.addEventListener("readystatechange",function(){if(thisArg.readyState!==4){return;}const type=thisArg.responseType;if(type!==""&&type!=="text"){return;}const textin=thisArg.responseText;const textout=pruner(textin);if(textout===textin){return;}Object.defineProperty(thisArg,"response",{value:textout});Object.defineProperty(thisArg,"responseText",{value:textout});});return Reflect.apply(target,thisArg,args);}}); $1')
 youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, ytInitialPlayerResponse.playerAds, undefined)
 youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, ytInitialPlayerResponse.adPlacements, undefined)
 youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, ytInitialPlayerResponse.adSlots, undefined)
 youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, playerResponse.adPlacements, undefined)
 !#if ext_devbuild
-youtube.com,youtubekids.com,youtube-nocookie.com#@#+js(rpnt, script, (function serverContract(), 'const pruner=text=>{const json=JSON.parse(text);for(k of["playerAds","adPlacements","adSlots"]){json[k]=[];}return JSON.stringify(json);};const urlFromArg=arg=>{if(typeof arg==="string"){return arg;}if(arg instanceof Request){return arg.url;}return String(arg);};const realFetch=window.fetch;window.fetch=new Proxy(window.fetch,{apply:function(target,thisArg,args){if(!(urlFromArg(args[0]).includes("player?key="))){return Reflect.apply(target,thisArg,args);}return realFetch(...args).then(realResponse=>realResponse.text().then(text=>new Response(pruner(text),{status:realResponse.status,statusText:realResponse.statusText,headers:realResponse.headers,})));}}); (function serverContract()')
+youtube.com,youtubekids.com,youtube-nocookie.com#@#+js(rpnt, script, /(\(function serverContract\(\)|writeEmbed|var _F_cssRowKey)/, 'const pruner=text=>{let json=JSON.parse(text);for(k of["playerAds","adPlacements","adSlots"]){json[k]=[];}return JSON.stringify(json);};const urlFromArg=arg=>{if(typeof arg==="string"){return arg;}if(arg instanceof Request){return arg.url;}return String(arg);};const realFetch=window.fetch;window.fetch=new Proxy(window.fetch,{apply:function(target,thisArg,args){if(!(urlFromArg(args[0]).includes("player?key="))){return Reflect.apply(target,thisArg,args);}return realFetch(...args).then(realResponse=>realResponse.text().then(text=>new Response(pruner(text),{status:realResponse.status,statusText:realResponse.statusText,headers:realResponse.headers,})));}});window.XMLHttpRequest.prototype.open=new Proxy(window.XMLHttpRequest.prototype.open,{apply:async(target,thisArg,args)=>{if(!(urlFromArg(args[1]).includes("player?key="))){return Reflect.apply(target,thisArg,args);}thisArg.addEventListener("readystatechange",function(){if(thisArg.readyState!==4){return;}const type=thisArg.responseType;if(type!==""&&type!=="text"){return;}const textin=thisArg.responseText;const textout=pruner(textin);if(textout===textin){return;}Object.defineProperty(thisArg,"response",{value:textout});Object.defineProperty(thisArg,"responseText",{value:textout});});return Reflect.apply(target,thisArg,args);}}); $1')
 youtube.com,youtubekids.com,youtube-nocookie.com##+js(json-prune, playerResponse.adPlacements playerResponse.playerAds playerResponse.adSlots adPlacements playerAds adSlots, , /^(?=.*\.js)(?!.*[A-z]jb \S+polymer).*/)
 !#endif
 music.youtube.com##+js(json-prune, playerResponse.adPlacements playerResponse.playerAds playerResponse.adSlots adPlacements playerAds adSlots important)
 youtube.com##.ytlr-horizontal-list-renderer__items > .yt-virtual-list__container > .yt-virtual-list__item--visible.yt-virtual-list__item--selected.yt-virtual-list__item:has-text(Ad)
 youtube.com###player [class*="suggested-action-badge-icon"]:upward(.ytp-suggested-action)
+||googlevideo.com/initplayback?source=youtube*&c=TVHTML5&oad=$xhr,domain=youtube.com
 ! AdDefend
 !#if env_chromium
 lablue.*##+js(nostif, push, 500)
@@ -17385,7 +17386,7 @@ yodbox.com##+js(aopw, _pop)
 freeromsdownload.com,roms-download.com,roms-hub.com###ads
 kingdomfiles.com##.col-sm-12 > li
 ! hilltopads-sites
-10convert.com,besthdgayporn.com,bigojav.com,fucksporn.com,fullxcinema1.com,gigmature.com,homemoviestube.com,javchill.com,kisscos.net,kmansin09.com,leermanga.net,mangamovil.net,naijauncut.com,nhentai.com,porn00.org,pornohubonline.com,pornxp.com,readwebtoononline.net,sexdiaryz.*,tatli.biz,teenager365.com,weloma.*##+js(acs, document.createElement, /l\.parentNode\.insertBefore\(s/)
+10convert.com,besthdgayporn.com,bigojav.com,fucksporn.com,fullxcinema1.com,gigmature.com,homemoviestube.com,javchill.com,kisscos.net,kmansin09.com,leermanga.net,mangamovil.net,naijauncut.com,porn00.org,pornohubonline.com,pornxp.com,readwebtoononline.net,sexdiaryz.*,tatli.biz,teenager365.com,weloma.*##+js(acs, document.createElement, /l\.parentNode\.insertBefore\(s/)
 besthdgayporn.com##^script:has-text(l.parentNode.insertBefore(s, l);)
 fucksporn.com###FloatingLayer
 fucksporn.com##.adv_banners
@@ -20992,6 +20993,7 @@ jiji.com##.RecommendUnderlayer
 rbbtoday.com##.cx-top-news
 president.jp##.recommend
 kobe-np.co.jp##section.sec:has(> #piano_recs_inline_title)
+vivi.tv##.section__inner:has(> #recommended-posts-result)
 ! ziyu.net
 jin115.com,livedoor.biz#?#.plugin-memo > div.side > script[src*="ziyu.net/"]:upward(2)
 okutta.net##.article__footer > div[style="height:500px; overflow-y:scroll;"]
@@ -21005,11 +21007,17 @@ crank-in.net##article > section.block-area:has(> div#taboola-below-article-thumb
 jbpress.ismedia.jp##div.--wid:has(> div#taboola-below-article-thumbnails-bottom)
 mdpr.jp##.p-articleList__heading:has(+ div#taboola-below-article-thumbnails-desktop)
 full-count.jp##.s-entry > section > div.c-heading:has(> div#taboola-below-article-thumbnails-desktop)
+newsweekjapan.jp##.taboola-below-article-thumbnails-desktop-2-wrap
+pashplus.jp##.content_right > div > span[style^="display: block; font-size: 30px"]:has(+ div#taboola-below-article-thumbnails)
+! Rtoaster
+nifty.com##div[class^="Setsuzoku_ourServicesDList"] > dl > dt:first-child
+nifty.com##dd[class^="Setsuzoku_servicePromo"]
 ! other
 blog.jp#?#.plugin-memo > div.side > div > div[id^="blz_rss"]:upward(3)
 nukigazo.com###text-2
 comichara.com,movient.net###text-6
 okazuch.site###custom_html-30
+tousatu-club.com###text-9
 lecturel.com##+js(nosiif, visibility, 1000)
 lecturel.com##+js(aeld, load, nextFunction)
 ||doubleclick.net/instream/ad_status.js$script,redirect=doubleclick_instream_ad_status.js
@@ -23272,3 +23280,17 @@ biblestudytools.com##+js(rmnt, script, AdBlockEnabled)
 mundowebtoon.com##+js(aost, atob, )
 czxxx.org##+js(set, adblockcheck, false)
 @@||ads.pubmatic.com/AdServer/*/pwt.js$script,domain=ondemandkorea.com
+globlenews.in,rontymobile.in,mynewsmedia.co,revadvert.com###VerifyBtn, #myTimerDiv, .MagicBtn, .nxBtn, #myNextInst, #NextBtn, #NextInfo, iframe:others()
+@@||gplinks.in/track/*$script,xhr,domain=rontymobile.in|gplinks.co|globlenews.in
+@@||googlesyndication.com^$script,xhr,domain=rontymobile.in|gplinks.co|globlenews.in
+@@||doubleclick.net^$script,xhr,domain=rontymobile.in|gplinks.co|globlenews.in
+@@*$ghide,domain=gplinks.co|rontymobile.in|globlenews.in
+*$frame,redirect=noopframe,domain=rontymobile.in|globlenews.in,important
+*$image,redirect-rule=1x1.gif,domain=mynewsmedia.co|revadvert.com|gplinks.co|rontymobile.in|globlenews.in
+globlenews.in,rontymobile.in##+js(set, count, 0)
+gplinks.co##.bg-soft-primary, a.exclude-pop.smartlink
+gplinks.co#@##AdbModel
+rontymobile.in#@#.adb-overlay
+gplinks.co##+js(aopr, clickCount)
+gplinks.co#@#+js(no-setInterval-if, href)
+globlenews.in#@#+js(rmnt, script, fetch)
