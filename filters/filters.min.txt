@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Expires: 5 days
-! Last modified: Fri, 01 Sep 2023 15:59:08 +0000
+! Last modified: Sat, 02 Sep 2023 01:28:32 +0000
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 !
@@ -31,6 +31,7 @@ youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, ytInitialPlayerRespon
 youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, playerResponse.adPlacements, undefined)
 !#if ext_devbuild
 youtube.com,youtubekids.com,youtube-nocookie.com#@#+js(rpnt, script, /(\(function serverContract\(\)|writeEmbed|var _F_cssRowKey)/, 'const pruner=text=>{let json=JSON.parse(text);for(k of["playerAds","adPlacements","adSlots"]){json[k]=[];}return JSON.stringify(json);};const urlFromArg=arg=>{if(typeof arg==="string"){return arg;}if(arg instanceof Request){return arg.url;}return String(arg);};const realFetch=window.fetch;window.fetch=new Proxy(window.fetch,{apply:function(target,thisArg,args){if(!(urlFromArg(args[0]).includes("player?key="))){return Reflect.apply(target,thisArg,args);}return realFetch(...args).then(realResponse=>realResponse.text().then(text=>new Response(pruner(text),{status:realResponse.status,statusText:realResponse.statusText,headers:realResponse.headers,})));}});window.XMLHttpRequest.prototype.open=new Proxy(window.XMLHttpRequest.prototype.open,{apply:async(target,thisArg,args)=>{if(!(urlFromArg(args[1]).includes("player?key="))){return Reflect.apply(target,thisArg,args);}thisArg.addEventListener("readystatechange",function(){if(thisArg.readyState!==4){return;}const type=thisArg.responseType;if(type!==""&&type!=="text"){return;}const textin=thisArg.responseText;const textout=pruner(textin);if(textout===textin){return;}Object.defineProperty(thisArg,"response",{value:textout});Object.defineProperty(thisArg,"responseText",{value:textout});});return Reflect.apply(target,thisArg,args);}}); $1')
+youtube.com,youtubekids.com,youtube-nocookie.com#@#+js(rpnt, script, /(\(function serverContract\(\)|writeEmbed|var _F_cssRowKey)/, const pruner=text=>{let json=JSON.parse(text);for(k of["playerAds"\,"adPlacements"\,"adSlots"]){json[k]=[];}return JSON.stringify(json);};const urlFromArg=arg=>{if(typeof arg==="string"){return arg;}if(arg instanceof Request){return arg.url;}return String(arg);};const realFetch=window.fetch;window.fetch=new Proxy(window.fetch\,{apply:function(target\,thisArg\,args){if(!(urlFromArg(args[0]).includes("player?key="))){return Reflect.apply(target\,thisArg\,args);}return realFetch(...args).then(realResponse=>realResponse.text().then(text=>new Response(pruner(text)\,{status:realResponse.status\,statusText:realResponse.statusText\,headers:realResponse.headers\,})));}});window.XMLHttpRequest.prototype.open=new Proxy(window.XMLHttpRequest.prototype.open\,{apply:async(target\,thisArg\,args)=>{if(!(urlFromArg(args[1]).includes("player?key="))){return Reflect.apply(target\,thisArg\,args);}thisArg.addEventListener("readystatechange"\,function(){if(thisArg.readyState!==4){return;}const type=thisArg.responseType;if(type!==""&&type!=="text"){return;}const textin=thisArg.responseText;const textout=pruner(textin);if(textout===textin){return;}Object.defineProperty(thisArg\,"response"\,{value:textout});Object.defineProperty(thisArg\,"responseText"\,{value:textout});});return Reflect.apply(target\,thisArg\,args);}}); $1)
 youtube.com,youtubekids.com,youtube-nocookie.com##+js(json-prune, playerResponse.adPlacements playerResponse.playerAds playerResponse.adSlots adPlacements playerAds adSlots, , /^(?=.*\.js)(?!.*[A-z]jb \S+polymer).*/)
 !#endif
 music.youtube.com##+js(json-prune, playerResponse.adPlacements playerResponse.playerAds playerResponse.adSlots adPlacements playerAds adSlots important)
@@ -9040,7 +9041,6 @@ mynewsmedia.co,revadvert.com##+js(rmnt, script, fakeAd)
 gplinks.co##+js(aopr, clickCount)
 @@||gplinks.in/track/js/main.js$script,domain=revadvert.com|mynewsmedia.co
 @@||gplinks.in/track/*$xhr,domain=revadvert.com|mynewsmedia.co
-gplinks.co###AdbModel
 motohigh.pl##+js(nostif, , 1)
 orangespotlight.com##+js(aopr, adBlockDetected)
 thenation.com##+js(aopr, ___tp)
@@ -21628,9 +21628,10 @@ javsubindo.one##+js(nowoif)
 javsubindo.one###btm_banner
 javsubindo.one###close-teaser
 ||eatcells.com^$popup,3p
-multiup.eu,multiup.org##+js(ra, type, [type="hidden"], stay)
-multiup.eu,multiup.org##+js(ra, action, [action*="multinews"], stay)
-multiup.org,multiup.eu##+js(ra, class, [class="hidden"], stay)
+!multiup.eu,multiup.org##+js(ra, type, [type="hidden"], stay)
+!multiup.eu,multiup.org##+js(ra, action, [action*="multinews"], stay)
+!multiup.org,multiup.eu##+js(ra, class, [class="hidden"], stay)
+multiup.eu,multiup.org##+js(rpnt, script, /.*createElement.*/, var AG_onLoad=function(func){if(document.readyState==="complete"||document.readyState==="interactive")func();else if(document.addEventListener)document.addEventListener("DOMContentLoaded"\,func);else if(document.attachEvent)document.attachEvent("DOMContentLoaded"\,func)}; AG_onLoad(function(){var e=document.querySelectorAll(".panel-footer > form[action] > button[link]")\,b=document.querySelectorAll(".panel-footer > form[action]")\,c=new RegExp(/mega\./);if(e.length===b.length)for(var f\,g=0;g<b.length;g++)f=e[g].getAttribute("link")\,b[g].setAttribute("action"\,f)\,b[g].setAttribute("target"\,"_blank")\,b[g].querySelector("input[name=\"link\"]").remove()\,c.test(f)||b[g].setAttribute("method"\,"GET");const h=a=>{a.preventDefault();var b=a?.currentTarget?.getAttribute("link");b?window.open(b):a.currentTarget.removeEventListener("click"\,h)};var i=document.querySelectorAll("button[link^=\"https://drive.google.com/\"]");i.forEach(a=>{a.addEventListener("click"\,h)})}))
 coursedrive.org##+js(acs, eval, replace)
 18porncomic.com##+js(acs, document.querySelectorAll, popMagic)
 zubatecno.com###link1s-snp:style(display: block !important;)
@@ -23251,11 +23252,6 @@ zuperdrive.my.id###directAds
 techedubyte.com##+js(set, checkAdsStatus, noopFunc)
 techedubyte.com##.in-article
 techedubyte.com##[href^="https://betwinnerlive.com/"]
-rontymobile.in##+js(no-fetch-if, googlesyndication)
-@@||gplinks.in/track/js/main.js$script,domain=rontymobile.in
-@@||gplinks.in/track/data.php$xhr,domain=rontymobile.in
-rontymobile.in##+js(set, count, 0)
-rontymobile.in##.adb-overlay
 fescrypto.com##+js(aeld, load, htmls)
 gtxgamer.fr###custom_html-5
 mcafee-com.com##+js(acs, document.createElement, adsBlocked)
@@ -23279,17 +23275,15 @@ biblestudytools.com##+js(rmnt, script, AdBlockEnabled)
 mundowebtoon.com##+js(aost, atob, )
 czxxx.org##+js(set, adblockcheck, false)
 @@||ads.pubmatic.com/AdServer/*/pwt.js$script,domain=ondemandkorea.com
-globlenews.in,rontymobile.in,mynewsmedia.co,revadvert.com###VerifyBtn, #myTimerDiv, .MagicBtn, .nxBtn, #myNextInst, #NextBtn, #NextInfo, iframe:others()
-@@||gplinks.in/track/*$script,xhr,domain=rontymobile.in|gplinks.co|globlenews.in
-@@||googlesyndication.com^$script,xhr,domain=rontymobile.in|gplinks.co|globlenews.in
-@@||doubleclick.net^$script,xhr,domain=rontymobile.in|gplinks.co|globlenews.in
-@@*$ghide,domain=gplinks.co|rontymobile.in|globlenews.in
-*$frame,redirect=noopframe,domain=rontymobile.in|globlenews.in,important
-*$image,redirect-rule=1x1.gif,domain=mynewsmedia.co|revadvert.com|gplinks.co|rontymobile.in|globlenews.in
-globlenews.in,rontymobile.in##+js(set, count, 0)
+jomeramankahe.in,globlenews.in,rontymobile.in##+js(no-fetch-if, googlesyndication)
+@@||gplinks.in/track/*$script,xhr,domain=rontymobile.in|gplinks.co|globlenews.in|jomeramankahe.in
+@@||googlesyndication.com^$script,xhr,domain=rontymobile.in|gplinks.co|globlenews.in|jomeramankahe.in
+@@||doubleclick.net^$script,xhr,domain=rontymobile.in|gplinks.co|globlenews.in|jomeramankahe.in
+@@*$ghide,domain=gplinks.co|rontymobile.in|globlenews.in|jomeramankahe.in
+*$frame,redirect=noopframe,important,domain=rontymobile.in|globlenews.in|jomeramankahe.in
+*$image,redirect-rule=1x1.gif,domain=mynewsmedia.co|revadvert.com|gplinks.co|rontymobile.in|globlenews.in|jomeramankahe.in
+jomeramankahe.in,globlenews.in,rontymobile.in##+js(set, count, 0)
+jomeramankahe.in,globlenews.in,rontymobile.in##center:others()
+jomeramankahe.in,globlenews.in,rontymobile.in##[id*="iframe"], [id*="gpt_unit"]:style(height: 0px !important; visibility: collapse;)
 gplinks.co##.bg-soft-primary, a.exclude-pop.smartlink
-gplinks.co#@##AdbModel
-rontymobile.in#@#.adb-overlay
 gplinks.co##+js(aopr, clickCount)
-gplinks.co#@#+js(no-setInterval-if, href)
-globlenews.in#@#+js(rmnt, script, fetch)
