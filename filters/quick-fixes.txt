@@ -1,7 +1,7 @@
 ! Title: uBlock₀ filters – Quick fixes
 ! Description: Immediate, temporary filters to fix websites
 ! Expires: 12 hours
-! Last modified: Tue, 05 Sep 2023 10:06:42 +0000
+! Last modified: Tue, 05 Sep 2023 17:38:05 +0000
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! Forums: https://github.com/uBlockOrigin/uAssets/issues
@@ -19,6 +19,7 @@ rjno1.com##+js(rmnt, script, /_date|Date()|parseInt|banana|adblock|window.locati
 rjno1.com##div:matches-css(position:/fixed/)
 rjno1.com##+js(rpnt, script, /\/\*.*?\*\//)
 rjno1.com##+js(rpnt, script, }else{, }if(true){)
+rjno1.com##+js(rpnt, script, !=, ==)
 rjno1.com##+js(rpnt, script, .push({});, .push({}); document.getElementById("mokuai-search-id").innerHTML = "<form role=\"search\" method=\"get\" class=\"search-form\" action=\"https://www.rjno1.com/\" itemprop=\"potentialAction\" itemscope itemtype=\"http://schema.org/SearchAction\">  <meta itemprop=\"target\" content=\"https://www.rjno1.com/?s=search%20\"/>  <span class=\"screen-reader-text\">搜索：</span> <i class=\"fa fa-search\"></i>  <input type=\"search\" class=\"search-field\" placeholder=\"搜索 &hellip;\" value=\"\" name=\"s\" title=\"Search\" required itemprop=\"query-input\">  <button type=\"submit\" class=\"search-submit\"> <span >搜索</span> </button></form>";window.setTimeout(function() { document.getElementById("dl-buttom-id-for-js").innerHTML = "<a href=\"https://www.rjno1.com/" + document.location.href.replace("https://www.rjno1.com/"\, "") + "download-" + document.location.href.replace("https://www.rjno1.com/"\, "") + "\" class=\"post-download-address-button\"><i class=\"fa fa-download-button\"></i><span class=\"screen-reader-text\">下载地址</span>Download</a><div class=\"clear\"></div>";}\, 2000))
 
 ! https://github.com/uBlockOrigin/uAssets/issues/14204
@@ -146,10 +147,9 @@ dragontea.ink##[id$="ink_1000x100_anchor"][class="stpdr rendered"][data-google-q
 dragontea.ink###stpd_close:remove()
 dragontea.ink##ins[id^="gpt_unit_/"][style="display: block !important; width: 100vw !important; height: 100vh !important; inset: 0px auto auto 0px !important; clear: none !important; float: none !important; margin: 0px !important; max-height: none !important; max-width: none !important; opacity: 1 !important; overflow: visible !important; padding: 0px !important; position: fixed !important; vertical-align: baseline !important; visibility: visible !important; z-index: 2147483647 !important; background: transparent !important;"]
 
-! https://github.com/AdguardTeam/AdguardFilters/issues/160111
-btcbitco.in,btcsatoshi.net,wiour.com#@#div.text-center[id]:style(height: 100px !important;)
-btcbitco.in,btcsatoshi.net,crypto4yu.com,readbitcoin.org,wiour.com##div.text-center[id]:style(height: 120px !important;)
-||pngmart.com/files/10/Download-Now-Button-PNG-Free-Download.png
+! https://github.com/uBlockOrigin/uAssets/discussions/17361#discussioncomment-6915115
+btcbitco.in,btcsatoshi.net,crypto4yu.com,readbitcoin.org,wiour.com#@#div.text-center[id]:style(height: 120px !important;)
+btcbitco.in,btcsatoshi.net,crypto4yu.com,readbitcoin.org,wiour.com##div[id^="a"]:not([class]):style(height: 120px !important;)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/19486
 @@||cdn.trackjs.com/agent/*/latest/t.js$script,domain=delta.com
@@ -189,7 +189,8 @@ aliexpress.com#@#a.search-card-item[href*="&aem_p4p_detail="]:has-text(/^AD/)
 ! https://github.com/uBlockOrigin/uAssets/discussions/17361#discussioncomment-6895297
 techcyan.com#@#a[href*=".click"]
 techcyan.com#@#a[href*=".click"]:style(height:250px !important;left:-3000px !important;position:absolute !important;)
-techcyan.com##a[href*=".click"]:style(height: 1px !important; visibility: hidden !important;)
+techcyan.com#@#a[href*=".click"]:style(height: 1px !important; visibility: hidden !important;)
+techcyan.com##a[href*=".click"]:style(opacity: 0 !important; pointer-events: none !important;)
 
 ! https://github.com/uBlockOrigin/uAssets/discussions/17361#discussioncomment-6886166
 techacode.com,sahlmarketing.net###link, #btn6, #yuidea-snp:remove-attr(disabled)
@@ -203,10 +204,12 @@ techacode.com#@#+js(nowoif, !mtraffics)
 ! https://github.com/easylist/easylist/commit/5abaf5b562ac484ff94733a35ed59282be8db484
 /ad-provider.js
 
-! https://www.chip.de/download/9232_Downloads/gesamt-charts/
-chip.de##div[style="display: none;"] + div[class] > div[class] > h2:has-text(/Gesponsert|Bezahlte Empfehlung/):upward(2)
-chip.de##div[style="display: none;"] + div > :is(a[href*="https://x.chip.de/intern/dl/?url="], a[href*="https://www.chip.de/downloads/"]):has(img[src*="https://im.chip.de/"]):upward(1)
-chip.de##div[style="display: none;"] + div > div > :is(a[href*="https://x.chip.de/intern/dl/?url="], a[href*="https://www.chip.de/downloads/"]):upward(1)
-chip.de##div[style="display: none;"] + [name="randomString"] > [name="randomString"] :is(a[href*="https://x.chip.de/intern/dl/?url="], a[href*="https://www.chip.de/downloads/"]):has(img[src*="https://im.chip.de/"]):upward(1)
+! https://github.com/easylist/easylistgermany/issues/216
+chip.de##div[class] .A > h2:has-text(/Gesponsert|Bezahlte Empfehlung/):upward(2)
+chip.de##div[class] > a:is(a[href*="https://x.chip.de/intern/dl/?url="], a[href*="https://www.chip.de/downloads/"]):has(section img[src*="https://im.chip.de/"]):upward(1)
 chip.de#@#.app_nexus_banners_common
-chip.de##.app_nexus_banners_common:not([style])
+chip.de#@#.ob-p
+chip.de##div > .app_nexus_banners_common
+chip.de##div > .ob-p
+/im\.chip\.de\/ii\/[0-9]{3}\/[0-9a-zA-Z\/\.]{54,59}\?im=AspectCrop.*&hash=[0-9a-z]{27}/$image,xhr,match-case,1p
+||im.chip.de/ii/*?im=AspectCrop%2Csize%3D%2816%2C9%29%2Cgravity%3DCenter%3BResize%3D%28620%2C349%29%2Caspect%3Dfit%3BBackgroundColor%2Ccolor%3Dffffff&hash=%3Cesi:vars%3E*(randomString)%3C/esi:vars%3E$image,1p
