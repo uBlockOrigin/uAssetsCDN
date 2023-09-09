@@ -4,7 +4,7 @@
 !   which purpose is to guarantee that a filter won't be overriden by
 !   exception filters.
 ! Expires: 7 days
-! Last modified: Sat, 09 Sep 2023 02:25:04 +0000
+! Last modified: Sat, 09 Sep 2023 11:03:52 +0000
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 !
@@ -106,7 +106,8 @@ old.reddit.com##a.outbound[data-outbound-url]:remove-attr(data-outbound-url)
 reddit.com,~old.reddit.com##+js(rpnt, script, "outboundUrl", "outbound")
 reddit.com,~old.reddit.com##+js(json-prune, data.*.elements.edges.[].node.outboundLink)
 reddit.com,~old.reddit.com##+js(json-prune, data.children.[].data.outbound_link)
-/^https:\/\/www\.reddit\.com\/svc\/shreddit\/[0-9A-z]{9,}$/$xhr,1p,method=post
+/^https:\/\/www\.reddit\.com\/svc\/shreddit\/[-0-9A-z]{9,}$/$xhr,1p,method=post
+||www.reddit.com/|$xhr,1p,method=post
 
 ! https://github.com/uBlockOrigin/uAssets/pull/5578
 ||colpirio.com^$3p
@@ -741,13 +742,14 @@ $removeparam=s_cid
 ! vero
 $removeparam=vero_conv
 $removeparam=vero_id
+! Olytics
+! https://github.com/brave/brave-browser/issues/17451
 ! https://github.com/brave/brave-browser/issues/13644
 ! https://www.reddit.com/r/uBlockOrigin/comments/16c6rq0/why_does_ublockorigin_break_this_websites_login/
+$removeparam=rb_clickid
 $removeparam=oly_anon_id
 ! https://github.com/brave/brave-browser/issues/11579
 $removeparam=_openstat
-! https://github.com/brave/brave-browser/issues/17451
-$removeparam=rb_clickid
 ! https://github.com/brave/brave-browser/issues/17507
 $removeparam=ml_subscriber
 $removeparam=ml_subscriber_hash
