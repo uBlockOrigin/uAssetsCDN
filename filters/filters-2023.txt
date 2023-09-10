@@ -1,6 +1,6 @@
 ! Title: uBlock₀ filters
 ! Description: Filters optimized for uBlock, to be used along EasyList
-! Last modified: Sun, 10 Sep 2023 02:29:20 +0000
+! Last modified: Sun, 10 Sep 2023 10:50:02 +0000
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! New filters from January 2023 to ->
@@ -4288,12 +4288,6 @@ av01.media##+js(ra, onclick, a[onclick])
 av01.media##.row > div.col-lg-4:has(> div#tile-ad)
 av01.media##iframe[src="javascript:window.location.replace(this.frameElement.dataset.link)"]
 
-! https://everia.club/ occaisonal popup
-everia.club##+js(rmnt, script, /\[\'push\'\]/)
-everia.club##^script[data-cfasync]:has-text(push)
-! https://www.displayvertising.com variants
-/^https:\/\/www\.[a-z]{12,16}\.com\/[a-z]{7,10}\.min\.js$/$script,3p,match-case
-
 ! https://github.com/uBlockOrigin/uAssets/discussions/17361#discussioncomment-6872017
 sahlmarketing.net###link:remove-attr(disabled)
 sahlmarketing.net###link, center, #yuidea-snp, #btn6:style(display: block !important;)
@@ -4471,10 +4465,9 @@ guiacripto.online##+js(nano-stb, player, *, 0.02)
 ! nutraingredients-asia. com Interstitial
 nutraingredients-asia.com,nutraingredients-latam.com,nutraingredients-usa.com,nutraingredients.com##+js(set, displayInterstitialAdConfig, false)
 
-! https://github.com/AdguardTeam/AdguardFilters/commit/12010c20f85fcffe96339dcfb424fbb1f1f04e3a
-reddit.com,reddittorjg6rue252oqsxryoxengawnmo46qy4kyii5wtqnwfj4ooad.onion#@#.promotedlink
-reddit.com,reddittorjg6rue252oqsxryoxengawnmo46qy4kyii5wtqnwfj4ooad.onion##.promotedlink:not([style^="height: 1px;"])
-
 ! https://github.com/AdguardTeam/AdguardFilters/issues/161297
 gemstreams.com##+js(aopw, _pop)
 *$script,3p,domain=gemstreams.com,denyallow=ajax.googleapis.com|fastly.net|jsdelivr.net
+
+! https://github.com/uBlockOrigin/uAssets/issues/19684
+ithinkilikeyou.net##+js(noeval-if, ads)
