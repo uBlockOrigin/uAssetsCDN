@@ -1,6 +1,6 @@
 ! Title: uBlock₀ filters
 ! Description: Filters optimized for uBlock, to be used along EasyList
-! Last modified: Tue, 12 Sep 2023 16:59:44 +0000
+! Last modified: Tue, 12 Sep 2023 20:51:33 +0000
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! New filters from January 2023 to ->
@@ -2190,13 +2190,15 @@ adultcomixxx.com##.adsnative
 *$script,3p,denyallow=cloudflare.com|fastly.net|jwpcdn.com,domain=oneupload.to
 ||eveald.com^
 
-! https://streamvid. net popups
+! https://streamvid. net popups + antiadb
 streamvid.net##+js(nowoif)
 streamvid.net##+js(aopw, _pop)
 streamvid.net##+js(acs, document.documentElement, break;case $.)
 streamvid.net##+js(acs, globalThis, break;case)
 streamvid.net##+js(nano-stb, , , 0.02)
-
+streamvid.net##+js(set, googleAd, true)
+*$script,3p,denyallow=cloudflare.com,domain=streamvid.net
+ 
 ! https://github.com/AdguardTeam/AdguardFilters/issues/149877
 thichcode.net##+js(set, detectAdBlock, noopFunc)
 
@@ -3728,7 +3730,7 @@ animexin.vip##+js(acs, eval, replace)
 ! https://github.com/easylist/easylist/commit/3279eb38679284daea90c485c4b9ad298a6f82f3
 ||imasdk.googleapis.com/js/sdkloader/ima3_dai.js$redirect=noopjs,domain=southparkstudios.*,important
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$redirect=google-ima.js,domain=southpark.*|southparkstudios.*,important
-||imasdk.googleapis.com/pal/sdkloader/pal.js$redirect-rule=noop.js,domain=southpark.*
+||imasdk.googleapis.com/pal/sdkloader/pal.js$redirect-rule=noop.js,domain=southpark.*|southparkstudios.*
 
 ! https://github.com/uBlockOrigin/uAssets/issues/19210
 rain-alarm.com###main_canvas > div[id^="google"]
@@ -3853,6 +3855,7 @@ torrentgalaxy.to##+js(aost, String.prototype.charCodeAt, $)
 *$script,3p,denyallow=bootstrapcdn.com|disqus.com|disquscdn.com|jsdelivr.net|jwpcdn.com|fastly.net|fastlylb.net|jquery.com|hwcdn.net|recaptcha.net|cloudflare.com|cloudflare.net|google.com|googleapis.com|gstatic.com,domain=torrentgalaxy.*
 torrentgalaxy.to##.alert
 ||wonkychickens.org/data/statics/$image
+torrentgalaxy.to##[href^="/sub.php"]
 
 ! https://forums.lanik.us/viewtopic.php?t=48204-gplastra-com
 gplastra.com##+js(noeval-if, ads)
@@ -4509,3 +4512,7 @@ cbr.com##+js(rmnt, script, admiral)
 
 ! https://github.com/uBlockOrigin/uAssets/discussions/17361#discussioncomment-6981059
 gulio.site##+js(rmnt, script, RegExp)
+
+! https://github.com/uBlockOrigin/uAssets/issues/19709
+filmoviplex.com##+js(aopr, BetterJsPop)
+filmoviplex.com##+js(aopr, doSecondPop)
