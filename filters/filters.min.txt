@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Expires: 5 days
-! Last modified: Sun, 17 Sep 2023 21:31:55 +0000
+! Last modified: Mon, 18 Sep 2023 06:29:55 +0000
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 !
@@ -225,6 +225,7 @@ economictimes.indiatimes.com##div h2:has(span:matches-css-before(content: /Spons
 economictimes.indiatimes.com##div h2:has(span:matches-css-before(content: /Sponsored/)) + div
 indiatimes.com##h2:has-text(/Promoted/) + div
 indiatimes.com##h2:has-text(/Promoted/)
+indiatimes.com##.wzrk-overlay
 ||media.indiatimes.in/idthat/commons/images/rbc-gray.png$image
 indiatimes.com##[onclick] h5:has-text(/Ad/):xpath(../../..)
 m.timesofindia.com##.brand_ctn:has-text(/Ad:/):xpath(../..)
@@ -257,6 +258,7 @@ indiatimes.com###pollBudgetWidget
 navbharattimes.indiatimes.com##.parallaxDiv.ad1
 ! interstitial page
 economictimes.indiatimes.com##+js(set, objVc.interstitial_web,'')
+economictimes.indiatimes.com##+js(nosiif, adb)
 maharashtratimes.com##.float-amz.btn_openinapp
 maharashtratimes.com##.ad1
 maharashtratimes.com##.colombia
@@ -5234,11 +5236,12 @@ allkpop.com##+js(set, isal, true)
 azmath.info,azsoft.*,downfile.site,downphanmem.com,expertvn.com,memangbau.com,scratch247.info,trangchu.news##+js(set, count, 0)
 azmath.info,azsoft.*,downfile.site,downphanmem.com,expertvn.com,memangbau.com,scratch247.info,trangchu.news##+js(aopr, SMart1)
 azmath.info,azsoft.*,downfile.site,downphanmem.com,expertvn.com,memangbau.com,scratch247.info,trangchu.news##+js(noeval-if, chp_ad)
+trangchu.news##+js(rmnt, script, mdp)
+trangchu.news##+js(no-xhr-if, /doubleclick|googlesyndication/)
 /fuckadb.js$badfilter
 megaurl.in,megafly.in##+js(ra, onclick, [onclick^="pop"])
 @@||megaurl.*^$ghide
 @@||expertvn.com^$ghide
-@@||techacode.com^$script,1p
 *$script,3p,denyallow=bootstrapcdn.com|cloudflare.com|google.com|googleapis.com|gstatic.com|hwcdn.net|jquery.com,domain=expertvn.com
 ||monetiza.co^$3p
 ||vidcrunch.com^$domain=aztravels.net|downfile.site
@@ -8225,7 +8228,9 @@ animeshouse.net##+js(aopr, thumbad)
 *$script,redirect-rule=noopjs,domain=animeshouse.net
 /adblockpopup.$badfilter
 @@*adblocker.js|$script,domain=feralhosting.com
-@@||edifier-ah.shop/_banner_ads.js$script
+@@||edifier-ah.shop/_banner_ads.js|$script
+@@||edifier-ah.shop/_google_ad.js|$script
+@@||edifier-ah.shop/*.js|$script,domain=animeshouse.net|feralhosting.com|reign-ah.online
 fangraphs.com##+js(acs, $, Math.random)
 fangraphs.com##+js(set, ezstandalone.enabled, true)
 fangraphs.com##.catchall728
@@ -19271,6 +19276,8 @@ mtraffics.com##+js(nowoif, _blank)
 techacode.com,sahlmarketing.net###link, #btn6, #yuidea-snp:remove-attr(disabled)
 techacode.com,sahlmarketing.net##+js(set, count, 0)
 techacode.com##+js(aopr, SMart1)
+techacode.com##+js(rmnt, script, mdp)
+techacode.com##+js(no-xhr-if, /doubleclick|googlesyndication/)
 zadfaucet.com##+js(set, verifica_adblock, noopFunc)
 ewrc-results.com##+js(set, canGetAds, true)
 *$3p,script,redirect-rule=noop.js,domain=ksk.moe
