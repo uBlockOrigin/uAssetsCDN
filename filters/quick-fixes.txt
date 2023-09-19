@@ -1,14 +1,14 @@
 ! Title: uBlock₀ filters – Quick fixes
 ! Description: Immediate, temporary filters to fix websites
 ! Expires: 12 hours
-! Last modified: Tue, 19 Sep 2023 10:00:46 +0000
+! Last modified: Tue, 19 Sep 2023 18:02:05 +0000
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! Forums: https://github.com/uBlockOrigin/uAssets/issues
 
 ! aternos anti adb
 aternos.org##.header-center:style(margin-top:-5000px !important;)
-aternos.org##.sidebar:style(width: 1.745px !important; padding: 0.004cm !important;)
+aternos.org##.sidebar:style(width: 1.745px !important; padding: 0.004mm !important;)
 aternos.org##.ad-dfp:style(min-height: 0.1485mm !important; height: 0.1485mm !important;)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/11152
@@ -139,7 +139,10 @@ photopea.com##a[href*="photopea.com"][href*="ads"]
 
 ! https://github.com/easylist/easylistgermany/issues/216
 chip.de##div[class] > a:is(a[href*="https://x.chip.de/intern/dl/?url="], a[href*="https://www.chip.de/downloads/"]):has(div img[src*="https://im.chip.de/ii/"]):upward(1)
-/im\.chip\.de\/ii\/[0-9\/]{14,17}\/[a-zA-Z0-9]{6,10}\-[a-zA-Z0-9]{8,16}\-[a-zA-Z0-9]{16}\..*&hash=[a-z0-9]{64}/$image,xhr,match-case,1p,domain=chip.de
+chip.de#@#.ob-ad-carousel-layout
+chip.de##body:not(.l-DownloadDetail, .l-DownloadListing) .ob-ad-carousel-layout
+/im\.chip\.de\/ii\/[0-9\/]{14,17}\/[a-zA-Z0-9]{4,9}\-[a-zA-Z0-9]{3,6}\-[a-zA-Z0-9\-]{20,31}\..*&hash=[a-z0-9]{60,}/$image,xhr,match-case,1p,domain=chip.de
+@@/im\.chip\.de\/ii\/[0-9\/]{14,17}\/.*(logo|launcher|player|tool|messenger|game|microsoft|windows).*&hash=[a-z0-9]{64}/$image,xhr,1p,domain=chip.de
 ||im.chip.de/ii/*AspectCrop*gravity*&hash=*esi:vars%3E*(randomString)%3C/esi:vars$image,xhr,1p
 
 ! https://github.com/uBlockOrigin/uAssets/issues/19720
@@ -171,3 +174,7 @@ mastercomfig.com#@#div[class^="card "]
 
 ! https://github.com/uBlockOrigin/uAssets/issues/19767
 lifestyle.bg,money.bg,news.bg,topsport.bg,webcafe.bg##+js(nostif, /adblock|location|_0x/i)
+
+! https://github.com/uBlockOrigin/uAssets/commit/7e6d812b5f77e1af056978a1659d2de3e4e8ac30 - Remove after 2023-09-25
+||libretube.*^$all,domain=~libre-tube.github.io,badfilter
+||libretube.*^$all,domain=~libretube.dev,to=~libretube.dev
