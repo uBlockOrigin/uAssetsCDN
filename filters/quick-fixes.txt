@@ -1,7 +1,7 @@
 ! Title: uBlock₀ filters – Quick fixes
 ! Description: Immediate, temporary filters to fix websites
 ! Expires: 12 hours
-! Last modified: Thu, 21 Sep 2023 09:48:34 +0000
+! Last modified: Thu, 21 Sep 2023 18:04:05 +0000
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! Forums: https://github.com/uBlockOrigin/uAssets/issues
@@ -47,10 +47,6 @@ picbbdr.one,picbest.one,picbhrt.one##div[style="width:100%;height:110px"]
 picbbdr.one,picbest.one,picbhrt.one##+js(nowoif, !/prcf.fiyar|themes|pixsense|.jpg/)
 picbbdr.one,picbest.one,picbhrt.one##div[class][style="display: block;"]
 
-! https://github.com/uBlockOrigin/uAssets/issues/17125
-megaup.net##body .metaRedirectWrapperBottomAds:style(width: 10306px !important;)
-megaup.net##+js(rpnt, script, /;\$\S+:\(/, ;()
-
 ! https://github.com/uBlockOrigin/uAssets/issues/17548
 @@*$ghide,domain=dev.miuiflash.com|djxmaza.in|thecubexguide.com
 *$image,redirect-rule=32x32.png:5,domain=djxmaza.in|thecubexguide.com|dev.miuiflash.com
@@ -84,6 +80,10 @@ youtube.com,youtubekids.com,youtube-nocookie.com##+js(json-prune-xhr-response, [
 youtube.com,youtubekids.com,youtube-nocookie.com#@#+js(json-prune-xhr-response, [].playerResponse.adPlacements [].playerResponse.playerAds [].playerResponse.adSlots playerResponse.adPlacements playerResponse.playerAds playerResponse.adSlots adPlacements playerAds adSlots)
 youtube.com,youtubekids.com,youtube-nocookie.com#@#+js(json-prune, playerResponse.adPlacements playerResponse.playerAds playerResponse.adSlots adPlacements playerAds adSlots, responseContext.mainAppWebResponseContext.datasyncId)
 youtube.com,youtubekids.com,youtube-nocookie.com#@#+js(json-prune, playerResponse.adPlacements playerResponse.playerAds playerResponse.adSlots adPlacements playerAds adSlots, playerResponse.responseContext.mainAppWebResponseContext.datasyncId)
+youtube.com,youtubekids.com,youtube-nocookie.com#@#+js(rpnt, script, /(\(function serverContract\(\)|var yterr|var _F_cssRowKey)/, 'const jsonPruner=obj=>{for(k of["playerAds","adPlacements","adSlots"]){obj[k]=[];}return obj;};const pruner=(text,url)=>{let json=JSON.parse(text);if(url.includes("player?key=")){return JSON.stringify(jsonPruner(json));}else{let newJSON=[];for(obj of json){if("playerResponse"in obj){obj["playerResponse"]=jsonPruner(obj["playerResponse"]);}newJSON.push(obj);}return JSON.stringify(newJSON);}};const urlFromArg=arg=>{if(typeof arg==="string"){return arg;}if(arg instanceof Request){return arg.url;}return String(arg);};const realFetch=window.fetch;window.fetch=new Proxy(window.fetch,{apply:function(target,thisArg,args){let url=urlFromArg(args[0]);if(!(url.includes("player?key="))&&!(url.includes("watch?v="))){return Reflect.apply(target,thisArg,args);}return realFetch(...args).then(realResponse=>realResponse.text().then(text=>new Response(pruner(text,url),{status:realResponse.status,statusText:realResponse.statusText,headers:realResponse.headers,})));}});window.XMLHttpRequest.prototype.open=new Proxy(window.XMLHttpRequest.prototype.open,{apply:async(target,thisArg,args)=>{let url=urlFromArg(args[1]);if(!(url.includes("player?key="))&&!(url.includes("watch?v="))){return Reflect.apply(target,thisArg,args);}thisArg.addEventListener("readystatechange",function(){if(thisArg.readyState!==4){return;}const type=thisArg.responseType;if(type!==""&&type!=="text"){return;}const textin=thisArg.responseText;const textout=pruner(textin,url);if(textout===textin){return;}Object.defineProperty(thisArg,"response",{value:textout});Object.defineProperty(thisArg,"responseText",{value:textout});});return Reflect.apply(target,thisArg,args);}}); $1')
+!#if ext_devbuild
+youtube.com,youtubekids.com,youtube-nocookie.com#@#+js(json-prune, playerResponse.adPlacements playerResponse.playerAds playerResponse.adSlots adPlacements playerAds adSlots, , /^(?=.*\.js)(?!.*[A-z]jb \S+polymer).*/)
+!#endif
 
 ! https://github.com/uBlockOrigin/uAssets/issues/18476
 ! VOE sites
@@ -115,20 +115,15 @@ techcyan.com#@#+js(spoof-css, #btx1, display, block)
 techcyan.com#@#+js(spoof-css, #btx2, display, block)
 techcyan.com#@##btx1, #btx2
 ||techcyan.com/wp-content/plugins/azee-safelink/img/
-techcyan.com#@#a[href*=".click"]:style(visibility: collapse !important;)
 techcyan.com###btx1,#btx2:style(margin-right: -4000px !important;)
 upshrink.com#@#.banner
 ||blogspot.com/*/s336/Upshrink336x280.jpg
 ||upshrink.in^$frame,1p
 
 ! https://github.com/uBlockOrigin/uAssets/discussions/17361#discussioncomment-6960192
-btcbitco.in,btcsatoshi.net,cempakajaya.com,crypto4yu.com,gainl.ink,manofadan.com,readbitcoin.org,wiour.com#@#iframe[src*="/ads/show.php"]
 btcbitco.in,btcsatoshi.net,wiour.com##+js(nowoif, ?key=)
 /invoke.js$script,redirect-rule=noop.js,domain=btcbitco.in|btcsatoshi.net|wiour.com
 ||cryptocoinsad.com/ads/js/popunder.js$script,redirect=noop.js,domain=btcbitco.in|btcsatoshi.net|wiour.com
-
-! https://github.com/uBlockOrigin/uAssets/issues/19700
-||intuitcdn.net/analytics/$badfilter
 
 ! https://github.com/easylist/easylistgermany/issues/216
 chip.de##div[class] > a:is(a[href*="https://x.chip.de/intern/dl/?url="], a[href*="https://www.chip.de/downloads/"]):has(div img[src*="https://im.chip.de/ii/"]):upward(1)
@@ -161,9 +156,6 @@ torrentgalaxy.to##div > a[href^="/"][href*="?"]:has(* img[src^="https://img.wonk
 
 ! https://github.com/uBlockOrigin/uBlock-discussions/discussions/819#discussioncomment-6999778
 @@||reddit.com/svc/shreddit/more-comments/$xhr,1p,method=post
-
-! https://github.com/uBlockOrigin/uAssets/issues/19578
-mastercomfig.com#@#div[class^="card "]
 
 ! https://github.com/uBlockOrigin/uAssets/issues/19767
 lifestyle.bg,money.bg,news.bg,topsport.bg,webcafe.bg##+js(nostif, /adblock|location|_0x/i)
