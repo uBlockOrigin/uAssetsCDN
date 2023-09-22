@@ -1,7 +1,7 @@
 ! Title: uBlock₀ filters
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Expires: 5 days
-! Last modified: Fri, 22 Sep 2023 10:53:04 +0000
+! Last modified: Fri, 22 Sep 2023 15:21:58 +0000
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 !
@@ -28,9 +28,11 @@ youtube.com,youtubekids.com,youtube-nocookie.com##+js(json-prune-fetch-response,
 youtube.com,youtubekids.com,youtube-nocookie.com##+js(json-prune-xhr-response, [].playerResponse.adPlacements [].playerResponse.playerAds [].playerResponse.adSlots playerResponse.adPlacements playerResponse.playerAds playerResponse.adSlots adPlacements playerAds adSlots, , propsToMatch, url:/player\?key=|watch\?v=|youtubei\/v1\/player/)
 youtube.com,youtubekids.com,youtube-nocookie.com#@#+js(json-prune-xhr-response, [].playerResponse.adPlacements [].playerResponse.playerAds [].playerResponse.adSlots playerResponse.adPlacements playerResponse.playerAds playerResponse.adSlots adPlacements playerAds adSlots, , propsToMatch, url:/player\?key=|watch\?key=|youtubei\/v1\/player/)
 youtube.com,youtubekids.com,youtube-nocookie.com#@#+js(json-prune-xhr-response, [].playerResponse.adPlacements [].playerResponse.playerAds [].playerResponse.adSlots playerResponse.adPlacements playerResponse.playerAds playerResponse.adSlots adPlacements playerAds adSlots)
+!#if env_firefox
 youtube.com,youtubekids.com,youtube-nocookie.com##+js(trusted-replace-fetch-response, /\"adPlacements.*?\"\}\}\}\]\,/, , player?key=)
 youtube.com,youtubekids.com,youtube-nocookie.com##+js(trusted-replace-fetch-response, /\"adSlots.*?\}\]\}\}\]\,/, , player?key=)
 youtube.com,youtubekids.com,youtube-nocookie.com##+js(trusted-replace-fetch-response, /\"playerAds.*?\}\}\]\,/, , player?key=)
+!#endif
 ! https://www.reddit.com/r/uBlockOrigin/comments/154vtwy/getting_ads_on_youtube/jsu299l/
 youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, ytInitialPlayerResponse.playerAds, undefined)
 youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, ytInitialPlayerResponse.adPlacements, undefined)
@@ -1695,7 +1697,6 @@ freebeacon.com##.uppercase:has-text(/advertisement/i)
 ! https://www.reddit.com/r/uBlockOrigin/comments/b16dfr/nsfw_ubo_no_longer_works_on_chansankakucomplexcom/
 ! https://www.reddit.com/r/uBlockOrigin/comments/rce0k0/sankakucomplex_has_ads/
 ! https://github.com/uBlockOrigin/uAssets/issues/19806
-sankakucomplex.com##+js(rmnt, script, document.body.appendChild)
 sankakucomplex.com##+js(acs, Post.detect, show)
 sankakucomplex.com##+js(acs, document.querySelectorAll, popMagic)
 sankakucomplex.com##.vce-ad-container
@@ -7370,7 +7371,10 @@ plagiarismdetector.net##[rel]:matches-attr(/^/=/utm_source/)
 ! https://github.com/uBlockOrigin/uAssets/issues/17711
 plagiarismchecker.co##+js(rpnt, style, display:block!important, display:none!important)
 plagiarismchecker.co##+js(rpnt, style, {display:block;}, {display:none!important;})
-plagiarismchecker.co###topbox, #afterbox
+plagiarismchecker.co##+js(rpnt, style, {display:block}, {display:none!important;}, condition, grammarDisplay )
+plagiarismchecker.co##div[class^="lala-"], #topbox, #afterbox
+plagiarismchecker.co##[class$="-heading"] + div[class]:has(img[src^="https://www.plagiarismchecker.co/"])
+plagiarismchecker.co##p[class^="bbb"] + [class]:has(img[src^="https://www.plagiarismchecker.co/"])
 
 ! https://github.com/uBlockOrigin/uAssets/issues/4104
 jagran.com##.ads
