@@ -1,6 +1,6 @@
 ! Title: uBlock₀ filters
 ! Description: Filters optimized for uBlock, to be used along EasyList
-! Last modified: Sun, 24 Sep 2023 09:04:56 +0000
+! Last modified: Sun, 24 Sep 2023 17:34:34 +0000
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! New filters from January 2023 to ->
@@ -704,7 +704,13 @@ heavyfetish.com##.sponsor
 ads.snapchat.com#@#.banner_ad
 
 ! https://github.com/uBlockOrigin/uAssets/issues/16738
+! https://github.com/uBlockOrigin/uAssets/issues/19842
 7xm.xyz##+js(acs, eval, replace)
+!#if cap_html_filtering
+7xm.xyz##^script:has-text(AdBlocker)
+!#else
+7xm.xyz##+js(rmnt, script, AdBlocker)
+!#endif
 
 ! ytms.one popup
 ytms.one##+js(aopr, BetterJsPop)
@@ -4678,3 +4684,14 @@ blackmod.net##+js(refresh-defuser)
 ! https://github.com/uBlockOrigin/uAssets/issues/19838
 comidacaseira.me###colunas:style(display: block !important;)
 comidacaseira.me##+js(rpnt, script, IFRAME, BODY)
+
+! https://github.com/uBlockOrigin/uAssets/issues/19834
+fitnessbr.click,minhareceita.xyz###banner
+fitnessbr.click,minhareceita.xyz##+js(set, segundos, 0)
+
+! https://github.com/uBlockOrigin/uAssets/issues/19841
+!#if cap_html_filtering
+hes-goals.io##^script:has-text(AdBlock)
+!#else
+hes-goals.io##+js(rmnt, script, AdBlock)
+!#endif
