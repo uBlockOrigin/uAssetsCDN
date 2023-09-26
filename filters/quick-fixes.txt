@@ -1,7 +1,7 @@
 ! Title: uBlock₀ filters – Quick fixes
 ! Description: Immediate, temporary filters to fix websites
 ! Expires: 12 hours
-! Last modified: Tue, 26 Sep 2023 11:37:38 +0000
+! Last modified: Tue, 26 Sep 2023 17:45:00 +0000
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! Forums: https://github.com/uBlockOrigin/uAssets/issues
@@ -137,9 +137,11 @@ techcyan.com###btx1,#btx2:style(margin-right: -4000px !important;)
 ||upshrink.in^$frame,1p
 
 ! https://github.com/uBlockOrigin/uAssets/discussions/17361#discussioncomment-6960192
-btcbitco.in,btcsatoshi.net,wiour.com##+js(nowoif, ?key=)
-/invoke.js$script,redirect-rule=noop.js,domain=btcbitco.in|btcsatoshi.net|wiour.com
-||cryptocoinsad.com/ads/js/popunder.js$script,redirect=noop.js,domain=btcbitco.in|btcsatoshi.net|wiour.com
+btcbitco.in,btcsatoshi.net,crypto4yu.com,readbitcoin.org,wiour.com##+js(nowoif, ?key=)
+/invoke.js$script,redirect-rule=noop.js,domain=btcbitco.in|btcsatoshi.net|crypto4yu.com|readbitcoin.org|wiour.com
+||cryptocoinsad.com/ads/js/popunder.js$script,redirect=noop.js,domain=btcbitco.in|btcsatoshi.net|crypto4yu.com|readbitcoin.org|wiour.com
+||acceptable.a-ads.com^$frame,redirect-rule=noop.html,domain=btcbitco.in|btcsatoshi.net|crypto4yu.com|readbitcoin.org|wiour.com
+btcbitco.in,btcsatoshi.net,crypto4yu.com,readbitcoin.org,wiour.com##div.text-center[id]:style(height: 100px !important;)
 
 ! https://github.com/easylist/easylistgermany/issues/216
 chip.de##div[class] > a:is(a[href*="https://x.chip.de/intern/dl/?url="], a[href*="https://www.chip.de/downloads/"]):has(div img[src*="https://im.chip.de/ii/"]):upward(1)
@@ -152,9 +154,8 @@ apkmirror.com##^script:has-text(/style:last-of-type|:empty|APKM\..+?\.innerHTML/
 apkmirror.com##+js(rmnt, script, /style:last-of-type|:empty|APKM\..+?\.innerHTML/)
 !#endif
 
-! https://github.com/uBlockOrigin/uAssets/issues/19767
-lifestyle.bg,money.bg,news.bg,topsport.bg,webcafe.bg##+js(nostif, /adblock|location|0x/i)
-lifestyle.bg,money.bg,news.bg,topsport.bg,webcafe.bg##+js(rmnt, script, /confirm|ublock/i)
+! https://github.com/uBlockOrigin/uAssets/issues/19855
+lifestyle.bg,money.bg,news.bg,topsport.bg,webcafe.bg##+js(rmnt, script, join)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/19817 - Remove after 2023-09-28
 rookieroad.com#@#body > div #sticky-footer:upward(body > div)
@@ -180,3 +181,37 @@ philips-hue.com##+js(set, cockieConsentManagement, noopFunc)
 ! https://github.com/uBlockOrigin/uAssets/issues/7636#issuecomment-1735168592
 2.87.160.7$badfilter
 ||2.87.160.7^
+
+! https://github.com/uBlockOrigin/uAssets/issues/19872 - To be fixed by EasyList
+@@||web-ads.pulse.weatherbug.net/api/ads/targeting^$xhr,3p,domain=weatherbug.com
+
+! https://github.com/uBlockOrigin/uAssets/issues/14296 - Remove after 2023-10-01
+soft98.ir,~forum.soft98.ir##+js(aeld, click, [native code])
+||img.soft98.ir^$image,1p,redirect-rule=1x1.gif
+@@||soft98.ir^$ghide
+soft98.ir,~forum.soft98.ir##+js(window-close-if, /link-)
+linkdoni.soft98.ir##html:remove()
+!#if cap_html_filtering
+linkdoni.soft98.ir##^body,title
+!#endif
+sysban.ir##+js(window-close-if, /telephone-service)
+smostafa.ir##+js(window-close-if, /^/)
+coffeete.ir##+js(window-close-if, /soft98)
+||cdn.hostdl.com/goto/soft98^$doc,csp=script-src
+cdn.hostdl.com##^responseheader(location)
+cdn.hostdl.com##:matches-path(soft98) html:remove()
+||iranicard.ir^$doc,removeparam=utm_source
+||iranicard.ir^$doc,removeparam=utm_campaign
+||iranicard.ir/payments/shopping/amazon/?utm_medium=Banner^$doc,csp=script-src
+iranicard.ir##:matches-path(/utm_medium=Banner/i) html:remove()
+||faradars.org^$doc,removeparam=utm_source
+||faradars.org^$doc,removeparam=utm_campaign
+||faradars.org/explore?orderby=views&*&utm_medium=banner-kaprila^$doc,csp=script-src
+faradars.org##:matches-path(/utm_medium=banner-kaprila/i) html:remove()
+||cxchief.com^$doc,removeparam=utm_source
+||cxchief.com^$doc,removeparam=utm_campaign
+||cxchief.com^$doc,removeparam=utm_content
+||cxchief.com/fa/?utm_medium=adv^$doc,csp=script-src
+cxchief.com##:matches-path(/utm_medium=adv/i) html:remove()
+||smostafa.ir/?utm_source=footer^$doc,csp=script-src
+smostafa.ir##:matches-path(/utm_source=footer/i) html:remove()
