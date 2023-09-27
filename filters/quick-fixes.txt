@@ -1,14 +1,14 @@
 ! Title: uBlock₀ filters – Quick fixes
 ! Description: Immediate, temporary filters to fix websites
 ! Expires: 12 hours
-! Last modified: Wed, 27 Sep 2023 12:14:56 +0000
+! Last modified: Wed, 27 Sep 2023 18:22:52 +0000
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! Forums: https://github.com/uBlockOrigin/uAssets/issues
 
 ! aternos anti adb
 aternos.org##.header-center:style(margin-top:-5000px !important;)
-aternos.org##.sidebar:style(width: 1.745px !important; padding: 0.002em !important;)
+aternos.org##.sidebar:style(width: 1.745px !important; padding: 0.004em !important;)
 aternos.org##.ad-dfp:style(min-height: 0.1485mm !important; height: 0.1485mm !important;)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/11152
@@ -140,8 +140,9 @@ btcbitco.in,btcsatoshi.net,crypto4yu.com,readbitcoin.org,wiour.com##+js(nowoif, 
 btcbitco.in,btcsatoshi.net,crypto4yu.com,readbitcoin.org,wiour.com##div.text-center[id]:style(height: 100px !important;)
 
 ! https://github.com/easylist/easylistgermany/issues/216
-/im\.chip\.de\/ii\/[0-9\/]{14,17}\/[a-zA-Z0-9]{4,9}\-[a-zA-Z0-9]{3,6}\-[a-zA-Z0-9\-]{20,32}\..*&hash=[a-z0-9]{60,}/$image,xhr,match-case,1p,domain=chip.de
+/im\.chip\.de\/ii\/[0-9\/]{14,17}\/[a-zA-Z0-9]{4,9}\-[a-zA-Z0-9]{3,6}\-[a-zA-Z0-9]{3,6}\-([a-zA-Z0-9]{3,6}\-)?([a-zA-Z0-9]{3,6}\-)?[a-zA-Z0-9]{16}\..*?im=Resize.*&hash=[a-z0-9]{60,}/$image,xhr,match-case,1p,domain=chip.de
 @@/im\.chip\.de\/ii\/[0-9\/]{14,17}\/.*(logo|launcher|player|tool|messenger|game|microsoft|windows).*&hash=[a-z0-9]{64}/$image,xhr,1p,domain=chip.de
+chip.de#@#a[href^="https://im.chip.de/"]
 ! https://github.com/uBlockOrigin/uAssets/issues/6587
 chip.de##.js_download_button > a.Button--Download[href*="withinstaller"][href*="lastchanged"]:upward(1)
 
@@ -152,9 +153,9 @@ apkmirror.com##+js(rmnt, script, /style:last-of-type|:empty|APKM\..+?\.innerHTML
 !#endif
 
 ! https://github.com/uBlockOrigin/uAssets/issues/19855
-lifestyle.bg,money.bg,news.bg,topsport.bg,webcafe.bg##^script:has-text(/charAt|innerHTML|appendChild|contains|join/)
+lifestyle.bg,money.bg,news.bg,topsport.bg,webcafe.bg##^script:has-text(/charAt|innerHTML|appendChild|contains|join|jQuery.*length/)
 !#if !cap_html_filtering
-lifestyle.bg,money.bg,news.bg,topsport.bg,webcafe.bg##+js(rmnt, script, /charAt|innerHTML|appendChild|contains|join/)
+lifestyle.bg,money.bg,news.bg,topsport.bg,webcafe.bg##+js(rmnt, script, /charAt|innerHTML|appendChild|contains|join|jQuery.*length/)
 !#endif
 
 ! https://github.com/uBlockOrigin/uAssets/issues/19817 - Remove after 2023-09-28
@@ -228,3 +229,6 @@ smostafa.ir##:matches-path(/utm_source=footer/i) html:remove()
 @@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$script,xhr,domain=tenbizt.com|tvreport.co.kr|newautopost.co.kr|mememedia.co.kr
 tenbizt.com,tvreport.co.kr,newautopost.co.kr,mememedia.co.kr##+js(set, dable, {})
 tenbizt.com,tvreport.co.kr,newautopost.co.kr,mememedia.co.kr##ad-shield-inventory
+
+! unbreak streamtape. to etc
+streamtape.*#@#^script:has-text(/0x|\\x/)
