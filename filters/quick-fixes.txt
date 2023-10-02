@@ -1,7 +1,7 @@
 ! Title: uBlock₀ filters – Quick fixes
 ! Description: Immediate, temporary filters to fix websites
 ! Expires: 12 hours
-! Last modified: Sun, 01 Oct 2023 12:21:42 +0000
+! Last modified: Mon, 02 Oct 2023 10:26:53 +0000
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! Forums: https://github.com/uBlockOrigin/uAssets/issues
@@ -84,7 +84,6 @@ plagiarismchecker.co##[class^="tata"], [class^="baba"]
 plagiarismchecker.co##.col-md-9 > section + p + section[class]
 plagiarismchecker.co##[class][style*="width"][style*="margin"][style*="auto"]:has(img[src^="https://www.plagiarismchecker.co/"])
 
-! https://www.reddit.com/r/uBlockOrigin/comments/169iri2/youtube_antiadblock_and_ads_september_04_2023/jzkgsjz/
 ! https://www.reddit.com/r/uBlockOrigin/comments/16ncj4f/
 ! https://www.reddit.com/r/uBlockOrigin/comments/16lmeri/youtube_antiadblock_and_ads_september_18_2023/k1ow2es/
 ! https://old.reddit.com/r/uBlockOrigin/comments/16lmeri/youtube_antiadblock_and_ads_september_18_2023/k1uf2s1/
@@ -93,12 +92,7 @@ youtube.com##+js(trusted-replace-fetch-response, /\"adSlots.*?\}\]\}\}\]\,/, , p
 youtube.com##+js(trusted-replace-fetch-response, /\"playerAds.*?\}\}\]\,/, , player?key=)
 youtube.com##+js(json-prune-xhr-response, [].playerResponse.adPlacements [].playerResponse.playerAds [].playerResponse.adSlots playerResponse.adPlacements playerResponse.playerAds playerResponse.adSlots adPlacements playerAds adSlots, , propsToMatch, url:/player\?key=|watch\?v=|youtubei\/v1\/player/)
 youtube.com,youtubekids.com,youtube-nocookie.com#@#+js(json-prune-xhr-response, [].playerResponse.adPlacements [].playerResponse.playerAds [].playerResponse.adSlots playerResponse.adPlacements playerResponse.playerAds playerResponse.adSlots adPlacements playerAds adSlots, , propsToMatch, url:/player\?key=|watch\?key=|youtubei\/v1\/player/)
-youtube.com,youtubekids.com,youtube-nocookie.com#@#+js(json-prune-xhr-response, [].playerResponse.adPlacements [].playerResponse.playerAds [].playerResponse.adSlots playerResponse.adPlacements playerResponse.playerAds playerResponse.adSlots adPlacements playerAds adSlots)
-youtube.com,youtubekids.com,youtube-nocookie.com#@#+js(rpnt, script, /(\(function serverContract\(\)|var yterr|var _F_cssRowKey)/, 'const jsonPruner=obj=>{for(k of["playerAds","adPlacements","adSlots"]){obj[k]=[];}return obj;};const pruner=(text,url)=>{let json=JSON.parse(text);if(url.includes("player?key=")){return JSON.stringify(jsonPruner(json));}else{let newJSON=[];for(obj of json){if("playerResponse"in obj){obj["playerResponse"]=jsonPruner(obj["playerResponse"]);}newJSON.push(obj);}return JSON.stringify(newJSON);}};const urlFromArg=arg=>{if(typeof arg==="string"){return arg;}if(arg instanceof Request){return arg.url;}return String(arg);};const realFetch=window.fetch;window.fetch=new Proxy(window.fetch,{apply:function(target,thisArg,args){let url=urlFromArg(args[0]);if(!(url.includes("player?key="))&&!(url.includes("watch?v="))){return Reflect.apply(target,thisArg,args);}return realFetch(...args).then(realResponse=>realResponse.text().then(text=>new Response(pruner(text,url),{status:realResponse.status,statusText:realResponse.statusText,headers:realResponse.headers,})));}});window.XMLHttpRequest.prototype.open=new Proxy(window.XMLHttpRequest.prototype.open,{apply:async(target,thisArg,args)=>{let url=urlFromArg(args[1]);if(!(url.includes("player?key="))&&!(url.includes("watch?v="))){return Reflect.apply(target,thisArg,args);}thisArg.addEventListener("readystatechange",function(){if(thisArg.readyState!==4){return;}const type=thisArg.responseType;if(type!==""&&type!=="text"){return;}const textin=thisArg.responseText;const textout=pruner(textin,url);if(textout===textin){return;}Object.defineProperty(thisArg,"response",{value:textout});Object.defineProperty(thisArg,"responseText",{value:textout});});return Reflect.apply(target,thisArg,args);}}); $1')
 youtubekids.com,youtube-nocookie.com##+js(json-prune, playerResponse.adPlacements playerResponse.playerAds playerResponse.adSlots adPlacements playerAds adSlots important)
-!#if ext_devbuild
-youtube.com,youtubekids.com,youtube-nocookie.com#@#+js(json-prune, playerResponse.adPlacements playerResponse.playerAds playerResponse.adSlots adPlacements playerAds adSlots, , /^(?=.*\.js)(?!.*[A-z]jb \S+polymer).*/)
-!#endif
 ! https://www.reddit.com/r/uBlockOrigin/comments/16lmeri/youtube_antiadblock_and_ads_september_18_2023/k1wl8df/
 !#if !cap_html_filtering
 !#if env_firefox
@@ -162,9 +156,6 @@ apkmirror.com##+js(rmnt, script, /style:last-of-type|:empty|APKM\..+?\.innerHTML
 lifestyle.bg,money.bg,news.bg,topsport.bg,webcafe.bg##+js(no-fetch-if, method:GET)
 lifestyle.bg,money.bg,news.bg,topsport.bg,webcafe.bg##+js(nostif, google)
 
-! https://github.com/uBlockOrigin/uAssets/issues/19817 - Remove after 2023-09-28
-rookieroad.com#@#body > div #sticky-footer:upward(body > div)
-
 ! https://github.com/AdguardTeam/AdguardFilters/issues/161459
 ||yimg.jp/images/listing/tool/yads/
 
@@ -173,9 +164,6 @@ sankakucomplex.com#@#.scad
 
 ! https://github.com/uBlockOrigin/uAssets/issues/19835
 ||linkvertise.com^$badfilter
-
-! https://github.com/uBlockOrigin/uAssets/issues/4014 - Remove after 2023-09-30
-@@||driverfix.com/land/*$frame,1p
 
 ! https://www.reddit.com/r/uBlockOrigin/comments/16s40os/cannot_vote_on_shreddit_with_ublock_origin_on/
 reddit.com#@#+js(no-fetch-if, url:/svc/shreddit method:POST)
@@ -187,52 +175,9 @@ philips-hue.com##+js(set, cockieConsentManagement, noopFunc)
 2.87.160.7$badfilter
 ||2.87.160.7^
 
-! https://github.com/uBlockOrigin/uAssets/issues/19872 - Remove after 2023-10-02
-@@||web-ads.pulse.weatherbug.net/api/ads/targeting^$xhr,3p,domain=weatherbug.com
-
-! https://github.com/uBlockOrigin/uAssets/issues/14296 - Remove after 2023-10-01
-soft98.ir,~forum.soft98.ir##+js(aeld, click, [native code])
-||img.soft98.ir^$image,1p,redirect-rule=1x1.gif
-@@||soft98.ir^$ghide
-soft98.ir,~forum.soft98.ir##+js(window-close-if, /link-)
-linkdoni.soft98.ir##html:remove()
-!#if cap_html_filtering
-linkdoni.soft98.ir##^body,title
-!#endif
-sysban.ir##+js(window-close-if, /telephone-service)
-smostafa.ir##+js(window-close-if, /^/)
-coffeete.ir##+js(window-close-if, /soft98)
-||cdn.hostdl.com/goto/soft98^$doc,csp=script-src
-cdn.hostdl.com##^responseheader(location)
-cdn.hostdl.com##:matches-path(soft98) html:remove()
-||iranicard.ir^$doc,removeparam=utm_source
-||iranicard.ir^$doc,removeparam=utm_campaign
-||iranicard.ir/payments/shopping/amazon/?utm_medium=Banner^$doc,csp=script-src
-iranicard.ir##:matches-path(/utm_medium=Banner/i) html:remove()
-||faradars.org^$doc,removeparam=utm_source
-||faradars.org^$doc,removeparam=utm_campaign
-||faradars.org/explore?orderby=views&*&utm_medium=banner-kaprila^$doc,csp=script-src
-faradars.org##:matches-path(/utm_medium=banner-kaprila/i) html:remove()
-||cxchief.com^$doc,removeparam=utm_source
-||cxchief.com^$doc,removeparam=utm_campaign
-||cxchief.com^$doc,removeparam=utm_content
-||cxchief.com/fa/?utm_medium=adv^$doc,csp=script-src
-cxchief.com##:matches-path(/utm_medium=adv/i) html:remove()
-||smostafa.ir/?utm_source=footer^$doc,csp=script-src
-smostafa.ir##:matches-path(/utm_source=footer/i) html:remove()
-
 ! https://www.reddit.com/r/uBlockOrigin/comments/16tc6dq/how_do_i_unblock_valid_scripts_across/
 ||clickdimensions.com^$3p,badfilter
 ||clickdimensions.com/ts.js
-
-! Ad-Shield - Remove after 2.10.2023
-*$frame,redirect-rule=noopframe,domain=tenbizt.com|tvreport.co.kr|newautopost.co.kr|mememedia.co.kr|mobilitytv.co.kr
-*$script,xhr,redirect-rule=noopjs,domain=tenbizt.com|tvreport.co.kr|newautopost.co.kr|mememedia.co.kr|mobilitytv.co.kr
-*$image,redirect-rule=1x1.gif,domain=tenbizt.com|tvreport.co.kr|newautopost.co.kr|mememedia.co.kr|mobilitytv.co.kr
-@@*$ghide,domain=tenbizt.com|tvreport.co.kr|newautopost.co.kr|mememedia.co.kr|mobilitytv.co.kr
-@@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$script,xhr,domain=tenbizt.com|tvreport.co.kr|newautopost.co.kr|mememedia.co.kr|mobilitytv.co.kr
-tenbizt.com,tvreport.co.kr,newautopost.co.kr,mememedia.co.kr,mobilitytv.co.kr##+js(set, dable, {})
-tenbizt.com,tvreport.co.kr,newautopost.co.kr,mememedia.co.kr,mobilitytv.co.kr##ad-shield-inventory
 
 ! unbreak streamtape. to etc
 streamtape.*#@#^script:has-text(/0x|\\x/)
@@ -241,18 +186,6 @@ streamtape.*#@#^script:has-text(/0x|\\x/)
 #@#.jeg_ad
 #@#.jeg_ad_top
 #@#.jnews_header_top_ads
-
-! homad - Remove after 2.10.2023
-welt.de,~dutyfarm.welt.de##div[id][style^="z-index: 2"][style*="margin"][style*="auto"][style*="top"][style$="px; position: absolute;"]:remove()
-
-! https://github.com/uBlockOrigin/uAssets/issues/19808 - Remove after 2.10.2023
-teltarif.de##+js(nostif, null), 10)
-!#if cap_html_filtering
-teltarif.de##^script:has-text(/getAdUnitPath|\.then\(eval\)|DisplayAcceptableAdIfAdblocked/)
-!#else
-teltarif.de##+js(rmnt, script, /getAdUnitPath|\.then\(eval\)|DisplayAcceptableAdIfAdblocked/)
-100percentfedup.com,thegatewaypundit.com##+js(rmnt, script, /==undefined.*body/)
-!#endif
 
 ! https://www.reddit.com/r/uBlockOrigin/comments/16unn3u/
 @@||jobillico.com/js/vuejs/gtag/gtag.js$script,1p
