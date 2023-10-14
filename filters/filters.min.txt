@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Expires: 5 days
-! Last modified: Sat, 14 Oct 2023 12:27:11 +0000
+! Last modified: Sat, 14 Oct 2023 18:10:07 +0000
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 !
@@ -28,10 +28,13 @@ youtube.com#@#+js(json-prune-fetch-response, [].playerResponse.adPlacements [].p
 youtube.com#@#+js(json-prune-fetch-response, [].playerResponse.adPlacements [].playerResponse.playerAds [].playerResponse.adSlots playerResponse.adPlacements playerResponse.playerAds playerResponse.adSlots adPlacements playerAds adSlots, , propsToMatch, url:player?key=)
 youtube.com#@#+js(json-prune-fetch-response, [].playerResponse.adPlacements [].playerResponse.playerAds [].playerResponse.adSlots playerResponse.adPlacements playerResponse.playerAds playerResponse.adSlots adPlacements playerAds adSlots, , propsToMatch, url:player?key= method:/post/i)
 youtube.com#@#+js(json-prune-fetch-response, [].playerResponse.adPlacements [].playerResponse.playerAds [].playerResponse.adSlots playerResponse.adPlacements playerResponse.playerAds playerResponse.adSlots adPlacements playerAds adSlots, , propsToMatch, url:player?key= method:/post/i bodyUsed:true)
-youtube.com##+js(json-prune-xhr-response, [].playerResponse.adPlacements [].playerResponse.playerAds [].playerResponse.adSlots playerResponse.adPlacements playerResponse.playerAds playerResponse.adSlots adPlacements playerAds adSlots, , propsToMatch, url:/player\?key=|watch\?v=|youtubei\/v1\/player/)
-youtube.com##+js(trusted-replace-fetch-response, /(GFEEDBACK.*?)"adSlots.*?\}\]\}\}\]\,/, $1, url:player?key=)
-youtube.com##+js(trusted-replace-fetch-response, /(GFEEDBACK.*?)"adPlacements.*?"\}\}\}\]\,/, $1, url:player?key=)
-youtube.com##+js(trusted-replace-fetch-response, /(GFEEDBACK.*?)"playerAds.*?\}\}\]\,/, $1, url:player?key=)
+www.youtube.com##+js(json-prune-xhr-response, [].playerResponse.adPlacements [].playerResponse.playerAds [].playerResponse.adSlots playerResponse.adPlacements playerResponse.playerAds playerResponse.adSlots adPlacements playerAds adSlots, , propsToMatch, url:/player\?key=|watch\?v=|youtubei\/v1\/player/)
+www.youtube.com##+js(trusted-replace-fetch-response, /"adSlots.*?SLOT_TYPE_PLAYER_BYTES.*?\}\]\}\}\]\,/, , url:player?key=)
+www.youtube.com##+js(trusted-replace-fetch-response, /"adPlacements.*?AD_PLACEMENT_KIND_START.*?"\}\}\}\]\,/, , url:player?key=)
+www.youtube.com##+js(trusted-replace-fetch-response, /"playerAds.*?"enabledEngageTypes":"(\d{1,2},)+\d".*?\}\}\]\,/, , url:player?key=)
+youtube.com#@#+js(trusted-replace-fetch-response, /(GFEEDBACK.*?)"adSlots.*?\}\]\}\}\]\,/, $1, url:player?key=)
+youtube.com#@#+js(trusted-replace-fetch-response, /(GFEEDBACK.*?)"adPlacements.*?"\}\}\}\]\,/, $1, url:player?key=)
+youtube.com#@#+js(trusted-replace-fetch-response, /(GFEEDBACK.*?)"playerAds.*?\}\}\]\,/, $1, url:player?key=)
 youtube.com#@#+js(json-prune, playerResponse.adPlacements playerResponse.playerAds playerResponse.adSlots adPlacements playerAds adSlots)
 youtube.com#@#+js(trusted-replace-fetch-response, /(videoplayback.*?)"adSlots.*?\}\]\}\}\]\,/, $1, url:player?key=)
 youtube.com#@#+js(trusted-replace-fetch-response, /(videoplayback.*?)"adPlacements.*?"\}\}\}\]\,/, $1, url:player?key=)
@@ -63,7 +66,7 @@ youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, ytInitialPlayerRespon
 youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, ytInitialPlayerResponse.adPlacements, undefined)
 youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, ytInitialPlayerResponse.adSlots, undefined)
 youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, playerResponse.adPlacements, undefined)
-music.youtube.com,youtubekids.com,youtube-nocookie.com##+js(json-prune, playerResponse.adPlacements playerResponse.playerAds playerResponse.adSlots adPlacements playerAds adSlots important)
+m.youtube.com,music.youtube.com,youtubekids.com,youtube-nocookie.com##+js(json-prune, playerResponse.adPlacements playerResponse.playerAds playerResponse.adSlots adPlacements playerAds adSlots important)
 youtube.com##.ytlr-horizontal-list-renderer__items > .yt-virtual-list__container > .yt-virtual-list__item--visible.yt-virtual-list__item--selected.yt-virtual-list__item:has-text(Ad)
 youtube.com###player [class*="suggested-action-badge-icon"]:upward(.ytp-suggested-action)
 ||googlevideo.com/initplayback?source=youtube*&c=TVHTML5&oad=$xhr,domain=youtube.com
@@ -217,11 +220,6 @@ g9g.eu##+js(aopr, adBlockDetected)
 ||twnmm.com/js/*/dfpad/*$script,redirect=noopjs
 allmusic.com##+js(no-fetch-if, ads)
 allmusic.com##.advertising
-! Spotted on routine testing of opensubtitles.org
-||104.197.199.227^$all
-opensubtitles.org##+js(acs, atob)
-opensubtitles.org###loginBoxSubs
-opensubtitles.org###network
 redtube.*###paid_tabs_list
 pornhub.*##div[id^="customSkin"]
 pornhub.*##div.container:style(margin-top: 0px !important)
@@ -645,7 +643,7 @@ xbooru.com##a[href^="https://xbooru.com/c.html"]
 @@||kbb.com^$ghide
 kbb.com##[id^="kbbAds"], [id^="kbbAds"] + p
 ! Fingerprint2 popups
-dfiles.eu,downsub.com,j.gs,macserial.com,microify.com,minecraft-forum.net,onmovies.*,opensubtitles.org,pirateproxy.*,psarips.*,solidfiles.com,thepiratebay.org,uptobox.com##+js(aopw, Fingerprint2)
+dfiles.eu,downsub.com,j.gs,macserial.com,microify.com,minecraft-forum.net,onmovies.*,pirateproxy.*,psarips.*,solidfiles.com,thepiratebay.org,uptobox.com##+js(aopw, Fingerprint2)
 ||livewidget.net^
 solidfiles.com##.remove
 thepiratebay.org##[href^="http://www.coiwqe.site/"]
@@ -8049,11 +8047,6 @@ ayobelajarbareng.com,semawur.com##+js(nano-sib, , *, 0)
 semawur.com###main > .text-center > a[href] > img
 ||semawur.com/download$image
 cuevana2.io##+js(aopr, decodeURI)
-opensubtitles.org##+js(nano-sib)
-opensubtitles.org##+js(ra, data-ff-code)
-opensubtitles.org##+js(nowoif)
-opensubtitles.org##.ui-dialog:has-text(extension)
-opensubtitles.org##.ui-front.ui-widget-overlay
 @@||linkvertise.com^$ghide
 linkvertise.com##+js(acs, addEventListener, DOMNodeRemoved)
 linkvertise.com##+js(acs, document.dispatchEvent, CustomEvent)
@@ -16879,7 +16872,7 @@ ac-illust.com,photo-ac.com###eachDownloadedModal .ac-btn[href^="https://premium.
 ac-illust.com,photo-ac.com##.modal-backdrop
 ac-illust.com,photo-ac.com##body.modal-open *:style(filter: none!important;)
 ! PopAds-sites
-141jav.com,560pmovie.com,9xmovie.*,ahdafnews.blogspot.com,akuma.moe,androidadult.com,animestotais.xyz,animeyt.es,aotonline.org,askim-bg.com,avcrempie.com,belowporn.com,bobsvagene.club,coolcast2.com,countylocalnews.com,cuevana3.fan,cumception.com,curvaweb.com,daughtertraining.com,estrenosdoramas.net,everia.club,fapptime.com,filmesonlinexhd.biz,flizmovies.*,filmovitica.com,flyfaucet.com,gamesmountain.com,hdmoviesfair.*,hdmoviesflix.*,hesgoal.tv,hornylips.com,iwatchfriendsonline.net,javf.net,javleak.com,jiofiles.org,jp-films.com,jpop80ss3.blogspot.com,kantotinyo.com,legendei.net,lovesomecommunity.com,mangaboat.com,mangagenki.me,masaporn.xyz,megapornpics.com,meusanimes.net,mimaletamusical.blogspot.com,moredesi.com,moviesverse.*,movieswbb.com,nerdiess.com,novelssites.com,nsfwr34.com,nu6i-bg-net.com,ohjav.com,on9.stream,onepiece-mangaonline.com,onlyfullporn.video,originporn.com,pickteenz.com,pornoflux.com,porntn.com,portugues-fcr.blogspot.com,poseyoung.com,r18.best,ragnaru.net,rapelust.com,read-onepiece.net,rockdilla.com,rojadirectatvenvivo.com,serijefilmovi.com,sexcomics.me,sexdicted.com,sexgay18.com,sgpics.net,shahid4uu.*,shemale6.com,silverpic.com,socceron.name,streamcenter.pro,teamos.xyz,teen-wave.com,tgo-tv.co,thaihotmodels.com,theblueclit.com,thelastdisaster.vip,themoviesflix.*,themoviezflix.co.in,themoviesverse.co,thesexcloud.com,tightsexteens.com,tvseries.video,u4m.*,vidz7.com,w-hentai.com,wecast.to,witanime.best,xfantasy.su,xn--xvideos-espaol-1nb.com,yayanimes.net,youjax.com,ytstv.me,ytstvmovies.xyz##+js(aopw, _pop)
+141jav.com,560pmovie.com,9xmovie.*,ahdafnews.blogspot.com,akuma.moe,androidadult.com,animestotais.xyz,animeyt.es,aotonline.org,askim-bg.com,avcrempie.com,backfirstwo.com,belowporn.com,bobsvagene.club,coolcast2.com,countylocalnews.com,cuevana3.fan,cumception.com,curvaweb.com,daughtertraining.com,estrenosdoramas.net,everia.club,fapptime.com,filmesonlinexhd.biz,flizmovies.*,filmovitica.com,flyfaucet.com,gamesmountain.com,hdmoviesfair.*,hdmoviesflix.*,hesgoal.tv,hornylips.com,iwatchfriendsonline.net,javf.net,javleak.com,jiofiles.org,jp-films.com,jpop80ss3.blogspot.com,kantotinyo.com,legendei.net,lovesomecommunity.com,mangaboat.com,mangagenki.me,masaporn.xyz,megapornpics.com,meusanimes.net,mimaletamusical.blogspot.com,moredesi.com,moviesverse.*,movieswbb.com,nerdiess.com,novelssites.com,nsfwr34.com,nu6i-bg-net.com,ohjav.com,on9.stream,onepiece-mangaonline.com,onlyfullporn.video,originporn.com,pickteenz.com,pornoflux.com,porntn.com,portugues-fcr.blogspot.com,poseyoung.com,r18.best,ragnaru.net,rapelust.com,read-onepiece.net,rockdilla.com,rojadirectatvenvivo.com,serijefilmovi.com,sexcomics.me,sexdicted.com,sexgay18.com,sgpics.net,shahid4uu.*,shemale6.com,silverpic.com,socceron.name,streamcenter.pro,teamos.xyz,teen-wave.com,tgo-tv.co,thaihotmodels.com,theblueclit.com,thelastdisaster.vip,themoviesflix.*,themoviezflix.co.in,themoviesverse.co,thesexcloud.com,tightsexteens.com,tvseries.video,u4m.*,vidz7.com,w-hentai.com,wecast.to,witanime.best,xfantasy.su,xn--xvideos-espaol-1nb.com,yayanimes.net,youjax.com,ytstv.me,ytstvmovies.xyz##+js(aopw, _pop)
 ! In case aopw, _pop is not reliable
 everia.club##+js(rmnt, script, /\[\'push\'\]/)
 9xmovie.*,everia.club,mangagenki.me,nerdiess.com,tgo-tv.co,u4m.*##^script[data-cfasync]:has-text(h=decodeURIComponent)
@@ -16891,7 +16884,7 @@ everia.club##+js(rmnt, script, /\[\'push\'\]/)
 *$script,3p,domain=moredesi.com,denyallow=google.com|wp.com|disqus.com|pinterest.com|fastlylb.net|fastly.net
 /^https:\/\/www\.[a-z]{8,14}\.com\/[a-z]{1,4}\.js$/$script,third-party,match-case,domain=~edu|~gov
 /^https:\/\/www\.(?!instagram)[a-z]{8,16}\.com\/(assets\/)?(scripts\/)?(api\/)?(?:[a-z]{2,10}[-.])?[a-z]{2,10}\.(?:min\.)?js$/$script,3p,match-case,domain=club|rapelust.com
-://www.*.com/*/scripts/*.min.css|$script,3p
+://www.*.com*/scripts/*.min.css|$script,3p
 ?_=e3&v=*&s=$script,3p,to=com
 ||pushtoast-a.akamaihd.net^$script,3p
 ||wgsxteihr.com^
@@ -22637,6 +22630,7 @@ player.theplatform.com##+js(disable-newtab-links)
 player.theplatform.com##+js(m3u-prune, tvessaiprod.nbcuni.com, /theplatform\.com\/.*?\.m3u8/)
 @@||assets.adobedtm.com/extensions/*/AppMeasurement.min.js$script,domain=www.nbc.com
 nbc.com##+js(json-prune, avails)
+nbc.com##+js(json-prune-fetch-response, avails)
 ||designparty.sx/advertises/
 ||kukaj.io/ooo/
 kukaj.io###gldprr
