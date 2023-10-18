@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Expires: 5 days
-! Last modified: Wed, 18 Oct 2023 05:46:20 +0000
+! Last modified: Wed, 18 Oct 2023 11:49:29 +0000
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 !
@@ -144,11 +144,13 @@ telexplorer.com.ar##+js(aost, Math.random, /injectedScript.*inlineScript/)
 designbump.com,thedesigninspiration.com##+js(aost, Math.random, /(?=.*onerror)(?=^(?!.*(https)))/)
 teltarif.de##+js(nostif, null), 10)
 !#if cap_html_filtering
-teltarif.de##^script:has-text(/getAdUnitPath|\.then\(eval\)|DisplayAcceptableAdIfAdblocked|\,eval\)\)\)\;/)
+teltarif.de##^script:has-text(/getAdUnitPath|\.then\(eval\)|DisplayAcceptableAdIfAdblocked|\,eval\)\)\)\;|\.join\(\'\'\)\}\;/)
 !#else
-teltarif.de##+js(rmnt, script, /getAdUnitPath|\.then\(eval\)|DisplayAcceptableAdIfAdblocked|\,eval\)\)\)\;/)
+teltarif.de##+js(rmnt, script, /getAdUnitPath|\.then\(eval\)|DisplayAcceptableAdIfAdblocked|\,eval\)\)\)\;|\.join\(\'\'\)\}\;/)
 100percentfedup.com,thegatewaypundit.com##+js(rmnt, script, /==undefined.*body/)
 !#endif
+.jpg|$script,xhr,1p,domain=teltarif.de
+teltarif.de##img[referrerpolicy="unsafe-url"][src^="/img/"][src$=".jpg"]
 whatfinger.com##+js(set, oeo, noopFunc)
 @@*$ghide,domain=themattwalshblog.com
 ||rddywd.com^$image,redirect-rule=1x1.gif
@@ -16417,6 +16419,8 @@ chicagobearshq.com,chicagobullshq.com,chicagosportshq.com,cubshq.com,tigernet.co
 ! ytube2dl. com popups
 ytube2dl.com##+js(aeld, , pop)
 xenvn.com##+js(nostif, ads)
+@@||xenvn.com^$ghide
+xenvn.com##.ad_block:style(visibility: hidden !important;)
 tvhai.org##+js(aeld, , open)
 plhqtvhay.xyz##+js(nosiif, 0x)
 ! glotorrents.* ads, popups
@@ -19880,6 +19884,7 @@ adshnk.com##+js(nano-sib, countdown, *, 0.02)
 businessnamegenerator.com##+js(nostif, gclid)
 @@||derstandard.at^$ghide
 @@||npttech.com/advertising.js$script,domain=derstandard.at
+derstandard.at##ad-container
 ||tirexo.*^$csp=default-src 'unsafe-inline' 'self' *.gstatic.com *.googleapis.com *.jquery.com
 tirexo.*##+js(nowoif)
 ||tirexo.*/main.js?v=$script,1p
