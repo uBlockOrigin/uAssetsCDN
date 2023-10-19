@@ -1,7 +1,8 @@
 ! Title: uBlock filters
+! Version: $TAGNAME
+! Last modified: Thu, 19 Oct 2023 18:34:55 +0000
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Expires: 5 days
-! Last modified: Thu, 19 Oct 2023 12:24:16 +0000
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 !
@@ -9,9 +10,10 @@
 ! GitHub pull requests: https://github.com/uBlockOrigin/uAssets/pulls
 ! *** uAssets:filters/filters.txt ***
 ! Title: uBlock₀ filters
+! Version: %version%
+! Last modified: %timestamp%
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Expires: 5 days
-! Last modified: %timestamp%
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 !
@@ -26,9 +28,10 @@ youtube.com##ytd-video-masthead-ad-advertiser-info-renderer,ytm-promoted-sparkle
 ! @@||youtube.com/get_video_info?*timedtext_editor$xhr,1p
 www.youtube.com##+js(json-prune-xhr-response, [].playerResponse.adPlacements [].playerResponse.playerAds [].playerResponse.adSlots playerResponse.adPlacements playerResponse.playerAds playerResponse.adSlots adPlacements playerAds adSlots, , propsToMatch, url:/player\?key=|watch\?v=|youtubei\/v1\/player/)
 !#if env_chromium
-www.youtube.com##+js(trusted-replace-fetch-response, /(itag=.*?)"adSlots.*?\}\]\}\}\]\,/, $1, url:player?key=)
-www.youtube.com##+js(trusted-replace-fetch-response, /(itag=.*?)"adPlacements.*?"\}\}\}\]\,/, $1, url:player?key=)
-www.youtube.com##+js(trusted-replace-fetch-response, /(itag=.*?)"playerAds.*?\}\}\]\,/, $1, url:player?key=)
+www.youtube.com##+js(trusted-replace-fetch-response, /"adPlacements.*?\/(aclk\?sa=L&ai=C[-_0-9A-Za-z]+__________|get_midroll_info\S+&token=ALH).*?"\}\}\}\]\,/, , url:player?key=)
+www.youtube.com#@#+js(trusted-replace-fetch-response, /(itag=.*?)"adSlots.*?\}\]\}\}\]\,/, $1, url:player?key=)
+www.youtube.com#@#+js(trusted-replace-fetch-response, /(itag=.*?)"adPlacements.*?"\}\}\}\]\,/, $1, url:player?key=)
+www.youtube.com#@#+js(trusted-replace-fetch-response, /(itag=.*?)"playerAds.*?\}\}\]\,/, $1, url:player?key=)
 !#endif
 www.youtube.com#@#+js(trusted-replace-fetch-response, /("lastModified":"[^"]{3}.*?)"adSlots.*?\}\]\}\}\]\,/, $1, url:player?key=)
 www.youtube.com#@#+js(trusted-replace-fetch-response, /("lastModified":"[^"]{3}.*?)"adPlacements.*?"\}\}\}\]\,/, $1, url:player?key=)
@@ -65,8 +68,6 @@ youtube.com#@#+js(trusted-replace-fetch-response, /(youtubei.*?)"playerAds.*?\}\
 youtube.com#@#+js(trusted-replace-fetch-response, /\"adSlots.*?true.*?\}\]\}\}\]\,/, , url:player?key= method:/post/i)
 youtube.com#@#+js(trusted-replace-fetch-response, /\"adPlacements.*?ytimg.*?\"\}\}\}\]\,/, , url:player?key=)
 youtube.com#@#+js(trusted-replace-fetch-response, /\"playerAds.*?\"enabledEngageTypes\":\"\d.*?\}\}\]\,/, , url:player?key=)
-youtube.com#@#+js(trusted-replace-fetch-response, /\"adPlacements.*?true.*?\"\}\}\}\]\,/, , url:player?key= method:/post/i)
-youtube.com#@#+js(trusted-replace-fetch-response, /\"playerAds.*?true.*?\}\}\]\,/, , url:player?key= method:/post/i)
 www.youtube.com##+js(set, yt.config_.EXPERIMENT_FLAGS.ab_det_gen_re, false)
 youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, ytInitialPlayerResponse.playerAds, undefined)
 youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, ytInitialPlayerResponse.adPlacements, undefined)
@@ -9104,8 +9105,6 @@ osuskinner.com##.ad-300-250, .ad-billboard
 wickedspot.org##+js(aopr, b2a)
 wickedspot.org##+js(aopw, _pop)
 *$script,redirect-rule=noopjs,domain=sportif.id
-@@||torrentmegafilmes.tv^$ghide
-torrentmegafilmes.tv##+js(nowoif)
 @@||erai-raws.info^$ghide
 ##[href*="//agacelebir.com"]
 @@||smashresume.com^$ghide
@@ -11101,6 +11100,7 @@ graphicdesignresources.net##+js(nosiif, visibility, 1000)
 ! ||spotify.com/storage-resolve/files/audio/interactive/*$xhr,domain=open.spotify.com
 ||akamaized.net/audio/$media,redirect=noop-1s.mp4:10,from=open.spotify.com
 ||scdn.co/audio/$media,redirect=noop-1s.mp4:10,domain=open.spotify.com
+||spotifycdn.com/audio/$media,redirect=noop-1s.mp4:10,domain=open.spotify.com
 open.spotify.com##[href^="https://adclick.g.doubleclick.net/"]
 open.spotify.com###leaderboard-ad-element
 ilgeniodellostreaming.*##+js(aopr, AaDetector)
@@ -22714,7 +22714,6 @@ torrentgalaxy.to##div[class="col-lg-2 col-sm-12 smallhide"] > center > div[style
 torrentgalaxy.to###panelmain > .panel-body > div:first-child > a[href^="/"][href*="?"]:has(img):upward(1)
 torrentgalaxy.to###panelmain > .panel-body > div[position][style]:not([id], [class]):first-child:has(a[href^="/"][href*="?"] img)
 torrentgalaxy.to###panelmain > .panel-body > div[style="margin-bottom:10px;"]:has(a[href^="/"][href*="?"] img)
-torrentgalaxy.to##.tgxtablerow:has(.fa-adversal)
 gplastra.com##+js(noeval-if, ads)
 eurosport.*##.ad
 kurakura21.space##+js(noeval-if, UserCustomPop)
@@ -23081,10 +23080,10 @@ creditsalah.com,urlking.xyz##+js(nano-sib, _0x, *, 0.02)
 creditsalah.com,urlking.xyz##.safeb:style(display: block !important;)
 creditsalah.com,urlking.xyz##.post-footer, #sidebar-container, .all-flex, .post-inner-area > .entry-title, #breadcrumb, #lixXO-SmenuTested, .section-sticky, .cookies-show, #footer-wrapper, p, h2, h1, #sidebar-wrapper, .post-nav, .entry-labels, .page-header
 beastplayer.tk,jiolive.tv,livesportsclub.pages.dev,madlink.biz,madstream.live,rogstream.fun###AdbModel
-livesportsclub.pages.dev,lolstreamz.pages.dev,madxsia.live,rogstream.fun,rogstreamlive.eu.org##.ts-modal-overlay
-livesportsclub.pages.dev,lolstreamz.pages.dev,madxsia.live,rogstream.fun,rogstreamlive.eu.org##body:style(overflow: auto !important;)
+livesportsclub.pages.dev,lolstreamz.pages.dev,madxsia.live,rogsports.pages.dev,rogstream.fun,rogstreamlive.eu.org##.ts-modal-overlay
+livesportsclub.pages.dev,lolstreamz.pages.dev,madxsia.live,rogsports.pages.dev,rogstream.fun,rogstreamlive.eu.org##body:style(overflow: auto !important;)
 ! telegram app download annoyance
-beastplayer.tk,livesportsclub.pages.dev,lolstreamz.pages.dev,madlink.biz,rogstream.fun##+js(set, confirm, noopFunc)
+beastplayer.tk,livesportsclub.pages.dev,lolstreamz.pages.dev,madlink.biz,rogsports.pages.dev,rogstream.fun##+js(set, confirm, noopFunc)
 jornaldigital.org##+js(set-cookie, Ads, 2)
 ||cdn.jsdelivr.net/npm/devtools-detector$script,domain=superembeds.com
 ||media.toxtren.com^$all
