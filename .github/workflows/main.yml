@@ -21,6 +21,10 @@ jobs:
           exit 0
       - name: Clone uAssetsCDN
         uses: actions/checkout@v3
+      - name: Generate version string
+        run: |
+          TAGNAME=$(date -u "+%Y.%-m.%-d.")$(date -u "+%H*60+%M" | bc)
+          echo "Version string is $TAGNAME"
       - name: Copy uAssets/filters to uAssetsCDN
         run: |
           TMPDIR=$(mktemp -d)
@@ -34,13 +38,15 @@ jobs:
           cp -v $TMPDIR/assets/assets*.json ublock/
       - name: Commit changes, if any
         run: |
-          if [[ -n $(git diff) ]]; then
-            git config user.name "GitHub Actions Bot"
-            git config user.email "<>"
-            git add -u filters/ ublock/ thirdparties/
-            git commit -m "Update all CDN assets"
-            git push origin main
-            TAGNAME=$(date -u "+%Y.%-m.%-d.")$(date -u "+%H*60+%M" | bc)
-            git tag $TAGNAME
-            git push origin $TAGNAME
-          fi
+          if [[ -z $(git diff) ]]; then exit 0; fi
+          git diff --name-only | \
+              while read file; \
+                sed -i '1,10s/^! Version: %version%$/! Version: $TAGNAME/' $file; \
+              done
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
+          git add -u filters/ ublock/ thirdparties/
+          git commit -m "Update all CDN assets"
+          git push origin main
+          git tag $TAGNAME
+          git push origin $TAGNAME
