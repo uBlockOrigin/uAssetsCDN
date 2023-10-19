@@ -40,7 +40,7 @@ jobs:
         run: |
           if [[ -z $(git diff) ]]; then exit 0; fi
           git diff --name-only | \
-              while read file; \
+              while read file; do \
                 sed -i '1,10s/^! Version: %version%$/! Version: $TAGNAME/' $file; \
               done
           git config user.name "GitHub Actions Bot"
