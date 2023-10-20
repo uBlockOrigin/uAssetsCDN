@@ -24,6 +24,7 @@ jobs:
       - name: Generate version string
         run: |
           TAGNAME=$(date -u "+%Y.%-m.%-d.")$(date -u "+%H*60+%M" | bc)
+          echo "TAGNAME=$TAGNAME" >> $GITHUB_ENV
           echo "Version string is $TAGNAME"
       - name: Copy uAssets/filters to uAssetsCDN
         run: |
@@ -41,7 +42,7 @@ jobs:
           if [[ -z $(git diff) ]]; then exit 0; fi
           git diff --name-only | \
               while read file; do \
-                sed -i "1,10s/^! Version: %version%$/! Version: $TAGNAME/" $file; \
+                sed -i "1,10s/^! Version: %version%$/! Version: ${{ env.TAGNAME }}/" $file; \
               done
           git config user.name "GitHub Actions Bot"
           git config user.email "<>"
