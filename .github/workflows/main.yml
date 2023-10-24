@@ -15,7 +15,8 @@ jobs:
           if [[ "$GITHUB_REPOSITORY_OWNER" != "uBlockOrigin" ]]; then
             echo "This GitHub Action is meant to deliver filter lists for uBO."
             echo "You shouldn't need to run this GitHub Action in your fork."
-            echo "If you do, please customize the cron expression above."
+            echo "If you do, please customize the cron expression above, and"
+            echo "the URLs below."
             exit 1
           fi
           exit 0
@@ -26,6 +27,11 @@ jobs:
           TAGNAME=$(date -u "+%Y.%-m.%-d.")$(date -u "+%H*60+%M" | bc)
           echo "TAGNAME=$TAGNAME" >> $GITHUB_ENV
           echo "Version string is $TAGNAME"
+      - name: Copy shell script from uAssets
+        run: |
+          TMPDIR=$(mktemp -d)
+          git clone --depth=1 --single-branch --branch=master https://github.com/uBlockOrigin/uAssets.git $TMPDIR
+          cp -v $TMPDIR/tools/make-diffpatch.sh .
       - name: Copy uAssets/filters to uAssetsCDN
         run: |
           TMPDIR=$(mktemp -d)
@@ -35,18 +41,13 @@ jobs:
       - name: Copy uBlock/assets*.json to uAssetsCDN
         run: |
           TMPDIR=$(mktemp -d)
-          git clone --depth=1 https://github.com/gorhill/uBlock.git $TMPDIR
+          git clone --depth=1 -single-branch --branch=master https://github.com/gorhill/uBlock.git $TMPDIR
           cp -v $TMPDIR/assets/assets*.json ublock/
       - name: Commit changes, if any
         run: |
-          git diff --name-only | \
-              while read file; do \
-                if [[ -z $(git diff -I '^! Version: ' $file) ]]; then continue; fi; \
-                sed -i "1,10s/^! Version: %version%$/! Version: ${{ env.TAGNAME }}/" $file; \
-                git add -u $file; \
-              done
+          ./make-diffpatch.sh "${{ env.TAGNAME }}"
           if [[ -z $(git diff --name-only --cached) ]]; then exit 0; fi
-          git config user.name "GitHub Actions Bot"
+          git config user.name "GitHub Actions: main"
           git config user.email "<>"
           git commit -m "Update modified CDN assets to ${{ env.TAGNAME }}"
           git push origin main
