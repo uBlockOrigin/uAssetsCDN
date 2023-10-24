@@ -39,14 +39,15 @@ jobs:
           cp -v $TMPDIR/assets/assets*.json ublock/
       - name: Commit changes, if any
         run: |
-          if [[ -z $(git diff) ]]; then exit 0; fi
           git diff --name-only | \
               while read file; do \
+                if [[ -z $(git diff -I '^! Version: ') ]]; then continue; fi; \
                 sed -i "1,10s/^! Version: %version%$/! Version: ${{ env.TAGNAME }}/" $file; \
+                git add -u $file; \
               done
+          if [[ -z $(git diff --name-only --cached) ]]; then exit 0; fi
           git config user.name "GitHub Actions Bot"
           git config user.email "<>"
-          git add -u filters/ ublock/ thirdparties/
           git commit -m "Update all CDN assets to ${{ env.TAGNAME }}"
           git push origin main
           git tag ${{ env.TAGNAME }}
