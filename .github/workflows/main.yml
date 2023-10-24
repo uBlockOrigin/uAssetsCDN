@@ -41,7 +41,7 @@ jobs:
         run: |
           git diff --name-only | \
               while read file; do \
-                if [[ -z $(git diff -I '^! Version: ') ]]; then continue; fi; \
+                if [[ -z $(git diff -I '^! Version: ' $file) ]]; then continue; fi; \
                 sed -i "1,10s/^! Version: %version%$/! Version: ${{ env.TAGNAME }}/" $file; \
                 git add -u $file; \
               done
