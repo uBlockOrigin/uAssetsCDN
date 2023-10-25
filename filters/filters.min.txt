@@ -1,7 +1,7 @@
 ! Title: uBlock filters
-! Version: 2023.10.25.776
-! Last modified: Wed, 25 Oct 2023 11:13:23 +0000
-! Diff-Path: ../patches/2023.10.25.776.patch
+! Version: 2023.10.25.1127
+! Last modified: Wed, 25 Oct 2023 18:26:52 +0000
+! Diff-Path: ../patches/2023.10.25.1127.patch
 ! Diff-Name: ublock-filters
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Expires: 5 days
@@ -8353,6 +8353,7 @@ upzone.cc##+js(acs, document.getElementById, undefined)
 @@||kikiers.com^$script,1p
 @@||cdntvn.pl^$script,domain=player.pl
 @@||player.pl^$cname
+@@||player.pl^$shide
 /ad.xml$xhr,badfilter
 player.pl#@#+js(json-prune, movie.advertising.ad_server)
 $xhr,redirect-rule=noopjs,domain=player.pl
@@ -11282,8 +11283,8 @@ dcode.fr##div[id^="div-gpt-ad"]
 @@||dcode.fr$xhr,1p
 ggbases.com##+js(acs, document.querySelectorAll, popMagic)
 *$xhr,redirect-rule=nooptext,domain=ctrlv.*
-@@||ctrlv.*/$script,1p
-ctrlv.link##a.download:nth-of-type(2)
+ctrlv.*##a.download[target="_blank"]:not(a[href*="ctrlv."]):remove()
+ctrlv.*##+js(set, uBlockOriginDetected, false)
 fikiri.net##+js(nostif, mdp)
 @@||librevpn.org^$script,1p
 @@||mhktricks.org^$ghide
@@ -19354,28 +19355,35 @@ freethemesy.com##form[id]:style(display: block !important;)
 freethemesy.com###download, #download-button, #main-download:others()
 freethemesy.com##.cf.main-content.col-8:style(margin-top: 400px !important;)
 freethemesy.com##+js(trusted-click-element, #download-button > input)
-freethemesy.com##+js(trusted-click-element, #main-download, , 500)
 freethemesy.com##+js(trusted-click-element, #download)
 freethemesy.com##+js(trusted-click-element, [value="Download"])
 freethemesy.com##+js(rpnt, script, inline', block')
 freethemesy.com##+js(rmnt, script, replaceChild)
 freethemesy.com##+js(rmnt, #text, /^AD:/)
-httpmovies.online,namemeaningbengali.com,techyzero.com##+js(trusted-click-element, .butt, , 1000)
+httpmovies.online,namemeaningbengali.com,techyzero.com##+js(trusted-click-element, .butt, , 1500)
 httpmovies.online,namemeaningbengali.com,techyzero.com##.butt:style(margin-top: 420px !important;)
 httpmovies.online,namemeaningbengali.com,techyzero.com##.butt:others()
+! psa.wf Download Shorteners
 enit.in,financerites.com##+js(nostif, , 5)
 enit.in##+js(nowoif)
 enit.in##+js(set, blurred, false)
-financerites.com,skincarie.com###orquidea-slideup
-enit.in,financerites.*,skincarie.com##+js(nano-stb, downloadBtn, *)
-enit.in,financerites.*,skincarie.com##.footerLink.hidden:style(display: block !important;)
-enit.in,financerites.*,skincarie.com##.getlink:others()
-financerites.*##p:has-text('[ad_')
-financerites.*##h4:has-text(Ads)
-financerites.*##+js(nowoif)
-financerites.*##+js(set, blurred, false)
-vocalley.com##+js(nano-sib, timeSec, *)
-vocalley.com##+js(nano-stb, getlink, *)
+enit.in,financerites.*##+js(nano-stb, downloadBtn, *)
+enit.in##footer, div#gads.banner-inner
+enit.it###gads[disabled]:remove-attr(disabled)
+enit.in,financerites.*##.footerLink.hidden:style(display: block !important;)
+enit.in,financerites.*##.getlink:others()
+try2link.com##.text-left.box-main2, footer
+te-it.com,world2our.com,mobi2c.com,tech5s.co,ez4mods.com,sinonimos.de,bluetechno.net,forexit.online###go_d:remove-attr(disabled)
+tech5s.co##+js(nano-sib, /.?/, *, 0.02)
+te-it.com,world2our.com,mobi2c.com,tech5s.co,ez4mods.com,sinonimos.de,bluetechno.net,forexit.online###submitBtn, #go_d, #devozon-snp, #submitBtn, #tp-snp1, #go_d2:others()
+te-it.com,world2our.com,mobi2c.com,tech5s.co,ez4mods.com,sinonimos.de,bluetechno.net,forexit.online###submitBtn, #go_d, #devozon-snp, #submitBtn, #tp-snp1, #go_d2:style(display: block !important;)
+healthfirstweb.com,vocalley.com,yogablogfit.com,howifx.com,en.financerites.com##+js(nano-sib, timeSec, *, 0.02)
+healthfirstweb.com,vocalley.com,yogablogfit.com,howifx.com,en.financerites.com##+js(nano-stb, getlink, *, 0.02)
+healthfirstweb.com,vocalley.com,yogablogfit.com,howifx.com,en.financerites.com###gads
+healthfirstweb.com,vocalley.com,yogablogfit.com,howifx.com,en.financerites.com##.getlink, #getlink:remove-attr(disabled)
+healthfirstweb.com,vocalley.com,yogablogfit.com,howifx.com,en.financerites.com##.container:style(font-size: 0px !important;)
+healthfirstweb.com,vocalley.com,yogablogfit.com,howifx.com,en.financerites.com##.container > center:others()
+en.financerites.com##form:others()
 ||push-sdk.$3p
 ||a.labadena.com^$popup
 ||feistyhelicopter.com^$popup
@@ -19455,13 +19463,10 @@ stokerpiller.dk##.adsbygoogle:style(max-height: 1px !important;)
 sexgayplus.com##+js(acs, decodeURI, decodeURIComponent)
 player.hdgay.net##+js(aopr, BetterJsPop)
 ||player.hdgay.net/cdn-cgi/trace
-techvybes.com###lite-end-sora-button:style(display: block !important; margin-left: auto !important; margin-right: auto !important;)
-techvybes.com###lite-end-sora-wait
-techvybes.com###lite-human-verif-button:style(display: block !important; margin-left: auto !important; margin-right: auto !important;)
-techvybes.com###lite-human-verif-wait
-techvybes.com###lite-start-sora-wait
-techvybes.com###lite-start-sora-a:style(display: block !important;)
-||i.imgur.com/QUvin97.jpg$domain=vgmlinks.me
+profitshort.com,courselinkfree.us,technorozen.com,hubdrive.me,bestadvise4u.com,newztalkies.com,10desires.org,theapknews.shop,aiotechnical.com,cryptonewzhub.com,trendzguruji.me,techvybes.com,wizitales.com,101desires.com###top_nav, .rd_btn, .soractrl:style(display: block !important;)
+profitshort.com,courselinkfree.us,technorozen.com,hubdrive.me,bestadvise4u.com,newztalkies.com,10desires.org,theapknews.shop,aiotechnical.com,cryptonewzhub.com,trendzguruji.me,techvybes.com,wizitales.com,101desires.com###top_nav, .rd_btn, .soractrl, .large:others()
+profitshort.com,courselinkfree.us,technorozen.com,hubdrive.me,bestadvise4u.com,newztalkies.com,10desires.org,theapknews.shop,aiotechnical.com,cryptonewzhub.com,trendzguruji.me,techvybes.com,wizitales.com,101desires.com##+js(trusted-click-element, #top_nav)
+vgmlinks.*##[href*="stake.com/registration"]
 hortonanderfarom.blogspot.com##+js(nostif, pop)
 multiplayer.it##+js(aeld, , adb)
 apkhex.com##+js(nostif, show)
@@ -19578,9 +19583,6 @@ tok-thots.com##+js(acs, document.querySelectorAll, popMagic)
 rankersadda.in##+js(acs, addEventListener, google_ad_client)
 ! tiscali. it ad reinsertion
 tiscali.it##+js(set, adEnable, true)
-edunc.xyz,newstvhindi.in##+js(nano-stb, , 3000)
-edunc.xyz,newstvhindi.in###myBtn:style(display:block !important;)
-edunc.xyz,newstvhindi.in###myBtn, #nxBtn, #nxInfo:others()
 ! protege-torrent. com popups
 protege-torrent.com##+js(aeld, , pop)
 protege-torrent.com##+js(aopr, decodeURI)
@@ -19649,12 +19651,6 @@ novelssites.com##+js(nowoif)
 novelssites.com##+js(set, blurred, false)
 miuiflash.com##+js(acs, eval, replace)
 miuiflash.com##+js(acs, document.createElement, adb)
-miuiflash.com,thecubexguide.com##[href^="https://bit.ly/"]
-@@||thecubexguide.com^$ghide
-@@||securepubads.g.doubleclick.net/tag/js/gpt.js$script,domain=thecubexguide.com
-@@||securepubads.g.doubleclick.net/pagead/managed/js/gpt/*/pubads_impl$script,domain=thecubexguide.com
-@@||securepubads.g.doubleclick.net/gampad/ads$xhr,domain=thecubexguide.com
-@@||adoto.net/dashboard/common/js/common.js$3p,script,domain=dev.miuiflash.com|djxmaza.in|thecubexguide.com
 @@*$ghide,domain=dev.miuiflash.com|djxmaza.in|thecubexguide.com
 *$image,redirect-rule=32x32.png:5,domain=djxmaza.in|thecubexguide.com|dev.miuiflash.com
 *$frame,redirect=noopframe,domain=djxmaza.in|dev.miuiflash.com|thecubexguide.com
@@ -19663,6 +19659,7 @@ miuiflash.com,thecubexguide.com##[href^="https://bit.ly/"]
 @@||devfiles.pages.dev/fonts/wp-content/plugins/best-ads-block-detector/main.js
 @@||googlesyndication.com^$script,xhr,domain=djxmaza.in|dev.miuiflash.com|thecubexguide.com
 @@||doubleclick.net^$script,xhr,domain=djxmaza.in|dev.miuiflash.com|thecubexguide.com
+@@||adoto.net/dashboard/common/js/common.js$3p,script,domain=dev.miuiflash.com|djxmaza.in|thecubexguide.com
 dev.miuiflash.com,djxmaza.in,thecubexguide.com##+js(no-fetch-if, /adtrue\.com|eningspon\.com|freychang\.fun|orquideassp\.com|popunder/)
 dev.miuiflash.com,djxmaza.in,thecubexguide.com##+js(no-xhr-if, /a-mo\.net|adnxs\.com|prebid|creativecdn\.com|e-planning\.net|quantumdex\.io/)
 kledgeb.blogspot.com##body > div[style="visibility: hidden;"]:style(visibility: unset !important)
@@ -23116,14 +23113,14 @@ plumbersforums.net##+js(rmnt, script, /$.*adUnits/)
 ||paibopse.com^
 ||wachipho.net^
 ! XpShorts New
-creditsalah.com,urlking.xyz##+js(nano-sib, _0x, *, 0.02)
-creditsalah.com,urlking.xyz##.safeb:style(display: block !important;)
+usa.verina.in,creditsalah.com,urlking.xyz##+js(nano-sib, _0x, *, 0.02)
+usa.verina.in,creditsalah.com,urlking.xyz##.safeb:style(display: block !important;)
 urlking.xyz##.header-section, .footer-container:style(clip-path: circle(0) !important;)
 urlking.xyz##h2~*, #safeform~*, #sidebar, .entry-title, h2, .entry-content.post-body, .post-footer, .all-flex, #breadcrumb
-creditsalah.com##.post-footer, #sidebar-container, .all-flex, .post-inner-area > .entry-title, #breadcrumb, #lixXO-SmenuTested, .section-sticky, .cookies-show, #footer-wrapper, p, h2, h1, #sidebar-wrapper, .post-nav, .entry-labels, .page-header
-creditsalah.com,urlking.xyz##+js(trusted-click-element, #verify)
-creditsalah.com,urlking.xyz##+js(trusted-click-element, #notarobot, , 100)
-creditsalah.com,urlking.xyz##+js(trusted-click-element, .safeb, , 1500)
+usa.verina.in,creditsalah.com##.page-header, p, h1, h2, #sidebar-wrapper, #footer-wrapper, .entry-labels, .post-nav, .main-header
+usa.verina.in,creditsalah.com,urlking.xyz##+js(trusted-click-element, #verify)
+usa.verina.in,creditsalah.com,urlking.xyz##+js(trusted-click-element, #notarobot, , 100)
+usa.verina.in,creditsalah.com,urlking.xyz##+js(trusted-click-element, .safeb, , 1500)
 xpshort.com##+js(trusted-click-element, 'a.get-link, .get-link.btn-lg.btn-success.btn', , 9000)
 beastplayer.tk,jiolive.tv,livesportsclub.pages.dev,madlink.biz,madstream.live,rogstream.fun###AdbModel
 livesportsclub.pages.dev,lolstreamz.pages.dev,madxsia.live,rogsports.pages.dev,rogstream.fun,rogstreamlive.eu.org##.ts-modal-overlay
@@ -23416,3 +23413,5 @@ watchfacebook.com##+js(noeval-if, ads)
 @@||zive.cz^$ghide
 zive.cz##.cnc-ads
 zive.cz###cnc_branding_creative_wrapper
+web1s.asia##+js(noeval-if, ads)
+web1s.asia##+js(nano-sib, wait)
