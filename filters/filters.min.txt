@@ -1,7 +1,7 @@
 ! Title: uBlock filters
-! Version: 2023.10.25.407
-! Last modified: Wed, 25 Oct 2023 06:38:10 +0000
-! Diff-Path: %diffpath%
+! Version: 2023.10.25.776
+! Last modified: Wed, 25 Oct 2023 11:13:23 +0000
+! Diff-Path: ../patches/2023.10.25.776.patch
 ! Diff-Name: ublock-filters
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Expires: 5 days
@@ -54,10 +54,6 @@ www.youtube.com#@#+js(trusted-replace-fetch-response, /"adSlots.*?SLOT_TYPE_PLAY
 www.youtube.com#@#+js(trusted-replace-fetch-response, /"adPlacements.*?AD_PLACEMENT_KIND_START.*?"\}\}\}\]\,/, , url:player?key=)
 www.youtube.com#@#+js(trusted-replace-fetch-response, '/"playerAds.*?"enabledEngageTypes":"(\d{1,2},){5}\d".*?\}\}\],/', , url:player?key=)
 www.youtube.com#@#+js(trusted-replace-fetch-response, '/"playerAds.*?"enabledEngageTypes":"(\d{1,2},)+\d".*?\}\}\],/', , url:player?key=)
-youtube.com#@#+js(trusted-replace-fetch-response, /(GFEEDBACK.*?)"adSlots.*?\}\]\}\}\]\,/, $1, url:player?key=)
-youtube.com#@#+js(trusted-replace-fetch-response, /(GFEEDBACK.*?)"adPlacements.*?"\}\}\}\]\,/, $1, url:player?key=)
-youtube.com#@#+js(trusted-replace-fetch-response, /(GFEEDBACK.*?)"playerAds.*?\}\}\]\,/, $1, url:player?key=)
-www.youtube.com##+js(set, yt.config_.EXPERIMENT_FLAGS.ab_det_gen_re, false)
 youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, ytInitialPlayerResponse.playerAds, undefined)
 youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, ytInitialPlayerResponse.adPlacements, undefined)
 youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, ytInitialPlayerResponse.adSlots, undefined)
@@ -66,6 +62,7 @@ m.youtube.com,music.youtube.com,youtubekids.com,youtube-nocookie.com##+js(json-p
 youtube.com##.ytlr-horizontal-list-renderer__items > .yt-virtual-list__container > .yt-virtual-list__item--visible.yt-virtual-list__item--selected.yt-virtual-list__item:has-text(Ad)
 youtube.com###player [class*="suggested-action-badge-icon"]:upward(.ytp-suggested-action)
 ||googlevideo.com/initplayback?source=youtube*&c=TVHTML5&oad=$xhr,domain=youtube.com
+||googlevideo.com/videoplayback?*&ctier=L&$xmlhttprequest,domain=m.youtube.com|music.youtube.com|www.youtube.com,badfilter
 ! AdDefend
 !#if env_chromium
 lablue.*##+js(nostif, push, 500)
@@ -22913,7 +22910,7 @@ thestar.com##.loadingLI:upward(.tncms-block)
 thestar.com##.main-sidebar > #sticky-side-secondary-spacer:upward(1)
 thestar.com###site-navbar-container, #site-top-nav-container:style(padding-top: 10px !important;)
 dailymail.co.uk##+js(aopr, Notification)
-@@||cmp.dmgmediaprivacy.co.uk^$script,xhr,domain=dailymail.co.uk
+@@||cmp.dmgmediaprivacy.co.uk^$script,domain=dailymail.co.uk
 ! dailymail.co.uk##+js(set, atob, trueFunc)
 ||dailymail.co.uk/static/mol-adverts/demo/
 dailymail.co.uk##.pufftext > .sponsored:upward(3)
@@ -23414,3 +23411,8 @@ tiroalpalo.org##+js(aeld, load, nextFunction)
 sport7s01.com##+js(nowoif)
 teleclub.xyz##+js(rmnt, script, Error)
 watchfacebook.com##+js(noeval-if, ads)
+@@||animefire.vip^$script,1p
+/clever_ads.js$badfilter
+@@||zive.cz^$ghide
+zive.cz##.cnc-ads
+zive.cz###cnc_branding_creative_wrapper

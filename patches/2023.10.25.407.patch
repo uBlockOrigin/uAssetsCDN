@@ -1,28 +1,48 @@
+diff name:ublock-filters lines:17 checksum:0c816decc4
+d2 3
+a4 3
+! Version: 2023.10.25.776
+! Last modified: Wed, 25 Oct 2023 11:13:23 +0000
+! Diff-Path: ../patches/2023.10.25.776.patch
+d57 4
+a68 1
+||googlevideo.com/videoplayback?*&ctier=L&$xmlhttprequest,domain=m.youtube.com|music.youtube.com|www.youtube.com,badfilter
+d22916 1
+a22916 1
+@@||cmp.dmgmediaprivacy.co.uk^$script,domain=dailymail.co.uk
+a23416 5
+@@||animefire.vip^$script,1p
+/clever_ads.js$badfilter
+@@||zive.cz^$ghide
+zive.cz##.cnc-ads
+zive.cz###cnc_branding_creative_wrapper
+diff name:ublock-quick-fixes lines:129 checksum:a4db68efca
+a0 128
 ! Title: uBlock₀ filters – Quick fixes
 ! Version: 2023.10.25.776
-! Last modified: Wed, 25 Oct 2023 09:39:11 +0000
+! Last modified: Wed, 25 Oct 2023 11:13:23 +0000
+! Diff-Path: ../patches/2023.10.25.776.patch
+! Diff-Name: ublock-quick-fixes
+! *** uAssets:filters/quick-fixes.txt ***
+! Title: uBlock₀ filters – Quick fixes
+! Version: 2023.10.25.776
+! Last modified: %timestamp%
 ! Description: Immediate, temporary filters to fix websites
 ! Expires: 12 hours
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! Forums: https://github.com/uBlockOrigin/uAssets/issues
-
 ! aternos anti adb
 aternos.org##.header-center:style(margin-top:-5000px !important;)
 aternos.org##.sidebar:style(width: 1.745px !important;)
 aternos.org##.ad-dfp:style(min-height: 0.1485mm !important; height: 0.1485mm !important;)
-
 ! pixsera
-! https://github.com/uBlockOrigin/uAssets/issues/9123
-! https://github.com/orgs/uBlockOrigin/teams/ublock-filters-volunteers/discussions/423/comments/6
 piczzxsw.cfd##+js(aopr, console.clear)
 piczzxsw.cfd##+js(nano-sib, timer)
 piczzxsw.cfd##div[id][style^="position: fixed; display: block; width: 100%;"]
 piczzxsw.cfd##div[style="width:100%;height:110px"]
 piczzxsw.cfd##+js(nowoif, !/prcf.fiyar|themes|pixsense|.jpg/)
 piczzxsw.cfd##div[class][style="display: block;"]
-
-! https://github.com/uBlockOrigin/uAssets/issues/17548
 @@*$ghide,domain=dev.miuiflash.com|djxmaza.in|thecubexguide.com
 *$image,redirect-rule=32x32.png:5,domain=djxmaza.in|thecubexguide.com|dev.miuiflash.com
 *$frame,redirect=noopframe,domain=djxmaza.in|dev.miuiflash.com|thecubexguide.com
@@ -47,13 +67,7 @@ djxmaza.in,miuiflash.com,thecubexguide.com##+js(spoof-css, #featuredimage, visib
 !#else
 djxmaza.in,miuiflash.com,thecubexguide.com###featuredimage:style(transform: translateX(10000px) !important;)
 !#endif
-
-! https://github.com/uBlockOrigin/uAssets/issues/18036
-! https://github.com/uBlockOrigin/uAssets/issues/19016
 dropgalaxy.co,dropgalaxy.com##+js(set, isAdblockActive, false)
-
-! https://github.com/uBlockOrigin/uAssets/issues/17711
-! https://github.com/uBlockOrigin/uAssets/issues/19836
 plagiarismchecker.co##+js(rpnt, script, ").removeClass(', ").addClass(', condition, adsbygoogle)
 plagiarismchecker.co##+js(rpnt, script, ").removeClass(`, ").addClass(`, condition, adsbygoogle)
 plagiarismchecker.co##+js(rpnt, script, ).fadeIn().removeClass(, ).addClass(, condition, adsbygoogle)
@@ -64,8 +78,6 @@ plagiarismchecker.co##body *:matches-css(margin: /auto/):matches-css(width: /^[2
 plagiarismchecker.co##[class^="tata"], [class^="baba"], [class^="caca"], #top-ad, #before-ad, #after-ad, ins.adsbygoogle
 plagiarismchecker.co##.col-md-9 > section + span > section[class]
 plagiarismchecker.co##[class][style*="display"][style*="block"]:has(a img[src^="https://www.plagiarismchecker.co/"])
-
-! https://old.reddit.com/r/uBlockOrigin/comments/16lmeri/youtube_antiadblock_and_ads_september_18_2023/k1uf2s1/ - 045d2209
 !#if env_firefox
 www.youtube.com##+js(json-prune, playerResponse.adPlacements playerResponse.playerAds playerResponse.adSlots adPlacements playerAds adSlots, , /^(?=.*\.js)(?!.*j\.s[ \S]+polymer).*/)
 !#else
@@ -95,63 +107,37 @@ www.youtube.com#@#+js(trusted-replace-fetch-response, '/"playerAds.*?"enabledEng
 www.youtube.com#@#+js(trusted-replace-fetch-response, '/"playerAds.*?"enabledEngageTypes":"(\d{1,2},)+\d".*?\}\}\],/', , url:player?key=)
 www.youtube.com##+js(trusted-replace-xhr-response, /\"adPlacements.*?\"\}\}\}\]\,/, , /player\?key=|watch\?v=|youtubei\/v1\/player/)
 m.youtube.com##+js(json-prune, playerResponse.adPlacements playerResponse.playerAds playerResponse.adSlots adPlacements playerAds adSlots important)
-! https://www.reddit.com/r/uBlockOrigin/comments/16lmeri/youtube_antiadblock_and_ads_september_18_2023/k1wl8df/
 !#if !cap_html_filtering
 !#if env_firefox
 youtube.com##+js(json-prune, playerResponse.adPlacements playerResponse.playerAds playerResponse.adSlots adPlacements playerAds adSlots legacyImportant)
 !#endif
 !#endif
-! https://github.com/uBlockOrigin/uAssets/issues/19976#issuecomment-1778718540
 ||googlevideo.com/videoplayback?*&ctier=L&$xmlhttprequest,domain=m.youtube.com|music.youtube.com|www.youtube.com,badfilter
-
-! https://github.com/uBlockOrigin/uAssets/issues/18476
 ! VOE sites
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$script,redirect=google-ima.js,domain=phenomenalityuniform.com,important
 phenomenalityuniform.com##+js(nowoif)
-
-! https://github.com/uBlockOrigin/uAssets/issues/16083
 dragontea.ink##html:not(:has(link[href="https://dragontea.ink/xmlrpc.php"], link[href="/cdn-cgi/styles/challenges.css"])) > body:not(.page-template)
 dragontea.ink##[id$="ink_1000x100_anchor_top"][class="stpdr rendered"][data-google-query-id][style]:style(position: absolute !important;)
 dragontea.ink##[id$="ink_1000x100_anchor"][class="stpdr rendered"][data-google-query-id][style]:style(position: absolute !important;)
 dragontea.ink###stpd_close:remove()
 dragontea.ink##ins[id^="gpt_unit_/"][style="display: block !important; width: 100vw !important; height: 100vh !important; inset: 0px auto auto 0px !important; clear: none !important; float: none !important; margin: 0px !important; max-height: none !important; max-width: none !important; opacity: 1 !important; overflow: visible !important; padding: 0px !important; position: fixed !important; vertical-align: baseline !important; visibility: visible !important; z-index: 2147483647 !important; background: transparent !important;"]
-
 ! sankakucomplex detection
 sankakucomplex.com#@#.scad
 sankaku.app##+js(no-xhr-if, googlesyndication)
-
-! https://github.com/uBlockOrigin/uAssets/discussions/17361#discussioncomment-7251777
 btcbitco.in##+js(set, isRequestPresent, true)
 ||bmcdn6.com^$script,redirect-rule=noop.js
-
-! https://github.com/uBlockOrigin/uAssets/discussions/17361#discussioncomment-7246789
 coinscap.info,cryptowidgets.net,greenenez.com,insurancegold.in,webfreetools.net,wiki-topia.com##+js(nostif, /bait|detected/)
-
-! https://github.com/easylist/easylist/commit/a36aec86fcb8e505492fdb6385cb98a1432e1003
 /log_event?$badfilter
 /v1/log_event$badfilter
-
-! https://github.com/uBlockOrigin/uAssets/issues/20110
 ||cloudfront.net^$script,domain=ynet.co.il,badfilter
-
-! https://github.com/uBlockOrigin/uAssets/issues/20160
 ||spotifycdn.com/audio/$media,redirect=noop-1s.mp4:10,domain=open.spotify.com
-
-! https://github.com/uBlockOrigin/uAssets/issues/20181
 washingtonpost.com#@#+js(rmnt, script, /adblock/)
 washingtonpost.com##+js(rmnt, script, /\badblock\b/)
-
-! https://github.com/uBlockOrigin/uAssets/issues/20199
 as.com##+js(set, DTM.trackAsyncPV, noopFunc)
-
-! https://www.reddit.com/r/uBlockOrigin/comments/17eoi44/
 megaup.net#@#body .metaRedirectWrapperBottomAds:style(width: 10420px !important;)
 megaup.net##body .metaRedirectWrapperBottomAds:style(visibility: hidden !important;)
 megaup.net##+js(rpnt, script, /\$\(_\S+?\):/)
-
 ! Ad-Shield
-! https://github.com/uBlockOrigin/uAssets/issues/12163
-! https://github.com/uBlockOrigin/uAssets/issues/16749
 *$frame,redirect-rule=noopframe,domain=a-ha.io
 *$script,xhr,redirect-rule=noopjs,domain=a-ha.io
 *$image,redirect-rule=1x1.gif,domain=a-ha.io
@@ -159,6 +145,48 @@ megaup.net##+js(rpnt, script, /\$\(_\S+?\):/)
 @@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$script,xhr,domain=a-ha.io
 loawa.com,ygosu.com,sportalkorea.com,algumon.com,hancinema.net,enetnews.co.kr,edaily.co.kr,economist.co.kr,etoday.co.kr,hankyung.com,isplus.com,hometownstation.com,kagit.kr,inven.co.kr,viva100.com,joongdo.co.kr,jjang0u.com,tenbizt.com,tvreport.co.kr,newautopost.co.kr,mememedia.co.kr,mobilitytv.co.kr,cboard.net,a-ha.io##+js(no-xhr-if, static.criteo.net)
 loawa.com,ygosu.com,sportalkorea.com,algumon.com,hancinema.net,enetnews.co.kr,edaily.co.kr,economist.co.kr,etoday.co.kr,hankyung.com,isplus.com,hometownstation.com,kagit.kr,inven.co.kr,viva100.com,joongdo.co.kr,jjang0u.com,tenbizt.com,tvreport.co.kr,newautopost.co.kr,mememedia.co.kr,mobilitytv.co.kr,cboard.net,a-ha.io##+js(set-local-storage-item, adshield-analytics-uuid, $remove$)
-
-! https://github.com/uBlockOrigin/uAssets/issues/20279
 /nielsen.js$badfilter
+diff name:ublock-unbreak lines:12 checksum:3f470d75a0
+d2 3
+a4 3
+! Version: 2023.10.25.776
+! Last modified: Wed, 25 Oct 2023 07:11:54 +0000
+! Diff-Path: ../patches/2023.10.25.776.patch
+d8 1
+a8 1
+! Version: 2023.10.25.776
+a2429 3
+||img.service.belboon.com^$badfilter
+||partner.service.belboon.com^$badfilter
+||ui.service.belboon.com^$badfilter
+diff name:easylist lines:6 checksum:22d3b8ca7d
+d3 3
+a5 3
+! Version: 2023.10.25.776
+! Last modified: Wed, 25 Oct 2023 09:33:48 +0000
+! Diff-Path: ../patches/2023.10.25.776.patch
+d57512 6
+diff name:easyprivacy lines:23 checksum:7345337bd5
+d3 3
+a5 3
+! Version: 2023.10.25.776
+! Last modified: Wed, 25 Oct 2023 09:33:48 +0000
+! Diff-Path: ../patches/2023.10.25.776.patch
+d2735 2
+d2742 1
+a2743 2
+/visitcounter.do
+/visitcounter.js
+d2746 2
+d2753 1
+a2754 1
+/visitor_info.js
+d2793 1
+d2804 2
+a2805 1
+/WebStat2.asmx
+d2857 1
+d2867 1
+d33026 1
+a33026 1
+@@||googletagmanager.com/gtag/js$domain=academy.com|acornonline.com|afisha.timepad.ru|aliexpress.com|carhartt-wip.com|cbslocal.com|cmoa.jp|devclass.com|dholic.co.jp|ejgiftcards.com|enmotive.com|factory.pixiv.net|game.anymanager.io|herculesstands.com|honeystinger.com|hostingvergelijker.nl|inforesist.org|kawasaki.com|liene-life.com|livongo.com|m.putlocker.how|mediaite.com|mirrativ.com|modehasen.de|montcopa.org|nihontsushin.com|oko.sh|panflix.com.br|papajohns.com|radiosarajevo.ba|rintraccialamiaspedizione.it|schwab.com|seatmaps.com|starblast.io|timparty.tim.it|toptal.com|virginmedia.com|virginplus.ca|winefolly.com|winhappy.com|xl-bygg.no|zf1.tohoku-epco.co.jp
