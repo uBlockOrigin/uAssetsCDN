@@ -1,5 +1,5 @@
 ! Title: uBlock filters
-! Last modified: Fri, 27 Oct 2023 10:26:37 +0000
+! Last modified: Fri, 27 Oct 2023 17:48:02 +0000
 ! Expires: 5 days
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Homepage: https://github.com/uBlockOrigin/uAssets
@@ -23,7 +23,8 @@ youtube.com##ytd-video-masthead-ad-advertiser-info-renderer,ytm-promoted-sparkle
 ! https://github.com/uBlockOrigin/uAssets/pull/18106/
 www.youtube.com##+js(trusted-replace-xhr-response, /\"adPlacements.*?\"\}\}\}\]\,/, , /player\?key=|watch\?v=|youtubei\/v1\/player/)
 !#if env_chromium
-www.youtube.com##+js(trusted-replace-fetch-response, /"adPlacements.*?\/(aclk\?sa=L&ai=C(?!3QQpfbUyZYWKL_)[-_0-9A-Za-z]+__________|get_midroll_info\S+&token=ALHj).*?"\}\}\}\]\,/, , url:player?key=)
+www.youtube.com##+js(trusted-replace-fetch-response, /(trackingParam":"kx_fmPxh.*?)"adPlacements.*?"\}\}\}\]\,/, $1, player?key=)
+www.youtube.com#@#+js(trusted-replace-fetch-response, /"adPlacements.*?\/(aclk\?sa=L&ai=C(?!3QQpfbUyZYWKL_)[-_0-9A-Za-z]+__________|get_midroll_info\S+&token=ALHj).*?"\}\}\}\]\,/, , url:player?key=)
 www.youtube.com#@#+js(trusted-replace-fetch-response, /(maxAgeSeconds.*?"loggedOut":[ft].*?)"adPlacements.*?"\}\}\}\]\,/, $1, url:player?key=)
 www.youtube.com#@#+js(trusted-replace-fetch-response, /"adPlacements.*?\/(aclk\?sa=L&ai=C[-_0-9A-Za-z]+__________|get_midroll_info\S+&token=ALHj).*?"\}\}\}\]\,/, , url:player?key=)
 www.youtube.com#@#+js(trusted-replace-fetch-response, /"adPlacements.*?\/(aclk\?sa=L&ai=C[-_0-9A-Za-z]+__________|get_midroll_info\S+&token=ALH).*?"\}\}\}\]\,/, , url:player?key=)
@@ -2197,6 +2198,7 @@ txxx.*##.video-content > div:first-child > div[class]:has(> div > a[href="#"])
 txxx.*##.videos-tube-friends
 txxx.*##span:only-child:has-text(/^AD$/):upward(2)
 txxx.*##.suggestion
+txxx.*##.index-page > .wrapper > .row + div[class]
 *$frame,3p,denyallow=google.com|gstatic.com,domain=txxx.*
 *$popunder,3p,domain=txxx.*
 ! https://github.com/uBlockOrigin/uAssets/issues/956
@@ -2232,12 +2234,15 @@ hotmovs.*##.videos-tube-friends
 ! https://github.com/uBlockOrigin/uAssets/issues/959
 *$script,3p,denyallow=gstatic.com,domain=vjav.*
 vjav.*##.hv-block
-vjav.*##.suggestions
 vjav.*##div[style="display:flex !important"] > div
 vjav.*##.album-page > div.video-page__wrapper + div[class]
 vjav.*##.content > div:not([class]) > div.video-page + div[class]
 vjav.*##.video-page__content > div.left + div[class]:last-child
 vjav.*##.video-page__player + div[class] > div[class]
+vjav.*##.video-tube-friends
+vjav.*##.video-tube-friends + div[class]:not(.pagination)
+vjav.*##.index-page > div.container + div[class]
+vjav.*##.jw-reset.jw-atitle.nopop
 ! pornq .com popups
 ||bitupsss.com^$all
 ! pornj .com popups
@@ -2285,6 +2290,7 @@ pornhits.com##.ft
 pornhits.com##.index-ntv
 pornhits.com##.jwplayer > span
 pornhits.com##.sponsor
+pornhits.com##.right
 ||pornhits.com/magic/
 ||red12flyw2.site^$3p
 ! inporn.com ads/PH
@@ -2296,11 +2302,15 @@ in-porn.com,inporn.com##section[is-footer-banners]
 in-porn.com,inporn.com###in_v
 in-porn.com,inporn.com##.btn-close
 in-porn.com,inporn.com##[style="display:flex !important"] > div > div:not(:last-child)
-mrgay.*,pornhits.com##.right
+in-porn.com,inporn.com##.jw-channel-btn.nopop
+in-porn.com,inporn.com##.wrapper[style="min-width: 0px;"] > section[style="padding: 12px;"]
 ! senzuri.tube redirect, ad
 senzuri.tube##+js(acs, adver)
 senzuri.tube##.right
 senzuri.tube##.video-tube-friends-wrapper
+senzuri.tube##.video-page + div[class]:not(.container)
+senzuri.tube##.video-page__content > div.left + div[class]:last-child
+senzuri.tube##.index-page > div.container + div[class]
 ! https://github.com/AdguardTeam/AdguardFilters/issues/130607
 txxxporn.tube##+js(acs, adver)
 txxxporn.tube##div[style="display:flex !important"] > div
@@ -2428,6 +2438,7 @@ blackporn.tube,mrgay.tube,xmilf.com##article > section
 bdsmx.tube,blackporn.tube,mrgay.tube,xmilf.com##[is-footer-banners]
 bdsmx.tube,blackporn.tube,mrgay.tube,xmilf.com##.headline.wrapper
 bdsmx.tube,blackporn.tube,mrgay.tube,xmilf.com##[style="display:flex !important"] > div > div:not(:last-child)
+mrgay.*##.right
 
 ! https://github.com/uBlockOrigin/uAssets/issues/992
 ||googlesyndication.com^$script,important,domain=mypapercraft.net
