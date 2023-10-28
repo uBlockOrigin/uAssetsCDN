@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Quick fixes
-! Last modified: Sat, 28 Oct 2023 11:16:14 +0000
+! Last modified: Sat, 28 Oct 2023 17:34:26 +0000
 ! Expires: 12 hours
-! Diff-Path: ../patches/2023.10.28.773.patch
+! Diff-Path: ../patches/2023.10.28.1127.patch
 ! Diff-Name: ublock-quick-fixes
 ! Diff-Expires: 6 hours
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -11,12 +11,12 @@ aternos.org##.header-center:style(margin-top:-5000px !important;)
 aternos.org##.sidebar:style(width: 1.745px !important;)
 aternos.org##.ad-dfp:style(min-height: 0.1485mm !important; height: 0.1485mm !important;)
 ! pixsera
-piczzxsw.cfd,picbbbde.cfd##+js(aopr, console.clear)
-piczzxsw.cfd,picbbbde.cfd##+js(nano-sib, timer)
-piczzxsw.cfd,picbbbde.cfd##div[id][style^="position: fixed; display: block; width: 100%;"]
-piczzxsw.cfd,picbbbde.cfd##div[style="width:100%;height:110px"]
-piczzxsw.cfd,picbbbde.cfd##+js(nowoif, !/prcf.fiyar|themes|pixsense|.jpg/)
-piczzxsw.cfd,picbbbde.cfd##div[class][style="display: block;"]
+pickjsn.cfd,piczzxsw.cfd,picbbbde.cfd##+js(aopr, console.clear)
+pickjsn.cfd,piczzxsw.cfd,picbbbde.cfd##+js(nano-sib, timer)
+pickjsn.cfd,piczzxsw.cfd,picbbbde.cfd##div[id][style^="position: fixed; display: block; width: 100%;"]
+pickjsn.cfd,piczzxsw.cfd,picbbbde.cfd##div[style="width:100%;height:110px"]
+pickjsn.cfd,piczzxsw.cfd,picbbbde.cfd##+js(nowoif, !/prcf.fiyar|themes|pixsense|.jpg/)
+pickjsn.cfd,piczzxsw.cfd,picbbbde.cfd##div[class][style="display: block;"]
 @@*$ghide,domain=dev.miuiflash.com|djxmaza.in|thecubexguide.com
 *$image,redirect-rule=32x32.png:5,domain=djxmaza.in|thecubexguide.com|dev.miuiflash.com
 *$frame,redirect=noopframe,domain=djxmaza.in|dev.miuiflash.com|thecubexguide.com
@@ -53,7 +53,8 @@ plagiarismchecker.co##[class^="tata"], [class^="baba"], [class^="caca"], #top-ad
 plagiarismchecker.co##.col-md-9 > section + span > section[class]
 plagiarismchecker.co##[class][style*="display"][style*="block"]:has(a img[src^="https://www.plagiarismchecker.co/"])
 !#if env_firefox
-www.youtube.com##+js(rpnt, script, /(\(function serverContract\(\))/, '/*start*/(function(){const t=globalThis,e={JSON_parse:t.JSON.parse.bind(t.JSON),JSON_stringify:t.JSON.stringify.bind(t.JSON),req:t.Request.prototype.clone},n=t.fetch;t.fetch=new Proxy(t.fetch,{apply:function(t,r,a){var s;return("string"==typeof(s=a[0])?s:s instanceof Request?e.req.call(s).url:String(s)).includes("player?key=")?n(...a).then(t=>t.text().then(n=>{var r;let a;return new Response((r=n,(a=e.JSON_parse(r)).adPlacements=[],a.playerAds=[],a.adSlots=[],e.JSON_stringify(a)),{status:t.status,statusText:t.statusText,headers:t.headers})})):Reflect.apply(t,r,a)}});let r=function(){document.querySelectorAll("script").forEach(t=>{t.textContent.startsWith("/*start*/")&&(t.textContent=t.textContent.replace(/\/\*start\*\/(.*)\/\*end\*\//g,""))})};"loading"!==document.readyState?r():document.addEventListener("DOMContentLoaded",r)})();/*end*/ $1')
+! Prune ads keys/values from fetch responses
+www.youtube.com##+js(rpnt, script, /(\(function serverContract\(\))/, '/*start*/(function(){const self=globalThis;const safe={JSON_parse:self.JSON.parse.bind(self.JSON),JSON_stringify:self.JSON.stringify.bind(self.JSON),Request_clone:self.Request.prototype.clone};const pruner=text=>{let json=safe.JSON_parse(text);json.adPlacements=[];json.playerAds=[];json.adSlots=[];return safe.JSON_stringify(json)};const urlFromArg=arg=>{if(typeof arg==="string"){return arg}if(arg instanceof Request){return safe.Request_clone.call(arg).url}return String(arg)};const realFetch=self.fetch;self.fetch=new Proxy(self.fetch,{apply:function(target,thisArg,args){if(!(urlFromArg(args[0]).includes("player?key="))){return Reflect.apply(target,thisArg,args)}return realFetch(...args).then(realResponse=>realResponse.text().then(text=>new Response(pruner(text),{status:realResponse.status,statusText:realResponse.statusText,headers:realResponse.headers})))}});const cleanup=function(){const scripts=document.querySelectorAll("script");scripts.forEach(script=>{if(script.textContent.startsWith("/*start*/")){script.textContent=script.textContent.replace(/\/\*start\*\/(.*)\/\*end\*\//g,"");return}})};if(document.readyState!=="loading"){cleanup()}else{document.addEventListener("DOMContentLoaded",cleanup)}})();/*end*/ $1')
 www.youtube.com##+js(set, yt.config_.EXPERIMENT_FLAGS.service_worker_enabled, false)
 !#else
 www.youtube.com##+js(trusted-replace-fetch-response, /(trackingParam":"kx_fmPxh.*?)"adPlacements.*?"\}\}\}\]\,/, $1, player?key=)
@@ -65,7 +66,8 @@ www.youtube.com#@#+js(trusted-replace-fetch-response, /(itag=.*?)"adSlots.*?\}\]
 www.youtube.com#@#+js(trusted-replace-fetch-response, /(itag=.*?)"adPlacements.*?"\}\}\}\]\,/, $1, url:player?key=)
 www.youtube.com#@#+js(trusted-replace-fetch-response, /(itag=.*?)"playerAds.*?\}\}\]\,/, $1, url:player?key=)
 www.youtube.com#@#+js(aost, btoa, /[A-Za-z]lb \S+polymer/)
-www.youtube.com##+js(rpnt, script, /(\(function serverContract\(\))/, '/*start*/(function(){const e={apply:(e,a,r)=>{if(Array.isArray(r)){const e=r[0];(e.adPlacements||e.adSlots||e.adBreakHeartbeatParams||e.playerResponse)&&(r=[{}])}return Reflect.apply(e,a,r)}};Object.getOwnPropertyNames=new Proxy(Object.getOwnPropertyNames,e);let t=function(){document.querySelectorAll("script").forEach(e=>{e.textContent=e.textContent.replace(/\/\*start\*\/(.*)\/\*end\*\//g,"")})};"loading"!==document.readyState?t():document.addEventListener("DOMContentLoaded",t)}());/*end*/ $1')
+! Prune bait JSONs from Object.getOwnPropertyNames
+www.youtube.com##+js(rpnt, script, /(\(function serverContract\(\))/, '/*start*/(function(){const handler={apply:(target,thisArg,args)=>{if(Array.isArray(args)){const arr=args[0];if(arr.adPlacements||arr.adSlots||arr.adBreakHeartbeatParams||arr.playerResponse){args=[{}]}}return Reflect.apply(target,thisArg,args)}};Object.getOwnPropertyNames=new Proxy(Object.getOwnPropertyNames,handler);const cleanup=function(){const scripts=document.querySelectorAll("script");scripts.forEach(script=>{if(script.textContent.startsWith("/*start*/")){script.textContent=script.textContent.replace(/\/\*start\*\/(.*)\/\*end\*\//g,"");return}})};if(document.readyState!=="loading"){cleanup()}else{document.addEventListener("DOMContentLoaded",cleanup)}}());/*end*/ $1')
 !#endif
 www.youtube.com#@#+js(trusted-replace-fetch-response, /("lastModified":"[^"]{3}.*?)"adSlots.*?\}\]\}\}\]\,/, $1, url:player?key=)
 www.youtube.com#@#+js(trusted-replace-fetch-response, /("lastModified":"[^"]{3}.*?)"adPlacements.*?"\}\}\}\]\,/, $1, url:player?key=)
