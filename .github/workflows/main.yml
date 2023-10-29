@@ -32,6 +32,7 @@ jobs:
           TMPDIR=$(mktemp -d)
           git clone --depth=1 --single-branch --branch=master https://github.com/uBlockOrigin/uAssets.git $TMPDIR
           cp -v $TMPDIR/tools/make-diffpatch.sh .
+          cp -v $TMPDIR/tools/update-diffpatches.sh .
       - name: Copy uAssets/filters to uAssetsCDN
         run: |
           TMPDIR=$(mktemp -d)
@@ -46,6 +47,7 @@ jobs:
       - name: Commit changes, if any
         run: |
           ./make-diffpatch.sh "${{ env.TAGNAME }}"
+          ./update-diffpatches.sh "${{ env.TAGNAME }}"
           if [[ -z $(git diff --name-only --cached) ]]; then exit 0; fi
           git config user.name "GitHub Actions: main"
           git config user.email "<>"
