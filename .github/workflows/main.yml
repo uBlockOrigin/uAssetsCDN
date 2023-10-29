@@ -44,10 +44,14 @@ jobs:
           TMPDIR=$(mktemp -d)
           git clone --depth=1 --single-branch --branch=master https://github.com/gorhill/uBlock.git $TMPDIR
           cp -v $TMPDIR/assets/assets*.json ublock/
-      - name: Commit changes, if any
+      - name: Create new patch
         run: |
           ./make-diffpatch.sh "${{ env.TAGNAME }}"
+      - name: Update existing patch
+        run: |
           ./update-diffpatches.sh "${{ env.TAGNAME }}"
+      - name: Commit changes, if any
+        run: |
           if [[ -z $(git diff --name-only --cached) ]]; then exit 0; fi
           git config user.name "GitHub Actions: main"
           git config user.email "<>"
