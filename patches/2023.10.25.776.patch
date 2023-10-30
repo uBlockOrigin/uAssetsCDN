@@ -1,10 +1,10 @@
-diff name:ublock-filters lines:230 checksum:bc02d53863
+diff name:ublock-filters lines:234 checksum:11c8dfeabd
 d2 5
 a6 1
-! Last modified: Sun, 29 Oct 2023 20:10:55 +0000
+! Last modified: Mon, 30 Oct 2023 04:07:08 +0000
 d8 1
 a8 3
-! Diff-Path: ../patches/2023.10.30.97.patch
+! Diff-Path: ../patches/2023.10.30.407.patch
 ! Diff-Name: ublock-filters
 ! Diff-Expires: 6 hours
 d10 3
@@ -13,7 +13,9 @@ d33 1
 a33 2
 www.youtube.com##+js(trusted-replace-fetch-response, /(trackingParam":"kx_fmPxh.*?)"adPlacements.*?"\}\}\}\]\,/, $1, player?key=)
 www.youtube.com#@#+js(trusted-replace-fetch-response, /"adPlacements.*?\/(aclk\?sa=L&ai=C(?!3QQpfbUyZYWKL_)[-_0-9A-Za-z]+__________|get_midroll_info\S+&token=ALHj).*?"\}\}\}\]\,/, , url:player?key=)
-d44 13
+d37 20
+a56 1
+!#endif
 a65 1
 *o097znze.googlevideo.com^$xhr,3p,method=get,domain=www.youtube.com
 d871 1
@@ -194,7 +196,7 @@ d23376 1
 a23376 1
 @@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$xhr,domain=guys01gaming.com
 d23386 1
-a23418 34
+a23418 36
 web1s.asia##+js(noeval-if, ads)
 web1s.asia##+js(nano-sib, wait)
 sshkit.com,fastssh.com,howdy.id##+js(no-fetch-if, adsbygoogle)
@@ -204,6 +206,7 @@ av-cdn.xyz##body > div ~ script + div[class]:last-child
 pluto.tv##+js(no-xhr-if, /_Ad_|_ad/)
 @@||imasdk.googleapis.com^$script,domain=oqee.tv
 ymovies.vip##+js(aopr, mm)
+||ymovies.vip/sab_*.html$frame
 trainerscity.com##+js(rpnt, script, startTime: '5', startTime: '0')
 speedrun.com##+js(json-prune, session.showAds)
 ||speedrun.com/cargo.js^$script,1p
@@ -229,13 +232,14 @@ cutsy.net,cutyurls.com,cutty.app##+js(aeld, click, handleClick)
 myvidster.com##+js(acs, document.write, cachebuster)
 niaomea.me##+js(aopw, _pop)
 fsl-stream.lu##+js(acs, document.documentElement, break;case $.)
-diff name:ublock-quick-fixes lines:56 checksum:65de2ba56a
+redd.tube##+js(aopr, config)
+diff name:ublock-quick-fixes lines:57 checksum:2246b27221
 d1 10
 a10 2
 ! Title: uBlock filters – Quick fixes
-! Last modified: Sun, 29 Oct 2023 15:23:22 +0000
+! Last modified: Mon, 30 Oct 2023 02:29:43 +0000
 a11 3
-! Diff-Path: %diffpath%
+! Diff-Path: ../patches/2023.10.30.407.patch
 ! Diff-Name: ublock-quick-fixes
 ! Diff-Expires: 6 hours
 d13 2
@@ -258,11 +262,12 @@ d64 1
 a64 2
 www.youtube.com##+js(trusted-replace-fetch-response, /(trackingParam":"kx_fmPxh.*?)"adPlacements.*?"\}\}\}\]\,/, $1, player?key=)
 www.youtube.com#@#+js(trusted-replace-fetch-response, /"adPlacements.*?\/(aclk\?sa=L&ai=C(?!3QQpfbUyZYWKL_)[-_0-9A-Za-z]+__________|get_midroll_info\S+&token=ALHj).*?"\}\}\}\]\,/, , url:player?key=)
+d68 3
 a70 3
 www.youtube.com#@#+js(aost, btoa, /[A-Za-z]lb \S+polymer/)
 ! Prune bait JSONs from Object.getOwnPropertyNames
 www.youtube.com##+js(rpnt, script, /(\(function serverContract\(\))/, '/*start*/(function(){const handler={apply:(target,thisArg,args)=>{if(Array.isArray(args)){const arr=args[0];if(arr.adPlacements||arr.adSlots||arr.adBreakHeartbeatParams||arr.playerResponse){args=[{}]}}return Reflect.apply(target,thisArg,args)}};Object.getOwnPropertyNames=new Proxy(Object.getOwnPropertyNames,handler);const cleanup=function(){const scripts=document.querySelectorAll("script");for(let i=scripts.length-1;i>=0;i--){if(scripts[i].textContent.startsWith("/*start*/")){scripts[i].textContent=scripts[i].textContent.replace(/\/\*start\*\/(.*)\/\*end\*\//g,"");break}}};if(document.readyState!=="loading"){cleanup()}else{document.addEventListener("DOMContentLoaded",cleanup)}}());/*end*/ $1')
-d75 13
+d72 16
 d89 1
 a95 1
 *o097znze.googlevideo.com^$xhr,3p,method=get,domain=www.youtube.com
@@ -286,13 +291,13 @@ a128 3
 @@||microsoft.com/*/aria-web-telemetry$script,1p
 @@||googletagmanager.com/gtm.js$script,domain=tide.com
 @@||xfinity.com/stream/js/api/fingerprint.js$script,1p
-diff name:ublock-unbreak lines:16 checksum:966b558e4a
+diff name:ublock-unbreak lines:16 checksum:549512a171
 d2 11
 a12 1
 ! Last modified: Sat, 28 Oct 2023 10:10:50 +0000
 d14 1
 a14 3
-! Diff-Path: %diffpath%
+! Diff-Path: ../patches/2023.10.28.773.patch
 ! Diff-Name: ublock-unbreak
 ! Diff-Expires: 6 hours
 d16 3
@@ -303,12 +308,12 @@ a2432 4
 help.cashctrl.com##+js(set, Origami, {})
 help.cashctrl.com##+js(set, Origami.fastclick, noopFunc)
 @@||microsoft.com/*/aria-web-telemetry$script,1p
-diff name:easylist lines:479 checksum:0a6250b3dc
+diff name:easylist lines:481 checksum:30ed6db2f5
 d3 4
 a6 1
-! Last modified: Sun, 29 Oct 2023 13:39:10 +0000
+! Last modified: Mon, 30 Oct 2023 02:13:25 +0000
 a7 3
-! Diff-Path: %diffpath%
+! Diff-Path: ../patches/2023.10.30.407.patch
 ! Diff-Name: easylist
 ! Diff-Expires: 6 hours
 d9 8
@@ -690,6 +695,8 @@ a57890 1
 a58094 1
 ||uviu.com/_xd/
 d58173 1
+a58200 1
+||nhentai.net/api/_/popunder?$popup
 d58207 1
 a58272 1
 gearspace.com###Takeover
@@ -783,12 +790,12 @@ infospiral.com##.right-content
 a64804 1
 @@||doodcdn.co^$domain=dood.la|dood.pm|dood.to|dood.ws
 d65110 1
-diff name:easyprivacy lines:470 checksum:b1e7197bf3
+diff name:easyprivacy lines:503 checksum:e11a36b702
 d3 4
 a6 1
-! Last modified: Sun, 29 Oct 2023 16:56:45 +0000
+! Last modified: Mon, 30 Oct 2023 02:13:25 +0000
 a7 3
-! Diff-Path: %diffpath%
+! Diff-Path: ../patches/2023.10.30.407.patch
 ! Diff-Name: easyprivacy
 ! Diff-Expires: 6 hours
 d9 8
@@ -807,10 +814,13 @@ a64 1
 d69 1
 d73 4
 d81 1
-a146 1
+d147 2
+a148 2
 /a/performance_timing/*
+/a8c-analytics.js
 d160 1
-d166 1
+d163 1
+d165 2
 d168 1
 d171 2
 a172 2
@@ -835,6 +845,9 @@ a380 2
 /api/cmp_tracker|
 a425 1
 /assets/performance_timing-
+d568 1
+a568 1
+/CaptureStat.asmx
 a609 1
 /click/impression?
 a676 2
@@ -857,11 +870,17 @@ a733 1
 d748 1
 a748 1
 /count_js.php
+a763 1
+/counter2.gif?
 a784 1
 /crypta.js
+a825 1
+/dl-web-pixel.js
 d875 1
 a915 1
 /eventLog.ajax
+a1159 1
+/gtm-suite.js
 a1226 1
 /id?d_visid_
 a1278 1
@@ -1073,6 +1092,8 @@ a2663 1
 d2668 3
 a2670 1
 /updatestats.js
+a2766 1
+/vli-platform/adb-analytics@
 a2797 1
 /webmnr.min.js
 a2798 1
@@ -1095,6 +1116,7 @@ d3236 36
 d3296 1
 a3598 1
 ||statisticplatform.com^
+d4582 1
 a4651 1
 ||heatmap.com^$third-party
 a4705 1
@@ -1112,19 +1134,37 @@ a9949 1
 ||eventlog.chatlead.com^
 a9973 1
 ||events.storifyme.com^
+a10116 1
+||getelevar.com/shops/*/events.js
 a10172 1
 ||hearstnp.com/log?
+a10187 1
+||hits.getelevar.com^
+a10312 1
+||klaviyo.com/onsite/track-analytics?
+a10505 1
+||monitor-api.blackcrow.ai^
 a11154 1
 ||telemetry.vtex.com^
+a11276 1
+||tracking-na.hawksearch.com^
+a11519 1
+||xp2023-pix.s3.amazonaws.com^
 d11834 1
 a12378 1
 ||wopweb.net/services/counters/
 a12785 1
 ||evt-api.ntm.eu^
+d13105 2
+a13106 1
+||coomer.su/api/v1/event
 a13254 1
 ||femetrics.grammarly.io^
 a13362 1
 ||hlogger.heraldcorp.com^
+d13446 2
+a13447 1
+||kemono.su/api/v1/event
 a14024 1
 ||track.sodapdf.com^
 a14093 1

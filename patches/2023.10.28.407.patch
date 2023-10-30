@@ -1,10 +1,10 @@
-diff name:ublock-annoyances lines:35 checksum:b9f44001c1
+diff name:ublock-annoyances lines:35 checksum:cd134ed473
 d2 1
 a2 1
 ! Last modified: Sun, 29 Oct 2023 14:06:16 +0000
 d4 1
 a4 1
-! Diff-Path: %diffpath%
+! Diff-Path: ../patches/2023.10.29.1127.patch
 a5 1
 ! Diff-Expires: 6 hours
 a103 3
@@ -34,16 +34,18 @@ a3856 3
 ymovies.vip##+js(set, devtoolsDetector.launch, noopFunc)
 lethalpanda.com##+js(aopr, b2a)
 animenewsnetwork.com##+js(set, ANN.ads.adblocked, false)
-diff name:ublock-filters lines:75 checksum:bc02d53863
+diff name:ublock-filters lines:80 checksum:11c8dfeabd
 d2 1
 a2 1
-! Last modified: Sun, 29 Oct 2023 20:10:55 +0000
+! Last modified: Mon, 30 Oct 2023 04:07:08 +0000
 d4 1
 a4 1
-! Diff-Path: ../patches/2023.10.30.97.patch
+! Diff-Path: ../patches/2023.10.30.407.patch
 a5 1
 ! Diff-Expires: 6 hours
-d29 6
+d22 13
+a34 1
+!#endif
 d850 1
 a850 1
 *$frame,denyallow=google.com,domain=slreamplay.*|streampiay.*
@@ -91,7 +93,9 @@ a23285 1
 d23310 1
 a23310 1
 @@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$xhr,domain=guys01gaming.com
-a23367 18
+a23360 1
+||ymovies.vip/sab_*.html$frame
+a23367 19
 nishankhatri.xyz##+js(rmnt, script, adblock)
 tapenoads.com##+js(nowoif)
 sugarona.com,nishankhatri.xyz##^script:has-text(AdbModel)
@@ -110,6 +114,7 @@ cutsy.net,cutyurls.com,cutty.app##+js(aeld, click, handleClick)
 myvidster.com##+js(acs, document.write, cachebuster)
 niaomea.me##+js(aopw, _pop)
 fsl-stream.lu##+js(acs, document.documentElement, break;case $.)
+redd.tube##+js(aopr, config)
 diff name:ublock-privacy lines:18 checksum:690936eed2
 d2 1
 a2 1
@@ -129,13 +134,13 @@ d365 2
 d382 1
 a382 1
 bing.com,msn.com##+js(cookie-remover, MicrosoftApplicationsTelemetryDeviceId)
-diff name:ublock-quick-fixes lines:25 checksum:65de2ba56a
+diff name:ublock-quick-fixes lines:26 checksum:2246b27221
 d2 1
 a2 1
-! Last modified: Sun, 29 Oct 2023 15:23:22 +0000
+! Last modified: Mon, 30 Oct 2023 02:29:43 +0000
 d4 1
 a4 1
-! Diff-Path: %diffpath%
+! Diff-Path: ../patches/2023.10.30.407.patch
 a5 1
 ! Diff-Expires: 6 hours
 d13 6
@@ -150,27 +155,28 @@ d55 1
 a55 2
 ! Prune ads keys/values from fetch responses
 www.youtube.com##+js(rpnt, script, /(\(function serverContract\(\))/, '/*start*/(function(){const self=globalThis;const safe={JSON:self.JSON,JSON_parseFn:self.JSON.parse,JSON_stringifyFn:self.JSON.stringify,JSON_parse:(...args)=>safe.JSON_parseFn.call(safe.JSON,...args),JSON_stringify:(...args)=>safe.JSON_stringifyFn.call(safe.JSON,...args),Request_clone:self.Request.prototype.clone};const pruner=text=>{let json=safe.JSON_parse(text);json.adPlacements=[];json.playerAds=[];json.adSlots=[];return safe.JSON_stringify(json)};const urlFromArg=arg=>{if(typeof arg==="string"){return arg}if(arg instanceof Request){return safe.Request_clone.call(arg).url}return String(arg)};const realFetch=self.fetch;self.fetch=new Proxy(self.fetch,{apply:function(target,thisArg,args){if(!(urlFromArg(args[0]).includes("player?key="))){return Reflect.apply(target,thisArg,args)}return realFetch(...args).then(realResponse=>realResponse.text().then(text=>new Response(pruner(text),{status:realResponse.status,statusText:realResponse.statusText,headers:realResponse.headers})))}});const cleanup=function(){const scripts=document.querySelectorAll("script");for(let i=scripts.length-1;i>=0;i--){if(scripts[i].textContent.startsWith("/*start*/")){scripts[i].textContent=scripts[i].textContent.replace(/\/\*start\*\/(.*)\/\*end\*\//g,"");break}}};if(document.readyState!=="loading"){cleanup()}else{document.addEventListener("DOMContentLoaded",cleanup)}})();/*end*/ $1')
+d63 3
 d67 1
 a67 2
 ! Prune bait JSONs from Object.getOwnPropertyNames
 www.youtube.com##+js(rpnt, script, /(\(function serverContract\(\))/, '/*start*/(function(){const handler={apply:(target,thisArg,args)=>{if(Array.isArray(args)){const arr=args[0];if(arr.adPlacements||arr.adSlots||arr.adBreakHeartbeatParams||arr.playerResponse){args=[{}]}}return Reflect.apply(target,thisArg,args)}};Object.getOwnPropertyNames=new Proxy(Object.getOwnPropertyNames,handler);const cleanup=function(){const scripts=document.querySelectorAll("script");for(let i=scripts.length-1;i>=0;i--){if(scripts[i].textContent.startsWith("/*start*/")){scripts[i].textContent=scripts[i].textContent.replace(/\/\*start\*\/(.*)\/\*end\*\//g,"");break}}};if(document.readyState!=="loading"){cleanup()}else{document.addEventListener("DOMContentLoaded",cleanup)}}());/*end*/ $1')
-d72 6
-diff name:ublock-unbreak lines:8 checksum:966b558e4a
+d69 9
+diff name:ublock-unbreak lines:8 checksum:549512a171
 d2 1
 a2 1
 ! Last modified: Sat, 28 Oct 2023 10:10:50 +0000
 d4 1
 a4 1
-! Diff-Path: %diffpath%
+! Diff-Path: ../patches/2023.10.28.773.patch
 a5 1
 ! Diff-Expires: 6 hours
-diff name:easylist lines:105 checksum:0a6250b3dc
+diff name:easylist lines:107 checksum:30ed6db2f5
 d3 1
 a3 1
-! Last modified: Sun, 29 Oct 2023 13:39:10 +0000
+! Last modified: Mon, 30 Oct 2023 02:13:25 +0000
 d5 1
 a5 1
-! Diff-Path: %diffpath%
+! Diff-Path: ../patches/2023.10.30.407.patch
 a6 1
 ! Diff-Expires: 6 hours
 d639 1
@@ -237,6 +243,8 @@ a57116 1
 ||widenetworks.net^$domain=flysat.com
 a57117 1
 ||windows.net/banners/$domain=hortidaily.com
+a58052 1
+||nhentai.net/api/_/popunder?$popup
 a58735 1
 pons.com###pons-ad-footer
 a59477 1
@@ -270,21 +278,34 @@ bing.com##div[class="ins_exp vsp"]
 a64133 1
 infospiral.com##.right-content
 d64975 1
-diff name:easyprivacy lines:25 checksum:b1e7197bf3
+diff name:easyprivacy lines:59 checksum:e11a36b702
 d3 1
 a3 1
-! Last modified: Sun, 29 Oct 2023 16:56:45 +0000
+! Last modified: Mon, 30 Oct 2023 02:13:25 +0000
 d5 1
 a5 1
-! Diff-Path: %diffpath%
+! Diff-Path: ../patches/2023.10.30.407.patch
 a6 1
 ! Diff-Expires: 6 hours
-a128 1
+d129 2
+a130 2
 /a/performance_timing/*
+/a8c-analytics.js
+d144 1
+d146 1
 a161 1
 /adobe-analytics/*$script
 a343 1
 /api/cmp_tracker|
+d532 1
+a532 1
+/CaptureStat.asmx
+a726 1
+/counter2.gif?
+a789 1
+/dl-web-pixel.js
+a1123 1
+/gtm-suite.js
 d1500 1
 d1502 1
 d1505 1
@@ -294,5 +315,26 @@ a1663 1
 /particles/analytics.js
 a1681 1
 /perimeterx/px.
+a2651 1
+/vli-platform/adb-analytics@
+d4442 1
+a9983 1
+||getelevar.com/shops/*/events.js
+a10055 1
+||hits.getelevar.com^
+a10180 1
+||klaviyo.com/onsite/track-analytics?
+a10373 1
+||monitor-api.blackcrow.ai^
+a11145 1
+||tracking-na.hawksearch.com^
+a11388 1
+||xp2023-pix.s3.amazonaws.com^
 a12654 1
 ||evt-api.ntm.eu^
+d12974 2
+a12975 1
+||coomer.su/api/v1/event
+d13317 2
+a13318 1
+||kemono.su/api/v1/event
