@@ -1,7 +1,7 @@
 ! Title: uBlock filters
-! Last modified: Mon, 30 Oct 2023 21:12:20 +0000
+! Last modified: Tue, 31 Oct 2023 06:18:25 +0000
 ! Expires: 5 days
-! Diff-Path: ../patches/2023.10.31.97.patch
+! Diff-Path: ../patches/2023.10.31.407.patch
 ! Diff-Name: ublock-filters
 ! Diff-Expires: 6 hours
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -20,7 +20,6 @@ www.youtube.com#@#+js(trusted-replace-fetch-response, /(trackingParam":"kx_fmPxh
 www.youtube.com#@#+js(trusted-replace-fetch-response, /"adPlacements.*?\/(aclk\?sa=L&ai=C(?!3QQpfbUyZYWKL_)[-_0-9A-Za-z]+__________|get_midroll_info\S+&token=ALHj).*?"\}\}\}\]\,/, , url:player?key=)
 www.youtube.com#@#+js(trusted-replace-fetch-response, /(maxAgeSeconds.*?"loggedOut":[ft].*?)"adPlacements.*?"\}\}\}\]\,/, $1, url:player?key=)
 www.youtube.com#@#+js(trusted-replace-fetch-response, /"adPlacements.*?\/(aclk\?sa=L&ai=C[-_0-9A-Za-z]+__________|get_midroll_info\S+&token=ALHj).*?"\}\}\}\]\,/, , url:player?key=)
-www.youtube.com#@#+js(trusted-replace-fetch-response, /"adPlacements.*?\/(aclk\?sa=L&ai=C[-_0-9A-Za-z]+__________|get_midroll_info\S+&token=ALH).*?"\}\}\}\]\,/, , url:player?key=)
 !#endif
 youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, ytInitialPlayerResponse.playerAds, undefined)
 youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, ytInitialPlayerResponse.adPlacements, undefined)
@@ -31,7 +30,7 @@ youtube.com##.ytlr-horizontal-list-renderer__items > .yt-virtual-list__container
 youtube.com###player [class*="suggested-action-badge-icon"]:upward(.ytp-suggested-action)
 ||googlevideo.com/initplayback?source=youtube*&c=TVHTML5&oad=$xhr,domain=youtube.com
 ||googlevideo.com/videoplayback?*&ctier=L&$xmlhttprequest,domain=m.youtube.com|music.youtube.com|www.youtube.com,badfilter
-*o097znze.googlevideo.com^$xhr,3p,method=get,domain=www.youtube.com
+||googlevideo.com/videoplayback$xhr,3p,method=get,domain=www.youtube.com
 ! AdDefend
 !#if env_chromium
 lablue.*##+js(nostif, push, 500)
@@ -6232,16 +6231,6 @@ extratorrent.*##:xpath(//a[contains(text(),"VPN")]/../../..)
 typinggames.zone##+js(acs, document.getElementById, alert)
 @@||typinggames.zone^$ghide
 cdna.tv##+js(nowoif)
-enrt.eu,seulink.*##^meta[http-equiv="refresh"]
-enrt.eu,seulink.online##+js(refresh-defuser)
-enrt.eu,seulink.*##+js(aopr, app_vars.force_disable_adblock)
-enrt.eu,seulink.*##+js(set, blurred, false)
-enrt.eu,seulink.*##.banner-inner
-enrt.eu##[href*="builderall.net/"]
-*$frame,script,3p,denyallow=google.com|gstatic.com|recaptcha.net,domain=enrt.eu|seulink.*
-||ads.enrt.eu^
-##[href*="https://catastropheillusive.com/"]
-##[href*="https://ads.enrt.eu/"]
 oko.sh##+js(rmnt, script, /document\.createElement|\.banner-in/)
 oko.sh##+js(aopr, AaDetector)
 oko.sh##+js(aopr, open)
@@ -8570,14 +8559,6 @@ rysafe.blogspot.com##+js(nostif, nextFunction, 250)
 @@||impotsurlerevenu.org^$ghide
 ! eletronicabr.com anti adb
 eletronicabr.com##+js(nostif, test, 100)
-fir3.net##+js(aopr, app_vars.force_disable_adblock)
-fir3.net##+js(set, blurred, false)
-fir3.net##.banner
-fir3.net###link-view > [href][target="_blank"]
-fir3.net##[href^="https://e9c1khhwn4uf.com/"]
-fir3.net##^meta[content*="ads.enrt.eu"]
-@@||fir3.net^$ghide
-*$script,3p,denyallow=google.com|gstatic.com|recaptcha.net,domain=fir3.net
 ! inkagames.com anti adb
 @@||inkagames.com^$ghide
 @@||filmytoday.com^$ghide
@@ -9092,9 +9073,6 @@ nirjonmela.com##+js(acs, $, AdBlock)
 thgss.com##+js(nosiif, adsbygoogle)
 @@||thgss.com^$script,1p
 u-s-news.com##+js(set, ulp_noadb, true)
-encurta.eu##+js(aopr, app_vars.force_disable_adblock)
-encurta.eu##.banner-inner
-encurta.eu##+js(nowoif)
 redbox.com##.rb-ad-leaderboard-container
 *$image,redirect-rule=2x2.png,domain=redbox.com
 yggtorrent.*##+js(aopw, Fingerprint2)
@@ -13141,7 +13119,7 @@ adblockstreamtape.*,adblockstrtape.*,adblockstrtech.*,komikcast.*,mavanimes.*,st
 ! ##+js(aost, Object, /(?=^(?!.*(https)))/)
 exego.app,foot2live.cc,buffstreams.*,criptologico.com,filmyworld.*,foreverwallpapers.com,hotstar.news,mcrypto.club,moviesda1.*,moviesda.*,olympicstreams.me,sockshare1.*,songspk.*,speedostream.*,t20cric.*,tnmusic.in,webcric.com,webseriesclub.com,yourtehzeeb.com,zone-telechargement.*##+js(aost, Object, /(?=^(?!.*(https)))/)
 ! ##+js(acs, document.documentElement, break;case $.)
-0123movie.*,123chill.*,123movies-free.*,123movies-org.*,123movies.*,123moviesfree.*,123movieshub.*,123movieweb.*,190.115.18.20,1hd.to,1todaypk.*,2kmovie.*,4movierulz.*,4movierulz1.*,5movies.*,9kmovies.*,a8ix.*,acn.vin,adblocktape.*,aflizmovies.com,ak4eg.*,anihdplay.com,animeonline.ninja,animeunity.*,animixplay.*,aniwatch.*,arc018.to,asianhdplay.*,atishmkv.*,backfirstwo.site,bolly2tolly.*,clickndownload.*,comedyshow.to,cool-etv.net,crackstreams.*,crackstreamshd.click,daddylivehd.*,direct-cloud.*,divicast.com,divxfilmeonline.net,dood.*,doods.pro,dooood.*,downloadhub.*,ds2play.com,dvdplay.*,embed4u.xyz,embedplayer.*,embedstream.me,emovies.*,encurtandourl.com,ev01.sx,exee.app,f123movies.com,faselhd.*,file-upload.com,film4e.com,filmeserialeonline.org,filmyzilla2022.com,fmoviesfree.*,footyhunter.lol,freelivetvon.com,freemovies.*,french-streams.cc,fslinks.org,fstream365.com,gameshdlive.xyz,gdflix.*,gdtot.*,gembedhd.com,gocast2.com,gogohd.*,goku.*,gokutv.*,gomovies.*,goone.pro,gotaku1.com,hdfriday.*,hdhub4u.*,hdmoviehub.*,hdtoday.tv,hihihaha1.xyz,huboflink.in,iflixmovies.*,jockantv.com,kickassanime.*,kuttymovies1.com,ligaset.com,likemanga.io,linkupload.xyz,lulustream.com,luluvdo.com,mangaraw.*,medeberiyas.com,mega4upload.com,megadb.net,megafilmeshd50.com,megaupto.com,membed1.com,mkvcinemas.*,mlwbd.*,movembed.cc,movieplay.*,moviesda4.*,moviesjoy.*,moviesmeta.*,moviesrulz.*,moviestowatch.tv,mp4upload.com,mreader.co,mydownloadtube.*,myflixerz.*,mywatchseries.*,naijachoice.com.ng,naijanowell.com,netfilmes.org,nflstreams.me,niadd.com,noblocktape.*,nolive.me,odiasia.sbs,oii.io,olympicstreams.me,playgo1.cc,project-free-tv.*,projectfreetv.*,putlocker.*,s.to,send.cm,serienstream.*,series2watch.*,seriesonline.*,seriestv.org,shadowrangers.live,shahed4u.*,shaheed4u.*,sinvida.me,soap2day-online.com,ssoap2day.*,stakes100.xyz,streamadblocker.*,streamcloud.best,streamhub.*,streamnoads.com,streamonsport99.*,streamtape.*,strtapewithadblock.*,swatchseries.*,tapeblocker.com,tapewithadblock.org,taxielcima.live,tii.la,tnhitsda.net,todaypk.*,tvpclive.com,up-4ever.net,upbaam.com,uploadhub.*,uproxy.*,vadbam.net,vavada5com.com,vid-guard.com,vidcloud9.*,videoplayer.*,vido.*,vidspeed.cc,vidsrc.*,viidshar.com,vikistream.com,vixcloud.co,watch-free.tv,watchcartoononline.*,watchmovies.*,watchmovierulz.*,watchomovies.*,watchonlinemoviespk.*,watchop.live,watchseries1.*,watchtvchh.xyz,wecast.to,worldstreams.click,yesmovies4u.*,zamundatv.com##+js(acs, document.documentElement, break;case $.)
+0123movie.*,123chill.*,123movies-free.*,123movies-org.*,123movies.*,123moviesfree.*,123movieshub.*,123movieweb.*,190.115.18.20,1hd.to,1todaypk.*,2kmovie.*,4movierulz.*,4movierulz1.*,5movies.*,9kmovies.*,a8ix.*,acn.vin,adblocktape.*,aflizmovies.com,ak4eg.*,anihdplay.com,animeonline.ninja,animeunity.*,animixplay.*,aniwatch.*,arc018.to,asianhdplay.*,atishmkv.*,backfirstwo.site,bolly2tolly.*,clickndownload.*,comedyshow.to,cool-etv.net,crackstreams.*,crackstreamshd.click,daddylivehd.*,direct-cloud.*,divicast.com,divxfilmeonline.net,dood.*,doods.pro,dooood.*,downloadhub.*,ds2play.com,dvdplay.*,embed4u.xyz,embedplayer.*,embedstream.me,emovies.*,encurtandourl.com,ev01.sx,exee.app,f123movies.com,faselhd.*,file-upload.com,film4e.com,filmeserialeonline.org,filmyzilla2022.com,fmoviesfree.*,footyhunter.lol,freelivetvon.com,freemovies.*,french-streams.cc,fslinks.org,fstream365.com,gameshdlive.xyz,gdflix.*,gdtot.*,gembedhd.com,gocast2.com,gogohd.*,goku.*,gokutv.*,gomovies.*,goone.pro,gotaku1.com,hdfriday.*,hdhub4u.*,hdmoviehub.*,hdtoday.tv,hihihaha1.xyz,huboflink.in,iflixmovies.*,jockantv.com,kickassanime.*,kuttymovies1.com,ligaset.com,likemanga.io,linkupload.xyz,lulustream.com,luluvdo.com,mangaraw.*,medeberiyas.com,mega4upload.com,megadb.net,megafilmeshd50.com,megaupto.com,membed1.com,mkvcinemas.*,mlwbd.*,movembed.cc,movieplay.*,moviesda4.*,moviesjoy.*,moviesmeta.*,moviesrulz.*,moviestowatch.tv,mp4upload.com,mreader.co,mydownloadtube.*,myflixerz.*,mywatchseries.*,naijachoice.com.ng,naijanowell.com,netfilmes.org,nflstreams.me,niadd.com,noblocktape.*,nolive.me,odiasia.sbs,oii.io,olympicstreams.me,pesktop.com,playgo1.cc,project-free-tv.*,projectfreetv.*,putlocker.*,s.to,send.cm,serienstream.*,series2watch.*,seriesonline.*,seriestv.org,shadowrangers.live,shahed4u.*,shaheed4u.*,sinvida.me,soap2day-online.com,ssoap2day.*,stakes100.xyz,streamadblocker.*,streamcloud.best,streamhub.*,streamnoads.com,streamonsport99.*,streamtape.*,strtapewithadblock.*,swatchseries.*,tapeblocker.com,tapewithadblock.org,taxielcima.live,tii.la,tnhitsda.net,todaypk.*,tvpclive.com,up-4ever.net,upbaam.com,uploadhub.*,uproxy.*,vadbam.net,vavada5com.com,vid-guard.com,vidcloud9.*,videoplayer.*,vido.*,vidspeed.cc,vidsrc.*,viidshar.com,vikistream.com,vixcloud.co,watch-free.tv,watchcartoononline.*,watchmovies.*,watchmovierulz.*,watchomovies.*,watchonlinemoviespk.*,watchop.live,watchseries1.*,watchtvchh.xyz,wecast.to,worldstreams.click,yesmovies4u.*,zamundatv.com##+js(acs, document.documentElement, break;case $.)
 atlaq.com,bolly4umovies.*,dietafitness.fun,douploads.net,moalm-qudwa.blogspot.com,redecanais.*,shurt.pw,topauto.fun##+js(aopr, zfgformats)
 123movieshub.*,animeunity.*,bflix.*,cima-club.*,flixhq.*,hindilinks4u.*,t7meel.*,theflixer.tv##+js(aopr, zfgstorage)
 01fmovies.com,123moviesfun.is,bmovies.*,bolly4umovies.*,putlocker.*,userscloud.com##+js(acs, Math, XMLHttpRequest)
@@ -13174,6 +13152,8 @@ shahiid-anime.net##+js(aost, Object,  /(?=^(?!.*(https)))/)
 ||ydjicxmmdhbwojs.com^
 ||xtjaejphgtpg.com^
 ||drarcchewdfk.com^
+||psoanufi.com^
+||ykjawfhta.com^
 !!! other filters for pp
 *$3p,denyallow=google.com|googleapis.com|gstatic.com,domain=moviesda1.*
 *$3p,denyallow=googleapis.com|gstatic.com|facebook.net|facebook.com|fbcdn.net|moviesda1.com|moviesda1.co|moviesda1.net,domain=dloader.*
@@ -22309,9 +22289,9 @@ creativebloq.com##.ad-unit:remove()
 creativebloq.com##.listingResult:has(> .sponsored-post)
 isekaipalace.com##+js(set, showAds, true)
 ||qtoptens.com^$csp=worker-src 'none'
-allmusic.com,androidpolice.com,calculator-online.net,cattime.com,collider.com,comingsoon.net,dogtime.com,dualshockers.com,freeconvert.com,givemesport.com,howtogeek.com,liveandletsfly.com,makeuseof.com,milestomemories.com,momtastic.com,nordot.app,qtoptens.com,screenrant.com,sherdog.com,superherohype.com,thefashionspot.com,timesnews.net,xda-developers.com##^script:has-text(/typeof [a-z]\.cmd\.unshift/)
+allmusic.com,androidpolice.com,calculator-online.net,cattime.com,collider.com,comingsoon.net,dogtime.com,dualshockers.com,freeconvert.com,givemesport.com,howtogeek.com,insider-gaming.com,liveandletsfly.com,makeuseof.com,milestomemories.com,momtastic.com,nordot.app,qtoptens.com,screenrant.com,sherdog.com,superherohype.com,thefashionspot.com,timesnews.net,xda-developers.com##^script:has-text(/typeof [a-z]\.cmd\.unshift/)
 !#if !cap_html_filtering
-allmusic.com,androidpolice.com,calculator-online.net,cattime.com,collider.com,comingsoon.net,dogtime.com,dualshockers.com,freeconvert.com,givemesport.com,howtogeek.com,liveandletsfly.com,makeuseof.com,milestomemories.com,momtastic.com,nordot.app,qtoptens.com,screenrant.com,sherdog.com,superherohype.com,thefashionspot.com,timesnews.net,xda-developers.com##+js(rmnt, script, /typeof [a-z]\.cmd\.unshift/, condition, cmd.unshift)
+allmusic.com,androidpolice.com,calculator-online.net,cattime.com,collider.com,comingsoon.net,dogtime.com,dualshockers.com,freeconvert.com,givemesport.com,howtogeek.com,insider-gaming.com,liveandletsfly.com,makeuseof.com,milestomemories.com,momtastic.com,nordot.app,qtoptens.com,screenrant.com,sherdog.com,superherohype.com,thefashionspot.com,timesnews.net,xda-developers.com##+js(rmnt, script, /typeof [a-z]\.cmd\.unshift/, condition, cmd.unshift)
 !#endif
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$domain=givemesport.com,important
 superherohype.com##a.wp-block-button__link:is([href^="https://amzn.to/"], [href^="https://www.amazon.com/"])
@@ -23323,7 +23303,10 @@ myvidster.com##+js(acs, document.write, cachebuster)
 niaomea.me##+js(aopw, _pop)
 fsl-stream.lu##+js(acs, document.documentElement, break;case $.)
 redd.tube##+js(aopr, config)
-live-streamfootball.*,rbtv77.com##+js(no-xhr-if, googlesyndication)
+live-streamfootball.*,rbtv77.com,superabbit77.*##+js(no-xhr-if, googlesyndication)
 ggjav.com,ggjav.tv##+js(acs, $, popunder)
 showcamrips.com##+js(rmnt, script, document.head.appendChild)
 showcamrips.com##+js(acs, document.cookie, document.head.appendChild)
+ bizdustry.com##+js(nostif, show)
+cl1ca.com,4br.me,fir3.net,seulink.*,encurtalink.*##+js(aopr, mm)
+cl1ca.com,4br.me,fir3.net,seulink.*,encurtalink.*##+js(set, blurred, false)
