@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Quick fixes
-! Last modified: Tue, 31 Oct 2023 16:57:52 +0000
 ! Expires: 12 hours
-! Diff-Path: ../patches/2023.11.1.101.patch
+! Last modified: Wed, 01 Nov 2023 03:43:17 +0000
+! Diff-Path: ../patches/2023.11.1.407.patch
 ! Diff-Name: ublock-quick-fixes
 ! Diff-Expires: 6 hours
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -66,12 +66,10 @@ www.youtube.com##+js(trusted-replace-fetch-response, /"adPlacements.*?\/(aclk\?s
 www.youtube.com#@#+js(trusted-replace-fetch-response, /(trackingParam":"kx_fmPxh.*?)"adPlacements.*?"\}\}\}\]\,/, $1, player?key=)
 www.youtube.com#@#+js(trusted-replace-fetch-response, /"adPlacements.*?\/(aclk\?sa=L&ai=C(?!3QQpfbUyZYWKL_)[-_0-9A-Za-z]+__________|get_midroll_info\S+&token=ALHj).*?"\}\}\}\]\,/, , url:player?key=)
 www.youtube.com#@#+js(trusted-replace-fetch-response, /(maxAgeSeconds.*?"loggedOut":[ft].*?)"adPlacements.*?"\}\}\}\]\,/, $1, url:player?key=)
-www.youtube.com#@#+js(trusted-replace-fetch-response, /"adPlacements.*?\/(aclk\?sa=L&ai=C[-_0-9A-Za-z]+__________|get_midroll_info\S+&token=ALHj).*?"\}\}\}\]\,/, , url:player?key=)
 www.youtube.com#@#+js(aost, btoa, /[A-Za-z]lb \S+polymer/)
 ! Prune bait JSONs from Object.getOwnPropertyNames
 www.youtube.com##+js(rpnt, script, /(\(function serverContract\(\))/, '/*start*/(function(){const handler={apply:(target,thisArg,args)=>{if(Array.isArray(args)){const arr=args[0];if(arr.adPlacements||arr.adSlots||arr.adBreakHeartbeatParams||arr.playerResponse){args=[{}]}}return Reflect.apply(target,thisArg,args)}};Object.getOwnPropertyNames=new Proxy(Object.getOwnPropertyNames,handler);const cleanup=function(){const scripts=document.querySelectorAll("script");for(let i=scripts.length-1;i>=0;i--){if(scripts[i].textContent.startsWith("/*start*/")){scripts[i].textContent=scripts[i].textContent.replace(/\/\*start\*\/(.*)\/\*end\*\//g,"");break}}};if(document.readyState!=="loading"){cleanup()}else{document.addEventListener("DOMContentLoaded",cleanup)}}());/*end*/ $1')
 !#endif
-www.youtube.com##+js(trusted-replace-xhr-response, /\"adPlacements.*?\"\}\}\}\]\,/, , /player\?key=|watch\?v=|youtubei\/v1\/player/)
 !#if !cap_html_filtering
 !#if env_firefox
 youtube.com##+js(json-prune, playerResponse.adPlacements playerResponse.playerAds playerResponse.adSlots adPlacements playerAds adSlots legacyImportant)
@@ -93,8 +91,6 @@ sankaku.app##+js(no-xhr-if, googlesyndication)
 btcbitco.in##+js(set, isRequestPresent, true)
 ||bmcdn6.com^$script,redirect-rule=noop.js
 coinscap.info,cryptowidgets.net,greenenez.com,insurancegold.in,webfreetools.net,wiki-topia.com##+js(nostif, /bait|detected/)
-washingtonpost.com#@#+js(rmnt, script, /adblock/)
-washingtonpost.com##+js(rmnt, script, /\badblock\b/)
 as.com##+js(set, DTM.trackAsyncPV, noopFunc)
 megaup.net#@#body .metaRedirectWrapperBottomAds:style(width: 10420px !important;)
 megaup.net##body .metaRedirectWrapperBottomAds:style(visibility: hidden !important;)
@@ -111,3 +107,4 @@ loawa.com,ygosu.com,sportalkorea.com,algumon.com,hancinema.net,enetnews.co.kr,ed
 apkmirror.com##+js(noeval-if, 07c225f3.online)
 @@||googletagmanager.com/gtm.js$script,domain=tide.com
 @@||climateknowledgeportal.worldbank.org/themes/cckp/js/Map/GeoMap.js
+||amillionads.com^$media,redirect=noop-1s.mp4:10,from=open.spotify.com
