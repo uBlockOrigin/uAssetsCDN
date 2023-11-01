@@ -1,5 +1,5 @@
 ! Title: uBlock filters (2023)
-! Last modified: Wed, 01 Nov 2023 04:23:28 +0000
+! Last modified: Wed, 01 Nov 2023 17:36:55 +0000
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -1385,7 +1385,7 @@ telesrbija.com##+js(acs, Promise, Adb)
 
 ! javgg.net anti-adb on DL
 javgg.net#@##AD_160
-*$script,3p,denyallow=cloudflare.com|googleapis.com,domain=javgg.club|javgg.net
+*$script,3p,denyallow=cloudflare.com|fluidplayer.com|googleapis.com,domain=javgg.club|javgg.net
 javmoon.me##+js(nostif, /debugger|UserCustomPop/)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/17192
@@ -3012,11 +3012,15 @@ freepublicporn.com##[href*="find-my-girl.com"]
 ! https://shaboysglobal.com/ anti-adb
 @@||shaboysglobal.com^$ghide
 
-! These sites work fine on the desktop and Android but they only allow iPhone useragent
+! PersianBlocker filters
+! app.blubank.com, mobileweb.bankmellat.ir - These sites work fine on the desktop and Android but they only allow iPhone useragent
 app.blubank.com,mobileweb.bankmellat.ir##+js(trusted-set, navigator.userAgent, iPad; CPU OS 14_7_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML\, like Gecko) Version/14.1.2 Mobile/15E148 Safari)
 mobileweb.bankmellat.ir##+js(trusted-set, navigator.platform, iPhone)
 app.blubank.com##+js(set, navigator.standalone, true)
 app.blubank.com##div.fixed[style^="z-index:"]:has-text(گوشی خود را بچرخانید)
+! https://uploadboy.com/f64c93jcxy0a - Timer
+uploadboy.com##+js(rpnt, script, self.location.href;, self.location.href; document.addEventListener('DOMContentLoaded'\,()=>{const button=document.querySelector('form > input#method_free');if(button){button.click()}});, sedCount, 1)
+uploadboy.com##+js(rpnt, script, //$('#btn_download').click();, $('#btn_download').click();, sedCount, 1)
 
 ! https://github.com/AdguardTeam/AdguardFilters/issues/153146
 lifesurance.info##+js(set, showAdss, true)
@@ -4067,10 +4071,6 @@ txori.com##+js(nostif, adblock)
 olarila.com##+js(no-fetch-if, googlesyndication)
 olarila.com##+js(nostif, adblock)
 
-! https://uploadboy.com/f64c93jcxy0a timer
-uploadboy.com##+js(rpnt, script, self.location.href;, self.location.href; document.addEventListener('DOMContentLoaded'\,()=>{const button=document.querySelector('form > input#method_free');if(button){button.click()}});, sedCount, 1)
-uploadboy.com##+js(rpnt, script, //$('#btn_download').click();, $('#btn_download').click();, sedCount, 1)
-
 ! https://github.com/uBlockOrigin/uAssets/issues/19360
 miniwebtool.com##^script:has-text(adblock)
 !#if !cap_html_filtering
@@ -4814,6 +4814,17 @@ decorisi.com##+js(acs, Swal.fire)
 
 ! https://github.com/uBlockOrigin/uAssets/discussions/17361#discussioncomment-7144221
 aiimgvlog.fun##+js(no-xhr-if, popunder)
+aiimgvlog.fun##+js(acs, eval, replace)
+aiimgvlog.fun##+js(acs, addEventListener, google_ad_client)
+@@||aiimgvlog.fun^$ghide
+aiimgvlog.fun##+js(aopw, AdbModel)
+aiimgvlog.fun##+js(aeld, , popMagic)
+aiimgvlog.fun##+js(set, protection, noopFunc)
+aiimgvlog.fun##+js(set, document.hasFocus, trueFunc)
+aiimgvlog.fun##form[id]:style(display: block !important;)
+aiimgvlog.fun##form > div[id][style="display: none;"]:style(display: block !important;)
+aiimgvlog.fun###widescreen2
+aiimgvlog.fun##div[id][style="position:fixed;bottom: 0px;left: 0px;z-index:999999;"]
 cpm.icu##+js(set, blurred, false)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/19910
@@ -4879,18 +4890,11 @@ pesktop.com##[href="javascript:void(0)"]
 ||cdn.intergient.com^$redirect-rule=noopjs,domain=arras.*|arras.netlify.app|arrax.io
 ||arras.io/img/server-hunter*.jpg$image,1p
 
-! https://github.com/uBlockOrigin/uAssets/discussions/17361#discussioncomment-7196409
-aiimgvlog.fun##+js(acs, eval, replace)
-
 ! https://github.com/uBlockOrigin/uAssets/issues/19990
 wolfstream.tv##+js(aopw, showADBOverlay)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/19991
 papa4k.co##+js(acs, eval, replace)
-
-! https://github.com/uBlockOrigin/uAssets/discussions/17361#discussioncomment-7196409
-aiimgvlog.fun##+js(acs, addEventListener, google_ad_client)
-aiimgvlog.fun##form[id]:style(display: block !important;)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/19954
 tickzoo.tv##+js(nowoif, , 10)
@@ -5244,3 +5248,6 @@ cl1ca.com,4br.me,fir3.net,seulink.*,encurtalink.*##+js(set, blurred, false)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/20379
 app.axenthost.com##+js(no-fetch-if, /^/)
+
+! https://github.com/uBlockOrigin/uAssets/issues/20401
+infinityscans.xyz##+js(no-fetch-if, ads)
