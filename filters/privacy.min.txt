@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Privacy
 ! Expires: 7 days
-! Last modified: Wed, 01 Nov 2023 20:10:22 +0000
-! Diff-Path: ../patches/2023.11.2.776.patch
+! Last modified: Thu, 02 Nov 2023 17:47:56 +0000
+! Diff-Path: ../patches/2023.11.2.1127.patch
 ! Diff-Name: ublock-privacy
 ! Diff-Expires: 6 hours
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -109,23 +109,13 @@ search.brave.com##+js(no-fetch-if, body:browser)
 ||d3bch4rrbnbe5n.cloudfront.net/pxl.png^
 /visilabs.min.js
 ||civicscience.com^$3p
+/\/[a-z0-9]{12}\/(?=[a-zA-Z0-9\/\-]*\+)[a-zA-Z0-9\/\+\-]{97,106}$/$match-case,script,1p,strict1p
+/^https?:\/\/[0-9a-z]{12}\.[^\/]*\/[a-zA-Z0-9\/\+\-]{97,106}$/$match-case,script,1p,strict3p
 /dataunlocker$script,1p,domain=~dataunlocker.com
-/[a-z0-9]{12}(\.admin)?\.dataunlocker\.com\//$script,1p,domain=dataunlocker.com
-/^\w+://[\w.\-]+\.www\.cybernetman\.com//$1p,script
-/^\w+://[\w.\-]+\.www\.logology\.co//$1p,script
-/^\w+://[\w.\-]+\.www\.atlaslane\.com//$1p,script
-/^\w+://[0-9a-z]{12}\.adria\.gg//$1p,script
-/^\w+://[0-9a-z]{11}\.taxliencode\.com//$1p,script
-/^\w+://[0-9a-z]{12}\.www\.sidsplumbing\.ie//$1p,script
-/^\w+://[0-9a-z]{12}\.www\.kodalia\.com//$1p,script
-/^\w+://[0-9a-z]{12}\.quine\.sh//$1p,script
-/^\w+://[0-9a-z]{12}\.controlconceptsusa\.com//$1p,script
-/^\w+://[0-9a-z]{12}\.www\.emanualonline\.com//$1p,script
 /www\.eldorado\.gg\/[a-zA-Z]{10}\.js/$1p,script,domain=eldorado.gg
 ||ampl.cinotes.com^
 ||data-saver-cindi.herokuapp.com^
 ||cdn.cindicator.com/$script,3p
-cefirates.com,freecodecamp.org,monumentmetals.com,nookgaming.com,ping.gg,resourceya.com,camberlion.com,alpacafinance.org,groove.so,jaywilsonwebsolutions.com,bitdomain.biz,madrigalmaps.com,tapmyback.com,revistaferramental.com.br,kvest.ee,creatordrop.com,cybernetman.com,adaptive.marketing,future-fortune.com,panprices.com,adria.gg##+js(acs, String.fromCharCode, join)
 !#if cap_html_filtering
 botcomics.com,cefirates.com,chandlerorchards.com,comicleaks.com,marketdata.app,monumentmetals.com,tapmyback.com,ping.gg,revistaferramental.com.br,hawpar.com,alpacafinance.org,nookgaming.com,enkeleksamen.no,kvest.ee,creatordrop.com,panpots.com,cybernetman.com,bitdomain.biz,gerardbosch.xyz,fort-shop.kiev.ua,accuretawealth.com,resourceya.com,tracktheta.com,adaptive.marketing##^script:has-text("join('')")
 alpacafinance.org,tt.live,future-fortune.com,abhijith.page,furucombo.app,madrigalmaps.com,adventuretix.com##^script:has-text('join("")')
@@ -143,8 +133,8 @@ panprices.com,intercity.technology,freelancer.taxmachine.be,adria.gg,fjlaborator
 ||15823f12-289e-4189-9e51-e2de1bf1a105.online^$xhr,ping
 /^https:\/\/cdn\.jsdelivr\.net\/npm\/[-a-z_]{4,22}@latest\/dist\/script\.min\.js$/$script,3p,match-case
 loawa.com,ygosu.com,sportalkorea.com,algumon.com,hancinema.net,enetnews.co.kr,edaily.co.kr,economist.co.kr,etoday.co.kr,hankyung.com,isplus.com,hometownstation.com,kagit.kr,inven.co.kr,viva100.com,joongdo.co.kr,jjang0u.com,tenbizt.com,tvreport.co.kr,newautopost.co.kr,mememedia.co.kr,mobilitytv.co.kr,cboard.net,a-ha.io,interfootball.co.kr,fourfourtwo.co.kr,apkmirror.com,dotkeypress.kr,viewcash.co.kr,tripplus.co.kr,enterdiary.com##+js(set-local-storage-item, adshield-analytics-uuid, $remove$)
-apkmirror.com,dotkeypress.kr,viewcash.co.kr,tripplus.co.kr,enterdiary.com##+js(noeval-if, 07c225f3.online)
-apkmirror.com,dotkeypress.kr,viewcash.co.kr,tripplus.co.kr,enterdiary.com##^script:has-text(KCgpPT57bGV0IGU)
+apkmirror.com,dotkeypress.kr,viewcash.co.kr,tripplus.co.kr,enterdiary.com,mtodayauto.com##+js(noeval-if, 07c225f3.online)
+apkmirror.com,dotkeypress.kr,viewcash.co.kr,tripplus.co.kr,enterdiary.com,mtodayauto.com##^script:has-text(KCgpPT57bGV0IGU)
 ||connectier.io^
 ||nsfw.xxx/vendor/fingerprint/fingerprint2.min.js$script,redirect=fingerprint2.js,important
 ||collector.xhwebsite.com^
@@ -506,6 +496,7 @@ web.bale.ai##+js(trusted-set, navigator.userAgent, Mozilla/5.0 (Windows NT 10.0;
 !#else
 web.bale.ai##+js(trusted-set, navigator.userAgent, Mozilla/5.0 (Linux; Android 10) AppleWebKit/537.36 (KHTML\, like Gecko) Chrome/119.0.6045.66 Mobile Safari/537.36)
 !#endif
+||agma-analytics.de^
 ! Merge in resource-abuse.txt
 ! *** uAssets:filters/resource-abuse.txt ***
 /edgemesh.*.js$script,domain=~edgemesh.com|~edgeno.de
