@@ -1,5 +1,5 @@
 ! Title: uBlock filters
-! Last modified: Fri, 03 Nov 2023 10:50:52 +0000
+! Last modified: Fri, 03 Nov 2023 20:43:05 +0000
 ! Expires: 5 days
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Homepage: https://github.com/uBlockOrigin/uAssets
@@ -23,8 +23,10 @@ youtube.com##ytd-video-masthead-ad-advertiser-info-renderer,ytm-promoted-sparkle
 ! https://github.com/uBlockOrigin/uAssets/pull/18106/
 www.youtube.com##+js(trusted-replace-xhr-response, /\"adPlacements.*?\"\}\}\}\]\,/, , /player\?key=|watch\?v=|youtubei\/v1\/player/)
 !#if env_chromium
-www.youtube.com##+js(trusted-replace-fetch-response, /"adPlacements.*?privateDoNotAccessOrElseTrustedResourceUrlWrappedValue":"https:\/\/(www\.youtube\.com\/aboutthisad\?pf=web&source=youtube&reasons=A|fundingchoices).*?"\}\}\}\]\,/, , player?key=)
-www.youtube.com##+js(trusted-replace-fetch-response, /"adPlacements.*?get_midroll_info\S+&token=ALHj.*?"\}\}\}\]\,/, , player?key=)
+www.youtube.com##+js(trusted-replace-fetch-response, /"adPlacements.*?privateDoNotAccessOrElseTrustedResourceUrlWrappedValue":"https:\/\/www\.youtube\.com\/aboutthisad\?pf=web&source=youtube&reasons=A.*?"\}\}\}\]\,/, , player?key=)
+www.youtube.com#@#+js(trusted-replace-fetch-response, /"adPlacements.*?privateDoNotAccessOrElseTrustedResourceUrlWrappedValue":"https:\/\/(www\.youtube\.com\/aboutthisad\?pf=web&source=youtube&reasons=A|fundingchoices).*?"\}\}\}\]\,/, , player?key=)
+www.youtube.com##+js(trusted-replace-fetch-response, /"adPlacements.*?"getAdBreakUrl":"https:\/\/www\.youtube\.com\/get_midroll_info\S+&token=ALHj.*?"\}\}\}\]\,/, , player?key=)
+www.youtube.com#@#+js(trusted-replace-fetch-response, /"adPlacements.*?get_midroll_info\S+&token=ALHj.*?"\}\}\}\]\,/, , player?key=)
 www.youtube.com#@#+js(trusted-replace-fetch-response, /"adPlacements.*?\/(aclk\?sa=L&ai=C(?!3OQpfbUyZYWKL_)[-_0-9A-Za-z]+__________[-_0-9A-Za-z]+A[A-Za-z]AA&|get_midroll_info\S+&token=ALHj).*?"\}\}\}\]\,/, , player?key=)
 www.youtube.com#@#+js(trusted-replace-fetch-response, /(trackingParam":"kx_fmPxh.*?)"adPlacements.*?"\}\}\}\]\,/, $1, player?key=)
 www.youtube.com#@#+js(trusted-replace-fetch-response, /"adPlacements.*?\/(aclk\?sa=L&ai=C(?!3QQpfbUyZYWKL_)[-_0-9A-Za-z]+__________|get_midroll_info\S+&token=ALHj).*?"\}\}\}\]\,/, , url:player?key=)
@@ -3919,9 +3921,6 @@ moondoge.co.in##.captchaAd:style(visibility: collapse !important)
 ! https://github.com/NanoAdblocker/NanoFilters/commit/f711954f407c43329b5d242a7516a5a38c3bee4e#commitcomment-28218753
 revealname.com##+js(set, $.fx.off, true)
 
-! https://github.com/jspenguin2017/uBlockProtector/issues/891
-makeuseof.com##+js(nostif, document.body.classList.add, 100)
-
 ! https://github.com/uBlockOrigin/uAssets/issues/1768
 alphaporno.com##+js(aopr, ExoLoader)
 alphaporno.com##+js(set, console.clear, noopFunc)
@@ -4802,7 +4801,7 @@ ashemaletube.com##.ads-block-rightside
 ||cc.ashemaletube.com/*/black-header.jpg$image
 ||cc.ashemaletube.com/*/header-black.jpg$image
 ashemaletube.com##.video-end-overlay
-*.mp4$media,3p,redirect=noopmp3-0.1s,domain=ashemaletube.com
+*.mp4$media,redirect=noopmp3-0.1s,domain=ashemaletube.com
 ||cc.ashemaletube.com/*/black-main.jpg$image,1p
 ashemaletube.com###site-wrapper:style(padding-top: 0 !important;)
 ashemaletube.com##.header-ads-wrapper
@@ -7631,14 +7630,15 @@ mywatchseries.*##+js(acs, document.querySelectorAll, popMagic)
 ! https://github.com/uBlockOrigin/uAssets/issues/4219
 yomovies.*##+js(aopr, decodeURI)
 mixdrp.*##+js(aeld, load, download-wrapper)
-mixdrop.*,mixdroop.*##+js(aopw, _pop)
+md3b0j6hj.com,mixdrop.*,mixdroop.*##+js(aopw, _pop)
 mixdrop.*##+js(set, MDCore.adblock, 0)
-mixdrop.*,mixdrp.*,mixdroop.*##+js(nowoif)
+md3b0j6hj.com,mixdrop.*,mixdrp.*,mixdroop.*##+js(nowoif)
 mixdrop.*,mixdrp.*##+js(acs, $, String.fromCharCode)
 mixdrop.*,mixdrp.*##+js(nano-stb, disabled)
+md3b0j6hj.com##+js(acs, setTimeout, setInterval)
 ||mixdrop.*/sw.js$script,1p
 mixdrop.*##div[onclick^="$(this).remove"]
-mixdrp.*,mixdrop.*,mixdroop.*##body > div[style^="position: absolute;"][style*="z-index"]
+md3b0j6hj.com,mixdrp.*,mixdrop.*,mixdroop.*##body > div[style^="position: absolute;"][style*="z-index"]
 *$script,3p,denyallow=dotblocking.dummy|google.com|gstatic.com|hwcdn.net|jquery.com,domain=mixdrop.*|mixdrp.*|~mixdrop.one|mixdroop.*
 ||brightadnetwork.com^
 
@@ -14169,9 +14169,6 @@ warps.club##+js(aopr, adblockDetect)
 
 ! https://github.com/NanoMeow/QuickReports/issues/2890
 *$script,redirect-rule=noopjs,domain=texviewer.herokuapp.com
-
-! https://github.com/NanoMeow/QuickReports/issues/2894
-heidisql.com##+js(acs, $, adblock)
 
 ! https://github.com/NanoMeow/QuickReports/issues/2897
 fake-it.ws##+js(set, adsLoadable, true)
