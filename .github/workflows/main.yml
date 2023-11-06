@@ -15,8 +15,8 @@ jobs:
         run: |
           UPDATE_PERIOD_IN_HOURS=5
           MOD_SINCE_UBO_EPOCH="($(date +%s) - $(date -d "20140623" +%s)) / 3600 % $UPDATE_PERIOD_IN_HOURS" | bc
-          if [ "$MOD_SINCE_UBO_EPOCH" != "0" ]; then
-            exit 1
+          if [ "$MOD_SINCE_UBO_EPOCH" = "0" ]; then
+            echo "CAN_DO=yes" >> $GITHUB_ENV
           fi
       - name: Repo check
         run: |
@@ -29,36 +29,44 @@ jobs:
           fi
           exit 0
       - name: Clone uAssetsCDN
+        if: ${{ env.CAN_DO == 'yes' }}
         uses: actions/checkout@v3
       - name: Generate version string
+        if: ${{ env.CAN_DO == 'yes' }}
         run: |
           TAGNAME=$(date -u "+%Y.%-m.%-d.")$(date -u "+%H*60+%M" | bc)
           echo "TAGNAME=$TAGNAME" >> $GITHUB_ENV
           echo "Version string is $TAGNAME"
       - name: Copy shell script from uAssets
+        if: ${{ env.CAN_DO == 'yes' }}
         run: |
           TMPDIR=$(mktemp -d)
           git clone --depth=1 --single-branch --branch=master https://github.com/uBlockOrigin/uAssets.git $TMPDIR
           cp -v $TMPDIR/tools/make-diffpatch.sh .
           cp -v $TMPDIR/tools/update-diffpatches.sh .
       - name: Copy uAssets/filters to uAssetsCDN
+        if: ${{ env.CAN_DO == 'yes' }}
         run: |
           TMPDIR=$(mktemp -d)
           git clone --depth=1 --single-branch --branch=gh-pages https://github.com/uBlockOrigin/uAssets.git $TMPDIR
           cp -v $TMPDIR/filters/*.txt filters/
           cp -v $TMPDIR/thirdparties/*.txt thirdparties/
       - name: Copy uBlock/assets*.json to uAssetsCDN
+        if: ${{ env.CAN_DO == 'yes' }}
         run: |
           TMPDIR=$(mktemp -d)
           git clone --depth=1 --single-branch --branch=master https://github.com/gorhill/uBlock.git $TMPDIR
           cp -v $TMPDIR/assets/assets*.json ublock/
       - name: Create new patch
+        if: ${{ env.CAN_DO == 'yes' }}
         run: |
           ./make-diffpatch.sh "${{ env.TAGNAME }}"
       - name: Update existing patch
+        if: ${{ env.CAN_DO == 'yes' }}
         run: |
           ./update-diffpatches.sh "${{ env.TAGNAME }}"
       - name: Commit changes, if any
+        if: ${{ env.CAN_DO == 'yes' }}
         run: |
           if [[ -z $(git diff --name-only --cached) ]]; then exit 0; fi
           git config user.name "GitHub Actions: main"
