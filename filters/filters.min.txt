@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Mon, 06 Nov 2023 17:13:25 +0000
-! Diff-Path: ../patches/2023.11.6.1130.patch#ublock-filters
+! Last modified: Mon, 06 Nov 2023 23:12:14 +0000
+! Diff-Path: ../patches/2023.11.6.1430.patch#ublock-filters
 ! Diff-Name: ublock-filters
 ! Diff-Expires: 5 hours
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -14,7 +14,6 @@ youtube.com###promotion-shelf
 youtube.com##ytd-video-masthead-ad-advertiser-info-renderer,ytm-promoted-sparkles-web-renderer
 ! @@||youtube.com/get_video_info?*timedtext_editor$xhr,1p
 www.youtube.com##+js(trusted-replace-xhr-response, /\"adPlacements.*?\"\}\}\}\]\,/, , /player\?key=|watch\?v=|youtubei\/v1\/player/)
-!#if env_chromium
 www.youtube.com##+js(trusted-replace-fetch-response, /"adPlacements.*?privateDoNotAccessOrElseTrustedResourceUrlWrappedValue":"https:\/\/www\.youtube\.com\/aboutthisad\?pf=web&source=youtube&reasons=A.*?"\}\}\}\]\,/, , player?key=)
 www.youtube.com#@#+js(trusted-replace-fetch-response, /"adPlacements.*?privateDoNotAccessOrElseTrustedResourceUrlWrappedValue":"https:\/\/(www\.youtube\.com\/aboutthisad\?pf=web&source=youtube&reasons=A|fundingchoices).*?"\}\}\}\]\,/, , player?key=)
 www.youtube.com##+js(trusted-replace-fetch-response, /"adPlacements.*?"getAdBreakUrl":"https:\/\/www\.youtube\.com\/get_midroll_info\S+&token=ALHj.*?"\}\}\}\]\,/, , player?key=)
@@ -22,7 +21,6 @@ www.youtube.com#@#+js(trusted-replace-fetch-response, /"adPlacements.*?get_midro
 www.youtube.com#@#+js(trusted-replace-fetch-response, /"adPlacements.*?\/(aclk\?sa=L&ai=C(?!3OQpfbUyZYWKL_)[-_0-9A-Za-z]+__________[-_0-9A-Za-z]+A[A-Za-z]AA&|get_midroll_info\S+&token=ALHj).*?"\}\}\}\]\,/, , player?key=)
 www.youtube.com#@#+js(trusted-replace-fetch-response, /(trackingParam":"kx_fmPxh.*?)"adPlacements.*?"\}\}\}\]\,/, $1, player?key=)
 www.youtube.com#@#+js(trusted-replace-fetch-response, /"adPlacements.*?\/(aclk\?sa=L&ai=C(?!3QQpfbUyZYWKL_)[-_0-9A-Za-z]+__________|get_midroll_info\S+&token=ALHj).*?"\}\}\}\]\,/, , url:player?key=)
-!#endif
 youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, ytInitialPlayerResponse.playerAds, undefined)
 youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, ytInitialPlayerResponse.adPlacements, undefined)
 youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, ytInitialPlayerResponse.adSlots, undefined)
@@ -10266,34 +10264,35 @@ blademaster666.com,fanproj.net,hot2k.com,luchoedu.org,lupaste.com,pornovenezolan
 desktophut.com###loading-ad
 *$frame,redirect-rule=noopframe,domain=desktophut.com
 *$xhr,redirect-rule=nooptext,domain=desktophut.com
+*$frame,redirect-rule=noopframe,domain=dropgalaxy.com|techthematter.xyz
+*$xhr,redirect-rule=nooptext,domain=dropgalaxy.com|techthematter.xyz
+*$script,redirect-rule=noopjs,domain=dropgalaxy.*|financemonk.net|techthematter.xyz
+*$image,redirect-rule=32x32.png,domain=dropgalaxy.*|financemonk.net|techthematter.xyz
+@@||dropgalaxy.*^$ghide
 @@||googlesyndication.com^$script,xhr,domain=dropgalaxy.com
+@@||doubleclick.net^$script,xhr,domain=dropgalaxy.com
 @@||adoto.net^$script,xhr,domain=dropgalaxy.com
 @@||rsc.cdn77.org^$script,xhr,domain=dropgalaxy.com
-@@||doubleclick.net^$script,xhr,domain=dropgalaxy.com
 @@||challenges.cloudflare.com^$subdocument,domain=dropgalaxy.com
 @@||a2zapk.com^$script,xhr,3p,domain=dropgalaxy.com
 @@||imasdk.googleapis.com/js/sdkloader/ima3.js$script,domain=dropgalaxy.com
 @@||blockadsnot.com^$script,domain=dropgalaxy.com
 @@||login.popmonetizer.com^$script,domain=dropgalaxy.com
+@@||assets.vlitag.com/prebid/$script,domain=dropgalaxy.com
+@@||services.vlitag.com/adv1/$script,domain=dropgalaxy.com
+@@||services.vlitag.com/cli/$xhr,domain=dropgalaxy.com
+@@||services.vlitag.com/obj/$xhr,domain=dropgalaxy.com
+||assets.isavetube.com/images/dgpromo.jpg
+dropgalaxy.com##div[id^="TR-"][tr-id][style*="z-index: 9999"]
 dropgalaxy.com##html.i-amphtml-inabox
 dropgalaxy.com##+js(acis, document.createElement, /break;case \$\.|popunder/)
 dropgalaxy.com##+js(trusted-set, document.visibilityState, visible)
 dropgalaxy.*##+js(no-fetch-if, /adtrue\.com|eningspon\.com|freychang\.fun|orquideassp\.com|popunder/)
 dropgalaxy.*##+js(no-xhr-if, /a-mo\.net|adnxs\.com|prebid|creativecdn\.com|e-planning\.net|quantumdex\.io/)
 dropgalaxy.*,financemonk.net##+js(nowoif)
-@@||dropgalaxy.*^$ghide
+dropgalaxy.*##+js(set, isAdblockActive, false)
 @@||financemonk.net^$ghide
 financemonk.net###vipada
-*$frame,redirect-rule=noopframe,domain=dropgalaxy.com|techthematter.xyz
-*$xhr,redirect-rule=nooptext,domain=dropgalaxy.com|techthematter.xyz
-*$script,redirect-rule=noopjs,domain=dropgalaxy.*|financemonk.net|techthematter.xyz
-*$image,redirect-rule=32x32.png,domain=dropgalaxy.*|financemonk.net|techthematter.xyz
-||assets.isavetube.com/images/dgpromo.jpg
-dropgalaxy.com##div[id^="TR-"][tr-id][style*="z-index: 9999"]
-@@||assets.vlitag.com/prebid/$script,domain=dropgalaxy.com
-@@||services.vlitag.com/adv1/$script,domain=dropgalaxy.com
-@@||services.vlitag.com/cli/$xhr,domain=dropgalaxy.com
-@@||services.vlitag.com/obj/$xhr,domain=dropgalaxy.com
 techthematter.xyz###app
 techthematter.xyz###msg
 techthematter.xyz##a#link:style(display: block !important)
@@ -13491,7 +13490,7 @@ viralxns.com###timeout, #tp-snp2:others()
 viralxns.com###timeout:remove-attr(disabled)
 viralxns.com,wp.uploadfiles.in,uploadsoon.com##+js(nano-sib, /.?/, *, 0.02)
 viralxns.com,wp.uploadfiles.in,uploadsoon.com##+js(trusted-click-element, #tp-snp2)
-viralsbaba1.blogspot.com##+js('trusted-click-element', 'button#btn-gotolink', '', '1000')
+viralsbaba1.blogspot.com##+js(trusted-click-element, button#btn-gotolink, , 1000)
 viralsbaba1.blogspot.com###btn-gotolink:style(display:block !important; margin-top: 410px !important; margin-left: 200px !important; height: 100px !important; width: 100px !important)
 viralsbaba1.blogspot.com###btn-gotolink:remove-attr(disabled)
 viralsbaba1.blogspot.com###btn-gotolink:others()
@@ -20299,16 +20298,16 @@ sportskart.*##+js(aopr, afScript)
 sportskart.*##^script:has-text(u_cfg)
 ! *** uAssets:filters/filters-2023.txt ***
 ! gplinks all domains
-*$frame,redirect-rule=noopframe,important,domain=gplinks.co|freemodapp.com
-@@||gplinks.in/track/$script,xhr,domain=gplinks.co|freemodapp.com
-@@||googlesyndication.com^$script,xhr,domain=gplinks.co|freemodapp.com
-@@||doubleclick.net^$script,xhr,domain=gplinks.co|freemodapp.com
-@@*$ghide,domain=gplinks.co|freemodapp.com
-freemodapp.com###VerifyBtn:style(display: block !important;)
-freemodapp.com##center:others()
-freemodapp.com##+js(aopw, AdBDetected)
-freemodapp.com##+js(set, count, 0)
-freemodapp.com##[id*="iframe"], [id*="gpt_unit"], [id*="div-gpt-"]:style(height:0.0001px !important;)
+*$frame,redirect-rule=noopframe,important,domain=gplinks.co|forexhack.xyz
+@@||gplinks.in/track/$script,xhr,domain=gplinks.co|forexhack.xyz
+@@||googlesyndication.com^$script,xhr,domain=gplinks.co|forexhack.xyz
+@@||doubleclick.net^$script,xhr,domain=gplinks.co|forexhack.xyz
+@@*$ghide,domain=gplinks.co|forexhack.xyz
+forexhack.xyz###VerifyBtn:style(display: block !important;)
+forexhack.xyz##center:others()
+forexhack.xyz##+js(aopw, AdBDetected)
+forexhack.xyz##+js(set, count, 0)
+forexhack.xyz##[id*="iframe"], [id*="gpt_unit"], [id*="div-gpt-"]:style(height:0.0001px !important;)
 gplinks.co##.bg-soft-primary, a.exclude-pop.smartlink, .exclude-pop.quiz-container, #PlayQuiz, #quiz-frame
 ! XpShort New
 spiritualstory13.blogspot.com##+js(nano-sib, _0x, *, 0.02)
@@ -20316,8 +20315,8 @@ spiritualstory13.blogspot.com##.safeb:style(display: block !important;)
 spiritualstory13.blogspot.com##p, h3, h1, ul, .breadcrumbs, .creditInner, .mainWrapper > .header
 spiritualstory13.blogspot.com##+js(trusted-click-element, #verify > .safeb)
 spiritualstory13.blogspot.com##+js(trusted-click-element, #notarobot > .safeb, , 150)
-spiritualstory13.blogspot.com##+js(trusted-click-element, #notarobot > .safeb, , 2000)
-xpshort.com##+js(trusted-click-element, 'a.get-link, .get-link.btn-lg.btn-success.btn', , 9000)
+spiritualstory13.blogspot.com##+js(trusted-click-element, #notarobot > .safeb, , 2500)
+xpshort.com##+js(trusted-click-element, 'a.get-link, .get-link.btn-lg.btn-success.btn', , 9500)
 streamhide.to##+js(acs, setTimeout, checkADB)
 guccihide.com##+js(nowoif)
 filelions.to,guccihide.com,streamhide.to,streamwish.to##+js(aopr, __Y)
@@ -23321,13 +23320,6 @@ stream.hownetwork.xyz###donate
 tucinehd.com##+js(nostif, nextFunction, 2000)
 senda.pl##+js(no-fetch-if, googletagmanager)
 newzjunky.com##+js(noeval-if, ads)
-dicasfinanceirasbr.com##+js(no-fetch-if, googlesyndication.com)
-dicasfinanceirasbr.com###player:style(display: block !important;)
-dicasdevalor.net##+js(acs, jQuery, AdblockDetector)
-dicasdevalor.net###player:style(display: block !important;)
-dicasvalores.com##.content-box:style(display: block !important;)
-dicasdefinancas.net##+js(no-fetch-if, googlesyndication.com)
-dicasdefinancas.net###player:style(display: block !important;)
 win.gg###td-top-leaderboard-1
 win.gg###td-top-mpu-1
 win.gg###td-bottom-mpu-1
