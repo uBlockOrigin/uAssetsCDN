@@ -1,5 +1,5 @@
 ! Title: uBlock₀ filters – Quick fixes
-! Last modified: Tue, 07 Nov 2023 04:02:55 +0000
+! Last modified: Tue, 07 Nov 2023 14:01:02 +0000
 ! Expires: 12 hours
 ! Description: Immediate, temporary filters to fix websites
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -14,12 +14,12 @@ aternos.org##.ad-dfp:style(min-height: 0.1485mm !important; height: 0.1485mm !im
 ! pixsera
 ! https://github.com/uBlockOrigin/uAssets/issues/9123
 ! https://github.com/orgs/uBlockOrigin/teams/ublock-filters-volunteers/discussions/423/comments/6
-imgwelt.sbs##+js(aopr, console.clear)
-imgwelt.sbs##+js(nano-sib, timer)
-imgwelt.sbs##div[id][style^="position: fixed; display: block; width: 100%;"]
-imgwelt.sbs##div[style="width:100%;height:110px"]
-imgwelt.sbs##+js(nowoif, !/prcf.fiyar|themes|pixsense|.jpg/)
-imgwelt.sbs##div[class][style="display: block;"]
+imgwelt.sbs,imgbuner.sbs##+js(aopr, console.clear)
+imgwelt.sbs,imgbuner.sbs##+js(nano-sib, timer)
+imgwelt.sbs,imgbuner.sbs##div[id][style^="position: fixed; display: block; width: 100%;"]
+imgwelt.sbs,imgbuner.sbs##div[style="width:100%;height:110px"]
+imgwelt.sbs,imgbuner.sbs##+js(nowoif, !/prcf.fiyar|themes|pixsense|.jpg/)
+imgwelt.sbs,imgbuner.sbs##div[class][style="display: block;"]
 
 ! https://github.com/uBlockOrigin/uAssets/issues/17548
 @@*$ghide,domain=dev.miuiflash.com|djxmaza.in|thecubexguide.com
@@ -53,6 +53,7 @@ plagiarismdetector.net#@#[class^="my-"], [style^="min-height:"][class][id], #img
 plagiarismdetector.net##[style^="min-height:"][class][id], #img1, #img2, #img3, #img4, #img5
 ||plagiarismdetector.net/pd-imgs/tea.png$image,1p
 ||plagiarismdetector.net/pd-imgs/coffe.png$image,1p
+||plagiarismdetector.net/pd-imgs/aacoaae.png$image,1p
 plagiarismdetector.net##[class^="my-"][style^="min-height:"] + [class]
 plagiarismdetector.net##[style]:matches-attr(id="/[a-z0-9]{32}/") + [class]
 plagiarismdetector.net##[id][class] > a[rel*="nofollow"][class] > img[class][src^="https://plagiarismdetector.net"][alt]
@@ -69,8 +70,7 @@ www.youtube.com#@#+js(trusted-replace-fetch-response, /"adPlacements.*?"getAdBre
 www.youtube.com#@#+js(trusted-replace-fetch-response, /"adPlacements.*?get_midroll_info\S+&token=ALHj.*?"\}\}\}\]\,/, , player?key=)
 www.youtube.com#@#+js(trusted-replace-fetch-response, /"adPlacements.*?\/(aclk\?sa=L&ai=C(?!3OQpfbUyZYWKL_)[-_0-9A-Za-z]+__________[-_0-9A-Za-z]+A[A-Za-z]AA&|get_midroll_info\S+&token=ALHj).*?"\}\}\}\]\,/, , player?key=)
 www.youtube.com#@#+js(trusted-replace-fetch-response, /(trackingParam":"kx_fmPxh.*?)"adPlacements.*?"\}\}\}\]\,/, $1, player?key=)
-www.youtube.com#@#+js(trusted-replace-fetch-response, /"adPlacements.*?\/(aclk\?sa=L&ai=C(?!3QQpfbUyZYWKL_)[-_0-9A-Za-z]+__________|get_midroll_info\S+&token=ALHj).*?"\}\}\}\]\,/, , url:player?key=)
-www.youtube.com##+js(rpnt, script, /(\(function serverContract\(\))/, '/*start*/(function(){const nativeArrayFilter=Array.prototype.filter;const wrapper=(target,thisArg,args)=>{const ads=["adPlacements","adSlots","adBreakHeartbeatParams","playerResponse","playerAds"];if(thisArg&&Array.isArray(thisArg)){thisArg=nativeArrayFilter.call(thisArg,e=>!ads.includes(e))}return Reflect.apply(target,thisArg,args)};const handler={apply:wrapper};Array.prototype.filter=new Proxy(Array.prototype.filter,handler);const cleanup=function(){const scripts=document.querySelectorAll("script");for(let i=scripts.length-1;i>=0;i--){if(scripts[i].textContent.startsWith("/*start*/")){scripts[i].textContent=scripts[i].textContent.replace(/\/\*start\*\/(.*)\/\*end\*\//g,"");break}}};if(document.readyState!=="loading"){cleanup()}else{document.addEventListener("DOMContentLoaded",cleanup)}}());/*end*/$1')
+www.youtube.com##+js(rpnt, script, /^(\(function serverContract\(\))/s, '/*start*/(function(){const nativeArrayFilter=Array.prototype.filter;const wrapper=(target,thisArg,args)=>{const ads=["adPlacements","adSlots","adBreakHeartbeatParams","playerResponse","playerAds"];if(thisArg&&Array.isArray(thisArg)){thisArg=nativeArrayFilter.call(thisArg,e=>!ads.includes(e))}return Reflect.apply(target,thisArg,args)};const handler={apply:wrapper};Array.prototype.filter=new Proxy(Array.prototype.filter,handler);const scripts=document.querySelectorAll("script");for(let i=scripts.length-1;i>=0;i--){if(scripts[i].textContent.startsWith("/*start*/")){scripts[i].textContent=scripts[i].textContent.replace(/\/\*start\*\/(.*)\/\*end\*\//g,"");break}}}());/*end*/$1')
 ! https://www.reddit.com/r/uBlockOrigin/comments/16lmeri/youtube_antiadblock_and_ads_september_18_2023/k1wl8df/
 !#if !cap_html_filtering
 !#if env_firefox
@@ -99,15 +99,12 @@ sankaku.app##+js(no-xhr-if, googlesyndication)
 ! Ad-Shield
 ! https://github.com/uBlockOrigin/uAssets/issues/12163
 ! https://github.com/uBlockOrigin/uAssets/issues/16749
-genshinlab.com,a-ha.io,cboard.net,mobilitytv.co.kr,mememedia.co.kr,newautopost.co.kr,tvreport.co.kr,tenbizt.com,jjang0u.com,joongdo.co.kr,viva100.com##+js(noeval-if, 07c225f3.online)
+genshinlab.com,a-ha.io,cboard.net,mobilitytv.co.kr,mememedia.co.kr,newautopost.co.kr,tvreport.co.kr,tenbizt.com,jjang0u.com,joongdo.co.kr,viva100.com,hotplacehunter.co.kr,mystylezip.com##+js(noeval-if, 07c225f3.online)
 !#if cap_html_filtering
-genshinlab.com,fourfourtwo.co.kr,interfootball.co.kr,a-ha.io,cboard.net,mobilitytv.co.kr,mememedia.co.kr,newautopost.co.kr,tvreport.co.kr,tenbizt.com,jjang0u.com,joongdo.co.kr,viva100.com##^script:has-text(KCgpPT57bGV0IGU)
+genshinlab.com,fourfourtwo.co.kr,interfootball.co.kr,a-ha.io,cboard.net,mobilitytv.co.kr,mememedia.co.kr,newautopost.co.kr,tvreport.co.kr,tenbizt.com,jjang0u.com,joongdo.co.kr,viva100.com,hotplacehunter.co.kr,mystylezip.com##^script:has-text(KCgpPT57bGV0IGU)
 !#else
-genshinlab.com,fourfourtwo.co.kr,interfootball.co.kr,a-ha.io,cboard.net,mobilitytv.co.kr,mememedia.co.kr,newautopost.co.kr,tvreport.co.kr,tenbizt.com,jjang0u.com,joongdo.co.kr,viva100.com##+js(rmnt, script, KCgpPT57bGV0IGU)
+genshinlab.com,fourfourtwo.co.kr,interfootball.co.kr,a-ha.io,cboard.net,mobilitytv.co.kr,mememedia.co.kr,newautopost.co.kr,tvreport.co.kr,tenbizt.com,jjang0u.com,joongdo.co.kr,viva100.com,hotplacehunter.co.kr,mystylezip.com##+js(rmnt, script, KCgpPT57bGV0IGU)
 !#endif
-
-! https://github.com/uBlockOrigin/uAssets/issues/20382 - Remove after 5.11.2023
-@@||climateknowledgeportal.worldbank.org/themes/cckp/js/Map/GeoMap.js
 
 ! https://github.com/uBlockOrigin/uAssets/issues/20359
 ||amillionads.com^$media,redirect=noop-1s.mp4:10,from=open.spotify.com
@@ -144,17 +141,13 @@ mdn.lol##div.form-group:remove()
 ! https://github.com/uBlockOrigin/uAssets/issues/20369
 zive.cz#@#.cnc-ads
 zive.cz#@##cnc_branding_creative_wrapper
+zive.cz#@#div.sky-wrapper
 zive.cz##.cnc-ads:style(min-height: 0px !important; height: 0px !important; visibility: hidden !important;)
 zive.cz###cnc_branding_creative_wrapper:style(min-height: 0px !important; height: 0px !important; visibility: hidden !important;)
+zive.cz##div.sky-wrapper:style(min-height: 0px !important; height: 0px !important; visibility: hidden !important;)
 zive.cz##.cnc-ads--rectangle_480_1
 *$script,redirect-rule=noopjs,domain=zive.cz
 zive.cz##+js(set, window.cpexCMPVersion, 2)
-
-! https://github.com/easylist/easylistgermany/issues/116 - remove after 7.11.2023
-gmx.ch,gmx.net,web.de##list-inbox-pga-ad-item
-gmx.ch,gmx.net,web.de##list-programmatic-inbox-ad-item
-gmx.ch,gmx.net,web.de##.list-programmatic-inbox-ad-item__iframe
-||agma-analytics.de^
 
 ! https://github.com/easylist/easylistgermany/issues/216 - remove after 8.11.2023
 chip.de##div > a:is(a[href*="https://x.chip.de/intern/dl/?url="], a[href*="https://www.chip.de/downloads/"]):has(figure img[src*="https://im.chip.de/ii/"]):upward(1)
@@ -162,3 +155,9 @@ chip.de##body > a:is(a[href*="https://x.chip.de/intern/dl/?url="], a[href*="http
 chip.de#@##banner_top_table
 chip.de###banner_top_table:not([style^="display:block;"])
 chip.de#@#a[href^="https://www.chip.de/downloads/"]:has(div:has-text(Anzeige))
+
+! https://github.com/uBlockOrigin/uAssets/issues/20505 - remove after 12.11.2023
+megaup.net#@#body .metaRedirectWrapperBottomAds:style(visibility: hidden !important;)
+megaup.net##.metaRedirectWrapperBottomAds:style(visibility: hidden !important;)
+megaup.net##+js(spoof-css, .metaRedirectWrapperBottomAds, visibility, visible)
+megaup.net##+js(rpnt, script, /;\$.+?:/, ;)

@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Tue, 07 Nov 2023 04:02:55 +0000
-! Diff-Path: ../patches/2023.11.7.590.patch#ublock-filters
+! Last modified: Tue, 07 Nov 2023 14:29:03 +0000
+! Diff-Path: ../patches/2023.11.7.890.patch#ublock-filters
 ! Diff-Name: ublock-filters
 ! Diff-Expires: 5 hours
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -21,7 +21,6 @@ www.youtube.com#@#+js(trusted-replace-fetch-response, /"adPlacements.*?"getAdBre
 www.youtube.com#@#+js(trusted-replace-fetch-response, /"adPlacements.*?get_midroll_info\S+&token=ALHj.*?"\}\}\}\]\,/, , player?key=)
 www.youtube.com#@#+js(trusted-replace-fetch-response, /"adPlacements.*?\/(aclk\?sa=L&ai=C(?!3OQpfbUyZYWKL_)[-_0-9A-Za-z]+__________[-_0-9A-Za-z]+A[A-Za-z]AA&|get_midroll_info\S+&token=ALHj).*?"\}\}\}\]\,/, , player?key=)
 www.youtube.com#@#+js(trusted-replace-fetch-response, /(trackingParam":"kx_fmPxh.*?)"adPlacements.*?"\}\}\}\]\,/, $1, player?key=)
-www.youtube.com#@#+js(trusted-replace-fetch-response, /"adPlacements.*?\/(aclk\?sa=L&ai=C(?!3QQpfbUyZYWKL_)[-_0-9A-Za-z]+__________|get_midroll_info\S+&token=ALHj).*?"\}\}\}\]\,/, , url:player?key=)
 youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, ytInitialPlayerResponse.playerAds, undefined)
 youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, ytInitialPlayerResponse.adPlacements, undefined)
 youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, ytInitialPlayerResponse.adSlots, undefined)
@@ -4068,20 +4067,12 @@ file-upload.*##+js(aopw, Fingerprint2)
 ||file-upload.*^$frame
 /werbebanner-$badfilter
 streamdreams.org##+js(aopr, exoJsPop101)
-||2mdn.net^$media,redirect=noopmp4-1s,domain=wowescape.com
-||youtube.com/get_video$media,redirect=noopmp4-1s,domain=wowescape.com
-@@||wowescape.com^$ghide
-@@||g.doubleclick.net/dbm/vast?dbm_c=$xhr,domain=imasdk.googleapis.com
-@@||googleads.g.doubleclick.net/pagead/*wowescape.com$xhr,domain=imasdk.googleapis.com
-wowescape.com##[id^="aswift"]
-wowescape.com##embed:style(display:inherit!important)
-wowescape.com###adContainer
-wowescape.com##[id^="gdsdk_"]
-wowescape.com##div:has(> div:has(> .adsbygoogle))
+wowescape.com##+js(no-fetch-if, adsbygoogle)
+wowescape.com##iframe[src^="https://www.bigescapegames.com/"]:style(display: block !important;)
+wowescape.com##.col-12 > .adsbyvli:upward(1)
+wowescape.com##.col-12 > .adsbygoogle:upward(1)
 wowescape.com##div.border_radius:has-text(Advertisement)
-wowescape.com##.col-sm-4:has-text(Advertisement)
-wowescape.com##+js(ra, target)
-@@||api.adinplay.com/libs/$script,domain=wowescape.com
+wowescape.com###preroll
 duellinksmeta.com##+js(noeval)
 *$script,redirect-rule=noopjs,domain=duellinksmeta.com
 @@||cdn.intergi.com/hera/*$xhr,domain=duellinksmeta.com
@@ -22509,11 +22500,11 @@ sotwe.com##.tweet-card .v-responsive.media-carousel-image .v-responsive__content
 ||d2zue0pgsssbc6.cloudfront.net/j/*-prod.js$script,3p
 ||d2zue0pgsssbc6.cloudfront.net/j/prod-*.js$script,3p
 *$frame,redirect-rule=noopframe,domain=megaup.net
-megaup.net##body .metaRedirectWrapperBottomAds:style(visibility: hidden !important;)
-megaup.net##+js(rpnt, script, /\$\(_\S+?\):/)
+megaup.net##.metaRedirectWrapperBottomAds:style(visibility: hidden !important;)
+megaup.net##+js(spoof-css, .metaRedirectWrapperBottomAds, visibility, visible)
+megaup.net##+js(rpnt, script, /;\$.+?:/, ;)
 megaup.net#@#a[href^="https://tm-offers.gamingadult.com/"]
 @@||megaup.net/imageads/$image,1p
-megaup.net##body:style(overflow-x: hidden !important;)
 player.theplatform.com##+js(disable-newtab-links)
 ! breakage https://github.com/uBlockOrigin/uAssets/issues/16216
 !||player.theplatform.com^$frame,removeparam=params,domain=nbc.com
@@ -23331,3 +23322,8 @@ win.gg##main:style(padding-top: 5em !important;)
 @@||tv.shoot-yalla.live^$ghide
 coingraph.us##form > [id], #wpsafe-link3, .wpsafelink-button:style(display: block !important;)
 coingraph.us##.base-timer
+earnhub.net##+js(aeld, load, htmls)
+! hextank.io anti adblock after clicking on "Play"
+hextank.io##+js(set, aipAPItag.prerollSkipped, true)
+hextank.io##+js(set, aipAPItag.setPreRollStatus, trueFunc)
+hextank.io###preroll
