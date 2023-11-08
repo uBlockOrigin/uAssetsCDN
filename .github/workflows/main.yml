@@ -62,8 +62,9 @@ jobs:
       - name: Create new patch
         if: ${{ env.CAN_DO == 'yes' }}
         run: |
+          rm -f .git/index.lock
           PATCHES_DIR="patches"
-          ./make-diffpatch.sh "${{ env.TAGNAME }}" patches
+          ./make-diffpatch.sh "${{ env.TAGNAME }}" "$PATCHES_DIR"
       - name: Update existing patches
         if: ${{ env.CAN_DO == 'yes' }}
         run: |
