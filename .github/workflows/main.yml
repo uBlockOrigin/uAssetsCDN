@@ -6,25 +6,11 @@ on:
     - cron: '11 */1 * * *'
   workflow_dispatch:
 
-concurrency: 
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
-
 jobs:
   publish:
     name: Update assets
     runs-on: ubuntu-latest
     steps:
-      - name: Repo check
-        run: |
-          if [[ "$GITHUB_REPOSITORY_OWNER" != "uBlockOrigin" ]]; then
-            echo "This GitHub Action is meant to deliver filter lists for uBO."
-            echo "You shouldn't need to run this GitHub Action in your fork."
-            echo "If you do, please customize the cron expression above, and"
-            echo "the URLs below."
-            exit 1
-          fi
-          exit 0
       - name: Time check
         run: |
           UPDATE_PERIOD_IN_HOURS=5
@@ -34,6 +20,17 @@ jobs:
           else
             echo "Aborting workflow because $MOD_SINCE_UBO_EPOCH is not zero"
           fi
+      - name: Repo check
+        if: ${{ env.CAN_DO == 'yes' }}
+        run: |
+          if [[ "$GITHUB_REPOSITORY_OWNER" != "uBlockOrigin" ]]; then
+            echo "This GitHub Action is meant to deliver filter lists for uBO."
+            echo "You shouldn't need to run this GitHub Action in your fork."
+            echo "If you do, please customize the cron expression above, and"
+            echo "the URLs below."
+            exit 1
+          fi
+          exit 0
       - name: Clone uAssetsCDN
         if: ${{ env.CAN_DO == 'yes' }}
         uses: actions/checkout@v3
