@@ -6,6 +6,10 @@ on:
     - cron: '11 */1 * * *'
   workflow_dispatch:
 
+concurrency: 
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   publish:
     name: Update assets
@@ -25,7 +29,7 @@ jobs:
         run: |
           UPDATE_PERIOD_IN_HOURS=5
           MOD_SINCE_UBO_EPOCH=`echo "($(date +%s) - $(date -d "20140623" +%s)) / 3600 % $UPDATE_PERIOD_IN_HOURS" | bc`
-          if [ "$MOD_SINCE_UBO_EPOCH" = "0" ]; then
+          if [ "$MOD_SINCE_UBO_EPOCH" = "1" ]; then
             echo "CAN_DO=yes" >> $GITHUB_ENV
           else
             echo "Aborting workflow because $MOD_SINCE_UBO_EPOCH is not zero"
@@ -62,7 +66,6 @@ jobs:
       - name: Create new patch
         if: ${{ env.CAN_DO == 'yes' }}
         run: |
-          rm -f .git/index.lock
           PATCHES_DIR="patches"
           ./make-diffpatch.sh "${{ env.TAGNAME }}" "$PATCHES_DIR"
       - name: Update existing patches
