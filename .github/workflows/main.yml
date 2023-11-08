@@ -72,7 +72,7 @@ jobs:
         if: ${{ env.CAN_DO == 'yes' }}
         run: |
           PATCHES_DIR="patches"
-          read -ar FILTER_FILES < <(git ls-files --exclude-standard -- filters/*.min.txt thirdparties/*.txt)
+          FILTER_FILES=$(git ls-files --exclude-standard -- filters/*.min.txt thirdparties/*.txt)
           ./update-diffpatches.sh "$GITHUB_REPOSITORY" "$PATCHES_DIR" "$FILTER_FILES"
       - name: Commit changes, if any
         if: ${{ env.CAN_DO == 'yes' }}
