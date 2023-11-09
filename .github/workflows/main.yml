@@ -75,6 +75,8 @@ jobs:
         if: ${{ env.CAN_DO == 'yes' }}
         run: |
           if [[ -z $(git diff --name-only --cached) ]]; then exit 0; fi
+          git config user.name github-actions
+          git config user.email github-actions@github.com
           git commit -m "Update modified CDN assets to ${{ env.TAGNAME }}"
           git push origin main
           git tag ${{ env.TAGNAME }}
