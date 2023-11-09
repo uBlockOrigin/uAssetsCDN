@@ -1,5 +1,5 @@
 ! Title: uBlock filters (2023)
-! Last modified: Thu, 09 Nov 2023 16:09:13 +0000
+! Last modified: Thu, 09 Nov 2023 17:06:09 +0000
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -3047,9 +3047,10 @@ modmenow.xyz##+js(acs, eval, replace)
 ! https://github.com/uBlockOrigin/uAssets/issues/18442
 chat.nrj.fr##+js(nosiif, location)
 
-! sdmoviespoint. rest popups
+! sdmoviespoint. training popups + detection
+! https://github.com/uBlockOrigin/uAssets/issues/4411#issuecomment-1804073748
 *$script,3p,domain=sdmoviespoint.*,denyallow=disqus.com|disquscdn.com|disqus.map.fastlylb.net|media-imdb.com|media-amazon.com|cloudfront.net
-sdmoviespoint.rest###adfont
+sdmoviespoint.*##+js(noeval-if, ads)
 
 ! https://recipahi.com/ anti-adb
 recipahi.com##+js(aeld, DOMContentLoaded, adsbygoogle)
@@ -4268,10 +4269,6 @@ gtainside.com##div[style]:has(> div#gtainside_com_sidebar)
 gtainside.com##div.bar_container:has(> div.bar_headline:has-text(Advertising))
 gtainside.com##div[style]:has(> div.ads)
 
-! https://github.com/AdguardTeam/AdguardFilters/issues/159865
-france.tv##+js(no-fetch-if, fwmrm.net)
-france.tv##+js(nano-stb, [native code], 20000)
-
 ! https://github.com/AdguardTeam/AdguardFilters/issues/159491
 amateurporn.co##+js(set, isAdBlockActive, false)
 amateurporn.co##+js(set, flashvars.popunder_url, '')
@@ -5228,6 +5225,7 @@ ggjav.com,ggjav.tv##+js(acs, $, popunder)
 ecamrips.com,showcamrips.com##+js(rmnt, script, document.head.appendChild)
 ecamrips.com,showcamrips.com##+js(acs, document.cookie, document.head.appendChild)
 ecamrips.com,showcamrips.com##+js(acs, OpenInNewTab_Over)
+ecamrips.com,showcamrips.com##[href*="ads"]
 
 ! https://github.com/uBlockOrigin/uAssets/issues/20377
  bizdustry.com##+js(nostif, show)
@@ -5317,3 +5315,8 @@ visualcapitalist.com##+js(aopr, googletag)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/20539
 app.hellovaia.com##+js(trusted-replace-xhr-response, "ads_disabled":false, "ads_disabled":true, payments)
+
+! https://github.com/uBlockOrigin/uAssets/issues/20559
+111.90.141.252##.mfp-ready
+111.90.141.252##html:style(overflow: auto !important;)
+*/dyasds/$media,redirect=noopmp3-0.1s,domain=111.90.141.252
