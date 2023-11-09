@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Thu, 09 Nov 2023 06:59:59 +0000
-! Diff-Path: ../patches/2023.11.9.676.patch#ublock-filters
+! Last modified: Thu, 09 Nov 2023 16:19:16 +0000
+! Diff-Path: ../patches/2023.11.9.986.patch#ublock-filters
 ! Diff-Name: ublock-filters
 ! Diff-Expires: 5 hours
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -14,7 +14,8 @@ youtube.com###promotion-shelf
 youtube.com##ytd-video-masthead-ad-advertiser-info-renderer,ytm-promoted-sparkles-web-renderer
 ! @@||youtube.com/get_video_info?*timedtext_editor$xhr,1p
 www.youtube.com##+js(trusted-replace-xhr-response, /"adPlacements.*?\"\}\}\}\]\,/, , /player\?key=|watch\?v=|youtubei\/v1\/player/)
-www.youtube.com##+js(trusted-replace-fetch-response, /(hqdefault\.jpg\?sqp=-oaym.*?)"adPlacements.*?"\}\}\}\]\,/, $1, player?key=)
+www.youtube.com#@#+js(trusted-replace-fetch-response, /(hqdefault\.jpg\?sqp=-oaym.*?)"adPlacements.*?"\}\}\}\]\,/, $1, player?key=)
+www.youtube.com##+js(trusted-replace-fetch-response, /((?:hqdefault\.jpg\?sqp=-oaym|hqdefault_live).*?)"adPlacements.*?"\}\}\}\]\,/, $1, player?key=)
 www.youtube.com##+js(trusted-replace-fetch-response, /"adPlacements.*?"\}\}\}\]\,(.*?hqdefault\.jpg(?:\?|%3F)sqp(?:=|%3D)-oaym)/, $1, player?key=)
 www.youtube.com#@#+js(trusted-replace-fetch-response, /"adPlacements.*?privateDoNotAccessOrElseTrustedResourceUrlWrappedValue":"https:\/\/www\.youtube\.com\/aboutthisad\?pf=web&source=youtube&reasons=A.*?"\}\}\}\]\,/, , player?key=)
 www.youtube.com#@#+js(trusted-replace-fetch-response, /"adPlacements.*?privateDoNotAccessOrElseTrustedResourceUrlWrappedValue":"https:\/\/(www\.youtube\.com\/aboutthisad\?pf=web&source=youtube&reasons=A|fundingchoices).*?"\}\}\}\]\,/, , player?key=)
@@ -16055,8 +16056,7 @@ thewatchseries.live##+js(ra, href, #clickfakeplayer)
 definitions.net##+js(set, canRunAds, true)
 pixroute.com##+js(nowoif)
 pixroute.com##+js(set, proclayer, noopFunc)
-uploady.io##+js(acs, document.addEventListener, nextFunction)
-||uploady.io/sw.js
+uploady.io##+js(set, timeleft, 0)
 ravenmanga.xyz##+js(acs, addEventListener, onerror)
 ravenmanga.xyz##[href^="https://a-ads.com"]
 ||i.imgur.com/niNoP1F.gif^$3p
@@ -23336,3 +23336,5 @@ minecraft.buzz##+js(aeld, np.detect)
 terrylove.com##+js(nostif, prompt, 1000)
 yourlifeupdated.net##+js(noeval-if, ads)
 ticketmaster.sg##+js(set, detectAdblock, noopFunc)
+visualcapitalist.com##+js(aopr, googletag)
+app.hellovaia.com##+js(trusted-replace-xhr-response, "ads_disabled":false, "ads_disabled":true, payments)
