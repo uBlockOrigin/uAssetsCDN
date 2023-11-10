@@ -1,8 +1,8 @@
-diff name:ublock-annoyances lines:22 checksum:3128d37e18
+diff name:ublock-annoyances lines:25 checksum:4bdd614a47
 d3 2
 a4 2
-! Last modified: Thu, 09 Nov 2023 23:14:48 +0000
-! Diff-Path: ../patches/2023.11.10.437.patch#ublock-annoyances
+! Last modified: Fri, 10 Nov 2023 08:27:11 +0000
+! Diff-Path: ../patches/2023.11.10.756.patch#ublock-annoyances
 a318 2
 ! cookies managed by trustarc
 consent-pref.trustarc.com##+js(trusted-click-element, .call)
@@ -19,23 +19,32 @@ a2574 1
 d2596 3
 d2606 1
 d2633 1
+d3922 1
+a3922 1
+!||userapi.com/impf/$image,urltransform=/^\/impf\/+//,domain=vk.com|vk.ru
 a3926 1
 broncoshq.com##+js(rmnt, script, XF)
-diff name:ublock-badware lines:3 checksum:e73e586e8d
-d4 1
-a4 1
-! Diff-Path: ../patches/2023.11.10.437.patch#ublock-badware
-diff name:ublock-filters lines:36 checksum:d77b24cf58
+diff name:ublock-badware lines:5 checksum:eb38f3e19a
 d3 2
 a4 2
-! Last modified: Thu, 09 Nov 2023 23:14:48 +0000
-! Diff-Path: ../patches/2023.11.10.437.patch#ublock-filters
-a16 1
-www.youtube.com##+js(trusted-replace-fetch-response, /(contextParams":"Q0FFU.*?)"adPlacements.*?"\}\}\}\]\,/, $1, player?key=)
+! Last modified: Fri, 10 Nov 2023 12:07:37 +0000
+! Diff-Path: ../patches/2023.11.10.756.patch#ublock-badware
+d2919 8
+diff name:ublock-filters lines:61 checksum:258ab68c1a
+d3 2
+a4 2
+! Last modified: Fri, 10 Nov 2023 10:47:26 +0000
+! Diff-Path: ../patches/2023.11.10.756.patch#ublock-filters
+a16 2
+www.youtube.com##+js(trusted-replace-fetch-response, /(contextParams":"Q0F[A-Z]U.*?)"adPlacements.*?"\}\}\}\]\,/, $1, player?key=)
+www.youtube.com#@#+js(trusted-replace-fetch-response, /(contextParams":"Q0FFU.*?)"adPlacements.*?"\}\}\}\]\,/, $1, player?key=)
 d18 2
 a19 2
 www.youtube.com#@#+js(trusted-replace-fetch-response, /((?:hqdefault\.jpg\?sqp=-oaym|hqdefault_live).*?)"adPlacements.*?"\}\}\}\]\,/, $1, player?key=)
 www.youtube.com#@#+js(trusted-replace-fetch-response, /"adPlacements.*?"\}\}\}\]\,(.*?hqdefault\.jpg(?:\?|%3F)sqp(?:=|%3D)-oaym)/, $1, player?key=)
+d26 1
+a1027 1
+*$script,3p,denyallow=fastly.net|statically.io|sharecast.ws|bunnycdn.ru|bootstrapcdn.com|cdn.ampproject.org|cloudflare.com|cdn.staticfile.org|disqus.com|disquscdn.com|dmca.com|ebacdn.com|facebook.net|fastlylb.net|fbcdn.net|fluidplayer.com|fontawesome.com|github.io|google.com|googleapis.com|googletagmanager.com|gstatic.com|jquery.com|jsdelivr.net|jwpcdn.com|jwplatform.com|polyfill.io|recaptcha.net|shrink.pe|twitter.com|ulogin.ru|unpkg.com|userapi.com|vidazoo.com|vk.com|yastatic.net|ytimg.com|zencdn.net|youtube.com|cackle.me|googleoptimize.com|vuukle.com|chatango.com|twimg.com|google-analytics.com|hcaptcha.com|raincaptcha.com|media-imdb.com|blogger.com|hwcdn.net|instagram.com|wp.com|fastcomments.com|plyr.io,domain=kimcartoon.*
 d2572 1
 d4784 1
 d4919 1
@@ -49,6 +58,24 @@ soft98.ir,~forum.soft98.ir##+js(aeld, contextmenu, preventDefault)
 !#else
 a19445 1
 !#endif
+d20018 3
+a20020 3
+chip.de###dlcharts-list + .mt-md > div > h2:has-text(/Gesponsert|Bezahlte Empfehlung/) + a[href^="https://www.chip.de/downloads/"]:upward(2)
+chip.de##.fb > .Listing > div > h2:has-text(/Gesponsert|Bezahlte Empfehlung/) + a[href^="https://www.chip.de/downloads/"]:upward(1)
+chip.de##a:is(a[href*="https://x.chip.de/intern/dl/?url="][target], a[href*="https://www.chip.de/downloads/"][target]):has(figure img[src*="https://im.chip.de/ii/"]:not([data-was-processed])):upward(1)
+a20028 3
+chip.de#@#.ob-widget .ob-p
+chip.de#@#.Ad
+chip.de#@##R1C2 > .Ad.align
+a20030 3
+chip.de###R1C2[role="complementary"]:not(:has(> .Hero))
+chip.de###R1C1[role="complementary"]
+chip.de##section.mt-md + aside[role="complementary"]
+a20032 4
+chip.de##.ob-widget:not([style^="display:block;"]) .ob-p
+chip.de##.Ad:not([style^="display:block;"]):not(.Ad.align)
+chip.de###R1C2:not([style^="display:block;"]) > .Ad.align
+chip.de###contentad-top-adsense-1
 d22115 1
 a22115 1
 ! sdmoviespoint. training popups + detection
@@ -58,36 +85,63 @@ sdmoviespoint.*##+js(noeval-if, ads)
 d22796 2
 a23300 1
 ecamrips.com,showcamrips.com##[href*="ads"]
-a23340 3
-111.90.141.252##.mfp-ready
-111.90.141.252##html:style(overflow: auto !important;)
+a23340 6
+111.90.141.252#+js(acs, $, noConflict)
+111.90.141.252##+js(aopr, preroll_helper.advs)
 */dyasds/$media,redirect=noopmp3-0.1s,domain=111.90.141.252
-diff name:ublock-privacy lines:9 checksum:fef63df227
+! wsj ads
+/^https:\/\/[0-9a-z]+\.cloudfront\.net\/[a-z]\/[-0-9a-f]+\.js$/$script,3p,match-case,to=cloudfront.net,from=marketwatch.com|wsj.com
+||d36hsrzhv8pket.cloudfront.net^
+diff name:ublock-privacy lines:11 checksum:2772708c9d
 d3 2
 a4 2
-! Last modified: Thu, 09 Nov 2023 21:30:15 +0000
-! Diff-Path: ../patches/2023.11.10.437.patch#ublock-privacy
+! Last modified: Fri, 10 Nov 2023 12:17:24 +0000
+! Diff-Path: ../patches/2023.11.10.756.patch#ublock-privacy
 d275 1
 a275 1
 ||adthrive.com^$removeparam,from=~mediaite.com|~a-z-animals.com
+a489 1
+||youtu.be^$removeparam=si
 a510 1
 ||upera.shop/ref/$doc,urltransform=/^\/ref\/[^\/]+//
-diff name:ublock-quick-fixes lines:10 checksum:d4b3d85e0c
+diff name:ublock-quick-fixes lines:32 checksum:ab8c3069d8
 d3 2
 a4 2
-! Last modified: Thu, 09 Nov 2023 22:28:35 +0000
-! Diff-Path: ../patches/2023.11.10.437.patch#ublock-quick-fixes
-a54 1
-www.youtube.com##+js(trusted-replace-fetch-response, /(contextParams":"Q0FFU.*?)"adPlacements.*?"\}\}\}\]\,/, $1, player?key=)
+! Last modified: Fri, 10 Nov 2023 10:05:42 +0000
+! Diff-Path: ../patches/2023.11.10.756.patch#ublock-quick-fixes
+a54 2
+www.youtube.com##+js(trusted-replace-fetch-response, /(contextParams":"Q0F[A-Z]U.*?)"adPlacements.*?"\}\}\}\]\,/, $1, player?key=)
+www.youtube.com#@#+js(trusted-replace-fetch-response, /(contextParams":"Q0FFU.*?)"adPlacements.*?"\}\}\}\]\,/, $1, player?key=)
 d56 2
 a57 2
 www.youtube.com#@#+js(trusted-replace-fetch-response, /((?:hqdefault\.jpg\?sqp=-oaym|hqdefault_live).*?)"adPlacements.*?"\}\}\}\]\,/, $1, player?key=)
 www.youtube.com#@#+js(trusted-replace-fetch-response, /"adPlacements.*?"\}\}\}\]\,(.*?hqdefault\.jpg(?:\?|%3F)sqp(?:=|%3D)-oaym)/, $1, player?key=)
-diff name:ublock-unbreak lines:19 checksum:ac2e99abb4
+d64 1
+d119 1
+a119 1
+zive.cz##+js(set, cpexAddCMPCloseButton, noopFunc)
+a128 16
+||userapi.com/impf/$image,urltransform=/^\/impf\/+//,domain=vk.com|vk.ru,badfilter
+||ubereats.com/_events$badfilter
+chip.de###dlcharts-list + .mt-md > div > h2:has-text(/Gesponsert|Bezahlte Empfehlung/) + a[href^="https://www.chip.de/downloads/"]:upward(2)
+chip.de##.fb > .Listing > div > h2:has-text(/Gesponsert|Bezahlte Empfehlung/) + a[href^="https://www.chip.de/downloads/"]:upward(1)
+chip.de##a:is(a[href*="https://x.chip.de/intern/dl/?url="][target], a[href*="https://www.chip.de/downloads/"][target]):has(figure img[src*="https://im.chip.de/ii/"]:not([data-was-processed])):upward(1)
+chip.de#@#.ob-widget .ob-p
+chip.de#@#.Ad
+chip.de#@##R1C2 > .Ad.align
+chip.de###R1C3[role="complementary"]
+chip.de###R1C2[role="complementary"]:not(:has(> .Hero))
+chip.de###R1C1[role="complementary"]
+chip.de##section.mt-md + aside[role="complementary"]
+chip.de##.ob-widget:not([style^="display:block;"]) .ob-p
+chip.de##.Ad:not([style^="display:block;"]):not(.Ad.align)
+chip.de###R1C2:not([style^="display:block;"]) > .Ad.align
+chip.de###contentad-top-adsense-1
+diff name:ublock-unbreak lines:25 checksum:73cc04821a
 d3 2
 a4 2
-! Last modified: Fri, 10 Nov 2023 03:07:49 +0000
-! Diff-Path: ../patches/2023.11.10.437.patch#ublock-unbreak
+! Last modified: Fri, 10 Nov 2023 11:04:29 +0000
+! Diff-Path: ../patches/2023.11.10.756.patch#ublock-unbreak
 d1079 1
 a1079 3
 ||groupbycloud.com/gb-tracker-client-3.min.js$domain=officedepot.co.cr,important
@@ -100,14 +154,20 @@ a1185 2
 a1187 2
 a-z-animals.com#@#.adthrive-video-player
 a-z-animals.com#@#.adthrive
-a2431 2
+a2431 8
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$script,redirect-rule=google-ima.js,domain=moviesandtv.myvi.in
 @@||moviesandtv.myvi.in/videojs/videojs-contrib-ads.min.js$script,domain=moviesandtv.myvi.in
-diff name:easylist lines:24 checksum:c32a485613
+@@||cdn.lib.getjad.io^$script,domain=vidaextra.com
+@@||c.amazon-adsystem.com/aax2/apstag.js$script,domain=vidaextra.com
+@@||securepubads.g.doubleclick.net/tag/js/gpt.js$script,domain=vidaextra.com
+@@||securepubads.g.doubleclick.net/pagead/managed/js/gpt/*/pubads_impl.js$script,domain=vidaextra.com
+@@||securepubads.g.doubleclick.net/gampad/ads$xhr,domain=vidaextra.com
+www.reddit.com,new.reddit.com##.subredditvars-r-ublockorigin [role="dialog"]>div:style(width: auto !important)
+diff name:easylist lines:24 checksum:c438a44cc4
 d4 2
 a5 2
 ! Last modified: Fri, 10 Nov 2023 02:51:29 +0000
-! Diff-Path: ../patches/2023.11.10.437.patch#easylist
+! Diff-Path: ../patches/2023.11.10.756.patch#easylist
 a19069 1
 ||3e950d4353.com^
 a20666 1
@@ -128,11 +188,11 @@ a41570 1
 ||rural-patience.com^
 a62207 1
 flatpanelshd.com##[data-aa-adunit]
-diff name:easyprivacy lines:9 checksum:f0d4927d46
+diff name:easyprivacy lines:9 checksum:2eac695d54
 d4 2
 a5 2
 ! Last modified: Fri, 10 Nov 2023 02:51:29 +0000
-! Diff-Path: ../patches/2023.11.10.437.patch#easyprivacy
+! Diff-Path: ../patches/2023.11.10.756.patch#easyprivacy
 a6778 1
 ||dependenttrip.com^
 a7828 1

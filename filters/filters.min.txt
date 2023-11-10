@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Thu, 09 Nov 2023 23:14:48 +0000
-! Diff-Path: ../patches/2023.11.10.437.patch#ublock-filters
+! Last modified: Fri, 10 Nov 2023 10:47:26 +0000
+! Diff-Path: ../patches/2023.11.10.756.patch#ublock-filters
 ! Diff-Name: ublock-filters
 ! Diff-Expires: 5 hours
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -14,7 +14,8 @@ youtube.com###promotion-shelf
 youtube.com##ytd-video-masthead-ad-advertiser-info-renderer,ytm-promoted-sparkles-web-renderer
 ! @@||youtube.com/get_video_info?*timedtext_editor$xhr,1p
 www.youtube.com##+js(trusted-replace-xhr-response, /"adPlacements.*?\"\}\}\}\]\,/, , /player\?key=|watch\?v=|youtubei\/v1\/player/)
-www.youtube.com##+js(trusted-replace-fetch-response, /(contextParams":"Q0FFU.*?)"adPlacements.*?"\}\}\}\]\,/, $1, player?key=)
+www.youtube.com##+js(trusted-replace-fetch-response, /(contextParams":"Q0F[A-Z]U.*?)"adPlacements.*?"\}\}\}\]\,/, $1, player?key=)
+www.youtube.com#@#+js(trusted-replace-fetch-response, /(contextParams":"Q0FFU.*?)"adPlacements.*?"\}\}\}\]\,/, $1, player?key=)
 www.youtube.com#@#+js(trusted-replace-fetch-response, /(hqdefault\.jpg\?sqp=-oaym.*?)"adPlacements.*?"\}\}\}\]\,/, $1, player?key=)
 www.youtube.com#@#+js(trusted-replace-fetch-response, /((?:hqdefault\.jpg\?sqp=-oaym|hqdefault_live).*?)"adPlacements.*?"\}\}\}\]\,/, $1, player?key=)
 www.youtube.com#@#+js(trusted-replace-fetch-response, /"adPlacements.*?"\}\}\}\]\,(.*?hqdefault\.jpg(?:\?|%3F)sqp(?:=|%3D)-oaym)/, $1, player?key=)
@@ -24,7 +25,6 @@ www.youtube.com#@#+js(trusted-replace-fetch-response, /"adPlacements.*?("getAdBr
 www.youtube.com#@#+js(trusted-replace-fetch-response, /"adPlacements.*?"getAdBreakUrl":"https:\/\/www\.youtube\.com\/get_midroll_info\S+&token=ALHj.*?"\}\}\}\]\,/, , player?key=)
 www.youtube.com#@#+js(trusted-replace-fetch-response, /"adPlacements.*?get_midroll_info\S+&token=ALHj.*?"\}\}\}\]\,/, , player?key=)
 www.youtube.com#@#+js(trusted-replace-fetch-response, /"adPlacements.*?\/(aclk\?sa=L&ai=C(?!3OQpfbUyZYWKL_)[-_0-9A-Za-z]+__________[-_0-9A-Za-z]+A[A-Za-z]AA&|get_midroll_info\S+&token=ALHj).*?"\}\}\}\]\,/, , player?key=)
-www.youtube.com#@#+js(trusted-replace-fetch-response, /(trackingParam":"kx_fmPxh.*?)"adPlacements.*?"\}\}\}\]\,/, $1, player?key=)
 youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, ytInitialPlayerResponse.playerAds, undefined)
 youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, ytInitialPlayerResponse.adPlacements, undefined)
 youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, ytInitialPlayerResponse.adSlots, undefined)
@@ -1026,6 +1026,7 @@ kimcartoon.*##.kcAds1
 kimcartoon.*###ads-top-wrap
 ||kimcartoon.*/Ads/$frame
 *$script,redirect-rule=noopjs,domain=kimcartoon.*
+*$script,3p,denyallow=fastly.net|statically.io|sharecast.ws|bunnycdn.ru|bootstrapcdn.com|cdn.ampproject.org|cloudflare.com|cdn.staticfile.org|disqus.com|disquscdn.com|dmca.com|ebacdn.com|facebook.net|fastlylb.net|fbcdn.net|fluidplayer.com|fontawesome.com|github.io|google.com|googleapis.com|googletagmanager.com|gstatic.com|jquery.com|jsdelivr.net|jwpcdn.com|jwplatform.com|polyfill.io|recaptcha.net|shrink.pe|twitter.com|ulogin.ru|unpkg.com|userapi.com|vidazoo.com|vk.com|yastatic.net|ytimg.com|zencdn.net|youtube.com|cackle.me|googleoptimize.com|vuukle.com|chatango.com|twimg.com|google-analytics.com|hcaptcha.com|raincaptcha.com|media-imdb.com|blogger.com|hwcdn.net|instagram.com|wp.com|fastcomments.com|plyr.io,domain=kimcartoon.*
 dailyuploads.net##+js(acs, document.getElementById, adblockinfo)
 dailyuploads.net##+js(aopr, parcelRequire)
 dailyuploads.net##+js(nowoif)
@@ -20018,9 +20019,9 @@ jiocinema.com##ins[id^="jioads"]
 *$script,domain=koamnewsnow.com,redirect-rule=noopjs
 kpkuang.org##+js(nostif, _0x)
 kpkuang.org###sterra-ad-onmid
-chip.de###dlcharts-list + .mt-md > div > div > h2:has-text(/Gesponsert|Bezahlte Empfehlung/) + a[href^="https://www.chip.de/downloads/"]:upward(3)
-chip.de##div > a:is(a[href*="https://x.chip.de/intern/dl/?url="], a[href*="https://www.chip.de/downloads/"]):has(figure img[src*="https://im.chip.de/ii/"]):upward(1)
-chip.de##body > a:is(a[href*="https://x.chip.de/intern/dl/?url="], a[href*="https://www.chip.de/downloads/"]):has(figure img[src*="https://im.chip.de/ii/"])
+chip.de###dlcharts-list + .mt-md > div > h2:has-text(/Gesponsert|Bezahlte Empfehlung/) + a[href^="https://www.chip.de/downloads/"]:upward(2)
+chip.de##.fb > .Listing > div > h2:has-text(/Gesponsert|Bezahlte Empfehlung/) + a[href^="https://www.chip.de/downloads/"]:upward(1)
+chip.de##a:is(a[href*="https://x.chip.de/intern/dl/?url="][target], a[href*="https://www.chip.de/downloads/"][target]):has(figure img[src*="https://im.chip.de/ii/"]:not([data-was-processed])):upward(1)
 chip.de###aabhor:not([style^="display:block;"])
 chip.de###R1C2 > .Ad.align
 chip.de###CR:not(.Downloads-Detail) .ob-ad-carousel-layout
@@ -20029,10 +20030,20 @@ chip.de##.Ad-hor-height:not([id])
 chip.de##td[style][colspan] > a.js-antivirusclick[href]
 chip.de#@#.FC__Container.min-height-250px-mu
 chip.de#@##banner_top_table
+chip.de#@#.ob-widget .ob-p
+chip.de#@#.Ad
+chip.de#@##R1C2 > .Ad.align
 chip.de##.FC__Container.min-height-250px-mu:style(max-height: 0.1px !important; height: 0.1px !important; min-height: 0px !important;)
 chip.de###R1C3[role="complementary"]
+chip.de###R1C2[role="complementary"]:not(:has(> .Hero))
+chip.de###R1C1[role="complementary"]
+chip.de##section.mt-md + aside[role="complementary"]
 chip.de##.app_nexus_banners_common[id]:not([style^="display:block;"])
 chip.de###banner_top_table:not([style^="display:block;"])
+chip.de##.ob-widget:not([style^="display:block;"]) .ob-p
+chip.de##.Ad:not([style^="display:block;"]):not(.Ad.align)
+chip.de###R1C2:not([style^="display:block;"]) > .Ad.align
+chip.de###contentad-top-adsense-1
 ||nah-versorger.de^$3p
 ||stopundstart.de^$3p
 ||mein-organizer.de^$3p
@@ -23340,6 +23351,9 @@ yourlifeupdated.net##+js(noeval-if, ads)
 ticketmaster.sg##+js(set, detectAdblock, noopFunc)
 visualcapitalist.com##+js(aopr, googletag)
 app.hellovaia.com##+js(trusted-replace-xhr-response, "ads_disabled":false, "ads_disabled":true, payments)
-111.90.141.252##.mfp-ready
-111.90.141.252##html:style(overflow: auto !important;)
+111.90.141.252#+js(acs, $, noConflict)
+111.90.141.252##+js(aopr, preroll_helper.advs)
 */dyasds/$media,redirect=noopmp3-0.1s,domain=111.90.141.252
+! wsj ads
+/^https:\/\/[0-9a-z]+\.cloudfront\.net\/[a-z]\/[-0-9a-f]+\.js$/$script,3p,match-case,to=cloudfront.net,from=marketwatch.com|wsj.com
+||d36hsrzhv8pket.cloudfront.net^
