@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Fri, 10 Nov 2023 10:47:26 +0000
-! Diff-Path: ../patches/2023.11.10.756.patch#ublock-filters
+! Last modified: Fri, 10 Nov 2023 15:36:04 +0000
+! Diff-Path: ../patches/2023.11.10.1041.patch#ublock-filters
 ! Diff-Name: ublock-filters
 ! Diff-Expires: 5 hours
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -7603,7 +7603,7 @@ birdurls.com##+js(aopw, _pop)
 birdurls.com##.box-main p
 birdurls.com##.box-main center
 birdurls.com###link-view > br
-*$frame,script,3p,denyallow=consensu.org|google.com|gstatic.com|recaptcha.net|quantcast.com,domain=birdurls.com
+*$frame,script,3p,denyallow=consensu.org|google.com|gstatic.com|recaptcha.net|quantcast.com|cloudflare.com,domain=birdurls.com
 @@||video.bestjavporn.com^$ghide
 bestjavporn.com,mm9841.cc###flash
 bestjavporn.com###player_3x2_container_inner
@@ -16786,6 +16786,7 @@ everia.club##+js(rmnt, script, /\[\'push\'\]/)
 /^https:\/\/www\.(?!instagram)[a-z]{8,16}\.com\/(assets\/)?(static\/)?(scripts\/)?(api\/)?(?:[a-z]{2,10}[-.])?[a-z]{2,10}\.(?:min\.)?js$/$script,3p,match-case,domain=club|mdy48tn97.com|rapelust.com
 ://www.*.min.css|$script,3p
 ://www.*/images/*.min.js|$script,3p
+://www.*-min.css|$script,3p
 ||pushtoast-a.akamaihd.net^$script,3p
 ||nsfwr34.com/ad_schedule/
 mdy48tn97.com##+js(nowoif)
@@ -19592,7 +19593,9 @@ upshrink.com##+js(set, blurred, false)
 @@*$ghide,domain=techcyan.com|kiktu.com|upshrink.com|trangchu.news|banaraswap.in
 @@*$xhr,domain=kiktu.com|techcyan.com|upshrink.com|banaraswap.in
 banaraswap.in##a[href*=".click"]
-kiktu.com##a[target="_blank"][rel]:style(clip-path: circle(0) !important;)
+kiktu.com##[href*="click"]:style(width: 0 !important; height: 0 !important;)
+kiktu.com##.btnx
+kiktu.com##.mediafire
 ||upshrink.in/updealz-1^$frame,domain=upshrink.com
 techcyan.com,kiktu.com,banaraswap.in##body:style(overflow: visible !important;)
 upshrink.com##+js(aeld, DOMContentLoaded, iframe)
@@ -20021,9 +20024,9 @@ kpkuang.org##+js(nostif, _0x)
 kpkuang.org###sterra-ad-onmid
 chip.de###dlcharts-list + .mt-md > div > h2:has-text(/Gesponsert|Bezahlte Empfehlung/) + a[href^="https://www.chip.de/downloads/"]:upward(2)
 chip.de##.fb > .Listing > div > h2:has-text(/Gesponsert|Bezahlte Empfehlung/) + a[href^="https://www.chip.de/downloads/"]:upward(1)
-chip.de##a:is(a[href*="https://x.chip.de/intern/dl/?url="][target], a[href*="https://www.chip.de/downloads/"][target]):has(figure img[src*="https://im.chip.de/ii/"]:not([data-was-processed])):upward(1)
+chip.de##a:is(a[href*="https://x.chip.de/intern/dl/?url="][target], a[href*="https://www.chip.de/downloads/"][target]):has(figure img[src*="https://im.chip.de/ii/"]:not([data-was-processed]))
+chip.de##a[href^="https://www.chip.de/downloads/"][style^="background"]:has(img[src^="https://im.chip.de/"]:not([data-was-processed]))
 chip.de###aabhor:not([style^="display:block;"])
-chip.de###R1C2 > .Ad.align
 chip.de###CR:not(.Downloads-Detail) .ob-ad-carousel-layout
 chip.de###CR:not(.Downloads-Detail) .Ad-hor-height
 chip.de##.Ad-hor-height:not([id])
@@ -20032,7 +20035,6 @@ chip.de#@#.FC__Container.min-height-250px-mu
 chip.de#@##banner_top_table
 chip.de#@#.ob-widget .ob-p
 chip.de#@#.Ad
-chip.de#@##R1C2 > .Ad.align
 chip.de##.FC__Container.min-height-250px-mu:style(max-height: 0.1px !important; height: 0.1px !important; min-height: 0px !important;)
 chip.de###R1C3[role="complementary"]
 chip.de###R1C2[role="complementary"]:not(:has(> .Hero))
@@ -20042,7 +20044,6 @@ chip.de##.app_nexus_banners_common[id]:not([style^="display:block;"])
 chip.de###banner_top_table:not([style^="display:block;"])
 chip.de##.ob-widget:not([style^="display:block;"]) .ob-p
 chip.de##.Ad:not([style^="display:block;"]):not(.Ad.align)
-chip.de###R1C2:not([style^="display:block;"]) > .Ad.align
 chip.de###contentad-top-adsense-1
 ||nah-versorger.de^$3p
 ||stopundstart.de^$3p
@@ -23357,3 +23358,8 @@ app.hellovaia.com##+js(trusted-replace-xhr-response, "ads_disabled":false, "ads_
 ! wsj ads
 /^https:\/\/[0-9a-z]+\.cloudfront\.net\/[a-z]\/[-0-9a-f]+\.js$/$script,3p,match-case,to=cloudfront.net,from=marketwatch.com|wsj.com
 ||d36hsrzhv8pket.cloudfront.net^
+*$media,domain=gofilmizle.com,redirect=noopmp3-0.1s
+*$media,domain=filmizletv.*,redirect=noopmp3-0.1s
+gofilmizle.com##+js(nano-sib)
+filmizletv.*,gofilmizle.com###rekgecyen
+gourmetsupremacy.com##+js(nostif, null)
