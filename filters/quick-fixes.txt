@@ -1,5 +1,5 @@
 ! Title: uBlock₀ filters – Quick fixes
-! Last modified: Sun, 12 Nov 2023 07:27:45 +0000
+! Last modified: Sun, 12 Nov 2023 13:14:38 +0000
 ! Expires: 12 hours
 ! Description: Immediate, temporary filters to fix websites
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -14,12 +14,12 @@ aternos.org##.ad-dfp:style(min-height: 0.1485mm !important; height: 0.1485mm !im
 ! pixsera
 ! https://github.com/uBlockOrigin/uAssets/issues/9123
 ! https://github.com/orgs/uBlockOrigin/teams/ublock-filters-volunteers/discussions/423/comments/6
-imgwelt.sbs,imgbuner.sbs,imgqasz.sbs##+js(aopr, console.clear)
-imgwelt.sbs,imgbuner.sbs,imgqasz.sbs##+js(nano-sib, timer)
-imgwelt.sbs,imgbuner.sbs,imgqasz.sbs##div[id][style^="position: fixed; display: block; width: 100%;"]
-imgwelt.sbs,imgbuner.sbs,imgqasz.sbs##div[style="width:100%;height:110px"]
-imgwelt.sbs,imgbuner.sbs,imgqasz.sbs##+js(nowoif, !/prcf.fiyar|themes|pixsense|.jpg/)
-imgwelt.sbs,imgbuner.sbs,imgqasz.sbs##div[class][style="display: block;"]
+imgwelt.sbs,imgbuner.sbs,imgqasz.sbs,imgbbbx.sbs##+js(aopr, console.clear)
+imgwelt.sbs,imgbuner.sbs,imgqasz.sbs,imgbbbx.sbs##+js(nano-sib, timer)
+imgwelt.sbs,imgbuner.sbs,imgqasz.sbs,imgbbbx.sbs##div[id][style^="position: fixed; display: block; width: 100%;"]
+imgwelt.sbs,imgbuner.sbs,imgqasz.sbs,imgbbbx.sbs##div[style="width:100%;height:110px"]
+imgwelt.sbs,imgbuner.sbs,imgqasz.sbs,imgbbbx.sbs##+js(nowoif, !/prcf.fiyar|themes|pixsense|.jpg/)
+imgwelt.sbs,imgbuner.sbs,imgqasz.sbs,imgbbbx.sbs##div[class][style="display: block;"]
 
 ! https://github.com/uBlockOrigin/uAssets/issues/17548
 @@*$ghide,domain=dev.miuiflash.com|djxmaza.in|thecubexguide.com
@@ -59,6 +59,7 @@ searchenginereports.net##div[class^="theBdsy"], div[id^="theBdsy_"]
 
 ! https://old.reddit.com/r/uBlockOrigin/comments/16lmeri/youtube_antiadblock_and_ads_september_18_2023/k1uf2s1/ - ac9e22c0
 www.youtube.com##+js(trusted-replace-fetch-response, /(contextParams":"Q0F[A-Z]U.*?)"adPlacements.*?"\}\}\}\]\,/, $1, player?key=)
+www.youtube.com##+js(trusted-replace-fetch-response, /((?:(?:&|%26)id(?:=|%3D)o-A[A-Z]|yt_live_broadcast).*?)"adPlacements.*?"\}\}\}\]\,/, $1, player?key=)
 www.youtube.com#@#+js(trusted-replace-fetch-response, /(contextParams":"Q0FFU.*?)"adPlacements.*?"\}\}\}\]\,/, $1, player?key=)
 www.youtube.com#@#+js(trusted-replace-fetch-response, /(hqdefault\.jpg\?sqp=-oaym.*?)"adPlacements.*?"\}\}\}\]\,/, $1, player?key=)
 www.youtube.com#@#+js(trusted-replace-fetch-response, /((?:hqdefault\.jpg\?sqp=-oaym|hqdefault_live).*?)"adPlacements.*?"\}\}\}\]\,/, $1, player?key=)
@@ -75,7 +76,6 @@ www.youtube.com#@#+js(trusted-replace-fetch-response, /"adPlacements.*?\/(aclk\?
 youtube.com##+js(json-prune, playerResponse.adPlacements playerResponse.playerAds playerResponse.adSlots adPlacements playerAds adSlots legacyImportant)
 !#endif
 !#endif
-/^https:\/\/[-\w]+\.googlevideo\.com\/videoplayback\?expire=([02-9]|1[0-589]|16[0-8]|169[0-8]|1699[0-5])/$xhr,3p,method=get,domain=www.youtube.com
 
 ! https://github.com/uBlockOrigin/uAssets/issues/18476
 ! VOE sites
@@ -146,11 +146,12 @@ zive.cz##.cnc-ads--rectangle_480_1
 *$script,redirect-rule=noopjs,domain=zive.cz
 zive.cz##+js(set, cpexAddCMPCloseButton, noopFunc)
 
-! https://github.com/uBlockOrigin/uAssets/issues/20505 - remove after 12.11.2023
-megaup.net#@#body .metaRedirectWrapperBottomAds:style(visibility: hidden !important;)
+! https://github.com/uBlockOrigin/uAssets/issues/20505 - remove after 17.11.2023
 megaup.net##.metaRedirectWrapperBottomAds:style(visibility: hidden !important;)
-megaup.net##+js(spoof-css, .metaRedirectWrapperBottomAds, visibility, visible)
+megaup.net##.metaRedirectWrapperTopAds:style(visibility: hidden !important;)
+megaup.net##+js(spoof-css, .metaRedirectWrapperBottomAds\, .metaRedirectWrapperTopAds, visibility, visible)
 megaup.net##+js(rpnt, script, /;\$.+?:/, ;)
+@@||download.megaup.net/openads.js$script,1p
 
 ! https://github.com/uBlockOrigin/uAssets/issues/20509
 @@||src.litix.io/videojs/$script,domain=nasa.gov
