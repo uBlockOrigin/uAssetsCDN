@@ -11,17 +11,7 @@ jobs:
     name: Update assets
     runs-on: ubuntu-latest
     steps:
-      - name: Time check
-        run: |
-          UPDATE_PERIOD_IN_HOURS=5
-          MOD_SINCE_UBO_EPOCH=`echo "($(date +%s) - $(date -d "20140623" +%s)) / 3600 % $UPDATE_PERIOD_IN_HOURS" | bc`
-          if [ "$MOD_SINCE_UBO_EPOCH" = "0" ]; then
-            echo "CAN_DO=yes" >> $GITHUB_ENV
-          else
-            echo "Aborting workflow because $MOD_SINCE_UBO_EPOCH is not zero"
-          fi
       - name: Repo check
-        if: ${{ env.CAN_DO == 'yes' }}
         run: |
           if [[ "$GITHUB_REPOSITORY_OWNER" != "uBlockOrigin" ]]; then
             echo "This GitHub Action is meant to deliver filter lists for uBO."
@@ -32,21 +22,24 @@ jobs:
           fi
           exit 0
       - name: Clone uAssetsCDN
-        if: ${{ env.CAN_DO == 'yes' }}
         uses: actions/checkout@v3
+      - name: Copy shell script from uAssets
+        run: |
+          TMPDIR="$(mktemp -d)"
+          git clone --depth=1 --single-branch --branch=master https://github.com/uBlockOrigin/uAssets.git "$TMPDIR"
+          cp -v "$TMPDIR"/tools/need-patch.mjs .
+          cp -v "$TMPDIR"/tools/make-diffpatch.sh .
+          cp -v "$TMPDIR"/tools/update-diffpatches.sh .
+      - name: Time check
+        run: |
+          UPDATE_PERIOD_IN_HOURS=5
+          echo "CAN_DO=$(node ./need-patch.mjs delay="$UPDATE_PERIOD_IN_HOURS")" >> $GITHUB_ENV
       - name: Generate version string
         if: ${{ env.CAN_DO == 'yes' }}
         run: |
           TAGNAME=$(date -u "+%Y.%-m.%-d.")$(date -u "+%H*60+%M" | bc)
           echo "TAGNAME=$TAGNAME" >> $GITHUB_ENV
           echo "Version string is $TAGNAME"
-      - name: Copy shell script from uAssets
-        if: ${{ env.CAN_DO == 'yes' }}
-        run: |
-          TMPDIR="$(mktemp -d)"
-          git clone --depth=1 --single-branch --branch=master https://github.com/uBlockOrigin/uAssets.git "$TMPDIR"
-          cp -v "$TMPDIR"/tools/make-diffpatch.sh .
-          cp -v "$TMPDIR"/tools/update-diffpatches.sh .
       - name: Copy uAssets/filters to uAssetsCDN
         if: ${{ env.CAN_DO == 'yes' }}
         run: |
