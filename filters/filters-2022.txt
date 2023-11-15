@@ -1,5 +1,5 @@
 ! Title: uBlock filters (2022)
-! Last modified: Wed, 15 Nov 2023 11:45:40 +0000
+! Last modified: Wed, 15 Nov 2023 18:19:39 +0000
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -95,7 +95,7 @@ everia.club##+js(rmnt, script, /\[\'push\'\]/)
 /^https:\/\/www\.[a-z]{8,14}\.com\/[a-z]{1,4}\.js$/$script,third-party,match-case,domain=~edu|~gov
 ! https://github.com/uBlockOrigin/uAssets/issues/19539 new variants
 ! https://github.com/uBlockOrigin/uAssets/issues/19848
-/^https:\/\/www\.(?!instagram)[a-z]{8,16}\.com\/(assets\/)?(static\/)?(scripts\/)?(api\/)?(?:[a-z]{2,10}[-.])?[a-z]{2,10}\.(?:min\.)?js$/$script,3p,match-case,domain=club|diskusscan.com|mdy48tn97.com|rapelust.com
+/^https:\/\/www\.(?!instagram)[a-z]{8,16}\.com\/(common\/)?(assets\/)?(static\/)?(scripts\/)?(api\/)?(?:[A-Za-z]{2,20}[-.])?[A-Za-z]{2,20}\.(?:min\.)?js$/$script,3p,match-case,domain=club|diskusscan.com|mdy48tn97.com|rapelust.com
 ://www.*.min.css|$script,3p
 ://www.*/images/*.min.js|$script,3p
 ://www.*-min.css|$script,3p
@@ -4689,27 +4689,22 @@ quicksounds.com##.ad-head
 links.medipost.org##+js(set, blurred, false)
 
 ! https://www.reddit.com/r/uBlockOrigin/comments/ynjx62/
-mdn.lol,techydino.net##.floawing-banner
-mdn.lol,techydino.net##form.text-center > div[id][style="display: none;"]:style(display: block !important;)
+mdn.lol##+js(nostif, /adblock|isRequestPresent/)
+mdn.lol##+js(no-fetch-if, bmcdn6)
+mdn.lol##form[id]:style(display: block !important;)
+mdn.lol##.form-group > div[style^="width:"]
+mdn.lol##div[style^="width:"][style$=" height: 90px;"]
+mdn.lol##+js(acs, window.onload, devtools)
 ||thisiswaldo.com/static/js$script,redirect-rule=noop.js
 ||cloudfront.net/prebid_$script,redirect-rule=noop.js
-||techydino.net/teaser1.php
 ! https://github.com/uBlockOrigin/uAssets/issues/15139
 haxina.com##+js(aeld, load, adblock)
 *$script,redirect-rule=noopjs,domain=haxina.com
 @@/libs/advertisement.js?ad_ids=*&show_ad=$script,1p
-@@||taxedborley.com^$script,domain=blog.mdn.lol
 ! https://github.com/uBlockOrigin/uAssets/issues/15277
-mdn.lol##+js(aeld, DOMContentLoaded, adsBlocked)
-mdn.lol##+js(nostif, show)
 ! https://github.com/uBlockOrigin/uAssets/issues/15278
-techydino.net##+js(nostif, showModal)
-mdn.lol##+js(acs, onload, adblock)
-mdn.lol##+js(nowoif)
 ||coinzillatag.com^$script,redirect-rule=noopjs
-mdn.lol##input:style(display: block !important)
-mdn.lol##.g-recaptcha:upward(div):style(display: block !important)
-bitcotasks.com,mdn.lol,techydino.net##[class^="floating-banner"]
+bitcotasks.com##[class^="floating-banner"]
 ! https://github.com/uBlockOrigin/uAssets/issues/15428
 *$script,redirect-rule=noopjs,domain=bitcotasks.com
 bitcotasks.com##+js(acs, document.createElement, adsBlocked)
@@ -4719,47 +4714,11 @@ bitcotasks.com##[src^="https://cryptocoinsad.com/ads/"]
 bitcotasks.com##+js(aeld, load, htmls)
 bitcotasks.com##^script:has-text(htmls)
 /files/banners/*.gif$image,domain=bitcotasks.com
+bitcotasks.com##+js(aopr, adBlockDetected)
+||bitcotasks.com/yos.php
 ! https://github.com/uBlockOrigin/uAssets/issues/16207
 hatecoin.me###wcfloatDiv4
-@@||clickiocdn.com^$script,domain=mdn.lol
-@@||holid.io^$script,domain=mdn.lol
-@@||cdn.unblockia.com^$script,domain=mdn.lol
-mdn.lol##+js(aopr, pbjs)
-mdn.lol##+js(no-fetch-if, wpadmngr)
-mdn.lol##+js(acs, document.createElement, adsBlocked)
-mdn.lol##^script:has-text(adsBlocked)
-mdn.lol##form[action*="cashando.me"]
-||t.co^$frame,domain=mdn.lol
-||clickiocdn.com/*log$script,domain=mdn.lol,important
 ||hbagency.it^
-*$xhr,domain=mdn.lol,redirect-rule=noopjs
-||live.demand.supply/up.js$script,redirect=noopjs,domain=mdn.lol
-! https://github.com/uBlockOrigin/uAssets/discussions/17361#discussioncomment-6110748
-mdn.lol##+js(set, document.hasFocus, trueFunc)
-mdn.lol##form > div[id][style="display: none;"] .g-recaptcha:upward(div[id][style="display: none;"]):style(display: block !important;)
-mdn.lol##.fa-xmark
-mdn.lol##div[style*="728px;"]
-mdn.lol##div[style$="min-height: 250px;"]
-mdn.lol##.modal
-mdn.lol##.modal-backdrop
-mdn.lol##.modal-open:style(overflow: auto !important;)
-! https://github.com/uBlockOrigin/uAssets/discussions/17361#discussioncomment-6341063
-*$script,redirect-rule=noopjs,domain=mdn.lol
-mdn.lol##+js(noeval)
-mdn.lol##+js(ra, onmouseover, .g-recaptcha)
-mdn.lol###overlay
-mdn.lol##div[style^="width:305px;height"][style$="display: inline-block;margin: 0 auto;overflow:hidden;"]
-mdn.lol##+js(alert-buster)
-mdn.lol##+js(nostif, /\.innerHtml|offsetWidth/)
-mdn.lol##+js(nosiif, atob, 1000)
-! https://github.com/uBlockOrigin/uAssets/discussions/17361#discussioncomment-7433160
-mdn.lol##+js(rmnt, script, documnet.write)
-mdn.lol##+js(rpnt, script, bait.offsetWidth)
-mdn.lol##+js(rpnt, script, window.location.assign(", noop(")
-@@||static.surfe.pro/js/net.js$script,domain=mdn.lol
-||a-ads.com^$frame,redirect-rule=noop.html,domain=mdn.lol
-||mdn.lol/aryans.php
-mdn.lol##div.form-group:remove()
 
 ! https://github.com/uBlockOrigin/uAssets/issues/15140
 ||assets.maxroll.gg/wp-content/assets/img/adblock/$image
@@ -5007,10 +4966,6 @@ vod.tvp.pl#@#[class^="ad-"]
 
 ! https://github.com/uBlockOrigin/uAssets/issues/15372
 saint.to##+js(acs, document.querySelectorAll, popMagic)
-
-! https://github.com/AdguardTeam/AdguardFilters/issues/132697
-oxy.st##+js(nosiif, .hide)
-oxy.st###divdownload > div[data-template][data-source_url]
 
 ! infinitehentai.com ad, popup
 infinitehentai.com##+js(nowoif)

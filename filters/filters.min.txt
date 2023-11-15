@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Wed, 15 Nov 2023 12:26:16 +0000
-! Diff-Path: ../patches/2023.11.15.758.patch#ublock-filters
+! Last modified: Wed, 15 Nov 2023 18:19:39 +0000
+! Diff-Path: ../patches/2023.11.15.1104.patch#ublock-filters
 ! Diff-Name: ublock-filters
 ! Diff-Expires: 5 hours
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -10139,6 +10139,7 @@ m.washingtontimes.com##.mrf-adv__wrapper
 fortune.com##.amp-ad-wrapper
 fortune.com##.amp-ad-wrapper-dianomi
 wallpaperbetter.com##.lst_ads
+variety.com##.admz
 ! player on clipx.tv
 xxxporns.org##.adBlock
 a-eroland.net,hhmanga.com,nyahentai.re##.__isboostReturnAd
@@ -10933,8 +10934,6 @@ metro.co.uk##.metro__ad_area_left
 metro.co.uk##.metro__ad_area_right
 metro.co.uk###taboola-feed-container
 metro.co.uk###taboola-below-article-thumbnails
-oxy.st##[href*=".info"]
-oxy.st##+js(acs, $, localStorage)
 javmvp.com##+js(aopr, __Y)
 cracking.org##+js(acs, $, samAdBlockAction)
 cracking.org##+js(acs, RegExp, googlebot)
@@ -16820,7 +16819,7 @@ everia.club##+js(rmnt, script, /\[\'push\'\]/)
 *$script,domain=onlyfullporn.video,3p,denyallow=twitter.com|facebook.net|vk.com|zencdn.net|unpkg.com|fastly.net|fbcdn.net
 *$script,3p,domain=moredesi.com,denyallow=google.com|wp.com|disqus.com|pinterest.com|fastlylb.net|fastly.net
 /^https:\/\/www\.[a-z]{8,14}\.com\/[a-z]{1,4}\.js$/$script,third-party,match-case,domain=~edu|~gov
-/^https:\/\/www\.(?!instagram)[a-z]{8,16}\.com\/(assets\/)?(static\/)?(scripts\/)?(api\/)?(?:[a-z]{2,10}[-.])?[a-z]{2,10}\.(?:min\.)?js$/$script,3p,match-case,domain=club|diskusscan.com|mdy48tn97.com|rapelust.com
+/^https:\/\/www\.(?!instagram)[a-z]{8,16}\.com\/(common\/)?(assets\/)?(static\/)?(scripts\/)?(api\/)?(?:[A-Za-z]{2,20}[-.])?[A-Za-z]{2,20}\.(?:min\.)?js$/$script,3p,match-case,domain=club|diskusscan.com|mdy48tn97.com|rapelust.com
 ://www.*.min.css|$script,3p
 ://www.*/images/*.min.js|$script,3p
 ://www.*-min.css|$script,3p
@@ -19558,24 +19557,19 @@ nozomi.la##+js(aopw, __aaZoneid)
 @@||quicksounds.com^$ghide
 quicksounds.com##.ad-head
 links.medipost.org##+js(set, blurred, false)
-mdn.lol,techydino.net##.floawing-banner
-mdn.lol,techydino.net##form.text-center > div[id][style="display: none;"]:style(display: block !important;)
+mdn.lol##+js(nostif, /adblock|isRequestPresent/)
+mdn.lol##+js(no-fetch-if, bmcdn6)
+mdn.lol##form[id]:style(display: block !important;)
+mdn.lol##.form-group > div[style^="width:"]
+mdn.lol##div[style^="width:"][style$=" height: 90px;"]
+mdn.lol##+js(acs, window.onload, devtools)
 ||thisiswaldo.com/static/js$script,redirect-rule=noop.js
 ||cloudfront.net/prebid_$script,redirect-rule=noop.js
-||techydino.net/teaser1.php
 haxina.com##+js(aeld, load, adblock)
 *$script,redirect-rule=noopjs,domain=haxina.com
 @@/libs/advertisement.js?ad_ids=*&show_ad=$script,1p
-@@||taxedborley.com^$script,domain=blog.mdn.lol
-mdn.lol##+js(aeld, DOMContentLoaded, adsBlocked)
-mdn.lol##+js(nostif, show)
-techydino.net##+js(nostif, showModal)
-mdn.lol##+js(acs, onload, adblock)
-mdn.lol##+js(nowoif)
 ||coinzillatag.com^$script,redirect-rule=noopjs
-mdn.lol##input:style(display: block !important)
-mdn.lol##.g-recaptcha:upward(div):style(display: block !important)
-bitcotasks.com,mdn.lol,techydino.net##[class^="floating-banner"]
+bitcotasks.com##[class^="floating-banner"]
 *$script,redirect-rule=noopjs,domain=bitcotasks.com
 bitcotasks.com##+js(acs, document.createElement, adsBlocked)
 bitcotasks.com##+js(set, time, 0)
@@ -19583,43 +19577,10 @@ bitcotasks.com##[src^="https://cryptocoinsad.com/ads/"]
 bitcotasks.com##+js(aeld, load, htmls)
 bitcotasks.com##^script:has-text(htmls)
 /files/banners/*.gif$image,domain=bitcotasks.com
+bitcotasks.com##+js(aopr, adBlockDetected)
+||bitcotasks.com/yos.php
 hatecoin.me###wcfloatDiv4
-@@||clickiocdn.com^$script,domain=mdn.lol
-@@||holid.io^$script,domain=mdn.lol
-@@||cdn.unblockia.com^$script,domain=mdn.lol
-mdn.lol##+js(aopr, pbjs)
-mdn.lol##+js(no-fetch-if, wpadmngr)
-mdn.lol##+js(acs, document.createElement, adsBlocked)
-mdn.lol##^script:has-text(adsBlocked)
-mdn.lol##form[action*="cashando.me"]
-||t.co^$frame,domain=mdn.lol
-||clickiocdn.com/*log$script,domain=mdn.lol,important
 ||hbagency.it^
-*$xhr,domain=mdn.lol,redirect-rule=noopjs
-||live.demand.supply/up.js$script,redirect=noopjs,domain=mdn.lol
-mdn.lol##+js(set, document.hasFocus, trueFunc)
-mdn.lol##form > div[id][style="display: none;"] .g-recaptcha:upward(div[id][style="display: none;"]):style(display: block !important;)
-mdn.lol##.fa-xmark
-mdn.lol##div[style*="728px;"]
-mdn.lol##div[style$="min-height: 250px;"]
-mdn.lol##.modal
-mdn.lol##.modal-backdrop
-mdn.lol##.modal-open:style(overflow: auto !important;)
-*$script,redirect-rule=noopjs,domain=mdn.lol
-mdn.lol##+js(noeval)
-mdn.lol##+js(ra, onmouseover, .g-recaptcha)
-mdn.lol###overlay
-mdn.lol##div[style^="width:305px;height"][style$="display: inline-block;margin: 0 auto;overflow:hidden;"]
-mdn.lol##+js(alert-buster)
-mdn.lol##+js(nostif, /\.innerHtml|offsetWidth/)
-mdn.lol##+js(nosiif, atob, 1000)
-mdn.lol##+js(rmnt, script, documnet.write)
-mdn.lol##+js(rpnt, script, bait.offsetWidth)
-mdn.lol##+js(rpnt, script, window.location.assign(", noop(")
-@@||static.surfe.pro/js/net.js$script,domain=mdn.lol
-||a-ads.com^$frame,redirect-rule=noop.html,domain=mdn.lol
-||mdn.lol/aryans.php
-mdn.lol##div.form-group:remove()
 ||assets.maxroll.gg/wp-content/assets/img/adblock/$image
 maxroll.gg##.adsmanager-ad-container
 *$script,redirect-rule=noopjs,domain=freelitecoin.top|freetron.top
@@ -19764,8 +19725,6 @@ repelishd.com.ar##+js(nowoif)
 @@||vod.tvp.pl^$ghide
 vod.tvp.pl#@#[class^="ad-"]
 saint.to##+js(acs, document.querySelectorAll, popMagic)
-oxy.st##+js(nosiif, .hide)
-oxy.st###divdownload > div[data-template][data-source_url]
 ! infinitehentai.com ad, popup
 infinitehentai.com##+js(nowoif)
 ||infinitehentai.com/uploads/banners/
@@ -20776,7 +20735,14 @@ lightsnovel.com##+js(set, pandaAdviewValidate, true)
 n.fcd.su###submitbutton[disabled]:remove-attr(disabled)
 n.fcd.su##a#gobutton[onclick]:remove-attr(onclick)
 n.fcd.su##+js(acs, $, push-allow-modal)
-oxy.cloud##+js(acs, $, window.open)
+oxy.*##+js(acs, $, window.open)
+oxy.*##+js(nosiif, .hide)
+oxy.*##+js(acs, $, localStorage)
+oxy.*###divdownload > div[data-template][data-source_url]
+oxy.*##[href*=".info"]
+oxy.*##.group_viewport, .page__viewport:style(display: initial !important;)
+oxy.*###izobrazhenie-1:style(padding-bottom: 0px !important;)
+*$script,3p,denyallow=yastatic.net,domain=oxy.*
 mobilkulup.com##+js(nostif, show)
 wnynewsnow.com##.g
 eltiempo.es##.cls-publi-height-city
