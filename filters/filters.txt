@@ -1,5 +1,5 @@
 ! Title: uBlock filters
-! Last modified: Fri, 17 Nov 2023 07:45:45 +0000
+! Last modified: Fri, 17 Nov 2023 11:56:14 +0000
 ! Expires: 5 days
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Homepage: https://github.com/uBlockOrigin/uAssets
@@ -21,10 +21,13 @@ youtube.com##ytd-video-masthead-ad-advertiser-info-renderer,ytm-promoted-sparkle
 ! @@||youtube.com/get_video_info?*timedtext_editor$xhr,1p
 ! https://redd.it/ggcmkp https://redd.it/gx03e0
 ! https://github.com/uBlockOrigin/uAssets/pull/18106/
-www.youtube.com##+js(trusted-replace-xhr-response, /"adPlacements.*?\"\}\}\}\]\,/, , /player\?key=|watch\?v=|youtubei\/v1\/player/)
+www.youtube.com##+js(trusted-replace-xhr-response, /"adPlacements.*?([A-Z]"\}|"\}{2})\}\]\,/, , /player\?key=|watch\?v=|youtubei\/v1\/player/)
+www.youtube.com#@#+js(trusted-replace-xhr-response, /"adPlacements.*?\"\}\}\}\]\,/, , /player\?key=|watch\?v=|youtubei\/v1\/player/)
 www.youtube.com##+js(trusted-replace-xhr-response, /"adPlacements.*?("adSlots"|"adBreakHeartbeatParams")/gms, $1, /youtubei\/v1\/player\/?$/)
-www.youtube.com##+js(trusted-replace-fetch-response, /((?:(?:&|%26)id(?:=|%3D)o-A[A-Z]|yt_live_broadcast).*?)"adPlacements.*?([^=]"\}\}|"\}\}\})\]\,/, $1, player?key=)
-www.youtube.com##+js(trusted-replace-fetch-response, /(contextParams":"Q0F[A-Z]U.*?)"adPlacements.*?([^=]"\}\}|"\}\}\})\]\,/, $1, player?key=)
+www.youtube.com##+js(trusted-replace-fetch-response, /((?:(?:&|%26)id(?:=|%3D)o-A[A-Z]|yt_live_broadcast).*?)"adPlacements.*?([A-Z]"\}|"\}{2})\}\]\,/, $1, player?key=)
+www.youtube.com##+js(trusted-replace-fetch-response, /(contextParams":"Q0F[A-Z]U.*?)"adPlacements.*?([A-Z]"\}|"\}{2})\}\]\,/, $1, player?key=)
+www.youtube.com#@#+js(trusted-replace-fetch-response, /((?:(?:&|%26)id(?:=|%3D)o-A[A-Z]|yt_live_broadcast).*?)"adPlacements.*?([^=]"\}\}|"\}\}\})\]\,/, $1, player?key=)
+www.youtube.com#@#+js(trusted-replace-fetch-response, /(contextParams":"Q0F[A-Z]U.*?)"adPlacements.*?([^=]"\}\}|"\}\}\})\]\,/, $1, player?key=)
 www.youtube.com#@#+js(trusted-replace-fetch-response, /((?:(?:&|%26)id(?:=|%3D)o-A[A-Z]|yt_live_broadcast).*?)"adPlacements.*?"\}\}\}\]\,/, $1, player?key=)
 www.youtube.com#@#+js(trusted-replace-fetch-response, /(contextParams":"Q0F[A-Z]U.*?)"adPlacements.*?"\}\}\}\]\,/, $1, player?key=)
 www.youtube.com#@#+js(trusted-replace-fetch-response, /(contextParams":"Q0FFU.*?)"adPlacements.*?"\}\}\}\]\,/, $1, player?key=)
@@ -34,8 +37,6 @@ www.youtube.com#@#+js(trusted-replace-fetch-response, /"adPlacements.*?"\}\}\}\]
 www.youtube.com#@#+js(trusted-replace-fetch-response, /"adPlacements.*?privateDoNotAccessOrElseTrustedResourceUrlWrappedValue":"https:\/\/www\.youtube\.com\/aboutthisad\?pf=web&source=youtube&reasons=A.*?"\}\}\}\]\,/, , player?key=)
 www.youtube.com#@#+js(trusted-replace-fetch-response, /"adPlacements.*?("getAdBreakUrl":"https:\/\/www\.youtube\.com\/get_midroll_info\S+&token=ALHj|"(base)?[Uu]rl":"https:\/\/(secure)?pubads\.g\.doubleclick\.net).*?"\}\}\}\]\,/, , player?key=)
 www.youtube.com#@#+js(trusted-replace-fetch-response, /"adPlacements.*?"getAdBreakUrl":"https:\/\/www\.youtube\.com\/get_midroll_info\S+&token=ALHj.*?"\}\}\}\]\,/, , player?key=)
-www.youtube.com#@#+js(trusted-replace-fetch-response, /"adPlacements.*?get_midroll_info\S+&token=ALHj.*?"\}\}\}\]\,/, , player?key=)
-www.youtube.com#@#+js(trusted-replace-fetch-response, /"adPlacements.*?\/(aclk\?sa=L&ai=C(?!3OQpfbUyZYWKL_)[-_0-9A-Za-z]+__________[-_0-9A-Za-z]+A[A-Za-z]AA&|get_midroll_info\S+&token=ALHj).*?"\}\}\}\]\,/, , player?key=)
 ! https://www.reddit.com/r/uBlockOrigin/comments/154vtwy/getting_ads_on_youtube/jsu299l/
 youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, ytInitialPlayerResponse.playerAds, undefined)
 youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, ytInitialPlayerResponse.adPlacements, undefined)
@@ -1785,6 +1786,19 @@ userupload.*##.btn-danger:has-text(/download/i)
 userupload.net##.ads
 ||tgwidget.com^$3p
 
+! https://github.com/uBlockOrigin/uAssets/issues/5674
+uploadrar.*##+js(acs, Math, _0x)
+uploadrar.*##+js(aopr, popns)
+uploadrar.com##+js(acs, eval, replace)
+uploadrar.com##+js(nobab)
+uploadrar.com##+js(nano-stb, tick, 1000)
+uploadrar.com##[class^="banner"]:not(:has(#commonId))
+uploadrar.com##div.download0page:not(:has(.mngez-free-download))
+uploadrar.com###wrapper:style(display: initial !important;)
+||uploadrar.*/sw.js$script
+||7jhsdfs77.monster^
+||lobimax.com^
+
 ! https://github.com/reek/anti-adblock-killer/issues/3723
 wetter.com##+js(acs, $, lobster)
 at.wetter.com##+js(aopw, openLity)
@@ -2170,7 +2184,7 @@ platinmods.*##+js(nano-sib)
 ||whentai.com/*.gif$image
 
 ! Common rules for TXXX network
-/\/[a-z]{4,}\/(?!holly7)(?!siksik7)[0-9a-z]{3,}\d\.\d{1,2}\.\d{1,2}\.[0-9a-f]{32}\.js$/$script,domain=555.porn|bigdick.tube|hclips.com|hdzog.*|hotmovs.*|imzog.com|in-porn.com|inporn.com|javdaddy.com|manysex.com|porn555.com|pornforrelax.com|porngo.tube|pornj.com|pornl.com|pornq.com|porntop.com|privatehomeclips.com|puporn.com|see.xxx|shemalez.com|sss.xxx|thegay.*|tubepornclassic.com|tuberel.com|txxx.*|txxxporn.tube|upornia.*|vjav.*|voyeurhit.*|vxxx.com
+/\/[a-z]{4,}\/(?!holly7)(?!siksik7)[0-9a-z]{3,}\d\.\d{1,2}\.\d{1,2}\.[0-9a-f]{32}\.js$/$script,domain=555.porn|bigdick.tube|hclips.com|hdzog.*|hotmovs.*|imzog.com|in-porn.com|inporn.com|javdaddy.com|manysex.com|porn555.com|pornclassic.tube|pornforrelax.com|porngo.tube|pornj.com|pornl.com|pornq.com|porntop.com|privatehomeclips.com|puporn.com|see.xxx|shemalez.com|sss.xxx|thegay.*|tubepornclassic.com|tuberel.com|txxx.*|txxxporn.tube|upornia.*|vjav.*|voyeurhit.*|vxxx.com
 /\.[a-z]{3,5}\/[0-9a-z]{8,12}\/[0-9a-z]{8,12}\.js$/$script,domain=555.porn|asiantv.fun|blackporn.tube|bdsmx.tube|bigdick.tube|hclips.com|hdzog.*|hotmovs.*|imzog.com|in-porn.com|inporn.com|javdaddy.com|manysex.com|mrgay.tube|onlyporn.tube|porn555.com|pornclassic.tube|pornforrelax.com|porngo.tube|pornhits.com|pornj.com|pornl.com|pornq.com|porntop.com|pornzog.com|privatehomeclips.com|puporn.com|see.xxx|senzuri.tube|sextu.com|shemalez.com|sss.xxx|teenorgy.video|thegay.*|tubepornclassic.com|tuberel.com|txxx.*|txxxporn.tube|upornia.*|vjav.*|voyeurhit.*|vxxx.com|xmilf.com
 /afon7.$script,1p
 /barbar7.$script,1p
@@ -7282,14 +7296,6 @@ gamezhero.com##+js(set, ads, true)
 ! https://www.reddit.com/r/uBlockOrigin/comments/9utd8b/wikifeet_adverts/
 wikifeet.com##+js(aopr, NativeAd)
 
-! https://github.com/uBlockOrigin/uAssets/issues/5674
-uploadrar.*##+js(acs, Math, _0x)
-uploadrar.*##+js(aopr, popns)
-uploadrar.*##+js(nano-stb)
-||uploadrar.*/sw.js$script
-||7jhsdfs77.monster^
-||lobimax.com^
-
 ! https://github.com/NanoMeow/QuickReports/issues/295
 flashplayer.fullstacks.net##+js(set, gadb, false)
 
@@ -11678,20 +11684,24 @@ al4a.com##+js(acs, document.querySelectorAll, popMagic)
 lonely-mature.com##+js(aopr, EviPopunder)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/6143
-tubepornclassic.com##+js(acs, adver)
+pornclassic.tube,tubepornclassic.com##+js(acs, adver)
 tubepornclassic.com##+js(acs, document.createElement, tcpusher)
 tubepornclassic.com##+js(aeld, , window.open)
 tubepornclassic.com##+js(aopr, preadvercb)
 tubepornclassic.com##+js(nosiif, complete, 50)
 tubepornclassic.com##+js(nosiif, document.readyState)
-*$frame,3p,domain=tubepornclassic.com
-*$popunder,3p,domain=tubepornclassic.com
+pornclassic.tube,tubepornclassic.com##+js(set, prerollMain, undefined)
+*$frame,3p,domain=pornclassic.tube|tubepornclassic.com
+*$popunder,3p,domain=pornclassic.tube|tubepornclassic.com
 pornclassic.tube,tubepornclassic.com##.content > div > .container + div
-tubepornclassic.com##.video-page__adv
-tubepornclassic.com##a[href^="http://www.theclassicporn.com/"]:upward(1)
+pornclassic.tube,tubepornclassic.com##a[href^="http://www.theclassicporn.com/"]:upward(1)
+pornclassic.tube,tubepornclassic.com##span[style="display:flex !important"] > div:first-child
 pornclassic.tube,tubepornclassic.com##.video-page__content > div.left + div[class]:last-child
 pornclassic.tube,tubepornclassic.com##div[style="display:flex !important"] > div
 pornclassic.tube,tubepornclassic.com##.video-page__player + div[class] > div[class]
+pornclassic.tube,tubepornclassic.com##.partners-wrap + div[class]
+pornclassic.tube,tubepornclassic.com##section[style="padding: 20px;"]
+pornclassic.tube,tubepornclassic.com##div[style="width: 300px; height: 250px;"]
 
 ! https://github.com/uBlockOrigin/uAssets/issues/6144
 flashingjungle.com##+js(aeld, /^(click|mousedown|mousemove|touchstart|touchend|touchmove)/, system.popunder)
