@@ -1,5 +1,5 @@
 ! Title: uBlock₀ filters – Quick fixes
-! Last modified: Thu, 23 Nov 2023 14:03:33 +0000
+! Last modified: Thu, 23 Nov 2023 18:56:54 +0000
 ! Expires: 12 hours
 ! Description: Immediate, temporary filters to fix websites
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -103,7 +103,11 @@ chip.de##.js_download_button > a.Download-Button--Free[href*="withinstaller"][hr
 ||xp.apple.com^$~ping,badfilter
 
 ! https://github.com/uBlockOrigin/uAssets/issues/20792
-twitter.com##[data-testid="primaryColumn"] [data-testid="cellInnerDiv"] > div:has([data-testid="top-impression-pixel"]):remove()
+twitter.com##[data-testid="primaryColumn"] [data-testid="cellInnerDiv"] > div:has([data-testid$="-impression-pixel"]):remove()
+! https://github.com/easylist/easylist/commit/7cb8b866a9bcd23d4125b8aad62d6fb5ff460361
+twitter.com##div[data-testid="cellInnerDiv"] > div > div[class] > div[class][data-testid="placementTracking"]
+! https://github.com/easylist/easylist/commit/6d32dcea3c63819d582652278bffffda5dc2b551
+twitter.com#?#div[data-testid="placementTracking"]:-abp-has(div[data-testid$="-impression-pixel"])
 
 ! Ad-Shield
 ! https://github.com/uBlockOrigin/uAssets/issues/12163
@@ -116,11 +120,11 @@ loawa.com,ygosu.com,sportalkorea.com,algumon.com,hancinema.net,enetnews.co.kr,ed
 *$image,1p,domain=07c225f3.online|content-loader.com
 *$image,3p,redirect=1x1.gif,domain=07c225f3.online|content-loader.com
 *$doc,ping,font,css,domain=07c225f3.online|content-loader.com
-genshinlab.com,a-ha.io,cboard.net,mobilitytv.co.kr,mememedia.co.kr,newautopost.co.kr,tvreport.co.kr,tenbizt.com,jjang0u.com,joongdo.co.kr,viva100.com##+js(noeval-if, 07c225f3.online)
+genshinlab.com,a-ha.io,cboard.net,mobilitytv.co.kr,mememedia.co.kr,newautopost.co.kr,tvreport.co.kr,tenbizt.com,jjang0u.com,joongdo.co.kr,viva100.com,thephoblographer.com,newdaily.co.kr##+js(noeval-if, /07c225f3\.online|content-loader\.com/)
 !#if cap_html_filtering
-genshinlab.com,fourfourtwo.co.kr,interfootball.co.kr,a-ha.io,cboard.net,mobilitytv.co.kr,mememedia.co.kr,newautopost.co.kr,tvreport.co.kr,tenbizt.com,jjang0u.com,joongdo.co.kr,viva100.com,meconomynews.com,brandbrief.co.kr##^script:has-text(KCgpPT57bGV0IGU)
+genshinlab.com,fourfourtwo.co.kr,interfootball.co.kr,a-ha.io,cboard.net,mobilitytv.co.kr,mememedia.co.kr,newautopost.co.kr,tvreport.co.kr,tenbizt.com,jjang0u.com,joongdo.co.kr,viva100.com,meconomynews.com,brandbrief.co.kr,thephoblographer.com,newdaily.co.kr##^script:has-text(KCgpPT57bGV0IGU)
 !#else
-genshinlab.com,fourfourtwo.co.kr,interfootball.co.kr,a-ha.io,cboard.net,mobilitytv.co.kr,mememedia.co.kr,newautopost.co.kr,tvreport.co.kr,tenbizt.com,jjang0u.com,joongdo.co.kr,viva100.com,meconomynews.com,brandbrief.co.kr##+js(rmnt, script, KCgpPT57bGV0IGU)
+genshinlab.com,fourfourtwo.co.kr,interfootball.co.kr,a-ha.io,cboard.net,mobilitytv.co.kr,mememedia.co.kr,newautopost.co.kr,tvreport.co.kr,tenbizt.com,jjang0u.com,joongdo.co.kr,viva100.com,meconomynews.com,brandbrief.co.kr,thephoblographer.com,newdaily.co.kr##+js(rmnt, script, KCgpPT57bGV0IGU)
 !#endif
 
 ! https://github.com/uBlockOrigin/uAssets/issues/16533
@@ -140,12 +144,18 @@ techcyan.com,kiktu.com,upshrink.com,trangchu.news,banaraswap.in##+js(spoof-css, 
 ! https://www.reddit.com/r/uBlockOrigin/comments/17rxlfr/block_randomlygenerated_class_with_specific/
 /^https:\/\/[0-9a-z]+\.cloudfront\.net\/([a-z]\/)?[0-9a-f]{6,}-[-0-9a-f]+\.js$/$script,3p,match-case,to=cloudfront.net,from=marketwatch.com|wsj.com
 
-! https://github.com/easylist/easylist/commit/7cb8b866a9bcd23d4125b8aad62d6fb5ff460361
-twitter.com##div[data-testid="cellInnerDiv"] > div > div[class] > div[class][data-testid="placementTracking"]
-
 ! https://github.com/AdguardTeam/AdguardFilters/commit/c69c2dd360a16f06652c5b14c735e75e96eb9a87
 sekai-kabuka.com#@#ins.adsbygoogle:upward(1):style(visibility: hidden !important;)
 
 ! Ads
 instagram.com#@#article:has(a[href^="https://www.facebook.com/ads/"]):style(position: absolute !important; left: -4000px !important;)
 instagram.com##article:has(a[href^="https://www.facebook.com/ads/"]):style(height: 0 !important; overflow: hidden !important;)
+
+! https://github.com/AdguardTeam/AdguardFilters/issues/165624
+||check-host.net/images/*.png?$image,1p
+||check-host.net/images/kkkkkkk$image,1p
+||check-host.net/images/*rundguaz$image,1p
+check-host.net##div[style="position: relative"]:has(a[title] img[src^="/images/"])
+check-host.net##div[class*="self-end"]:has(a:has-text(100%))
+check-host.net###hostigq, a[href^="/etgo/"], a[href*="/spclrdp"], div[id$="-guuaryd"], .nrkzbcharzcont, a[title="DDoS_Guard"], #nrkzbchadincogni
+check-host.net##a[href*="/aff_c?offer_id="]
