@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Thu, 23 Nov 2023 05:31:36 +0000
-! Diff-Path: ../patches/2023.11.23.560.patch#ublock-filters
+! Last modified: Thu, 23 Nov 2023 14:03:33 +0000
+! Diff-Path: ../patches/2023.11.23.862.patch#ublock-filters
 ! Diff-Name: ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -16,8 +16,9 @@ youtube.com##ytd-video-masthead-ad-advertiser-info-renderer,ytm-promoted-sparkle
 www.youtube.com##+js(trusted-replace-xhr-response, /"adPlacements.*?([A-Z]"\}|"\}{2})\}\]\,/, , /player\?key=|watch\?v=|youtubei\/v1\/player/)
 www.youtube.com#@#+js(trusted-replace-xhr-response, /"adPlacements.*?\"\}\}\}\]\,/, , /player\?key=|watch\?v=|youtubei\/v1\/player/)
 www.youtube.com##+js(trusted-replace-xhr-response, /"adPlacements.*?("adSlots"|"adBreakHeartbeatParams")/gms, $1, youtubei/v1/player)
-www.youtube.com##+js(trusted-replace-fetch-response, /((?:(?:&|%26)id(?:=|%3D)o-A[A-Z]|yt_live_broadcast).*?)"adPlacements.*?([A-Z]"\}|"\}{2})\}\]\,/, $1, player?key=)
-www.youtube.com##+js(trusted-replace-fetch-response, /(contextParams":"Q0F[A-Z]U.*?)"adPlacements.*?([A-Z]"\}|"\}{2})\}\]\,/, $1, player?key=)
+www.youtube.com##+js(trusted-replace-fetch-response, /"adPlacements.*?([A-Z]"\}|"\}{2})\}\]\,/, , player?key=)
+www.youtube.com#@#+js(trusted-replace-fetch-response, /((?:(?:&|%26)id(?:=|%3D)o-A[A-Z]|yt_live_broadcast).*?)"adPlacements.*?([A-Z]"\}|"\}{2})\}\]\,/, $1, player?key=)
+www.youtube.com#@#+js(trusted-replace-fetch-response, /(contextParams":"Q0F[A-Z]U.*?)"adPlacements.*?([A-Z]"\}|"\}{2})\}\]\,/, $1, player?key=)
 www.youtube.com#@#+js(trusted-replace-fetch-response, /((?:(?:&|%26)id(?:=|%3D)o-A[A-Z]|yt_live_broadcast).*?)"adPlacements.*?([^=]"\}\}|"\}\}\})\]\,/, $1, player?key=)
 www.youtube.com#@#+js(trusted-replace-fetch-response, /(contextParams":"Q0F[A-Z]U.*?)"adPlacements.*?([^=]"\}\}|"\}\}\})\]\,/, $1, player?key=)
 www.youtube.com#@#+js(trusted-replace-fetch-response, /((?:(?:&|%26)id(?:=|%3D)o-A[A-Z]|yt_live_broadcast).*?)"adPlacements.*?"\}\}\}\]\,/, $1, player?key=)
@@ -326,14 +327,17 @@ facebook.com,facebookwkhpilnemxj7asaniu7vnjjbiltxjqhye3mhbshg7kx5tfyd.onion###wa
 facebook.com,facebookwkhpilnemxj7asaniu7vnjjbiltxjqhye3mhbshg7kx5tfyd.onion###watch_feed div:not([class]) > div:not([class]) div[class] span[class] > a[aria-label="広告"]:upward(div:not([class]) > div:not([class]))
 facebook.com,facebookwkhpilnemxj7asaniu7vnjjbiltxjqhye3mhbshg7kx5tfyd.onion###watch_feed div:not([class]) > div:not([class]) div[class] [class] > a[href*="utm_source=facebook"] span[class] > span[class][style*="-webkit-line-clamp"]:has-text(広告):upward(div:not([class]) > div:not([class]))
 !facebook.com,facebookwkhpilnemxj7asaniu7vnjjbiltxjqhye3mhbshg7kx5tfyd.onion##div[role="feed"] > div[class]:has([data-ad-preview])
-m.facebook.com,touch.facebook.com##.m[data-type="vscroller"] > :is(.bg-s2, .bg-s3):has(+ :is(.bg-s2, .bg-s3) + :is(.bg-s2, .bg-s3):has(> .m > .m .nb[style*="clip-path:inset(0 0 0 0 round 4px)"] > [style*="margin-top:1px;"][style*="margin-left:1px;"]))
-m.facebook.com,touch.facebook.com##.m[data-type="vscroller"] > :is(.bg-s2, .bg-s3):has(+ :is(.bg-s2, .bg-s3):has(> .m > .m .nb[style*="clip-path:inset(0 0 0 0 round 4px)"] > [style*="margin-top:1px;"][style*="margin-left:1px;"]))
-m.facebook.com,touch.facebook.com##.m[data-type="vscroller"] > :is(.bg-s2, .bg-s3) > .m > .m > .nb[style*="clip-path:inset(0 0 0 0 round 4px)"] > [style*="margin-top:1px;"][style*="margin-left:1px;"]:upward(4)
-m.facebook.com,touch.facebook.com##.m[data-type="vscroller"] > :is(.bg-s2, .bg-s3) > .m > .m > .nb[style*="clip-path:inset(0 0 0 0 round 4px)"] > [style*="margin-top:1px;"][style*="margin-left:1px;"]:upward(4) + .m
-m.facebook.com,touch.facebook.com##.m[data-type="vscroller"] > :is(.bg-s2, .bg-s3) > .m > .m > .nb[style*="clip-path:inset(0 0 0 0 round 4px)"] > [style*="margin-top:1px;"][style*="margin-left:1px;"]:upward(4) + .m + .m
-m.facebook.com,touch.facebook.com##.m[data-type="vscroller"] > :is(.bg-s2, .bg-s3) > .m > .m > .m > .nb[style*="clip-path:inset(0 0 0 0 round 4px)"] > [style*="margin-top:1px;"][style*="margin-left:1px;"]:upward(5)
-m.facebook.com,touch.facebook.com##.m[data-type="vscroller"] > :is(.bg-s2, .bg-s3) > .m > .m > .m > .nb[style*="clip-path:inset(0 0 0 0 round 4px)"] > [style*="margin-top:1px;"][style*="margin-left:1px;"]:upward(5) + .m
-m.facebook.com,touch.facebook.com##.m[data-type="vscroller"] > :is(.bg-s2, .bg-s3) > .m > .m > .m > .nb[style*="clip-path:inset(0 0 0 0 round 4px)"] > [style*="margin-top:1px;"][style*="margin-left:1px;"]:upward(5) + .m + .m
+m.facebook.com,touch.facebook.com##.m[data-type="vscroller"] > :is(.bg-s2, .bg-s3):has(+ :is(.bg-s2, .bg-s3) + :is(.bg-s2, .bg-s3):has(> .m > .m .nb[style*="inset(0"] > [style*="margin-top:1px;"][style*="margin-left:1px;"]))
+m.facebook.com,touch.facebook.com##.m[data-type="vscroller"] > :is(.bg-s2, .bg-s3):has(+ :is(.bg-s2, .bg-s3):has(> .m > .m .nb[style*="inset(0"] > [style*="margin-top:1px;"][style*="margin-left:1px;"]))
+m.facebook.com,touch.facebook.com##.m[data-type="vscroller"] > :is(.bg-s2, .bg-s3) > .m > .m > .nb[style*="inset(0"] > [style*="margin-top:1px;"][style*="margin-left:1px;"]:upward(4)
+m.facebook.com,touch.facebook.com##.m[data-type="vscroller"] > :is(.bg-s2, .bg-s3) > .m > .m > .nb[style*="inset(0"] > [style*="margin-top:1px;"][style*="margin-left:1px;"]:upward(4) + .m
+m.facebook.com,touch.facebook.com##.m[data-type="vscroller"] > :is(.bg-s2, .bg-s3) > .m > .m > .nb[style*="inset(0"] > [style*="margin-top:1px;"][style*="margin-left:1px;"]:upward(4) + .m + .m
+m.facebook.com,touch.facebook.com##.m[data-type="vscroller"] > :is(.bg-s2, .bg-s3) > .m > .m > .m > .nb[style*="inset(0"] > [style*="margin-top:1px;"][style*="margin-left:1px;"]:upward(5)
+m.facebook.com,touch.facebook.com##.m[data-type="vscroller"] > :is(.bg-s2, .bg-s3) > .m > .m > .m > .nb[style*="inset(0"] > [style*="margin-top:1px;"][style*="margin-left:1px;"]:upward(5) + .m
+m.facebook.com,touch.facebook.com##.m[data-type="vscroller"] > :is(.bg-s2, .bg-s3) > .m > .m > .m > .nb[style*="inset(0"] > [style*="margin-top:1px;"][style*="margin-left:1px;"]:upward(5) + .m + .m
+m.facebook.com,touch.facebook.com##.m[data-type="vscroller"] > :is(.bg-s2, .bg-s3) > .m > .m > .m > .m > .nb[style*="inset(0"] > [style*="margin-top:1px;"][style*="margin-left:1px;"]:upward(6)
+m.facebook.com,touch.facebook.com##.m[data-type="vscroller"] > :is(.bg-s2, .bg-s3) > .m > .m > .m > .m > .nb[style*="inset(0"] > [style*="margin-top:1px;"][style*="margin-left:1px;"]:upward(6) + .m
+m.facebook.com,touch.facebook.com##.m[data-type="vscroller"] > :is(.bg-s2, .bg-s3) > .m > .m > .m > .m > .nb[style*="inset(0"] > [style*="margin-top:1px;"][style*="margin-left:1px;"]:upward(6) + .m + .m
 ! mail.yahoo.com stuff
 mail.yahoo.com##[data-test-id="right-rail-ad"]
 mail.yahoo.com##[data-test-id="video-container"]
@@ -744,6 +748,7 @@ fullxh.com,hamsterix.*,megaxh.com,unlockxh4.com,xhadult2.com,xhadult3.com,xhadul
 fullxh.com,hamsterix.*,megaxh.com,unlockxh4.com,xhadult2.com,xhadult3.com,xhadult4.com,xhadult5.com,xhamster.*,xhamster1.*,xhamster10.*,xhamster11.*,xhamster12.*,xhamster13.*,xhamster14.*,xhamster15.*,xhamster16.*,xhamster17.*,xhamster18.*,xhamster19.*,xhamster20.*,xhamster2.*,xhamster3.*,xhamster4.*,xhamster46.com,xhamster5.*,xhamster7.*,xhamster8.*,xhday.com,xhday1.com,xhmoon5.com,xhplanet1.com,xhplanet2.com,xhreal2.com,xhreal3.com,xhtab2.com,xhvictory.com,xhwebsite.com,xhwebsite2.com,xhwide1.com,xhwide8.com##[data-role="promo"]
 fullxh.com,hamsterix.*,megaxh.com,unlockxh4.com,xhadult2.com,xhadult3.com,xhadult4.com,xhadult5.com,xhamster.*,xhamster1.*,xhamster10.*,xhamster11.*,xhamster12.*,xhamster13.*,xhamster14.*,xhamster15.*,xhamster16.*,xhamster17.*,xhamster18.*,xhamster19.*,xhamster20.*,xhamster2.*,xhamster3.*,xhamster4.*,xhamster46.com,xhamster5.*,xhamster7.*,xhamster8.*,xhday.com,xhday1.com,xhmoon5.com,xhplanet1.com,xhplanet2.com,xhreal2.com,xhreal3.com,xhtab2.com,xhvictory.com,xhwebsite.com,xhwebsite2.com,xhwide1.com,xhwide8.com##.xp-banner-pause
 fullxh.com,hamsterix.*,megaxh.com,unlockxh4.com,xhadult2.com,xhadult3.com,xhadult4.com,xhadult5.com,xhamster.*,xhamster1.*,xhamster10.*,xhamster11.*,xhamster12.*,xhamster13.*,xhamster14.*,xhamster15.*,xhamster16.*,xhamster17.*,xhamster18.*,xhamster19.*,xhamster20.*,xhamster2.*,xhamster3.*,xhamster4.*,xhamster46.com,xhamster5.*,xhamster7.*,xhamster8.*,xhday.com,xhday1.com,xhmoon5.com,xhplanet1.com,xhplanet2.com,xhreal2.com,xhreal3.com,xhtab2.com,xhvictory.com,xhwebsite.com,xhwebsite2.com,xhwide1.com,xhwide8.com##div[class^="yld-"]
+fullxh.com,hamsterix.*,megaxh.com,unlockxh4.com,xhadult2.com,xhadult3.com,xhadult4.com,xhadult5.com,xhamster.*,xhamster1.*,xhamster10.*,xhamster11.*,xhamster12.*,xhamster13.*,xhamster14.*,xhamster15.*,xhamster16.*,xhamster17.*,xhamster18.*,xhamster19.*,xhamster20.*,xhamster2.*,xhamster3.*,xhamster4.*,xhamster46.com,xhamster5.*,xhamster7.*,xhamster8.*,xhday.com,xhday1.com,xhmoon5.com,xhplanet1.com,xhplanet2.com,xhreal2.com,xhreal3.com,xhtab2.com,xhvictory.com,xhwebsite.com,xhwebsite2.com,xhwide1.com,xhwide8.com##.xp-banner-bottom + button
 fullxh.com,hamsterix.*,megaxh.com,unlockxh4.com,xhadult2.com,xhadult3.com,xhadult4.com,xhadult5.com,xhamster.*,xhamster1.*,xhamster10.*,xhamster11.*,xhamster12.*,xhamster13.*,xhamster14.*,xhamster15.*,xhamster16.*,xhamster17.*,xhamster18.*,xhamster19.*,xhamster20.*,xhamster2.*,xhamster3.*,xhamster4.*,xhamster46.com,xhamster5.*,xhamster7.*,xhamster8.*,xhday.com,xhday1.com,xhmoon5.com,xhplanet1.com,xhplanet2.com,xhreal2.com,xhreal3.com,xhtab2.com,xhvictory.com,xhwebsite.com,xhwebsite2.com,xhwide1.com,xhwide8.com##+js(set, initials.yld-pdpopunder, '')
 fullxh.com,hamsterix.*,megaxh.com,unlockxh4.com,xhadult2.com,xhadult3.com,xhadult4.com,xhadult5.com,xhamster.*,xhamster1.*,xhamster10.*,xhamster11.*,xhamster12.*,xhamster13.*,xhamster14.*,xhamster15.*,xhamster16.*,xhamster17.*,xhamster18.*,xhamster19.*,xhamster20.*,xhamster2.*,xhamster3.*,xhamster4.*,xhamster46.com,xhamster5.*,xhamster7.*,xhamster8.*,xhday.com,xhday1.com,xhmoon5.com,xhplanet1.com,xhplanet2.com,xhreal2.com,xhreal3.com,xhtab2.com,xhvictory.com,xhwebsite.com,xhwebsite2.com,xhwide1.com,xhwide8.com##+js(set-cookie, ts_popunder, true, , reload, 1)
 fullxh.com,hamsterix.*,megaxh.com,unlockxh4.com,xhadult2.com,xhadult3.com,xhadult4.com,xhadult5.com,xhamster.*,xhamster1.*,xhamster10.*,xhamster11.*,xhamster12.*,xhamster13.*,xhamster14.*,xhamster15.*,xhamster16.*,xhamster17.*,xhamster18.*,xhamster19.*,xhamster20.*,xhamster2.*,xhamster3.*,xhamster4.*,xhamster46.com,xhamster5.*,xhamster7.*,xhamster8.*,xhday.com,xhday1.com,xhmoon5.com,xhplanet1.com,xhplanet2.com,xhreal2.com,xhreal3.com,xhtab2.com,xhvictory.com,xhwebsite.com,xhwebsite2.com,xhwide1.com,xhwide8.com##+js(rpnt, script, popunder, , condition, popunder, stay, 1)
@@ -1268,6 +1273,7 @@ yts.mx##^script:has-text(document.write)
 !#if !cap_html_filtering
 yts.mx##+js(rmnt, script, document.write)
 !#endif
+yts.mx##.container > [class]:has-text(VPN)
 sarugbymag.co.za##+js(aopr, showAds)
 imgdrive.net,imgwallet.com##+js(acs, jQuery, TestAdBlock)
 imgadult.com,imgdrive.net,imgtaxi.com,imgwallet.com##+js(aopr, ExoLoader)
@@ -13468,8 +13474,6 @@ wp.uploadfiles.in,uploadsoon.com###tp-snp2:others()
 viralxns.com###timeout, #tp-snp2:others()
 viralxns.com###timeout:remove-attr(disabled)
 viralxns.com,wp.uploadfiles.in,uploadsoon.com##+js(nano-sib, /.?/, *, 0.02)
-viralxns.com,wp.uploadfiles.in,uploadsoon.com##+js(trusted-click-element, #tp-snp2)
-viralsbaba1.blogspot.com##+js(trusted-click-element, button#btn-gotolink, , 1000)
 viralsbaba1.blogspot.com###btn-gotolink:style(display:block !important; margin-top: 410px !important; margin-left: 200px !important; height: 100px !important; width: 100px !important)
 viralsbaba1.blogspot.com###btn-gotolink:remove-attr(disabled)
 viralsbaba1.blogspot.com###btn-gotolink:others()
@@ -16725,22 +16729,17 @@ upshrink.com##.getox
 ||i.ibb.co^$image,domain=techcyan.com|kiktu.com|upshrink.com|trangchu.news|banaraswap.in
 !techcyan.com,kiktu.com,upshrink.com,trangchu.news,banaraswap.in##.e-container--row.innerParentContainer > .e-container--column:has(#abovehead > .e-container--column > .elementor-widget-shortcode > .elementor-widget-container > #recap-btn) ~ div
 ! Mlwbd Download
-easytech24.com##+js(trusted-click-element, .myButton)
 easytech24.com###verifying-source:style(margin-top: 430px !important;)
 freethemesy.com##+js(nano-sib, counter, *, 0.02)
 freethemesy.com##form[id]:style(display: block !important;)
 freethemesy.com###download, #download-button, #main-download:others()
 freethemesy.com##.cf.main-content.col-8:style(margin-top: 400px !important;)
-freethemesy.com##+js(trusted-click-element, #download-button > input)
-freethemesy.com##+js(trusted-click-element, #download)
-freethemesy.com##+js(trusted-click-element, [value="Download"])
 freethemesy.com##+js(rpnt, script, inline', block')
 freethemesy.com##+js(rmnt, script, replaceChild)
 freethemesy.com##+js(rmnt, #text, /^AD:/)
 namemeaningbengali.com,techyzero.com##.cf.main-content.col-8:style(margin-top: 420px !important;)
 httpmovies.online##.button-wrapper:style(margin-top: 450px !important;)
 httpmovies.online,namemeaningbengali.com,techyzero.com##.butt:others()
-httpmovies.online,techyzero.com##+js(trusted-click-element, .butt, , 1000)
 ! psa.wf Download Shorteners
 enit.in,financerites.com##+js(nostif, , 5)
 enit.in##+js(nowoif)
@@ -19100,6 +19099,7 @@ genshinlab.com,fourfourtwo.co.kr,interfootball.co.kr,a-ha.io,cboard.net,mobility
 ! instagram.com##main > div div[style*="flex-direction: column;"] > article > div:has(a[href^="https://www.facebook.com/ads/ig_redirect/"][target="_blank"]):remove()
 instagram.com##main > div div[style*="flex-direction: column;"] > article > div:has(>div:first-child a[href*="/?enable_persistent_cta="]):style(height: 1px !important; visibility: hidden !important;)
 instagram.com##main > div div[style*="flex-direction: column;"] > article > div:has(>div:first-child a[href*="/?enable_persistent_cta="]):remove()
+instagram.com##article:has(a[href^="https://www.facebook.com/ads/"]):style(height: 0 !important; overflow: hidden !important;)
 ||instagram.com/api/v1/injected_story_units/
 gewinde-normen.de##+js(nostif, nextFunction, 2000)
 rakuten.com#@#.google-ads
@@ -19283,7 +19283,6 @@ player.hdgay.net##+js(aopr, BetterJsPop)
 ||player.hdgay.net/cdn-cgi/trace
 profitshort.com,courselinkfree.us,technorozen.com,hubdrive.me,bestadvise4u.com,newztalkies.com,10desires.org,theapknews.shop,aiotechnical.com,cryptonewzhub.com,trendzguruji.me,techvybes.com,wizitales.com,101desires.com###top_nav, .rd_btn, .soractrl:style(display: block !important;)
 profitshort.com,courselinkfree.us,technorozen.com,hubdrive.me,bestadvise4u.com,newztalkies.com,10desires.org,theapknews.shop,aiotechnical.com,cryptonewzhub.com,trendzguruji.me,techvybes.com,wizitales.com,101desires.com###top_nav, .rd_btn, .soractrl, .large:others()
-profitshort.com,courselinkfree.us,technorozen.com,hubdrive.me,bestadvise4u.com,newztalkies.com,10desires.org,theapknews.shop,aiotechnical.com,cryptonewzhub.com,trendzguruji.me,techvybes.com,wizitales.com,101desires.com##+js(trusted-click-element, #top_nav)
 vgmlinks.*##[href*="stake.com/registration"]
 hortonanderfarom.blogspot.com##+js(nostif, pop)
 multiplayer.it##+js(aeld, , adb)
@@ -20238,10 +20237,6 @@ gplinks.co##.bg-soft-primary, a.exclude-pop.smartlink, .exclude-pop.quiz-contain
 bhojpurimeet.in##+js(nano-sib, _0x, *, 0.02)
 bhojpurimeet.in##.safeb:style(display: block !important;)
 bhojpurimeet.in##p, h3, h1, ul, .breadcrumbs, .creditInner, .mainWrapper > .header, #header-wrapper, #footer-wrapper
-bhojpurimeet.in##+js(trusted-click-element, #verify > .safeb)
-bhojpurimeet.in##+js(trusted-click-element, #notarobot > .safeb, , 150)
-bhojpurimeet.in##+js(trusted-click-element, #notarobot > .safeb, , 2500)
-xpshort.com##+js(trusted-click-element, 'a.get-link, .get-link.btn-lg.btn-success.btn', , 9500)
 go.publicearn.com##.page-header > h3, .banner, .bg-soft-primary
 @@*$ghide,domain=iisfvirtual.in|starxinvestor.com
 iisfvirtual.in,starxinvestor.com##+js(nano-sib, timer, *)
@@ -20271,9 +20266,6 @@ info.sarkarigo.com,pmkisanlists.in,rojgargovernment.in,nregajobcard.in,cookar.ne
 shareus.io,shrs.link##.button-texts:others()
 @@||exeo.app^$ghide
 exeo.app##.actions, .earning-steps ~*, .earning-steps, header, footer, .ad-element
-exeo.app##+js(trusted-click-element, .link-button.button)
-exeo.app##+js(trusted-click-element, #invisibleCaptchaShortlink.link-button.button)
-exeo.app##+js(trusted-click-element, .get-link.link-button.button, , 7500)
 ! LinkShortify
 bookszone.in##+js(nano-sib, timer, *)
 bookszone.in###tp98, #jatinbtn-continue:style(display: block !important;)
@@ -22054,8 +22046,6 @@ fansonlinehub.com,hotmediahub.com,terabox.fun##.adsense
 fansonlinehub.com,hotmediahub.com,terabox.fun##[id^="pop-ad"]
 fansonlinehub.com,hotmediahub.com##.full-box, .bottom-adsense
 terabox.fun##.short-link-home-bottom
-fansonlinehub.com,terabox.fun,hotmediahub.com##+js(trusted-click-element, .active.btn > span)
-fansonlinehub.com,terabox.fun,hotmediahub.com##+js(trusted-click-element, .active.btn > span, , 200)
 fansonlinehub.com,hotmediahub.com,terabox.fun##+js(json-prune, web_share_ads_adsterra_config wap_short_link_middle_page_ad wap_short_link_middle_page_show_time data.ads_cpm_info)
 fansonlinehub.com,hotmediahub.com,terabox.fun##+js(nano-stb, value, *)
 fansonlinehub.com,hotmediahub.com,terabox.fun##+js(nano-sib, clearInterval, *)
@@ -22515,8 +22505,8 @@ sotwe.com##.tweet-card .v-responsive.media-carousel-image .v-responsive__content
 ||d2zue0pgsssbc6.cloudfront.net/j/*-prod.js$script,3p
 ||d2zue0pgsssbc6.cloudfront.net/j/prod-*.js$script,3p
 *$frame,redirect-rule=noopframe,domain=megaup.net
-megaup.net##.metaRedirectWrapperBottomAds, .metaRedirectWrapperTopAds, a[href^="https://tm-offers.gamingadult.com/"]:style(visibility: hidden !important;)
-megaup.net##+js(spoof-css, .metaRedirectWrapperBottomAds\, .metaRedirectWrapperTopAds\, a[href^="https://tm-offers.gamingadult.com/"], visibility, visible)
+megaup.net##.metaRedirectWrapperBottomAds, .metaRedirectWrapperTopAds, .metaRedirectWrapperTopAd, a[href^="https://tm-offers.gamingadult.com/"]:style(visibility: hidden !important;)
+megaup.net##+js(spoof-css, .metaRedirectWrapperBottomAds\, .metaRedirectWrapperTopAds\, .metaRedirectWrapperTopAd\, a[href^="https://tm-offers.gamingadult.com/"], visibility, visible)
 megaup.net##+js(rpnt, script, /;\$.+?:/, ;)
 @@||megaup.net/imageads/$image,1p
 @@||download.megaup.net^$script,1p
