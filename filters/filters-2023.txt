@@ -1,5 +1,5 @@
 ! Title: uBlock filters (2023)
-! Last modified: Sat, 25 Nov 2023 10:17:56 +0000
+! Last modified: Sat, 25 Nov 2023 16:21:36 +0000
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -3878,6 +3878,11 @@ megaup.net##+js(spoof-css, .metaRedirectWrapperBottomAds\, .metaRedirectWrapperT
 @@||megaup.net/imageads/$image,1p
 @@||download.megaup.net^$script,1p
 download.megaup.net##+js(rpnt, script, /if\(\S+?\)\{document/gms, if(false){document)
+!#if cap_html_filtering
+megaup.net##^script:has-text(FingerprintJS)
+!#else
+megaup.net##+js(rmnt, script, FingerprintJS)
+!#endif
 
 ! https://www.reddit.com/r/uBlockOrigin/comments/hxzp5h/ublock_fails_to_block_ads_after_clicking_video/
 player.theplatform.com##+js(disable-newtab-links)
@@ -5312,10 +5317,7 @@ app.axenthost.com##+js(no-fetch-if, /^/)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/20401
 infinityscans.xyz##+js(no-fetch-if, ads)
-infinityscans.xyz##^script:has-text('shift')
-!#if !cap_html_filtering
-infinityscans.xyz##+js(rmnt, script, "'shift'")
-!#endif
+infinityscans.xyz##+js(rmnt, script, /function.*charAt/)
 
 ! https://www.reddit.com/r/uBlockOrigin/comments/17lu2us/antiad_block_blocks_video_about_10_seconds_in/
 ||pornkinky.com^$image,1p,redirect-rule=1x1.gif
@@ -5547,5 +5549,5 @@ soccerinhd.com##+js(aopw, _pop)
 ! https://github.com/uBlockOrigin/uAssets/issues/20850
 gameshdlive.net##+js(aopw, _pop)
 
-! https://github.com/uBlockOrigin/uAssets/issues/20855
-wrosinski.pl##+js(aeld, rocket-DOMContentLoaded, bind(document))
+! https://github.com/uBlockOrigin/uAssets/issues/20870
+pornleaks.in##+js(noeval-if, ads)
