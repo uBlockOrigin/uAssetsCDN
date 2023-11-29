@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Wed, 29 Nov 2023 10:10:58 +0000
-! Diff-Path: ../patches/2023.11.29.626.patch#ublock-filters
+! Last modified: Wed, 29 Nov 2023 14:13:57 +0000
+! Diff-Path: ../patches/2023.11.29.922.patch#ublock-filters
 ! Diff-Name: ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -5028,6 +5028,9 @@ scubidu.eu###custom_html-15
 scubidu.eu###custom_html-16
 root-top.com##+js(aopr, adblockblock)
 watchaccordingtojimonline.com,watchdowntonabbeyonline.com,watchelementaryonline.com,watcheronline.net,watchgleeonline.com,watchlostonline.net,watchmonkonline.com,watchprettylittleliarsonline.com,watchrulesofengagementonline.com,watchthekingofqueens.com,watchthemiddleonline.com##+js(aopw, _pop)
+!#if env_firefox
+||cibntv.net/youku/$media,important,redirect=none:10,from=youku.com
+!#endif
 ||cibntv.net/youku/*$media,redirect=noopmp3-0.1s,domain=youku.com
 ||valipl.cp31.ott.cibntv.net^$media,redirect=noopmp3-0.1s,domain=youku.com
 youku.com##+js(nano-stb, , ,0)
@@ -16747,8 +16750,8 @@ techy.veganab.co##.text-left, div.inst.box, .banner-inner
 ||assets.isavetube.com/images/dgpromo.jpg
 dropgalaxy.*##+js(acis, document.createElement, /break;case \$\.|popunder|iframe|_0xh/)
 dropgalaxy.*##+js(trusted-set, document.visibilityState, visible)
-dropgalaxy.*##+js(no-fetch-if, /adtrue\.com|eningspon\.com|freychang\.fun|orquideassp\.com|popunder|mobileoffers|googlesyndication|histats|creativecdn|crwdcntrl|prebid|sync|cloudflareinsights|vlitag|inklinkor|popmonetizer|ads|dubzenom|rsc|adoto/)
-dropgalaxy.*##+js(no-xhr-if, /a-mo\.net|adnxs\.com|prebid|creativecdn\.com|e-planning\.net|quantumdex\.io|mobileoffers|googlesyndication|histats|creativecdn|crwdcntrl|prebid|sync|cloudflareinsights|vlitag|inklinkor|popmonetizer|ads|dubzeno|rsc|adoto/)
+!dropgalaxy.*##+js(no-fetch-if, /adtrue\.com|eningspon\.com|freychang\.fun|orquideassp\.com|popunder|mobileoffers|googlesyndication|histats|creativecdn|crwdcntrl|prebid|sync|cloudflareinsights|vlitag|inklinkor|popmonetizer|ads|dubzenom|rsc|adoto/)
+!dropgalaxy.*##+js(no-xhr-if, /a-mo\.net|adnxs\.com|prebid|creativecdn\.com|e-planning\.net|quantumdex\.io|mobileoffers|googlesyndication|histats|creativecdn|crwdcntrl|prebid|sync|cloudflareinsights|vlitag|inklinkor|popmonetizer|ads|dubzeno|rsc|adoto/)
 dropgalaxy.*,financemonk.net##+js(nowoif)
 dropgalaxy.*##+js(set, isAdblockActive, false)
 dropgalaxy.*##+js(aeld, , loadScripts)
@@ -16761,6 +16764,9 @@ dropgalaxy.*##+js(rpnt, script, 'iframe, 'div)
 dropgalaxy.*##+js(rpnt, script, /none|hidden/, 0, condition, getComputedStyle)
 dropgalaxy.*##+js(rmnt, script, /\.onerror|document\.write|Error|userTimezoneOffset=userDate|div-gpt-ad-dropgalaxycom/)
 dropgalaxy.*##+js(rpnt, script, .offsetParent)
+dropgalaxy.*##+js(rpnt, script, /getTimezoneOffset|userTimezoneOffset = userDate|(error|getTimezoneFromOffset|null;|timezoneOffset|'src',/)
+dropgalaxy.*##^script:has-text(navigator.userAgent)
+dropgalaxy.*##^script:has-text(throw new Error)
 @@||financemonk.net^$ghide
 financemonk.net###vipada
 !@@*$ghide,domain=dev.miuiflash.com|djxmaza.in|thecubexguide.com
@@ -16908,7 +16914,11 @@ freeromsdownload.com,roms-download.com,roms-hub.com###ads
 kingdomfiles.com##.col-sm-12 > li
 ! hilltopads-sites
 10convert.com,besthdgayporn.com,bigojav.com,fucksporn.com,fullxcinema1.com,gigmature.com,homemoviestube.com,javchill.com,kisscos.net,kmansin09.com,leermanga.net,mangamovil.net,naijauncut.com,nudeslegion.com,porn00.org,pornohubonline.com,pornxp.com,readwebtoononline.net,sexdiaryz.*,tatli.biz,teenager365.com,weloma.*##+js(acs, document.createElement, /l\.parentNode\.insertBefore\(s/)
-besthdgayporn.com##^script:has-text(l.parentNode.insertBefore(s, l);)
+!#if cap_html_filtering
+besthdgayporn.com##^script:has-text(/popMagic|pop1stp/)
+!#else
+besthdgayporn.com##+js(rmnt, script, /popMagic|pop1stp/)
+!#endif
 fucksporn.com###FloatingLayer
 fucksporn.com##.adv_banners
 fucksporn.com##.prefix-player-out
@@ -19080,6 +19090,7 @@ algumon.com#@#div[class^="ad-"]
 loawa.com,ygosu.com,sportalkorea.com,algumon.com,hancinema.net,enetnews.co.kr,edaily.co.kr,economist.co.kr,etoday.co.kr,hankyung.com,isplus.com,hometownstation.com,kagit.kr,inven.co.kr,honkailab.com,warcraftrumbledeck.com,genshinlab.com,thestockmarketwatch.com##+js(no-xhr-if, /static\.criteo\.net|adsbygoogle/)
 loawa.com,ygosu.com,sportalkorea.com,algumon.com,hancinema.net,enetnews.co.kr,edaily.co.kr,economist.co.kr,etoday.co.kr,hankyung.com,isplus.com,hometownstation.com,kagit.kr,inven.co.kr,honkailab.com,warcraftrumbledeck.com,genshinlab.com,thestockmarketwatch.com##ad-shield-inventory
 thestockmarketwatch.com##ins.adsbygoogle:style(height: 1px !important; visibility: hidden !important;)
+thestockmarketwatch.com#@#.adSpotPad
 thestockmarketwatch.com##.adSpotPad:style(height: 1px !important; min-height: 1px !important; visibility: hidden !important;)
 loawa.com##a[href^="https://mini.m-able.app/@mini/loawa?tracking_template"]:remove()
 loawa.com##a[target="_blank"][data-href][data-banner-statics]:remove()
@@ -23428,3 +23439,4 @@ hostmath.com##+js(no-fetch-if, googlesyndication)
 freemagazinespdf.com##+js(acs, eval, replace)
 leechpremium.net##+js(aopr, atob)
 urlcut.ninja##+js(no-fetch-if, googlesyndication)
+@@||resortcams.com^$ghide
