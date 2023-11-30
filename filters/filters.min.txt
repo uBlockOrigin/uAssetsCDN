@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Thu, 30 Nov 2023 06:12:50 +0000
-! Diff-Path: ../patches/2023.11.30.386.patch#ublock-filters
+! Last modified: Thu, 30 Nov 2023 10:57:22 +0000
+! Diff-Path: ../patches/2023.11.30.677.patch#ublock-filters
 ! Diff-Name: ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -1521,7 +1521,13 @@ voyeurhit.*##.video-related + div[class] > div[class]:only-child
 voyeurhit.*##div[style="display:flex !important"] > div
 voyeurhit.*##.video-tube-friends + div[class]
 upornia.*##+js(acs, adver)
+upornia.com##+js(rmnt, script, /popunder|isAdBlock|admvn.src/i)
+upornia.com##h5:has-text(Advertisement)
+upornia.com##section:not(:empty)
+upornia.com##.underplayer:style(min-height: initial !important;)
+upornia.com##.video-page__content > .right
 upornia.*##div[style="display:flex !important"] > div
+upornia.*##.intwo__img
 upornia.*##.video-content > div[class] > div.text > a[href="#"]:upward(2)
 upornia.*##.videoplayer-wrapper + div > div[class]:only-child
 upornia.*##.video-ad-videos + div.aa_label
@@ -4161,6 +4167,7 @@ limetorrents.*##+js(aeld, load, onload)
 limetorrents.*##+js(acs, Object.assign, popunder)
 limetorrents.*##+js(acs, Math, XMLHttpRequest)
 limetorrents.*##[href^="/fast.php"]
+limetorrents.*##div:has(> div > a[href^="/leet/?"])
 limetorrents.*##tr:has-text(VPN)
 ||limetorrents.*/sw.js
 @@||limetorrents.*^$ghide
@@ -16752,7 +16759,9 @@ techy.veganab.co##.text-left, div.inst.box, .banner-inner
 @@||adoto.net/dashboard/common/js/common.js$script,xhr,domain=dropgalaxy.*
 @@||tmp.a2zapk.com/adbdata.php$xhr,domain=dropgalaxy.*
 ||assets.isavetube.com/images/dgpromo.jpg
+||js.mobileoffers-ep-download.com^$domain=dropgalaxy.com
 dropgalaxy.*##+js(acis, document.createElement, /break;case \$\.|popunder|iframe|_0xh/)
+dropgalaxy.com##+js(aeld, DOMContentLoaded, handler)
 dropgalaxy.*##+js(trusted-set, document.visibilityState, visible)
 !dropgalaxy.*##+js(no-fetch-if, /adtrue\.com|eningspon\.com|freychang\.fun|orquideassp\.com|popunder|mobileoffers|googlesyndication|histats|creativecdn|crwdcntrl|prebid|sync|cloudflareinsights|vlitag|inklinkor|popmonetizer|ads|dubzenom|rsc|adoto/)
 !dropgalaxy.*##+js(no-xhr-if, /a-mo\.net|adnxs\.com|prebid|creativecdn\.com|e-planning\.net|quantumdex\.io|mobileoffers|googlesyndication|histats|creativecdn|crwdcntrl|prebid|sync|cloudflareinsights|vlitag|inklinkor|popmonetizer|ads|dubzeno|rsc|adoto/)
@@ -16769,6 +16778,7 @@ dropgalaxy.*##+js(rpnt, script, /none|hidden/, 0, condition, getComputedStyle)
 dropgalaxy.*##+js(rmnt, script, /\.onerror|document\.write|Error|userTimezoneOffset=userDate|div-gpt-ad-dropgalaxycom/)
 dropgalaxy.*##+js(rpnt, script, .offsetParent)
 dropgalaxy.*##+js(rpnt, script, /getTimezoneOffset|userTimezoneOffset = userDate|(error|getTimezoneFromOffset|null;|timezoneOffset|'src',/)
+dropgalaxy.com##+js(rpnt, script, /s.src =|s.src/i)
 dropgalaxy.*##^script:has-text(throw new Error)
 @@||financemonk.net^$ghide
 financemonk.net###vipada
@@ -16776,10 +16786,12 @@ financemonk.net###vipada
 *$script,redirect-rule=noopjs,domain=djxmaza.in|thecubexguide.com|dev.miuiflash.com
 *$frame,redirect=noopframe,domain=djxmaza.in|dev.miuiflash.com|thecubexguide.com
 *$xhr,domain=djxmaza.in|dev.miuiflash.com|thecubexguide.com,redirect-rule=nooptext
+*$image,redirect-rule=32x32.png:5,domain=djxmaza.in|thecubexguide.com|dev.miuiflash.com
 @@||devfiles.pages.dev/fonts/wp-content/plugins/best-ads-block-detector/main.js
 @@||googlesyndication.com^$script,xhr,domain=djxmaza.in|dev.miuiflash.com|thecubexguide.com
 @@||doubleclick.net^$script,xhr,domain=djxmaza.in|dev.miuiflash.com|thecubexguide.com
 @@||adoto.net/dashboard/common/js/common.js$3p,script,domain=dev.miuiflash.com|djxmaza.in|thecubexguide.com
+dev.miuiflash.com,djxmaza.in,thecubexguide.com##iframe:upward(div)
 dev.miuiflash.com,djxmaza.in,thecubexguide.com##[id*="-gpt-ad"]:style(height:250px !important;left:-3000px !important;position:absolute !important)
 djxmaza.in,miuiflash.com,thecubexguide.com###featuredimage
 djxmaza.in,miuiflash.com,thecubexguide.com##+js(rpnt, script, featuredimage', container', condition, getComputedStyle)
@@ -16788,7 +16800,6 @@ djxmaza.in,miuiflash.com,thecubexguide.com##+js(rpnt, script, /error|onerror|gpt
 djxmaza.in,miuiflash.com,thecubexguide.com##+js(rpnt, script, IFRAME", CONTAINER")
 djxmaza.in,miuiflash.com,thecubexguide.com##+js(rpnt, script, /.offsetHeight|.offsetWidth|offset|height:|width:/)
 dev.miuiflash.com,djxmaza.in,thecubexguide.com##+js(rpnt, script, iframe., form.)
-!dev.miuiflash.com,djxmaza.in,thecubexguide.com##+js(rpnt, script, /none'|hidden'|undefined/)
 dev.miuiflash.com,djxmaza.in,thecubexguide.com##+js(rpnt, script, /gtag/js|tag/js|js'|doubleclick|adsby|src="/)
 akoam.*##+js(nowoif)
 javhdfree.icu##+js(aopr, __Y)
@@ -20316,6 +20327,7 @@ loaninsurehub.com###getlink:others()
 loaninsurehub.com###iframe_id, .vc_column-inner, .td-footer-wrap, #overlay
 @@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$script,domain=hotmediahub.com|terabox.fun|fansonlinehub.com
 @@*$ghide,domain=hotmediahub.com|terabox.fun|fansonlinehub.com
+||gamerplay50.space^$domain=hotmediahub.com|terabox.fun|fansonlinehub.com
 fansonlinehub.com,hotmediahub.com,terabox.fun##body:style(overflow: auto !important;)
 fansonlinehub.com,hotmediahub.com,terabox.fun##[id^="pop-ad"], div.artical-content, .full-box, .bottom-adsense
 terabox.fun##.short-link-home-bottom
@@ -21329,6 +21341,7 @@ hiraethtranslation.com##+js(acs, decodeURIComponent, String.fromCharCode)
 hiraethtranslation.com##.c-sidebar
 sideplusleaks.com##+js(noeval-if, adb)
 entutes.com##+js(nostif, _0x)
+shineads.*##+js(acs, document.readyState, adsBlocked)
 shineads.*##+js(nostif, ai_adb)
 shineads.*##+js(no-xhr-if, ads)
 shineads.*##.entry-header
@@ -23448,5 +23461,7 @@ fplstatistics.co.uk#@#ins.adsbygoogle
 fplstatistics.co.uk##ins.adsbygoogle:style(clip-path: circle(0) !important;)
 @@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js^$script,3p,domain=fplstatistics.co.uk
 @@||pagead2.googlesyndication.com/pagead/managed/js/adsense^$script,3p,domain=fplstatistics.co.uk
-@@||fundingchoicesmessages.google.com^$script,domain=fplstatistics.co.uk
+@@||fundingchoicesmessages.google.com^$script,3p,domain=fplstatistics.co.uk
 ||googleads.g.doubleclick.net/pagead^$frame,3p,redirect-rule=noopframe,domain=fplstatistics.co.uk
+@@||mrfreemium.blogspot.com^$ghide
+alexsportz.online##+js(acs, fetch, googlesyndication)
