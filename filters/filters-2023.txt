@@ -1,5 +1,5 @@
 ! Title: uBlock filters (2023)
-! Last modified: Thu, 30 Nov 2023 10:32:10 +0000
+! Last modified: Thu, 30 Nov 2023 16:11:08 +0000
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -371,9 +371,11 @@ darkwanderer.net,truckingboards.com##+js(nostif, show)
 *$xhr,domain=luffytra.xyz,redirect-rule=nooptext
 luffytra.xyz##+js(no-xhr-if, tag)
 
-! 
-||googlesyndication.com^$image,domain=smartkhabrinews.com,redirect-rule=1x1.gif
+! https://github.com/uBlockOrigin/uAssets/issues/20949
+||googlesyndication.com^$image,domain=smartkhabrinews.com|streama2z.com,redirect-rule=1x1.gif
 smartkhabrinews.com##+js(no-fetch-if, /freychang|passback|popunder|tag/)
+smartkhabrinews.com###vipada
+@@||popads.net/js/adblock.js$script,xhr,domain=smartkhabrinews.com
 
 ! https://github.com/uBlockOrigin/uAssets/issues/16354
 guru3d.com##.content3 > div[style]:has-text(Advertisement)
@@ -1764,7 +1766,7 @@ globlenews.in##+js(no-fetch-if, googlesyndication)
 ##.banner-ads:not(.textads)
 ##.banner_ads:not(.textads)
 ##.ad-zone:not(.textads)
-##.ad-space:not(.textads)
+##.ad-space:not(.textads):not(.adbox)
 
 ! https://github.com/AdguardTeam/AdguardFilters/issues/146901
 bravedown.com##+js(nostif, canRunAds)
@@ -5512,7 +5514,7 @@ aduzz.com,bitcrypto.info##+js(set, wpsafelinkCount, 0)
 freeltc.online##+js(noeval-if, ads)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/20792
-twitter.com##[data-testid="primaryColumn"] [data-testid="cellInnerDiv"] > div:has([data-testid="top-impression-pixel"]):remove()
+twitter.com##[data-testid="primaryColumn"] [data-testid="cellInnerDiv"] > div:has([data-testid$="-impression-pixel"]):remove()
 
 ! https://github.com/uBlockOrigin/uAssets/issues/20794
 daotranslate.com##+js(aost, setTimeout, ads)
@@ -5616,3 +5618,6 @@ fplstatistics.co.uk##ins.adsbygoogle:style(clip-path: circle(0) !important;)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/20972
 alexsportz.online##+js(acs, fetch, googlesyndication)
+
+! https://github.com/uBlockOrigin/uAssets/issues/20975
+btvplus.bg##+js(rmnt, script, onerror)
