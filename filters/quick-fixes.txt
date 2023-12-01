@@ -1,5 +1,5 @@
 ! Title: uBlock₀ filters – Quick fixes
-! Last modified: Fri, 01 Dec 2023 15:51:33 +0000
+! Last modified: Fri, 01 Dec 2023 22:21:17 +0000
 ! Expires: 12 hours
 ! Description: Immediate, temporary filters to fix websites
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -18,7 +18,6 @@ d1rp4yowwe587e.cloudfront.net^$script,domain=dropgalaxy.*,important
 @@||services.vlitag.com/cli/$xhr,domain=dropgalaxy.*
 @@||services.vlitag.com/obj/$xhr,domain=dropgalaxy.*
 ||js.mobileoffers-ep-download.com^$domain=dropgalaxy.*,important
-dropgalaxy.*##+js(rpnt, script, /\.onerror|document\.write|Error|userTimezoneOffset=userDate|div-gpt-ad-dropgalaxycom|getTimezoneOffset|userTimezoneOffset|userDate|330|(error|getTimezoneFromOffset|null;|timezoneOffset|'src',|.offsetParent/)
 dropgalaxy.*##+js(rpnt, script, /charAt|constructor|_0x/)
 dropgalaxy.*##+js(rpnt, script, iframe, script)
 dropgalaxy.*##+js(rpnt, script, /script1.|script2./ dgnoob.)
@@ -38,7 +37,7 @@ imgwelt.sbs,imgbuner.sbs,imgqasz.sbs,imgbbbx.sbs,imgwqaf.sbs,imgcdfd.sbs,imguwjs
 imgwelt.sbs,imgbuner.sbs,imgqasz.sbs,imgbbbx.sbs,imgwqaf.sbs,imgcdfd.sbs,imguwjsd.sbs,imgcnmm.sbs,imgsaqe.sbs,imgnndj.sbs,imgkhgyj.sbs,picqqwqe.sbs,picasda.sbs##+js(nowoif, !/prcf.fiyar|themes|pixsense|.jpg/)
 imgwelt.sbs,imgbuner.sbs,imgqasz.sbs,imgbbbx.sbs,imgwqaf.sbs,imgcdfd.sbs,imguwjsd.sbs,imgcnmm.sbs,imgsaqe.sbs,imgnndj.sbs,imgkhgyj.sbs,picqqwqe.sbs,picasda.sbs##div[class][style="display: block;"]
 
-! https://old.reddit.com/r/uBlockOrigin/comments/16lmeri/youtube_antiadblock_and_ads_september_18_2023/k1uf2s1/ - 2ebf064d
+! https://old.reddit.com/r/uBlockOrigin/comments/16lmeri/youtube_antiadblock_and_ads_september_18_2023/k1uf2s1/ - 2a835f78
 www.youtube.com##+js(trusted-replace-fetch-response, /"adPlacements.*?([A-Z]"\}|"\}{2})\}\]\,/, , player?key=)
 tv.youtube.com##+js(trusted-replace-xhr-response, '"adPlacements"', '"no_ads"', /player\?key=|watch\?v=|youtubei\/v1\/player/)
 www.youtube.com#@#+js(trusted-replace-fetch-response, /((?:(?:&|%26)id(?:=|%3D)o-A[A-Z]|yt_live_broadcast).*?)"adPlacements.*?([A-Z]"\}|"\}{2})\}\]\,/, $1, player?key=)
@@ -50,6 +49,7 @@ youtube.com##+js(json-prune, playerResponse.adPlacements playerResponse.playerAd
 !#endif
 !#endif
 youtube.com#@##merch-shelf
+youtube.com#@##video-masthead
 
 ! https://github.com/uBlockOrigin/uAssets/issues/18476
 ! VOE sites
@@ -135,10 +135,8 @@ check-host.net##img[onclick^="window.location = '/"]
 @@||infinityscans.xyz^$ghide
 infinityscans.xyz##+js(nowoif)
 ||infinityscans.xyz/sw.js$script,1p
-@@||platform.bidgear.com/pubbidgear-ad.js$xhr,domain=infinityscans.xyz
-!#if ext_devbuild
-infinityscans.xyz##+js(no-fetch-if, pagead2.googlesyndication.com/pagead/js/adsbygoogle.js, war:googlesyndication_adsbygoogle.js)
-!#endif
+@@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$xhr,domain=infinityscans.xyz
+infinityscans.xyz##+js(rpnt, script, /let.*throw.Error.*?(})/gms, )
 
 ! https://github.com/uBlockOrigin/uAssets/issues/20941
 *$removeparam=t,from=twitter.com|x.com,badfilter
