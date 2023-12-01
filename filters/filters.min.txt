@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Fri, 01 Dec 2023 12:00:11 +0000
-! Diff-Path: ../patches/2023.12.1.758.patch#ublock-filters
+! Last modified: Fri, 01 Dec 2023 15:51:33 +0000
+! Diff-Path: ../patches/2023.12.1.1041.patch#ublock-filters
 ! Diff-Name: ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -15,6 +15,7 @@ youtube.com##ytd-video-masthead-ad-advertiser-info-renderer,ytm-promoted-sparkle
 ! @@||youtube.com/get_video_info?*timedtext_editor$xhr,1p
 www.youtube.com##+js(trusted-replace-xhr-response, /"adPlacements.*?([A-Z]"\}|"\}{2})\}\]\,/, , /player\?key=|watch\?v=|youtubei\/v1\/player/)
 www.youtube.com##+js(trusted-replace-xhr-response, /"adPlacements.*?("adSlots"|"adBreakHeartbeatParams")/gms, $1, youtubei/v1/player)
+tv.youtube.com##+js(trusted-replace-xhr-response, '"adPlacements"', '"no_ads"', /player\?key=|watch\?v=|youtubei\/v1\/player/)
 www.youtube.com##+js(trusted-replace-fetch-response, /"adPlacements.*?([A-Z]"\}|"\}{2})\}\]\,/, , player?key=)
 www.youtube.com#@#+js(trusted-replace-fetch-response, /((?:(?:&|%26)id(?:=|%3D)o-A[A-Z]|yt_live_broadcast).*?)"adPlacements.*?([A-Z]"\}|"\}{2})\}\]\,/, $1, player?key=)
 www.youtube.com#@#+js(trusted-replace-fetch-response, /(contextParams":"Q0F[A-Z]U.*?)"adPlacements.*?([A-Z]"\}|"\}{2})\}\]\,/, $1, player?key=)
@@ -16759,27 +16760,25 @@ techy.veganab.co##.text-left, div.inst.box, .banner-inner
 *$image,redirect-rule=32x32.png,domain=dropgalaxy.*
 @@||dropgalaxy.*^$ghide
 @@||challenges.cloudflare.com^$subdocument,domain=dropgalaxy.*
-@@||login.popmonetizer.com/ss/js/ads.js$script,domain=dropgalaxy.*
-@@||adoto.net/dashboard/common/js/common.js$script,xhr,domain=dropgalaxy.*
-@@||tmp.a2zapk.com/adbdata.php$xhr,domain=dropgalaxy.*
+@@||adoto.net^$script,xhr,domain=dropgalaxy.*
+@@||a2zapk.com^$script,xhr,3p,domain=dropgalaxy.*
+@@||login.popmonetizer.com^$script,domain=dropgalaxy.*
 ||assets.isavetube.com/images/dgpromo.jpg
 ||js.mobileoffers-ep-download.com^$domain=dropgalaxy.com
-dropgalaxy.*##+js(acis, document.createElement, /break;case \$\.|popunder|iframe|_0xh/)
-dropgalaxy.com##+js(aeld, DOMContentLoaded, handler)
-dropgalaxy.*##+js(trusted-set, document.visibilityState, visible)
-!dropgalaxy.*##+js(no-fetch-if, /adtrue\.com|eningspon\.com|freychang\.fun|orquideassp\.com|popunder|mobileoffers|googlesyndication|histats|creativecdn|crwdcntrl|prebid|sync|cloudflareinsights|vlitag|inklinkor|popmonetizer|ads|dubzenom|rsc|adoto/)
-!dropgalaxy.*##+js(no-xhr-if, /a-mo\.net|adnxs\.com|prebid|creativecdn\.com|e-planning\.net|quantumdex\.io|mobileoffers|googlesyndication|histats|creativecdn|crwdcntrl|prebid|sync|cloudflareinsights|vlitag|inklinkor|popmonetizer|ads|dubzeno|rsc|adoto/)
-dropgalaxy.*,financemonk.net##+js(nowoif)
-dropgalaxy.*##+js(set, isAdblockActive, false)
+dropgalaxy.*##+js(acs, document.createElement, /break;case \$\.|popunder/)
+dropgalaxy.*##+js(aeld, DOMContentLoaded, handler)
 dropgalaxy.*##+js(aeld, , loadScripts)
+dropgalaxy.*##+js(set, window.isAdblockActive, false)
+dropgalaxy.*##+js(trusted-set, document.visibilityState, visible)
+dropgalaxy.*##+js(no-fetch-if, /adtrue\.com|eningspon\.com|freychang\.fun|orquideassp\.com|popunder|mobileoffers|googlesyndication|histats|creativecdn|crwdcntrl|prebid|cloudflareinsights|vlitag|inklinkor|popmonetizer|dubzenom|rsc|adoto/)
+dropgalaxy.*##+js(no-xhr-if, /a-mo\.net|adnxs\.com|prebid|creativecdn\.com|e-planning\.net|quantumdex\.io|mobileoffers|googlesyndication|histats|creativecdn|crwdcntrl|prebid|cloudflareinsights|vlitag|inklinkor|popmonetizer|dubzeno|rsc|adoto/)
+dropgalaxy.*##+js(rpnt, script, /\.onerror|document\.write|Error|userTimezoneOffset=userDate/)
 dropgalaxy.*##+js(rpnt, script, true;, false;)
 dropgalaxy.*##+js(rpnt, script, /script1.src|script2.src/, lol.noop)
 dropgalaxy.*##+js(rpnt, script, /none|hidden/, 0, condition, getComputedStyle)
-dropgalaxy.*##+js(rmnt, script, /\.onerror|document\.write|Error|userTimezoneOffset=userDate|div-gpt-ad-dropgalaxycom/)
-dropgalaxy.*##+js(rpnt, script, .offsetParent)
 dropgalaxy.*##+js(rpnt, script, /getTimezoneOffset|userTimezoneOffset = userDate|(error|getTimezoneFromOffset|null;|timezoneOffset|'src',/)
 dropgalaxy.com##+js(rpnt, script, /s.src =|s.src/i)
-dropgalaxy.*##^script:has-text(throw new Error)
+dropgalaxy.*,financemonk.net##+js(nowoif)
 @@||financemonk.net^$ghide
 financemonk.net###vipada
 @@*$ghide,domain=dev.miuiflash.com|djxmaza.in|thecubexguide.com
@@ -21186,9 +21185,7 @@ javsubindo.one##+js(nowoif)
 javsubindo.one###btm_banner
 javsubindo.one###close-teaser
 ||eatcells.com^$popup,3p
-multiup.eu,multiup.io,multiup.org##+js(remove-attr, action, [action*="multinews"], stay)
-multiup.eu,multiup.io,multiup.org##+js(ra, class, [class="hidden"], stay)
-multiup.eu,multiup.io,multiup.org##+js(ra, type, [type="hidden"], stay)
+multiup.eu,multiup.io,multiup.org##+js(multiup)
 coursedrive.org##+js(acs, eval, replace)
 18porncomic.com##+js(acs, document.querySelectorAll, popMagic)
 zubatecno.com###link1s-snp:style(display: block !important;)
@@ -22383,6 +22380,9 @@ www.google.com##div[aria-label="Why this ad?"]:upward([data-pla="1"])
 totalcsgo.com##+js(rmnt, script, /adconfig/i)
 totalcsgo.com##.body-container:style(background-image: unset !important; cursor: auto !important;)
 ||totalcsgo.com/*/site-takeover/$image
+totalcsgo.com##+js(aeld, , /mechanism/)
+totalcsgo.com##[style*="desktop-url"]:remove()
+totalcsgo.com##[href^="https://link.totalcsgo.com"][target="_blank"]
 vod.pl##+js(set, Object.prototype.adblockDetector, noopFunc)
 ||skyadsmart.com^
 vivamax.asia##+js(rmnt, script, AdblockDetector)
