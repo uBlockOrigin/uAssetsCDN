@@ -26,3 +26,9 @@ This site is used as a [Content Delivery Network](https://en.wikipedia.org/wiki/
     * [EasyList – Newsletter Notices](./thirdparties/easylist-newsletters.txt)
     * [EasyList – Notifications](./thirdparties/easylist-notifications.txt)
     * [EasyList – Social Widgets](./thirdparties/easylist-social.txt)
+
+Mirrors:
+- <https://ublockorigin.github.io/uAssetsCDN/>
+- <https://ublockorigin.pages.dev/>
+- <https://www.jsdelivr.com/package/gh/uBlockOrigin/uAssetsCDN>
+- <https://cdn.statically.io/gh/uBlockOrigin/uAssetsCDN/main/README.md>
