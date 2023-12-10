@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Annoyances
 ! Expires: 7 days
-! Last modified: Sun, 10 Dec 2023 04:59:49 +0000
-! Diff-Path: ../patches/2023.12.10.676.patch#ublock-annoyances
+! Last modified: Sun, 10 Dec 2023 16:06:28 +0000
+! Diff-Path: ../patches/2023.12.10.984.patch#ublock-annoyances
 ! Diff-Name: ublock-annoyances
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -149,6 +149,7 @@ e-shop.leonidas.com##+js(set-cookie, cc_analytics, 0)
 e-shop.leonidas.com##+js(set-cookie, cc_essential, 1)
 aonsolutions.es##+js(trusted-set-cookie, cookies-consent, agree)
 vr.fi##+js(trusted-set-local-storage-item, cookieConsent, '{"consented":true,"levels":{"level1":true,"level2":false,"level3":false,"level4":false}}')
+launer.com##+js(trusted-set-cookie, cookie_consent, 100, 1year)
 !! Needs additional cookies
 ! Closing Optanon Alert Box
 1001games.com,1001hry.cz,1001jeux.fr,1001jocuri.ro,1001jogos.com.br,1001jogos.pt,1001pelit.com,1001spiele.de,elkspel.nl,gamespot.com,giochixl.it,glamour.com,grajteraz.pl,isladejuegos.com,jatekokxl.hu,mtvuutiset.fi,paixnidiaxl.gr,pushsquare.com,spelo.se,spillespill.no,spilxl.dk,thejournal.ie,thetrainline.com,vkmag.com,zdnet.com##+js(trusted-set-cookie, OptanonAlertBoxClosed, $currentDate$, 1year)
@@ -398,6 +399,12 @@ calciomercato.com##+js(trusted-click-element, #cl-consent button[data-role="b_de
 rtl.de##+js(trusted-set-cookie, consentUUID, accee7b2-0121-45d7-aa34-4d4572577125_26)
 fortune.com##+js(trusted-click-element, button.trustarc-agree-btn)
 fortune.com#@##teconsent
+! dpgmedia consentwall - Necessary + Social media
+! Sample pages: ad.nl,hln.be,trouw.nl
+cmp.dpgmedia.nl,cmp.dpgmedia.be,cmp.ad.nl,cmp.hln.be,cmp.trouw.nl##+js(trusted-click-element, .pg-configure-button[title="Instellen"], , 500)
+cmp.dpgmedia.nl,cmp.dpgmedia.be,cmp.ad.nl,cmp.hln.be,cmp.trouw.nl##+js(trusted-click-element, 'button[aria-checked="false"][aria-label="Sociale media cookies"], button.sp_choice_type_SAVE_AND_EXIT[title="Voorkeuren opslaan"]', , 500)
+myprivacy.dpgmedia.nl,myprivacy.dpgmedia.be,ad.nl,hln.be,trouw.nl##[title="SP Consent Message"]
+@@||cmp.trouw.nl/unified/wrapperMessagingWithoutDetection.js$script,domain=trouw.nl
 ! *** filters/annoyances-others.txt ***
 mimaletadepeliculas.blogspot.com##+js(aopr, document.oncontextmenu)
 mimaletadepeliculas.blogspot.com##+js(acs, document.onselectstart)
@@ -4049,18 +4056,6 @@ digminecraft.com##+js(set, placeAdsHandler, noopFunc)
 vidstreaming.xyz##+js(nosiif, devtoolsDetector)
 @@||iphoneincanada.ca^$ghide
 iphoneincanada.ca##.adthrive-ad
-!@@||googlesyndication.com^$script,domain=cheatnetwork.eu
-!@@||cheatnetwork.eu^$script,xhr,1p
-!@@*$xhr,domain=cheatnetwork.eu
-!@@||cdn.discordapp.com/attachments/$script,3p,domain=cheatnetwork.eu
-!@@||fundingchoicesmessages.google.com^$script,domain=cheatnetwork.eu
-!@@||googleads.g.doubleclick.net^$frame,domain=cheatnetwork.eu
-cheatnetwork.eu###headlessui-portal-root:has-text(d):has-text(e):has-text(t):has-text(c)
-cheatnetwork.eu###headlessui-portal-root:has([src*="data:"])
-cheatnetwork.eu##+js(set, PerformanceObserver, null)
-!#if cap_html_filtering
-||cheatnetwork.eu/_nuxt/entry$script,1p,replace=/alert\(/console.log(/g
-!#endif
 ! firescans. xyz anti drag and drop, f-keys
 firescans.xyz##+js(acs, jQuery, hmwp_is_devtool)
 *$image,domain=peacocktv.com,redirect-rule=1x1.gif
@@ -4075,3 +4070,6 @@ cespun.eu##*:style(-webkit-touch-callout: default !important; -webkit-user-selec
 tips97tech.blogspot.com##+js(rmnt, script, debugger)
 ! encurtandourl.com anti right click and copy
 encurtandourl.com##+js(aopw, mensagem)
+news.17173.com##+js(aeld, copy)
+@@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$script,domain=woomy-site.glitch.me
+||cdn.jsdelivr.net/npm/disable-devtool$script,domain=embed.meomeo.pw|vumoo.to

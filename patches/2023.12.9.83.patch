@@ -1,32 +1,47 @@
-diff name:ublock-annoyances lines:13 checksum:ef27770af4
+diff name:ublock-annoyances lines:24 checksum:31bbb5d585
 d3 2
 a4 2
-! Last modified: Sun, 10 Dec 2023 04:59:49 +0000
-! Diff-Path: ../patches/2023.12.10.676.patch#ublock-annoyances
-a150 1
+! Last modified: Sun, 10 Dec 2023 16:06:28 +0000
+! Diff-Path: ../patches/2023.12.10.984.patch#ublock-annoyances
+a150 2
 vr.fi##+js(trusted-set-local-storage-item, cookieConsent, '{"consented":true,"levels":{"level1":true,"level2":false,"level3":false,"level4":false}}')
-a397 2
+launer.com##+js(trusted-set-cookie, cookie_consent, 100, 1year)
+a397 8
 fortune.com##+js(trusted-click-element, button.trustarc-agree-btn)
 fortune.com#@##teconsent
-a4071 3
+! dpgmedia consentwall - Necessary + Social media
+! Sample pages: ad.nl,hln.be,trouw.nl
+cmp.dpgmedia.nl,cmp.dpgmedia.be,cmp.ad.nl,cmp.hln.be,cmp.trouw.nl##+js(trusted-click-element, .pg-configure-button[title="Instellen"], , 500)
+cmp.dpgmedia.nl,cmp.dpgmedia.be,cmp.ad.nl,cmp.hln.be,cmp.trouw.nl##+js(trusted-click-element, 'button[aria-checked="false"][aria-label="Sociale media cookies"], button.sp_choice_type_SAVE_AND_EXIT[title="Voorkeuren opslaan"]', , 500)
+myprivacy.dpgmedia.nl,myprivacy.dpgmedia.be,ad.nl,hln.be,trouw.nl##[title="SP Consent Message"]
+@@||cmp.trouw.nl/unified/wrapperMessagingWithoutDetection.js$script,domain=trouw.nl
+d4049 12
+a4071 6
 tips97tech.blogspot.com##+js(rmnt, script, debugger)
 ! encurtandourl.com anti right click and copy
 encurtandourl.com##+js(aopw, mensagem)
-diff name:ublock-badware lines:9 checksum:be6df3eb2c
+news.17173.com##+js(aeld, copy)
+@@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$script,domain=woomy-site.glitch.me
+||cdn.jsdelivr.net/npm/disable-devtool$script,domain=embed.meomeo.pw|vumoo.to
+diff name:ublock-badware lines:13 checksum:405e3dc26b
 d3 2
 a4 2
-! Last modified: Sun, 10 Dec 2023 08:58:46 +0000
-! Diff-Path: ../patches/2023.12.10.676.patch#ublock-badware
+! Last modified: Sun, 10 Dec 2023 15:50:37 +0000
+! Diff-Path: ../patches/2023.12.10.984.patch#ublock-badware
 a655 1
 /mc-test/*/index.php?cid=$doc
+a719 1
+||allsft.shop^$doc
+a738 1
+||pengwinhacks.xyz^$doc
 a3085 2
 ||chromegoogle.cn^$all
 ||mk90.shop^$all
-diff name:ublock-filters lines:1307 checksum:277665a499
+diff name:ublock-filters lines:1324 checksum:c815d48fc0
 d3 2
 a4 2
-! Last modified: Sun, 10 Dec 2023 11:11:08 +0000
-! Diff-Path: ../patches/2023.12.10.676.patch#ublock-filters
+! Last modified: Sun, 10 Dec 2023 16:20:01 +0000
+! Diff-Path: ../patches/2023.12.10.984.patch#ublock-filters
 d390 1
 a390 1
 1337x.*##+js(acs, atob, /h=decodeURIComponent|_pop/)
@@ -232,6 +247,11 @@ sinvida.me##+js(acs, atob, /h=decodeURIComponent|_pop/)
 d4836 1
 a4836 1
 asianclub.*,javmost.*##+js(acs, atob, /h=decodeURIComponent|_pop/)
+d4857 2
+a4858 2
+! uppit. com ads
+||uppit.com^$document,csp=script-src 'self' 'unsafe-eval' 'unsafe-inline' data: *.cloudflare.com
+d4860 2
 d4899 1
 a4899 1
 mega-mkv.com,mkv-pastes.com##+js(acs, atob, /h=decodeURIComponent|_pop/)
@@ -355,6 +375,7 @@ acefile.co##+js(acs, atob, /h=decodeURIComponent|_pop/)
 d6827 1
 a6827 1
 5movies.*##+js(acs, atob, /h=decodeURIComponent|_pop/)
+d6847 6
 d6930 1
 a6930 1
 kimochi.info##+js(acs, atob, /h=decodeURIComponent|_pop/)
@@ -1279,6 +1300,12 @@ d22145 1
 a22145 1
 /^https:\/\/[a-z]{10,12}\.com\/[\/a-z]{2,}\?id=1\d{6}$/$script,3p,match-case
 d22183 1
+d22251 2
+a22252 4
+megaup.net##.metaRedirectWrapperBottomAds, [class*="metaReedirectWrapperTopAd"], a[href^="https://tm-offers.gamingadult.com/"]:style(visibility: hidden !important;)
+megaup.net##+js(spoof-css, .metaRedirectWrapperBottomAds\, [class*="metaReedirectWrapperTopAd"]\, a[href^="https://tm-offers.gamingadult.com/"], visibility, visible)
+download.megaup.net##body > div[id]:not(#download) a:style(visibility: hidden !important;)
+download.megaup.net##+js(spoof-css, body > div[id]:not(#download) a, visibility, visible)
 d22500 1
 a22500 1
 nicekkk.com##+js(acs, atob, /h=decodeURIComponent|_pop/)
@@ -1291,6 +1318,11 @@ lulustream.com,luluvdo.com##+js(acs, atob, /h=decodeURIComponent|_pop/)
 d22759 1
 a22759 1
 nopay2.info##+js(acs, atob, /h=decodeURIComponent|_pop/)
+a22858 1
+arras.io,arras.netlify.app,arrax.io##+js(rmnt, script, onerror)
+d22860 1
+a22860 1
+/img/server-hunter*.jpg$image,1p,domain=arras.io|arras.netlify.app|arrax.io
 d22939 1
 a22939 1
 3dporndude.com##+js(acs, atob, /h=decodeURIComponent|_pop/)
@@ -1330,43 +1362,72 @@ richhioon.eu##+js(nowoif, , 10)
 bmw-scooters.com##+js(acs, $, btoa)
 ! yourupload .com/watch/ pC2Wp7ek7kTJ popups old script
 yourupload.com##+js(acs, atob, /h=decodeURIComponent|_pop/)
-diff name:ublock-privacy lines:3 checksum:fdc4c3f383
+diff name:ublock-privacy lines:3 checksum:0d996cc572
 d4 1
 a4 1
-! Diff-Path: ../patches/2023.12.10.676.patch#ublock-privacy
-diff name:ublock-quick-fixes lines:20 checksum:33cbc5b119
+! Diff-Path: ../patches/2023.12.10.984.patch#ublock-privacy
+diff name:ublock-quick-fixes lines:47 checksum:806dde0db8
 d3 2
 a4 2
-! Last modified: Sat, 09 Dec 2023 14:34:21 +0000
-! Diff-Path: ../patches/2023.12.10.676.patch#ublock-quick-fixes
+! Last modified: Sun, 10 Dec 2023 15:15:21 +0000
+! Diff-Path: ../patches/2023.12.10.984.patch#ublock-quick-fixes
+d26 6
+a31 6
+imgwelt.sbs,imgbuner.sbs,imgqasz.sbs,imgbbbx.sbs,imgwqaf.sbs,imgcdfd.sbs,imguwjsd.sbs,imgcnmm.sbs,imgsaqe.sbs,imgnndj.sbs,imgkhgyj.sbs,picqqwqe.sbs,picasda.sbs,picvvvd.sbs,picnnngr.sbs,imgmmmf.shop,imgrehd.shop##+js(aopr, console.clear)
+imgwelt.sbs,imgbuner.sbs,imgqasz.sbs,imgbbbx.sbs,imgwqaf.sbs,imgcdfd.sbs,imguwjsd.sbs,imgcnmm.sbs,imgsaqe.sbs,imgnndj.sbs,imgkhgyj.sbs,picqqwqe.sbs,picasda.sbs,picvvvd.sbs,picnnngr.sbs,imgmmmf.shop,imgrehd.shop##+js(nano-sib, timer)
+imgwelt.sbs,imgbuner.sbs,imgqasz.sbs,imgbbbx.sbs,imgwqaf.sbs,imgcdfd.sbs,imguwjsd.sbs,imgcnmm.sbs,imgsaqe.sbs,imgnndj.sbs,imgkhgyj.sbs,picqqwqe.sbs,picasda.sbs,picvvvd.sbs,picnnngr.sbs,imgmmmf.shop,imgrehd.shop##div[id][style^="position: fixed; display: block; width: 100%;"]
+imgwelt.sbs,imgbuner.sbs,imgqasz.sbs,imgbbbx.sbs,imgwqaf.sbs,imgcdfd.sbs,imguwjsd.sbs,imgcnmm.sbs,imgsaqe.sbs,imgnndj.sbs,imgkhgyj.sbs,picqqwqe.sbs,picasda.sbs,picvvvd.sbs,picnnngr.sbs,imgmmmf.shop,imgrehd.shop##div[style="width:100%;height:110px"]
+imgwelt.sbs,imgbuner.sbs,imgqasz.sbs,imgbbbx.sbs,imgwqaf.sbs,imgcdfd.sbs,imguwjsd.sbs,imgcnmm.sbs,imgsaqe.sbs,imgnndj.sbs,imgkhgyj.sbs,picqqwqe.sbs,picasda.sbs,picvvvd.sbs,picnnngr.sbs,imgmmmf.shop,imgrehd.shop##+js(nowoif, !/prcf.fiyar|themes|pixsense|.jpg/)
+imgwelt.sbs,imgbuner.sbs,imgqasz.sbs,imgbbbx.sbs,imgwqaf.sbs,imgcdfd.sbs,imguwjsd.sbs,imgcnmm.sbs,imgsaqe.sbs,imgnndj.sbs,imgkhgyj.sbs,picqqwqe.sbs,picasda.sbs,picvvvd.sbs,picnnngr.sbs,imgmmmf.shop,imgrehd.shop##div[class][style="display: block;"]
+d66 1
+a66 1
+check-host.net###hostisq, a[href^="/ettgo/"], a[href$="/specawexmrrdp"], #anrkzbtchadyddos-guuaryt, #ddaddos-guuaryt, .of-f-elative, .dgde1-en, .dgde2-en, .useless-battle, img[alt="ddos-guard"]
+d68 4
+a71 3
+check-host.net##.alda_c:upward(1)
+check-host.net##body > * > * > * > * *:matches-css(background-image: /url/):matches-css(width: /^[2-46-8]{1}[0-9]{2}(\.[0-9]+)?px$/):matches-css(height: /^[3-57-9]{1}[0-9]{1}(\.[0-9]+)?px$/):upward(2):style(visibility: hidden)
+check-host.net##script:has-text(onclick):upward(2)
 a72 12
+check-host.net##[style*="background-repeat"][style*="no-repeat"][style*="cursor"][style*="pointer"]
 !#if ext_devbuild
-infinityscans.xyz##+js(no-fetch-if, googlesyndication, true)
-infinityscans.xyz##+js(no-fetch-if, bidgear, true)
+infinityscans.xyz##+js(no-fetch-if, /googlesyndication|bidgear|marreerouens/, true)
 !#endif
 !#if env_chromium
-@@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$xhr,domain=infinityscans.xyz
+infinityscans.xyz##+js(rmnt, script, stop)
 !#endif
 !#if env_firefox
-@@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$xhr,script,domain=infinityscans.xyz
-@@||platform.bidgear.com/pubbidgear-ad.js$xhr,domain=infinityscans.xyz
+infinityscans.xyz##^script:has-text(await fetch)
+infinityscans.xyz##^script:has-text(stop)
 !#endif
 infinityscans.xyz##+js(nowoif)
 d77 2
 d80 1
 d82 2
-diff name:ublock-unbreak lines:6 checksum:406e96cb08
+a90 10
+! cheatnetwork
+!@@*$xhr,domain=cheatnetwork.eu
+!@@||cdn.discordapp.com/attachments/$script,3p,domain=cheatnetwork.eu
+!@@||fundingchoicesmessages.google.com^$script,domain=cheatnetwork.eu
+!@@||googleads.g.doubleclick.net^$frame,domain=cheatnetwork.eu
+@@||googlesyndication.com^$script,domain=cheatnetwork.eu
+@@||cheatnetwork.eu^$script,xhr,1p
+cheatnetwork.eu##+js(spoof-css, ##ins.adsbygoogle)
+mapchart.net#@#.row:has-text(Adv)
+mapchart.net##.row:has-text(Advertisement)
+diff name:ublock-unbreak lines:8 checksum:695ceec948
 d3 2
 a4 2
-! Last modified: Sat, 09 Dec 2023 07:35:33 +0000
-! Diff-Path: ../patches/2023.12.10.676.patch#ublock-unbreak
-a2433 1
+! Last modified: Sun, 10 Dec 2023 11:42:49 +0000
+! Diff-Path: ../patches/2023.12.10.984.patch#ublock-unbreak
+a2433 3
 ||jsrdn.com^$badfilter
-diff name:easylist lines:1812 checksum:858a03f68c
+! cname https://github.com/uBlockOrigin/uAssets/issues/21297#issuecomment-1848938391
+@@||geo.dailymotion.com^$cname
+diff name:easylist lines:1854 checksum:32126c59f2
 d4 2
 a5 2
-! Last modified: Sun, 10 Dec 2023 08:51:31 +0000
-! Diff-Path: ../patches/2023.12.10.676.patch#easylist
+! Last modified: Sun, 10 Dec 2023 13:35:13 +0000
+! Diff-Path: ../patches/2023.12.10.984.patch#easylist
 d461 1
 d1645 1
 a1645 1
@@ -1604,6 +1665,8 @@ a22587 1
 a22626 1
 ||beblass.com^
 d22629 1
+a22631 1
+||beccc1d245.com^
 d22637 1
 d22689 1
 d22787 1
@@ -1641,6 +1704,8 @@ a23304 1
 a23305 1
 ||boilingloathe.com^
 d23383 1
+a23411 1
+||borhaj.com^
 a23450 1
 ||boundsinflectioncustom.com^
 a23538 1
@@ -1780,6 +1845,8 @@ a26697 1
 d26718 1
 a26742 1
 ||divedresign.com^
+a26764 1
+||djphnuhkbjf.com^
 a26765 1
 ||djssdvbo.com^
 d26769 2
@@ -1993,6 +2060,8 @@ a30693 1
 d30695 1
 d30712 1
 d30733 2
+a30738 1
+||gvkqpogjqvni.com^
 d30745 1
 a30745 1
 ||gwfcpecnwwtgn.xyz^
@@ -2023,6 +2092,8 @@ a31128 1
 ||herdintwillelitt.com^
 d31139 1
 d31163 1
+a31172 1
+||heusysianedu.com^
 d31178 1
 d31189 1
 d31191 1
@@ -2122,11 +2193,15 @@ a32721 1
 d32744 3
 a32772 1
 ||jazzlowness.com^
+a32782 1
+||jbnznvnylnkyr.top^
 a32785 1
 ||jbrnmlmvnazey.top^
 d32790 1
 a32794 1
 ||jcqueawk.xyz^
+a32800 1
+||jdoeknc.com^
 a32805 1
 ||jdzqdcpkbh.com^
 a32812 1
@@ -2358,6 +2433,8 @@ d36674 1
 d36699 1
 d36701 1
 d36776 1
+a36819 1
+||nounrespectively.com^
 d36850 1
 a36853 1
 ||npyqwxlztwlea.com^
@@ -2379,6 +2456,8 @@ d37007 2
 a37057 1
 ||oarsmenmytilid.uno^
 d37074 3
+a37078 1
+||obdtawpwyr.com^
 d37104 3
 a37166 1
 ||occxfzqyhhq.com^
@@ -2437,6 +2516,8 @@ d37718 1
 d37751 1
 d37767 1
 d37784 1
+a37785 1
+||orldwhoisquite.org^
 d37795 1
 d37798 2
 d37803 2
@@ -2482,6 +2563,8 @@ a38400 1
 ||patronageausterity.com^
 d38424 1
 d38457 1
+a38493 1
+||pdqkkzouflx.com^
 d38518 1
 d38590 1
 d38600 1
@@ -2538,6 +2621,8 @@ d40078 1
 d40085 2
 a40119 1
 ||pursuitperceptionforest.com^
+a40225 1
+||puzzio.xyz^
 d40239 1
 d40277 2
 a40278 1
@@ -2753,6 +2838,8 @@ d44724 1
 a44735 1
 ||thairoob.com^
 d44744 1
+a44747 1
+||thanksgivingdelights.com^
 d44758 1
 d44779 1
 d44786 1
@@ -2821,6 +2908,8 @@ a45988 1
 d46004 1
 a46048 1
 ||ujznabh.com^
+a46059 1
+||uklgakwqy.com^
 a46182 1
 ||undertakinghomeyegg.com^
 d46212 1
@@ -3121,7 +3210,12 @@ a55692 1
 ||vv.7vid.net^
 d56674 1
 d56803 1
+a56808 1
+||javguru.gggsss.site^
 d56859 1
+a57142 2
+||elil.cc/pdev/
+||elil.cc/reqe.js
 d57408 1
 d57425 1
 d57527 1
@@ -3149,18 +3243,27 @@ a57887 1
 d58085 2
 d58619 1
 d59300 1
+d59685 1
+a59685 1
+androidtrends.com,backthetruckup.com,bingehulu.com,streamsgeek.com,trendstorys.com##.a-wrap
+a60078 1
+hostingreviews24.com##.av_pop_modals_1
 d60116 1
 a60116 1
 1001games.com,alistapart.com,arcadebomb.com,armageddonexpo.com,bikechatforums.com,birminghamworld.uk,bristolworld.com,bsc.news,btcmanager.com,ca-flyers.com,caixinglobal.com,caribvision.tv,cmo.com.au,coryarcangel.com,derbyshiretimes.co.uk,dominicantoday.com,doncasterfreepress.co.uk,elyricsworld.com,euobserver.com,eurochannel.com,exalink.fun,fifetoday.co.uk,filmmakermagazine.com,flvtomp3.cc,footballtradedirectory.com,forexpeacearmy.com,funpic.hu,gartic.io,garticphone.com,glasgowworld.com,gr8.cc,gsprating.com,hartlepoolmail.co.uk,hortidaily.com,hyipexplorer.com,ibtimes.co.in,ibtimes.co.uk,imedicalapps.com,insidefutbol.com,irishpost.com,israelnationalnews.com,japantimes.co.jp,jpost.com,kissasians.org,laserpointerforums.com,lincolnshireworld.com,liverpoolworld.uk,livescore.in,londonworld.com,manchesterworld.uk,marinelink.com,mercopress.com,miltonkeynes.co.uk,mmorpg.com,mob.org,nationalworld.com,newcastleworld.com,news.am,news.net,northamptonchron.co.uk,northantstelegraph.co.uk,northumberlandgazette.co.uk,oncyprus.com,onlineconvertfree.com,pharmatimes.com,portsmouth.co.uk,powerboat.world,reversephonesearch.com.au,roblox.com,scientificamerican.com,smartcarfinder.com,speedcafe.com,sputniknews.com,starradionortheast.co.uk,subscene.com,sumodb.com,sussexexpress.co.uk,sweeting.org,swzz.xyz,tass.com,thefanhub.com,thefringepodcast.com,thehun.com,thestar.co.uk,timeslive.co.za,timesofisrael.com,tmi.me,toyworldmag.co.uk,unblockstreaming.com,vibilagare.se,vloot.io,warwickshireworld.com,weatheronline.co.uk,weekly-ads.us,worldtimeserver.com,xbiz.com,ynetnews.com,yorkshirepost.co.uk##.banner
+a60332 1
+bing.com##.br-poleoffcarousel
 a62559 1
 thepinknews.com##.video-player__container
 d63170 1
-d63741 4
-a63744 3
+d63741 3
+a63743 3
 youtube.com###content > ytd-ad-slot-renderer
 youtube.com###contents.style-scope.ytd-search-pyv-renderer
 youtube.com###items > ytd-ad-slot-renderer
-d63746 37
+a63744 1
+youtube.com###masthead-ad > .ytd-rich-grid-renderer
+d63747 36
 a63782 3
 youtube.com##.ytp-chrome-top-buttons > .ytp-cards-teaser
 m.youtube.com##lazy-list > ad-slot-renderer
@@ -3175,11 +3278,11 @@ x-picture.com##.happy-sidebar
 d65038 1
 a65038 1
 badjojo.com,boysfood.com,definebabe.com,efukt.com,fantasti.cc,girlsofdesire.org,imagepix.org,javfor.me,pornxs.com,shemaletubevideos.com,therealpornwikileaks.com##a[href*=".php"]
-diff name:easyprivacy lines:20 checksum:791c9cddca
+diff name:easyprivacy lines:20 checksum:c968295353
 d4 2
 a5 2
 ! Last modified: Sun, 10 Dec 2023 08:51:31 +0000
-! Diff-Path: ../patches/2023.12.10.676.patch#easyprivacy
+! Diff-Path: ../patches/2023.12.10.984.patch#easyprivacy
 d1413 1
 a2106 1
 /stats/events
