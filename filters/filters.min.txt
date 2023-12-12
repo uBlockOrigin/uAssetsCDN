@@ -1,16 +1,16 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Tue, 12 Dec 2023 01:14:57 +0000
-! Diff-Path: ../patches/2023.12.12.201.patch#ublock-filters
+! Last modified: Tue, 12 Dec 2023 07:09:57 +0000
+! Diff-Path: ../patches/2023.12.12.506.patch#ublock-filters
 ! Diff-Name: ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
 *_ad_$media,domain=youtube.com,3p
 ! @@||youtube.com/get_video_info?*timedtext_editor$xhr,1p
-www.youtube.com##+js(trusted-replace-xhr-response, /"adPlacements.*?([A-Z]"\}|"\}{2})\}\]\,/, , /player\?key=|watch\?v=|youtubei\/v1\/player/)
+www.youtube.com##+js(trusted-replace-xhr-response, /"adPlacements.*?([A-Z]"\}|"\}{2})\}\]\,/, , /playlist\?list=|player\?key=|watch\?v=|youtubei\/v1\/player/)
 www.youtube.com##+js(trusted-replace-xhr-response, /"adPlacements.*?("adSlots"|"adBreakHeartbeatParams")/gms, $1, youtubei/v1/player)
-tv.youtube.com##+js(trusted-replace-xhr-response, '"adPlacements"', '"no_ads"', /player\?key=|watch\?v=|youtubei\/v1\/player/)
+tv.youtube.com##+js(trusted-replace-xhr-response, '"adPlacements"', '"no_ads"', /playlist\?list=|player\?key=|watch\?v=|youtubei\/v1\/player/)
 www.youtube.com##+js(trusted-replace-fetch-response, /"adPlacements.*?([A-Z]"\}|"\}{2})\}\]\,/, , player?key=)
 youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, ytInitialPlayerResponse.playerAds, undefined)
 youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, ytInitialPlayerResponse.adPlacements, undefined)
@@ -19937,20 +19937,22 @@ sportskart.*##+js(aopr, afScript)
 sportskart.*##^script:has-text(u_cfg)
 ! *** uAssets:filters/filters-2023.txt ***
 ! gplinks all domains
-*$frame,redirect-rule=noopframe,domain=gplinks.co|djrajurjm.in|techsotta.com|zutiza.com|snapseedmod.in
-@@||gplinks.in/track/$script,xhr,domain=gplinks.co|djrajurjm.in|techsotta.com|zutiza.com|snapseedmod.in
-@@||googlesyndication.com^$script,xhr,domain=gplinks.co|djrajurjm.in|techsotta.com|zutiza.com|snapseedmod.in
-@@||doubleclick.net^$script,xhr,domain=djrajurjm.in|techsotta.com|zutiza.com|snapseedmod.in
-@@*$ghide,domain=gplinks.co|djrajurjm.in|techsotta.com|zutiza.com|snapseedmod.in
-snapseedmod.in,djrajurjm.in,techsotta.com,zutiza.com##center:others()
-snapseedmod.in,djrajurjm.in,techsotta.com,zutiza.com##+js(aopw, AdBDetected)
-snapseedmod.in,djrajurjm.in,techsotta.com,zutiza.com##+js(set, count, 0)
-snapseedmod.in,djrajurjm.in,techsotta.com,zutiza.com##[id*="iframe"], [id*="gpt_unit"], [id*="div-gpt-"]:style(height:0.0001px !important;)
+*$frame,redirect-rule=noopframe,domain=gplinks.co|djrajurjm.in|techsotta.com|zutiza.com|snapseedmod.in|lndianews.com
+@@||gplinks.in/track/$script,xhr,domain=gplinks.co|djrajurjm.in|techsotta.com|zutiza.com|snapseedmod.in|lndianews.com
+@@||googlesyndication.com^$script,xhr,domain=gplinks.co|djrajurjm.in|techsotta.com|zutiza.com|snapseedmod.in|lndianews.com
+@@||doubleclick.net^$script,xhr,domain=djrajurjm.in|techsotta.com|zutiza.com|snapseedmod.in|lndianews.com
+@@*$ghide,domain=gplinks.co|djrajurjm.in|techsotta.com|zutiza.com|snapseedmod.in|lndianews.com
+snapseedmod.in,djrajurjm.in,techsotta.com,zutiza.com,lndianews.com##center:others()
+snapseedmod.in,djrajurjm.in,techsotta.com,zutiza.com,lndianews.com##+js(aopw, AdBDetected)
+snapseedmod.in,djrajurjm.in,techsotta.com,zutiza.com,lndianews.com##+js(set, count, 0)
+snapseedmod.in,djrajurjm.in,techsotta.com,zutiza.com,lndianews.com##[id*="iframe"], [id*="gpt_unit"], [id*="div-gpt-"]:style(height:0.0001px !important;)
 gplinks.co##.bg-soft-primary, a.exclude-pop.smartlink, .exclude-pop.quiz-container, #PlayQuiz, #quiz-frame
 ! XpShort New
-khesarilalyadavmp3.in##+js(nano-sib, _0x, *, 0.02)
+khesarilalyadavmp3.in##+js(nano-sib, _0x, *, 0.001)
 khesarilalyadavmp3.in##.safeb:style(display: block !important;)
 khesarilalyadavmp3.in##h2~*, #safeform~*, #sidebar, .entry-title, h2, .entry-content.post-body, .post-footer, .all-flex, #breadcrumb
+xpshort.com##+js(set, blurred, false)
+xpshort.com##.banner
 go.publicearn.com##.page-header > h3, .banner, .bg-soft-primary
 @@*$ghide,domain=iisfvirtual.in|starxinvestor.com
 iisfvirtual.in,starxinvestor.com##+js(rmnt, script, googlesyndication)
@@ -23272,3 +23274,4 @@ cartometro.com##[class^="cmad"]
 fivemdev.org##+js(no-fetch-if, googlesyndication)
 ! rpupdate .cc anti-adb
 rpupdate.cc##+js(acs, eval, replace)
+animehub.ac##+js(no-xhr-if, googlesyndication)
