@@ -1,8 +1,7 @@
 ! Title: uBlock filters – Annoyances
 ! Expires: 7 days
-! Last modified: Tue, 12 Dec 2023 13:49:51 +0000
-! Diff-Path: ../patches/2023.12.12.1105.patch#ublock-annoyances
-! Diff-Name: ublock-annoyances
+! Last modified: Tue, 12 Dec 2023 23:19:35 +0000
+! Diff-Path: ../patches/2023.12.12.1400.patch#ublock-annoyances
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/annoyances.txt ***
@@ -414,6 +413,9 @@ dpgmediagroup.com###pg-modal
 ! tomsguide.com
 privacy-mgmt.com##+js(trusted-click-element, button[title="AGREE"])
 tomsguide.com##+js(trusted-click-element, button[mode="primary"])
+! only essential cookies
+collectibles.mclaren.com##+js(trusted-set-cookie, user, '%7B%22necessary%22%3Atrue%2C%22preferences%22%3Afalse%2C%22statistics%22%3Afalse%2C%22marketing%22%3Afalse%7D')
+tobis.de##+js(trusted-set-cookie, tarteaucitron, '!tarteaucitron=true!website=true!analytics=false!regex_analytic=false!regex_ads=true!googletagmanager=false!facebookpixel=false!addtoanyshare=false!youtube=true', 1year)
 ! *** filters/annoyances-others.txt ***
 mimaletadepeliculas.blogspot.com##+js(aopr, document.oncontextmenu)
 mimaletadepeliculas.blogspot.com##+js(acs, document.onselectstart)
@@ -4083,3 +4085,11 @@ news.17173.com##+js(aeld, copy)
 ||videos-cloudfront.jwpsrv.com^$media,domain=app.simpleclub.com
 ||cdn.jwplayer.com^$media,domain=app.simpleclub.com
 ||ip.sb/assets/js/wwads_blocked.js
+@@||arras.io^$xhr,1p
+arras.io,arras.netlify.app,arrax.io##+js(rmnt, script, onerror)
+||cdn.intergient.com^$redirect-rule=noopjs,domain=arras.*|arras.netlify.app|arrax.io
+!#if cap_html_filtering
+/container.js$script,1p,replace=/5\>Object\.keys\(/0>Object.keys(/g,domain=arras.io|arras.netlify.app|arrax.io
+!#else
+@@||cdn.intergient.com/*/ramp.js$script,domain=arras.io|arras.netlify.app|arrax.io
+!#endif

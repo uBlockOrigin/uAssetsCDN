@@ -1,18 +1,21 @@
-diff name:ublock-annoyances lines:23 checksum:79596cafb1
-d3 2
-a4 2
-! Last modified: Tue, 12 Dec 2023 13:49:51 +0000
-! Diff-Path: ../patches/2023.12.12.1105.patch#ublock-annoyances
+diff name:ublock-annoyances lines:34 checksum:dddd9a9f4e
+d3 3
+a5 2
+! Last modified: Tue, 12 Dec 2023 23:19:35 +0000
+! Diff-Path: ../patches/2023.12.12.1400.patch#ublock-annoyances
 d104 2
 a152 3
 bever.nl##+js(trusted-set-cookie, consent_setting, analytics%3A0%7Cfunctional%3A1%7Cmarketing%3A0, , , reload, 1)
 sixt-neuwagen.de##+js(trusted-set-cookie, user_cookie_consent, essential)
 sixt-neuwagen.de##+js(set-cookie, user_accepted_cookies, 1)
 d413 1
-a413 3
+a413 6
 ! tomsguide.com
 privacy-mgmt.com##+js(trusted-click-element, button[title="AGREE"])
 tomsguide.com##+js(trusted-click-element, button[mode="primary"])
+! only essential cookies
+collectibles.mclaren.com##+js(trusted-set-cookie, user, '%7B%22necessary%22%3Atrue%2C%22preferences%22%3Afalse%2C%22statistics%22%3Afalse%2C%22marketing%22%3Afalse%7D')
+tobis.de##+js(trusted-set-cookie, tarteaucitron, '!tarteaucitron=true!website=true!analytics=false!regex_analytic=false!regex_ads=true!googletagmanager=false!facebookpixel=false!addtoanyshare=false!youtube=true', 1year)
 a2939 1
 realpython.com##+js(set-local-storage-item, rprw, $remove$)
 d3970 1
@@ -20,24 +23,32 @@ a3970 3
 dicasfinanceirasbr.com,dicasdevalor.net,dicasdefinancas.net,guiasaude.info,felizemforma.com,financasdeouro.com##+js(aeld, contextmenu)
 guiasaude.info,felizemforma.com##+js(acs, document.onkeydown)
 financasdeouro.com##[oncontextmenu="return false;"]:remove-attr(oncontextmenu)
-a4078 1
+a4078 9
 ||ip.sb/assets/js/wwads_blocked.js
-diff name:ublock-badware lines:10 checksum:bfafe07656
-d3 2
-a4 2
-! Last modified: Mon, 11 Dec 2023 14:46:26 +0000
-! Diff-Path: ../patches/2023.12.12.1105.patch#ublock-badware
+@@||arras.io^$xhr,1p
+arras.io,arras.netlify.app,arrax.io##+js(rmnt, script, onerror)
+||cdn.intergient.com^$redirect-rule=noopjs,domain=arras.*|arras.netlify.app|arrax.io
+!#if cap_html_filtering
+/container.js$script,1p,replace=/5\>Object\.keys\(/0>Object.keys(/g,domain=arras.io|arras.netlify.app|arrax.io
+!#else
+@@||cdn.intergient.com/*/ramp.js$script,domain=arras.io|arras.netlify.app|arrax.io
+!#endif
+diff name:ublock-badware lines:10 checksum:834f0fe289
+d3 3
+a5 2
+! Last modified: Tue, 12 Dec 2023 19:39:36 +0000
+! Diff-Path: ../patches/2023.12.12.1400.patch#ublock-badware
 a2714 5
 ||falsettoy.click^$doc
 ||on-li-ne.net^$doc
 ||rayon-mid.com^$doc
 ||pc.mt3sys.com^$doc
 ||tokyodisney.mixracket.com^$doc
-diff name:ublock-filters lines:1302 checksum:10b099baf2
-d3 2
-a4 2
-! Last modified: Tue, 12 Dec 2023 18:25:27 +0000
-! Diff-Path: ../patches/2023.12.12.1105.patch#ublock-filters
+diff name:ublock-filters lines:1310 checksum:d9f2dd111c
+d3 3
+a5 2
+! Last modified: Tue, 12 Dec 2023 23:18:45 +0000
+! Diff-Path: ../patches/2023.12.12.1400.patch#ublock-filters
 d11 1
 a11 1
 www.youtube.com##+js(trusted-replace-xhr-response, /"adPlacements.*?([A-Z]"\}|"\}{2})\}\]\,/, , /playlist\?list=|player\?key=|watch\?v=|youtubei\/v1\/player/)
@@ -199,6 +210,11 @@ torrentz2eu.*##+js(rmnt, script, /h=decodeURIComponent|popundersPerIP/)
 d3794 1
 a3794 1
 movies123.*##+js(rmnt, script, /h=decodeURIComponent|popundersPerIP/)
+d3878 1
+a3880 3
+hotpornfile.org##+js(nowoif, !bergblock, 10)
+@@||searchwithme.net/redirect?tid=$frame,domain=hotpornfile.org
+||hotpornfile.org/wp-content/themes/hpf-theme/assets/img/search-ash.gif$image
 d3950 1
 a3950 1
 payskip.org##+js(rmnt, script, /h=decodeURIComponent|popundersPerIP/)
@@ -1285,6 +1301,7 @@ a22736 2
 ||redir.minhareceita.xyz^$script,strict3p
 ||saude.fitnessbr.click/up/show-promote.min.js$script,1p
 d22743 2
+d22820 3
 a22846 3
 raenonx.cc##+js(nosiif, isBlocked)
 raenonx.cc##div[class="flex flex-col w-full info-section-opaque fixed bottom-0 z-nav"]:has(div:has-text(/^Ads$/))
@@ -1316,7 +1333,7 @@ bestporn4free.com##+js(rmnt, script, /h=decodeURIComponent|popundersPerIP/)
 d23255 1
 a23255 1
 yourupload.com##+js(rmnt, script, /h=decodeURIComponent|popundersPerIP/)
-a23261 19
+a23261 21
 get-coin.click##+js(acs, Swal.fire)
 get-coin.click##+js(acs, document.createElement, atob)
 @@||cartometro.com^$ghide
@@ -1334,13 +1351,15 @@ ltc-faucet.xyz,coin-profits.xyz##+js(nostif, nextFunction)
 ||bittrafficads.com^$3p
 ! ckxsfm .com anti-adb
 ckxsfm.com##+js(acs, document.getElementById, fakeElement)
-pling.com,store.kde.org,xfce-look.org,gnome-look.org##+js(rmnt, script, btnHtml)
-pling.com,store.kde.org,xfce-look.org,gnome-look.org##button[type=submit]:remove-attr(disabled)
-diff name:ublock-privacy lines:14 checksum:bef7d0a186
-d3 2
-a4 2
-! Last modified: Tue, 12 Dec 2023 13:40:11 +0000
-! Diff-Path: ../patches/2023.12.12.1105.patch#ublock-privacy
+appimagehub.com,gnome-look.org,store.kde.org,linux-apps.com,opendesktop.org,pling.com,xfce-look.org##+js(rmnt, script, btnHtml)
+appimagehub.com,gnome-look.org,store.kde.org,linux-apps.com,opendesktop.org,pling.com,xfce-look.org##button[type=submit]:remove-attr(disabled)
+! yottachess .com anti-adb
+yottachess.com##+js(no-xhr-if, googlesyndication)
+diff name:ublock-privacy lines:14 checksum:839935ee6e
+d3 3
+a5 2
+! Last modified: Tue, 12 Dec 2023 19:39:36 +0000
+! Diff-Path: ../patches/2023.12.12.1400.patch#ublock-privacy
 d131 4
 a134 4
 loawa.com,ygosu.com,sportalkorea.com,algumon.com,hancinema.net,enetnews.co.kr,edaily.co.kr,economist.co.kr,etoday.co.kr,hankyung.com,isplus.com,hometownstation.com,kagit.kr,inven.co.kr,viva100.com,joongdo.co.kr,jjang0u.com,tenbizt.com,tvreport.co.kr,newautopost.co.kr,mememedia.co.kr,mobilitytv.co.kr,cboard.net,a-ha.io,interfootball.co.kr,fourfourtwo.co.kr,apkmirror.com,dotkeypress.kr,viewcash.co.kr,tripplus.co.kr,enterdiary.com,mtodayauto.com,genshinlab.com,hotplacehunter.co.kr,mystylezip.com,majorgeeks.com,poro.gg,maple.gg,lolchess.gg,dak.gg,newdaily.co.kr,meconomynews.com,brandbrief.co.kr,dfast.kr,thephoblographer.com,newdaily.co.kr,dogdrip.net,youtu.co,honkailab.com,warcraftrumbledeck.com,golf-live.at,mlbpark.donga.com,gamingdeputy.com,thestockmarketwatch.com,capress.kr,carandmore.co.kr,maxmovie.kr,motorgraph.com,newsbell.co.kr,tminews.co.kr,thehousemagazine.kr,hardreset.info,metabattle.com,thesaurus.net##+js(set-local-storage-item, adshield-analytics-uuid, $remove$)
@@ -1351,11 +1370,11 @@ a531 3
 proboards.com,winclassic.net##+js(rmnt, script, vglnk)
 proboards.com,winclassic.net##^script:has-text(vglnk)
 coomer.su,kemono.su##+js(set, plausible, noopFunc)
-diff name:ublock-quick-fixes lines:54 checksum:a3dc8ff0ab
-d3 2
-a4 2
-! Last modified: Tue, 12 Dec 2023 16:47:25 +0000
-! Diff-Path: ../patches/2023.12.12.1105.patch#ublock-quick-fixes
+diff name:ublock-quick-fixes lines:54 checksum:9b88bcd319
+d3 3
+a5 2
+! Last modified: Tue, 12 Dec 2023 19:39:36 +0000
+! Diff-Path: ../patches/2023.12.12.1400.patch#ublock-quick-fixes
 d27 7
 a33 7
 imgnnng.shop##+js(aopr, console.clear)
@@ -1406,11 +1425,11 @@ thesaurus.net##^script:has-text(KCgpPT57bGV0IGU)
 thesaurus.net##+js(rmnt, script, KCgpPT57bGV0IGU)
 !#endif
 thesaurus.net##.grammarly-bnr
-diff name:ublock-unbreak lines:12 checksum:f7ed5d05c7
-d3 2
-a4 2
-! Last modified: Tue, 12 Dec 2023 03:38:42 +0000
-! Diff-Path: ../patches/2023.12.12.1105.patch#ublock-unbreak
+diff name:ublock-unbreak lines:12 checksum:81f9444967
+d3 3
+a5 2
+! Last modified: Tue, 12 Dec 2023 19:39:36 +0000
+! Diff-Path: ../patches/2023.12.12.1400.patch#ublock-unbreak
 d1156 2
 a1157 2
 @@||ads.adthrive.com/sites/*/ads.min.js$script,domain=a-z-animals.com|brewerfanatic.com|northsidebaseball.com|pimylifeup.com|twinsdaily.com
@@ -1419,11 +1438,11 @@ d1159 3
 a1161 2
 a-z-animals.com,brewerfanatic.com,northsidebaseball.com,pimylifeup.com,twinsdaily.com#@#.adthrive
 a-z-animals.com,brewerfanatic.com,northsidebaseball.com,twinsdaily.com#@#.adthrive-video-player
-diff name:easylist lines:516 checksum:8c9a3ed063
-d4 2
-a5 2
-! Last modified: Tue, 12 Dec 2023 18:21:29 +0000
-! Diff-Path: ../patches/2023.12.12.1105.patch#easylist
+diff name:easylist lines:557 checksum:56adf807e9
+d4 3
+a6 2
+! Last modified: Tue, 12 Dec 2023 23:18:45 +0000
+! Diff-Path: ../patches/2023.12.12.1400.patch#easylist
 d148 1
 a517 1
 /adunits/bcid?
@@ -1442,6 +1461,14 @@ a9977 3
 ##.admngr
 ##.admngrfr
 ##.admngrft
+a13982 1
+##.header__ads-wrapper
+a15352 1
+##.nw_adv_square
+a15694 1
+##.pubtech-adv-slot
+a17681 1
+##a[href^="http://naggingirresponsible.com/"]
 a18570 1
 thespruce.com#@#.mntl-leaderboard-spacer
 a18931 1
@@ -1482,6 +1509,10 @@ a22833 1
 ||bidsxchange.com^
 a23355 1
 ||bqkwfioyd.xyz^
+a23822 1
+||cagolgzazof.com^
+a24424 1
+||choagrie.com^
 a25413 1
 ||creditbitesize.com^
 a25465 1
@@ -1490,6 +1521,8 @@ a25508 1
 ||csscloudstorage.com^
 a25564 1
 ||cumbersomesteedominous.com^
+a25631 1
+||cxmnsbrbdmxoyd.com^
 a25634 1
 ||cxwqeehw.com^
 a25750 1
@@ -1520,6 +1553,8 @@ a27369 1
 ||eeghadse.com^
 a27763 1
 ||enteredcocktruthful.com^
+a27941 1
+||esodnbhzdpl.com^
 a28022 1
 ||evanpcf.uno^
 a28141 1
@@ -1532,6 +1567,8 @@ a28804 1
 ||fistsurprising.com^
 a28843 1
 ||flakesaridphysical.com^
+a28902 1
+||flimsymarch.pro^
 a28943 1
 ||flunkeycaptor.guru^
 a29066 1
@@ -1540,6 +1577,8 @@ a29265 1
 ||fringesdurocs.com^
 a29429 1
 ||fybkhsfntvuyat.com^
+a29729 1
+||getter.cfd^
 a29915 1
 ||gleneditor.com^
 a30122 1
@@ -1554,6 +1593,8 @@ a31446 1
 ||hvkwmvpxvjo.xyz
 a31613 1
 ||ifsnickshriek.click^
+a31672 1
+||ikjzwgcg.com^
 a31988 1
 ||inheritancepillar.com^
 a31995 1
@@ -1568,6 +1609,8 @@ a32779 1
 ||josephineravine.com^
 a32837 1
 ||jsfrfeuubna.com^
+a32970 1
+||jyfirjqojg.xyz^
 a33080 1
 ||keajs.com^
 a33160 1
@@ -1608,6 +1651,8 @@ a35655 1
 ||mowdzgbusbqug.com^
 a35676 1
 ||mprhrvnxppdxci.com^
+a35694 1
+||mrgrekeroad.com^
 a35721 1
 ||mtypitea.net^
 a35861 1
@@ -1712,6 +1757,8 @@ a43935 1
 ||tablesgrace.com^
 a44155 1
 ||teenagerapostrophe.com^
+a44159 1
+||teepoomo.xyz^
 a44486 1
 ||thoobsix.xyz^
 a44492 1
@@ -1774,6 +1821,10 @@ a48027 1
 ||xtdioaawlam.com^
 a48101 1
 ||xyztracking.net^
+a48198 1
+||yftpnol.com^
+a48402 1
+||yunenly.com^
 a48467 1
 ||zaribastunty.com^
 a48525 1
@@ -1840,8 +1891,14 @@ a53930 1
 ||xyztracking.net^$popup
 a54151 1
 ||awempire.com^$third-party
+a54724 1
+||1002867133.rsc.cdn77.org^
 a54726 1
 ||1144017219.rsc.cdn77.org^
+a54728 1
+||1244458189.rsc.cdn77.org^
+a56104 1
+||luckyforbet.com^$popup
 a56517 2
 ||backgrounds.wetransfer.net$image
 ||backgrounds.wetransfer.net/*.mp4$media
@@ -1892,6 +1949,9 @@ a62086 1
 discussingfilm.net,goonhammer.com,joemygod.com,shtfplan.com,thestrongtraveller.com,usmagazine.com##.widget_block
 a62121 1
 lowcarbtips.org##.wp-block-image.size-full
+d62190 1
+a62190 1
+beincrypto.com,bitcoinist.com,captainaltcoin.com,coincodex.com,coinpaprika.com,coinspeaker.com,crypto-news-flash.com,cryptonews.com,cryptonewsz.com,insidebitcoins.com,techreport.com##[class*="clickout-"]
 d62678 1
 a62678 1
 paste.fo##div.wrapper > [class] > a[href][target="_blank"]
@@ -1936,11 +1996,11 @@ d64312 1
 a64312 1
 see.xxx,tuberel.com##.vda-item
 d64431 1
-diff name:easyprivacy lines:124 checksum:9c91b32554
-d4 2
-a5 2
-! Last modified: Tue, 12 Dec 2023 13:00:52 +0000
-! Diff-Path: ../patches/2023.12.12.1105.patch#easyprivacy
+diff name:easyprivacy lines:124 checksum:206812b22c
+d4 3
+a6 2
+! Last modified: Tue, 12 Dec 2023 23:18:45 +0000
+! Diff-Path: ../patches/2023.12.12.1400.patch#easyprivacy
 a573 1
 /cls/check.php?$image
 a1176 1

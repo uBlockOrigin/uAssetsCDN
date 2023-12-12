@@ -1,33 +1,51 @@
-diff name:ublock-annoyances lines:14 checksum:79596cafb1
-d3 2
-a4 2
-! Last modified: Tue, 12 Dec 2023 13:49:51 +0000
-! Diff-Path: ../patches/2023.12.12.1105.patch#ublock-annoyances
+diff name:ublock-annoyances lines:26 checksum:dddd9a9f4e
+d3 3
+a5 2
+! Last modified: Tue, 12 Dec 2023 23:19:35 +0000
+! Diff-Path: ../patches/2023.12.12.1400.patch#ublock-annoyances
 d104 2
 a152 3
 bever.nl##+js(trusted-set-cookie, consent_setting, analytics%3A0%7Cfunctional%3A1%7Cmarketing%3A0, , , reload, 1)
 sixt-neuwagen.de##+js(trusted-set-cookie, user_cookie_consent, essential)
 sixt-neuwagen.de##+js(set-cookie, user_accepted_cookies, 1)
 d413 6
-a418 3
+a418 6
 ! tomsguide.com
 privacy-mgmt.com##+js(trusted-click-element, button[title="AGREE"])
 tomsguide.com##+js(trusted-click-element, button[mode="primary"])
-diff name:ublock-badware lines:3 checksum:bfafe07656
-d4 1
-a4 1
-! Diff-Path: ../patches/2023.12.12.1105.patch#ublock-badware
-diff name:ublock-filters lines:80 checksum:10b099baf2
-d3 2
-a4 2
-! Last modified: Tue, 12 Dec 2023 18:25:27 +0000
-! Diff-Path: ../patches/2023.12.12.1105.patch#ublock-filters
+! only essential cookies
+collectibles.mclaren.com##+js(trusted-set-cookie, user, '%7B%22necessary%22%3Atrue%2C%22preferences%22%3Afalse%2C%22statistics%22%3Afalse%2C%22marketing%22%3Afalse%7D')
+tobis.de##+js(trusted-set-cookie, tarteaucitron, '!tarteaucitron=true!website=true!analytics=false!regex_analytic=false!regex_ads=true!googletagmanager=false!facebookpixel=false!addtoanyshare=false!youtube=true', 1year)
+a4087 8
+@@||arras.io^$xhr,1p
+arras.io,arras.netlify.app,arrax.io##+js(rmnt, script, onerror)
+||cdn.intergient.com^$redirect-rule=noopjs,domain=arras.*|arras.netlify.app|arrax.io
+!#if cap_html_filtering
+/container.js$script,1p,replace=/5\>Object\.keys\(/0>Object.keys(/g,domain=arras.io|arras.netlify.app|arrax.io
+!#else
+@@||cdn.intergient.com/*/ramp.js$script,domain=arras.io|arras.netlify.app|arrax.io
+!#endif
+diff name:ublock-badware lines:4 checksum:834f0fe289
+d3 3
+a5 2
+! Last modified: Tue, 12 Dec 2023 19:39:36 +0000
+! Diff-Path: ../patches/2023.12.12.1400.patch#ublock-badware
+diff name:ublock-filters lines:88 checksum:d9f2dd111c
+d3 3
+a5 2
+! Last modified: Tue, 12 Dec 2023 23:18:45 +0000
+! Diff-Path: ../patches/2023.12.12.1400.patch#ublock-filters
 d11 1
 a11 1
 www.youtube.com##+js(trusted-replace-xhr-response, /"adPlacements.*?([A-Z]"\}|"\}{2})\}\]\,/, , /playlist\?list=|player\?key=|watch\?v=|youtubei\/v1\/player/)
 d13 1
 a13 1
 tv.youtube.com##+js(trusted-replace-xhr-response, '"adPlacements"', '"no_ads"', /playlist\?list=|player\?key=|watch\?v=|youtubei\/v1\/player/)
+d3880 1
+a3882 3
+hotpornfile.org##+js(nowoif, !bergblock, 10)
+@@||searchwithme.net/redirect?tid=$frame,domain=hotpornfile.org
+||hotpornfile.org/wp-content/themes/hpf-theme/assets/img/search-ash.gif$image
 d9717 1
 a9717 1
 @@/wp-content/plugins/eazy-ad-unblocker/*$script,domain=imgair.net|imgblaze.net|imgfrost.net|pixsera.net|vestimage.site|imgwia.buzz|pixlev.*
@@ -86,7 +104,8 @@ designparty.sx##+js(nowoif)
 d22520 1
 a22520 1
 advocate.com,alternet.org,androidcure.com,arobasenet.com,bodytr.com,cleveland.com,clutchpoints.com,cultofmac.com,currentaffairs.gktoday.in,dailycaller.com,digitalmusicnews.com,dogtime.com,epicstream.com,fallbrook247.com,feral-heart.com,gamesgames.com,gamerevolution.com,gazettenet.com,girlsgogames.co.uk,insidenova.com,jetztspielen.de,kasvekuvvet.net,leitesculinaria.com,nbcnews.com,notevibes.com,practicalpainmanagement.com,prad.de,pwinsider.com,ranker.com,realityblurb.com,ruinmyweek.com,sanangelolive.com,sanfoundry.com,selfhacked.com,son.co.za,sporcle.com,stealthoptional.com,stylecaster.com,upi.com,viraliq.com,visualcapitalist.com,cbssports.com##+js(aopr, googletag)
-a23274 11
+d22822 3
+a23274 13
 animehub.ac##+js(no-xhr-if, googlesyndication)
 kissanime.com.ru##+js(no-xhr-if, googlesyndication)
 winlator.com##+js(no-fetch-if, googlesyndication)
@@ -96,20 +115,22 @@ ltc-faucet.xyz,coin-profits.xyz##+js(nostif, nextFunction)
 ||bittrafficads.com^$3p
 ! ckxsfm .com anti-adb
 ckxsfm.com##+js(acs, document.getElementById, fakeElement)
-pling.com,store.kde.org,xfce-look.org,gnome-look.org##+js(rmnt, script, btnHtml)
-pling.com,store.kde.org,xfce-look.org,gnome-look.org##button[type=submit]:remove-attr(disabled)
-diff name:ublock-privacy lines:6 checksum:bef7d0a186
-d3 2
-a4 2
-! Last modified: Tue, 12 Dec 2023 13:40:11 +0000
-! Diff-Path: ../patches/2023.12.12.1105.patch#ublock-privacy
+appimagehub.com,gnome-look.org,store.kde.org,linux-apps.com,opendesktop.org,pling.com,xfce-look.org##+js(rmnt, script, btnHtml)
+appimagehub.com,gnome-look.org,store.kde.org,linux-apps.com,opendesktop.org,pling.com,xfce-look.org##button[type=submit]:remove-attr(disabled)
+! yottachess .com anti-adb
+yottachess.com##+js(no-xhr-if, googlesyndication)
+diff name:ublock-privacy lines:6 checksum:839935ee6e
+d3 3
+a5 2
+! Last modified: Tue, 12 Dec 2023 19:39:36 +0000
+! Diff-Path: ../patches/2023.12.12.1400.patch#ublock-privacy
 a533 1
 coomer.su,kemono.su##+js(set, plausible, noopFunc)
-diff name:ublock-quick-fixes lines:43 checksum:a3dc8ff0ab
-d3 2
-a4 2
-! Last modified: Tue, 12 Dec 2023 16:47:25 +0000
-! Diff-Path: ../patches/2023.12.12.1105.patch#ublock-quick-fixes
+diff name:ublock-quick-fixes lines:43 checksum:9b88bcd319
+d3 3
+a5 2
+! Last modified: Tue, 12 Dec 2023 19:39:36 +0000
+! Diff-Path: ../patches/2023.12.12.1400.patch#ublock-quick-fixes
 d27 7
 a33 7
 imgnnng.shop##+js(aopr, console.clear)
@@ -149,11 +170,11 @@ chip.de##body.l-DownloadListing > div:not([class="fb"]) ul:has(> li a[href^="htt
 chip.de##body.l-DownloadListing > div:has(> div > div > ul a[href^="https://www.chip.de/downloads/"] img[src^="https://im.chip.de/"])
 chip.de##body.l-DownloadListing .Main__Container > div[class] ul:has(> li a[href^="https://www.chip.de/downloads/"] img[src^="https://im.chip.de/"])
 chip.de##body.l-DownloadListing .wrapper-safe.mt-sm > .fb > section:not(.Listing) ul:has(> li a[href^="https://www.chip.de/downloads/"] img[src^="https://im.chip.de/"])
-diff name:ublock-unbreak lines:12 checksum:f7ed5d05c7
-d3 2
-a4 2
-! Last modified: Tue, 12 Dec 2023 03:38:42 +0000
-! Diff-Path: ../patches/2023.12.12.1105.patch#ublock-unbreak
+diff name:ublock-unbreak lines:12 checksum:81f9444967
+d3 3
+a5 2
+! Last modified: Tue, 12 Dec 2023 19:39:36 +0000
+! Diff-Path: ../patches/2023.12.12.1400.patch#ublock-unbreak
 d1156 2
 a1157 2
 @@||ads.adthrive.com/sites/*/ads.min.js$script,domain=a-z-animals.com|brewerfanatic.com|northsidebaseball.com|pimylifeup.com|twinsdaily.com
@@ -162,11 +183,11 @@ d1159 3
 a1161 2
 a-z-animals.com,brewerfanatic.com,northsidebaseball.com,pimylifeup.com,twinsdaily.com#@#.adthrive
 a-z-animals.com,brewerfanatic.com,northsidebaseball.com,twinsdaily.com#@#.adthrive-video-player
-diff name:easylist lines:364 checksum:8c9a3ed063
-d4 2
-a5 2
-! Last modified: Tue, 12 Dec 2023 18:21:29 +0000
-! Diff-Path: ../patches/2023.12.12.1105.patch#easylist
+diff name:easylist lines:405 checksum:56adf807e9
+d4 3
+a6 2
+! Last modified: Tue, 12 Dec 2023 23:18:45 +0000
+! Diff-Path: ../patches/2023.12.12.1400.patch#easylist
 a516 1
 /adunits/bcid?
 a776 1
@@ -175,6 +196,14 @@ d962 1
 d971 1
 a971 1
 /jshexo.hj?lb=
+a13979 1
+##.header__ads-wrapper
+a15349 1
+##.nw_adv_square
+a15691 1
+##.pubtech-adv-slot
+a17678 1
+##a[href^="http://naggingirresponsible.com/"]
 a18929 1
 ||295a9f642d.com^
 a19304 1
@@ -203,10 +232,16 @@ a22833 1
 ||bidsxchange.com^
 a23355 1
 ||bqkwfioyd.xyz^
+a23822 1
+||cagolgzazof.com^
+a24424 1
+||choagrie.com^
 a25466 1
 ||crossroadoutlaw.com^
 a25566 1
 ||cumbersomesteedominous.com^
+a25633 1
+||cxmnsbrbdmxoyd.com^
 a25753 1
 ||dakjddjerdrct.online^
 a25988 1
@@ -229,6 +264,8 @@ a27375 1
 ||eeghadse.com^
 a27769 1
 ||enteredcocktruthful.com^
+a27947 1
+||esodnbhzdpl.com^
 a28028 1
 ||evanpcf.uno^
 a28147 1
@@ -239,12 +276,16 @@ a28811 1
 ||fistsurprising.com^
 a28850 1
 ||flakesaridphysical.com^
+a28909 1
+||flimsymarch.pro^
 a28950 1
 ||flunkeycaptor.guru^
 a29273 1
 ||fringesdurocs.com^
 a29437 1
 ||fybkhsfntvuyat.com^
+a29737 1
+||getter.cfd^
 a29923 1
 ||gleneditor.com^
 a30130 1
@@ -255,6 +296,8 @@ a31169 1
 ||holmiumundried.com^
 a31623 1
 ||ifsnickshriek.click^
+a31682 1
+||ikjzwgcg.com^
 a31998 1
 ||inheritancepillar.com^
 a32005 1
@@ -267,6 +310,8 @@ a32790 1
 ||josephineravine.com^
 a32848 1
 ||jsfrfeuubna.com^
+a32981 1
+||jyfirjqojg.xyz^
 a33172 1
 ||kfjhd.com^
 a33461 1
@@ -297,6 +342,8 @@ a35231 1
 ||mildlyrambleadroit.com^
 a35692 1
 ||mprhrvnxppdxci.com^
+a35710 1
+||mrgrekeroad.com^
 a35878 1
 ||myhappy-news.com^
 a36530 1
@@ -385,6 +432,8 @@ a43959 1
 ||tablesgrace.com^
 a44179 1
 ||teenagerapostrophe.com^
+a44183 1
+||teepoomo.xyz^
 a44517 1
 ||thoroughfarefeudalfaster.com^
 a44544 1
@@ -435,6 +484,10 @@ a48050 1
 ||xruolsogwsi.com^
 a48131 1
 ||xyztracking.net^
+a48228 1
+||yftpnol.com^
+a48432 1
+||yunenly.com^
 a48569 1
 ||zephyronearc.com^
 a48740 1
@@ -484,6 +537,12 @@ a53756 1
 ||viikttcq.com^$popup
 a53966 1
 ||xyztracking.net^$popup
+a54761 1
+||1002867133.rsc.cdn77.org^
+a54766 1
+||1244458189.rsc.cdn77.org^
+a56142 1
+||luckyforbet.com^$popup
 a56605 1
 ||content.powzerz.lol^
 d56725 1
@@ -498,6 +557,9 @@ d60772 1
 d62139 1
 a62139 1
 discussingfilm.net,goonhammer.com,joemygod.com,shtfplan.com,thestrongtraveller.com,usmagazine.com##.widget_block
+d62244 1
+a62244 1
+beincrypto.com,bitcoinist.com,captainaltcoin.com,coincodex.com,coinpaprika.com,coinspeaker.com,crypto-news-flash.com,cryptonews.com,cryptonewsz.com,insidebitcoins.com,techreport.com##[class*="clickout-"]
 d63673 2
 d63744 2
 a63745 1
@@ -527,11 +589,11 @@ d64287 1
 a64287 1
 3movs.com,3movs.xxx,bravotube.net,camvideos.tv,cluset.com,deviants.com,dixyporn.com,hello.porn,katestube.com,pornicom.com,sleazyneasy.com,videocelebs.net,vikiporn.com,vjav.com##.spot
 d64488 1
-diff name:easyprivacy lines:82 checksum:9c91b32554
-d4 2
-a5 2
-! Last modified: Tue, 12 Dec 2023 13:00:52 +0000
-! Diff-Path: ../patches/2023.12.12.1105.patch#easyprivacy
+diff name:easyprivacy lines:82 checksum:206812b22c
+d4 3
+a6 2
+! Last modified: Tue, 12 Dec 2023 23:18:45 +0000
+! Diff-Path: ../patches/2023.12.12.1400.patch#easyprivacy
 a5411 1
 ||sentry-cdn.top^$third-party
 a6419 1
