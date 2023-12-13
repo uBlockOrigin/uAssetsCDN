@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Quick fixes
 ! Expires: 12 hours
-! Last modified: Wed, 13 Dec 2023 13:46:46 +0000
-! Diff-Path: ../patches/2023.12.13.863.patch#ublock-quick-fixes
+! Last modified: Wed, 13 Dec 2023 19:07:59 +0000
+! Diff-Path: ../patches/2023.12.13.1156.patch#ublock-quick-fixes
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/quick-fixes.txt ***
@@ -69,7 +69,11 @@ check-host.net##[style*="background-repeat"][style*="no-repeat"][style*="cursor"
 !#if ext_devbuild
 infinityscans.xyz##+js(no-fetch-if, /googlesyndication|bidgear|marreerouens/, true)
 !#endif
-infinityscans.xyz##+js(rmnt, script, \x76\x3E)
+!#if cap_html_filtering
+infinityscans.xyz##^script:has-text(fetch)
+!#else
+infinityscans.xyz##+js(rmnt, script, fetch)
+!#endif
 infinityscans.xyz##+js(nowoif)
 *$script,redirect-rule=noopjs,domain=infinityscans.xyz
 *$xhr,domain=infinityscans.xyz,redirect-rule=nooptext
@@ -79,8 +83,8 @@ infinityscans.xyz##+js(nowoif)
 ! Can be removed on 13th of December, 2023
 edition.cnn.com#@##onetrust-consent-sdk
 chip.de##+js(rpnt, script, pmactiveff !== 1, pmactiveff !== 1 || true)
-chip.de##+js(rpnt, style, /a:hover\s{0\,}\{\sbackground:\s{0\,}rgba\(/, {display: none !important;} iuvnhauihtfdg { background, condition, /aspect-ratio:\s{0\,}auto\s{0\,}!important;/)
-chip.de##+js(rpnt, style, /a:hover\s{0\,}\{\sbackground-color:\s{0\,}rgba\(/, {display: none !important;} iuvnhauihtfdg { background, condition, /aspect-ratio:\s{0\,}auto\s{0\,}!important;/)
+chip.de##+js(rpnt, style, /a:hover\s{0\,}\{\sbackground:/, {display: none !important;} iuvjhauihtfdg { background, condition, /^.{1\,1000}aspect-ratio:\s{0\,}auto\s{0\,}!important;/s)
+chip.de##+js(rpnt, style, /a:hover\s{0\,}\{\sbackground-color:/, {display: none !important;} iuvjhauihtfdg { background, condition, /^.{1\,1000}aspect-ratio:\s{0\,}auto\s{0\,}!important;/s)
 tekkenmods.com##+js(aopw, HTMLScriptElement.prototype.onerror)
 perchance.org##+js(rmnt, script, usingAdPoweredPlugin)
 @@||static-cdn.spot.im/production/launcher/$script,domain=openweb.jac.yahoosandbox.com
