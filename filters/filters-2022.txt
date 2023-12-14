@@ -1,5 +1,5 @@
 ! Title: uBlock filters (2022)
-! Last modified: Thu, 14 Dec 2023 03:29:32 +0000
+! Last modified: Thu, 14 Dec 2023 14:35:56 +0000
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -107,7 +107,6 @@ dropgalaxy.*##+js(rpnt, script, true;, false;)
 dropgalaxy.*##+js(rpnt, script, /script1.src|script2.src/, lol.noop)
 dropgalaxy.*##+js(rpnt, script, /none|hidden/, 0, condition, getComputedStyle)
 dropgalaxy.*##+js(rpnt, script, /s.src =|s.src/i)
-
 dropgalaxy.*,financemonk.net##+js(nowoif)
 @@||financemonk.net^$ghide
 financemonk.net###vipada
@@ -119,11 +118,12 @@ financemonk.net###vipada
 *$xhr,domain=djxmaza.in|dev.miuiflash.com|thecubexguide.com,redirect-rule=nooptext
 *$image,redirect-rule=32x32.png:5,domain=djxmaza.in|thecubexguide.com|dev.miuiflash.com
 @@||devfiles.pages.dev/fonts/wp-content/plugins/best-ads-block-detector/main.js
-@@||googlesyndication.com^$script,xhr,domain=djxmaza.in|dev.miuiflash.com|thecubexguide.com
-@@||doubleclick.net^$script,xhr,domain=djxmaza.in|dev.miuiflash.com|thecubexguide.com
+!@@||googlesyndication.com^$script,xhr,domain=djxmaza.in|dev.miuiflash.com|thecubexguide.com
+!@@||doubleclick.net^$script,xhr,domain=djxmaza.in|dev.miuiflash.com|thecubexguide.com
 @@||adoto.net/dashboard/common/js/common.js$3p,script,domain=dev.miuiflash.com|djxmaza.in|thecubexguide.com
 !dev.miuiflash.com,djxmaza.in,thecubexguide.com##iframe:upward(div)
-dev.miuiflash.com,djxmaza.in,thecubexguide.com##[id*=google_ads_]:style(height:250px !important;left:-3000px !important;position:absolute !important)
+!dev.miuiflash.com,djxmaza.in,thecubexguide.com##[id*=google_ads_]:style(height:250px !important;left:-3000px !important;position:absolute !important)
+dev.miuiflash.com,djxmaza.in,thecubexguide.com##+js(no-xhr-if, ads, true)
 djxmaza.in,miuiflash.com,thecubexguide.com###featuredimage
 djxmaza.in,miuiflash.com,thecubexguide.com##+js(rpnt, script, featuredimage', container', condition, getComputedStyle)
 djxmaza.in,miuiflash.com,thecubexguide.com##+js(rmnt, script, checkifscript)
@@ -207,6 +207,7 @@ ac-illust.com,photo-ac.com##body.modal-open *:style(filter: none!important;)
 =e3&*,0|$script,3p,to=com
 ://www.*/dotdotdot.js|$script,3p
 ://www.*leaflet.toolbar.js|$script,3p
+://www.*/cwnmijs.js|$script,third-party
 ||pushtoast-a.akamaihd.net^$script,3p
 ||nsfwr34.com/ad_schedule/
 mdy48tn97.com##+js(nowoif)
@@ -3934,6 +3935,10 @@ genshinlab.com,fourfourtwo.co.kr,interfootball.co.kr,a-ha.io,cboard.net,mobility
 genshinlab.com,fourfourtwo.co.kr,interfootball.co.kr,a-ha.io,cboard.net,mobilitytv.co.kr,mememedia.co.kr,newautopost.co.kr,tvreport.co.kr,tenbizt.com,jjang0u.com,joongdo.co.kr,viva100.com,thephoblographer.com,newdaily.co.kr,dogdrip.net,golf-live.at,gamingdeputy.com,thesaurus.net##+js(rmnt, script, KCgpPT57bGV0IGU)
 !#endif
 
+! https://github.com/uBlockOrigin/uAssets/issues/21346
+||thesaurus.net/public/desktop/images/grammarly-ads$image,1p
+thesaurus.net##.grammarly-bnr
+
 ! https://github.com/uBlockOrigin/uAssets/issues/14370
 ! https://github.com/uBlockOrigin/uAssets/issues/19731
 ! instagram.com#?#main > div div[style*="flex-direction: column;"] > article > div:has(a[href^="https://www.facebook.com/ads/ig_redirect/"][target="_blank"]):style(height: 1px !important; visibility: hidden !important;)
@@ -4562,8 +4567,7 @@ upiapi.in##+js(set, detectAdBlock, noopFunc)
 *&caid=$xhr,removeparam=caid,domain=max.com
 ! play.max.com##+js(json-prune, ssaiInfo fallback.ssaiInfo manifest.url)
 play.max.com##+js(json-prune, ssaiInfo fallback.ssaiInfo)
-! https://github.com/AdguardTeam/AdguardFilters/issues/165997#issuecomment-1843511187 - Will be rewritten.
-! play.max.com##+js(xml-prune, xpath(//*[name()="Period"][not(.//*[name()="SegmentTimeline"])][not(.//*[name()="ContentProtection"])]), , .mpd)
+play.max.com##+js(xml-prune, xpath(//*[name()="Period"][not(.//*[name()="SegmentTimeline"])][not(.//*[name()="ContentProtection"])]), , .mpd)
 play.max.com##+js(json-prune, adtech-brightline adtech-google-pal adtech-iab-om)
 
 ! https://github.com/AdguardTeam/AdguardFilters/issues/130913
