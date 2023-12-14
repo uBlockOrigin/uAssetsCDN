@@ -1,8 +1,8 @@
-diff name:ublock-annoyances lines:34 checksum:a5b5dccd65
+diff name:ublock-annoyances lines:42 checksum:4e57b205c9
 d3 3
 a5 2
-! Last modified: Wed, 13 Dec 2023 18:01:51 +0000
-! Diff-Path: ../patches/2023.12.13.1156.patch#ublock-annoyances
+! Last modified: Wed, 13 Dec 2023 19:42:34 +0000
+! Diff-Path: ../patches/2023.12.14.84.patch#ublock-annoyances
 a150 3
 bever.nl##+js(trusted-set-cookie, consent_setting, analytics%3A0%7Cfunctional%3A1%7Cmarketing%3A0, , , reload, 1)
 sixt-neuwagen.de##+js(trusted-set-cookie, user_cookie_consent, essential)
@@ -16,9 +16,11 @@ tobis.de##+js(trusted-set-cookie, tarteaucitron, !tarteaucitron=true!website=tru
 manta.net##+js(trusted-set-local-storage-item, cookie_setting, '{"analytical_cookies":false,"functional_cookies":true}')
 a1723 1
 doods.*,ds2play.com##+js(set, console.clear, undefined)
+a1807 1
+streamtape.*##+js(rmnt, script, /parseInt.*push.*setTimeout.*try.*catch/)
 a3873 1
 fmoviesz.to##+js(nostif, null)
-a4088 14
+a4088 20
 @@||arras.io^$xhr,1p
 arras.io,arras.netlify.app,arrax.io##+js(rmnt, script, onerror)
 ||cdn.intergient.com^$redirect-rule=noopjs,domain=arras.*|arras.netlify.app|arrax.io
@@ -33,18 +35,24 @@ zippyupload.com##[class^="advt-"]
 zippyupload.com##+js(aeld, contextmenu, preventDefault)
 ! ndtvprofit. com copy manipulation
 ndtvprofit.com##+js(aopr, document.oncopy)
-diff name:ublock-badware lines:6 checksum:6c34396440
+! tuborstb.co anti devtools
+tuborstb.co##+js(nostif, debugger)
+! vembed.org anti devtools
+vembed.*##+js(rmnt, script, devtools)
+! stbnetu.xyz anti devtools
+stbnetu.xyz##+js(set, devtoolsDetector.launch, noopFunc)
+diff name:ublock-badware lines:6 checksum:42aa1e9d11
 d3 3
 a5 2
 ! Last modified: Tue, 12 Dec 2023 23:37:04 +0000
-! Diff-Path: ../patches/2023.12.13.1156.patch#ublock-badware
+! Diff-Path: ../patches/2023.12.14.84.patch#ublock-badware
 a1125 1
 ||tokyo-waters.com^$all
-diff name:ublock-filters lines:121 checksum:7e97598ec3
+diff name:ublock-filters lines:130 checksum:ecdf3da633
 d3 3
 a5 2
-! Last modified: Wed, 13 Dec 2023 19:14:19 +0000
-! Diff-Path: ../patches/2023.12.13.1156.patch#ublock-filters
+! Last modified: Wed, 13 Dec 2023 20:57:57 +0000
+! Diff-Path: ../patches/2023.12.14.84.patch#ublock-filters
 d32 1
 a32 5
 !#if cap_html_filtering
@@ -121,6 +129,10 @@ bitcotasks.com##body > iframe#frame
 !#if cap_html_filtering
 ||bitcotasks.com^$script,1p,replace=/window\.location\.assign\("\/detected\.html"\);/""/g
 !#endif
+a19430 3
+derstandard.at##.tp-modal
+derstandard.at##.tp-active.tp-backdrop
+derstandard.at##body:remove-class(tp-modal-open)
 a19652 6
 blog.carsmania.net,blog.carstopia.net,blog.coinsvalue.net,blog.cookinguide.net,blog.freeoseocheck.com,blog.makeupguide.net##+js(refresh-defuser)
 blog.carsmania.net,blog.carstopia.net,blog.coinsvalue.net,blog.cookinguide.net,blog.freeoseocheck.com,blog.makeupguide.net##+js(nostif, , 2500)
@@ -131,6 +143,9 @@ blog.carsmania.net,blog.carstopia.net,blog.coinsvalue.net,blog.cookinguide.net,b
 d21708 1
 a21708 1
 fslinks.org,v6embed.xyz,vembed.*,vgplayer.xyz,vid-guard.com##+js(nostif, afterOpen)
+d22186 1
+a22186 1
+aliendictionary.com,proverbmeaning.com,tudongnghia.com##+js(acs, document.querySelector, adblock)
 a22245 3
 designparty.sx##+js(nowoif)
 ||designparty.sx/player/jw8/vast.js$script,1p
@@ -139,7 +154,7 @@ d22523 1
 a22523 1
 advocate.com,alternet.org,androidcure.com,arobasenet.com,bodytr.com,cleveland.com,clutchpoints.com,cultofmac.com,currentaffairs.gktoday.in,dailycaller.com,digitalmusicnews.com,dogtime.com,epicstream.com,fallbrook247.com,feral-heart.com,gamesgames.com,gamerevolution.com,gazettenet.com,girlsgogames.co.uk,insidenova.com,jetztspielen.de,kasvekuvvet.net,leitesculinaria.com,nbcnews.com,notevibes.com,practicalpainmanagement.com,prad.de,pwinsider.com,ranker.com,realityblurb.com,ruinmyweek.com,sanangelolive.com,sanfoundry.com,selfhacked.com,son.co.za,sporcle.com,stealthoptional.com,stylecaster.com,upi.com,viraliq.com,visualcapitalist.com,cbssports.com##+js(aopr, googletag)
 d22825 3
-a23282 22
+a23282 24
 ltc-faucet.xyz,coin-profits.xyz##+js(nostif, nextFunction)
 ||bittrafficads.com^$3p
 ! ckxsfm .com anti-adb
@@ -162,29 +177,42 @@ rollstroll.com##+js(nosiif, daadb)
 butterpolish.com##+js(acs, eval, replace)
 ! stbnetu.xyz popups
 stbnetu.xyz##+js(aopr, popUrl)
-diff name:ublock-privacy lines:6 checksum:accb7fba83
+infidrive.net##+js(no-xhr-if, googlesyndication)
+infidrive.net##+js(nano-stb, -1, *, 0.001)
+diff name:ublock-privacy lines:6 checksum:42773f3bc2
 d3 3
 a5 2
 ! Last modified: Tue, 12 Dec 2023 19:39:36 +0000
-! Diff-Path: ../patches/2023.12.13.1156.patch#ublock-privacy
+! Diff-Path: ../patches/2023.12.14.84.patch#ublock-privacy
 a533 1
 coomer.su,kemono.su##+js(set, plausible, noopFunc)
-diff name:ublock-quick-fixes lines:24 checksum:4fbffd355b
+diff name:ublock-quick-fixes lines:35 checksum:59a3c153e9
 d3 3
 a5 2
-! Last modified: Wed, 13 Dec 2023 19:07:59 +0000
-! Diff-Path: ../patches/2023.12.13.1156.patch#ublock-quick-fixes
+! Last modified: Wed, 13 Dec 2023 21:40:46 +0000
+! Diff-Path: ../patches/2023.12.14.84.patch#ublock-quick-fixes
 d42 5
 a46 3
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$script,3p,redirect=google-ima.js,domain=paulkitchendark.com
 paulkitchendark.com##+js(nowoif)
 paulkitchendark.com##+js(set, console.clear, undefined)
-d75 5
-a79 4
-!#if cap_html_filtering
-infinityscans.xyz##^script:has-text(fetch)
-!#else
-infinityscans.xyz##+js(rmnt, script, fetch)
+d62 2
+a63 2
+||check-host.net/*/$image,1p
+@@||check-host.net/images/$image,1p
+d65 1
+a65 1
+check-host.net###hostifq, a[href^="/eutgo/"], a[href$="/specawaqnrrdp"], #anrkzbtchamyrd-juuaryt, #ddard-juuaryt, .oh-h-elative, .dgdt1-en, .dgdt2-en, .cake_with_cherry
+d67 1
+a67 1
+check-host.net##.alfa_b:upward(1)
+d69 1
+a69 2
+check-host.net##body > * > * > * > * *:has(> * > svg image)
+check-host.net##script:has-text(window["loc" + "ation"]):upward(2)
+d75 6
+a80 1
+infinityscans.xyz##+js(rmnt, script, fetch(, condition, /^\s+\(function/)
 d89 5
 a93 3
 chip.de##+js(rpnt, script, pmactiveff !== 1, pmactiveff !== 1 || true)
@@ -194,18 +222,18 @@ a102 3
 ! Ad-Shield
 loawa.com,ygosu.com,sportalkorea.com,algumon.com,hancinema.net,enetnews.co.kr,edaily.co.kr,economist.co.kr,etoday.co.kr,hankyung.com,isplus.com,hometownstation.com,kagit.kr,inven.co.kr,honkailab.com,warcraftrumbledeck.com,genshinlab.com,thestockmarketwatch.com,thephoblographer.com##+js(no-fetch-if, /static\.criteo\.net|adsbygoogle/)
 ||f97ae142.online^$doc,ping,font,css,popup
-diff name:ublock-unbreak lines:6 checksum:58adfddab2
+diff name:ublock-unbreak lines:6 checksum:a0a74c7775
 d3 3
 a5 2
 ! Last modified: Wed, 13 Dec 2023 09:49:55 +0000
-! Diff-Path: ../patches/2023.12.13.1156.patch#ublock-unbreak
+! Diff-Path: ../patches/2023.12.14.84.patch#ublock-unbreak
 a2435 1
 ||munchkin.marketo.net/munchkin.js$script,important,redirect=noop.js,domain=st.com
-diff name:easylist lines:198 checksum:82b8075120
+diff name:easylist lines:198 checksum:475e892213
 d4 3
 a6 2
 ! Last modified: Wed, 13 Dec 2023 17:21:33 +0000
-! Diff-Path: ../patches/2023.12.13.1156.patch#easylist
+! Diff-Path: ../patches/2023.12.14.84.patch#easylist
 a13980 1
 ##.header__ads-wrapper
 a15350 1
@@ -400,11 +428,11 @@ manga-miz.vy1.click###header_banner
 d64205 1
 a64205 1
 deepfake-porn.com,x-picture.com##.happy-sidebar
-diff name:easyprivacy lines:9 checksum:b401efcbaa
+diff name:easyprivacy lines:9 checksum:4ce20791bf
 d4 3
 a6 2
 ! Last modified: Wed, 13 Dec 2023 13:08:15 +0000
-! Diff-Path: ../patches/2023.12.13.1156.patch#easyprivacy
+! Diff-Path: ../patches/2023.12.14.84.patch#easyprivacy
 d25726 1
 d25898 1
 d32946 1
