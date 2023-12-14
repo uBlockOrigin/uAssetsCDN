@@ -1,5 +1,5 @@
 ! Title: uBlock filters – Cookie Notices
-! Last modified: Thu, 14 Dec 2023 14:29:21 +0000
+! Last modified: Thu, 14 Dec 2023 18:16:46 +0000
 ! Expires: 7 days
 ! Description: |
 !   Filters optimized for uBlock Origin, to be used with EasyList's
@@ -48,13 +48,12 @@ www.google.*##+js(trusted-set-cookie, SOCS, CAESHAgBEhJnd3NfMjAyMzA2MTItMF9SQzIa
 consent.google.*##+js(trusted-click-element, form[action] button[jsname="tWT92d"])
 facebook.com##+js(trusted-set-cookie, datr, __GMZCgwVF5BbyvAtfJojQwg, 1year, , reload, 1)
 instagram.com##+js(trusted-set-cookie, ig_did, 0C826C21-17C3-444A-ABB7-EBABD37214D7, 1year, , reload, 1)
-! Sample page: https://www.bloomberg.com/live/europe & https://www.bloomberg.co.jp/
-sourcepointcmp.bloomberg.com##+js(trusted-click-element, [title="Manage Cookies"])
-sourcepointcmp.bloomberg.com##+js(trusted-click-element, [title="Reject All"], , 500)
+! Sample page: https://www.bloomberg.com/live/europe || https://www.bloomberg.co.jp/live/asia
+sourcepointcmp.bloomberg.com,sourcepointcmp.bloomberg.co.jp##+js(trusted-click-element, [title="Manage Cookies"])
+sourcepointcmp.bloomberg.com,sourcepointcmp.bloomberg.co.jp##+js(trusted-click-element, [title="Reject All"], , 500)
 bloomberg.com,bloomberg.co.jp##html.sp-message-open:style(width: initial !important)
 bloomberg.com,bloomberg.co.jp##html.sp-message-open > body:style(position: unset !important; overflow: unset !important; margin-top: 0 !important)
-! https://github.com/uBlockOrigin/uAssets/issues/21408
-bloomberg.co.jp##+js(trusted-click-element, button[title$="Accept"])
+bloomberg.com,bloomberg.co.jp##[title="SP Consent Message"]
 ! Sample page: https://www.fandom.com/articles/hgt-wow-wrath-of-the-lich-king
 fandom.com##+js(trusted-set-cookie, euconsent-v2, CPt3fQAPt3fQACNAFAENDLCgAAAAAAAAACiQAAAOCgDAB-AIsAZ8A6QDBAHBAAAA.YAAAAAAAAAAA, 1year)
 fandom.com##+js(trusted-set-cookie, tracking-opt-in-status, rejected, 1year)
@@ -704,3 +703,7 @@ manta.net##+js(trusted-set-local-storage-item, cookie_setting, '{"analytical_coo
 
 ! chip.de functional + social
 chip.de##+js(trusted-set-cookie, consentUUID, 5b13fb0e-6264-4bfa-bd0c-20f35140a634_26)
+
+! https://github.com/uBlockOrigin/uAssets/issues/21412
+@@||cmp.pubtech.ai/*/pubtech-cmp-v2.js$script,from=ilrestodelcarlino.it
+ilrestodelcarlino.it##+js(trusted-click-element, #pubtech-cmp #pt-close)
