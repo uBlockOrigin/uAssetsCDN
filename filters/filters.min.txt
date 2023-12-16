@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Fri, 15 Dec 2023 19:33:59 +0000
-! Diff-Path: ../patches/2023.12.15.1277.patch#ublock-filters
+! Last modified: Sat, 16 Dec 2023 01:50:15 +0000
+! Diff-Path: ../patches/2023.12.16.149.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -1838,8 +1838,7 @@ pornktube.*##+js(acs, document.querySelectorAll, popMagic)
 viki.com##+js(set, VikiPlayer.prototype.pingAbFactor, noopFunc)
 viki.com##+js(set, player.options.disableAds, true)
 *expire=$media,redirect=noopmp3-0.1s,domain=viki.com
-*$script,redirect-rule=noopjs,domain=viki.com
-@@||imasdk.googleapis.com/js/sdkloader/ima3.js$script,domain=viki.com
+||imasdk.googleapis.com/js/sdkloader/ima3.js$script,redirect-rule=google-ima.js,domain=viki.com
 realgfporn.com##+js(aopr, ExoLoader)
 realgfporn.com##+js(aopw, __htapop)
 realgfporn.com##+js(popads-dummy)
@@ -17871,9 +17870,10 @@ inbbotlist.com##div[id^="wpsafe-wait"]
 apkmagic.com.ar##+js(no-xhr-if, ads)
 @@||gamaniak.com^$script,1p
 @@||gamaniak.com^$ghide
-! moviesjoy. pw/.best/.plus/ .to popunders
+! moviesjoy. pw/.best/.plus/ .to /. is popunders
 moviesjoy.*##+js(acs, document.createElement, /l\.parentNode\.insertBefore\(s/)
 moviesjoy.*##+js(aopr, mm)
+moviesjoy.*##+js(nowoif)
 moviesjoy.*###fcnbox
 moviesjoy.*##[href*="moviesflix4k"]
 moviesjoy.*##.premodal.modal
@@ -23342,3 +23342,7 @@ forextrader.site##+js(aopr, scriptUrls)
 javggvideo.xyz##+js(nowoif)
 ! trannyteca .com popups
 trannyteca.com##+js(rmnt, script, /h=decodeURIComponent|popundersPerIP/)
+! shemale6 .com anti-adb
+*$image,domain=shemale6.com,redirect-rule=1x1.gif
+! 9animes .ru anti-adb
+9animes.ru##+js(no-xhr-if, googlesyndication)
