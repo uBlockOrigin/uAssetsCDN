@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Sat, 16 Dec 2023 16:37:52 +0000
-! Diff-Path: ../patches/2023.12.16.1039.patch#ublock-filters
+! Last modified: Sat, 16 Dec 2023 21:45:13 +0000
+! Diff-Path: ../patches/2023.12.16.1341.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -3501,7 +3501,7 @@ worldofbitco.in,weatherx.co.in##+js(set, spoof, noopFunc)
 dailyfreebits.com##+js(acs, $, html)
 @@||getyourbitco.in^$ghide
 getyourbitco.in##+js(set, adBlock, false)
-sbs.com.au##+js(set, adBlockerDetected, false)
+sbs.com.au##+js(set, adBlockerDetected, undefined)
 sbs.com.au##+js(m3u-prune, /redirector\.googlevideo\.com\/videoplayback\?[\s\S]*?dclk_video_ads/, pubads.g.doubleclick.net/ondemand/hls/)
 sbs.com.au##+js(no-xhr-if, /redirector\.googlevideo\.com\/videoplayback[\s\S]*?dclk_video_ads/)
 sbs.com.au##+js(json-prune, ads breaks cuepoints times)
@@ -14685,11 +14685,6 @@ cloudemb.com##+js(set, isadb, false)
 sbot.cf##[id^="parentframe"]
 sbot.cf##+js(window.open-defuser)
 ||sbasian.pro/js/mainpc.js
-blisseyhusband.in##+js(acs, eval, replace)
-blisseyhusband.in##+js(no-xhr-if, googlesyndication)
-blisseyhusband.in#@#.adsBanner
-blisseyhusband.in##.adace-slideup-slot-wrap
-blisseyhusband.in##.adfoxly-wrapper
 bestgirlsexy.com##+js(rmnt, script, /h=decodeURIComponent|popundersPerIP/)
 sharetext.me##+js(set, isAdBlockActive, false)
 theblissempire.com##+js(aopr, app_vars.force_disable_adblock)
@@ -15536,13 +15531,7 @@ funker530.com##+js(rc, cnx-ad-container|cnx-ad-bid-slot)
 reset-scans.com,reset-scans.us##+js(rmnt, script, deblocker)
 uyduportal.net##+js(acs, document.addEventListener, nextFunction)
 businessinsider.fr##[id^="bin-ads"]
-ahentai.top##+js(acs, document.querySelectorAll, popMagic)
-ahentai.top##div[id^="read_online_ads"]
-||ahentai.top/catalog/view/core/adchecker/
-||ahentai.top/catalog/view/core/comic/fc.js
-||ahentai.top/catalog/view/core/comic/fc0.js
 @@||cdnqq.net^$script,1p
-45.87.43.43,xdxdxd.xyz##+js(nowoif)
 testserver.pro##+js(nostif, google)
 novinhastop.com,warddogs.com##+js(aeld, DOMContentLoaded, adsBlocked)
 novinhastop.com##.single-right
@@ -15632,11 +15621,6 @@ adlinkweb.com,vklinks.com##.banner-inner
 ||i.ibb.co^$image,domain=adlinkweb.com
 ||ad.lomadee.com^
 ||myezads.com^$3p
-! PH, focus detection
-girls-like.me###id-custom_banner
-girls-like.me###orquidea-slideup
-girls-like.me##div[style$="height:250px;"]
-girls-like.me##div[style$="width:728px;height:90px;"]
 streamingsites.com##.OUTBRAIN:upward(2)
 schoolcheats.net##+js(nosiif, Adblocker)
 schoolcheats.net##+js(nostif, googletag)
@@ -20040,8 +20024,8 @@ go.publicearn.com##.page-header > h3, .banner, .bg-soft-primary
 @@*$ghide,domain=iisfvirtual.in|starxinvestor.com
 iisfvirtual.in,starxinvestor.com##+js(rmnt, script, googlesyndication)
 iisfvirtual.in,starxinvestor.com##+js(set, countdown, 0)
-iisfvirtual.in,starxinvestor.com##[id*="-Ads"], [id*="-gpt-ad"], center > h3, #skull, #content, #btnx, .mh-clearfix.mh-wrapper:remove()
 iisfvirtual.in,starxinvestor.com###tp98, #btn6:style(display: block !important;)
+iisfvirtual.in,starxinvestor.com##div[id$="-Ads"]
 ! earn2me.com
 recipese.com,easyworldbusiness.com###yuidea-snp, #yuidea-btn-after, a[href]:style(display: block !important;)
 recipese.com,easyworldbusiness.com##center, [src*="google.com/recaptcha/"]:others()
@@ -20537,10 +20521,13 @@ hipsonyc.com##.close-sticky-ad
 hipsonyc.com###footer-sticky-ad
 ||iili.io^$image,domain=hipsonyc.com
 hipsonyc.com###adtera
-hipsonyc.com###getlink:style(display: block !important;)
+hipsonyc.com###getlink,#verify,#pop-button,#gotolink:style(display: block !important;)
 hipsonyc.com###getlink[disabled]:remove-attr(disabled)
 hipsonyc.com###gotolink[disabled]:remove-attr(disabled)
 hipsonyc.com##+js(nano-sib, countDown)
+tech.hipsonyc.com,www.hipsonyc.com###verify, #getlink, #pop-button, #gotolink, #notarobot:others()
+go.hipsonyc.com##+js(set, blurred, false)
+go.hipsonyc.com##.blog-item
 *$popunder,domain=go.theforyou.in
 ||buoydeparturediscontent.com^$all
 gyanitheme.com,hipsonyc.com##+js(no-xhr-if, adsbygoogle)
@@ -23407,3 +23394,8 @@ trannyteca.com##+js(rmnt, script, /h=decodeURIComponent|popundersPerIP/)
 ! 9animes .ru anti-adb
 9animes.ru##+js(no-xhr-if, googlesyndication)
 @@||overgal.com^$ghide
+areascans.net##+js(noeval-if, ads)
+! PopAds external script
+eurostreaming.*##+js(aost, document.createElement, /HTMLScriptElement|onload/)
+king-shoot.io##+js(aeld, load, onload)
+king-shoot.io##+js(nosiif, _0x)
