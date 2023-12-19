@@ -1,9 +1,9 @@
-diff name:ublock-annoyances lines:48 checksum:fabe069002
+diff name:ublock-annoyances lines:59 checksum:59bae43ef6
 d3 2
 a4 2
-! Last modified: Mon, 18 Dec 2023 17:24:53 +0000
-! Diff-Path: ../patches/2023.12.18.1156.patch#ublock-annoyances
-a160 9
+! Last modified: Mon, 18 Dec 2023 21:17:23 +0000
+! Diff-Path: ../patches/2023.12.19.85.patch#ublock-annoyances
+a160 20
 ! festool
 !#if ext_devbuild
 ! Waits for 1.55 to be widely available
@@ -13,6 +13,17 @@ festool.*,festoolcanada.com###focus-lock-id
 !#endif
 cc.com##+js(trusted-set-cookie, OptanonAlertBoxClosed, $currentDate$, 1year)
 resursbank.fi##+js(trusted-set-cookie, cookie_consent, necessary%3A1%2Cstatistics%3A0%2Cmarketing%3A0)
+! LADbiblegroup, broken videos. Sample page: https://www.unilad.com/celebrity/news/big-bang-theory-kate-micucci-cancer-free-950283-20231218
+consent.ladbible.com,consent.unilad.com,consent.gamingbible.com,consent.sportbible.com,consent.tyla.com,consent.ladbiblegroup.com##+js(trusted-click-element, button.sp_choice_type_12[title$="Settings"])
+consent.ladbible.com,consent.unilad.com,consent.gamingbible.com,consent.sportbible.com,consent.tyla.com,consent.ladbiblegroup.com##+js(trusted-click-element, button[title="REJECT ALL"], , 1000)
+ladbible.com,unilad.com,gamingbible.com,sportbible.com,tyla.com,ladbiblegroup.com##html.sp-message-open:style(width: initial !important)
+ladbible.com,unilad.com,gamingbible.com,sportbible.com,tyla.com,ladbiblegroup.com##html.sp-message-open > body:style(position: unset !important; overflow: unset !important)
+ladbible.com,unilad.com,gamingbible.com,sportbible.com,tyla.com,ladbiblegroup.com##[title="SP Consent Message"]
+! Temp filters:
+||consent.unilad.com^$badfilter
+sportbible.com#@#+js(remove-class, sp-message-open, html, stay)
+sportbible.com#@#div[id^="sp_message_container_"]
+@@||consent.sportbible.com^$domain=sportbible.com
 d415 2
 a416 2
 cmp-sp.vrt.be,cmp.dpgmedia.nl,cmp.dpgmedia.be,cmp.ad.nl,cmp.autoweek.nl,cmp.bd.nl,cmp.bndestem.nl,cmp.demorgen.be,cmp.deondernemer.nl,cmp.destentor.nl,cmp.ed.nl,cmp.gaspedaal.nl,cmp.gelderlander.nl,cmp.hln.be,cmp.humo.be,cmp.margriet.nl,cmp.nu.nl,cmp.qmusic.nl,cmp.stijlvol-wonen.com,cmp.trouw.nl,cmp.tubantia.nl,cmp.vtwonen.be,cmp.vtwonen.nl,cmp.pzc.nl,cmp.zozitdat.nl##+js(trusted-click-element, 'button[aria-checked="false"][aria-label^="Social"], button.sp_choice_type_SAVE_AND_EXIT', , 500)
@@ -47,11 +58,11 @@ netu.*,netuplayer.top,stbnetu.xyz##+js(set, devtoolsDetector.launch, noopFunc)
 a4137 2
 ! emturbovid.com anti devtools
 emturbovid.com##+js(nostif, debugger)
-diff name:ublock-badware lines:18 checksum:f40afc9fc5
+diff name:ublock-badware lines:18 checksum:ea4607cdc0
 d3 2
 a4 2
 ! Last modified: Mon, 18 Dec 2023 13:23:43 +0000
-! Diff-Path: ../patches/2023.12.18.1156.patch#ublock-badware
+! Diff-Path: ../patches/2023.12.19.85.patch#ublock-badware
 d730 1
 d738 1
 a1125 1
@@ -66,11 +77,11 @@ a3099 4
 ||mevnow.com^$all
 ||mevtime.com^$all
 ||eth-mev.com^$all
-diff name:ublock-filters lines:246 checksum:1cee54c197
+diff name:ublock-filters lines:248 checksum:60b326b66b
 d3 2
 a4 2
-! Last modified: Mon, 18 Dec 2023 19:09:01 +0000
-! Diff-Path: ../patches/2023.12.18.1156.patch#ublock-filters
+! Last modified: Mon, 18 Dec 2023 23:23:50 +0000
+! Diff-Path: ../patches/2023.12.19.85.patch#ublock-filters
 a516 2
 spiegel.de##[data-area="affiliatebox"]
 spiegel.de##[data-area="vouchers"]
@@ -186,6 +197,7 @@ a16952 1
 a16953 2
 ||d3plnp2f9sfye5.cloudfront.net^$script,redirect-rule=noopjs
 shorttrick.in###wpsafe-generate, #wpsafe-link:style(display: block !important;)
+d18427 1
 a18845 3
 !#if ext_devbuild
 loawa.com,ygosu.com,sportalkorea.com,algumon.com,hancinema.net,enetnews.co.kr,edaily.co.kr,economist.co.kr,etoday.co.kr,hankyung.com,isplus.com,hometownstation.com,kagit.kr,inven.co.kr,honkailab.com,warcraftrumbledeck.com,genshinlab.com,thestockmarketwatch.com,thephoblographer.com##+js(no-fetch-if, /static\.criteo\.net|adsbygoogle/)
@@ -197,15 +209,15 @@ a19844 1
 bluemedialink.online,game3rb.com,manhwalist.com,nflstreams.me,s2dfree.to,secretlink.xyz,soap2day.*##+js(acs, navigator, FingerprintJS)
 d20006 9
 a20014 9
-*$frame,redirect-rule=noopframe,domain=gplinks.co|snapseedmod.in|lndianews.com|diethim.com|newsjov.com
-@@||gplinks.in/track/$script,xhr,domain=gplinks.co|snapseedmod.in|lndianews.com|diethim.com|newsjov.com
-@@||googlesyndication.com^$script,xhr,domain=gplinks.co|snapseedmod.in|lndianews.com|diethim.com|newsjov.com
-@@||doubleclick.net^$script,xhr,domain=snapseedmod.in|lndianews.com|diethim.com|newsjov.com
-@@*$ghide,domain=gplinks.co|snapseedmod.in|lndianews.com|diethim.com|newsjov.com
-snapseedmod.in,lndianews.com,diethim.com,newsjov.com##center:others()
-snapseedmod.in,lndianews.com,diethim.com,newsjov.com##+js(aopw, AdBDetected)
-snapseedmod.in,lndianews.com,diethim.com,newsjov.com##+js(set, count, 0)
-snapseedmod.in,lndianews.com,diethim.com,newsjov.com##[id*="iframe"], [id*="gpt_unit"], [id*="div-gpt-"]:style(height:0.0001px !important;)
+*$frame,redirect-rule=noopframe,domain=gplinks.co|snapseedmod.in|lndianews.com|diethim.com|newsjov.com|jobnewsj.com
+@@||gplinks.in/track/$script,xhr,domain=gplinks.co|snapseedmod.in|lndianews.com|diethim.com|newsjov.com|jobnewsj.com
+@@||googlesyndication.com^$script,xhr,domain=gplinks.co|snapseedmod.in|lndianews.com|diethim.com|newsjov.com|jobnewsj.com
+@@||doubleclick.net^$script,xhr,domain=snapseedmod.in|lndianews.com|diethim.com|newsjov.com|jobnewsj.com
+@@*$ghide,domain=gplinks.co|snapseedmod.in|lndianews.com|diethim.com|newsjov.com|jobnewsj.com
+snapseedmod.in,lndianews.com,diethim.com,newsjov.com,jobnewsj.com##center:others()
+snapseedmod.in,lndianews.com,diethim.com,newsjov.com,jobnewsj.com##+js(aopw, AdBDetected)
+snapseedmod.in,lndianews.com,diethim.com,newsjov.com,jobnewsj.com##+js(set, count, 0)
+snapseedmod.in,lndianews.com,diethim.com,newsjov.com,jobnewsj.com##[id*="iframe"], [id*="gpt_unit"], [id*="div-gpt-"]:style(height:0.0001px !important;)
 d20018 3
 a20020 3
 khesarilalyadavmp3.in,dhunwap.com.in##+js(nano-sib, _0x, *, 0.001)
@@ -296,7 +308,7 @@ a22751 1
 a23238 2
 filmweb.pl##.faPremiumBanner
 filmweb.pl##.faBannerPromo
-a23401 16
+a23401 17
 ! bettycrocker.com PH
 bettycrocker.com##.adhesiveHeaderAdFixed header:matches-media((min-width: 1000px)):style(top: 0 !important;)
 bettycrocker.com##.adhesiveAdSpacing
@@ -313,15 +325,16 @@ moviesjoyhd.to##+js(aeld, mousedown, shown_at)
 metrolagu.cam,poop.cx##+js(nowoif)
 /adus.js|$script,domain=metrolagu.cam|poop.cx
 ||doood.cam^$popup,3p
-diff name:ublock-privacy lines:3 checksum:729c39dae8
+redlion.net##+js(set, aoAdBlockDetected, false)
+diff name:ublock-privacy lines:3 checksum:8421cdb053
 d4 1
 a4 1
-! Diff-Path: ../patches/2023.12.18.1156.patch#ublock-privacy
-diff name:ublock-quick-fixes lines:43 checksum:0d03c7cc83
+! Diff-Path: ../patches/2023.12.19.85.patch#ublock-privacy
+diff name:ublock-quick-fixes lines:43 checksum:869121a29c
 d3 2
 a4 2
 ! Last modified: Sun, 17 Dec 2023 20:26:31 +0000
-! Diff-Path: ../patches/2023.12.18.1156.patch#ublock-quick-fixes
+! Diff-Path: ../patches/2023.12.19.85.patch#ublock-quick-fixes
 a9 1
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$script,redirect-rule=google-ima.js,domain=dropgalaxy.*
 d13 1
@@ -361,28 +374,36 @@ infinityscans.xyz##+js(rmnt, script, /Blocker|stop|fetch/, condition, /^\s*\(.*f
 a100 2
 ||go.oracle.com^$badfilter
 /web-vitals.$script,redirect-rule=noopjs,domain=amazon.com
-diff name:ublock-unbreak lines:9 checksum:cd1421f820
+diff name:ublock-unbreak lines:11 checksum:a066dc3214
 d3 2
 a4 2
-! Last modified: Mon, 18 Dec 2023 09:13:14 +0000
-! Diff-Path: ../patches/2023.12.18.1156.patch#ublock-unbreak
-a2437 4
+! Last modified: Mon, 18 Dec 2023 22:34:50 +0000
+! Diff-Path: ../patches/2023.12.19.85.patch#ublock-unbreak
+a2437 6
 /web-vitals.$script,redirect-rule=noopjs,domain=amazon.com
 @@||amazonwebservicesinc.tt.omtrdc.net/m2/amazonwebservicesinc/ubox/raw$xhr,3p,domain=aws.amazon.com
 ||amazonwebservicesinc.tt.omtrdc.net/m2/amazonwebservicesinc/ubox/raw$xhr,3p,removeparam,domain=aws.amazon.com
 ||cdnwebonplay.gviet.vn/public/js/player/ads/ima3.js$script,3p,redirect-rule=google-ima.js,domain=vtvcab.vn,important
-diff name:easylist lines:278 checksum:a48ce46804
+@@||micro.rubiconproject.com/prebid/dynamic/$script,xmlhttprequest,domain=sportbible.com
+@@||amazon-adsystem.com/aax2/apstag.js$domain=sportbible.com
+diff name:easylist lines:324 checksum:27dc32899d
 d4 2
 a5 2
-! Last modified: Mon, 18 Dec 2023 17:24:53 +0000
-! Diff-Path: ../patches/2023.12.18.1156.patch#easylist
+! Last modified: Mon, 18 Dec 2023 21:17:23 +0000
+! Diff-Path: ../patches/2023.12.19.85.patch#easylist
+d14400 1
 d17976 1
 d18002 1
 d18465 1
 a18465 1
 m.nettiauto.com,m.nettikaravaani.com,m.nettikone.com,m.nettimoto.com,m.nettivaraosa.com,m.nettivene.com,nettimokki.com#@#.ad_caption
+d18565 1
+a18565 1
+iplogger.org#@#.item-ads
 a19354 1
 ||71dd1ff9fd.com^
+a19642 1
+||abamatoyer.com^
 a20177 1
 ||adplushub.com^
 a20284 1
@@ -397,6 +418,8 @@ a22975 1
 ||bjiehnopho.com^
 a23546 1
 ||bruisedpaperworkmetre.com^
+a23602 1
+||buddlekroner.com^
 a23759 1
 ||bymnyzbkylaaw.top^
 a24099 1
@@ -407,6 +430,10 @@ a24846 1
 ||cntrktaieagnam.com^
 a25282 1
 ||corruptmatter.com^
+a25433 1
+||crcgrilses.com^
+a25666 1
+||cwipbkyqhloajc.com^
 a25707 1
 ||cyyhkeknmbe.com^
 d25733 1
@@ -420,6 +447,8 @@ a26889 1
 a26937 1
 ||dreamsaukn.org^
 d27123 1
+a27240 1
+||eaglingauslaut.com^
 a27332 1
 ||ebwvjkvd.com^
 a27732 1
@@ -434,12 +463,16 @@ a29246 1
 ||fouleewu.net^
 a29911 1
 ||ginfohpg.com^
+a30111 1
+||glukropi.com^
 a30147 1
 ||gnqtageoyy.com^
 a30572 1
 ||guitarfelicityraw.com^
 a31208 1
 ||hlbelbblmc.com^
+a31225 1
+||hntkeiupbnoaeha.xyz^
 a31314 1
 ||hophcomeysw.com^
 a31406 1
@@ -454,6 +487,12 @@ a31768 1
 ||iivzdmqgyyiw.com^
 a31847 1
 ||imathematica.org^
+a31909 1
+||impavidmarsian.com^
+a32168 1
+||insecurepaint.pro^
+a32495 1
+||iuc1.online^
 a32507 1
 ||iviugcxgemuk.com^
 a32623 1
@@ -476,6 +515,8 @@ a33533 1
 ||korporatefinau.org^
 a33861 1
 ||lcwoewvvmhj.com^
+a33921 1
+||leesecobourg.com^
 a34235 1
 ||ljlbzdqznogl.com^
 a34479 1
@@ -486,6 +527,8 @@ a34935 1
 ||markxa.xyz^
 a35156 1
 ||medoofty.com^
+a35182 1
+||megnotch.xyz^
 a35214 1
 ||memorableeditor.com^
 a35317 1
@@ -498,6 +541,8 @@ a35899 1
 ||muffled-apartment.com^
 a35921 1
 ||multiwall-ads.shop^
+a35952 1
+||muskatarsenal.com^
 a36059 1
 ||myyhvsekloyvul.com^
 a36743 1
@@ -530,6 +575,8 @@ a40383 1
 ||qxgbgixnzcoen.com^
 a40563 1
 ||rbgrckaysvrp.com^
+a40841 1
+||reglowsupbar.com^
 a40886 1
 ||relatumrorid.com^
 a41346 1
@@ -538,10 +585,16 @@ a41555 1
 ||rqdcusltmryapg.com^
 a41562 1
 ||rqwel.com^
+a41656 1
+||rugaetieback.com^
 a42106 1
 ||scrollye.com^
+a42268 1
+||senecaanoles.com^
 a42686 1
 ||silkytitle.com^
+a43025 1
+||snidethereto.com^
 a43276 1
 ||specialisthuge.com^
 a43431 1
@@ -575,6 +628,8 @@ a47063 1
 ||vujriahqyleveh.com^
 a47096 1
 ||vwswilfrveqzw.com^
+a47191 1
+||wanodtbfif.com^
 a47327 1
 ||wbubnjqyrmv.com^
 a47336 1
@@ -593,8 +648,14 @@ a48579 1
 ||yndmorvwdfuk.com^
 a48795 1
 ||zbvhwaakws.com^
+a48911 1
+||zipheeda.xyz^
 a49036 1
 ||zvjkhrdp.com^
+a52636 1
+||naxadrug.com^$popup
+a53554 1
+||specialisthuge.com^$popup
 a55613 1
 ||d18ql5xgy7gz3p.cloudfront.net^
 a56079 1
@@ -650,11 +711,11 @@ a65423 1
 d65425 1
 a65425 1
 @@||imasdk.googleapis.com/js/sdkloader/ima3_dai.js$domain=247sports.com|bloomberg.co.jp|bloomberg.com|cbc.ca|cbssports.com|embed.comicbook.com|gbnews.com|history.com|paramountplus.com|s.yimg.jp|sbs.com.au|southpark.cc.com|tv.rakuten.co.jp|vk.sportsbull.jp|worldsurfleague.com
-diff name:easyprivacy lines:39 checksum:a8690f8420
+diff name:easyprivacy lines:39 checksum:fe5774450e
 d4 2
 a5 2
 ! Last modified: Mon, 18 Dec 2023 17:24:53 +0000
-! Diff-Path: ../patches/2023.12.18.1156.patch#easyprivacy
+! Diff-Path: ../patches/2023.12.19.85.patch#easyprivacy
 d1201 1
 d3376 1
 d9347 1

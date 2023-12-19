@@ -1,9 +1,9 @@
-diff name:ublock-annoyances lines:31 checksum:fabe069002
+diff name:ublock-annoyances lines:42 checksum:59bae43ef6
 d3 2
 a4 2
-! Last modified: Mon, 18 Dec 2023 17:24:53 +0000
-! Diff-Path: ../patches/2023.12.18.1156.patch#ublock-annoyances
-a160 9
+! Last modified: Mon, 18 Dec 2023 21:17:23 +0000
+! Diff-Path: ../patches/2023.12.19.85.patch#ublock-annoyances
+a160 20
 ! festool
 !#if ext_devbuild
 ! Waits for 1.55 to be widely available
@@ -13,6 +13,17 @@ festool.*,festoolcanada.com###focus-lock-id
 !#endif
 cc.com##+js(trusted-set-cookie, OptanonAlertBoxClosed, $currentDate$, 1year)
 resursbank.fi##+js(trusted-set-cookie, cookie_consent, necessary%3A1%2Cstatistics%3A0%2Cmarketing%3A0)
+! LADbiblegroup, broken videos. Sample page: https://www.unilad.com/celebrity/news/big-bang-theory-kate-micucci-cancer-free-950283-20231218
+consent.ladbible.com,consent.unilad.com,consent.gamingbible.com,consent.sportbible.com,consent.tyla.com,consent.ladbiblegroup.com##+js(trusted-click-element, button.sp_choice_type_12[title$="Settings"])
+consent.ladbible.com,consent.unilad.com,consent.gamingbible.com,consent.sportbible.com,consent.tyla.com,consent.ladbiblegroup.com##+js(trusted-click-element, button[title="REJECT ALL"], , 1000)
+ladbible.com,unilad.com,gamingbible.com,sportbible.com,tyla.com,ladbiblegroup.com##html.sp-message-open:style(width: initial !important)
+ladbible.com,unilad.com,gamingbible.com,sportbible.com,tyla.com,ladbiblegroup.com##html.sp-message-open > body:style(position: unset !important; overflow: unset !important)
+ladbible.com,unilad.com,gamingbible.com,sportbible.com,tyla.com,ladbiblegroup.com##[title="SP Consent Message"]
+! Temp filters:
+||consent.unilad.com^$badfilter
+sportbible.com#@#+js(remove-class, sp-message-open, html, stay)
+sportbible.com#@#div[id^="sp_message_container_"]
+@@||consent.sportbible.com^$domain=sportbible.com
 a417 1
 ! Waits for 1.55 to be widely available
 a440 5
@@ -30,11 +41,11 @@ netu.*,netuplayer.top,stbnetu.xyz##+js(set, devtoolsDetector.launch, noopFunc)
 a4145 2
 ! emturbovid.com anti devtools
 emturbovid.com##+js(nostif, debugger)
-diff name:ublock-badware lines:18 checksum:f40afc9fc5
+diff name:ublock-badware lines:18 checksum:ea4607cdc0
 d3 2
 a4 2
 ! Last modified: Mon, 18 Dec 2023 13:23:43 +0000
-! Diff-Path: ../patches/2023.12.18.1156.patch#ublock-badware
+! Diff-Path: ../patches/2023.12.19.85.patch#ublock-badware
 d730 1
 d738 1
 a1125 1
@@ -49,11 +60,11 @@ a3099 4
 ||mevnow.com^$all
 ||mevtime.com^$all
 ||eth-mev.com^$all
-diff name:ublock-filters lines:170 checksum:1cee54c197
+diff name:ublock-filters lines:183 checksum:60b326b66b
 d3 2
 a4 2
-! Last modified: Mon, 18 Dec 2023 19:09:01 +0000
-! Diff-Path: ../patches/2023.12.18.1156.patch#ublock-filters
+! Last modified: Mon, 18 Dec 2023 23:23:50 +0000
+! Diff-Path: ../patches/2023.12.19.85.patch#ublock-filters
 a516 2
 spiegel.de##[data-area="affiliatebox"]
 spiegel.de##[data-area="vouchers"]
@@ -147,10 +158,22 @@ a16953 1
 a16954 2
 ||d3plnp2f9sfye5.cloudfront.net^$script,redirect-rule=noopjs
 shorttrick.in###wpsafe-generate, #wpsafe-link:style(display: block !important;)
+d18428 1
 a18846 3
 !#if ext_devbuild
 loawa.com,ygosu.com,sportalkorea.com,algumon.com,hancinema.net,enetnews.co.kr,edaily.co.kr,economist.co.kr,etoday.co.kr,hankyung.com,isplus.com,hometownstation.com,kagit.kr,inven.co.kr,honkailab.com,warcraftrumbledeck.com,genshinlab.com,thestockmarketwatch.com,thephoblographer.com##+js(no-fetch-if, /static\.criteo\.net|adsbygoogle/)
 !#endif
+d20008 9
+a20016 9
+*$frame,redirect-rule=noopframe,domain=gplinks.co|snapseedmod.in|lndianews.com|diethim.com|newsjov.com|jobnewsj.com
+@@||gplinks.in/track/$script,xhr,domain=gplinks.co|snapseedmod.in|lndianews.com|diethim.com|newsjov.com|jobnewsj.com
+@@||googlesyndication.com^$script,xhr,domain=gplinks.co|snapseedmod.in|lndianews.com|diethim.com|newsjov.com|jobnewsj.com
+@@||doubleclick.net^$script,xhr,domain=snapseedmod.in|lndianews.com|diethim.com|newsjov.com|jobnewsj.com
+@@*$ghide,domain=gplinks.co|snapseedmod.in|lndianews.com|diethim.com|newsjov.com|jobnewsj.com
+snapseedmod.in,lndianews.com,diethim.com,newsjov.com,jobnewsj.com##center:others()
+snapseedmod.in,lndianews.com,diethim.com,newsjov.com,jobnewsj.com##+js(aopw, AdBDetected)
+snapseedmod.in,lndianews.com,diethim.com,newsjov.com,jobnewsj.com##+js(set, count, 0)
+snapseedmod.in,lndianews.com,diethim.com,newsjov.com,jobnewsj.com##[id*="iframe"], [id*="gpt_unit"], [id*="div-gpt-"]:style(height:0.0001px !important;)
 d20028 1
 a20028 1
 iisfvirtual.in,starxinvestor.com##+js(set, count, 0)
@@ -209,7 +232,7 @@ d22755 1
 a22755 1
 ||unpkg.com/videojs-vast-vpaid@2.0.2/bin/videojs_5.vast.vpaid.min.js$script,domain=playfmovies.online|vvtplayer.online|wiztube.xyz
 d23414 1
-a23414 10
+a23414 11
 @@||bluemedialink.online^$ghide
 ||bluemedialink.online/*.gif$image
 bluemedialink.online###ads-center
@@ -220,15 +243,16 @@ moviesjoyhd.to##+js(aeld, mousedown, shown_at)
 metrolagu.cam,poop.cx##+js(nowoif)
 /adus.js|$script,domain=metrolagu.cam|poop.cx
 ||doood.cam^$popup,3p
-diff name:ublock-privacy lines:3 checksum:729c39dae8
+redlion.net##+js(set, aoAdBlockDetected, false)
+diff name:ublock-privacy lines:3 checksum:8421cdb053
 d4 1
 a4 1
-! Diff-Path: ../patches/2023.12.18.1156.patch#ublock-privacy
-diff name:ublock-quick-fixes lines:36 checksum:0d03c7cc83
+! Diff-Path: ../patches/2023.12.19.85.patch#ublock-privacy
+diff name:ublock-quick-fixes lines:36 checksum:869121a29c
 d3 2
 a4 2
 ! Last modified: Sun, 17 Dec 2023 20:26:31 +0000
-! Diff-Path: ../patches/2023.12.18.1156.patch#ublock-quick-fixes
+! Diff-Path: ../patches/2023.12.19.85.patch#ublock-quick-fixes
 a9 1
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$script,redirect-rule=google-ima.js,domain=dropgalaxy.*
 d13 2
@@ -261,30 +285,44 @@ check-host.net##img:matches-css(width: /^([2-46-8]{1}[0-9]{2}(\.[0-9]+)?px|0px)$
 check-host.net##.alga_n:upward(1)
 a74 1
 infinityscans.xyz##+js(rmnt, script, /Blocker|stop|fetch/, condition, /^\s*\(.*function/)
-diff name:ublock-unbreak lines:6 checksum:cd1421f820
+diff name:ublock-unbreak lines:8 checksum:a066dc3214
 d3 2
 a4 2
-! Last modified: Mon, 18 Dec 2023 09:13:14 +0000
-! Diff-Path: ../patches/2023.12.18.1156.patch#ublock-unbreak
-a2440 1
+! Last modified: Mon, 18 Dec 2023 22:34:50 +0000
+! Diff-Path: ../patches/2023.12.19.85.patch#ublock-unbreak
+a2440 3
 ||cdnwebonplay.gviet.vn/public/js/player/ads/ima3.js$script,3p,redirect-rule=google-ima.js,domain=vtvcab.vn,important
-diff name:easylist lines:178 checksum:a48ce46804
+@@||micro.rubiconproject.com/prebid/dynamic/$script,xmlhttprequest,domain=sportbible.com
+@@||amazon-adsystem.com/aax2/apstag.js$domain=sportbible.com
+diff name:easylist lines:224 checksum:27dc32899d
 d4 2
 a5 2
-! Last modified: Mon, 18 Dec 2023 17:24:53 +0000
-! Diff-Path: ../patches/2023.12.18.1156.patch#easylist
+! Last modified: Mon, 18 Dec 2023 21:17:23 +0000
+! Diff-Path: ../patches/2023.12.19.85.patch#easylist
+d14400 1
+d18563 1
+a18563 1
+iplogger.org#@#.item-ads
+a19641 1
+||abamatoyer.com^
 a22938 1
 ||bipidoan.com^
 a22978 1
 ||bjiehnopho.com^
 a23549 1
 ||bruisedpaperworkmetre.com^
+a23605 1
+||buddlekroner.com^
 a24103 1
 ||cc72fceb4f.com^
 a24544 1
 ||ciedpso.com^
 a25287 1
 ||corruptmatter.com^
+a25438 1
+||crcgrilses.com^
+a25671 1
+||cwipbkyqhloajc.com^
 a25712 1
 ||cyyhkeknmbe.com^
 d25738 1
@@ -296,6 +334,8 @@ a26164 1
 a26943 1
 ||dreamsaukn.org^
 d27129 1
+a27246 1
+||eaglingauslaut.com^
 a27739 1
 ||emwqvlymjydv.com^
 a28756 1
@@ -308,12 +348,16 @@ a29253 1
 ||fouleewu.net^
 a29918 1
 ||ginfohpg.com^
+a30118 1
+||glukropi.com^
 a30154 1
 ||gnqtageoyy.com^
 a30579 1
 ||guitarfelicityraw.com^
 a31215 1
 ||hlbelbblmc.com^
+a31232 1
+||hntkeiupbnoaeha.xyz^
 a31321 1
 ||hophcomeysw.com^
 a31440 1
@@ -324,6 +368,12 @@ a31753 1
 ||ignoresphlorol.com^
 a31856 1
 ||imathematica.org^
+a31918 1
+||impavidmarsian.com^
+a32177 1
+||insecurepaint.pro^
+a32504 1
+||iuc1.online^
 a32516 1
 ||iviugcxgemuk.com^
 a32788 1
@@ -336,6 +386,8 @@ a33547 1
 ||korporatefinau.org^
 a33875 1
 ||lcwoewvvmhj.com^
+a33935 1
+||leesecobourg.com^
 a34494 1
 ||lpausaiverbene.com^
 a34707 1
@@ -344,6 +396,8 @@ a34950 1
 ||markxa.xyz^
 a35171 1
 ||medoofty.com^
+a35197 1
+||megnotch.xyz^
 a35229 1
 ||memorableeditor.com^
 a35332 1
@@ -354,6 +408,8 @@ a35643 1
 ||moduledescendantlos.com^
 a35914 1
 ||muffled-apartment.com^
+a35968 1
+||muskatarsenal.com^
 a36075 1
 ||myyhvsekloyvul.com^
 a36759 1
@@ -376,16 +432,24 @@ a40404 1
 ||qxgbgixnzcoen.com^
 a40584 1
 ||rbgrckaysvrp.com^
+a40862 1
+||reglowsupbar.com^
 a40907 1
 ||relatumrorid.com^
 a41367 1
 ||rmhptjwikttv.com^
 a41576 1
 ||rqdcusltmryapg.com^
+a41678 1
+||rugaetieback.com^
 a42128 1
 ||scrollye.com^
+a42290 1
+||senecaanoles.com^
 a42708 1
 ||silkytitle.com^
+a43047 1
+||snidethereto.com^
 a43298 1
 ||specialisthuge.com^
 a43453 1
@@ -408,12 +472,20 @@ a47091 1
 ||vujriahqyleveh.com^
 a47124 1
 ||vwswilfrveqzw.com^
+a47219 1
+||wanodtbfif.com^
 a47365 1
 ||wcnndaazbwmane.com^
 a48051 1
 ||wretched-confusion.com^
 a48829 1
 ||zbvhwaakws.com^
+a48945 1
+||zipheeda.xyz^
+a52671 1
+||naxadrug.com^$popup
+a53589 1
+||specialisthuge.com^$popup
 a55648 1
 ||d18ql5xgy7gz3p.cloudfront.net^
 a56114 1
@@ -447,11 +519,11 @@ a62146 1
 dailykos.com##.story-banner-ad-placeholder
 a63633 1
 youtube.com###ytd-player button.ytp-suggested-action-badge
-diff name:easyprivacy lines:15 checksum:a8690f8420
+diff name:easyprivacy lines:15 checksum:fe5774450e
 d4 2
 a5 2
 ! Last modified: Mon, 18 Dec 2023 17:24:53 +0000
-! Diff-Path: ../patches/2023.12.18.1156.patch#easyprivacy
+! Diff-Path: ../patches/2023.12.19.85.patch#easyprivacy
 d3375 1
 d9346 1
 a9346 4
