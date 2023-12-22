@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Fri, 22 Dec 2023 01:16:21 +0000
-! Diff-Path: ../patches/2023.12.22.504.patch#ublock-filters
+! Last modified: Fri, 22 Dec 2023 12:09:25 +0000
+! Diff-Path: ../patches/2023.12.22.802.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -19644,10 +19644,11 @@ adshnk.com##+js(nosiif, adblocker, 10000)
 !#endif
 adshnk.com##+js(nano-sib, countdown, *, 0.02)
 businessnamegenerator.com##+js(nostif, gclid)
-@@||derstandard.at^$ghide
-@@||npttech.com/advertising.js$script,domain=derstandard.at
-derstandard.at##ad-container
-derstandard.at##+js(rpnt, script, "adsDisabled":false, "adsDisabled":true)
+@@*$ghide,domain=derstandard.at|derstandard.de
+@@||npttech.com/advertising.js$script,domain=derstandard.at,derstandard.de
+derstandard.at,derstandard.de##ad-container
+derstandard.at,derstandard.de##+js(rpnt, script, "adsDisabled":false, "adsDisabled":true)
+derstandard.at,derstandard.de##+js(nostif, event, 3000)
 ||tirexo.*^$csp=default-src 'unsafe-inline' 'self' *.gstatic.com *.googleapis.com *.jquery.com
 tirexo.*##+js(nowoif)
 ||tirexo.*/main.js?v=$script,1p
@@ -20144,6 +20145,7 @@ xxxshake.com##.fluid-b
 btcbitco.in##+js(acs, window.onload, innerHTML)
 @@||emailn.de^$ghide
 bravedown.com##+js(rmnt, script, AdBlock)
+bravedown.com##+js(set-local-storage-item, a_render, true)
 adzz.in,proappapk.com##+js(ra, disabled, #gotolink)
 adzz.in,proappapk.com###gotolink:style(display: block !important;)
 proappapk.com##.blogContent:has(#verify) .postBody
@@ -20815,8 +20817,9 @@ pornstash.in##+js(aopw, atOptions)
 ! regenerator adservers ex. asian-sexy.com
 ://cdn.*.com/renderer/renderer.js|$script,3p
 ://loc.*.com/renderer/renderer.js|$script,3p
-! awe adservers ex. sexwebvideo.net
+! awe adservers ex. sexwebvideo.net,scrolller.com
 &subAffId={SUBAFFID}^$frame,script,3p
+&subAffId=tall^$frame,script,3p
 ! japan-whores.com ad frame
 ||javhd.com/*/300x250.html?
 shopforex.online##+js(aeld, load, Ads)
@@ -22307,10 +22310,10 @@ sotwe.com##.tweet-card .v-responsive.media-carousel-image .v-responsive__content
 ||d2zue0pgsssbc6.cloudfront.net/j/*-prod.js$script,3p
 ||d2zue0pgsssbc6.cloudfront.net/j/prod-*.js$script,3p
 *$frame,redirect-rule=noopframe,domain=megaup.net
-megaup.net##.metaRedirectWrapperBottomAds, .ametaReeedirectWrapperTopAdd, a[href^="https://tm-offers.gamingadult.com/"]:style(visibility: hidden !important;)
-megaup.net##+js(spoof-css, .metaRedirectWrapperBottomAds\, .ametaReeedirectWrapperTopAdd\, a[href^="https://tm-offers.gamingadult.com/"], visibility, visible)
-download.megaup.net##body > div[id]:not(#downloada.download) a:style(visibility: hidden !important;)
-download.megaup.net##+js(spoof-css, body > div[id]:not(#downloada.download) a, visibility, visible)
+megaup.net##.metaRedirectWrapperBottomAds, .ametaReedirectWrapperTopAdd, a[href^="https://tm-offers.gamingadult.com/"]:style(visibility: hidden !important;)
+megaup.net##+js(spoof-css, .metaRedirectWrapperBottomAds\, .ametaReedirectWrapperTopAdd\, a[href^="https://tm-offers.gamingadult.com/"], visibility, visible)
+download.megaup.net##body > div[id]:not([id="download"][class="download"]) a:style(visibility: hidden !important;)
+download.megaup.net##+js(spoof-css, body > div[id]:not([id="download"][class="download"]) a, visibility, visible)
 @@||megaup.net/imageads/$image,1p
 @@||download.megaup.net^$script,1p
 download.megaup.net##+js(rpnt, script, /if\(\S+?\)\{document/gms, if(false){document)
@@ -23436,3 +23439,7 @@ ytlarge.com##+js(no-fetch-if, doubleclick)
 couponscorpion.com##+js(no-xhr-if, googlesyndication)
 ! netcine2 .la anti-adb
 netcine2.la##+js(aeld, load, fetch)
+bitzite.com##+js(aeld, DOMContentLoaded, antiAdBlockerHandler)
+bitzite.com##+js(nano-sib, timer)
+bitzite.com##center, .modal-overlay
+bitzite.com##form > div[id], [id*="wpsafe"]:style(display: block !important;)
