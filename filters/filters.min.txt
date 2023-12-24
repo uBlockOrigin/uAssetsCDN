@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Sun, 24 Dec 2023 14:31:40 +0000
-! Diff-Path: ../patches/2023.12.24.919.patch#ublock-filters
+! Last modified: Sun, 24 Dec 2023 19:52:47 +0000
+! Diff-Path: ../patches/2023.12.24.1219.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -6709,6 +6709,7 @@ thevidhd.*##h1
 @@||tubitv.com^$ghide
 ||ads.adrise.tv^$3p
 *.mp4$media,redirect=noopmp3-0.1s,domain=tubitv.com
+/cdn.*/ads.$badfilter
 cuatro.com,mitele.es,telecinco.es##+js(aopr, $REACTBASE_STATE.serverModules.push)
 @@||wupfile.com^$ghide
 wupfile.com##[id*=ScriptRoot]
@@ -10203,6 +10204,10 @@ postazap.com##[href^="https://1wvfbz.top/"]
 rawlazy.si##+js(nano-stb, /\$\('|ai-close/, *, 0.001)
 bigdata.rawlazy.si##+js(nano-sib, counter, *, 0.001)
 rawlazy.si##.content-text.lh-16.font-12x
+rsadnetworkinfo.com,rsinsuranceinfo.com,rsfinanceinfo.com,rssoftwareinfo.com,rshostinginfo.com,rseducationinfo.com##+js(set, isRequestPresent, true)
+rsadnetworkinfo.com,rsinsuranceinfo.com,rsfinanceinfo.com,rssoftwareinfo.com,rshostinginfo.com,rseducationinfo.com##+js(nano-sib, count, *, 0.001)
+rsadnetworkinfo.com,rsinsuranceinfo.com,rsfinanceinfo.com,rssoftwareinfo.com,rshostinginfo.com,rseducationinfo.com##table.d,table.c
+rsadnetworkinfo.com,rsinsuranceinfo.com,rsfinanceinfo.com,rssoftwareinfo.com,rshostinginfo.com,rseducationinfo.com##form > div[id]:style(display: block !important;)
 !#if env_mobile
 ! *** filters/filters-mobile.txt ***
 !----- 2020 -----
@@ -21249,8 +21254,8 @@ wp.pl,money.pl,o2.pl,parenting.pl,pudelek.pl,autokult.pl,gadzetomania.pl,fotoblo
 wp.pl,~www.wp.pl,money.pl,o2.pl,parenting.pl,pudelek.pl,autokult.pl,gadzetomania.pl,fotoblogia.pl,komorkomania.pl,polygamia.pl,abczdrowie.pl,open.fm,benchmark.pl,kafeteria.pl,pysznosci.pl,dobreprogramy.pl,genialne.pl,autocentrum.pl,jastrzabpost.pl##div[style="position: relative; top: 0px;"]:has(> a[target="_blank"])
 wp.pl,~www.wp.pl,money.pl,o2.pl,parenting.pl,pudelek.pl,autokult.pl,gadzetomania.pl,fotoblogia.pl,komorkomania.pl,polygamia.pl,abczdrowie.pl,open.fm,benchmark.pl,kafeteria.pl,pysznosci.pl,dobreprogramy.pl,genialne.pl,autocentrum.pl,jastrzabpost.pl##div[class] > div:not([class], [id]):only-child:has(> div[class]:only-child > div[class]:first-child > a > img[src^="https://v.wpimg.pl/"])
 wp.pl,money.pl,o2.pl,parenting.pl,pudelek.pl,autokult.pl,gadzetomania.pl,fotoblogia.pl,komorkomania.pl,polygamia.pl,abczdrowie.pl,open.fm,benchmark.pl,kafeteria.pl,pysznosci.pl,dobreprogramy.pl,genialne.pl,autocentrum.pl,jastrzabpost.pl##+js(trusted-set-cookie, WPcbadcp, $now$)
-wp.pl,money.pl,o2.pl,pudelek.pl,gadzetomania.pl,polygamia.pl,dobreprogramy.pl,autokult.pl,fotoblogia.pl,komorkomania.pl,abczdrowie.pl,pysznosci.pl,money.pl,genialne.pl,deliciousmagazine.pl##div[class]:has(> img[src] + div > style:has-text(flex: 0 0 100%))
-pysznosci.pl,fotoblogia.pl,komorkomania.pl,dobreprogramy.pl,autokult.pl,genialne.pl,gadzetomania.pl,polygamia.pl##div[class]:has(> style:first-child:has-text(flex: 0 0 100%) + div > div > style:first-child:has-text(flex: 0 0 100%) + div):not(:has([data-st-area^="czyt_dalej"]))
+wp.pl,money.pl,o2.pl,pudelek.pl,gadzetomania.pl,polygamia.pl,dobreprogramy.pl,autokult.pl,fotoblogia.pl,komorkomania.pl,abczdrowie.pl,pysznosci.pl,money.pl,genialne.pl,deliciousmagazine.pl,telewizja.jastrzabpost.pl##div[class]:has(> img[src] + div > style:has-text(flex: 0 0 100%))
+pysznosci.pl,fotoblogia.pl,komorkomania.pl,dobreprogramy.pl,autokult.pl,genialne.pl,gadzetomania.pl,polygamia.pl,telewizja.jastrzabpost.pl##div[class]:has(> style:first-child:has-text(flex: 0 0 100%) + div > div > style:first-child:has-text(flex: 0 0 100%) + div):not(:has([data-st-area^="czyt_dalej"]))
 autokult.pl,komorkomania.pl,fotoblogia.pl##div[class]:has(> div[class]:empty + img[src^="https://i.wpimg.pl/"])
 autokult.pl,money.pl##body > div > div[style^="height: "]:has(> a)
 sportowefakty.wp.pl,kafeteria.pl,fitness.wp.pl##div[class*=" "]:has(> div:first-child > div:first-child:empty):matches-css(z-index: 0):matches-css(position: relative)
@@ -21309,6 +21314,7 @@ horoskop.wp.pl##div[class*="reklama_"]
 parenting.pl,abczdrowie.pl##main + div:has(> div > a img[src^="https://v.wpimg.pl/"])
 kobieta.wp.pl##div[data-alternative-wrapper]:has(> div > div > a > img[src^="https://v.wpimg.pl/"][style])
 deliciousmagazine.pl##div[style="min-height: 400px; height: auto;"]:has([class^="cdc-products"])
+pogoda.wp.pl##div[class^="placeholder_"]
 @@||googletagmanager.com/gtm.js$script,domain=abczdrowie.pl
 tralhasvarias.blogspot.com##+js(nano-stb, decodeURL, *)
 tralhasvarias.blogspot.com##+js(nano-sib, updateProgress, *)
@@ -23370,7 +23376,7 @@ everand.com##+js(no-fetch-if, /api/v1/events)
 ! zona11 .com anti-adb
 zona11.com##+js(nostif, keepChecking)
 kemiox.com##+js(rmnt, script, deblocker)
-||baeldung.com/cs/wp-content/themes/baeldung/library/dist/js/ad-recovery.min.js$script,1p
+||baeldung.com/*/wp-content/themes/baeldung/library/dist/js/ad-recovery.min.js$script,1p
 ||cdn.mxpnl.com/libs/mixpanel-2-latest.min.js$script,domain=obefitness.com,redirect=noopjs
 infinite-streaming.live##+js(acs, addEventListener, blocker)
 ! checkersmenu .us anti-adb
@@ -23408,3 +23414,5 @@ scsport.live##+js(nostif, keepChecking)
 casi3.xyz##+js(nostif, show)
 casi3.xyz##+js(rmnt, script, AdBlock)
 ||garticphone.com/videos/gio.mp4$media,1p,redirect=noopmp3-0.1s
+perchance.org##+js(rmnt, script, usingAdPoweredPlugin)
+tekkenmods.com##+js(aopw, HTMLScriptElement.prototype.onerror)
