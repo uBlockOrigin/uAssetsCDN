@@ -1,5 +1,5 @@
 ! Title: uBlock₀ filters – Quick fixes
-! Last modified: Tue, 26 Dec 2023 11:52:34 +0000
+! Last modified: Tue, 26 Dec 2023 16:32:29 +0000
 ! Expires: 12 hours
 ! Description: Immediate, temporary filters to fix websites
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -35,19 +35,14 @@ imgqklw.shop,pixqkhgrt.shop,pixqbngg.shop,pixqwet.shop,pixmos.shop,imgtgd.shop##
 imgqklw.shop,pixqkhgrt.shop,pixqbngg.shop,pixqwet.shop,pixmos.shop,imgtgd.shop##div[class][style="display: block;"]
 @@||imgair.net^$script
 
-! https://old.reddit.com/r/uBlockOrigin/comments/16lmeri/youtube_antiadblock_and_ads_september_18_2023/k1uf2s1/ - c8d5ead8
-tv.youtube.com##+js(trusted-replace-xhr-response, '"adPlacements"', '"no_ads"', /playlist\?list=|player\?key=|watch\?v=|youtubei\/v1\/player/)
 ! https://www.reddit.com/r/uBlockOrigin/comments/16lmeri/youtube_antiadblock_and_ads_september_18_2023/k1wl8df/
 !#if !cap_html_filtering
 !#if env_firefox
 youtube.com##+js(json-prune, playerResponse.adPlacements playerResponse.playerAds playerResponse.adSlots adPlacements playerAds adSlots legacyImportant)
 !#endif
 !#endif
-youtube.com#@##YtSparklesVisibilityIdentifier
-! https://www.reddit.com/r/uBlockOrigin/comments/184fivk/comment/kcw5362/?context=3
-www.youtube.com##+js(trusted-replace-xhr-response, /"adPlacements.*?([A-Z]"\}|"\}{2})\}\]\,/, , /playlist\?list=|player\?key=|watch\?v=|youtubei\/v1\/player/)
 !#if ext_devbuild
-||youtube.com/s/desktop/*/jsbin/desktop_polymer.vflset/desktop_polymer.js$uritransform=/desktop\/\w+\/jsbin/desktop\/e4d15d2c\/jsbin/,domain=www.youtube.com
+||youtube.com/s/desktop/*/jsbin/desktop_polymer.vflset/desktop_polymer.js$uritransform=/desktop\/\w+\/jsbin/desktop\/28b0985e\/jsbin/,domain=www.youtube.com
 !#endif
 
 ! https://github.com/uBlockOrigin/uAssets/issues/18476
@@ -152,18 +147,6 @@ loawa.com,ygosu.com,sportalkorea.com,algumon.com,hancinema.net,enetnews.co.kr,ed
 !#endif
 !#endif
 
-! https://github.com/uBlockOrigin/uAssets/issues/21416
-||cloudfront.net/events$badfilter
-
-! https://github.com/uBlockOrigin/uAssets/issues/21433
-||go.oracle.com^$badfilter
-
-! https://github.com/uBlockOrigin/uAssets/issues/21446
-/web-vitals.$script,redirect-rule=noopjs,domain=amazon.com
-
-! https://github.com/uBlockOrigin/uAssets/issues/21472
-://www.*/firebase.js|$script,3p,to=com,badfilter
-
 ! https://github.com/easylist/easylist/commit/a61d7fa546dfceab90b75d646622979d16122960 backup
 @@||amazon.*/action-impressions/1/OP/$xhr,1p
 
@@ -173,8 +156,5 @@ heaven-burns-red.com#@#article.ad
 ! https://github.com/uBlockOrigin/uAssets/issues/21559
 /cdn.*/ads.$badfilter
 
-! https://github.com/AdguardTeam/AdguardFilters/issues/159931
 ! https://github.com/uBlockOrigin/uAssets/issues/21578
-iwb.jp#@#ins.adsbygoogle
-iwb.jp##ins.adsbygoogle:style(height: 0 !important;)
 iwb.jp##+js(aost, onload, getComputedStyle)
