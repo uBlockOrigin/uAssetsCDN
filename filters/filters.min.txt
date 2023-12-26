@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Tue, 26 Dec 2023 11:49:12 +0000
-! Diff-Path: ../patches/2023.12.26.1040.patch#ublock-filters
+! Last modified: Tue, 26 Dec 2023 21:27:57 +0000
+! Diff-Path: ../patches/2023.12.26.1341.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -16824,11 +16824,11 @@ onlytech.com##+js(acs, $, test)
 ||js.mobileoffers-ep-download.com^$domain=dropgalaxy.*
 dropgalaxy.*##+js(acs, document.createElement, /break;case \$\.|popunder/)
 dropgalaxy.*##+js(aeld, DOMContentLoaded, handler)
-dropgalaxy.*##+js(aeld, , loadScripts)
+!dropgalaxy.*##+js(aeld, , loadScripts)
 dropgalaxy.*##+js(set, window.isAdblockActive, false)
 dropgalaxy.*##+js(trusted-set, document.visibilityState, visible)
 dropgalaxy.*##+js(rpnt, script, true;, false;)
-dropgalaxy.*##+js(rpnt, script, /none|hidden/, 0, condition, getComputedStyle)
+dropgalaxy.*##+js(rpnt, script, /("none")|("hidden")/, (0))
 !dropgalaxy.*##+js(rpnt, script, /s.src =|s.src/i)
 !dropgalaxy.*##+js(rpnt, script, /script1.src|script2.src/, lol.noop)
 dropgalaxy.*,financemonk.net##+js(nowoif)
@@ -22665,7 +22665,7 @@ yt2conv.com##+js(ra, onclick, a#downloadbtn[onclick^="window.open"], stay)
 yt2conv.com##+js(nowoif)
 blogtruyenmoi.com##+js(aeld, click, alink)
 levelupalone.com##+js(aopr, popns)
-bagi.co.in,keran.co##+js(rmnt, script, charAt)
+bagi.co.in,keran.co##+js(rmnt, script, /charAt|XMLHttpRequest/)
 getthit.com##+js(no-fetch-if, /ads|googletagmanager/)
 movies4u.*##+js(nowoif)
 movies4u.*##.ads-btns
@@ -23406,7 +23406,7 @@ serially.it##+js(xml-prune, xpath(//*[name()="Period"][.//*[name()="BaseURL" and
 serially.it##+js(json-prune, ads)
 pkbiosfix.com##+js(nostif, show)
 pkbiosfix.com##+js(rmnt, script, AdBlock)
-autoscout24.*##+js(nostif, /Detect|adblock|style\.display|\[native code]/)
+autoscout24.*##+js(nostif, /Detect|adblock|style\.display|\[native code]|\.call\(null\)/)
 autoscout24.*##div[class^="AdContentBanner"]
 ! scsport .live anti-adb
 scsport.live##+js(nostif, keepChecking)
@@ -23424,3 +23424,4 @@ isthischannelmonetized.com##+js(set, gtag, undefined)
 buxfaucet.com,faucetcaptcha.co.in,gameblog.in,needbux.com##+js(acs, eval, replace)
 @@*$script,xhr,ghide,domain=uptoplay.net
 @@||googlesyndication.com^$frame,domain=uptoplay.net
+chickenkarts.io##+js(aopw, blockedAds)
