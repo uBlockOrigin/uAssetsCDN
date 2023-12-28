@@ -1,5 +1,5 @@
 ! Title: uBlock filters – Link shorteners
-! Last modified: Wed, 27 Dec 2023 08:20:04 +0000
+! Last modified: Thu, 28 Dec 2023 08:55:32 +0000
 ! Expires: 5 days
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Homepage: https://github.com/uBlockOrigin/uAssets
@@ -309,34 +309,25 @@ btcbitco.in,btcsatoshi.net,crypto4yu.com,readbitcoin.org,wiour.com##div.text-cen
 btcbitco.in##+js(set, isRequestPresent, true)
 ||bmcdn6.com^$script,redirect-rule=noop.js
 
-! https://github.com/uBlockOrigin/uAssets/issues/15805
-*$script,domain=carsmania.net|carstopia.net|coinsvalue.net|cookinguide.net|freeoseocheck.com|makeupguide.net,redirect-rule=noopjs
-carsmania.net,carstopia.net,coinsvalue.net,cookinguide.net,freeoseocheck.com,makeupguide.net##+js(acs, document.createElement, adsBlocked)
-carsmania.net,carstopia.net,coinsvalue.net,cookinguide.net,freeoseocheck.com,makeupguide.net##+js(rmnt, script, /window\.location|Adblock/)
-! https://github.com/uBlockOrigin/uAssets/issues/16317
-! https://github.com/uBlockOrigin/uAssets/issues/17166#issuecomment-1480649091
-||blog.carsmania.net/post/$csp=style-src *
-||blog.carstopia.net/post/$csp=style-src *
-||blog.coinsvalue.net/post/$csp=style-src *
-||blog.cookinguide.net/post/$csp=style-src *
-||blog.freeoseocheck.com/post/$csp=style-src *
-||blog.makeupguide.net/post/$csp=style-src *
-blog.freeoseocheck.com##.floating-banner
-blog.carsmania.net,blog.carstopia.net,blog.coinsvalue.net,blog.cookinguide.net,blog.freeoseocheck.com,blog.makeupguide.net##.fa-xmark
-carsmania.net,carstopia.net,coinsvalue.net,cookinguide.net,freeoseocheck.com,makeupguide.net##+js(aeld, load, htmls)
-carsmania.net,carstopia.net,coinsvalue.net,cookinguide.net,freeoseocheck.com,makeupguide.net##+js(set, document.hasFocus, trueFunc)
-carsmania.net,carstopia.net,coinsvalue.net,cookinguide.net,freeoseocheck.com,makeupguide.net##^script:has-text(htmls)
-carsmania.net,carstopia.net,coinsvalue.net,cookinguide.net,freeoseocheck.com##+js(acs, document.getElementById, adss)
-carsmania.net,carstopia.net,coinsvalue.net,cookinguide.net,freeoseocheck.com,makeupguide.net###ad\.js
-blog.carsmania.net,blog.carstopia.net,blog.coinsvalue.net,blog.cookinguide.net,blog.freeoseocheck.com,blog.makeupguide.net##+js(aopw, adBlockDetected)
-blog.carsmania.net,blog.carstopia.net,blog.coinsvalue.net,blog.cookinguide.net,blog.freeoseocheck.com,blog.makeupguide.net##+js(set, navigator.brave, undefined)
-blog.carsmania.net,blog.carstopia.net,blog.coinsvalue.net,blog.cookinguide.net,blog.freeoseocheck.com,blog.makeupguide.net##+js(refresh-defuser)
-blog.carsmania.net,blog.carstopia.net,blog.coinsvalue.net,blog.cookinguide.net,blog.freeoseocheck.com,blog.makeupguide.net##+js(nostif, , 2500)
-blog.carsmania.net,blog.carstopia.net,blog.coinsvalue.net,blog.cookinguide.net,blog.freeoseocheck.com,blog.makeupguide.net##+js(aost, HTMLBodyElement.prototype.removeChild, onload)
+! https://github.com/uBlockOrigin/uAssets/issues/21549#issuecomment-1869871771
+@@||cdn.bmcdn6.com^$script,xhr,domain=cryptowidgets.net|wiki-topia.com|insurancegold.in
+cryptowidgets.net,insurancegold.in,wiki-topia.com##+js(rpnt, script, window.location.href = "/detected.html";)
 !#if cap_html_filtering
-*$script,1p,replace=/window\.location\.assign\("\/detected\.html"\);/""/g,domain=blog.carsmania.net|blog.carstopia.net|blog.coinsvalue.net|blog.cookinguide.net|blog.freeoseocheck.com|blog.makeupguide.net
+*$script,1p,replace=/window\.location\.href = "\/detected\.html";/""/g,domain=cryptowidgets.net|insurancegold.in|wiki-topia.com
 !#endif
-||bitcotasks.com/*.php$script,domain=carsmania.net|carstopia.net|coinsvalue.net|cookinguide.net|freeoseocheck.com|makeupguide.net
+blog.cryptowidgets.net,blog.insurancegold.in,blog.wiki-topia.com##.col,.form-group,._hide
+blog.cryptowidgets.net,blog.insurancegold.in,blog.wiki-topia.com##center > [style] > [id]:style(display: block !important;)
+blog.cryptowidgets.net,blog.insurancegold.in,blog.wiki-topia.com##form[id][method="post"] :is(h2,h3:not(#click),h4,p,ul)
+
+! https://github.com/uBlockOrigin/uAssets/issues/15805
+@@||cdn.bmcdn6.com^$script,xhr,domain=carsmania.net|carstopia.net|coinsvalue.net|cookinguide.net|freeoseocheck.com|makeupguide.net
+carsmania.net,carstopia.net,coinsvalue.net,cookinguide.net,freeoseocheck.com,makeupguide.net##+js(rpnt, script, window.location.href = "/detected.html";)
+!#if cap_html_filtering
+*$script,1p,replace=/window\.location\.href = "\/detected\.html";/""/g,domain=carsmania.net|carstopia.net|coinsvalue.net|cookinguide.net|freeoseocheck.com|makeupguide.net
+!#endif
+carsmania.net,carstopia.net,coinsvalue.net,cookinguide.net,freeoseocheck.com,makeupguide.net##.col,.form-group,._hide
+carsmania.net,carstopia.net,coinsvalue.net,cookinguide.net,freeoseocheck.com,makeupguide.net##center > [style] > [id]:style(display: block !important;)
+carsmania.net,carstopia.net,coinsvalue.net,cookinguide.net,freeoseocheck.com,makeupguide.net##form[id][method="post"] :is(h2,h3:not(#click),h4,p,ul)
 
 ! https://github.com/bogachenko/fuckfuckadblock/issues/167
 loan2host.com,tei.ai,tii.ai##+js(aopr, app_vars.force_disable_adblock)
@@ -502,11 +493,12 @@ aduzz.com,bitcrypto.info##+js(set, wpsafelinkCount, 0)
 
 ! https://go.tinys.click/jzEDHsQHbNTokEJrRorG
 tinys.click##+js(noeval-if, adsBlocked)
+tinys.click##+js(rmnt, script, antiAdBlockerHandler)
 tinys.click##+js(set, blurred, false)
 tinys.click##+js(set, go_popup, {})
+tinys.click##.text-left, .banner-inner, .separator, .gmr-box-content
 tinys.click###wpsafe-generate, #wpsafe-link:style(display: block !important)
 tinys.click##div[id^="wpsafe-wait"]
-tinys.click##.banner-inner, .fixed-leftSd, .fixed-rightSd, .separator > a[target="_blank"], .banner-captcha ~ .text-left
 
 ! https://github.com/uBlockOrigin/uAssets/issues/21531
 ! https://github.com/uBlockOrigin/uAssets/discussions/17361#discussioncomment-6583759
@@ -525,8 +517,7 @@ bitzite.com##form > div[id], [id*="wpsafe"]:style(display: block !important;)
 cpmlink.pro##+js(ra, data-ppcnt_ads, , stay)
 cpmlink.pro##+js(nowoif, php)
 cpmlink.pro##+js(nano-sib)
-cpmlink.pro###toasts
-cpmlink.pro##.alternative-ad
+cpmlink.pro###toasts, .alternative-ad
 bildirim.link##+js(set, Notification, undefined)
 
 ! https://github.com/uBlockOrigin/uAssets/discussions/17361#discussioncomment-7144221
@@ -622,3 +613,7 @@ rsadnetworkinfo.com,rsinsuranceinfo.com,rsfinanceinfo.com,rsgamer.app,rssoftware
 cravesandflames.com##+js(set, go_popup, {})
 cravesandflames.com##[href^="https://apps.apple.com/"]
 cravesandflames.com##[href^="https://play.google.com/"]
+
+! https://www.reddit.com/r/uBlockOrigin/comments/18sm4q5/how_to_fast_timer_on_this_url/
+filmypoints.in##+js(nano-sib, timer, 1000, 0.001)
+filmypoints.in##+js(set, count, 0)
