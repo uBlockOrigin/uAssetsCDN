@@ -1,5 +1,5 @@
 ! Title: uBlock filters (2022)
-! Last modified: Thu, 28 Dec 2023 09:11:48 +0000
+! Last modified: Thu, 28 Dec 2023 11:30:37 +0000
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -466,12 +466,6 @@ suzihaza.com##+js(aopr, __Y)
 ! https://www.reddit.com/r/uBlockOrigin/comments/sa1487/create_filter_to_run_across_all_pages_of_a_domain/
 freecoursesites.com##+js(acs, eval, replace)
 freecoursesites.com##.herald_adsense_widget
-
-! https://www.reddit.com/r/uBlockOrigin/comments/sace7s/ubo_detected_on_httpsupvizzzxyzvb7sahcrvythx/
-*$xhr,redirect-rule=nooptext,domain=upvizzz.xyz
-upvizzz.xyz##+js(nowoif)
-upvizzz.xyz##div[style="position: fixed; display: block; width: 100%; height: 100%; inset: 0px; background-color: rgba(0, 0, 0, 0); z-index: 300000;"]
-||upvizzz.xyz/assets/js/pack.js^
 
 ! https://github.com/uBlockOrigin/uAssets/issues/11437
 derivative-calculator.net##+js(aopr, fallbackAds)
@@ -1549,9 +1543,6 @@ rureka.com##+js(aeld, , $)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/12459
 inwepo.co##+js(aopr, b2a)
-
-! https://github.com/uBlockOrigin/uAssets/issues/12464
-weakstreams.com##+js(acs, setTimeout, admc)
 
 ! anti adb initBlocked
 ! forfun.ist,mayclub.com.tw,sheikhjee.com,hauswirt.com,houseofcharizma.com
@@ -3718,7 +3709,15 @@ ewrc-results.com##+js(set, canGetAds, true)
 @@||yt2save.com^$ghide
 
 ! https://github.com/uBlockOrigin/uAssets/issues/14237
-theappstore.org##+js(set, detectAB1, noopFunc)
+@@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$xhr,domain=theappstore.org
+!#if ext_devbuild
+theappstore.org##+js(no-fetch-if, adsbygoogle, length:11000)
+!#else
+!#if cap_html_filtering
+||theappstore.org/script.js?v=$script,1p,replace=/result\.length \> 10000/result.length < 10000/g
+theappstore.org##+js(no-fetch-if, adsbygoogle)
+!#endif
+!#endif
 
 ! https://github.com/uBlockOrigin/uAssets/issues/14238
 dzeko11.net##+js(nostif, keepChecking)
