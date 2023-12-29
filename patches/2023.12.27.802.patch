@@ -1,9 +1,25 @@
-diff name:ublock-annoyances lines:12 checksum:f3d09d1d23
+diff name:ublock-annoyances lines:28 checksum:e2f3f500ea
 d3 2
 a4 2
-! Last modified: Thu, 28 Dec 2023 15:47:18 +0000
-! Diff-Path: ../patches/2023.12.28.1155.patch#ublock-annoyances
+! Last modified: Thu, 28 Dec 2023 20:37:24 +0000
+! Diff-Path: ../patches/2023.12.29.72.patch#ublock-annoyances
 d468 4
+a471 15
+! essential only
+mafu.de##+js(trusted-set-cookie, wmm-visitor_token, 4cb8860d-4194-4ab5-be04-10f9a26afaa8)
+! essential only
+paf.com##+js(trusted-set-cookie, cookieConsent, {%22essential%22:true%2C%22tracking%22:false%2C%22marketing%22:false})
+! Continue without agreeing, hide consent flash
+frandroid.com###didomi-host
+frandroid.com##+js(trusted-click-element, .didomi-continue-without-agreeing)
+! functional only, ad/analytics denied
+flip.gr##+js(trusted-set-cookie, consts, '{%22ad_storage%22:%22denied%22%2C%22analytics_storage%22:%22denied%22%2C%22functionality_storage%22:%22granted%22}')
+! necessarry
+andersiahotel.pl##+js(trusted-set-cookie, _CookiesPolicyAccepted, [%22necessary%22])
+! functional only (hide consent flash)
+nutri-plus.de##.acris-cookie-consent
+nutri-plus.de##.modal-backdrop
+nutri-plus.de##+js(trusted-click-element, #ccAcceptOnlyFunctional, , 4000)
 d2981 2
 a4198 5
 !#if cap_html_filtering
@@ -11,20 +27,21 @@ a4198 5
 !#endif
 solarmovie.*##+js(nostif, _detectLoop)
 chowhound.com,explore.com,foodie.com,foodrepublic.com,glam.com,grunge.com,healthdigest.com,housedigest.com,looper.com,mashed.com,moneydigest.com,nickiswift.com,outdoorguide.com,slashfilm.com,slashgear.com,tastingtable.com,thedailymeal.com,thelist.com,women.com,wrestlinginc.com##+js(aeld, copy)
-diff name:ublock-badware lines:6 checksum:e58d0b886e
+diff name:ublock-badware lines:6 checksum:0e439e0c1e
 d3 2
 a4 2
 ! Last modified: Wed, 27 Dec 2023 14:20:08 +0000
-! Diff-Path: ../patches/2023.12.28.1155.patch#ublock-badware
+! Diff-Path: ../patches/2023.12.29.72.patch#ublock-badware
 a2679 1
 ||foretheure.jp^$doc
-diff name:ublock-filters lines:155 checksum:bcb3313c08
+diff name:ublock-filters lines:196 checksum:27ae879ea9
 d3 2
 a4 2
-! Last modified: Thu, 28 Dec 2023 18:53:30 +0000
-! Diff-Path: ../patches/2023.12.28.1155.patch#ublock-filters
+! Last modified: Fri, 29 Dec 2023 00:39:07 +0000
+! Diff-Path: ../patches/2023.12.29.72.patch#ublock-filters
 d796 1
 d1089 1
+d2286 4
 d2855 3
 d4147 1
 a4147 1
@@ -33,31 +50,44 @@ d5075 1
 a5080 1
 ||solarmovie.vip/js/dab.min.js
 d6829 1
+d9840 10
+a9849 10
+*$frame,redirect-rule=noopframe,domain=gplinks.co|jobnewsj.com|businessloan5.com|serkarijobresult.com|disking.in|studygovtyojana.com
+@@||gplinks.in/track/$script,xhr,domain=gplinks.co|jobnewsj.com|businessloan5.com|serkarijobresult.com|disking.in|studygovtyojana.com
+@@||googlesyndication.com^$script,xhr,domain=gplinks.co|jobnewsj.com|businessloan5.com|serkarijobresult.com|disking.in|studygovtyojana.com
+@@||doubleclick.net^$script,xhr,domain=jobnewsj.com|businessloan5.com|serkarijobresult.com|disking.in|studygovtyojana.com
+@@*$ghide,domain=gplinks.co|jobnewsj.com|businessloan5.com|serkarijobresult.com|disking.in|studygovtyojana.com
+jobnewsj.com,businessloan5.com,serkarijobresult.com,disking.in,studygovtyojana.com##center:others()
+jobnewsj.com,businessloan5.com,serkarijobresult.com,disking.in,studygovtyojana.com##+js(acs, navigator.brave)
+jobnewsj.com,businessloan5.com,serkarijobresult.com,disking.in,studygovtyojana.com##+js(aopw, AdBDetected)
+jobnewsj.com,businessloan5.com,serkarijobresult.com,disking.in,studygovtyojana.com##+js(set, count, 0)
+jobnewsj.com,businessloan5.com,serkarijobresult.com,disking.in,studygovtyojana.com##[id*="iframe"], [id*="gpt_unit"], [id*="div-gpt-"]:style(height:0.0001px !important;)
 d9933 3
 a9935 3
 recipese.com,easyworldbusiness.com,riveh.com###yuidea-snp, #yuidea-btn-after, a[href]:style(display: block !important;)
 recipese.com,easyworldbusiness.com,riveh.com##center, [src*="google.com/recaptcha/"]:others()
 recipese.com,easyworldbusiness.com,riveh.com##+js(nano-sib, timer, *, 0.02)
 d10089 21
-a10109 2
+a10109 10
 @@||cdn.bmcdn6.com^$script,xhr,domain=cryptowidgets.net|wiki-topia.com|insurancegold.in
 cryptowidgets.net,insurancegold.in,wiki-topia.com##+js(rpnt, script, window.location.href = "/detected.html";)
-d10111 1
-a10111 1
+!#if cap_html_filtering
 *$script,1p,replace=/window\.location\.href = "\/detected\.html";/""/g,domain=cryptowidgets.net|insurancegold.in|wiki-topia.com
-d10113 1
-a10113 11
+!#endif
 blog.cryptowidgets.net,blog.insurancegold.in,blog.wiki-topia.com##.col,.form-group,._hide
 blog.cryptowidgets.net,blog.insurancegold.in,blog.wiki-topia.com##center > [style] > [id]:style(display: block !important;)
 blog.cryptowidgets.net,blog.insurancegold.in,blog.wiki-topia.com##form[id][method="post"] :is(h2,h3:not(#click),h4,p,ul)
 @@||cdn.bmcdn6.com^$script,xhr,domain=carsmania.net|carstopia.net|coinsvalue.net|cookinguide.net|freeoseocheck.com|makeupguide.net
 carsmania.net,carstopia.net,coinsvalue.net,cookinguide.net,freeoseocheck.com,makeupguide.net##+js(rpnt, script, window.location.href = "/detected.html";)
-!#if cap_html_filtering
+d10111 1
+a10111 1
 *$script,1p,replace=/window\.location\.href = "\/detected\.html";/""/g,domain=carsmania.net|carstopia.net|coinsvalue.net|cookinguide.net|freeoseocheck.com|makeupguide.net
-!#endif
+d10113 1
+a10113 4
 carsmania.net,carstopia.net,coinsvalue.net,cookinguide.net,freeoseocheck.com,makeupguide.net##.col,.form-group,._hide
 carsmania.net,carstopia.net,coinsvalue.net,cookinguide.net,freeoseocheck.com,makeupguide.net##center > [style] > [id]:style(display: block !important;)
 carsmania.net,carstopia.net,coinsvalue.net,cookinguide.net,freeoseocheck.com,makeupguide.net##form[id][method="post"] :is(h2,h3:not(#click),h4,p,ul)
+carsmania.net,carstopia.net,coinsvalue.net,cookinguide.net,freeoseocheck.com,makeupguide.net##.g-recaptchaa
 a10244 1
 tinys.click##+js(rmnt, script, antiAdBlockerHandler)
 a10246 1
@@ -66,16 +96,40 @@ d10249 1
 d10263 2
 a10264 1
 cpmlink.pro###toasts, .alternative-ad
-a10334 3
+a10334 25
 filmypoints.in##+js(nano-sib, timer, 1000, 0.001)
 filmypoints.in##+js(set, count, 0)
 financeyogi.net,finclub.in,go.tnshort.net##+js(nano-sib, timer, *, 0.001)
+! linksfire.co (link.linksfire.co/dLvqhe)
+blog.linksfire.co##+js(aopr, app_vars.force_disable_adblock)
+blog.linksfire.co##[href^="https://b3stcond1tions.com/"]
+blog.linksfire.co##div.separator > b
+blog.linksfire.co##.banner
+blog.linksfire.co##.ex2
+blog.linksfire.co##.link-details
+linksfire.*##+js(aopr, open)
+bartendingexpert.com###yuidea-snp:style(display: block !important;)
+bartendingexpert.com###yuidea-snp:others()
+! linkco.pro (linkco.pro/N8kQfv)
+easywithcode.tech,letest25.co,truevpnlover.com##+js(nano-sib, timer, *, 0.001)
+letest25.co,truevpnlover.com###tp-snp2:others()
+easywithcode.tech###cross-snp2:others()
+! dollerlinksd.in (dollerlinksd.in/ZN4p)
+rphost.in,vedamdigi.tech##+js(nano-sib, timer, *, 0.001)
+rphost.in###tp-snp2:others()
+vedamdigi.tech###cross-snp2:others()
+vedamdigi.tech##.g-recaptcha, #cross-verify-go, .captcha-check, [src*="google.com/recaptcha/"]:others()
+! linkpays.in (linkpays.in/Kdk)
+insuranceinfos.in###center, #wpsafe-snp, #btn11, #btn6:style(display: block !important;)
+insuranceinfos.in###center, #wpsafe-snp, #btn11, #btn6:others()
 d10545 2
 a10546 2
 notube.*,~notube.com##+js(ra, onClick)
 notube.*,~notube.com##+js(nowoif)
 d11945 3
 d12324 1
+d12367 6
+d13216 1
 d13400 1
 a13400 1
 booru.eu,borwap.xxx,centralboyssp.com.br,czxxx.org,filmdelisi.co,filmovitica.com,foxtube.com,hd-xxx.me,ipornxxx.net,itsfuck.com,javembed.*,javideo.pw,kissanime.*,lametrofitness.net,longporn.xyz,matureworld.ws,mp3-convert.org,sexy-games.*,stilltube.com,streamm4u.club,teenage-nudists.net,xvideos.name,xxx-videos.org,xxxputas.net,youpornfm.com,maxtubeporn.net,vidsvidsvids.com##+js(nowoif)
@@ -160,7 +214,7 @@ tabele-kalorii.pl##+js(noeval-if, AdBlock)
 d22730 1
 a23188 1
 fplstatistics.co.uk##+js(no-fetch-if, googlesyndication)
-a23433 13
+a23433 16
 pl#@#.ad
 pl#@#[class$="-ads"]
 radiosupernova.pl##.zpr_combo
@@ -174,29 +228,42 @@ gncloudy.com##+js(acs, eval, replace)
 teksnologi.com##+js(rmnt, script, deblocker)
 ! dollareuro .live anti-adb
 dollareuro.live##+js(rmnt, script, deblocker)
-diff name:ublock-privacy lines:3 checksum:b97912ab6b
+loot-links.com##+js(no-fetch-if, googlesyndication)
+sethphat.com##+js(nano-stb, total, 1000, 0.001)
+theapkfolder.com##+js(nano-stb, countdown, *, 0.001)
+diff name:ublock-privacy lines:3 checksum:28ffb7f432
 d4 1
 a4 1
-! Diff-Path: ../patches/2023.12.28.1155.patch#ublock-privacy
-diff name:ublock-quick-fixes lines:9 checksum:5595e4152c
+! Diff-Path: ../patches/2023.12.29.72.patch#ublock-privacy
+diff name:ublock-quick-fixes lines:19 checksum:13e98da666
 d3 2
 a4 2
-! Last modified: Thu, 28 Dec 2023 18:08:10 +0000
-! Diff-Path: ../patches/2023.12.28.1155.patch#ublock-quick-fixes
+! Last modified: Thu, 28 Dec 2023 20:34:10 +0000
+! Diff-Path: ../patches/2023.12.29.72.patch#ublock-quick-fixes
+d71 4
+a74 4
+check-host.net##.bg-ch-blue.text-white:has(a:has-text(/website prot𝅹ection|website protectiоn|Защита cайта|Защита сайтa/i))
+check-host.net###hostazq, a[href^="/egtgo/"], a[href$="/prmetn"], a[href^="/egtgo/"], a[href$="/dk/en/web"], #sntkwbtchamsalexhost, .pr-e-lative, #sntkwbtchamspp-juiaryt, #sntkwbtchamspp-juiaryt2, .happy-new-year-to-all-adguard-and-ublock-volunteers
+check-host.net##.alxa_n:upward(1)
+check-host.net##img:matches-css(width: /^[2-46-8]{1}[0-9]{2}(\.[0-9]+)?px$/):matches-css(height: /^[3-57-9]{1}[0-9]{1}(\.[0-9]+)?px$/):upward(1):remove()
+d78 2
+a79 2
+check-host.net##a:has(img[loading="lazy"][class]):remove()
+check-host.net###insideyourip + [id]
 d128 1
 a128 1
 iwb.jp##+js(nostif, location.href)
 a130 1
 ||foxsports.com/static/orion/js/segment-analytics.js$badfilter
-diff name:ublock-unbreak lines:3 checksum:19ff45e5e2
+diff name:ublock-unbreak lines:3 checksum:519e8c1ea0
 d4 1
 a4 1
-! Diff-Path: ../patches/2023.12.28.1155.patch#ublock-unbreak
-diff name:easylist lines:135 checksum:10f0394739
+! Diff-Path: ../patches/2023.12.29.72.patch#ublock-unbreak
+diff name:easylist lines:154 checksum:33233af12c
 d4 2
 a5 2
-! Last modified: Thu, 28 Dec 2023 14:31:18 +0000
-! Diff-Path: ../patches/2023.12.28.1155.patch#easylist
+! Last modified: Thu, 28 Dec 2023 21:11:07 +0000
+! Diff-Path: ../patches/2023.12.29.72.patch#easylist
 a18809 1
 ||1c447fc5b7.com^
 a20525 1
@@ -205,8 +272,14 @@ a21052 1
 ||alwubrhkxgqdiw.com^
 a22542 1
 ||bdmbazqsboxooh.com^
+a23586 1
+||brownerchunam.com^
+a24092 1
+||cashooscrunode.com^
 a24980 1
 ||coevalscabbagy.com^
+a25569 1
+||cricksnatchez.com^
 a25692 1
 ||cugeeksy.net^
 a25797 1
@@ -221,6 +294,8 @@ a31348 1
 ||hingamgladt.org^
 a31421 1
 ||hn1l.online^
+a31497 1
+||hooglidi.net^
 a32001 1
 ||ikevinwfc.com^
 a33026 1
@@ -233,6 +308,8 @@ a34049 1
 ||lasosignament.com^
 a34419 1
 ||linensephraim.com^
+a34724 1
+||lovesgoner.com^
 a34897 1
 ||lvlmhyjzdan.com^
 a35047 1
@@ -259,6 +336,8 @@ a37197 1
 ||nvzcoggh.com^
 a38453 1
 ||panuelobriard.com^
+a39164 1
+||pirniemagi.com^
 a40544 1
 ||qdotzfy.com^
 a40595 1
@@ -285,6 +364,8 @@ a47556 1
 ||vuphoubs.com^
 a49473 1
 ||zjpwrpo.com^
+a50190 1
+||codegown.care^$third-party
 a50293 1
 ||erling.online^$third-party
 a50324 1
@@ -322,17 +403,23 @@ a58584 4
 ||marine.xhamster.desi^
 ||marine.xhamster2.com^
 ||marine.xhamster3.com^
+a60621 1
+chowhound.com,glam.com,moneydigest.com,outdoorguide.com,svg.com##.before-ad
 a62141 1
 newkerala.com##.pb-2 .text-mute
 a62894 1
 sportingnews.com##.top-mpu-container
+d63190 1
+a63190 1
+beincrypto.com,bitcoinist.com,captainaltcoin.com,coincodex.com,coinpaprika.com,coinspeaker.com,crypto-news-flash.com,cryptonews.com,cryptonewsz.com,insidebitcoins.com,philnews.ph,techreport.com##[class*="clickout-"]
 a63697 1
 aajtakcampus.in##div[class*="ads_ads_container__"]
-diff name:easyprivacy lines:11 checksum:a35fb8c8db
+diff name:easyprivacy lines:12 checksum:ba837ccd72
 d4 2
 a5 2
-! Last modified: Thu, 28 Dec 2023 08:53:44 +0000
-! Diff-Path: ../patches/2023.12.28.1155.patch#easyprivacy
+! Last modified: Thu, 28 Dec 2023 21:11:07 +0000
+! Diff-Path: ../patches/2023.12.29.72.patch#easyprivacy
+d5934 1
 a7076 1
 ||handyincrease.com^
 a10178 1
