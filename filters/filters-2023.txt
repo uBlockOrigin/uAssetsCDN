@@ -1,5 +1,5 @@
 ! Title: uBlock filters (2023)
-! Last modified: Mon, 01 Jan 2024 13:19:00 +0000
+! Last modified: Mon, 01 Jan 2024 17:05:37 +0000
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -1426,6 +1426,7 @@ battleroyal.online###link1s-snp:style(display: block !important;)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/17166#issuecomment-1479792886
 bitcosite.com,bitzite.com##+js(no-fetch-if, googlesyndication)
+bitcosite.com##+js(acs, eval, replace)
 bitcosite.com##+js(set, blurred, false)
 ! https://github.com/uBlockOrigin/uAssets/discussions/17361#discussioncomment-6595762
 @@||googletagmanager.com/gtm.js$domain=go.bitcosite.com
@@ -1827,6 +1828,7 @@ www.wp.pl###glonews > div > div:has(> div > a[href^="https://www.wp.pl/"] > img[
 www.wp.pl##.app-container > div:has(div + img[src^="https://v.wpimg.pl/"] + div:empty)
 www.wp.pl##div:has(> div > div > iframe[scrolling="no"][data-bunch][data-slot]:empty)
 www.wp.pl##div:has(> div:first-child:empty + div:empty)
+www.wp.pl##aside > div > div[data-st-area="Wiadomosci"] ~ div[class]:has(div[style^="transform:"] > a[style="text-decoration: none;"])
 money.pl##div:has-text(> style:has-text(flex: 0 0 100%))
 !#endif
 pilot.wp.pl##div[class]:has(> img[src] + div + style:has-text(flex: 0 0 100%))
@@ -1840,6 +1842,7 @@ money.pl##div[data-breakpoint] > div > div:has(> div > div > div > div > div > a
 money.pl##div[data-breakpoint] > div > div > main > div:first-child:has(a[href="/sekcja/kongres-590/"])
 money.pl##div:not([class], [id]):has(> div:not([class], [id]) > div:first-child > div:first-child > iframe[scrolling="no"][frameborder="0"])
 money.pl###app > div:first-child > div:not([class], [id]):has(> div:not([class^="sc-"]))
+money.pl##.adsize_content > div + div:has(> div > a img[loading="lazy"])
 moto.wp.pl,wiadomosci.wp.pl,kobieta.wp.pl,pysznosci.pl,autokult.pl,parenting.pl,o2.pl##div:has(> div > iframe[src^="https://v.wpimg.pl/"][frameborder="0"][scrolling="no"]:first-child)
 genialne.pl,jastrzabpost.pl##div[style="background: #ddd9d9; margin-bottom: 10px; width: 100%;"]
 wiadomosci.wp.pl##div:has(> div:first-child > img[src^="https://v.wpimg.pl/"][height="45"][width="56"])
@@ -2893,6 +2896,10 @@ uploadboy.com##+js(rpnt, script, self.location.href;, self.location.href; docume
 uploadboy.com##+js(rpnt, script, //$('#btn_download').click();, $('#btn_download').click();, sedCount, 1)
 ! https://dehlinks.ir/link_download.php?Mozojadid_Id=166517 - Timer
 ||dehlinks.ir/link_download.php?Mozojadid_Id=$doc,replace=/content="15;/content="0;/
+! https://github.com/MasterKia/PersianBlocker/issues/218
+reymit.ir##+js(trusted-rpnt, script, /reymit_ads_for_categories\.length>0|reymit_ads_for_streams\.length>0/g, false)
+||a.reymit.ir^$1p,frame
+reymit.ir##div.featured-holder > div.owl-carousel > div.owl-stage-outer > div.owl-stage > div.owl-item:has(> div.item > div > div.placeholder > iframe[src^="https://a.reymit.ir/"]):remove()
 
 ! https://github.com/AdguardTeam/AdguardFilters/issues/153146
 lifesurance.info##+js(set, showAdss, true)
@@ -5506,6 +5513,7 @@ myradioonline.pl##+js(set, AddAdsV2I.addBlock, false)
 
 ! https://github.com/AdguardTeam/AdguardFilters/issues/168921
 ytlarge.com##+js(no-fetch-if, doubleclick)
+ytlarge.com##+js(rmnt, script, Adblock)
 @@||ytlarge.com^$ghide
 
 ! couponscorpion .com anti-adb
