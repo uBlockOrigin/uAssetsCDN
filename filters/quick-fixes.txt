@@ -1,5 +1,5 @@
 ! Title: uBlock₀ filters – Quick fixes
-! Last modified: Fri, 05 Jan 2024 04:45:45 +0000
+! Last modified: Fri, 05 Jan 2024 15:07:56 +0000
 ! Expires: 12 hours
 ! Description: Immediate, temporary filters to fix websites
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -121,12 +121,13 @@ infinityscans.xyz,infinityscans.net##+js(rmnt, script, ;break;case $.)
 ! https://github.com/easylist/easylistgermany/issues/216
 ! https://github.com/uBlockOrigin/uAssets/issues/21504
 www.chip.de##+js(rpnt, script, /if \([a-zA-Z]+ && [a-zA-Z]+ === (0|\[\]\.length|\([0-9\-\+\+\/]+\)) && [a-zA-Z]+ !== 1\) \{/, if(true){, condition, publisherAdsRp)
-www.chip.de##+js(rpnt, style,  a {margin:0 auto;width:100%;max-width:970px;padding-top:10px;}, {display: none !important;}, condition, /aspect-ratio:\s?auto/)
-www.chip.de##+js(rpnt, style,  @media screen and (max-width: 659.99px), @media screen and (max-width: 10000px), condition, /aspect-ratio:\s?auto/)
+www.chip.de##+js(rpnt, style, a {margin:0 auto; width:100%; max-width:970px;padding-top:10px; }, {display: none !important;}, condition, /aspect-ratio:\s?auto/)
+www.chip.de##+js(rpnt, style, @media screen and (min-width: 694px), @media screen and (max-width: 1px), condition, /aspect-ratio:\s?auto/)
 www.chip.de##+js(rpnt, style, a > div { width:auto;padding-right:0;padding-left:0; }, {display: none !important;}, condition, /aspect-ratio:\s?auto/)
 www.chip.de##body.l-DownloadListing > div:has(> div > ul a[href^="https://www.chip.de/downloads/"] img[src^="https://im.chip.de/"])
 www.chip.de##body.l-DownloadListing .wrapper-safe.mt-sm > .fb > section:not(.Listing) ul:has(> li a[href^="https://www.chip.de/downloads/"] img[src^="https://im.chip.de/"])
 www.chip.de###CR.Downloads-Detail main#M1 > .wrapper-safe > .fb > [class="fb-col-lg-4 is-hidden-sm is-hidden-md"] > *:not([class="mt-md"]):has(ul a[href^="https://www.chip.de/downloads/"] img[src^="https://im.chip.de/"])
+www.chip.de##body[class="l-DownloadListing is-sticky"] > [class="Main Main--Skyscraper"] > .Main__Container > main[class="Downloads DownloadListing bg-white mt-xs"] > [class="mt-sm wrapper-bleed bg-blue"] + [class="wrapper-safe"]:has(a img[src^="https://im.chip.de/ii/"])
 
 ! Ad-Shield
 ! https://github.com/uBlockOrigin/uAssets/issues/21346
@@ -174,6 +175,7 @@ bitcotasks.com##+js(rpnt, script, window_paused = false;, window_paused = false;
 @@||cleaningmaturegallop.com/*/invoke.js$script,domain=ourtecads.com
 ourtecads.com##+js(no-fetch-if, cleaningmaturegallop)
 ourtecads.com##+js(no-xhr-if, /^/)
+ourtecads.com##+js(rpnt, script, /if\(.*?\.body\.innerHTML\.length > [0-9]+\) \{/, if(true){)
 *$domain=ourtecads.com
 !#if cap_html_filtering
 bitcotasks.com##^script:has-text(AdblockRegixFinder)
@@ -183,15 +185,11 @@ bitcotasks.com##+js(rmnt, script, AdblockRegixFinder)
 
 ! paste. fo ads
 paste.fo##+js(rpnt, style, display: flex, display: none)
-paste.fo##+js(rpnt, style, /display:\s*var\(--.*?\);/, display: none !important;)
+paste.fo##+js(rpnt, style, /display:\s*var\(--.*?\);/, visibility: hidden !important; max-height: 0px !important;)
 paste.fo##a:has-text(Free:)
-paste.fo##a:matches-css-after(content:/Free:/)
-||imgur.com/GFcm2wO.gif$image,3p
-||imgur.com/Hf3Hp59.gif$image,3p
-||imgur.com/PpAlOJn.gif$image,3p
-||ibb.co/YyX9k9v/BannerC.gif$image,3p
-||external-content.duckduckgo.com/iu/?u=*gifyu.com*.gif$image,domain=paste.fo
-||paste.fo/assets/img/default4.png$image,1p
+paste.fo##a[href^="https://anonsmm.com/?utm_source"], a[href="https://cryptochanger.to/"]
+paste.fo##a *:matches-css-after(content:/Free:/)
+/paste\.fo\/[A-Z0-9]{70,100}\.gif$/$image,1p,domain=paste.fo
 
 ! https://github.com/uBlockOrigin/uAssets/discussions/17361#discussioncomment-8002410
 blog.cryptowidgets.net,blog.insurancegold.in,blog.wiki-topia.com##+js(set, isRequestPresent, true)
