@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Quick fixes
 ! Expires: 12 hours
-! Last modified: Fri, 05 Jan 2024 15:07:56 +0000
-! Diff-Path: ../patches/2024.1.5.1043.patch#ublock-quick-fixes
+! Last modified: Fri, 05 Jan 2024 22:01:41 +0000
+! Diff-Path: ../patches/2024.1.5.1343.patch#ublock-quick-fixes
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/quick-fixes.txt ***
@@ -135,13 +135,15 @@ gamedrive.org##+js(aost, document.querySelector, /showModal|chooseAction|doActio
 gamedrive.org##+js(acs, eval, replace)
 ||foxsports.com/static/orion/js/segment-analytics.js$badfilter
 @@||assets.msn.com/bundles/v1/homepage/latest/libs_ad-service_dist_index_js$script,1p
-bitcotasks.com##+js(rpnt, script, window_paused = false;, window_paused = false; window.setTimeout(function(){showadbar()}\, 2000))
+bitcotasks.com##+js(rpnt, script, window_paused = false;, window_paused = false; window.setTimeout(function(){$("#status").fadeOut(1e3\,function(){$("#progress").progressTimer({timeLimit:duration\,onFinish:function(){$("#progress").fadeOut(1e3\,function(){$("#status").html('<div class="alert alert-warning" role="alert"><i class="fa fa-exclamation-circle fa-fw"></i> '+captchaMsg+"</div>").fadeIn("fast")\,showCaptcha()})}})});}\, 2000))
 @@||ourtecads.com^$frame,domain=bitcotasks.com
 *$frame,redirect=noopframe,domain=ourtecads.com
 @@||cleaningmaturegallop.com/*/invoke.js$script,domain=ourtecads.com
+@@||code.jquery.com^$domain=ourtecads.com
+@@||ourtecads.com^$frame,domain=ourtecads.com
+@@||ourtecads.com^$script,1p
 ourtecads.com##+js(no-fetch-if, cleaningmaturegallop)
 ourtecads.com##+js(no-xhr-if, /^/)
-ourtecads.com##+js(rpnt, script, /if\(.*?\.body\.innerHTML\.length > [0-9]+\) \{/, if(true){)
 *$domain=ourtecads.com
 !#if cap_html_filtering
 bitcotasks.com##^script:has-text(AdblockRegixFinder)
@@ -155,7 +157,11 @@ paste.fo##a:has-text(Free:)
 paste.fo##a[href^="https://anonsmm.com/?utm_source"], a[href="https://cryptochanger.to/"]
 paste.fo##a *:matches-css-after(content:/Free:/)
 /paste\.fo\/[A-Z0-9]{70,100}\.gif$/$image,1p,domain=paste.fo
+||paste.fo/clk.php?as=$xhr
 blog.cryptowidgets.net,blog.insurancegold.in,blog.wiki-topia.com##+js(set, isRequestPresent, true)
+blog.cryptowidgets.net,blog.insurancegold.in,blog.wiki-topia.com##+js(rpnt, script, = false;, = true;, condition, innerHTML)
 carsmania.net,carstopia.net,coinsvalue.net,cookinguide.net,freeoseocheck.com,makeupguide.net##+js(set, isRequestPresent, true)
+carsmania.net,carstopia.net,coinsvalue.net,cookinguide.net,freeoseocheck.com,makeupguide.net##+js(rpnt, script, = false;, = true;, condition, innerHTML)
 syracuse.com#@#^script:has-text(/typeof [a-z]\.cmd\.unshift/)
 syracuse.com#@#+js(rmnt, script, /typeof [a-z]\.cmd\.unshift/, condition, cmd.unshift)
+@@||d3e54v103j8qbb.cloudfront.net/js/jquery$script,domain=wellzesta.com
