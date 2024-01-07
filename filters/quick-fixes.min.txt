@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Quick fixes
 ! Expires: 12 hours
-! Last modified: Sun, 07 Jan 2024 14:17:59 +0000
-! Diff-Path: ../patches/2024.1.7.860.patch#ublock-quick-fixes
+! Last modified: Sun, 07 Jan 2024 19:13:58 +0000
+! Diff-Path: ../patches/2024.1.7.1155.patch#ublock-quick-fixes
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/quick-fixes.txt ***
@@ -12,12 +12,15 @@
 @@||dropgalaxy.*^$ghide
 ||d1rp4yowwe587e.cloudfront.net^$script,domain=dropgalaxy.*,important
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$script,redirect-rule=google-ima.js,domain=dropgalaxy.*
+||pocpoc.io^$domain=dropgalaxy.*
 ||mobileoffers-ep-download.com^$domain=dropgalaxy.*
-@@||popads.net/js/adblock.js$script,xhr,domain=dropgalaxy.*
+@@||histats.com/js.js$script,domain=dropgalaxy.*
+@@||popads.net/js/adblock.js$script,domain=dropgalaxy.*
 @@||cdn.jsdelivr.net/gh/prebid/*$script,domain=dropgalaxy.*
+@@*$script,xhr,from=dropgalaxy.*,to=googlesyndication.com|doubleclick.net|rsc.cdn77.org|vlitag.com|adoto.net|a2zapk.com|login.popmonetizer.com
 dropgalaxy.*##+js(nowoif)
-dropgalaxy.*##+js(set, isAdblockActive, false)
 dropgalaxy.*##+js(trusted-set, document.visibilityState, visible)
+dropgalaxy.com#@#+js(abort-current-script, document.onkeydown)
 dropgalaxy.*##html.i-amphtml-inabox
 dropgalaxy.*##[id^="TR-"][tr-id][style*="z-index: 9999"]
 ! aternos anti adb
@@ -118,7 +121,7 @@ issuya.com##^script:has-text(error-report.com)
 tweaksforgeeks.com##+js(rmnt, script, KCgpPT57bGV0IGU)
 issuya.com##+js(rmnt, script, error-report.com)
 !#endif
-iwb.jp##+js(nostif, getComputedStyle)
+iwb.jp##+js(nosiif, getComputedStyle)
 gamedrive.org##+js(aost, document.querySelector, /showModal|chooseAction|doAction|callbackAdsBlocked/)
 gamedrive.org##+js(acs, eval, replace)
 ||foxsports.com/static/orion/js/segment-analytics.js$badfilter
@@ -147,7 +150,7 @@ paste.fo##a[href^="https://anonsmm.com/?utm_source"], a[href="https://cryptochan
 paste.fo##a *:matches-css-after(content:/Free:/)
 paste.fo##a *:matches-css-before(content:/Free:/)
 /paste\.fo\/[A-Z0-9]{70,100}\.(gif|jpeg)$/$image,1p,domain=paste.fo
-||paste.fo/clk.php?as=$xhr
+||paste.fo/clk*.php?as=$xhr
 paste.fo##a[href] img:not([src$=".php"])
 blog.cryptowidgets.net,blog.insurancegold.in,blog.wiki-topia.com##+js(set, isRequestPresent, true)
 blog.cryptowidgets.net,blog.insurancegold.in,blog.wiki-topia.com##+js(rpnt, script, = false;, = true;, condition, innerHTML)
@@ -161,4 +164,4 @@ abema.tv##^script:has-text(NREUM)
 !#else
 abema.tv##+js(rmnt, script, NREUM)
 !#endif
-perchance.org##+js(nostif, /ads/i)
+perchance.org##+js(nostif, /abp|cookie|browser|ad\$/i)
