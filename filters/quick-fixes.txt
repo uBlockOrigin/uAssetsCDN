@@ -1,5 +1,5 @@
 ! Title: uBlock₀ filters – Quick fixes
-! Last modified: Tue, 09 Jan 2024 15:26:16 +0000
+! Last modified: Tue, 09 Jan 2024 20:12:07 +0000
 ! Expires: 12 hours
 ! Description: Immediate, temporary filters to fix websites
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -147,6 +147,7 @@ gamedrive.org##+js(acs, eval, replace)
 ! https://github.com/uBlockOrigin/uAssets/issues/15428
 @@||cdn.bmcdn6.com/js/*.js?v=$script,domain=bitcotasks.com
 @@||cdn.bmcdn6.com/p/$frame,domain=bitcotasks.com
+@@||ourtecads.com^$frame,domain=bitcotasks.com
 bitcotasks.com#@#[class^="floating-banner"]
 bitcotasks.com##[class^="floating-banner"]:style(visibility: hidden !important; pointer-events: none !important;)
 !#if cap_html_filtering
@@ -155,6 +156,7 @@ bitcotasks.com##^script:has-text(AdblockRegixFinder)
 bitcotasks.com##+js(rmnt, script, AdblockRegixFinder)
 !#endif
 bitcotasks.com##+js(aeld, blur, event.triggered)
+bitcotasks.com##+js(no-fetch-if, bmcdn6)
 
 ! paste. fo ads
 paste.fo##+js(rpnt, style, display: flex, display: none)
@@ -190,10 +192,7 @@ abema.tv##+js(rmnt, script, NREUM)
 !#endif
 
 ! https://github.com/uBlockOrigin/uAssets/issues/20666
-@@||pub.network^$script,xhr,domain=perchance.org
-@@||cdn.snigelweb.com^$xhr,domain=perchance.org
-@@||doubleclick.net^$script,domain=perchance.org
-perchance.org##+js(rpnt, script, false, true, condition, double)
+perchance.org##+js(rpnt, script, false, true, condition, '/s[\s\$\{\"\}]{0,}n[\s\$\{\"\}]{0,}i[\s\$\{\"\}]{0,}g[\s\$\{\"\}]{0,}e[\s\$\{\"\}]{0,}l/')
 
 ! https://github.com/uBlockOrigin/uAssets/issues/21861
 ||dropbox.com/2/ml_platform/log_predictions_events$badfilter
