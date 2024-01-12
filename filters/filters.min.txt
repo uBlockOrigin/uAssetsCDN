@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Thu, 11 Jan 2024 22:10:00 +0000
-! Diff-Path: ../patches/2024.1.11.1400.patch#ublock-filters
+! Last modified: Fri, 12 Jan 2024 04:14:18 +0000
+! Diff-Path: ../patches/2024.1.12.265.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -9564,7 +9564,7 @@ stockhideout.com##+js(nosiif, daadb)
 copypastescan.xyz##+js(noeval-if, /chp_?ad/)
 @@||fundingchoicesmessages.google.com^$script,domain=formulatv.com
 @@||formulatv.com^$ghide
-@@||fm-arena.com^$ghide
+fm-arena.com##+js(nostif, getComputedStyle, 2000)
 ! Link shortener filters go into their own dedicated list
 ! *** filters/ubo-link-shorteners.txt ***
 ! gplinks all domains (gplinks.co/EWu8)
@@ -9845,7 +9845,7 @@ aylink.co,gitizle.vip,shtms.co##+js(nano-sib)
 aylink.co,gitizle.vip,shtms.co##+js(ra, data-ppcnt_ads|onclick, #main)
 aylink.co,gitlink.pro,gitizle.vip,shtms.co##.alternative-ad
 @@||shorterall.com^$ghide
-@@||allgroups.online$script,css,domain=promo-visits.site|satoshi-win.xyz|shorterall.com
+@@||allgroups.online^$script,css,domain=promo-visits.site|satoshi-win.xyz|shorterall.com
 @@*$script,1p,domain=promo-visits.site|satoshi-win.xyz
 *$frame,redirect-rule=noopframe,domain=promo-visits.site|satoshi-win.xyz|shorterall.com
 *$script,redirect-rule=noopjs,domain=promo-visits.site|satoshi-win.xyz|shorterall.com
@@ -10258,6 +10258,7 @@ apkpure.com##.ad-box-auto
 correiobraziliense.com.br##.publi
 poder360.com.br##.box-advertising
 4hu.tv##.wrap > #btmBox
+wunderground.com##.ad-wrap
 !#endif
 ! *** uAssets:filters/filters-2020.txt ***
 *$script,redirect-rule=noopjs,domain=arcai.com
@@ -11192,7 +11193,7 @@ tricksplit.io##div[class^="ads_longAd_"]
 @@||dcode.fr^$ghide
 dcode.fr##ins.adsbygoogle
 dcode.fr##div[id^="div-gpt-ad"]
-@@||dcode.fr$xhr,1p
+@@||dcode.fr^$xhr,1p
 *$xhr,redirect-rule=nooptext,domain=ctrlv.*
 ctrlv.*##a.download[target="_blank"]:not(a[href*="ctrlv."]):remove()
 ctrlv.*##+js(set, uBlockOriginDetected, false)
@@ -11416,7 +11417,9 @@ pimylifeup.com##+js(aopr, adthrive.config)
 chronicle.com##.GoogleDfpAd-container
 @@||vix.com^$ghide
 vix.com##+js(json-prune, breaks interstitials info, interstitials)
-vix.com##+js(xml-prune, xpath(//*[name()="Period"][.//*[name()="AdaptationSet"][@contentType="video"]]), , .mpd)
+vix.com##+js(xml-prune, xpath(//*[name()="Period"][.//*[name()="AdaptationSet"][@contentType="video"][not(@bitstreamSwitching="true")]]), , .mpd)
+||imasdk.googleapis.com/js/sdkloader/ima3.js$script,3p,redirect-rule=google-ima.js,domain=vix.com
+@@||imasdk.googleapis.com/js/sdkloader/ima3_dai.js$script,3p,domain=vix.com
 animepahe.*##+js(aopw, __C)
 wordcounter.icu##+js(nowoif)
 @@||wordcounter.icu^$ghide
@@ -17780,9 +17783,9 @@ missav.com##.hidden > .mx-auto
 missav.com##^script:has-text(htmlAds)
 ! animexstream. tk popups
 animexstream.*##+js(aopr, __Y)
-! illimite-streaming.com popup
-illimite-streaming.com##+js(aopr, BetterJsPop)
-illimite-streaming.com##^script:has-text(BetterJsPop.add)
+! wilifilm.net popup
+wilifilm.net##+js(aopr, BetterJsPop)
+wilifilm.net##^script:has-text(BetterJsPop.add)
 ! wowroms.com timer, PH
 wowroms.com##+js(nano-sib, second)
 wowroms.com##.ulromlist > .element:has(> ul > li > .adsbygoogle)
@@ -18593,7 +18596,7 @@ beelink.pro##+js(no-fetch-if, googlesyndication)
 @@||imasdk.googleapis.com/js/sdkloader/vpaid_adapter.js$script,domain=lasexta.com
 ||publi.atresmediapublicidad.com^$media,domain=lasexta.com,redirect=noopmp3-0.1s
 @@||atresmedia.com^$xhr,domain=atresplayer.com
-@@||smetrics.atresplayer.com$xhr,1p
+@@||smetrics.atresplayer.com^$xhr,1p
 ||atresmediapublicidad.com^$media,domain=atresplayer.com,redirect=noopmp3-0.1s
 ||v.fwmrm.net/ad/g/1?*_html5_live$domain=atresplayer.com,important
 atresplayer.com##+js(nano-stb, [native code], 5000)
@@ -19527,7 +19530,7 @@ seznam.cz##.sticky-content:has-text(Rek)
 seznam.cz##.sticky-content:has-text(klama)
 seznam.cz##[class*="advert"]
 ||seznam.cz/$frame,1p
-@@||diskuze.seznam.cz$frame
+@@||diskuze.seznam.cz^$frame
 @@||seznam.cz/html/cmp.html$frame,1p
 seznam.cz##+js(nostif, 0x)
 @@||seznam.cz^$ghide,badfilter
@@ -19540,7 +19543,7 @@ seznamzpravy.cz##.sticky-content:has-text(Rek)
 seznamzpravy.cz##.sticky-content:has-text(klama)
 seznamzpravy.cz##[class*="advert"]
 ||seznamzpravy.cz/$frame,1p
-@@||diskuze.seznamzpravy.cz$frame
+@@||diskuze.seznamzpravy.cz^$frame
 @@||seznamzpravy.cz/html/cmp.html$frame,1p
 seznamzpravy.cz##+js(nostif, 0x)
 @@||seznamzpravy.cz^$ghide,badfilter
@@ -21789,9 +21792,9 @@ onmsft.com##+js(acs, document.createElement, googletag)
 familyminded.com,foxvalleyfoodie.com,merriam-webster.com,news.com.au,playstationlifestyle.net,sportsnaut.com,tempumail.com,toledoblade.com##+js(aopr, __cmpGdprAppliesGlobally)
 pc-builds.com,qtoptens.com,reuters.com,today.com,videogamer.com,wrestlinginc.com##+js(set, admiral, noopFunc)
 !#if cap_html_filtering
-al.com,allmovie.com,allmusic.com,androidpolice.com,antyradio.pl,carmagazine.co.uk##^script:has-text('"v4ac1eiZr0"')
-cattime.com,cbr.com,cbssports.com,chaptercheats.com,cleveland.com,collider.com,comingsoon.net##^script:has-text('"v4ac1eiZr0"')
-decider.com,didyouknowfacts.com,dogtime.com,dualshockers.com##^script:has-text('"v4ac1eiZr0"')
+al.com,allmovie.com,allmusic.com,androidpolice.com,antyradio.pl,artnews.com##^script:has-text('"v4ac1eiZr0"')
+carmagazine.co.uk,cattime.com,cbr.com,cbssports.com,chaptercheats.com,cleveland.com,collider.com,comingsoon.net##^script:has-text('"v4ac1eiZr0"')
+dailyvoice.com,decider.com,didyouknowfacts.com,dogtime.com,dualshockers.com##^script:has-text('"v4ac1eiZr0"')
 footwearnews.com,freeconvert.com##^script:has-text('"v4ac1eiZr0"')
 gamerant.com,gfinityesports.com,givemesport.com,gulflive.com##^script:has-text('"v4ac1eiZr0"')
 howtogeek.com,insider-gaming.com,lehighvalleylive.com,liveandletsfly.com,lonestarlive.com##^script:has-text('"v4ac1eiZr0"')
@@ -21799,14 +21802,15 @@ makeuseof.com,masslive.com,milestomemories.com,mlive.com,momtastic.com,movieweb.
 nationalreview.com,nj.com,nordot.app,nypost.com##^script:has-text('"v4ac1eiZr0"')
 oakvillenews.org,observer.com,oregonlive.com##^script:has-text('"v4ac1eiZr0"')
 pagesix.com,pennlive.com##^script:has-text('"v4ac1eiZr0"')
-qtoptens.com,realgm.com,screenrant.com,sheknows.com,sherdog.com,sidereel.com,silive.com,simpleflying.com,spacenews.com,superherohype.com,syracuse.com##^script:has-text('"v4ac1eiZr0"')
+qtoptens.com,realgm.com,robbreport.com##^script:has-text('"v4ac1eiZr0"')
+screenrant.com,sheknows.com,sherdog.com,sidereel.com,silive.com,simpleflying.com,spacenews.com,superherohype.com,syracuse.com##^script:has-text('"v4ac1eiZr0"')
 thefashionspot.com,thegamer.com,thegamescabin.com,timesnews.net,tutsnode.org,tvline.com##^script:has-text('"v4ac1eiZr0"')
 wimp.com,xda-developers.com##^script:has-text('"v4ac1eiZr0"')
 cheatsheet.com,pwinsider.com##^script:has-text(admiral)
 !#else
-al.com,allmovie.com,allmusic.com,androidpolice.com,antyradio.pl,carmagazine.co.uk##+js(rmnt, script, '"v4ac1eiZr0"')
-cattime.com,cbr.com,cbssports.com,chaptercheats.com,cleveland.com,collider.com,comingsoon.net##+js(rmnt, script, '"v4ac1eiZr0"')
-decider.com,didyouknowfacts.com,dogtime.com,dualshockers.com##+js(rmnt, script, '"v4ac1eiZr0"')
+al.com,allmovie.com,allmusic.com,androidpolice.com,antyradio.pl,artnews.com##+js(rmnt, script, '"v4ac1eiZr0"')
+carmagazine.co.uk,cattime.com,cbr.com,cbssports.com,chaptercheats.com,cleveland.com,collider.com,comingsoon.net##+js(rmnt, script, '"v4ac1eiZr0"')
+dailyvoice.com,decider.com,didyouknowfacts.com,dogtime.com,dualshockers.com##+js(rmnt, script, '"v4ac1eiZr0"')
 footwearnews.com,freeconvert.com##+js(rmnt, script, '"v4ac1eiZr0"')
 gamerant.com,gfinityesports.com,givemesport.com,gulflive.com##+js(rmnt, script, '"v4ac1eiZr0"')
 howtogeek.com,insider-gaming.com,lehighvalleylive.com,liveandletsfly.com,lonestarlive.com##+js(rmnt, script, '"v4ac1eiZr0"')
@@ -21814,7 +21818,8 @@ makeuseof.com,masslive.com,milestomemories.com,mlive.com,momtastic.com,movieweb.
 nationalreview.com,nj.com,nordot.app,nypost.com##+js(rmnt, script, '"v4ac1eiZr0"')
 oakvillenews.org,observer.com,oregonlive.com##+js(rmnt, script, '"v4ac1eiZr0"')
 pagesix.com,pennlive.com##+js(rmnt, script, '"v4ac1eiZr0"')
-qtoptens.com,realgm.com,screenrant.com,sheknows.com,sherdog.com,sidereel.com,silive.com,simpleflying.com,spacenews.com,superherohype.com,syracuse.com##+js(rmnt, script, '"v4ac1eiZr0"')
+qtoptens.com,realgm.com,robbreport.com##+js(rmnt, script, '"v4ac1eiZr0"')
+screenrant.com,sheknows.com,sherdog.com,sidereel.com,silive.com,simpleflying.com,spacenews.com,superherohype.com,syracuse.com##+js(rmnt, script, '"v4ac1eiZr0"')
 thefashionspot.com,thegamer.com,thegamescabin.com,timesnews.net,tutsnode.org,tvline.com##+js(rmnt, script, '"v4ac1eiZr0"')
 wimp.com,xda-developers.com##+js(rmnt, script, '"v4ac1eiZr0"')
 cheatsheet.com,pwinsider.com##+js(rmnt, script, admiral)
@@ -21824,7 +21829,7 @@ superherohype.com##a.wp-block-button__link:is([href^="https://amzn.to/"], [href^
 sanfoundry.com##.sf-desktop-ads
 ||succeedscene.com/ads_*/ads.load.js$script,redirect-rule=noop.js
 ||qtoptens.com^$csp=worker-src 'none'
-androidpolice.com,gamerant.com,thegamer.com##+js(aeld, error, blocker)
+androidpolice.com,cbr.com,gamerant.com,thegamer.com##+js(aeld, error, blocker)
 yt2conv.com##+js(ra, onclick, a#downloadbtn[onclick^="window.open"], stay)
 yt2conv.com##+js(nowoif)
 blogtruyenmoi.com##+js(aeld, click, alink)
