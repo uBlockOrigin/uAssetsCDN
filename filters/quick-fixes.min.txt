@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Quick fixes
 ! Expires: 12 hours
-! Last modified: Sat, 20 Jan 2024 11:02:53 +0000
-! Diff-Path: ../patches/2024.1.20.1041.patch#ublock-quick-fixes
+! Last modified: Sat, 20 Jan 2024 21:29:34 +0000
+! Diff-Path: ../patches/2024.1.20.1342.patch#ublock-quick-fixes
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/quick-fixes.txt ***
@@ -45,9 +45,9 @@ youtube.com#@##scroll-container > #items.ytd-merch-shelf-renderer
 youtube.com#@##primary > .ytd-two-column-browse-results-renderer.style-scope > #masthead-ad.ytd-rich-grid-renderer > .ytd-rich-grid-renderer.style-scope > .ytd-banner-promo-renderer.style-scope
 youtube.com#@#ytd-watch-info-text > #info-container > #info > span:has-text(/\d+\s[pP]rod/)
 ! VOE sites
-||imasdk.googleapis.com/js/sdkloader/ima3.js$script,3p,redirect=google-ima.js,domain=jamiesamewalk.com
-jamiesamewalk.com##+js(nowoif)
-jamiesamewalk.com##+js(set, console.clear, undefined)
+||imasdk.googleapis.com/js/sdkloader/ima3.js$script,3p,redirect=google-ima.js,domain=seanshowcould.com
+seanshowcould.com##+js(nowoif)
+seanshowcould.com##+js(set, console.clear, undefined)
 dragontea.ink##html:not(:has(link[href="https://dragontea.ink/xmlrpc.php"], link[href="/cdn-cgi/styles/challenges.css"])) > body:not(.page-template)
 dragontea.ink##[id$="ink_1000x100_anchor_top"][class="stpdr rendered"][data-google-query-id][style]:style(position: absolute !important;)
 dragontea.ink##[id$="ink_1000x100_anchor"][class="stpdr rendered"][data-google-query-id][style]:style(position: absolute !important;)
@@ -63,7 +63,7 @@ techcyan.com,kiktu.com,upshrink.com,trangchu.news,banaraswap.in###btx1, #btx2, #
 techcyan.com,kiktu.com,upshrink.com,trangchu.news,banaraswap.in##+js(spoof-css, #btx1\, #btx2\, #wg-genx > .mediafire, visibility, visible)
 .click/?s=$popup,domain=techcyan.com|kiktu.com|upshrink.com|trangchu.news|banaraswap.in
 *$image,domain=techcyan.com|kiktu.com|upshrink.com|trangchu.news|banaraswap.in,redirect-rule=2x2.png:5
-infinityscans.xyz,infinityscans.net##+js(no-fetch-if, /googlesyndication|bidgear|marreerouens|pubfuture/, true)
+infinityscans.xyz,infinityscans.net##+js(no-fetch-if, /googlesyndication|bidgear|marreerouens|pubfuture/, length:1735)
 infinityscans.xyz,infinityscans.net##+js(nowoif)
 *$script,redirect-rule=noopjs,domain=infinityscans.xyz|infinityscans.net
 *$xhr,domain=infinityscans.xyz|infinityscans.net,redirect-rule=nooptext
@@ -127,10 +127,11 @@ paste.fo##a *:matches-css-before(content:/Free:/)
 ||paste.fo/clk*.php?as=$xhr
 paste.fo##a[href] img:not([src$=".php"])
 ! perchance - broken by its dev
-perchance.org##+js(set, String.prototype.includes, trueFunc)
+!perchance.org##+js(set, String.prototype.includes, trueFunc)
 !perchance.org##+js(rpnt, script, '/if(\n){1,}.*\.*\("."\)\).\{([\s\S]*?)\}/gms', )
-perchance.org##+js(rpnt, script, '/if\(([^;]+)\)[^{]+{\s+throw.*\(".*"\);\s+.*;\s+}/gm', )
-perchance.org##+js(rpnt, script, '/if\(window\..*\[\`.*\`\]\("."\)\) \{([\s\S]*?\}){2}/gm', )
+!perchance.org##+js(rpnt, script, '/if\(([^;]+)\)[^{]+{\s+throw.*\(".*"\);\s+.*;\s+}/gm', )
+!perchance.org##+js(rpnt, script, '/if\(..*\[\`.*\`\]\("."\)\) \{([\s\S]*?\}){2}/gm', )
+perchance.org##+js(rpnt, script, '/if\(..*\[\`.*\`\]\("."\)\) \{([\s\S]*?\}){2}/gm', 'if (location.href.indexOf("ai-") !== -1) {String.prototype.includes=function (){return true}}')
 amazon.ae,amazon.ca,amazon.cn,amazon.co.jp,amazon.co.uk,amazon.com,amazon.com.au,amazon.com.be,amazon.com.br,amazon.com.mx,amazon.com.tr,amazon.de,amazon.eg,amazon.es,amazon.fr,amazon.in,amazon.it,amazon.nl,amazon.pl,amazon.sa,amazon.se,amazon.sg#@#[data-card-metrics-id]
 @@||agoda.com/*/book/$removeparam
 bild.de##+js(set, __NUXT__.state.advertisement.adBlockWallEnabled, false)
