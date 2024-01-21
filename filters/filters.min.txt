@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Sat, 20 Jan 2024 21:26:04 +0000
-! Diff-Path: ../patches/2024.1.20.1342.patch#ublock-filters
+! Last modified: Sun, 21 Jan 2024 03:10:33 +0000
+! Diff-Path: ../patches/2024.1.21.201.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -11,10 +11,10 @@ www.youtube.com##+js(trusted-replace-xhr-response, /"adPlacements.*?([A-Z]"\}|"\
 www.youtube.com##+js(trusted-replace-xhr-response, /"adPlacements.*?("adSlots"|"adBreakHeartbeatParams")/gms, $1, youtubei/v1/player)
 tv.youtube.com##+js(trusted-replace-xhr-response, '"adPlacements"', '"no_ads"', /playlist\?list=|player\?key=|watch\?v=|youtubei\/v1\/player/)
 www.youtube.com##+js(trusted-replace-fetch-response, /"adPlacements.*?([A-Z]"\}|"\}{2})\}\]\,/, , player?key=)
-youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, ytInitialPlayerResponse.playerAds, undefined)
-youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, ytInitialPlayerResponse.adPlacements, undefined)
-youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, ytInitialPlayerResponse.adSlots, undefined)
-youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, playerResponse.adPlacements, undefined)
+youtube.com,youtubekids.com,youtube-nocookie.com,~accounts.youtube.com,~payments.youtube.com##+js(set, ytInitialPlayerResponse.playerAds, undefined)
+youtube.com,youtubekids.com,youtube-nocookie.com,~accounts.youtube.com,~payments.youtube.com##+js(set, ytInitialPlayerResponse.adPlacements, undefined)
+youtube.com,youtubekids.com,youtube-nocookie.com,~accounts.youtube.com,~payments.youtube.com##+js(set, ytInitialPlayerResponse.adSlots, undefined)
+youtube.com,youtubekids.com,youtube-nocookie.com,~accounts.youtube.com,~payments.youtube.com##+js(set, playerResponse.adPlacements, undefined)
 m.youtube.com,music.youtube.com,youtubekids.com,youtube-nocookie.com##+js(json-prune, playerResponse.adPlacements playerResponse.playerAds playerResponse.adSlots adPlacements playerAds adSlots important)
 youtube.com##.ytlr-horizontal-list-renderer__items > .yt-virtual-list__container > .yt-virtual-list__item--visible.yt-virtual-list__item--selected.yt-virtual-list__item:has-text(Ad)
 ||googlevideo.com/initplayback?source=youtube*&c=TVHTML5&oad=$xhr,domain=youtube.com
@@ -9639,17 +9639,18 @@ twitchmetrics.net##+js(set-cookie, npabp, 1)
 nyaa.land##+js(aeld, DOMContentLoaded, open)
 nyaa.land##[href="https://privateiptvaccess.com"]
 ||go4kora.tv/assets/js/script_antiAdBlock_*.js$script,1p
+msdos-games.com##+js(nostif, getComputedStyle)
 ! Link shortener filters go into their own dedicated list
 ! *** filters/ubo-link-shorteners.txt ***
 ! gplinks all domains (gplinks.co/EWu8)
-*$frame,redirect-rule=noopframe,domain=gplinks.co|phixshop.com|ggbazaar.in|ignoupur.in|hindityping.net|indiasarkari.com|ktgnews.com|1stepforlife.in|djppclub.com|mpscstudyhub.com|jankarihubedu21.com
-@@||gplinks.in/track/$script,xhr,domain=gplinks.co|phixshop.com|ggbazaar.in|ignoupur.in|hindityping.net|indiasarkari.com|ktgnews.com|1stepforlife.in|djppclub.com|mpscstudyhub.com|jankarihubedu21.com
-@@||doubleclick.net^$script,xhr,domain=phixshop.com|ggbazaar.in|ignoupur.in|hindityping.net|indiasarkari.com|ktgnews.com|1stepforlife.in|djppclub.com|mpscstudyhub.com|jankarihubedu21.com
-@@*$ghide,domain=gplinks.co|phixshop.com|ggbazaar.in|ignoupur.in|hindityping.net|indiasarkari.com|ktgnews.com|1stepforlife.in|djppclub.com|mpscstudyhub.com|jankarihubedu21.com
-phixshop.com,ggbazaar.in,ignoupur.in,hindityping.net,indiasarkari.com,ktgnews.com,1stepforlife.in,djppclub.com,mpscstudyhub.com,jankarihubedu21.com##center:others()
-phixshop.com,ggbazaar.in,ignoupur.in,hindityping.net,indiasarkari.com,ktgnews.com,1stepforlife.in,djppclub.com,mpscstudyhub.com,jankarihubedu21.com##+js(aopw, AdBDetected)
-phixshop.com,ggbazaar.in,ignoupur.in,hindityping.net,indiasarkari.com,ktgnews.com,1stepforlife.in,djppclub.com,mpscstudyhub.com,jankarihubedu21.com##+js(set, count, 0)
-phixshop.com,ggbazaar.in,ignoupur.in,hindityping.net,indiasarkari.com,ktgnews.com,1stepforlife.in,djppclub.com,mpscstudyhub.com,jankarihubedu21.com##[id*="iframe"], [id*="gpt_unit"], [id*="div-gpt-"]:style(height:0.0001px !important;)
+*$frame,redirect-rule=noopframe,domain=gplinks.co|phixshop.com|ggbazaar.in|ignoupur.in|hindityping.net|indiasarkari.com|ktgnews.com|1stepforlife.in|djppclub.com|mpscstudyhub.com|jankarihubedu21.com|gachalifeoldversionapk.net
+@@||gplinks.in/track/$script,xhr,domain=gplinks.co|phixshop.com|ggbazaar.in|ignoupur.in|hindityping.net|indiasarkari.com|ktgnews.com|1stepforlife.in|djppclub.com|mpscstudyhub.com|jankarihubedu21.com|gachalifeoldversionapk.net
+@@||doubleclick.net^$script,xhr,domain=phixshop.com|ggbazaar.in|ignoupur.in|hindityping.net|indiasarkari.com|ktgnews.com|1stepforlife.in|djppclub.com|mpscstudyhub.com|jankarihubedu21.com|gachalifeoldversionapk.net
+@@*$ghide,domain=gplinks.co|phixshop.com|ggbazaar.in|ignoupur.in|hindityping.net|indiasarkari.com|ktgnews.com|1stepforlife.in|djppclub.com|mpscstudyhub.com|jankarihubedu21.com|gachalifeoldversionapk.net
+phixshop.com,ggbazaar.in,ignoupur.in,hindityping.net,indiasarkari.com,ktgnews.com,1stepforlife.in,djppclub.com,mpscstudyhub.com,jankarihubedu21.com,gachalifeoldversionapk.net##center:others()
+phixshop.com,ggbazaar.in,ignoupur.in,hindityping.net,indiasarkari.com,ktgnews.com,1stepforlife.in,djppclub.com,mpscstudyhub.com,jankarihubedu21.com,gachalifeoldversionapk.net##+js(aopw, AdBDetected)
+phixshop.com,ggbazaar.in,ignoupur.in,hindityping.net,indiasarkari.com,ktgnews.com,1stepforlife.in,djppclub.com,mpscstudyhub.com,jankarihubedu21.com,gachalifeoldversionapk.net##+js(set, count, 0)
+phixshop.com,ggbazaar.in,ignoupur.in,hindityping.net,indiasarkari.com,ktgnews.com,1stepforlife.in,djppclub.com,mpscstudyhub.com,jankarihubedu21.com,gachalifeoldversionapk.net##[id*="iframe"], [id*="gpt_unit"], [id*="div-gpt-"]:style(height:0.0001px !important;)
 gplinks.co##.bg-soft-primary, a.exclude-pop.smartlink, .exclude-pop.quiz-container, #PlayQuiz, #quiz-frame, .exclude-popad
 ||gamezop.com^$domain=gplinks.*
 gplinks.co##+js(set, blurred, false)
@@ -17218,6 +17219,8 @@ fox.com##+js(no-xhr-if, googlesyndication)
 fox.com,foxsports.com##+js(json-prune, ads)
 fox.com,foxsports.com##+js(m3u-prune, /\,ad\n.+?(?=#UPLYNK-SEGMENT)/gm, .m3u8)
 fox.com,foxsports.com#@#+js(m3u-prune, /is_ad|ohash=\w{300}/, .m3u8)
+||link.theplatform.com/s/*/media/*=m3u&*_webdesktop_vod*$xhr,domain=foxsports.com,removeparam=/^((?!formats|profile).)*$/
+://foxvideo-sports.$xhr,3p,removeparam=ad.prof,domain=foxsports.com
 ! movieswatch24.pk,watchonlinemovies15.pk popup
 movieswatch24.pk,watchonlinemovies15.pk##+js(nowoif)
 cue-vana.com##+js(nano-sib, count)
@@ -20224,7 +20227,6 @@ stratford-herald.com##.MPU
 tuxnews.it##+js(aost, parseInt, adsBlocked)
 pokemundo.com##+js(noeval-if, show)
 griddy.click##+js(acs, document.createElement, fakeAd)
-||link.theplatform.com/s/*/media/*=m3u&*_webdesktop_vod*$xhr,domain=foxsports.com,removeparam=/^((?!formats|profile).)*$/
 accesousa.com,bellinghamherald.com,bnd.com,bradenton.com,centredaily.com,charlotteobserver.com,elnuevoherald.com,flkeysnews.com,fresnobee.com,heraldonline.com,heraldsun.com,idahostatesman.com,islandpacket.com,kansas.com,kansascity.com,kentucky.com,ledger-enquirer.com,macon.com,mahoningmatters.com,mcclatchydc.com,mercedsunstar.com,miamiherald.com,modbee.com,myrtlebeachonline.com,newsobserver.com,sacbee.com,sanluisobispo.com,star-telegram.com,sunherald.com,thenewstribune.com,theolympian.com,thestate.com,tri-cityherald.com###mastheadVueContainer > .zone
 accesousa.com,bellinghamherald.com,bnd.com,bradenton.com,centredaily.com,charlotteobserver.com,elnuevoherald.com,flkeysnews.com,fresnobee.com,heraldonline.com,heraldsun.com,idahostatesman.com,islandpacket.com,kansas.com,kansascity.com,kentucky.com,ledger-enquirer.com,macon.com,mahoningmatters.com,mcclatchydc.com,mercedsunstar.com,miamiherald.com,modbee.com,myrtlebeachonline.com,newsobserver.com,sacbee.com,sanluisobispo.com,star-telegram.com,sunherald.com,thenewstribune.com,theolympian.com,thestate.com,tri-cityherald.com##article .combo.zone
 accesousa.com,bellinghamherald.com,bnd.com,bradenton.com,centredaily.com,charlotteobserver.com,elnuevoherald.com,flkeysnews.com,fresnobee.com,heraldonline.com,heraldsun.com,idahostatesman.com,islandpacket.com,kansas.com,kansascity.com,kentucky.com,ledger-enquirer.com,macon.com,mahoningmatters.com,mcclatchydc.com,mercedsunstar.com,miamiherald.com,modbee.com,myrtlebeachonline.com,newsobserver.com,sacbee.com,sanluisobispo.com,star-telegram.com,sunherald.com,thenewstribune.com,theolympian.com,thestate.com,tri-cityherald.com##article [id^="zone-el"]
@@ -22218,6 +22220,7 @@ truyen-hentai.com##.async-reklam-placeholder
 truyen-hentai.com##.bottom-reklam
 darknessporn.com,familyporner.com,freepublicporn.com,pisshamster.com,punishworld.com,xanimu.com##+js(rmnt, script, Exo)
 darknessporn.com,familyporner.com,freepublicporn.com,pisshamster.com,punishworld.com,xanimu.com##+js(aeld, getexoloader)
+xanimu.com##.alrt-ver2
 ||xanimu.com/*.php
 tvbanywherena.com##+js(rpnt, script, (hasBlocker), (false))
 ||brightcove.com^$xhr,3p,removeparam=ad_config_id,domain=tvbanywherena.com
