@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Tue, 23 Jan 2024 02:24:43 +0000
-! Diff-Path: ../patches/2024.1.23.323.patch#ublock-filters
+! Last modified: Tue, 23 Jan 2024 10:15:02 +0000
+! Diff-Path: ../patches/2024.1.23.626.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -9653,6 +9653,8 @@ fernsehzone.online##.adsbygoogle
 krx18.com##center > [src*="/ads/"]
 playerwatch.xyz##+js(nowoif, , 10)
 ||ezodn.com^$redirect-rule=noopjs,domain=tv.bdix.app
+dagensnytt.com##+js(aeld, load, doTest)
+blisseyhusbands.com##+js(rmnt, script, deblocker)
 ! Link shortener filters go into their own dedicated list
 ! *** filters/ubo-link-shorteners.txt ***
 ! gplinks all domains (gplinks.co/EWu8)
@@ -10312,6 +10314,11 @@ gigody.com###soralink-human-verif-main, #generater, #showlink:style(display: blo
 gigody.com##.soractrl, [src*="www.google.com/recaptcha"]:others()
 djpunjab2.in###wpsafe-link:others()
 djpunjab2.in###wpsafe-link:style(display: block !important;)
+travel.vebma.com##+js(no-fetch-if, ads)
+travel.vebma.com##.text-primary.inline-block, button.text-primary:others()
+travel.vebma.com##+js(aeld, blur, counter)
+travel.vebma.com##+js(nano-sib, /counter|wait/, *, 0.02)
+adtival.network##div.box:has(.purple)
 !#if env_mobile
 ! *** filters/filters-mobile.txt ***
 !----- 2020 -----
@@ -15245,8 +15252,8 @@ gab.com#?#:matches-path(/\/posts/) div[data-comment*="gab-ad"]:has(span[class]:h
 quizlet.com##.StickyAdz
 quizlet.com##+js(rc, has-sidebar-adz|DashboardPage-inner, div[class^="DashboardPage-inner"], stay)
 quizlet.com##+js(rc, hasStickyAd, div.hasStickyAd[class^="SetPage"], stay)
-quizlet.com##+js(rc, has-adz, div.has-adz, stay)
 quizlet.com##+js(nano-stb)
+quizlet.com##div.has-adz:not(.SetPage):remove-class(has-adz)
 vivo.st##+js(aeld, , preventDefault)
 vivo.st##+js(aeld, click, tabunder)
 @@||imasdk.googleapis.com/js/sdkloader/ima3.js$script,domain=vivo.st
@@ -19479,6 +19486,7 @@ autosport.com,motorsport.com##+js(set-cookie, 4d8L2108, 1, , reload, 1)
 autosport.com,motorsport.com##+js(acs, document.querySelector, adblock)
 @@||imasdk.googleapis.com/js/sdkloader/ima3.js$script,domain=tv8.com.tr
 *$script,domain=rendimentibtp.it,redirect-rule=noopjs
+rendimentibtp.it##+js(no-fetch-if, googlesyndication)
 ! nflstreams .me ads/popups
 nflstreams.me##+js(acs, setTimeout, admc)
 nflstreams.me##.position-absolute
