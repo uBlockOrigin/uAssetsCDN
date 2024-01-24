@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Tue, 23 Jan 2024 18:09:50 +0000
-! Diff-Path: ../patches/2024.1.23.1222.patch#ublock-filters
+! Last modified: Wed, 24 Jan 2024 00:42:53 +0000
+! Diff-Path: ../patches/2024.1.24.92.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -9638,8 +9638,10 @@ bailiwickexpress.com##+js(acs, $, load_banner)
 twitchmetrics.net##+js(set-cookie, npabp, 1)
 nyaa.land##+js(nowoif)
 nyaa.land##[href*="iptv.cat"]
+nyaa.land##[href*="tiny.cc"]
 nyaa.land##html > body > div:not([class="container"])
 nyaa.land##html > body > div:not([class="container"]) + br
+nyaa.land##html > body > center
 ||go4kora.tv/assets/js/script_antiAdBlock_*.js$script,1p
 msdos-games.com##+js(nostif, getComputedStyle)
 @@||webshark.pl^$script,domain=vider.*
@@ -9658,18 +9660,17 @@ blisseyhusbands.com##+js(rmnt, script, deblocker)
 @@*$ghide,domain=countrychord.com|wazzuptechph.com|bigbrothergisthub.com|news9.co.ke|techprice.pk|scopenew.com|rokuguru.com|guided.news|techfinancials.co.za|scholarshipexpo.com|dailyparliamenttimes.com|theexchange.africa|thedailyhoosier.com|subhashyadav.org|thenews-chronicle.com|diyprojectslab.com
 @@||alliptvlinks.com^$1p,script
 @@||alliptvlinks.com^$ghide
-watchmdh.to##.block-video > .table
 ! Link shortener filters go into their own dedicated list
 ! *** filters/ubo-link-shorteners.txt ***
 ! gplinks all domains (gplinks.co/EWu8)
-*$frame,redirect-rule=noopframe,domain=gplinks.co|bharatsarkarijobalert.com
-@@||gplinks.in/track/$script,xhr,domain=gplinks.co|bharatsarkarijobalert.com
-@@||doubleclick.net^$script,xhr,domain=bharatsarkarijobalert.com
-@@*$ghide,domain=gplinks.co|bharatsarkarijobalert.com
-bharatsarkarijobalert.com##center:others()
-bharatsarkarijobalert.com##+js(aopw, AdBDetected)
-bharatsarkarijobalert.com##+js(set, count, 0)
-bharatsarkarijobalert.com##[id*="iframe"], [id*="gpt_unit"], [id*="div-gpt-"]:style(height:0.0001px !important;)
+*$frame,redirect-rule=noopframe,domain=gplinks.co|bharatsarkarijobalert.com|seobar.in
+@@||gplinks.in/track/$script,xhr,domain=gplinks.co|bharatsarkarijobalert.com|seobar.in
+@@||doubleclick.net^$script,xhr,domain=bharatsarkarijobalert.com|seobar.in
+@@*$ghide,domain=gplinks.co|bharatsarkarijobalert.com|seobar.in
+bharatsarkarijobalert.com,seobar.in##center:others()
+bharatsarkarijobalert.com,seobar.in##+js(aopw, AdBDetected)
+bharatsarkarijobalert.com,seobar.in##+js(set, count, 0)
+bharatsarkarijobalert.com,seobar.in##[id*="iframe"], [id*="gpt_unit"], [id*="div-gpt-"]:style(height:0.0001px !important;)
 gplinks.co##.bg-soft-primary, a.exclude-pop.smartlink, .exclude-pop.quiz-container, #PlayQuiz, #quiz-frame, .exclude-popad
 ||gamezop.com^$domain=gplinks.*
 gplinks.co##+js(set, blurred, false)
@@ -10318,10 +10319,10 @@ gigody.com###soralink-human-verif-main, #generater, #showlink:style(display: blo
 gigody.com##.soractrl, [src*="www.google.com/recaptcha"]:others()
 djpunjab2.in###wpsafe-link:others()
 djpunjab2.in###wpsafe-link:style(display: block !important;)
-travel.vebma.com##+js(no-fetch-if, ads)
-travel.vebma.com##.text-primary.inline-block, button.text-primary:others()
-travel.vebma.com##+js(aeld, blur, counter)
-travel.vebma.com##+js(nano-sib, /counter|wait/, *, 0.02)
+travel.vebma.com,cloud.majalahhewan.com##+js(no-fetch-if, ads)
+travel.vebma.com,cloud.majalahhewan.com##.text-primary.inline-block, button.text-primary:others()
+travel.vebma.com,cloud.majalahhewan.com##+js(aeld, blur, counter)
+travel.vebma.com,cloud.majalahhewan.com##+js(nano-sib, /counter|wait/, *, 0.001)
 adtival.network##div.box:has(.purple)
 !#if env_mobile
 ! *** filters/filters-mobile.txt ***
@@ -14547,6 +14548,8 @@ watchmdh.to##+js(acs, addEventListener, -0x)
 watchmdh.to##+js(aopr, decodeURI)
 watchmdh.to##a[style^="position: absolute; inset: 0px;"][target="_blank"]
 watchmdh.to##.sponsor
+watchmdh.to##.block-video > .table
+watchmdh.to##.top
 neos-easygames.com,synk-casualgames.com#@##ad_block
 @@||animedevil.com^$ghide
 ||tny.so^$3p
