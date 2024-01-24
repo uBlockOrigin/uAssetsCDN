@@ -1,9 +1,9 @@
-diff name:ublock-annoyances lines:50 checksum:c86e887728
+diff name:ublock-annoyances lines:52 checksum:be6e9ffe4f
 d3 2
 a4 2
-! Last modified: Tue, 23 Jan 2024 19:09:14 +0000
-! Diff-Path: ../patches/2024.1.24.387.patch#ublock-annoyances
-a551 11
+! Last modified: Wed, 24 Jan 2024 11:07:54 +0000
+! Diff-Path: ../patches/2024.1.24.678.patch#ublock-annoyances
+a551 13
 ! only necessary
 generali.at##+js(trusted-set-cookie, website_privacycookie_relaunch, accetta)
 generali.at##+js(trusted-set-cookie, website_privacycookie, accetta)
@@ -15,6 +15,8 @@ butterflyshop.dk##+js(set-cookie, DDCookiePolicy-consent-statistics, false)
 ! functional_analytics (when using refuse)
 praxis.nl,brico.be##+js(trusted-set-cookie, CookieConsentLevel, functional_analytics)
 praxis.nl,brico.be##+js(set-cookie, CookieNotificationSeen, 1, , reload, 1)
+! technical only
+correos.es##+js(trusted-set-cookie, correosCookies, '{"tecnicas":"true","analiticas":"false","publicidad":"false"}')
 d3571 2
 d3574 2
 a3575 3
@@ -49,11 +51,13 @@ abril.com.br##+js(aeld, copy)
 mcskinhistory.com##+js(no-fetch-if, ads)
 tv.bdix.app##+js(set, jh_disabled_options_data, null)
 tv.bdix.app##*:style(user-select: text !important; -ms-user-select: text !important; -moz-user-select: text !important; -khtml-user-select: text !important; -webkit-user-select: text !important; -webkit-touch-callout: default !important;)
-diff name:ublock-badware lines:20 checksum:48375812f4
+diff name:ublock-badware lines:22 checksum:4102fad5bb
 d3 2
 a4 2
-! Last modified: Tue, 23 Jan 2024 13:53:23 +0000
-! Diff-Path: ../patches/2024.1.24.387.patch#ublock-badware
+! Last modified: Wed, 24 Jan 2024 09:30:21 +0000
+! Diff-Path: ../patches/2024.1.24.678.patch#ublock-badware
+a655 1
+/?l=*&ymid=$doc
 a2638 4
 ||hoshi-no-michibiki.com^$doc
 ||hoshi-no-michibiki.jp^$doc
@@ -70,11 +74,13 @@ a2977 2
 ||newpipe.app^$all,domain=~newpipe.net
 a3068 1
 ||primeleech.com^$all
-diff name:ublock-filters lines:143 checksum:13c8131572
+diff name:ublock-filters lines:145 checksum:83d88428a9
 d3 2
 a4 2
-! Last modified: Wed, 24 Jan 2024 05:05:19 +0000
-! Diff-Path: ../patches/2024.1.24.387.patch#ublock-filters
+! Last modified: Wed, 24 Jan 2024 10:51:08 +0000
+! Diff-Path: ../patches/2024.1.24.678.patch#ublock-filters
+a13 1
+/youtubei/v*/player?key=$replace=/\"adPlacements.*?([A-Z]"\}|"\}{2})\}\]\,//,domain=www.youtube.com
 a2257 1
 next-episode.net##+js(rmnt, script, appendChild)
 d7588 1
@@ -214,18 +220,18 @@ thecelticblog.com,thecurvyfashionista.com,thefashionspot.com,thegamer.com,thegam
 d21943 1
 a21943 1
 /htdocs/js/admiral/init.js$1p
-diff name:ublock-privacy lines:6 checksum:6ff76f4e44
+diff name:ublock-privacy lines:6 checksum:bd1487fb9a
 d3 2
 a4 2
 ! Last modified: Tue, 23 Jan 2024 13:42:31 +0000
-! Diff-Path: ../patches/2024.1.24.387.patch#ublock-privacy
+! Diff-Path: ../patches/2024.1.24.678.patch#ublock-privacy
 d165 3
 d169 1
-diff name:ublock-quick-fixes lines:56 checksum:a6a1e1dfe0
+diff name:ublock-quick-fixes lines:56 checksum:5eed6036a4
 d3 2
 a4 2
 ! Last modified: Wed, 24 Jan 2024 03:43:37 +0000
-! Diff-Path: ../patches/2024.1.24.387.patch#ublock-quick-fixes
+! Diff-Path: ../patches/2024.1.24.678.patch#ublock-quick-fixes
 d33 6
 a38 6
 imgbncvnv.sbs##+js(aopr, console.clear)
@@ -278,25 +284,29 @@ nyaa.land##html > body > center
 @@||alliptvlinks.com^$ghide
 ||alliptvlinks.com/tktk-content/tktk/85d309b7-1705694100.min.js$script,important
 alliptvlinks.com##+js(set, eazyAdUnblockerHolderDiv, {})
-diff name:ublock-unbreak lines:13 checksum:adf577376a
+diff name:ublock-unbreak lines:17 checksum:746cf77863
 d3 2
 a4 2
-! Last modified: Wed, 24 Jan 2024 06:06:52 +0000
-! Diff-Path: ../patches/2024.1.24.387.patch#ublock-unbreak
+! Last modified: Wed, 24 Jan 2024 07:17:28 +0000
+! Diff-Path: ../patches/2024.1.24.678.patch#ublock-unbreak
 d1424 3
 a1426 1
 9to5google.com##+js(trusted-rpnt, script, (function($), '(function(){const a=document.createElement("div");document.documentElement.appendChild(a),setTimeout(()=>{a&&a.remove()},100)})(); (function($)')
 d2235 1
 a2235 1
 eksisozluk.com##.ad-banner:remove()
-a2460 2
+a2460 6
 sklep.trzynastkaplus.pl##[onclick$="return !ga.loaded;"]:remove-attr(onclick)
 @@||st.dynamicyield.com/st$script,3p,domain=thewarehouse.co.nz
-diff name:easylist lines:4741 checksum:9989cf9155
+!#if env_firefox
+foxnews.com##+js(set, Taplytics, {})
+foxnews.com##+js(set, Taplytics.featureFlagEnabled, noopFunc)
+!#endif
+diff name:easylist lines:5604 checksum:7378b029ec
 d4 2
 a5 2
-! Last modified: Wed, 24 Jan 2024 04:20:02 +0000
-! Diff-Path: ../patches/2024.1.24.387.patch#easylist
+! Last modified: Wed, 24 Jan 2024 10:51:08 +0000
+! Diff-Path: ../patches/2024.1.24.678.patch#easylist
 d995 2
 d998 2
 d1005 1
@@ -316,10 +326,9 @@ d18384 8
 a18435 1
 lexicanum.com#@##sidebar-ad
 d18613 1
+d18644 1
 d18705 1
 d18711 1
-a18711 1
-||06cd28a7d7.com^
 d18713 1
 d18721 1
 d18724 2
@@ -327,6 +336,8 @@ d18730 1
 d18737 1
 d18743 1
 d18745 1
+d18754 1
+d18766 1
 d18775 1
 d18778 1
 d18794 1
@@ -344,6 +355,7 @@ d18871 1
 a18875 1
 ||1j02claf9p.pro^
 d18936 1
+d18940 1
 d18958 1
 d18962 1
 d18965 1
@@ -351,6 +363,7 @@ d18972 1
 d18977 2
 d18980 2
 d18987 1
+d18995 1
 d19005 1
 d19035 2
 d19066 1
@@ -394,6 +407,7 @@ d19331 1
 d19342 1
 d19359 1
 d19362 1
+d19365 1
 d19371 1
 d19373 1
 d19380 1
@@ -403,6 +417,8 @@ a19380 2
 d19386 1
 d19398 1
 d19410 1
+a19414 1
+||76416dc840.com^
 d19428 1
 d19436 1
 d19442 1
@@ -425,14 +441,18 @@ d19545 2
 d19550 1
 d19556 1
 d19574 2
+d19581 1
 d19584 1
 d19587 1
 d19592 1
 d19603 1
 d19620 1
+a19631 1
+||a044eff3be.com^
 d19645 1
 d19651 1
 d19655 1
+d19658 1
 d19660 1
 d19674 1
 d19678 1
@@ -443,17 +463,29 @@ d19712 2
 d19727 1
 a19738 1
 ||abddkjba.com^
+d19775 1
 d19788 1
 d19795 1
 d19817 1
 d19844 1
 a19847 1
 ||abvnypoqcgmh.com^
+a19849 1
+||abwlrooszor.com^
+a19861 1
+||accbxepcls.com^
+d19870 1
 d19899 1
+a19902 1
+||accuracyswede.com^
 a19907 1
 ||acdhahqc.com^
+a19908 1
+||acedhpcgakx.com^
 a19915 1
 ||acfaaoaaxdqm.com^
+a19916 1
+||acftxqqg.com^
 d19921 1
 a19935 1
 ||acjlrotnjjjrobx.com^
@@ -469,24 +501,39 @@ a20151 1
 ||adhiepfpixtjmv.com^
 d20168 2
 d20223 1
+d20231 1
 d20261 1
 d20366 1
 d20453 1
 d20466 1
 d20549 1
+a20555 1
+||aeioakbonnkwik.com^
 a20559 1
 ||aeqtjaonwrnyy.com^
 d20565 1
+a20572 2
+||afahivar.com^
+||afahivar.coom^
+a20581 1
+||afethqrektafa.com^
 d20588 1
 d20598 1
 d20628 1
 d20646 1
+a20663 2
+||afmhlhqwkn.com^
+||afoaglux.com^
 a20668 1
 ||afqqnxifhgsaqab.com^
 d20691 1
 a20698 1
 ||afxokeqdrnnm.xyz^
 d20735 1
+a20736 1
+||aggjprvqamtl.com^
+a20745 1
+||agiorybjn.com^
 d20751 1
 d20757 1
 d20764 1
@@ -495,21 +542,29 @@ a20764 1
 d20771 2
 a20780 1
 ||aguwehajqluorgv.com^
+d20785 1
 a20800 1
 ||ahjmiyrd.xyz^
 a20802 1
 ||ahngnhjdcu.com^
+d20806 1
 a20810 1
 ||ahvmsyemcldyjjr.com^
 a20814 1
 ||aidraiphejpb.com^
+a20819 1
+||aigugrou.com^
 a20820 1
 ||aiixyxwx.com^
+a20822 1
+||aikeemsaurgi.com^
 d20838 1
 a20843 1
 ||aiqdviuyvlcplis.xyz^
 a20846 1
 ||airaujoog.com^
+a20866 1
+||aiwebgak.com^
 a20867 2
 ||aixppedb.com^
 ||aixyyagjj.xyz^
@@ -531,6 +586,7 @@ a20939 1
 d20944 1
 d20947 1
 d20960 1
+d20967 1
 d21006 1
 d21022 1
 d21027 1
@@ -539,6 +595,8 @@ a21034 1
 a21042 1
 ||allnesskepped.com^
 d21050 1
+a21097 1
+||alovfbgx.xyz^
 d21113 1
 d21140 1
 a21155 1
@@ -549,18 +607,29 @@ d21194 1
 d21203 1
 d21211 1
 d21227 1
+a21236 1
+||amqxvwmsfn.xyz^
 d21244 1
 d21247 1
+a21251 1
+||amyaxgaqvoh.com^
 d21255 1
 d21260 1
+d21282 1
+d21298 1
 d21304 1
 d21318 1
 d21320 1
 a21331 1
 ||ankkdgursk.com^
 d21343 1
+a21347 1
+||annrgyvv.xyz^
+a21359 1
+||anqigmbloqnnypa.com^
 a21372 1
 ||antcfeamynt.com^
+d21375 1
 a21378 1
 ||antennawritersimilar.com^
 d21385 1
@@ -569,6 +638,8 @@ d21394 1
 d21401 1
 d21407 1
 d21418 1
+a21423 1
+||anwyrxpockct.xyz^
 a21427 1
 ||anxskuoltqsdjp.com^
 d21444 1
@@ -581,6 +652,10 @@ a21451 1
 a21452 1
 ||aoxtyivjpt.com^
 d21458 1
+a21459 1
+||apbbtddsamgit.com^
+a21460 1
+||apcltlwndq.com^
 d21462 1
 a21462 1
 ||apctrgkmtjku.com^
@@ -589,8 +664,12 @@ a21480 1
 d21483 1
 d21496 1
 d21509 1
+a21519 1
+||applandforbests.com^
 d21525 1
 d21529 1
+a21534 1
+||appmateforbests.com^
 a21574 1
 ||apvfhisrrmen.com^
 a21581 2
@@ -620,6 +699,8 @@ d21660 1
 a21665 1
 ||arminuntor.com^
 d21678 1
+a21682 1
+||aromatic-possibility.pro^
 d21700 1
 a21705 1
 ||arrivedcanteen.com^
@@ -629,6 +710,8 @@ d21738 1
 a21749 1
 ||ascentloinconvenience.com^
 d21768 1
+a21771 1
+||asgclick.com^
 d21793 1
 a21808 1
 ||aslkaxvpv.com^
@@ -641,24 +724,34 @@ a21818 1
 d21823 1
 a21823 1
 ||asozordoafie.com^
-d21825 1
+d21825 2
 d21850 1
 d21866 1
+a21881 1
+||astehaub.net^
 d21896 1
 d21907 1
 d21910 1
 a21916 1
 ||atahphkpndlcdi.com^
+a21936 1
+||aterroppop.com^
 a21946 1
 ||athivopou.com^
+a21948 1
+||athostouco.com^
+a21955 1
+||atlhjtmjrj.com^
 d21957 1
 d21966 1
-a21972 1
+a21972 2
 ||atpfowtcbsedv.xyz^
+||atquvmlcjbctql.com^
 a21979 1
 ||atsjypchedufjy.com^
 d21981 1
 d21986 1
+d22003 1
 d22005 1
 d22009 2
 a22020 1
@@ -677,23 +770,33 @@ a22052 1
 a22053 1
 ||auficxqpyfgcd.xyz^
 d22061 1
+a22078 1
+||aulsidakr.com^
+a22079 1
+||aultesou.net^
 a22083 1
 ||aumludom.com^
 a22086 1
 ||aunaurdeempi.com^
 a22090 1
 ||auobxpvjej.xyz^
+a22091 2
+||auphirtie.com^
+||auphoalt.com^
 a22093 1
 ||aupsugnee.com^
 a22096 1
 ||aurduwin.com^
-a22097 1
+a22097 2
 ||aurtoodse.com^
+||aurvioecvf.com^
 a22101 1
 ||austaihauna.com^
 a22105 1
 ||authaptixoal.com^
 d22108 2
+a22109 1
+||authookroop.com^
 d22118 1
 a22121 1
 ||auwjmphx.com^
@@ -705,8 +808,9 @@ a22151 1
 a22153 1
 ||avouboojirs.com^
 d22155 1
-a22158 2
+a22158 3
 ||avqhelxlb.com^
+||avrqaijwdqk.xyz^
 ||avthelkp.net^
 d22162 1
 d22183 1
@@ -737,6 +841,8 @@ d22356 1
 d22359 1
 d22361 1
 d22363 2
+a22374 1
+||babfdicktnodx.xyz^
 d22384 1
 d22392 1
 d22404 3
@@ -748,6 +854,7 @@ a22435 1
 ||baglaubs.com^
 a22437 1
 ||bagrobsoufy.com^
+d22439 1
 d22445 1
 d22448 1
 d22454 1
@@ -772,9 +879,13 @@ a22623 1
 ||bawickie.com^
 d22626 1
 d22635 1
+a22637 1
+||bbaxeoftbnhehev.com^
 a22643 2
 ||bbhxuqym.xyz^
 ||bbkaqmmknori.com^
+a22648 1
+||bbsgsmmqviaob.xyz^
 a22649 1
 ||bbwcbdurxalsks.com^
 a22652 1
@@ -806,8 +917,13 @@ a22770 1
 d22780 1
 a22793 1
 ||belengougha.com^
+a22794 1
+||belfrynonfiction.com^
+d22809 1
 d22814 1
 d22820 1
+a22833 1
+||benefitsshea.com^
 d22848 3
 d22854 1
 a22859 1
@@ -824,8 +940,9 @@ a23006 3
 ||bfrghskgq.com^
 ||bfsnxjwfju.xyz^
 ||bftlugdih.com^
-a23007 1
+a23007 2
 ||bfutvoehfooh.com^
+||bfwnkcfsycbd.com^
 a23011 1
 ||bgeclklgpnk.xyz^
 d23014 1
@@ -834,11 +951,14 @@ a23014 1
 d23016 1
 a23020 1
 ||bhapnssodp.com^
-a23025 1
+a23025 2
 ||bhdhddjbyf.com^
+||bhgmlryalkwx.xyz^
 a23028 2
 ||bhnmkauncgr.com^
 ||bhovnhvpq.com^
+a23030 1
+||bhupsrkrwnggcl.com^
 a23031 1
 ||bhxogodamtrcs.com^
 d23059 1
@@ -889,6 +1009,12 @@ a23277 1
 d23283 1
 a23285 1
 ||blsrscpqu.com^
+a23308 1
+||bmbuqmdrjjhny.com^
+a23319 1
+||bmkmlweih.com^
+a23325 1
+||bmrgliygnaf.com^
 a23345 1
 ||bnjotruds.com^
 a23347 1
@@ -899,15 +1025,31 @@ a23359 1
 d23369 1
 d23378 1
 d23382 1
+d23394 1
 d23411 1
 d23451 1
 a23451 1
 ||bonjonetwork.com^
 d23462 1
+a23483 1
+||boolevool.com^
 d23490 1
+a23545 1
+||botsaunirt.com^
+a23549 1
+||bouchipeeju.com^
+a23551 3
+||bouhaisaufy.com^
+||bouheemosh.com^
+||bouhtquecu.com^
 a23595 1
 ||bpnauclcmo.xyz^
-a23603 1
+a23600 1
+||bpxcqxonbmn.com^
+a23601 1
+||bqieaijre.xyz^
+a23603 2
+||bqlhwrgxoedsm.com^
 ||bqqvmupmcnjnbv.com^
 d23616 1
 a23637 1
@@ -918,16 +1060,19 @@ a23661 1
 d23697 1
 d23701 1
 d23710 1
+a23711 2
+||brjyhgebqwl.com^
+||brmuclifyii.com^
 d23734 1
 a23734 1
 ||bromidsluluai.com^
 d23774 2
 a23780 1
 ||brvrrlnmnpvsqln.com^
-a23794 2
+d23795 1
+a23795 3
 ||bsudzbtp.com^
 ||bswakciowtsmnm.com^
-a23795 1
 ||bsxqnbhahvjrrry.com^
 a23803 1
 ||btiixwrwoinck.xyz^
@@ -939,8 +1084,12 @@ d23815 2
 a23816 1
 ||btwtssrnntidgb.com^
 d23822 2
+a23823 1
+||buchaumpo.com^
 d23828 1
 d23840 1
+a23853 1
+||bujaguppplfy.xyz^
 a23854 1
 ||buksoaksuro.com^
 d23879 1
@@ -950,6 +1099,8 @@ d23892 1
 a23899 1
 ||bupbapegrtoamk.com^
 d23901 1
+a23901 1
+||bupoeyfsfqgg.com^
 a23904 1
 ||buqumxalotikf.com^
 d23914 2
@@ -961,10 +1112,17 @@ a23966 1
 ||bvolfluxk.com^
 a23972 1
 ||bwceohkom.xyz^
+a23974 1
+||bwunebnqdu.com^
 d23979 1
-a23979 1
+a23979 3
 ||bxevkphcx.com^
-a23982 1
+||bxikceucv.com^
+||bxpjpkldxrsss.xyz^
+a23981 1
+||bxvxfsdvgstu.com^
+a23982 2
+||bxxiklwst.xyz^
 ||bxxvmjrpegqy.com^
 a23985 1
 ||byauyahgcobvjkq.com^
@@ -1000,14 +1158,20 @@ d24127 2
 d24131 1
 d24143 1
 d24180 1
+d24185 1
 d24191 2
 a24197 1
 ||capounsou.com^
 d24236 1
 d24296 2
 d24299 1
+a24315 1
+||caubichofus.com^
 d24317 1
-a24320 1
+a24317 1
+||caufirig.com^
+a24320 2
+||caumausa.com^
 ||caunauptipsy.com^
 a24343 1
 ||cayrtgavy.xyz^
@@ -1025,8 +1189,10 @@ a24362 1
 d24375 1
 a24379 1
 ||cddbwlpqk.xyz^
-a24381 1
+a24381 3
+||cdfcnngojhp.com^
 ||cdhvrrlyrawrxqd.xyz^
+||cdkcaxxjyyb.xyz^
 d24429 1
 d24433 1
 a24438 1
@@ -1035,6 +1201,8 @@ d24447 1
 a24447 2
 ||cecmuthejooz.com^
 ||cecqypgynertbfd.com^
+a24449 1
+||ceebikoph.com^
 d24476 1
 a24476 1
 ||cemaaxyhrcaf.com^
@@ -1046,14 +1214,17 @@ d24507 1
 a24516 1
 ||cesmqcuyfugkpyp.com^
 d24527 1
-a24533 1
+a24533 2
+||cflmdoigokoeld.com^
 ||cfpruxrajtnlpt.com^
-a24540 1
+a24540 2
+||cghfqbwdkuemcn.com^
 ||cguospfen.com^
 a24541 1
 ||cgyhsyvm.xyz^
 d24549 1
-a24551 1
+a24551 2
+||chaibsoacmo.com^
 ||chailsun.com^
 d24556 1
 a24560 1
@@ -1064,12 +1235,16 @@ a24566 2
 a24589 1
 ||chapseel.com^
 d24607 1
+a24610 1
+||chaubseet.com^
 d24615 1
 a24622 2
 ||chbvrgjgkuv.com^
 ||chdkxgjtwflba.com^
 a24645 1
 ||cheebetoops.com^
+a24669 1
+||chemtoaxeehy.com^
 d24687 1
 d24689 1
 a24692 1
@@ -1088,6 +1263,8 @@ a24764 1
 ||choughigrool.com^
 a24768 1
 ||chozipeem.com^
+a24787 1
+||chtyapulmcxmbt.com^
 a24788 1
 ||chuctmalo.xyz^
 a24796 1
@@ -1099,6 +1276,8 @@ a24820 3
 ||cigreechodsu.com^
 ||ciijcnrjf.com^
 ||ciknujoiqsmuw.xyz^
+a24863 1
+||cjkaihej.com^
 a24864 1
 ||cjnktmhcukfdcq.xyz^
 a24867 2
@@ -1107,6 +1286,8 @@ a24867 2
 a24869 2
 ||ckbynmeskffnn.com^
 ||ckeyutgnwtsojbc.xyz^
+a24876 1
+||ckvnyoaitrhaw.com^
 a24878 1
 ||ckywou.com^
 a24887 1
@@ -1115,6 +1296,8 @@ d24895 1
 d24905 1
 d24907 1
 d24915 1
+a24935 1
+||clear-speech.pro^
 d24945 1
 d24953 1
 a24959 1
@@ -1136,9 +1319,11 @@ a25108 1
 a25109 1
 ||cmpgfltxv.xyz^
 d25112 1
-a25119 1
+a25119 2
 ||cnahoscfk.xyz^
-a25123 1
+||cndcfvmc.com^
+a25123 2
+||cnkapolr.xyz^
 ||cnmisflbwrnrtph.com^
 d25125 1
 d25127 1
@@ -1158,6 +1343,8 @@ d25152 1
 a25181 1
 ||coercehiation.com^
 d25191 1
+a25215 1
+||cokqquqxrkxwqx.xyz^
 d25238 1
 d25260 1
 d25370 1
@@ -1169,6 +1356,10 @@ d25443 1
 d25494 1
 a25511 1
 ||coochitiphy.com^
+a25521 1
+||coolappland2.com^
+a25523 1
+||coolappland5.com^
 d25525 1
 d25534 1
 a25536 1
@@ -1182,22 +1373,38 @@ d25569 1
 a25602 1
 ||coukagrous.com^
 d25615 1
+a25626 1
+||coupteew.com^
+a25644 1
+||couwooji.xyz^
 d25649 1
 d25652 1
 d25657 1
 d25679 1
+a25692 1
+||cpobcsianm.com^
+a25693 1
+||cpsvbyveawikgh.xyz^
 a25702 1
 ||cqbmddliqbbp.com^
+a25704 1
+||cqdlfqgsnjyyhew.com^
 a25708 1
 ||cqmqudieixhc.xyz^
 d25713 1
+a25719 1
+||crafty-math.com^
+d25762 1
 d25778 1
 a25783 1
 ||crfmbxqrf.xyz^
 d25812 1
 d25830 1
 d25834 1
+d25843 1
 d25850 2
+a25857 1
+||csfabdtmrs.com^
 a25860 1
 ||csoatmxpcv.xyz^
 a25865 1
@@ -1216,22 +1423,37 @@ a25906 1
 ||cueafuljdytb.com^
 a25910 1
 ||cuferxmtvifnu.com^
+a25911 1
+||cugiphepty.com^
 d25919 1
 a25979 1
 ||cuunpsyhsb.com^
+a25981 2
+||cvcmslcefxvvux.com^
+||cvjfmrrgyrqnsnw.xyz^
+a25988 1
+||cwhrfkpniuvkn.xyz^
+a25989 1
+||cwixbvnnndpe.xyz^
 a25990 1
 ||cwkuefvuipe.com^
 a25992 1
 ||cwqggdbsuksb.com^
 d25997 1
+a25998 1
+||cxeciqartjtctih.com^
 a25999 3
 ||cxgicdcfou.com^
 ||cxgnymgd.xyz^
 ||cxhhvmkwfh.com^
 d26005 1
+a26005 1
+||cxotiggg.com^
 d26019 1
 a26019 1
 ||cyilxkpkf.com^
+a26036 1
+||cyyjhkhgt.com^
 d26054 1
 a26054 1
 ||d1i76h1c9mme1m.cloudfront.net^
@@ -1242,11 +1464,15 @@ d26073 1
 d26081 1
 d26092 1
 d26113 1
+a26118 1
+||daicoaky.net^
 d26132 1
 d26134 1
 a26136 1
 ||daizooth.net^
 d26155 1
+a26176 1
+||dantasg.com^
 a26185 2
 ||dapsotsares.com^
 ||daptault.com^
@@ -1257,7 +1483,8 @@ a26207 1
 a26218 1
 ||date-5-c.com^
 d26246 1
-a26253 1
+a26253 2
+||dauptoawhi.com^
 ||dausoofo.net^
 d26255 1
 d26264 1
@@ -1269,6 +1496,8 @@ a26275 1
 ||dbgqgmqqc.com^
 a26276 1
 ||dbhhvmoq.com^
+a26277 1
+||dblbkinsuswpr.com^
 a26278 1
 ||dbplygoi.com^
 a26285 1
@@ -1306,6 +1535,8 @@ d26543 1
 d26568 1
 a26568 1
 ||dersouds.com^
+a26587 1
+||deshourty.com^
 d26610 1
 d26612 1
 d26630 1
@@ -1338,6 +1569,9 @@ a26680 1
 a26681 1
 ||dhrbgwqljdgw.com^
 d26685 1
+d26714 1
+a26721 1
+||didwuxdpojkaxxk.com^
 a26743 1
 ||dighojatho.com^
 a26748 1
@@ -1346,6 +1580,7 @@ a26750 1
 ||diicpuhi.com^
 a26756 1
 ||dikypkxancrqrn.xyz^
+d26761 1
 a26762 1
 ||dilrouthoab.com^
 a26767 1
@@ -1355,22 +1590,34 @@ d26783 1
 d26804 1
 d26813 1
 d26838 1
+a26860 1
+||discodjxkqya.com^
 d26877 1
 d26884 1
 d26936 1
 d26964 1
 d26976 1
+a26976 1
+||dithhdwwvqm.com^
+a26988 1
+||dixhqjgbatpg.com^
+a27003 1
+||djmwwdrznntss.com^
 a27005 1
 ||djqitgfjfu.com^
+a27007 1
+||djsxyvgrkyl.com^
 a27008 1
 ||djytaswabirm.xyz^
-a27010 1
+a27010 2
+||dkesqebismkqec.com^
 ||dkihlqwmd.com^
 a27022 1
 ||dljuejfp.com^
 a27024 1
 ||dlpwuggxxifidgd.com^
-a27027 1
+a27027 2
+||dlwcjcbwst.com^
 ||dlxodggxduh.xyz^
 a27035 1
 ||dmmgjsymlrfp.com^
@@ -1389,9 +1636,12 @@ a27049 1
 ||dnfqqucdsdb.com^
 a27062 1
 ||doashoshou.com^
+d27070 1
 a27090 1
 ||doghasta.com^
 d27093 1
+a27101 1
+||dokseptaufa.com^
 d27106 1
 d27114 1
 a27128 1
@@ -1402,14 +1652,22 @@ a27165 1
 ||doostauge.com^
 a27187 1
 ||dositsil.net^
+a27189 1
+||dosnoyhkd.com^
 a27220 1
 ||doukoula.com^
+a27221 1
+||doupseejog.com^
 d27224 1
 d27237 1
 a27243 1
 ||doyngspern.com^
 a27244 1
 ||dozeelsy.xyz^
+a27246 1
+||dp94m8xzwqsjk.cloudfront.net^
+a27247 1
+||dpdcinlfynhg.xyz^
 a27252 2
 ||dpnwqokx.com^
 ||dpoevnml.com^
@@ -1419,6 +1677,8 @@ a27260 1
 ||dqjouawswgmchn.com^
 a27262 1
 ||dqsdpdofibwsjjg.xyz^
+a27263 1
+||dqxbqubsknfc.com^
 d27277 1
 a27282 1
 ||dramipmsxyutc.xyz^
@@ -1435,12 +1695,15 @@ a27352 1
 ||dropdoneraining.com^
 a27370 1
 ||drvkypkfm.com^
-a27383 1
+a27383 2
+||dslsgbrckqshuep.com^
 ||dsmrnsngvnrc.xyz^
 a27394 1
 ||dsygubntxgvxo.com^
 a27415 1
 ||dtsxqguwovhg.com^
+a27420 1
+||dubbylxutstyn.com^
 d27422 1
 d27433 1
 a27452 1
@@ -1452,19 +1715,21 @@ a27510 1
 ||duzbhonizsk.com^
 a27512 1
 ||dvbhretuebm.com^
-a27513 1
+d27514 2
+a27515 2
 ||dvdwflxaniloha.com^
-a27514 1
 ||dvfmdgdk.com^
-d27521 1
-a27537 1
+d27521 2
+a27537 2
 ||dwxouoltkraywm.com^
+||dxabebtsgsg.com^
 a27538 3
 ||dxdboroipcvo.com^
 ||dxfovuqib.com^
 ||dxmgyqxweyutwdm.com^
-a27540 3
+a27540 4
 ||dxstaham.com^
+||dxtsqgnwn.com^
 ||dxuuvxweynac.com^
 ||dxyvxeytwxgepjr.xyz^
 a27541 1
@@ -1476,7 +1741,8 @@ d27547 1
 a27547 1
 ||dylwqfrdb.com^
 d27551 1
-a27562 2
+a27562 3
+||dyygsgxhfrlo.xyz^
 ||dyykbhvlwrdhgjb.com^
 ||dyysxwjeyfiysrs.com^
 a27571 1
@@ -1487,14 +1753,18 @@ d27600 1
 a27621 1
 ||eachnykmucntt.com^
 d27624 1
+d27629 1
 d27645 1
 d27708 1
 a27711 1
 ||eaxhsjrlq.com^
-a27718 1
+a27718 2
+||ebdlthbijshfj.com^
 ||ebdrxqox.com^
 a27719 1
 ||ebefseuetqjyg.com^
+a27720 1
+||ebimdeibbtw.com^
 a27724 1
 ||ebqqiakyhsn.com^
 d27733 2
@@ -1503,11 +1773,13 @@ a27734 1
 a27735 1
 ||ecffmhajfgxw.com^
 d27750 1
-a27760 1
+a27760 2
 ||ecslkbpb.com^
+||ecstatic-rope.pro^
 a27776 1
 ||eddmciqkvq.com^
 d27785 1
+d27791 1
 a27791 1
 ||editionoverlookadvocate.com^
 d27793 1
@@ -1515,13 +1787,16 @@ a27795 1
 ||edkwgbxgn.com^
 a27801 1
 ||edoumoosseg.com^
-a27804 1
+a27804 2
 ||edshhhfsawod.com^
+||edsvqciwxxqd.com^
 a27805 1
 ||edttfiou.com^
 d27811 1
 a27818 1
 ||edvruqmrjvlg.com^
+a27821 1
+||edxfquupejhbrey.com^
 d27825 1
 a27827 1
 ||eeaxtnurmuxylb.com^
@@ -1535,11 +1810,17 @@ a27841 1
 ||eeglauftoo.com^
 a27843 1
 ||eegroosoad.com^
+a27846 1
+||eekeeghoolsy.com^
 a27849 1
 ||eeleekso.com^
 a27852 1
 ||eemauroo.com^
 d27862 1
+a27868 1
+||eerjrekklw.com^
+a27883 1
+||eexoampe.com^
 a27917 1
 ||efmrxqjngyc.xyz^
 a27922 2
@@ -1549,12 +1830,18 @@ a27932 1
 ||egjubfeteywvi.com^
 d27938 1
 d27943 1
+a27948 1
+||egrousoawhie.com^
 a27957 1
 ||ehcrmpbrfyrq.com^
 a27958 3
 ||eheiwhacdsnc.com^
 ||ehgavvcqj.xyz^
 ||ehliswxnrx.com^
+a27959 1
+||ehpnkugmfatoyhg.com^
+a27962 1
+||ehqnheqa.com^
 a27963 1
 ||eicxlvkek.com^
 a27980 2
@@ -1566,6 +1853,8 @@ d27990 1
 d27996 1
 a27999 1
 ||ejsgxapv.xyz^
+a28000 1
+||ejvdfssdj.com^
 a28001 1
 ||ekaurord.com^
 a28007 1
@@ -1578,20 +1867,33 @@ a28043 1
 ||elgotakpgo.xyz^
 a28064 1
 ||elkjufuj.xyz^
+a28066 1
+||ellemgvooadmlnk.com^
 a28067 1
 ||ellmtlvlpihr.com^
 a28072 1
 ||eloinedcanasta.com^
+a28080 1
+||eltbbvcqgnkc.com^
 a28081 1
 ||elugnoasargo.com^
 a28085 1
 ||emaitsakraug.com^
 d28088 1
+a28098 1
+||emeecmou.com^
 d28102 1
 a28116 1
 ||emoticfriends.com^
-d28147 1
+d28130 1
+d28143 1
+d28147 2
+d28156 1
+a28178 1
+||encumbranceunderlineheadmaster.com^
 d28199 1
+a28206 1
+||engkqlckjri.com^
 a28212 1
 ||enhdgciogijq.com^
 a28215 1
@@ -1599,39 +1901,56 @@ a28215 1
 a28218 1
 ||enkluojvftrvr.com^
 d28229 1
+a28241 1
+||enqpjgdbvf.com^
 d28249 1
 a28270 1
 ||entjryftqwmsus.com^
+a28276 1
+||entuvmcdcedli.com^
 d28302 1
 a28302 1
 ||eoasxirquewfyn.com^
 d28310 1
 a28312 1
 ||eopudxnabotrlsx.com^
+a28322 1
+||ep5banners.com^
 d28327 1
-a28327 2
+a28327 3
 ||epcpbbqi.xyz^
+||epctwfwy.com^
 ||epewvpvddaxtv.com^
 d28339 1
 a28345 1
 ||epocvwthrvaxos.com^
 a28346 1
 ||epqlidgerrnwyv.com^
-a28349 1
+a28348 1
+||epsauthoup.com^
+a28349 3
+||eptanecgntm.com^
 ||eptepcaiydxlk.com^
+||eptobeemeeps.com^
 d28354 1
+a28354 1
+||epxmxnhjqknsuql.com^
 a28355 5
 ||eqcilkii.com^
 ||eqepeqrfaijsx.com^
 ||eqewdxnkex.com^
 ||eqhegcbxmsgwil.com^
 ||eqjkdifmtfpxdpd.com^
+a28358 1
+||eqpbskmjcfoj.com^
 d28361 1
 a28377 1
 ||ereerdepi.com^
 d28388 1
 d28395 1
 d28399 1
+a28420 1
+||erusenbspnty.com^
 d28438 1
 d28440 1
 a28440 1
@@ -1642,10 +1961,13 @@ a28444 1
 ||esisfulylydev.com^
 a28453 1
 ||espinotyponym.com^
-a28454 1
+a28454 2
+||esqarqiqwulytqy.xyz^
 ||esrbkneqve.com^
 a28462 1
 ||estainuptee.com^
+a28472 1
+||esxjpnkgyaeiu.xyz^
 a28474 1
 ||etbnbvlnhvr.com^
 a28477 1
@@ -1656,21 +1978,28 @@ a28502 1
 ||etystoass.com^
 d28510 1
 d28518 2
+a28519 1
+||eupxokccpc.xyz^
 a28527 2
 ||eusbhnpyhty.com^
 ||eusmadhlyjn.xyz^
 a28536 1
 ||evarjrsowtfakk.com^
+a28538 1
+||evcnxaiisqqfqfe.xyz^
 a28540 1
 ||evdxiecmmpics.com^
 a28541 1
 ||eveenaiftoa.com^
 a28568 1
 ||evidhjksdtgyxrh.xyz^
-a28571 1
+a28571 2
+||evivuwhoa.com^
 ||evjroovrujr.xyz^
 a28577 1
 ||evtkugaoxhwegi.com^
+a28578 1
+||evvykulupl.com^
 a28589 1
 ||ewdxisdrc.com^
 d28594 1
@@ -1687,18 +2016,25 @@ a28601 2
 ||ewrwpqqd.xyz^
 ||ewsinungniuj.com^
 d28635 1
+a28648 1
+||excwaaclqshxyh.com^
 a28653 1
 ||exefprtna.com^
-a28663 1
+a28663 2
 ||exhcloykalx.com^
+||exhhdwlgvvygc.xyz^
 a28664 1
 ||exhibitedpermanentstoop.com^
-d28681 1
+d28690 1
 d28695 1
+a28750 1
+||exuharpxs.com^
 a28769 1
 ||eyfivnokubyhmy.xyz^
 a28771 1
 ||eylepgswsnyyd.com^
+a28773 1
+||eymprvikdld.xyz^
 d28779 1
 a28779 1
 ||eyrvfxwrogfslk.com^
@@ -1719,20 +2055,32 @@ d28840 2
 d28844 1
 d28852 1
 d28855 1
+a28871 1
+||faejowvqdmnjwib.xyz^
+a28874 1
+||faggapmunost.com^
 d28882 1
 d28901 1
 d28906 1
+a28907 1
+||faiwastauk.com^
 d28919 1
 a28950 1
 ||fappwopyaw.com^
+a28953 1
+||faramkaqxoh.com^
 d28991 1
 a28999 1
 ||fatheemt.com^
+a29010 1
+||faukoocifaly.com^
 a29014 2
 ||fauneeptoaso.com^
 ||fausothaur.com^
 d29024 1
 d29032 1
+a29039 1
+||fbkzqnyyga.com^
 a29044 1
 ||fbtinlxy.com^
 a29051 2
@@ -1740,6 +2088,8 @@ a29051 2
 ||fclypuqnbykp.xyz^
 a29054 1
 ||fcpygacbjukjdvr.com^
+a29061 1
+||fd2cd5c351.com^
 a29063 1
 ||fdatcfvlgvryxpa.com^
 d29065 1
@@ -1748,25 +2098,43 @@ a29066 2
 ||fdheincvdbp.com^
 a29067 1
 ||fdjcuxxgmrye.com^
-a29068 1
+a29068 2
+||fdjnusmqs.com^
 ||fdmfbxvsthr.xyz^
+a29069 1
+||fdovswgdj.com^
+a29070 1
+||fdrgtt9edmej010.com^
 d29080 1
 a29120 1
 ||feetheho.com^
+a29124 1
+||fegroawie.com^
 d29142 1
 a29151 1
 ||femsurgo.com^
 d29158 2
 a29159 1
 ||fepaddxacwfo.xyz^
+d29171 1
 d29179 1
 d29197 1
 d29205 1
+a29206 1
+||ffcclqkmmlmecf.xyz^^
+a29210 1
+||ffrxlhuwvyldpk.com^
 a29215 1
 ||ffxpfkbro.xyz^
+a29221 1
+||fgisstdudch.com^
 a29223 1
 ||fgpvxxbsickfm.xyz^
+a29224 1
+||fgtnyfuk.xyz^
 d29226 1
+a29227 1
+||fhahujwafaf.com^
 a29230 1
 ||fhhtjomnapvgupg.xyz^
 a29232 2
@@ -1782,6 +2150,11 @@ a29237 1
 ||fibodjuxbxd.xyz^
 a29246 1
 ||fidnkwuqmaknlwr.com^
+a29249 1
+||fieoefbvsu.com^
+d29272 1
+a29272 1
+||filhibohwowm.com^
 d29274 1
 d29278 1
 a29282 1
@@ -1795,10 +2168,12 @@ a29378 1
 a29387 2
 ||fiyqnlqyu.com^
 ||fjadubbdcfmrm.com^
-a29390 1
+a29390 2
+||fjmgnfoedmsjj.xyz^
 ||fjmksbwxb.com^
-a29392 1
+a29392 2
 ||fjwymafkgqfq.xyz^
+||fjxowepqiwrdao.com^
 a29399 2
 ||fkpklrphfw.com^
 ||fkrdybcqxlytvs.xyz^
@@ -1815,16 +2190,21 @@ d29489 1
 d29509 1
 a29529 1
 ||flvvcqfmw.com^
-a29550 2
+a29550 3
 ||fnmfaoac.xyz^
 ||fnnmnupevx.com^
+||fnofnbdkfwnvguu.com^
 a29554 1
 ||fnuvsfyylouxwu.com^
 a29582 1
 ||fohvutgi.com^
-d29608 1
+d29607 2
+a29608 1
+||fomulex.com^
 a29616 1
 ||foogpdywvrswrxl.com^
+a29625 1
+||foothoupaufa.com^
 a29627 1
 ||foowuniwhoa.com^
 a29634 1
@@ -1836,8 +2216,11 @@ d29729 1
 d29742 1
 a29757 1
 ||foxmeywkh.xyz^
-a29765 1
+a29765 2
 ||fpmleqdb.com^
+||fpnakbanlt.com^
+a29766 1
+||fpokdodfcpd.com^
 a29767 2
 ||fpwncdgqsnq.xyz^
 ||fpwpvchbwckbg.com^
@@ -1854,6 +2237,8 @@ a29879 1
 ||frkvlntwbyayt.com^
 a29880 1
 ||frmpbwotg.com^
+a29885 1
+||frokbsuagevsy.com^
 d29900 1
 a29901 1
 ||frtrqkeei.com^
@@ -1862,8 +2247,9 @@ d29912 1
 a29912 2
 ||frxuqdho.com^
 ||frxwattywgcnsgw.xyz^
-a29916 1
+a29916 2
 ||fsihfhjt.com^
+||fsksvtvhxtyqp.com^
 a29926 1
 ||ftatpfqffc.xyz^
 a29932 2
@@ -1871,19 +2257,24 @@ a29932 2
 ||fthyvbyedeypqy.com^
 a29935 1
 ||ftkywqcphlqh.com^
-a29937 3
+a29937 4
 ||ftncfjwfokiqrnr.com^
 ||ftqfrkwdj.com^
+||ftqygccvexbxpb.com^
 ||ftrakdnp.xyz^
 a29944 3
 ||ftxaonydrmajhvv.com^
 ||ftxolfex.xyz^
 ||fuboraimoo.com^
 d29946 1
+a29948 1
+||fucmoadsoako.com^
 a29949 1
 ||fucsarhyhlci.com^
 d29951 3
 d29958 1
+a29958 1
+||fujigar.com^
 d29965 1
 a29984 1
 ||funiooboqifnku.com^
@@ -1893,20 +2284,37 @@ d29996 1
 d30000 1
 a30034 1
 ||fvebixpgtxm.com^
-a30035 1
+a30035 2
+||fvloumuvcbve.com^
 ||fvmcyvapsn.com^
 a30036 1
 ||fwabhrptdns.com^
+a30037 2
+||fwealjdmeptu.com^
+||fwftmuxxeh.com^
 a30039 1
 ||fwnxbcogqcjj.com^
+a30040 1
+||fwskotewexa.xyz^
+a30043 1
+||fwyhyryyqvs.com^
 a30044 1
 ||fxggbfjfi.com^
-a30047 1
+a30046 3
+||fxluaijchj.com^
+||fxqsxxvfgampwu.xyz^
+||fxqsxxvfgderjdf.com^
+a30047 2
 ||fxroflypm.com^
+||fxwykuxh.com^
 d30052 1
 a30052 1
 ||fyiyducvgp.com^
 d30054 1
+a30071 1
+||gadqsrxurvtd.com^
+a30082 1
+||gaeebjednl.xyz^
 a30088 1
 ||gagytxjgcs.com^
 a30095 1
@@ -1920,8 +2328,12 @@ d30118 1
 d30132 1
 a30144 1
 ||gamvbfdrybtkug.com^
+a30153 1
+||gaooawffc.com^
 d30170 1
 d30174 1
+a30180 1
+||gasasphrad.com^
 d30184 1
 d30188 1
 a30195 1
@@ -1955,48 +2367,75 @@ d30336 1
 d30343 1
 a30377 1
 ||gevauwaudsem.com^
-a30379 2
+a30379 3
+||gexvcalvbhxl.com^
 ||gfbpijvtoxpit.com^
 ||gfbxgrfnljmxs.com^
 a30381 1
 ||gfkefmmnludbkj.com^
 a30387 1
 ||gftasruowjnsc.xyz^
-a30388 1
+a30388 2
 ||gfuaveumtb.xyz^
+||gfunwoakvgwo.com^
 a30389 1
 ||ggeaqltgasbcysu.com^
 a30391 1
 ||ggftwafd.xyz^
+a30392 1
+||gghmyocmyl.com^
+a30394 1
+||ggknkowmh.com^
 a30395 1
 ||ggqppaiglthoq.com^
 d30405 1
-a30405 2
+a30405 3
 ||ghavjknuitkmh.com^
+||ghbktboutfibvt.com^
 ||ghejrcvslombjse.com^
 a30410 1
 ||ghfnlorkormcmr.com^
 d30413 1
 a30430 1
 ||gidmikipluoju.com^
+a30442 1
+||gignfrfs.com^
 a30446 1
 ||giliakmisdaub.com^
+a30468 1
+||gipsouglow.com^
 d30476 1
+a30491 1
+||givingcareer.com^
+a30493 1
+||gixjtofnjpgxstg.com^
 a30494 1
 ||giyqjkph.com^
+a30495 1
+||gjffrtfkhf.xyz^
+a30503 1
+||gk79a2oup.com^
 a30504 2
 ||gkfehrdhbm.com^
 ||gkkchmjdndovu.xyz^
 a30507 2
 ||gkpfuoyapoprvln.com^
 ||gkpuqpewgxjso.com^
+d30515 1
+a30516 1
+||glaickoxaksy.com^
 d30526 1
+d30540 1
 d30555 1
 a30558 1
 ||gleemsub.com^
 d30585 1
+a30589 1
+||gliufwcsjq.com^
 a30593 1
 ||gllgqjxog.com^
+a30598 1
+||gloaghouph.com^
 a30617 1
 ||globxaxqp.com^
 a30620 1
@@ -2011,6 +2450,7 @@ d30642 2
 a30643 1
 ||glorsugn.net^
 d30660 1
+d30667 1
 a30673 1
 ||glungakra.com^
 d30685 1
@@ -2019,11 +2459,14 @@ a30685 1
 a30686 2
 ||gmbopxcfbwg.com^
 ||gmcdxivnqegrnl.com^
+a30689 1
+||gmixiwowford.com^
 a30691 2
 ||gmmcerkkja.com^
 ||gmnagxbisjn.com^
-a30693 1
+a30693 2
 ||gmuskkvfophohqn.xyz^
+||gmxtrqkshsaqu.com^
 a30699 2
 ||gndkcpwowxnc.com^
 ||gnemxcfermkpp.com^
@@ -2038,6 +2481,9 @@ a30770 1
 ||gogucbuojg.com^
 a30772 1
 ||gohupsou.com^
+d30776 1
+a30777 1
+||goiojjgyvdhfdm.com^
 a30778 1
 ||goksuxauks.com^
 d30781 1
@@ -2046,17 +2492,28 @@ a30789 1
 d30797 1
 a30800 1
 ||gonzalodaemon.top^
+a30803 1
+||goodappforyou.com^
+a30816 1
+||goolaptaugab.com^
+a30820 1
+||goosimes.com^
 d30830 1
 d30834 1
 d30837 1
 d30843 1
+a30844 1
+||goseyfpmyfhmhdd.com^
 a30851 1
 ||gostoamt.com^
+a30863 1
+||goudgctjcgan.com^
 a30864 1
 ||gouloupt.com^
 d30867 1
 d30870 1
-a30878 1
+a30878 2
+||goverua.com^
 ||govyygegtgofm.xyz^
 d30887 1
 a30894 1
@@ -2071,19 +2528,23 @@ a30953 2
 ||grapseex.com^
 ||grapselu.com^
 d30964 1
-a30964 1
+a30964 2
 ||graukaigh.com^
+||graumseehucm.com^
 a30967 1
 ||grauxouzair.com^
 d30971 1
 a30987 2
 ||greebomtie.com^
 ||greeckoangux.com^
+a30989 1
+||greeftougivy.com^
 d31001 1
 a31010 1
 ||gregarpor-roundens-i-276.site^
-a31014 1
+a31014 2
 ||grelrairg.com^
+||greltoat.xyz^
 a31017 1
 ||greptump.com^
 a31020 1
@@ -2092,8 +2553,13 @@ d31025 1
 a31025 1
 ||gribsastiw.com^
 d31035 1
+a31035 1
+||grimsecretary.com^
 d31040 1
-a31046 1
+a31040 1
+||gripping-bread.com^
+a31046 2
+||grkuikqvpmouglaitu.com^
 ||grkuikqvpmqnla.com^
 a31047 1
 ||groacmaz.com^
@@ -2104,17 +2570,24 @@ a31077 1
 ||grounolrou.com^
 d31087 1
 d31091 1
+a31113 1
+||grupkxfhi.com^
+a31114 1
+||grurawho.com^
 a31117 1
 ||grxiqsqota.xyz^
-a31120 2
+a31120 3
 ||gsecumwgxthon.com^
 ||gseyldgnl.com^
+||gsfoipmh.xyz^
 a31122 1
 ||gsrfkrnkeaanc.xyz^
 a31124 1
 ||gswinnodf.com^
 a31125 1
 ||gtcpsvyirosieug.com^
+a31127 1
+||gtiqmsbpor.com^
 a31128 1
 ||gtkimwuyvqfb.com^
 a31129 2
@@ -2144,7 +2617,8 @@ a31210 3
 ||gwtylvvexe.xyz^
 a31212 1
 ||gwvuasdnddxlsp.com^
-a31215 1
+a31215 2
+||gxeireojvtfoq.com^
 ||gxgrrrovnlgjcv.xyz^
 a31216 1
 ||gxhbsapkkdni.xyz^
@@ -2152,10 +2626,14 @@ a31218 1
 ||gxnedqaxm.com^
 a31223 1
 ||gyjwkknwanbug.xyz^
+a31226 1
+||gynnjgjljbqix.xyz^
 a31228 1
 ||gyqwppftsrmme.xyz^
 a31229 1
 ||gyudlffoisng.com^
+a31233 1
+||gzigudxidz.com^
 d31246 1
 a31246 1
 ||habdjbbkq.com^
@@ -2165,6 +2643,8 @@ a31273 1
 ||hagnaudsate.com^
 a31280 1
 ||hairdresserbayonet.com^
+a31286 1
+||haiwoubo.com^
 a31287 1
 ||haksaigho.com^
 d31298 1
@@ -2175,6 +2655,8 @@ d31400 2
 a31406 1
 ||hatapybbwxkbs.com^
 d31408 1
+a31429 1
+||hauphoak.xyz^
 d31432 1
 a31456 1
 ||hayjvhirir.com^
@@ -2204,41 +2686,67 @@ d31551 1
 d31584 1
 a31592 1
 ||henfskbbk.xyz^
+a31607 1
+||hepekdxt.xyz^
 d31634 1
 a31644 1
 ||hestutche.com^
+a31659 1
+||hevinauw.net^
 a31662 1
 ||hewhimaulols.com^
 a31671 1
 ||hfjoksuriyy.com^
+a31672 1
+||hfnrvmkqtqyudxt.com^
+a31674 1
+||hfqjfnswctf.xyz^
 a31675 1
 ||hfvqqbwverxy.xyz^
 d31677 1
 a31678 1
 ||hgcbvpjswabie.xyz^
-a31683 1
+a31682 3
+||hgijycxp.com^
+||hgirsxsgetv.com^
+||hgkuafsvkrn.xyz^
+a31683 2
 ||hgqpbscai.com^
+||hgsosrgldtgmyb.xyz^
 a31690 1
 ||hhffpagi.com^
 a31694 1
 ||hhoxwxfxgb.com^
-a31696 1
+a31696 3
 ||hhvbdeewfgpnb.xyz^
+||hhvivsbiip.com^
+||hhyajwolmq.com^
 d31704 1
 d31711 1
+d31717 1
+a31722 1
+||hifakritsimt.com^
+a31750 1
+||hightles.com^
 a31754 1
 ||higylflsnlmfk.com^
+d31757 1
 d31789 1
+a31799 1
+||hipvaeciaqqtrhy.xyz^
 a31806 1
 ||hisstrappedperpetual.com^
+a31831 1
+||hkbrsgemjlqfo.xyz^
 a31833 1
 ||hkgcthphxttqkqf.com^
 a31835 1
 ||hkilyflawp.com^
 d31838 1
-a31838 2
+a31838 3
 ||hkkpfcnqoajtsu.com^
 ||hkmvirkwqnscx.xyz^
+||hkngacxry.com^
 a31839 1
 ||hkuuopuhl.xyz^
 a31849 1
@@ -2247,13 +2755,20 @@ a31851 1
 ||hlusfkredm.com^
 a31853 1
 ||hmcjrijsmvk.com^
-a31854 1
+a31854 4
+||hmigeivcdojf.com^
 ||hmndkdan.com^
+||hmngpkkvri.com^
+||hmrixaskoqtw.com^
 a31857 1
 ||hmxogeovdbotm.com^
 a31863 1
 ||hnvtuftqshbkhui.xyz^
+a31864 1
+||hnyswepsc.com^
 d31876 1
+a31878 1
+||hobftcfdrm.com^
 a31880 1
 ||hockicmaidso.com^
 a31885 1
@@ -2266,26 +2781,39 @@ d31920 1
 d31936 1
 a31949 1
 ||hoophejod.com^
+a31965 1
+||hopsigna.com^
 d31969 1
 a31971 1
 ||horgoals.com^
 d31981 2
 d31988 1
+d31994 1
+a32012 1
+||hothkwrdnoevg.com^
 a32013 1
 ||hotiapjla.com^
+a32026 1
+||houfopsichoa.com^
 d32054 1
+a32058 1
+||hpjnixtyjnl.com^
 a32059 1
 ||hpkfcywyxbn.com^
 a32061 1
 ||hpnbvfiixnen.com^
-a32062 1
+a32062 2
 ||hprmbmtegydcwc.com^
+||hprmnfctkj.com^
 d32065 1
 a32065 1
 ||hpuxrycfvo.com^
 a32077 1
 ||hqsimfxiwyb.com^
-a32079 1
+a32078 1
+||hqtwyhampwu.xyz^
+a32079 2
+||hqykvshuj.com^
 ||hraawjaaaluqboj.com^
 a32081 1
 ||hrgpdiuf.com^
@@ -2296,9 +2824,13 @@ a32085 1
 ||hrotonafk.xyz^
 a32089 1
 ||hrtvluy.com^
+a32093 1
+||hsmrabnj.com^
 a32095 1
 ||hssitplsoq.com^
 d32098 1
+a32115 1
+||huafivdvnyycfxv.com^
 d32149 1
 d32188 1
 d32213 1
@@ -2308,36 +2840,59 @@ a32218 1
 ||hvrnjftl.com^
 a32219 1
 ||hwbekhxxihvdoue.com^
+a32220 1
+||hwfnlmmqn.com^
 a32224 1
 ||hwqybdkniptwm.com^
 a32225 2
 ||hwucqkpdinfb.xyz^
 ||hwydfevh.com^
+a32226 2
+||hwyrtegwvyjvbim.com^
+||hxatkjygdpar.com^
 a32227 3
 ||hxcovhhin.com^
 ||hxctmaismdcqnso.com^
 ||hxeukcmkuswifr.com^
+a32229 1
+||hxghalcrv.com^
 a32230 2
 ||hxgrdgrgjktw.xyz^
 ||hxitiioub.com^
-a32233 1
+a32233 2
 ||hxpyrgqycgreyy.xyz^
+||hxtvrydyhi.xyz^
+a32240 1
+||hyibpgaa.com^
 d32242 1
 d32271 1
+a32271 1
+||hyvmflsclweae.xyz^
 d32273 1
-a32286 1
+a32279 1
+||i.iloacmoam.com^
+a32284 1
+||iabjksixpvperd.com^
+a32286 2
 ||iairkldocd.com^
+||iaisbsspay.xyz^
 d32289 1
+a32290 1
+||iangakwvtjrpbew.xyz^
 a32292 1
 ||iarreowsca.com^
 a32297 1
 ||ibaxdpwaceyha.xyz^
 a32300 1
 ||ibicrxnap.com^
+a32303 1
+||ibonmfvcwb.xyz^
 a32306 1
 ||ibukommfple.xyz^
 a32307 1
 ||ibxckpvttgkat.com^
+a32314 1
+||ichairaivi.com^
 a32318 1
 ||iciftiwe.com^
 a32325 1
@@ -2351,6 +2906,8 @@ d32349 1
 d32354 1
 a32360 1
 ||idolsainsie.com^
+a32373 1
+||iemufbuvehrjo.xyz^
 a32374 1
 ||ietbwrkg.com^
 a32378 1
@@ -2361,6 +2918,8 @@ a32386 2
 ||ifkgdxhpt.com^
 a32389 1
 ||ifodyafshael.com^
+a32395 1
+||ifsussdehkgr.com^
 a32401 1
 ||igbkvuxgwxmh.com^
 a32414 2
@@ -2370,6 +2929,8 @@ a32415 1
 ||igrnkokvclemmv.xyz^
 a32419 1
 ||ihafiwuxeu.com^
+a32420 1
+||ihdcnwbcmw.com^
 d32427 1
 d32429 1
 d32432 1
@@ -2378,14 +2939,17 @@ a32436 2
 ||iiqradydqohuqg.com^
 a32437 1
 ||iiuvgfhqldb.xyz^
-a32440 1
+a32440 2
 ||ijafmqpmnxs.com^
+||ijajgnqelnn.xyz^
 a32442 2
 ||ijchefkkmlrqx.xyz^
 ||ijdprmdriueyq.com^
 a32444 2
 ||ijhfqqne.com^
 ||ijhilvbu.com^
+a32445 1
+||ijlnbonvfr.com^
 d32449 1
 a32449 1
 ||ijukwkxpek.xyz^
@@ -2393,9 +2957,15 @@ a32450 1
 ||ijynarif.xyz^
 a32453 1
 ||ikaqwwsmlk.com^
+a32456 1
+||ikdvwsuprr.com^
 d32462 2
+a32463 1
+||ikouthaupi.com^
 a32469 1
 ||ikyobwrswacki.xyz^
+a32471 1
+||ilathetchit.com^
 a32472 1
 ||ilcdamnqtpem.com^
 d32478 1
@@ -2416,12 +2986,15 @@ a32526 1
 ||imbgrfywnol.com^
 a32544 1
 ||imkbgfcnd.com^
+a32580 1
+||impartialpath.com^
 d32601 1
 d32622 1
 d32624 1
-a32630 3
+a32630 4
 ||imugjnniij.com^
 ||imvsujvyxtrnpb.com^
+||imxequfha.com^
 ||imxhirrqagtjwd.com^
 d32683 1
 d32693 1
@@ -2454,14 +3027,23 @@ d32981 1
 d32992 1
 a33009 1
 ||ioaalobqpc.com^
+a33015 1
+||ioffddnfllcqb.com^
+a33019 1
+||iojsqcbxoykb.com^
 a33043 1
 ||ipgbcmfagij.com^
+a33049 1
+||ipmuvtmonjdwuf.xyz^
 a33050 2
 ||ipouvoog.com^
 ||ippaxapccehjt.com^
 a33053 1
 ||iprpldsefjq.com^
-a33059 1
+a33054 1
+||ipsvptuxn.com^
+a33059 2
+||iqkufk^
 ||iqkufkxovbh.com^
 a33060 1
 ||iqmlcia.com^
@@ -2474,6 +3056,9 @@ a33075 1
 d33081 1
 d33083 1
 d33096 1
+d33101 1
+a33104 1
+||irsnylnjgcfytxq.com^
 a33106 1
 ||irufgmdewshgx.com^
 a33107 1
@@ -2493,8 +3078,12 @@ d33151 1
 d33162 1
 a33167 1
 ||ithlmmwluh.com^
+a33171 1
+||itnijtcvjb.xyz^
 a33175 1
 ||itpuqgloekujg.com^
+a33182 1
+||ittaxklbddvfcw.xyz^
 a33185 1
 ||itupnjqqjbxxqt.com^
 a33196 2
@@ -2507,6 +3096,8 @@ a33217 1
 ||ivvyusvh.com^
 a33220 1
 ||iwdapjojrylh.xyz^
+a33222 1
+||iwhejirurage.com^
 a33226 2
 ||iwoiclbfxkxgd.com^
 ||iwouhoft.com^
@@ -2518,6 +3109,8 @@ a33234 2
 ||ixhvdktusdklt.xyz^
 ||ixihxnnkewc.com^
 d33236 1
+a33238 1
+||ixmbkxthnj.xyz^
 a33245 1
 ||iyaixmbpaqc.com^
 a33250 1
@@ -2526,6 +3119,8 @@ d33260 1
 a33260 2
 ||j.bouptosaive.com^
 ||j.stixeepou.com^
+a33264 1
+||j8ff09dbyo.com^
 d33266 1
 a33267 1
 ||jaaraypdsr.xyz^
@@ -2533,7 +3128,8 @@ a33268 1
 ||jabddcgqjrvk.com^
 d33280 1
 d33301 1
-a33301 1
+a33301 2
+||jaipheeph.com^
 ||jajrlsaiboswdab.xyz^
 d33307 1
 a33313 1
@@ -2554,15 +3150,23 @@ a33370 1
 d33380 1
 a33384 1
 ||jcpcfopwcae.com^
-a33385 2
+a33385 3
 ||jctxsjtgedii.com^
+||jcuojcpgtqemx.xyz^
 ||jcviltucsmowx.com^
-a33388 1
+a33388 2
+||jdhgswknl.com^
 ||jdjckugsvlrmhnp.com^
+a33392 1
+||jdoguxtbovjngbg.com^
+a33408 1
+||jechusou.com^
 d33410 1
 d33412 1
 a33415 1
 ||jedsoute.net^
+a33417 1
+||jeejeetauz.com^
 d33422 1
 d33428 1
 a33439 1
@@ -2573,10 +3177,11 @@ a33478 1
 a33482 2
 ||jfcclfaiawiga.com^
 ||jfdvjpksdqhdhjo.com^
-a33484 3
+a33484 4
 ||jfjnyepxppqb.com^
 ||jfjpgufkaecvs.com^
 ||jfknowifcewd.com^
+||jfmbkffcxg.com^
 a33486 1
 ||jfsocqmvvqt.com^
 a33487 2
@@ -2593,6 +3198,8 @@ a33497 1
 a33501 2
 ||jhsfwutqvnf.xyz^
 ||jhtiyfioidhvl.com^
+a33503 1
+||jhwyadcak.com^
 d33505 1
 d33507 1
 a33509 1
@@ -2603,6 +3210,8 @@ d33520 1
 a33520 1
 ||jimzryxbsgjs.com^
 d33522 1
+a33527 1
+||jipsegoasho.com^
 d33533 1
 a33534 1
 ||jitynncs.com^
@@ -2612,6 +3221,8 @@ a33542 1
 ||jjhobovwtxarem.com^
 a33543 1
 ||jjldhuci.com^
+a33545 1
+||jjobuyratjc.com^
 a33546 3
 ||jjolbaew.com^
 ||jjpgbisdg.xyz^
@@ -2622,14 +3233,20 @@ a33549 3
 ||jjvafukltxk.com^
 a33556 1
 ||jkckmuiajldj.com^
+a33562 2
+||jknjyfabc.com^
+||jkohlxvodiwrjnt.xyz^
 d33564 1
 a33565 1
 ||jkyokdfjbhcuc.xyz^
 a33568 1
 ||jlbgyksbvdqj.com^
-a33569 2
+a33569 3
 ||jlegmmdcoo.com^
 ||jlhchjsy.com^
+||jljrllijyuoinx.com^
+a33572 1
+||jlpupeaqsxvvk.com^
 a33574 1
 ||jluaaqwn.com^
 a33575 2
@@ -2640,6 +3257,8 @@ a33577 1
 a33580 1
 ||jmqrogtmvfo.com^
 d33582 1
+a33583 1
+||jmxiwcjx.com^
 a33585 1
 ||jnlldyq.com^
 a33586 1
@@ -2649,16 +3268,25 @@ a33588 1
 a33592 2
 ||joaphoad.com^
 ||joasoagly.com^
+a33603 1
+||jocmeedran.com^
 a33604 1
 ||jodilhsitybnv.com^
+a33607 1
+||jogytuuey.com^
 a33609 1
 ||joilbmtlxlm.com^
 a33616 1
 ||jokcnycabhdvbwg.com^
 d33620 1
 d33631 1
+a33631 1
+||jonaharsu.com^
+a33632 1
+||joodugropup.com^
 d33643 1
-a33650 1
+a33650 2
+||joudotee.com^
 ||joukaglie.com^
 d33659 1
 a33669 1
@@ -2675,6 +3303,8 @@ a33678 3
 ||jpkukgeturqi.com^
 ||jpljnmen.com^
 ||jplkmeguj.xyz^
+a33681 1
+||jppvgnbib.com^
 a33683 2
 ||jqgqrsvcaos.xyz^
 ||jqitetsk.com^
@@ -2702,9 +3332,11 @@ a33717 1
 d33732 1
 a33733 1
 ||jtbmwwejrvbhul.com^
-a33734 2
+a33734 4
 ||jtdujjsk.com^
+||jteatfaqvwqf.com^
 ||jtiqpdqofdlwam.com^
+||jtiqpdqofdlwb.com^
 a33736 1
 ||jttowoxlomde.com^
 a33737 1
@@ -2712,17 +3344,24 @@ a33737 1
 d33759 1
 a33773 1
 ||jukxmvmaiiy.com^
+a33786 1
+||jumkiyhjx.xyz^
+a33803 1
+||junverwkpnl.com^
 a33809 1
 ||jursoateed.com^
 d33824 1
+a33829 1
+||juvuqsdxjfk.com^
 a33830 1
 ||juywaihht.com^
 a33833 3
 ||jvgsjchrxrf.xyz^
 ||jvjxkcsiktxgigo.com^
 ||jvlvxynq.com^
-a33839 1
+a33839 2
 ||jvtxuvfgiien.xyz^
+||jvvyucvkkfj.com^
 a33844 1
 ||jwfobgoeobehy.com^
 a33847 1
@@ -2730,8 +3369,12 @@ a33847 1
 a33852 2
 ||jxofoyftjdo.xyz^
 ||jxpjltwdeu.com^
+a33859 1
+||jygkylltb.com^
 a33860 1
 ||jyhxhsdgxbvcnj.com^
+a33866 1
+||jyrfbtmbuqeaeo.com^
 a33873 1
 ||jzpdjbpusgcbr.com^
 a33894 1
@@ -2743,16 +3386,22 @@ d33917 1
 d33929 1
 a33945 1
 ||katlcqwmrkx.com^
+a33949 1
+||kaujouphosta.com^
 a33969 3
 ||kcigvmdkwda.com^
 ||kcnfrqincdlf.xyz^
 ||kcwtugkvnq.xyz^
 a33970 1
 ||kdkatxfkxmgmbhu.xyz^
+a33973 1
+||kdwdrpiwdxof.com^
 d33977 1
 d33980 1
 a33980 1
 ||kecwhlsr.com^
+a33991 1
+||keephapi.com^
 a33998 3
 ||keezuptoo.com^
 ||kefdihfke.com^
@@ -2764,17 +3413,26 @@ d34018 1
 d34026 1
 a34033 1
 ||kervcufrblawcog.com^
+a34035 1
+||kessagames.com^
 d34038 1
+a34043 1
+||ketodis.com^
 a34048 1
 ||keughwsfhltvc.com^
 a34061 1
 ||kfebxhjlco.com^
-a34062 1
+a34062 2
 ||kfhninhokutn.com^
-a34063 1
+||kfiupggnofpqs.com^
+a34063 2
+||kfjkgfgr.com^
 ||kfkclxbmdptmehv.com^
-a34073 2
+a34072 1
+||kgtrnyeqmsvkwu.com^
+a34073 3
 ||kgussjxttd.com^
+||kgxpbxhigq.com^
 ||kgystvhlyqxnnhg.com^
 a34077 2
 ||khbvxhwwqckmo.com^
@@ -2793,6 +3451,8 @@ a34095 2
 ||kikbqkhghh.xyz^
 d34108 1
 d34117 2
+a34118 1
+||kineckekyu.com^
 a34133 1
 ||kiretafly.com^
 a34145 1
@@ -2806,6 +3466,10 @@ a34169 1
 ||kkixbfuihbhhrj.com^
 a34171 1
 ||kkkpydfok.com^
+a34172 1
+||kksapygupdp.com^
+a34207 1
+||kmxwygco.com^
 a34214 1
 ||kndvqgmfwrdyf.com^
 d34221 1
@@ -2815,7 +3479,8 @@ a34247 1
 a34254 1
 ||koabapeed.com^
 d34258 1
-a34258 2
+a34258 3
+||koadoasi.net^
 ||koahoocom.com^
 ||koakoucaisho.com^
 a34260 2
@@ -2827,21 +3492,38 @@ d34269 1
 a34269 2
 ||kojlgwliewan.xyz^
 ||kojmrbun.com^
+d34279 1
+a34283 1
+||kooboaphe.com^
 d34293 1
 a34293 1
 ||koosaipiph.com^
 d34299 1
 d34320 1
+a34321 1
+||kouceeptait.com^
 a34329 1
 ||koxqdviupg.xyz^
-a34330 2
+a34330 3
 ||kpdwueshr.com^
 ||kpeppgifggwws.com^
+||kphnncpx.xyz^
 a34331 1
 ||kpougoavtxkrew.com^
+a34334 2
+||kqpisbvnmtkgahq.xyz^
+||kqqwutgln.com^
+a34336 1
+||kqtvdljwv.com^
 a34337 2
 ||kqwtnuybueae.com^
 ||kqyywvok.xyz^
+a34340 1
+||krcuoujleerrun.com^
+a34347 1
+||krixyncbsyhju.com^
+a34348 1
+||krkmkvxneig.com^
 a34349 1
 ||krnishwktki.com^
 a34352 1
@@ -2865,15 +3547,20 @@ a34371 1
 ||kubhwrkpycngbwl.com^
 d34384 1
 d34392 2
+a34393 1
+||kuqekpfj.com^
 d34404 1
 a34404 2
 ||kuvbyhnotmwm.com^
 ||kuvoansub.com^
+a34406 1
+||kuwoucaxoad.com^
 a34408 1
 ||kvclwfrsvi.com^
 d34410 1
-a34415 1
+a34415 2
 ||kvgotkbufvxc.com^
+||kviojoglr.com^
 a34417 1
 ||kvtllnttauq.com^
 d34420 1
@@ -2890,10 +3577,13 @@ a34430 1
 ||kxeredrhsummac.xyz^
 a34431 1
 ||kxhbyjljkmyp.xyz^
-a34434 1
+a34434 2
 ||kxowmbwprnck.com^
+||kxrglnpolgofvr.xyz^
 a34435 1
 ||kxvxonkymcnm.com^
+a34439 1
+||kyjhuflgtl.xyz^
 d34441 1
 a34441 1
 ||kykfiyin.com^
@@ -2904,6 +3594,8 @@ a34449 1
 d34454 1
 d34469 1
 d34496 1
+a34503 1
+||lagqmwyvqr.com^
 a34507 1
 ||lailoasaiho.com^
 d34510 1
@@ -2916,15 +3608,18 @@ d34557 1
 a34585 1
 ||lasqnpjwuaoiqr.xyz^
 d34613 1
-d34620 1
+d34619 2
 d34622 1
 d34624 1
+d34626 1
 a34626 1
 ||laustiboo.com^
 d34635 2
 a34636 1
 ||lavtaexvpxnms.com^
 d34641 1
+a34643 1
+||laxecnef.com^
 d34651 1
 a34651 3
 ||lbabpxobwjkobef.com^
@@ -2936,22 +3631,28 @@ a34660 1
 ||lcmevashrxfh.com^
 a34663 1
 ||lcwogxmmukoe.com^
+a34664 1
+||ldclxgkcy.xyz^
 a34665 2
 ||ldexhnvqcyaio.com^
 ||ldfeqvkunqawgru.com^
+a34669 1
+||ldklkdkxoqs.com^
 a34716 2
 ||lebpeqroqqvtf.com^
 ||lebsigry.com^
-a34725 1
+a34725 2
 ||leedoash.com^
+||leefosto.com^
 a34727 1
 ||leesymvlvck.xyz^
 d34729 1
 d34754 1
 a34759 1
 ||lehoacku.net^
-a34789 1
+a34789 2
 ||leoohpwquexxoyt.com^
+||leoojlxbcvnmpbe.com^
 d34797 2
 d34801 1
 a34814 1
@@ -2961,8 +3662,10 @@ d34821 1
 d34823 2
 a34836 1
 ||lfywxgpkev.com^
+d34838 1
 a34838 1
 ||lgepbups.xyz^
+d34841 1
 a34841 1
 ||lgmvmfywd.com^
 a34846 1
@@ -2979,8 +3682,10 @@ d34875 1
 a34909 1
 ||lifootsouft.com^
 d34924 1
-a34924 1
+a34924 2
 ||lihhxayjmr.com^
+||lihuwvokhonsni.com^
+d34974 1
 a34996 1
 ||lipmswonv.com^
 d35006 1
@@ -2993,6 +3698,8 @@ a35054 3
 ||ljcsrrrhvu.com^
 ||ljdlgunextreyk.xyz^
 ||ljfncdojjuorjxu.com^
+a35056 1
+||ljntxsmdcvemlh.com^
 a35057 2
 ||ljoyjuis.com^
 ||ljtodywdhx.xyz^
@@ -3000,12 +3707,22 @@ a35064 1
 ||lketpgwauan.com^
 a35068 1
 ||lkkhedpqeduyukj.com^
-a35071 1
+a35071 2
+||lklaiwqnk.com^
 ||lklhwrqrcbsxdn.com^
-a35072 1
+a35072 2
+||lkoulntogv.com^
 ||lkoxbiwi.com^
-a35080 1
+a35080 2
 ||llapaewllfc.com^
+||llcbcqfwxyhgyda.com^
+a35083 2
+||llmvycxvfbalxa.xyz^
+||llohkcllkalodrb.xyz^
+a35086 1
+||llqrhggvwra.com^
+a35093 1
+||llykcdqkbl.xyz^
 a35094 1
 ||llyyxmav.xyz^
 a35099 1
@@ -3024,8 +3741,9 @@ a35110 1
 a35111 1
 ||lnjdtbpx.com^
 d35117 1
-a35117 2
+a35117 3
 ||lnlxhsjjqfjs.com^
+||lnonsoygtt.com^
 ||lnqdtbcrilhrdye.com^
 a35118 1
 ||lnupunlmewv.com^
@@ -3043,6 +3761,10 @@ d35182 1
 a35186 1
 ||lokqfjbpryua.com^
 d35207 1
+a35214 1
+||loolausufouw.com^
+a35226 1
+||loose-chemistry.pro^
 a35243 1
 ||lorumotwnkkkk.com^
 a35274 1
@@ -3052,7 +3774,8 @@ d35295 1
 a35305 1
 ||lowuybgxsekr.com^
 d35315 1
-a35324 1
+a35324 2
+||lpnljafoaklewbt.xyz^
 ||lppexpgt.com^
 a35332 1
 ||lqmrxmavv.com^
@@ -3061,8 +3784,11 @@ a35335 1
 d35345 1
 a35350 1
 ||lsafrdxtih.com^
-a35357 1
+a35357 2
+||lsubalhqkg.com^
 ||lsuoaeqmubc.xyz^
+a35362 1
+||ltedinncreasuke.org^
 a35366 2
 ||ltmlsehfqikh.xyz^
 ||ltmtuseetgmt.com^
@@ -3075,8 +3801,9 @@ d35398 1
 a35402 2
 ||luhjdiomy.com^
 ||luiingiho.com^
-a35425 1
+a35425 2
 ||luqlgnxfkgub.com^
+||luqqlylvh.com^
 a35432 1
 ||lurgimte.com^
 a35436 1
@@ -3116,13 +3843,19 @@ d35673 1
 d35680 1
 d35698 1
 d35704 1
+d35725 1
 d35740 2
 a35742 1
 ||mangzoi.xyz^
 d35760 1
+d35764 1
+a35767 1
+||mapamnni.com^
 d35812 1
 a35823 1
 ||martugnem.com^
+a35828 1
+||marvelous-studio.com^
 d35835 1
 d35848 1
 d35853 1
@@ -3142,6 +3875,8 @@ a35951 1
 a35967 2
 ||mdkycodubgvms.com^
 ||mdpycygel.com^
+a35968 1
+||meager-object.com^
 a35986 1
 ||meckvpiey.com^
 d36007 1
@@ -3175,6 +3910,8 @@ d36206 1
 a36206 2
 ||mgsgxjgpgumhdu.xyz^
 ||mgtrgjwmwuirx.com^
+a36209 1
+||mhboxleky.com^
 a36212 1
 ||mhtgdirbo.com^
 d36232 1
@@ -3182,6 +3919,8 @@ a36265 1
 ||mikhrmpwbtrip.com^
 d36296 1
 d36332 1
+a36341 1
+||miserablefocus.com^
 a36350 1
 ||mismeancohosh.com^
 d36353 1
@@ -3223,6 +3962,7 @@ a36451 1
 ||mnevunthkyb.com^
 a36455 1
 ||mnjxvtknnlai.com^
+d36459 1
 a36459 1
 ||mnribbbn.xyz^
 a36466 1
@@ -3234,9 +3974,9 @@ d36534 1
 a36538 1
 ||mohiwhaileed.com^
 d36553 1
-a36555 1
+d36556 2
+a36557 1
 ||momdljpsn.com^
-d36557 1
 a36559 1
 ||momhseym.com^
 d36580 1
@@ -3338,6 +4078,9 @@ a36947 1
 a36954 2
 ||myhugewords.com^
 ||myhypeposts.com^
+d36964 1
+d36968 1
+d36975 1
 a36982 1
 ||mytnlkjib.com^
 d37012 1
@@ -3382,9 +4125,10 @@ a37150 1
 ||nbwvxfqpfonnqi.xyz^
 a37151 1
 ||ncbrmfqeiudfxx.com^
-a37157 3
+a37157 4
 ||ncgvowqfolon.com^
 ||ncovebrwyronpg.com^
+||ncpvxltfbsfidgd.com^
 ||ncpvxltfbsrcavo.com^
 d37161 1
 a37176 1
@@ -3398,6 +4142,7 @@ a37183 1
 a37185 1
 ||neapsberne.digital^
 d37200 1
+d37219 1
 a37219 2
 ||neepsolufab.com^
 ||neerecah.xyz^
@@ -3498,6 +4243,7 @@ a37610 1
 ||noondaylingers.com^
 a37614 1
 ||nooraunod.com^
+d37628 1
 d37646 1
 d37670 1
 d37680 1
@@ -3505,20 +4251,28 @@ a37692 1
 ||noumohur.com^
 a37698 1
 ||nouvhidtxryveg.com^
+a37699 1
+||novel-inevitable.com^
 a37720 1
 ||noxbfmatyavxl.com^
 a37724 1
 ||npdnnsgg.com^
 a37726 1
 ||npehvrjmf.com^
+d37732 1
+d37734 1
 a37735 2
 ||nqcdenlfuvuoqj.com^
 ||nqftyfn.com^
+d37738 1
 a37740 2
 ||nqoxrsrf.com^
 ||nqpdhoxgtrxa.xyz^
+d37742 1
 a37751 1
 ||nrrdxyauavkdrc.com^
+d37753 1
+d37755 1
 d37759 1
 a37759 1
 ||nsexfxwcvro.xyz^
@@ -3528,6 +4282,8 @@ a37812 1
 ||nugejuhx.com^
 a37815 1
 ||nugxmtkydv.com^
+a37844 1
+||nuroflem.com^
 a37859 2
 ||nuxdwjicbg.com^
 ||nuyhvoshqnbkrg.com^
@@ -3551,10 +4307,9 @@ a37898 2
 ||nythathavere.org^
 a37925 1
 ||oagleeju.xyz^
-a37944 1
-||oampaute.net^
 a37949 1
 ||oapnqyxkjxmpet.com^
+d37952 1
 a37956 1
 ||oartoogree.com^
 a37965 2
@@ -3570,6 +4325,7 @@ d37992 2
 a38014 1
 ||obrodjiykb.com^
 d38018 1
+d38036 1
 a38046 1
 ||obynefeigvk.com^
 a38049 1
@@ -3623,6 +4379,7 @@ a38243 2
 ||ojguesirvxwgiog.xyz^
 a38244 1
 ||ojoodoaptouz.com^
+d38246 1
 d38259 1
 a38263 2
 ||okqdjbywcnqov.com^
@@ -3647,6 +4404,8 @@ a38437 1
 ||ongrpdwwnvliao.xyz^
 a38494 1
 ||ooivkrkudanjrpk.com^
+a38507 1
+||oophuvum.net^
 a38511 1
 ||oopursie.com^
 a38512 2
@@ -3665,7 +4424,8 @@ a38583 1
 ||oprlursg.com^
 a38587 1
 ||opsywljvakvjrm.com^
-a38610 1
+d38611 1
+a38611 1
 ||oqdawpvwcuj.xyz^
 a38612 3
 ||oqfgpdnwdbirpc.com^
@@ -3681,8 +4441,9 @@ a38662 1
 ||orgyqxtboakh.com^
 a38664 1
 ||orhlfmshhsvs.xyz^
-a38691 1
+a38691 2
 ||orrmmdsdc.com^
+||orrvucstaxip.com^
 a38694 1
 ||orxbqsvibjxqvai.com^
 a38697 1
@@ -3709,6 +4470,7 @@ a38822 1
 ||ouricsexja.com^
 a38832 1
 ||ourtopstories.com^
+d38846 1
 d38850 1
 d38855 1
 d38875 1
@@ -3718,7 +4480,8 @@ d38899 1
 a38901 1
 ||ovauthalrim.com^
 d38952 1
-a38956 2
+d38957 1
+a38957 2
 ||ovsdnhpigmtd.xyz^
 ||ovsiicni.com^
 a38958 2
@@ -3737,6 +4500,8 @@ a39002 1
 ||oxrqdkfftw.com^
 a39005 1
 ||oxwtihtvdwgdaq.com^
+a39011 1
+||oyen3zmvd.com^
 a39013 1
 ||oylbnuvbw.com^
 a39015 1
@@ -3790,6 +4555,7 @@ d39489 1
 d39504 1
 a39504 1
 ||pepbuhcnfxd.com^
+d39521 1
 d39563 1
 a39591 1
 ||pesoaniz.com^
@@ -3860,19 +4626,26 @@ a39852 1
 ||pimtauns.com^
 a39900 1
 ||pitasevpk.com^
+d39928 1
+d39930 1
 a39935 1
 ||pjoaeeajjxsc.com^
 d39939 1
 a39943 1
 ||pkhntvfvkho.com^
+d39946 1
 d39988 1
 a39992 1
 ||platebhmwfndajq.com^
+d40010 1
 a40021 1
 ||pleasedexample.com^
 d40038 1
-d40048 1
+d40048 2
+d40080 1
 d40089 1
+a40094 1
+||pnauclcmo.xyz^
 a40106 2
 ||pnymwcnihpyvpun.com^
 ||poacauceecoz.com^
@@ -3888,6 +4661,7 @@ a40309 1
 ||posfhnalwxdcaxb.com^
 d40317 1
 d40323 1
+d40355 1
 a40362 1
 ||pourpressedcling.com^
 d40364 1
@@ -3898,10 +4672,12 @@ a40405 1
 d40407 1
 a40407 1
 ||pqidjvomaowiww.com^
-a40452 1
+d40453 1
+a40453 1
 ||precisionnight.com^
 a40480 1
 ||prelandtopz.com^
+d40491 1
 d40516 1
 d40548 1
 d40555 1
@@ -3950,6 +4726,7 @@ a40925 1
 ||pteghoglapir.com^
 a40926 1
 ||pteroangud.com^
+d40928 1
 a40932 1
 ||pthzqqvrjyou.com^
 a40944 1
@@ -3994,8 +4771,9 @@ a41311 1
 d41316 1
 a41331 1
 ||qgexkmi.com^
-a41349 1
+a41349 2
 ||qiossrwine.xyz^
+||qipawjyjcukenb.com^
 a41367 1
 ||qkfwiylmib.com^
 a41369 1
@@ -4003,13 +4781,18 @@ a41369 1
 d41371 1
 a41383 1
 ||qmbpmdeq.xyz^
+d41392 1
 a41393 1
 ||qnkqurpyntrs.xyz^
 a41396 1
 ||qnucoorpe.com^
 d41405 1
+a41408 1
+||qoppwwjxjrmhdt.com^
 a41415 1
 ||qowqnnhf.com^
+d41425 1
+d41435 1
 d41450 1
 a41452 1
 ||qsgsnyvmoetur.com^
@@ -4017,6 +4800,7 @@ a41453 1
 ||qsjrovphsiybxc.com^
 d41479 1
 d41491 1
+d41511 1
 d41514 1
 d41516 1
 d41520 1
@@ -4027,8 +4811,9 @@ a41549 1
 ||qwkmiot.com^
 a41559 1
 ||qxlwpaxlwg.com^
-a41564 1
+a41564 2
 ||qybloikdmd.com^
+||qydgdko.com^
 a41566 1
 ||qykvrcqk.com^
 a41568 2
@@ -4046,9 +4831,12 @@ d41708 1
 d41711 2
 a41715 1
 ||raudoufoay.com^
+d41722 1
 d41745 1
 a41754 1
 ||rbuirpyptplp.com^
+a41755 1
+||rbzqarqlyzamj.top^
 d41789 1
 d41861 1
 d41869 1
@@ -4109,6 +4897,8 @@ d42456 1
 d42490 2
 d42503 1
 d42506 1
+d42515 1
+d42519 1
 a42527 1
 ||rjvfxxrsepwch.xyz^
 a42536 1
@@ -4123,12 +4913,20 @@ a42586 1
 d42596 1
 d42604 1
 d42607 1
+d42616 1
+a42631 1
+||rogbhbxvqe.com^
+a42636 1
+||rokafeg.com^
 a42665 1
 ||rooglomitaiy.com^
 a42675 1
 ||rooptawu.net^
 d42677 1
 d42693 1
+a42699 1
+||rosymap.pro^
+d42707 1
 d42712 1
 a42721 1
 ||rouloawhu.com^
@@ -4151,13 +4949,14 @@ d42938 1
 a42954 1
 ||rvibgboy.com^
 d42965 1
+a42967 1
+||rwusvej.com^
 d42969 1
 a42969 1
 ||rwxgorjgvcfirtx.com^
 d42987 1
 a42988 1
 ||ryqlbqdj.com^
-d43002 1
 d43021 1
 d43029 2
 d43074 1
@@ -4190,6 +4989,8 @@ a43394 1
 ||searchgear.pro^
 d43414 1
 d43419 1
+d43473 1
+d43476 1
 d43491 1
 d43508 1
 d43523 1
@@ -4197,6 +4998,12 @@ d43533 1
 d43577 1
 d43610 1
 d43623 1
+a43630 1
+||sex-chat.me^
+a43635 1
+||sexfg.com^
+a43637 1
+||sextf.com^
 d43650 1
 a43661 1
 ||sgpuijidjc.com^
@@ -4222,6 +5029,8 @@ d43811 1
 d43819 1
 d43836 1
 d43842 1
+a43876 1
+||shrillwife.pro^
 d43879 2
 d43901 1
 a43910 1
@@ -4245,7 +5054,6 @@ d44180 1
 d44187 1
 d44209 1
 d44249 1
-d44252 1
 a44257 1
 ||smitealter.com^
 d44281 1
@@ -4255,6 +5063,7 @@ d44359 1
 d44377 1
 a44380 1
 ||sodreekrukiy.com^
+d44388 1
 d44406 1
 d44436 1
 d44481 1
@@ -4263,12 +5072,16 @@ a44495 1
 d44512 1
 a44518 1
 ||southolaitha.com^
+d44523 1
 d44551 1
 d44555 1
 d44585 1
 d44619 1
+d44637 1
 d44652 1
 d44666 1
+a44667 1
+||spooksuspicions.com^
 d44669 1
 d44705 1
 d44708 1
@@ -4307,8 +5120,13 @@ d45119 1
 d45123 1
 d45196 1
 d45240 1
+a45240 1
+||sumnrydp.com^
 d45242 1
+d45259 1
 d45267 1
+a45304 1
+||surcloyalveloz.life^
 d45345 1
 d45347 1
 d45381 1
@@ -4323,6 +5141,8 @@ a45447 1
 d45449 1
 a45458 1
 ||symiwxemwgxtpj.com^
+a45468 1
+||syndapop.com^
 a45484 1
 ||syringewhile.com^
 a45495 1
@@ -4335,6 +5155,8 @@ d45529 1
 d45541 1
 a45544 1
 ||tagmai.xyz^
+a45550 1
+||tahwox.com^
 d45562 1
 a45562 1
 ||taisteptife.com^
@@ -4342,6 +5164,8 @@ d45576 1
 d45590 1
 d45592 1
 d45605 1
+a45628 1
+||tarandunlame.life^
 d45631 1
 d45650 1
 d45657 1
@@ -4372,6 +5196,7 @@ a45883 1
 a45885 1
 ||tgdyrtkjmbgimg.com^
 d45887 1
+d45889 1
 d45891 1
 a45907 1
 ||thangetsoam.com^
@@ -4427,7 +5252,8 @@ a46306 1
 d46309 1
 a46324 1
 ||tlyrlnyy.xyz^
-a46347 1
+d46348 1
+a46348 1
 ||tnsmufijcnulqtl.com^
 d46365 1
 d46371 1
@@ -4471,7 +5297,7 @@ d46843 1
 d46868 1
 d46871 1
 d46887 1
-d46889 1
+d46889 2
 d46901 1
 a46921 1
 ||ttkhtwqi.com^
@@ -4493,6 +5319,8 @@ a47097 1
 ||tyhjukinimoqfgv.com^
 d47111 1
 d47117 1
+a47134 1
+||u-50-rbdm.com^
 a47143 1
 ||uads.digital^
 d47167 1
@@ -4509,9 +5337,11 @@ a47218 1
 a47227 2
 ||ugroogree.com^
 ||ugujwhwwyh.com^
+d47233 1
 d47235 1
 a47235 1
 ||uhhgaodcxckgvqs.xyz^
+d47240 1
 d47252 1
 d47280 1
 a47283 1
@@ -4537,6 +5367,7 @@ d47516 1
 d47521 1
 d47527 1
 d47550 1
+d47555 1
 a47573 1
 ||uorwogwlbwtk.xyz^
 d47601 1
@@ -4547,6 +5378,7 @@ a47640 1
 ||uptafashib.com^
 d47647 1
 d47653 2
+d47692 1
 d47699 1
 d47706 1
 a47713 1
@@ -4585,6 +5417,8 @@ d48017 1
 d48026 1
 d48028 1
 d48031 1
+a48050 1
+||veoxphl.com^
 a48057 1
 ||veresultedinncre.org^
 d48060 1
@@ -4639,6 +5473,7 @@ d48485 1
 d48492 1
 a48500 1
 ||vsucocesisful.com^
+d48512 1
 a48519 1
 ||vudaiksaidy.com^
 d48521 1
@@ -4658,19 +5493,25 @@ d48661 1
 a48681 1
 ||wargumtu.net^
 d48703 1
+d48726 1
 d48747 1
-d48779 1
+d48779 2
 d48782 1
 d48817 1
 a48818 1
 ||wcltbpbnlf.com^
+a48827 1
+||wddlydaxtmm.com^
 d48835 1
 d48838 1
 a48895 1
 ||weebipoo.com^
+d48904 1
+a48920 1
+||welcomeneat.pro^
 a48944 1
 ||wepainsoaken.com^
-d48957 1
+d48957 2
 a48987 1
 ||whamauft.com^
 d49002 1
@@ -4701,6 +5542,9 @@ a49311 2
 ||wjxtbwffpykdmo.com^
 ||wjzrzwyrrbwyz.top^
 d49314 1
+a49331 1
+||wlyfiii.com^
+d49350 1
 d49363 1
 a49364 1
 ||woagroopsek.com^
@@ -4727,6 +5571,8 @@ a49597 1
 ||wuchaurteed.com^
 d49610 1
 d49615 1
+a49622 1
+||wvfhosisdsl.xyz^
 a49633 1
 ||wwemleypftdook.com^
 a49655 1
@@ -4743,13 +5589,18 @@ a49750 1
 ||xenopusbink.com^
 a49762 1
 ||xftrtljc.xyz^
+a49766 1
+||xgbmjmgrxfvf.com^
+a49789 1
+||ximybkpxwu.com^
 a49794 1
 ||xitwpifbihsxpj.com^
 d49805 1
 a49805 1
 ||xkdgblptpicgiu.xyz^
 d49826 1
-a49833 1
+d49834 1
+a49834 1
 ||xmhgwmdjhul.com^
 a49854 1
 ||xnysqiur.com^
@@ -4803,12 +5654,15 @@ a50236 1
 ||yourwownews.com^
 a50237 1
 ||yousefforts.com^
+d50257 1
 d50264 1
 a50290 1
 ||yudawbxk.com^
 d50297 1
 a50314 1
 ||yvkbftdi.com^
+a50317 1
+||ywgpkjg.com^
 a50321 1
 ||ywtvurjiulvuvj.xyz^
 a50341 1
@@ -4957,6 +5811,9 @@ a57665 1
 d58087 1
 d58289 1
 d58540 1
+d59135 1
+a59135 1
+/^https?:\/\/[0-9a-z]{5,}\.com\/.*/$script,third-party,xmlhttprequest,domain=123movies.tw|19turanosephantasia.com|1cloudfile.com|20demidistance9elongations.com|745mingiestblissfully.com|9xupload.asia|adblockeronstape.me|adblockeronstreamtape.me|adblockeronstrtape.xyz|adblockplustape.xyz|adblockstreamtape.art|adblockstreamtape.fr|adblockstreamtape.site|adblocktape.online|adblocktape.store|adblocktape.wiki|allsport.icu|allsports.icu|animepl.xyz|anonymz.com|antiadtape.com|aotonline.co|asianstream.pro|audaciousdefaulthouse.com|bowfile.com|clicknupload.to|cloudvideo.tv|coloredmanga.com|cr7sports.us|cut-y.net|daddylivehd.sx|dailyuploads.net|databasegdriveplayer.xyz|deltabit.co|dood.la|dood.pm|dood.re|dood.sh|dood.so|dood.to|dood.watch|dood.wf|dood.ws|dood.yt|doods.pro|dooood.com|dramacool.sr|drivebuzz.icu|ds2play.com|dslayeronline.com|dum.to|embedplayer.site|embedsb.com|embedsito.com|embedstream.me|engvideo.net|enjoy4k.xyz|eplayvid.net|evoload.io|f123movies.com|fembed-hd.com|fileclub.cyou|filemoon.sx|files.im|filmy4wap.ink|flexy.stream|fmovies.ps|footyhunter3.xyz|gameshdlive.xyz|gamovideo.com|gaybeeg.info|gdriveplayer.pro|givemenbastreams.com|gogoanimes.org|gogohd.net|goload.io|gomo.to|goodstream.org|greaseball6eventual20.com|hdtoday.ru|hexupload.net|housecardsummerbutton.com|hurawatch.at|ive.zone|kesini.in|kickassanime.ro|kickasstorrents.to|letsupload.io|linkhub.icu|linksafe.cc|livetvon.click|lookmyimg.com|luxubu.review|mangageko.com|mangareader.cc|mangareader.to|mangovideo.pw|maxsport.one|membed.net|meomeo.pw|mirrorace.org|mixdroop.bz|mixdroop.co|mixdrop.bz|mixdrop.ch|mixdrop.click|mixdrop.club|mixdrop.sx|mixdrop.to|mixdrops.xyz|mixdrp.co|movies2watch.tv|mp4upload.com|myflixer.to|nelion.me|noblocktape.com|nsw2u.org|onlinevideoconverter.com|ovagames.com|owodeuwu.xyz|pahaplayers.click|papahd.club|pcgamestorrents.com|pouvideo.cc|proxyer.org|putlocker-website.com|reputationsheriffkennethsand.com|rintor.space|rojadirecta.direct|scloud.online|send.cm|sflix.to|shavetape.cash|skidrowcodex.net|smallencode.me|soccerstreamslive.co|sportshighlights.club|stapadblockuser.art|stapadblockuser.click|stapadblockuser.info|stapadblockuser.xyz|stape.fun|stapewithadblock.beauty|stapewithadblock.monster|stapewithadblock.xyz|stayonline.pro|strcloud.in|streamadblocker.com|streamadblocker.store|streamadblocker.xyz|streamingsite.net|streamlare.com|streamnoads.com|streamta.pe|streamta.site|streamtape.com|streamtape.to|streamtape.xyz|streamtapeadblock.art|streamtapeadblockuser.art|streamtapeadblockuser.homes|streamtapeadblockuser.monster|streamtapeadblockuser.xyz|strikeout.ws|strtape.cloud|strtape.tech|strtapeadblock.club|strtapeadblocker.xyz|strtapewithadblock.art|strtapewithadblock.xyz|supervideo.tv|tapeantiads.com|tapeblocker.com|tapenoads.com|tapewithadblock.com|tapewithadblock.org|telyn610zoanthropy.com|thepiratebay0.org|theproxy.ws|thevideome.com|toxitabellaeatrebates306.com|un-block-voe.net|upbam.org|upload-4ever.com|upload.do|uproxy.to|upstream.to|uptobhai.ink|uqload.co|uqload.io|userscloud.com|v-o-e-unblock.com|vidbam.org|vido.lol|vidshar.org|vidsrc.me|vidsrc.stream|vipleague.im|vipleague.st|voe-unblock.net|voe.bar|voe.sx|voeun-block.net|voeunbl0ck.com|voeunblck.com|voeunblk.com|voeunblock.com|vostfree.online|vudeo.io|vudeo.net|vumoo.to|watch-free.tv|watchkobe.info|watchserieshd.live|x2download.com|yesmovies.mn|youtube4kdownloader.com
 d59341 1
 a59341 1
 ! ||1337x.to^$csp=script-src 'self' 'unsafe-inline' 'unsafe-eval' data: challenges.cloudflare.com
@@ -4985,8 +5842,12 @@ sevenforums.com##.infeed1
 d62790 1
 a62790 1
 athlonsports.com,bringmethenews.com,meidastouch.com,si.com,thestreet.com##.is-exco-player
+d64520 1
 a65077 1
 kuncomic.com##div[style="height: 255px;overflow: hidden"]
+a65192 1
+novelfull.com##ins[style*="width:300px;height:250px;"]
+d65286 1
 a65607 1
 google.ac,google.ad,google.ae,google.al,google.am,google.as,google.at,google.az,google.ba,google.be,google.bf,google.bg,google.bi,google.bj,google.bs,google.bt,google.by,google.ca,google.cat,google.cd,google.cf,google.cg,google.ch,google.ci,google.cl,google.cm,google.co.ao,google.co.bw,google.co.ck,google.co.cr,google.co.id,google.co.il,google.co.in,google.co.jp,google.co.ke,google.co.kr,google.co.ls,google.co.ma,google.co.mz,google.co.nz,google.co.th,google.co.tz,google.co.ug,google.co.uk,google.co.uz,google.co.ve,google.co.vi,google.co.za,google.co.zm,google.co.zw,google.com,google.com.af,google.com.ag,google.com.ai,google.com.ar,google.com.au,google.com.bd,google.com.bh,google.com.bn,google.com.bo,google.com.br,google.com.by,google.com.bz,google.com.cn,google.com.co,google.com.cu,google.com.cy,google.com.do,google.com.ec,google.com.eg,google.com.et,google.com.fj,google.com.gh,google.com.gi,google.com.gt,google.com.hk,google.com.jm,google.com.jo,google.com.kh,google.com.kw,google.com.lb,google.com.ly,google.com.mm,google.com.mt,google.com.mx,google.com.my,google.com.na,google.com.ng,google.com.ni,google.com.np,google.com.om,google.com.pa,google.com.pe,google.com.pg,google.com.ph,google.com.pk,google.com.pr,google.com.py,google.com.qa,google.com.ru,google.com.sa,google.com.sb,google.com.sg,google.com.sl,google.com.sv,google.com.tj,google.com.tn,google.com.tr,google.com.tw,google.com.ua,google.com.uy,google.com.vc,google.com.ve,google.com.vn,google.cv,google.cz,google.de,google.dj,google.dk,google.dm,google.dz,google.ee,google.es,google.fi,google.fm,google.fr,google.ga,google.ge,google.gg,google.gl,google.gm,google.gp,google.gr,google.gy,google.hk,google.hn,google.hr,google.ht,google.hu,google.ie,google.im,google.iq,google.is,google.it,google.it.ao,google.je,google.jo,google.jp,google.kg,google.ki,google.kz,google.la,google.li,google.lk,google.lt,google.lu,google.lv,google.md,google.me,google.mg,google.mk,google.ml,google.mn,google.ms,google.mu,google.mv,google.mw,google.ne,google.ne.jp,google.ng,google.nl,google.no,google.nr,google.nu,google.pl,google.pn,google.ps,google.pt,google.ro,google.rs,google.ru,google.rw,google.sc,google.se,google.sh,google.si,google.sk,google.sm,google.sn,google.so,google.sr,google.st,google.td,google.tg,google.tl,google.tm,google.tn,google.to,google.tt,google.us,google.vg,google.vu,google.ws##c-wiz[jsrenderer="YTTf6c"] > .bhapoc.oJeWuf[jsname="bN97Pc"][data-ved]
 a65693 12
@@ -5002,16 +5863,28 @@ checkfelix.com,kayak.ae,kayak.bo,kayak.ch,kayak.cl,kayak.co.cr,kayak.co.id,kayak
 checkfelix.com,kayak.ae,kayak.bo,kayak.ch,kayak.cl,kayak.co.cr,kayak.co.id,kayak.co.in,kayak.co.jp,kayak.co.kr,kayak.co.th,kayak.co.uk,kayak.co.ve,kayak.com,kayak.com.ar,kayak.com.au,kayak.com.br,kayak.com.co,kayak.com.do,kayak.com.ec,kayak.com.gt,kayak.com.hk,kayak.com.hn,kayak.com.mx,kayak.com.my,kayak.com.ni,kayak.com.pa,kayak.com.pe,kayak.com.ph,kayak.com.pr,kayak.com.py,kayak.com.sv,kayak.com.tr,kayak.com.uy,kayak.de,kayak.dk,kayak.es,kayak.fr,kayak.ie,kayak.it,kayak.nl,kayak.no,kayak.pl,kayak.pt,kayak.sa,kayak.se,kayak.sg,swoodoo.com##div.PzK0[role="button"]:has(span.PzK0-ad-marking)
 checkfelix.com,kayak.ae,kayak.bo,kayak.ch,kayak.cl,kayak.co.cr,kayak.co.id,kayak.co.in,kayak.co.jp,kayak.co.kr,kayak.co.th,kayak.co.uk,kayak.co.ve,kayak.com,kayak.com.ar,kayak.com.au,kayak.com.br,kayak.com.co,kayak.com.do,kayak.com.ec,kayak.com.gt,kayak.com.hk,kayak.com.hn,kayak.com.mx,kayak.com.my,kayak.com.ni,kayak.com.pa,kayak.com.pe,kayak.com.ph,kayak.com.pr,kayak.com.py,kayak.com.sv,kayak.com.tr,kayak.com.uy,kayak.de,kayak.dk,kayak.es,kayak.fr,kayak.ie,kayak.it,kayak.nl,kayak.no,kayak.pl,kayak.pt,kayak.sa,kayak.se,kayak.sg,swoodoo.com##div[class$="-adInner"]
 checkfelix.com,kayak.ae,kayak.bo,kayak.ch,kayak.cl,kayak.co.cr,kayak.co.id,kayak.co.in,kayak.co.jp,kayak.co.kr,kayak.co.th,kayak.co.uk,kayak.co.ve,kayak.com,kayak.com.ar,kayak.com.au,kayak.com.br,kayak.com.co,kayak.com.do,kayak.com.ec,kayak.com.gt,kayak.com.hk,kayak.com.hn,kayak.com.mx,kayak.com.my,kayak.com.ni,kayak.com.pa,kayak.com.pe,kayak.com.ph,kayak.com.pr,kayak.com.py,kayak.com.sv,kayak.com.tr,kayak.com.uy,kayak.de,kayak.dk,kayak.es,kayak.fr,kayak.ie,kayak.it,kayak.nl,kayak.no,kayak.pl,kayak.pt,kayak.sa,kayak.se,kayak.sg,swoodoo.com##div[data-resultid]:has(a.IZSg-adlink)
+a65743 1
+sainsburys.co.uk#?#.pt-grid-item:-abp-has([data-test-id="citrus-label"]:-abp-contains(Sponsored))
 d65872 1
 a65872 1
 hentai2w.com,iporntoo.com,tsmodelstube.com,xhentai.tv###playerOverlay
 d66033 1
-a66033 1
+a66033 2
 18teensex.tv,3movs.xxx,amamilf.com,amateurelders.com,analpornpix.com,babesmachine.com,beachpornpics.com,bikinipornpics.com,bizzarepornpics.com,bukkakepornpics.com,castingpornpics.com,cfnmpornpics.com,chaturbate.com,classicpornpics.com,creampiepornpics.com,cuckoldpornpics.com,cumshotpornpics.com,eldersfaces.com,facialpornpics.com,faperson.com,fboomporn.com,freepornpicss.com,gramateurs.com,grannarium.com,handjobpornpics.com,happysex.ch,hiddenhomemade.com,imagezog.com,its.porn,jackoffson.com,jerkoffer.com,kawaiihentai.com,legalporn4k.com,lyama.net,maturator.com,maturenudism.com,milffox.com,nonameporn.com,oldgf.com,oldies.name,oldnudism.com,paradisehill.cc,picschan.com,picsleaks.com,player3x.xyz,playporngames.com,playsexgames.xxx,playvids.com,porngames.com,private.com,publicpornpics.com,realelders.com,submittedgf.com,swingerspornpics.com,threesomepornpics.com,uniformpornpics.com,upskirtpornpics.com,video.laxd.com,vidxnet.com,vikiporn.com,vjav.com,voyeurpornpics.com,wankerson.com,watchhentaivideo.com,waybig.com,xanalsex.com,xbabe.com,xcum.com,xgrannypics.com,xnudepics.com,xpiglet.com,xpornophoto.com,xpornophotos.com,xpornopics.com,xpornpicture.com,xpornpix.com,xpussypics.com,xwifepics.com,xxxpicsxxx.com,xxxpornpix.com,youcanfaptothis.com,yourdailygirls.com,youx.xxx##.banner
+highporn.net##.banner-a
+a66415 1
+tokyonightstyle.com##.random-banner
 a66489 1
 tsmodelstube.com##.spot-regular
+a66695 1
+coomer.su,kemono.su##[href^="//a.adtng.com/get/"]
 a66745 1
 tsmodelstube.com##a[href="https://tsmodelstube.com/a/tangels"]
+a66766 1
+yaoimangaonline.com##a[href^="https://l.hyenadata.com/"]
+d66782 1
+a66782 1
+myreadingmanga.info,yaoimangaonline.com##a[href^="https://www.gaming-adult.com/"]
 d66920 2
 d66929 1
 d67110 1
@@ -5034,17 +5907,20 @@ d67366 2
 d67369 1
 d67373 1
 d67421 1
-diff name:easyprivacy lines:32 checksum:2afe6b68d3
+diff name:easyprivacy lines:35 checksum:d550b552bc
 d4 2
 a5 2
-! Last modified: Wed, 24 Jan 2024 04:20:02 +0000
-! Diff-Path: ../patches/2024.1.24.387.patch#easyprivacy
+! Last modified: Wed, 24 Jan 2024 10:51:08 +0000
+! Diff-Path: ../patches/2024.1.24.678.patch#easyprivacy
+d5778 1
 a6885 1
 ||grouchybrothers.com^
 a7162 1
 ||nocturnalloom.com^
 a9211 1
 ||analytics-prd.aws.wehaa.net^
+a9437 1
+||backend.verbolia.com/content/js/velw.min.js
 a11574 1
 ||yottaa.net/log-jh
 a14115 1
