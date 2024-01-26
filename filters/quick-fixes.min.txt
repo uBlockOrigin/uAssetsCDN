@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Quick fixes
 ! Expires: 12 hours
-! Last modified: Fri, 26 Jan 2024 03:45:53 +0000
-! Diff-Path: ../patches/2024.1.26.503.patch#ublock-quick-fixes
+! Last modified: Fri, 26 Jan 2024 12:39:04 +0000
+! Diff-Path: ../patches/2024.1.26.801.patch#ublock-quick-fixes
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/quick-fixes.txt ***
@@ -118,7 +118,8 @@ bitcotasks.com##+js(aeld, blur, event.triggered)
 ||bitcotasks.com/assets/ads.php$frame,1p
 ! perchance - broken by its dev
 perchance.org##+js(rpnt, script, '/if(\s){0,}\(..*\[\`.*\`\]\("."\)\) \{([\s\S]*?\}){2,}/gm', 'if (location.href.indexOf("ai-") !== -1) {String.prototype.includes=function (){return true};};riot.mount(\'app\', {generator: window.generatorData,dependencies: window.generatorDependenciesData,});window.successfulPageLoad = true;')
-perchance.org##+js(rmnt, script, '/(?<=if\(!window\.shouldExist\d+\) {)([^;]+)/gms', sedCount, 2)
+!perchance.org##+js(rmnt, script, '/(?<=if\(!window\.shouldExist\d+\) {)([^;]+)/gms', sedCount, 2)
+perchance.org##+js(rmnt, script, '/(?<=if\((\s){0,}!window\.(\s){0,}shouldExist\d+\) {)([^;]+)/gms')
 ! ytlarge detection
 @@||ytlarge.com^$ghide
 ytlarge.com##+js(no-fetch-if, doubleclick)
@@ -128,8 +129,6 @@ ytlarge.com##+js(aopr, onload)
 @@||ytlarge.com^$script,1p
 ! Ad-Shield
 /loader.min.js$xhr,script,domain=loawa.com|ygosu.com|sportalkorea.com|algumon.com|hancinema.net|enetnews.co.kr|edaily.co.kr|economist.co.kr|etoday.co.kr|hankyung.com|isplus.com|hometownstation.com|kagit.kr|inven.co.kr|honkailab.com|warcraftrumbledeck.com|genshinlab.com|thestockmarketwatch.com|thephoblographer.com,replace=/\)\]\(\(function [a-zA-Z0-9]{2}\([a-zA-Z0-9\,]{2,5}\){var/)]((function neutralized(){var/g
-! next-episode
-next-episode.net##+js(rmnt, script, /append|adsbygoogle/)
 nyaa.land##[href*="tiny.cc"]
 nyaa.land##html > body > center
 /nyaa\.land\/static\/[a-z0-9]{32}\.jpg$/$image,1p,domain=nyaa.land
