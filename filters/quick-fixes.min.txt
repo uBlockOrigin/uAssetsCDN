@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Quick fixes
 ! Expires: 12 hours
-! Last modified: Mon, 29 Jan 2024 21:55:24 +0000
-! Diff-Path: ../patches/2024.1.30.439.patch#ublock-quick-fixes
+! Last modified: Tue, 30 Jan 2024 09:46:05 +0000
+! Diff-Path: ../patches/2024.1.30.753.patch#ublock-quick-fixes
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/quick-fixes.txt ***
@@ -17,9 +17,9 @@
 @@||histats.com/js.js$script,domain=dropgalaxy.*
 @@||popads.net/js/adblock.js$script,domain=dropgalaxy.*
 @@||cdn.jsdelivr.net/gh/prebid/*$script,domain=dropgalaxy.*
+@@||fundingchoicesmessages.google.com^$script,domain=dropgalaxy.*
 @@*$script,xhr,from=dropgalaxy.*,to=googlesyndication.com|doubleclick.net|rsc.cdn77.org|vlitag.com|adoto.net|a2zapk.com|login.popmonetizer.com
 dropgalaxy.*##+js(nowoif)
-dropgalaxy.*##+js(set, window.isAdblockActive, false)
 dropgalaxy.*##+js(trusted-set, document.visibilityState, visible)
 dropgalaxy.com#@#+js(abort-current-script, document.onkeydown)
 dropgalaxy.*##+js(set, supportedBrowsers, )
@@ -108,6 +108,7 @@ perchance.org##+js(rpnt, script, '/if(\s){0,}\(..*\[\`.*\`\]\("."\)\) \{([\s\S]*
 perchance.org##+js(rmnt, script, '/(?<=if\((\s){0,}!window\.(\s){0,}[shouldExist\d+]{1,}\) {)([^;]+)/gms')
 perchance.org##+js(rmnt, script, '/document\[`(.+?)`\]\.innerHTML = window\..*;/gms')
 perchance.org##+js(rmnt, script, '/document.*.innerHTML =window\..*;/gms')
+perchance.org##+js(rmnt, script, '/document\["body"\]\.innerHTML\s*=\s*([^;]+);/g')
 ! ytlarge detection
 @@||ytlarge.com^$ghide
 @@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$script,domain=ytlarge.com
@@ -126,7 +127,7 @@ alliptvlinks.com,daneiakartes.info##+js(aopr, eazyAdUnBlockerHttp)
 ||2mdn.net^$media,redirect=noop-1s.mp4:10,domain=open.spotify.com
 *$media,3p,redirect-rule=noop-1s.mp4:10,domain=open.spotify.com
 @@||free-mp3-download.net^$script,1p
-free-mp3-download.net##+js(rpnt, script, return)
+@@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$xhr,domain=free-mp3-download.net
 apkmirror.com#@#^script:has-text(/style:last-of-type|:empty|APKM\..+?\.innerHTML/)
 apkmirror.com#@#+js(rmnt, script, /style:last-of-type|:empty|APKM\..+?\.innerHTML/)
 @@||cxense.com/document/search?
