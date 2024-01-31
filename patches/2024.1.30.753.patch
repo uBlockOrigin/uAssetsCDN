@@ -1,19 +1,19 @@
-diff name:ublock-annoyances lines:6 checksum:6c87651832
+diff name:ublock-annoyances lines:6 checksum:2fbca553c9
 d3 2
 a4 2
 ! Last modified: Tue, 30 Jan 2024 14:18:32 +0000
-! Diff-Path: ../patches/2024.1.31.800.patch#ublock-annoyances
+! Diff-Path: ../patches/2024.1.31.1099.patch#ublock-annoyances
 a566 1
 mishcon.com##+js(trusted-set-cookie, CookieChoicesApr2021, %7B%22functionality%22%3Afalse%2C%22anonymousMeasurement%22%3Afalse%2C%22performance%22%3Afalse%2C%22advertising%22%3Afalse%7D)
-diff name:ublock-badware lines:3 checksum:a4bd66af43
+diff name:ublock-badware lines:3 checksum:e462e5b7b9
 d4 1
 a4 1
-! Diff-Path: ../patches/2024.1.31.800.patch#ublock-badware
-diff name:ublock-filters lines:145 checksum:43ded5e7fc
+! Diff-Path: ../patches/2024.1.31.1099.patch#ublock-badware
+diff name:ublock-filters lines:147 checksum:0054a4b760
 d3 2
 a4 2
-! Last modified: Wed, 31 Jan 2024 12:35:42 +0000
-! Diff-Path: ../patches/2024.1.31.800.patch#ublock-filters
+! Last modified: Wed, 31 Jan 2024 17:38:42 +0000
+! Diff-Path: ../patches/2024.1.31.1099.patch#ublock-filters
 d289 1
 d732 6
 a737 6
@@ -62,6 +62,8 @@ bombuj.*##+js(noeval-if, ADblock)
 a7845 2
 cinemaxxl.de##noscript:has-text(Adblocker):remove()
 ||cinemaxxl.de/js/adblock.js$script
+a8427 1
+t3n.de##.outbrain-wrapper-outer
 d9615 4
 a9618 4
 @@*$script,1p,domain=puzzle-loop.com|puzzle-words.com|puzzle-chess.com|puzzle-thermometers.com|puzzle-norinori.com|puzzle-minesweeper.com|puzzle-slant.com|puzzle-lits.com|puzzle-galaxies.com|puzzle-tents.com|puzzle-battleships.com|puzzle-pipes.com|puzzle-hitori.com|puzzle-heyawake.com|puzzle-shingoki.com|puzzle-masyu.com|puzzle-stitches.com|puzzle-aquarium.com|puzzle-tapa.com|puzzle-star-battle.com|puzzle-kakurasu.com|puzzle-skyscrapers.com|puzzle-futoshiki.com|puzzle-futoshiki.com|puzzle-shakashaka.com|puzzle-kakuro.com|puzzle-jigsaw-sudoku.com|puzzle-killer-sudoku.com|puzzle-binairo.com|puzzle-nonograms.com|puzzle-sudoku.com|puzzle-light-up.com|puzzle-bridges.com|puzzle-bridges.com|puzzle-nurikabe.com|puzzle-nurikabe.com|puzzle-dominosa.com
@@ -155,20 +157,20 @@ a22441 1
 !#if env_chromium
 a22442 1
 !#endif
-diff name:ublock-privacy lines:8 checksum:bb3a1c58e1
+diff name:ublock-privacy lines:8 checksum:075e3594a2
 d3 2
 a4 2
 ! Last modified: Wed, 31 Jan 2024 03:44:27 +0000
-! Diff-Path: ../patches/2024.1.31.800.patch#ublock-privacy
+! Diff-Path: ../patches/2024.1.31.1099.patch#ublock-privacy
 d557 1
 a557 2
 /n/images/su?info$xhr,1p
 ://log.$image,1p,domain=znews.vn|zingnews.vn
-diff name:ublock-quick-fixes lines:46 checksum:b1d0955a8f
+diff name:ublock-quick-fixes lines:56 checksum:e85f452215
 d3 2
 a4 2
-! Last modified: Wed, 31 Jan 2024 12:54:17 +0000
-! Diff-Path: ../patches/2024.1.31.800.patch#ublock-quick-fixes
+! Last modified: Wed, 31 Jan 2024 17:53:27 +0000
+! Diff-Path: ../patches/2024.1.31.1099.patch#ublock-quick-fixes
 d33 6
 a38 6
 imgbncvnv.sbs,pixtryab.shop,imggune.shop,pictryhab.shop,pixbnab.shop##+js(aopr, console.clear)
@@ -178,9 +180,13 @@ imgbncvnv.sbs,pixtryab.shop,imggune.shop,pictryhab.shop,pixbnab.shop##div[style=
 imgbncvnv.sbs,pixtryab.shop,imggune.shop,pictryhab.shop,pixbnab.shop##+js(nowoif, !/prcf.fiyar|themes|pixsense|.jpg/)
 imgbncvnv.sbs,pixtryab.shop,imggune.shop,pictryhab.shop,pixbnab.shop##div[class][style="display: block;"]
 d44 2
-a45 2
+a45 6
 ||youtube.com/s/desktop/*/jsbin/desktop_polymer.vflset/desktop_polymer.js$~doc,uritransform=/desktop\/\w+\/jsbin/desktop\/53970d6d\/jsbin/,domain=www.youtube.com
+!#if ext_devbuild
+www.youtube.com##+js(remove-cache-storage-item, yt-appshell-assets, /\/jsbin\/desktop_polymer\.vflset\/desktop_polymer\.js$/)
+!#else
 www.youtube.com##+js(trusted-rpnt, script, /^(\(function serverContract\(\))/s, "caches.open('yt-appshell-assets').then(a=>['87786692','697254fd','53970d6d'].forEach(i=>a.delete(`/s/desktop/${i}/jsbin/desktop_polymer.vflset/desktop_polymer.js`)));$1")
+!#endif
 d65 2
 a66 1
 www.chip.de##+js(rpnt, style, { display: block ; }, {display: none !important;}, condition, /aspect-ratio:\s?auto/)
@@ -190,10 +196,15 @@ www.chip.de###CR[class="Downloads-Detail"] > #G32 > #M1 > [class]:not([class="wr
 d77 1
 a77 1
 www.chip.de###CR:is(.Downloads-Select, .Downloads-Getfile) > #G32 > #M1 > [class]:not([class="wrapper-safe"]):has(> div > section > ul.List.is-separated a img[src*="https://im.chip.de/ii/"])
+d80 1
+a80 1
+www.chip.de###CR.Downloads-Select > #G32 > #M1 > [class="wrapper-safe"] > [class^="fb mt-"] > section > [class]:has(> a > div:has-text(/^Anzeige$/))
 d82 3
 a84 2
 www.chip.de##body[class="l-DownloadListing is-sticky"] > [class="Main Main--Skyscraper"] > .Main__Container > [class]:not([class^="Downloads DownloadListing"]) > div > ul.List.is-separated:has(a img[src*="https://im.chip.de/ii/"])
 www.chip.de##body[class="l-DownloadListing is-sticky"] > [class]:has(> div > section:only-child > ul.List.is-separated a img[src*="https://im.chip.de/ii/"])
+a105 1
+bitcotasks.com##+js(no-fetch-if, bmcdn6)
 d114 1
 a114 1
 @@||pagead2.googlesyndication.com^$script,domain=ytlarge.com
@@ -211,15 +222,19 @@ free-mp3-download.net#@#ins.adsbygoogle
 free-mp3-download.net##.adsbygoogle-noablate:style(max-height: 1px !important; visibility: hidden !important;)
 free-mp3-download.net##ins.adsbygoogle:style(max-height: 1px !important; visibility: hidden !important;)
 !#endif
-diff name:ublock-unbreak lines:3 checksum:5fbcb978a2
-d4 1
-a4 1
-! Diff-Path: ../patches/2024.1.31.800.patch#ublock-unbreak
-diff name:easylist lines:582 checksum:863714b4a1
+d134 2
+diff name:ublock-unbreak lines:6 checksum:8b4077659e
+d3 2
+a4 2
+! Last modified: Wed, 31 Jan 2024 17:53:27 +0000
+! Diff-Path: ../patches/2024.1.31.1099.patch#ublock-unbreak
+a2466 1
+@@||cdn.taboola.com/libtrc/tipranks-tipranks/loader.js$script,domain=tipranks.com
+diff name:easylist lines:640 checksum:dd4970f002
 d4 2
 a5 2
-! Last modified: Wed, 31 Jan 2024 10:23:46 +0000
-! Diff-Path: ../patches/2024.1.31.800.patch#easylist
+! Last modified: Wed, 31 Jan 2024 16:30:21 +0000
+! Diff-Path: ../patches/2024.1.31.1099.patch#easylist
 a175 1
 /ad/load_ad?
 d759 1
@@ -313,6 +328,8 @@ d20668 1
 d20762 1
 d20899 1
 d21013 1
+a21209 1
+||anceteventur.info^
 d21226 1
 d21305 1
 a21362 1
@@ -327,6 +344,8 @@ a21879 1
 d21925 1
 a21933 1
 ||atrocityfingernail.com^
+a22022 1
+||augustjadespun.com^
 a22153 1
 ||awavjblaaekrb.top^
 d22297 1
@@ -351,10 +370,14 @@ a23613 1
 ||bpjgiwzzmgjp.com^
 a23666 1
 ||brasstrones.com^
+a23716 1
+||briesziphius.com^
 a23878 1
 ||bugraubs.com^
 d23931 1
 d23975 1
+a24012 1
+||bwpuoba.com^
 a24085 1
 ||c0ae703671.com^
 a24133 1
@@ -406,6 +429,8 @@ d27211 1
 d27221 1
 d27261 1
 d27265 1
+a27273 1
+||doc830ytc7pyp.cloudfront.net^
 d27339 1
 d27353 1
 d27405 1
@@ -460,6 +485,8 @@ d30635 1
 d30681 1
 d30738 1
 d30748 1
+a30755 1
+||gdbtlmsihonev.xyz^
 d31084 1
 d31203 1
 a31209 1
@@ -484,6 +511,8 @@ a32085 1
 d32164 2
 a32388 1
 ||hickytarp.space^
+a32562 1
+||hnjkcnntdg.com^
 d32569 1
 d32652 1
 d32857 1
@@ -521,6 +550,8 @@ d34153 1
 d34283 1
 d34306 1
 d34437 1
+a34473 1
+||jkajyrkjmzmkz.top^
 d34498 1
 a34672 1
 ||jrqwfdkksamx.com^
@@ -537,11 +568,15 @@ d35123 1
 d35369 1
 d35439 1
 d35710 2
+a35820 1
+||leafletcensorrescue.com^
 d35867 1
 a35868 1
 ||leezeept.com^
 d36019 1
 d36064 1
+a36217 1
+||lkeurotpmiz.com^
 d36238 1
 d36241 1
 a36275 1
@@ -588,6 +623,10 @@ d38524 1
 d38636 1
 a38844 1
 ||nmhcroxspro.com^
+a39173 1
+||nullscateringinforms.com^
+a39187 1
+||nunnifybalize.website^
 d39189 1
 d39486 1
 d39489 1
@@ -603,6 +642,8 @@ a39830 1
 ||oneselfindicaterequest.com^
 d40124 1
 d40273 1
+a40407 1
+||ovhacmobpval.com^
 d40481 1
 d40585 1
 d40635 1
@@ -610,6 +651,8 @@ d40657 1
 d40661 1
 a40672 1
 ||parkraffia.com^
+a40814 1
+||pbbqzqi.com^
 d41232 1
 d41350 1
 d41353 1
@@ -664,6 +707,8 @@ d43883 1
 d43914 1
 d43929 1
 d44046 1
+a44142 1
+||roarcontrivanceuseful.com^
 d44303 1
 d44336 1
 a44346 1
@@ -692,6 +737,8 @@ a45200 1
 ||sfnfpddbql.com^
 d45479 1
 d45629 1
+a45661 1
+||skulkspreppie.com^
 d45695 1
 d45769 1
 a45955 1
@@ -710,6 +757,8 @@ a47021 1
 ||syshrugglefor.info^
 a47600 1
 ||thirtycabook.com^
+a47611 1
+||thoaboow.xyz^
 a47860 1
 ||tlprbzoi.com^
 a48139 1
@@ -730,12 +779,16 @@ d49059 1
 d49134 1
 d49538 1
 d49560 1
+a49563 1
+||veenodax.digital^
 a49606 1
 ||ventualkentineda.info^
 d49620 1
 d49659 1
 d49670 1
 d49680 1
+a49771 1
+||vighooss.net^
 d49825 1
 d49906 1
 d49912 1
@@ -754,6 +807,8 @@ d50802 1
 d50822 1
 d50824 1
 d50826 1
+a50963 1
+||wmzlbovyjrwvw.top^
 d51045 1
 d51094 1
 a51253 1
@@ -787,26 +842,63 @@ a55673 1
 ||lataniaembosks.com^$popup
 a58472 1
 ||1647871863.rsc.cdn77.org^
+a58714 1
+||huffpost.com/embed/connatix/$subdocument
 a59857 1
 ||blockadstop.info^$popup
 a59867 1
 ||daily-guard.net^$popup
+a59965 1
+||anacams.com/cdn/top.
+d61920 1
+a63791 1
+costco.com##.col-xs-12:has([data-bi-placement^="Criteo_Product_Display"])
+a64130 1
+costco.com##.feature-carousel-container[data-rm-format-beacon]
+a66139 1
+costco.com##[data-bi-placement="Criteo_Home_Espot"]
+a66797 1
+newsbreak.com##div[style*="position:relative;width:100%;height:0;padding-bottom:"]
+a66929 1
+streeteasy.com##li.searchCardList--listItem:has(.jsSponsoredListingCard)
 a66992 1
 imgur.com##.Grid-column > div[style^="height:"]:has(.Post-item-external-ad)
+d67507 1
+a67507 1
+walmart.ca,walmart.com#?#div > div[io-id]:-abp-contains(Sponsored)
 a68773 1
 @@||gitlab.com/api/v4/projects/$~third-party
 a68858 1
 @@||raw.githubusercontent.com^$domain=viewscreen.githubusercontent.com
 d68955 1
-diff name:easyprivacy lines:11 checksum:b918a3590a
+diff name:easyprivacy lines:30 checksum:d6b25affa4
 d4 2
 a5 2
-! Last modified: Wed, 31 Jan 2024 04:47:51 +0000
-! Diff-Path: ../patches/2024.1.31.800.patch#easyprivacy
+! Last modified: Wed, 31 Jan 2024 13:53:36 +0000
+! Diff-Path: ../patches/2024.1.31.1099.patch#easyprivacy
 a6974 1
 ||humdrumtouch.com^
+a12601 1
+||applog.ssgdfs.com^
+a12605 1
+||dadispapi.gmarket.co.kr^
+a12615 1
+||montelena.auction.co.kr^
+a12630 1
+||utsgw.auction.co.kr^
+a13064 1
+||api.channel.io/*/events
+d13164 1
+a13164 1
+||channel.io/front/v*/channels/*/events
 a14590 1
 ||skyscanner.*/rf8vapwA/init.js
 d14643 1
 a14643 1
 givemesport.com,qtoptens.com,brobible.com,mensjournal.com,dualshockers.com,si.com,androidpolice.com,makeuseof.com,cbr.com,collider.com,thegamer.com,simpleflying.com,stealthoptional.com,xda-developers.com,howtogeek.com,screenrant.com##+js(abort-on-property-read, googletag)
+a42824 1
+||shinsegae.com/topNPopup.do
+a42825 1
+||ssgdfs.com/kr/common/getPageIcfCd
+a42834 1
+||traders.co.kr/common/js/makePCookie.js
