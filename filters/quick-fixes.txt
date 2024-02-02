@@ -1,5 +1,5 @@
 ! Title: uBlock₀ filters – Quick fixes
-! Last modified: Thu, 01 Feb 2024 19:03:45 +0000
+! Last modified: Fri, 02 Feb 2024 00:06:22 +0000
 ! Expires: 8 hours
 ! Description: Immediate, temporary filters to fix websites
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -49,11 +49,11 @@ imgbncvnv.sbs,pixtryab.shop,imggune.shop,pictryhab.shop,pixbnab.shop##div[class]
 youtube.com##+js(json-prune, playerResponse.adPlacements playerResponse.playerAds playerResponse.adSlots adPlacements playerAds adSlots legacyImportant)
 !#endif
 !#endif
-||youtube.com/s/desktop/*/jsbin/desktop_polymer.vflset/desktop_polymer.js$~doc,uritransform=/desktop\/\w+\/jsbin/desktop\/53970d6d\/jsbin/,domain=www.youtube.com
+||youtube.com/s/desktop/*/jsbin/desktop_polymer.vflset/desktop_polymer.js$~doc,uritransform=/desktop\/\w+\/jsbin/desktop\/2d97f03c\/jsbin/,domain=www.youtube.com
 !#if ext_devbuild
 www.youtube.com##+js(remove-cache-storage-item, yt-appshell-assets, /\/jsbin\/desktop_polymer\.vflset\/desktop_polymer\.js$/)
 !#else
-www.youtube.com##+js(trusted-rpnt, script, /^(\(function serverContract\(\))/s, "caches.open('yt-appshell-assets').then(a=>['87786692','697254fd','53970d6d'].forEach(i=>a.delete(`/s/desktop/${i}/jsbin/desktop_polymer.vflset/desktop_polymer.js`)));$1")
+www.youtube.com##+js(trusted-rpnt, script, /^(\(function serverContract\(\))/s, "caches.open('yt-appshell-assets').then(a=>['53970d6d','2d97f03c','8b6c1f4c'].forEach(i=>a.delete(`/s/desktop/${i}/jsbin/desktop_polymer.vflset/desktop_polymer.js`)));$1")
 !#endif
 
 ! https://github.com/uBlockOrigin/uAssets/issues/18476
@@ -134,7 +134,7 @@ perchance.org##+js(rmnt, script, '/(?<=if\((\s){0,}!window\.(\s){0,}[shouldExist
 perchance.org##+js(rmnt, script, '/document\[`(.+?)`\]\.innerHTML = window\..*;/gms')
 perchance.org##+js(rmnt, script, '/document.*.innerHTML =window\..*;/gms')
 perchance.org##+js(rmnt, script, '/document\["body"\]\.innerHTML\s*=\s*([^;]+);/g')
-perchance.org##+js(rmnt, script, '/"body"|"bo"\+"dy"/g')
+perchance.org##+js(rmnt, script, '/"body"|"bo"\+"dy"|"bod"\+"y"/g')
 
 ! ytlarge detection
 @@||ytlarge.com^$ghide
@@ -181,3 +181,13 @@ apkmirror.com#@#+js(rmnt, script, /style:last-of-type|:empty|APKM\..+?\.innerHTM
 
 ! https://github.com/easylist/easylist/commit/2083540af68c5607ca908ffe66d8b3e2390c8a56
 @@||cxense.com/document/search?
+
+! https://github.com/uBlockOrigin/uAssets/issues/20401
+!#if cap_html_filtering
+infinityscans.xyz,infinityscans.net##^script:has-text(throw Error)
+!#else
+infinityscans.xyz,infinityscans.net##+js(rmnt, script, throw Error)
+!#endif
+
+! n-e
+next-episode.net##+js(rmnt, script, /='.*#.*<.*>.*"/g)
