@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Mon, 05 Feb 2024 12:54:55 +0000
-! Diff-Path: ../patches/2024.2.5.800.patch#ublock-filters
+! Last modified: Mon, 05 Feb 2024 17:07:40 +0000
+! Diff-Path: ../patches/2024.2.5.1105.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -9613,9 +9613,7 @@ qwant.com#@#div[data-testid="pam.container"]
 qwant.com##div[data-testid="pam.container"]:style(max-height: 1px !important; opacity: 0 !important; pointer-events: none !important;)
 @@||spite.cz^$ghide
 civitai.com##+js(no-fetch-if, googlesyndication)
-civitai.com##.mantine-ScrollArea-root .mantine-Paper-root:empty
-civitai.com##.mantine-Paper-root[style="margin: 0px auto 10px; z-index: 10;"]
-civitai.com##.mantine-Paper-root:has(> div[style="margin: 0px auto;"])
+civitai.com##[data-aa-adunit]:upward(.mantine-Paper-root):remove()
 civitai.com##.mantine-Paper-root > .mantine-Stack-root:has-text(Become a supporter):upward(.mantine-Paper-root)
 ||ads.civitai.com^$script,1p,redirect-rule=noopjs
 @@*$script,1p,domain=puzzle-loop.com|puzzle-words.com|puzzle-chess.com|puzzle-thermometers.com|puzzle-norinori.com|puzzle-minesweeper.com|puzzle-slant.com|puzzle-lits.com|puzzle-galaxies.com|puzzle-tents.com|puzzle-battleships.com|puzzle-pipes.com|puzzle-hitori.com|puzzle-heyawake.com|puzzle-shingoki.com|puzzle-masyu.com|puzzle-stitches.com|puzzle-aquarium.com|puzzle-tapa.com|puzzle-star-battle.com|puzzle-kakurasu.com|puzzle-skyscrapers.com|puzzle-futoshiki.com|puzzle-shakashaka.com|puzzle-kakuro.com|puzzle-jigsaw-sudoku.com|puzzle-killer-sudoku.com|puzzle-binairo.com|puzzle-nonograms.com|puzzle-sudoku.com|puzzle-light-up.com|puzzle-bridges.com|puzzle-shikaku.com|puzzle-nurikabe.com|puzzle-dominosa.com
@@ -9691,6 +9689,7 @@ historyofroyalwomen.com##+js(aeld, DOMContentLoaded, daadb_get_data_fetch)
 ukchat.co.uk##+js(aeld, click, splashPage)
 ||ukchat.co.uk/js/popunder.js
 /afr?*zoneid=$3p,frame,domain=ukchat.co.uk
+wohnmobilforum.de##+js(nostif, nextFunction)
 ! Link shortener filters go into their own dedicated list
 ! *** filters/ubo-link-shorteners.txt ***
 ! gplinks all domains (gplinks.co/EWu8)
@@ -16471,7 +16470,7 @@ zerion.cc,zerocoin.top,zitss.xyz,zooqle.*,zpaste.net,zplayer.live##+js(rmnt, scr
 ://www.*.com/css/$script,3p,to=com,domain=~principal.com|~principalcdn.com
 ://www.*.com/js/css/$script,3p,to=com
 =e3&*,0|$script,3p,to=com
-/^https:\/\/www\.[a-z]{8,16}\.com\/(?:images\/)?(?:static\/)?(?:common\/)?(?:assets\/)?(?:scripts\/)?(?:api\/)?(?:js\/)?(?:[a-z]{3})?(?:[a-z]dom4|dotdotdot|editor|firebase|jfloating|leaflet\.toolbar|masync|mijs|proj4|sext-all|sha|ummenu|viz)\.js$/$script,3p,match-case
+/^https:\/\/www\.[a-z]{8,16}\.com\/(?:images\/)?(?:static\/)?(?:common\/)?(?:assets\/)?(?:scripts\/)?(?:api\/)?(?:js\/)?(?:[a-z]{3})?(?:[a-z]dom4|dotdotdot|editor|f(?:ire)?base|jfloating|leaflet\.toolbar|masync|mijs|proj4|sext-all|sha|ummenu|viz)\.js$/$script,3p,match-case
 ||pushtoast-a.akamaihd.net^$script,3p
 ||nsfwr34.com/ad_schedule/
 mdy48tn97.com##+js(nowoif)
@@ -19949,10 +19948,8 @@ techclips.net##+js(nostif, sadbl)
 /api/users/*^fill=$xhr
 ://cdn.*.com/vast2.js|$3p
 ! PopCash popcashjs.b-cdn.net CNAME adserver
-/^https?:\/\/cdn\.[a-z]{5,8}\.com\/app\.js$/$script,3p,match-case,domain=~edu|~gov
-/^https?:\/\/cdn\.[a-z]{4,7}\.xyz\/app\.js$/$script,3p,match-case
-.com/go/*/aHR0c*$popup,3p
-.xyz/go/*/aHR0c*$popup,3p
+/^https?:\/\/cdn\.[a-z]{5,8}\.(?:com|net|xyz)\/app\.js$/$script,3p,match-case,domain=~edu|~gov
+://p.*/go/$popup,3p
 ! NameSilo ab1n.net CNAME adserver
 /fp-interstitial.js
 /nativeads-v2.js
@@ -21808,8 +21805,19 @@ teknisitv.com,paylaterin.com##+js(aost, decodeURIComponent, autoptimize)
 *$script,3p,denyallow=bootstrapcdn.com|disqus.com|disquscdn.com|jsdelivr.net|jwpcdn.com|fastly.net|fastlylb.net|jquery.com|hwcdn.net|recaptcha.net|cloudflare.com|cloudflare.net|google.com|googleapis.com|gstatic.com,domain=torrentgalaxy.*|tgx.rs
 torrentgalaxy.to,tgx.rs##+js(aost, String.prototype.charCodeAt, $)
 torrentgalaxy.to,tgx.rs##.alert
-torrentgalaxy.to,tgx.rs##div[class="col-lg-2 col-sm-12 smallhide"] > div:has(> center > div[style^="margin-bottom"])
-torrentgalaxy.to,tgx.rs##[href*=".php?"]:not([href^="/torrents.php?"]):has(img[src])
+!torrentgalaxy.to,tgx.rs##[href*=".php?"]:not([href^="/torrents.php?"]):has(img[src])
+torrentgalaxy.to,tgx.rs##div[class="col-lg-2 col-sm-12 smallhide"] > div:has(> center > div[style^="margin"])
+torrentgalaxy.to,tgx.rs###panelmain > .panel-body > [style="margin-bottom:10px;"]:has(a img[src*="picturedent.org"])
+torrentgalaxy.to,tgx.rs###panelmain > .panel-body > div > a > div > img[src*="picturedent.org"]
+torrentgalaxy.to,tgx.rs##a[href^="/hub?"]:has(img[src*="picturedent.org"])
+||picturedent.org/images/2024/01/18/g4PIKqpuiy.jpg$image,3p
+||picturedent.org/images/2024/01/18/Ay3WxGe.jpg$image,3p
+||picturedent.org/images/2024/01/18/M5tryF9U.jpg$image,3p
+||picturedent.org/images/2024/01/18/KZtn5dQx.jpg$image,3p
+||picturedent.org/images/2024/01/18/VUEm1.jpg$image,3p
+||picturedent.org/images/2024/01/18/GUK0r.jpg$image,3p
+||picturedent.org/images/2024/01/18/Gw7sMm.jpg$image,3p
+||picturedent.org/images/2024/01/18/f4z1L57W3l.jpg$image,3p
 gplastra.com##+js(noeval-if, ads)
 eurosport.*##.ad
 kurakura21.space##+js(noeval-if, UserCustomPop)
