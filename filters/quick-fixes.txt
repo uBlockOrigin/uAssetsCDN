@@ -1,5 +1,5 @@
 ! Title: uBlock₀ filters – Quick fixes
-! Last modified: Wed, 07 Feb 2024 15:10:20 +0000
+! Last modified: Wed, 07 Feb 2024 17:55:56 +0000
 ! Expires: 8 hours
 ! Description: Immediate, temporary filters to fix websites
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -49,11 +49,11 @@ imgbncvnv.sbs,pixtryab.shop,imggune.shop,pictryhab.shop,pixbnab.shop,imgbnwe.sho
 youtube.com##+js(json-prune, playerResponse.adPlacements playerResponse.playerAds playerResponse.adSlots adPlacements playerAds adSlots legacyImportant)
 !#endif
 !#endif
-||youtube.com/s/desktop/*/jsbin/desktop_polymer.vflset/desktop_polymer.js$~doc,uritransform=/desktop\/\w+\/jsbin/desktop\/2e540ce9\/jsbin/,domain=www.youtube.com
+||youtube.com/s/desktop/*/jsbin/desktop_polymer.vflset/desktop_polymer.js$script,xhr,uritransform=/desktop\/\w+\/jsbin/desktop\/1adc386e\/jsbin/,domain=www.youtube.com
 !#if ext_devbuild
 www.youtube.com##+js(remove-cache-storage-item, yt-appshell-assets, /\/jsbin\/desktop_polymer\.vflset\/desktop_polymer\.js$/)
 !#else
-www.youtube.com##+js(trusted-rpnt, script, /^(\(function serverContract\(\))/s, "caches.open('yt-appshell-assets').then(a=>['2d97f03c','8b6c1f4c','2e540ce9'].forEach(i=>a.delete(`/s/desktop/${i}/jsbin/desktop_polymer.vflset/desktop_polymer.js`)));$1")
+www.youtube.com##+js(trusted-rpnt, script, /^(\(function serverContract\(\))/s, "caches.open('yt-appshell-assets').then(a=>['2e540ce9','1c21ae68','1adc386e'].forEach(i=>a.delete(`/s/desktop/${i}/jsbin/desktop_polymer.vflset/desktop_polymer.js`)));$1")
 !#endif
 
 ! https://github.com/uBlockOrigin/uAssets/issues/18476
@@ -109,7 +109,7 @@ perchance.org##+js(rpnt, script, '/if(\s){0,}\(..*\[\`.*\`\]\("."\)\) \{([\s\S]*
 !perchance.org##+js(rmnt, script, '/document\[`(.+?)`\]\.innerHTML = window\..*;/gms')
 !perchance.org##+js(rmnt, script, '/document.*.innerHTML =window\..*;/gms')
 !perchance.org##+js(rmnt, script, '/document\["body"\]\.innerHTML\s*=\s*([^;]+);/g')
-perchance.org##+js(rmnt, script, '/"body"|"bo"\+"dy"|"bod"\+"y"|"b"\+"od"\+"y"|"b"\+"od"\+"y"|"b"[\s\S]{0,}\+[\s\S]{0,}"od"[\s\S]{0,}\+[\s\S]{0,}"y"|"b"[\s\S]{0,}"o"[\s\S]{0,}"d"[\s\S]{0,}"y"[\s\S]{0,}|`b[\s\S]{0,}`o[\s\S]{0,}`d[\s\S]{0,}`y[\s\S]{0,}|b\$|u006f|document\.body;/g')
+perchance.org##+js(rmnt, script, '/"body"|"bo"\+"dy"|"bod"\+"y"|"b"\+"od"\+"y"|"b"\+"od"\+"y"|"b"[\s\S]{0,}\+[\s\S]{0,}"od"[\s\S]{0,}\+[\s\S]{0,}"y"|"b"[\s\S]{0,}"o"[\s\S]{0,}"d"[\s\S]{0,}"y"[\s\S]{0,}|`b[\s\S]{0,}`o[\s\S]{0,}`d[\s\S]{0,}`y[\s\S]{0,}|b\$|u006f|document\.body;|\["document"\]/g')
 
 ! ytlarge detection
 @@||ytlarge.com^$ghide
@@ -147,7 +147,7 @@ infinityscans.xyz,infinityscans.net##+js(rpnt, script, /\(function\(.*\(\);\}/, 
 
 ! next-episode .net
 !next-episode.net##+js(rmnt, script, '/[\s\S]{0,}head[\s\S]{1900,}/')
-next-episode.net##+js(rmnt, script, '/64/g')
+next-episode.net##+js(rmnt, script, '/60\+|fromChar/g')
 
 ! https://github.com/easylist/easylist/commit/007a89df225391115bcdd2820d013e4cc775851d
 ||d3nn82uaxijpm6.cloudfront.net^$script,badfilter
@@ -166,10 +166,13 @@ cookomix.com##+js(nostif, detected, 5000)
 cookomix.com##.AdMB
 
 ! https://github.com/uBlockOrigin/uAssets/issues/19729
+torrentgalaxy.to,tgx.rs#@#a[href^="/"][href*="?"][href*="&"]:has(img[src*="picturedent.org"])
 torrentgalaxy.to,tgx.rs##div[class="col-lg-2 col-sm-12 smallhide"] > div:has(center a :is(img[src*="picturedent.org"], img[src^="/images/202"]))
 torrentgalaxy.to,tgx.rs##div[style*="padding-left"][style*="max-width"] > .panel-primary > [class] > div:not([id="intblock"]):has(a img)
 torrentgalaxy.to,tgx.rs##div[class="col-lg-10 col-sm-12"][style] > [id] > [class] > [style="margin-bottom:10px;"]:has(a img:not([data-src]))
 torrentgalaxy.to,tgx.rs##div[class="col-lg-10 col-sm-12"][style] > [id] > [class] > [style*="text-align"] > [style*="margin-bottom"]:has(> center a img:not([data-src]))
+torrentgalaxy.to,tgx.rs##[style="padding-left:7px;padding-right:7px;"] > [id].panel-primary > [class] > [position="relative"][style*="margin-top"]:has(a img:not([data-src]))
+torrentgalaxy.to,tgx.rs##div[class*="slidingDiv"] > .container-fluid[style="overflow-x:auto;"] > .gluewrapper > div:last-child > div[style^="margin"]:has(a img:not([alt]))
 torrentgalaxy.to,tgx.rs##a[href^="/huz?r"][href$="&saerch"]
 ||torrentgalaxy.to/images/202*/*/*/*.jpg$image,1p
 ||tgx.rs/images/202*/*/*/*.jpg$image,1p
