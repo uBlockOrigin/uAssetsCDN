@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Fri, 09 Feb 2024 11:47:20 +0000
-! Diff-Path: ../patches/2024.2.9.753.patch#ublock-filters
+! Last modified: Fri, 09 Feb 2024 17:12:53 +0000
+! Diff-Path: ../patches/2024.2.9.1039.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -532,7 +532,6 @@ familyhandyman.com##.ad
 familyhandyman.com##.advertisement
 familyhandyman.com##.cm-ad-unit-section
 cwseed.com##+js(aopr, admrlWpJsonP)
-cwtv.com##+js(noeval)
 pocketnow.com##+js(aopr, InstallTrigger)
 ||adition.com^$important,domain=spiegel.de
 @@||ad.yieldlab.net^$script,domain=spiegel.de,badfilter
@@ -1065,6 +1064,8 @@ kisshentai.net##+js(aopr, adblock)
 ||zergnet.com/zerg-inf-multi$3p,script
 wunderground.com##+js(aopw, _sp_)
 wunderground.com##[class*="-ad-box-"]
+wunderground.com##.content-wrap #inner-wrap:style(height: 100vh !important;)
+wunderground.com##body wu-header:style(margin-top: 0px !important;)
 putlockerc.*##+js(nowoif)
 putlocker.*##[id*="ScriptRoot"]
 putlocker.*##.ep_buttons
@@ -9703,6 +9704,16 @@ dsharer.com##+js(aopr, showada)
 trust.zone##+js(set, adblock, false)
 ! faroutmagazine.co.uk placeholder at the top
 faroutmagazine.co.uk##.header:style(margin-top: 0px !important;)
+tandess.com##+js(nostif, detectAdblock)
+||tandess.com/music/files/detectAdblock.js
+soft3arbi.com##.ts-modal-overlay
+soft3arbi.com##body:style(overflow: auto !important;)
+soft3arbi.com##.ar-bunyad-main
+!#if cap_html_filtering
+j8jp.com##^script[nonce]:has-text(zaraz)
+!#else
+j8jp.com##+js(rmnt, script, zaraz)
+!#endif
 ! Link shortener filters go into their own dedicated list
 ! *** filters/ubo-link-shorteners.txt ***
 ! gplinks all domains (gplinks.co/EWu8)
@@ -14608,6 +14619,7 @@ simplebits.io##div[class][style="min-height: 60px;"]
 ||simplebits.io/ads/
 simplebits.io##+js(no-xhr-if, /ads)
 simplebits.io##+js(no-fetch-if, /ads)
+simplebits.io##+js(nostif, , 3000)
 hayamimi-gunpla.com##+js(acs, document.addEventListener, google_ad_client)
 ||prairiemountainmedia.com^$3p
 ||dailycamera.com^$3p
@@ -16494,7 +16506,8 @@ zerion.cc,zerocoin.top,zitss.xyz,zooqle.*,zpaste.net,zplayer.live##+js(rmnt, scr
 ://www.*.com/css/$script,3p,to=com,domain=~principal.com|~principalcdn.com
 ://www.*.com/js/css/$script,3p,to=com
 =e3&*,0|$script,3p,to=com
-/^https:\/\/www\.[a-z]{8,16}\.com\/(?:images\/)?(?:static\/)?(?:common\/)?(?:assets\/)?(?:scripts\/)?(?:api\/)?(?:js\/)?(?:[a-z]{3})?(?:[a-z]dom4|dotdotdot|editor|f(?:ire)?base|jfloating|leaflet\.toolbar|masync|mijs|proj4|sext-all|sha|ummenu|viz)\.js$/$script,3p,match-case
+=e3&*,1|$script,3p,to=com
+/^https:\/\/www\.[a-z]{8,16}\.com\/(?:images\/)?(?:static\/)?(?:common\/)?(?:assets\/)?(?:scripts\/)?(?:api\/)?(?:js\/)?(?:[a-z]{3})?(?:[a-z]dom4|dotdotdot|editor|[a-z](?:ire)?base|jfloating|leaflet\.toolbar|masync|mijs|proj4|sext-all|sha|ummenu|viz)\.js$/$script,3p,match-case
 ||pushtoast-a.akamaihd.net^$script,3p
 ||nsfwr34.com/ad_schedule/
 mdy48tn97.com##+js(nowoif)
@@ -17204,7 +17217,7 @@ norton.com##+js(window-close-if, /protect?)
 *$script,domain=play.tv3.lt,redirect-rule=noopjs
 *$image,domain=play.tv3.ee,redirect-rule=1x1.gif
 *$script,domain=play.tv3.ee,redirect-rule=noopjs
-play.tv3.ee##+js(set, Object.prototype.isNoAds, {})
+play.tv3.ee,play.tv3.lt,play.tv3.lv,tv3play.skaties.lv##+js(set, Object.prototype.isNoAds, {})
 @@||play.tv3.ee^$script,1p
 @@*$ghide,domain=play.tv3.*
 ! jalshamoviezhd. beauty ads
@@ -18383,6 +18396,7 @@ pbtube.co##+js(aopr, BetterJsPop)
 pl#@#.advert
 elektroda.pl#@#+js(set, loadElement, noopFunc)
 elektroda.pl##*:has(> a[href*="?utm_"])
+elektroda.pl##*:has(> .top-box-caption:has-text(/REKLAMA|WERBUNG/) + a)
 *$media,domain=link.paid4file.com
 link.paid4file.com##+js(set, go_popup, {})
 link.paid4file.com##+js(nowoif)
@@ -19978,7 +19992,7 @@ techclips.net##+js(nostif, sadbl)
 /api/users/*^fill=$xhr
 ://cdn.*.com/vast2.js|$3p
 ! PopCash popcashjs.b-cdn.net CNAME adserver
-/^https?:\/\/cdn\.[a-z]{5,8}\.(?:com|net|xyz)\/app\.js$/$script,3p,match-case,domain=~edu|~gov
+/^https?:\/\/cdn\.[a-z]{5,8}\.(?:com|net|org|xyz)\/app\.js$/$script,3p,match-case,domain=~edu|~gov
 ://p.*/go/$popup,3p
 ! NameSilo ab1n.net CNAME adserver
 /fp-interstitial.js
@@ -20639,7 +20653,7 @@ f1gplive.xyz,faaduindia.com,fapfapgames.com,fapkingsxxx.com,faqwiki.us,farolillo
 gabrielcoding.com,gadgetxplore.com,gadgetspidy.com,gahag.net,gamenv.net,gamefi-mag.com,gamers-haven.org,games-manuals.com,gamerxyt.com,gamevcore.com,gaminglariat.com,gamingsearchjournal.com,gatagata.net,ganzoscan.com,gazetazachodnia.eu,gdrivemovies.xyz,geekering.com,gemiadamlari.org,gentiluomodigitale.it,gesund-vital.online,getsuicidegirlsfree.com,ghostsfreaks.com,gisvacancy.com,giuseppegravante.com,gkbooks.in,gkgsca.com,gksansar.com,globelempire.com,gnusocial.jp,goegoe.net,gogetadoslinks.*,gogetapast.com.br,gogifox.com,gogueducation.com,gokerja.net,gokushiteki.com,golf.rapidmice.com,gomov.bio,goodriviu.com,googlearth.selva.name,gorating.in,gotocam.net,grafikos.cz,grasta.net,grazymag.com,greasygaming.com,greattopten.com,grootnovels.com,groovyfreestuff.com,gsdn.live,gsmfreezone.com,gsmmessages.com,gtavi.pl,gwiazdatalkie.com##+js(noeval-if, /chp_?ad/)
 habuteru.com,hackingwala.com,hackmodsapk.com,hadakanonude.com,hairjob.wpx.jp,happy-otalife.com,harbigol.com,harley.top,haryanaalert.*,haveyaseenjapan.com,hdhub4one.pics,healthbeautybee.com,healthfatal.com,heartrainbowblog.com,hechos.net,hellenism.net,heutewelt.com,hhesse.de,highdefdiscnews.com,hilaw.vn,hindimatrashabd.com,hindishri.com,historichorizons.com,hobbykafe.com,hockeyfantasytools.com,hojii.net,hookupnovel.com,hopsion-consulting.com,hostingreviews24.com,hotspringsofbc.ca,howtoblogformoney.net,hungarianhardstyle.hu,hyderone.com,hyogo.ie-t.net,hypelifemagazine.com,hypesol.com##+js(noeval-if, /chp_?ad/)
 ideatechy.com,idesign.wiki,idevfast.com,idevice.me,idpvn.com,iggtech.com,ignoustudhelp.in,ikarianews.gr,ilbassoadige.it,ilbolerodiravel.org,indiasmagazine.com,inertz.org,infocycles.com,infojabarloker.com,infulo.com,inlovingmemoriesnews.com,inprogrammer.com,inra.bg,insideeducation.co.za,insidememorial.com,insider-gaming.com,insurancepost.xyz,intelligence-console.com,interculturalita.it,inventionsdaily.com,iptvxtreamcodes.com,isabihowto.com.ng,italiadascoprire.net,itdmusic.*,itmaniatv.com,itopmusic.com,itopmusicx.com,itz-fast.com,iwb.jp##+js(noeval-if, /chp_?ad/)
-jackofalltradesmasterofsome.com,jaktsidan.se,japannihon.com,javboys.*,jcutrer.com,jk-market.com,jkhentai.co,jobsbd.xyz,jobslampung.net,josemo.com,jra.jpn.org,jrlinks.in,jungyun.net,juninhoscripts.com.br,juventusfc.hu##+js(noeval-if, /chp_?ad/)
+jackofalltradesmasterofsome.com,jaktsidan.se,japannihon.com,javboys.*,javcock.com,jcutrer.com,jk-market.com,jkhentai.co,jobsbd.xyz,jobslampung.net,josemo.com,jra.jpn.org,jrlinks.in,jungyun.net,juninhoscripts.com.br,juventusfc.hu##+js(noeval-if, /chp_?ad/)
 kacikcelebrytow.com,kagohara.net,kakiagune.com,kali.wiki,kana-mari-shokudo.com,kanaeblog.net,kandisvarlden.com,karaoke4download.com,kawaguchimaeda.com,kaystls.site,kenkou-maintenance.com,kenta2222.com,keroseed.*,khabarbyte.com,khabardinbhar.net,khohieu.com,kickcharm.com,kinisuru.com,kits4beats.com,kllproject.lv,know-how-tree.com,kobitacocktail.com,kodewebsite.com,kokosovoulje.com,korogashi-san.org,kotanopan.com,krx18.com,kukni.to,kupiiline.com,kurosuen.live##+js(noeval-if, /chp_?ad/)
 labstory.in,ladypopularblog.com,lamorgues.com,lampungkerja.com,lapaginadealberto.com,lascelebrite.com,latinlucha.es,law101.org.za,lawweekcolorado.com,learnedclub.com,learnodo-newtonic.com,learnospot.com,learnslovak.online,lebois-racing.com,leechyscripts.net,leeapk.com,legendaryrttextures.com,lendrive.web.id,letrasgratis.com.ar,levismodding.co.uk,lgcnews.com,lglbmm.com,lheritierblog.com,ligaset.com,limcasports.xyz,limontorrent.com,limontorrents.com,linkskibe.com,linkvoom.com,linux-talks.com,linuxexplain.com,lionsfan.net,literarysomnia.com,littlepandatranslations.com,livefootballempire.com,lk21org.com,loanpapa.in,locurainformaticadigital.com,logofootball.net,lookism.me,lordfix.xyz,lotus-tours.com.hk,ltpcalculator.in,luchaonline.com,luciferdonghua.in,luckymood777.com,lucrebem.com.br,lustesthd.cloud,lustesthd.lat,lycee-maroc.com##+js(noeval-if, /chp_?ad/)
 macrocreator.com,madevarquitectos.com,magesypro.*,maisondeas.com,maketoss.com,makeupguide.net,mamtamusic.in,mangcapquangvnpt.com,mantrazscan.com,marketedgeofficial.com,marketing-business-revenus-internet.fr,marketrevolution.eu,masashi-blog418.com,mastakongo.info,masterpctutoriales.com,maths101.co.za,matshortener.xyz,mcrypto.*,mdn.lol,medeberiya1.com,mediascelebres.com,medytour.com,meilblog.com,memorialnotice.com,mentalhealthcoaching.org,meteoregioneabruzzo.it,mhscans.com,michiganrugcleaning.cleaning,midis.com.ar,millihabercim.com,minddesignclub.org,minecraftwild.com,minhasdelicias.com,mitaku.net,mitsmits.com,mixmods.com.br,mm-scans.org,mmorpgplay.com.br,mockupcity.com,mockupgratis.com,modele-facture.com,modyster.com,monaco.co.il,morinaga-office.net,mosttechs.com,motofan-r.com,moviemod.online,movieping.com,movies4u.*,mscdroidlabs.es,msonglyrics.com,mtech4you.com,multimovies.tech,mundovideoshd.com,murtonroofing.com,musicforchoir.com,musictip.net,mxcity.mx,mxpacgroup.com,my-ford-focus.de,myglamwish.com,myicloud.info,mylinkat.com,mylivewallpapers.com,mypace.sasapurin.com,myqqjd.com,mytectutor.com,myunity.dev,myviptuto.com##+js(noeval-if, /chp_?ad/)
@@ -22087,6 +22101,7 @@ movies4u.*##+js(nowoif)
 movies4u.*##.ads-btns
 movies4u.*##[href^="https://cutt.ly/"]
 movies4u.*##+js(aopr, antiAdBlockerHandler)
+movies4u.*##+js(aopw, app_advert)
 movies4u.*##^script:has-text(antiAdBlockerHandler)
 _ads.gif$image,domain=movies4u.*
 !anichin.top##+js(aost, Promise, https)
@@ -22781,6 +22796,7 @@ bluemediadownload.*,bluemediafile.*,bluemedialink.*,bluemediastorage.*,bluemedia
 tinyzonetv.se##+js(nowoif)
 moviesjoyhd.to##+js(aeld, mousedown, shown_at)
 metrolagu.cam,poop.cx##+js(nowoif)
+metrolagu.cam##+js(no-fetch-if, googlesyndication)
 /adus.js|$script,domain=metrolagu.cam|poop.cx
 ||doood.cam^$popup,3p
 redlion.net##+js(set, aoAdBlockDetected, false)

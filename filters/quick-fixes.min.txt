@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Quick fixes
 ! Expires: 12 hours
-! Last modified: Fri, 09 Feb 2024 11:38:00 +0000
-! Diff-Path: ../patches/2024.2.9.753.patch#ublock-quick-fixes
+! Last modified: Fri, 09 Feb 2024 15:56:43 +0000
+! Diff-Path: ../patches/2024.2.9.1039.patch#ublock-quick-fixes
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/quick-fixes.txt ***
@@ -119,7 +119,7 @@ infinityscans.xyz,infinityscans.net##+js(rpnt, script, /\(function\(.*\(\);\}/, 
 !next-episode.net##+js(rmnt, script, '/[\s\S]{0,}head[\s\S]{1900,}/')
 !next-episode.net##+js(rmnt, script, '/60\+|fromChar/g')
 !next-episode.net##+js(rmnt, script, catch)
-next-episode.net##+js(rmnt, script, /adblock/i)
+next-episode.net##+js(rpnt, script, '/.then[\s\S]{0,}?;/g')
 ||d3nn82uaxijpm6.cloudfront.net^$script,badfilter
 www.wp.pl#@#[src^="https://v.wpimg.pl/"]:not([alt]):upward(3)
 benchmark.pl,dom.wp.pl,facet.wp.pl,film.wp.pl,finanse.wp.pl,fitness.wp.pl,gry.wp.pl,gwiazdy.wp.pl,kafeteria.pl,ksiazki.wp.pl,kuchnia.wp.pl,moto.wp.pl,nerwica.com,open.fm,opinie.wp.pl,pogoda.wp.pl,smaczneblogi.pl,teleshow.wp.pl,turystyka.wp.pl,wawalove.wp.pl,wroclaw.wp.pl#@#[src^="https://v.wpimg.pl/"]:not([alt]):upward(3)
@@ -128,14 +128,20 @@ androidauthority.com#@#.--_-___Sb
 androidauthority.com#@#.--_-___Jg
 cookomix.com##+js(nostif, detected, 5000)
 cookomix.com##.AdMB
-torrentgalaxy.to,tgx.rs###main > .row > [class] > [style*="max-width"] > div:first-child:has(center a img:not([data-src]))
-torrentgalaxy.to,tgx.rs###main > .row > [class] > [style*="max-width"] > [id].outer > [class] > div:first-child:has(a img:not([data-src]))
-torrentgalaxy.to,tgx.rs###main > .row > [class] > div:last-child > .outer > [class*="slidingDivf"] > [style="margin-bottom:10px;"]:has(a img:not([data-src]))
-torrentgalaxy.to,tgx.rs##div[class*="slidingDiv"] > [style="overflow-x:auto;"] > [class] > div:last-child > div[style^="margin"]:has(a img:not([alt]))
-torrentgalaxy.to,tgx.rs##[style*="max-width"] + [style] > .panel-primary > *:not([id]) > [align="center"][style="margin-top:10px;"]:has(a img:not([data-src]))
-torrentgalaxy.to,tgx.rs##a[href^="/hu"][href*="?r"][href$="&saerch"]
-||torrentgalaxy.to/images/*.jpg$image,1p
-||tgx.rs/images/*.jpg$image,1p
+||startgaming.net/*&utm_source=Torrentgalaxy&utm_medium=$doc,popup
+torrentgalaxy.to,tgx.rs###maln > [class] > [class] > [style*="max-width"] > div:first-child:has(center a:not([onmouseover]) img)
+torrentgalaxy.to,tgx.rs###maln > [class] > [class] > [style*="max-width"] > [id].outer > [class] > div:first-child:has(a:not([onmouseover]) img)
+torrentgalaxy.to,tgx.rs###maln > [class] > [class] > div:last-child > .outer > [class*="slidingDivf"] > [style="margin-bottom:10px;"]:has(a:not([onmouseover]) img)
+torrentgalaxy.to,tgx.rs##div[class*="slidingDiv"] > [style="overflow-x:auto;"] > [class] > div:last-child > [style]:has(a:not([onmouseover]) img)
+torrentgalaxy.to,tgx.rs##[style*="max-width"] + [style] > .panel-primary > *:not([id]) > * [style="margin-top:10px;"]:has(a:not([onmouseover]) img)
+torrentgalaxy.to,tgx.rs##a[href^="/hy?r"][href$="&saerch"]
+torrentgalaxy.to##div:not([class], [id]) > a > div:not([class], [id]) > img[class="img-responsive hpcover"]
+||torrentgalaxy.to/*.jpg$image,1p
+||tgx.rs/*.jpg$image,1p
+@@||torrentgalaxy.to/common/$image,1p
+@@||torrentgalaxy.to/captcha/captcha_show$image,1p
+@@||tgx.rs/common/$image,1p
+@@||tgx.rs/captcha/captcha_show$image,1p
 $removeparam=si,domain=youtu.be|youtube-nocookie.com|music.youtube.com|www.youtube.com,badfilter
 $removeparam=si,domain=youtu.be|youtube-nocookie.com|youtube.com,badfilter
 $removeparam=si,doc,domain=open.spotify.com|soundcloud.com|youtube.com|youtu.be|zappos.com,badfilter
