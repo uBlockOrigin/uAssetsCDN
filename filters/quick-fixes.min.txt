@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Quick fixes
 ! Expires: 12 hours
-! Last modified: Thu, 08 Feb 2024 17:59:37 +0000
-! Diff-Path: ../patches/2024.2.9.436.patch#ublock-quick-fixes
+! Last modified: Fri, 09 Feb 2024 11:38:00 +0000
+! Diff-Path: ../patches/2024.2.9.753.patch#ublock-quick-fixes
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/quick-fixes.txt ***
@@ -41,11 +41,11 @@ imgbncvnv.sbs,pixtryab.shop,imggune.shop,pictryhab.shop,pixbnab.shop,imgbnwe.sho
 youtube.com##+js(json-prune, playerResponse.adPlacements playerResponse.playerAds playerResponse.adSlots adPlacements playerAds adSlots legacyImportant)
 !#endif
 !#endif
-||youtube.com/s/desktop/*/jsbin/desktop_polymer.vflset/desktop_polymer.js$script,xhr,uritransform=/desktop\/\w+\/jsbin/desktop\/1adc386e\/jsbin/,domain=www.youtube.com
+||youtube.com/s/desktop/*/jsbin/desktop_polymer.vflset/desktop_polymer.js$script,xhr,uritransform=/desktop\/\w+\/jsbin/desktop\/d133835b\/jsbin/,domain=www.youtube.com
 !#if ext_devbuild
 www.youtube.com##+js(remove-cache-storage-item, yt-appshell-assets, /\/jsbin\/desktop_polymer\.vflset\/desktop_polymer\.js$/)
 !#else
-www.youtube.com##+js(trusted-rpnt, script, /^(\(function serverContract\(\))/s, "caches.open('yt-appshell-assets').then(a=>['2e540ce9','1c21ae68','1adc386e'].forEach(i=>a.delete(`/s/desktop/${i}/jsbin/desktop_polymer.vflset/desktop_polymer.js`)));$1")
+www.youtube.com##+js(trusted-rpnt, script, /^(\(function serverContract\(\))/s, "caches.open('yt-appshell-assets').then(a=>['1c21ae68','1adc386e','d133835b'].forEach(i=>a.delete(`/s/desktop/${i}/jsbin/desktop_polymer.vflset/desktop_polymer.js`)));$1")
 !#endif
 ! VOE sites
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$script,3p,redirect=google-ima.js,domain=morganoperationface.com
@@ -87,7 +87,7 @@ gamedrive.org##+js(aost, document.querySelector, /showModal|chooseAction|doActio
 gamedrive.org##+js(acs, eval, replace)
 ! perchance - broken by its dev
 perchance.org##+js(rpnt, script, '/if(\s){0,}\(..*\[\`.*\`\]\("."\)\) \{([\s\S]*?\}){2,}/gm', 'if (location.href.indexOf("ai-") !== -1) {String.prototype.includes=function (){return true};};riot.mount(\'app\', {generator: window.generatorData,dependencies: window.generatorDependenciesData,});window.successfulPageLoad = true;')
-perchance.org##+js(rmnt, script, '/"body"|"bo"\+"dy"|"bod"\+"y"|"b"\+"od"\+"y"|"b"\+"od"\+"y"|"b"[\s\S]{0,}\+[\s\S]{0,}"od"[\s\S]{0,}\+[\s\S]{0,}"y"|"b"[\s\S]{0,}"o"[\s\S]{0,}"d"[\s\S]{0,}"y"[\s\S]{0,}|`b[\s\S]{0,}`o[\s\S]{0,}`d[\s\S]{0,}`y[\s\S]{0,}|b\$|u006f|document\.body;|\["document"\]|\[[\s\S]{0,}"document"|`rep/g')
+perchance.org##+js(rmnt, script, '/"body"|"bo"\+"dy"|"bod"\+"y"|"b"\+"od"\+"y"|"b"\+"od"\+"y"|"b"[\s\S]{0,}\+[\s\S]{0,}"od"[\s\S]{0,}\+[\s\S]{0,}"y"|"b"[\s\S]{0,}"o"[\s\S]{0,}"d"[\s\S]{0,}"y"[\s\S]{0,}|`b[\s\S]{0,}`o[\s\S]{0,}`d[\s\S]{0,}`y[\s\S]{0,}|b\$|u006f|document\.body;|\["document"\]|\[[\s\S]{0,}"document"|`rep|\[`re/g')
 ! ytlarge detection
 @@||ytlarge.com^$ghide
 @@||pagead2.googlesyndication.com^$script,domain=ytlarge.com
@@ -117,8 +117,9 @@ infinityscans.xyz,infinityscans.net##+js(rpnt, script, /function _0x.*\)\)\);/, 
 infinityscans.xyz,infinityscans.net##+js(rpnt, script, /\(function\(.*\(\);\}/, , condition, throw Error)
 ! next-episode .net
 !next-episode.net##+js(rmnt, script, '/[\s\S]{0,}head[\s\S]{1900,}/')
-next-episode.net##+js(rmnt, script, '/60\+|fromChar/g')
-next-episode.net##+js(rmnt, script, catch)
+!next-episode.net##+js(rmnt, script, '/60\+|fromChar/g')
+!next-episode.net##+js(rmnt, script, catch)
+next-episode.net##+js(rmnt, script, /adblock/i)
 ||d3nn82uaxijpm6.cloudfront.net^$script,badfilter
 www.wp.pl#@#[src^="https://v.wpimg.pl/"]:not([alt]):upward(3)
 benchmark.pl,dom.wp.pl,facet.wp.pl,film.wp.pl,finanse.wp.pl,fitness.wp.pl,gry.wp.pl,gwiazdy.wp.pl,kafeteria.pl,ksiazki.wp.pl,kuchnia.wp.pl,moto.wp.pl,nerwica.com,open.fm,opinie.wp.pl,pogoda.wp.pl,smaczneblogi.pl,teleshow.wp.pl,turystyka.wp.pl,wawalove.wp.pl,wroclaw.wp.pl#@#[src^="https://v.wpimg.pl/"]:not([alt]):upward(3)
@@ -127,15 +128,14 @@ androidauthority.com#@#.--_-___Sb
 androidauthority.com#@#.--_-___Jg
 cookomix.com##+js(nostif, detected, 5000)
 cookomix.com##.AdMB
-torrentgalaxy.to,tgx.rs#@#a[href^="/"][href*="?"][href*="&"]:has(img[src*="picturedent.org"])
-torrentgalaxy.to,tgx.rs###main > .row > [class="col-lg-12"] > [style*="max-width"] > div:first-child:has(center a img:not([data-src]))
-torrentgalaxy.to,tgx.rs###main > .row > [class="col-lg-12"] > [style*="max-width"] > [id].outer > [class] > div:first-child:has(a img:not([data-src]))
-torrentgalaxy.to,tgx.rs###main > .row > [class="col-lg-12"] > div:last-child > .outer > [class*="slidingDivf"] > [style="margin-bottom:10px;"]:has(a img:not([data-src]))
-torrentgalaxy.to,tgx.rs##div[class*="slidingDiv"] > [style="overflow-x:auto;"] > .gluewrapper > div:last-child > div[style^="margin"]:has(a img:not([alt]))
-torrentgalaxy.to,tgx.rs##[style*="max-width"] + [style] > .panel-primary > *:not([id]) > [position="relative"][align="center"][style="margin-top:10px;"]:has(a img:not([data-src]))
-torrentgalaxy.to,tgx.rs##a[href^="/hux?r"][href$="&saerch"]
-||torrentgalaxy.to/images/*/*/*/*.jpg$image,1p
-||tgx.rs/images/*/*/*/*.jpg$image,1p
+torrentgalaxy.to,tgx.rs###main > .row > [class] > [style*="max-width"] > div:first-child:has(center a img:not([data-src]))
+torrentgalaxy.to,tgx.rs###main > .row > [class] > [style*="max-width"] > [id].outer > [class] > div:first-child:has(a img:not([data-src]))
+torrentgalaxy.to,tgx.rs###main > .row > [class] > div:last-child > .outer > [class*="slidingDivf"] > [style="margin-bottom:10px;"]:has(a img:not([data-src]))
+torrentgalaxy.to,tgx.rs##div[class*="slidingDiv"] > [style="overflow-x:auto;"] > [class] > div:last-child > div[style^="margin"]:has(a img:not([alt]))
+torrentgalaxy.to,tgx.rs##[style*="max-width"] + [style] > .panel-primary > *:not([id]) > [align="center"][style="margin-top:10px;"]:has(a img:not([data-src]))
+torrentgalaxy.to,tgx.rs##a[href^="/hu"][href*="?r"][href$="&saerch"]
+||torrentgalaxy.to/images/*.jpg$image,1p
+||tgx.rs/images/*.jpg$image,1p
 $removeparam=si,domain=youtu.be|youtube-nocookie.com|music.youtube.com|www.youtube.com,badfilter
 $removeparam=si,domain=youtu.be|youtube-nocookie.com|youtube.com,badfilter
 $removeparam=si,doc,domain=open.spotify.com|soundcloud.com|youtube.com|youtu.be|zappos.com,badfilter
