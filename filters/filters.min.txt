@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Sat, 10 Feb 2024 00:12:43 +0000
-! Diff-Path: ../patches/2024.2.10.200.patch#ublock-filters
+! Last modified: Sat, 10 Feb 2024 08:17:58 +0000
+! Diff-Path: ../patches/2024.2.10.501.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -3438,10 +3438,10 @@ sbs.com.au##+js(m3u-prune, /redirector\.googlevideo\.com\/videoplayback\?[\s\S]*
 sbs.com.au##+js(no-xhr-if, /redirector\.googlevideo\.com\/videoplayback[\s\S]*?dclk_video_ads/)
 sbs.com.au##+js(json-prune, ads breaks cuepoints times)
 sbs.com.au##+js(rc, ad-controls, .bitmovinplayer-container.ad-controls)
-||pubads.g.doubleclick.net/ondemand/hls/content/*/streams$xmlhttprequest,redirect=noop.txt,domain=sbs.com.au
-||redirector.googlevideo.com/*&source=dclk_video_ads&$redirect=noop.txt,domain=sbs.com.au,important,image,media,subdocument,stylesheet,script,xmlhttprequest,other
+||pubads.g.doubleclick.net/ondemand/hls/content/*/streams$xhr,redirect=noop.txt,domain=sbs.com.au
+||redirector.googlevideo.com/*&source=dclk_video_ads&$redirect=noop.txt,domain=sbs.com.au,important,image,media,subdocument,stylesheet,script,xhr,other
 @@||pubads.g.doubleclick.net/ondemand/hls/content/*/vid/*/streams$domain=sbs.com.au
-@@||pubads.g.doubleclick.net/ssai/event/$xmlhttprequest,domain=sbs.com.au
+@@||pubads.g.doubleclick.net/ssai/event/$xhr,domain=sbs.com.au
 @@||imasdk.googleapis.com/js/sdkloader/ima3.js$domain=sbs.com.au
 sbs.com.au##^script:has-text(NREUM)
 @@||sbs.com.au^$ghide
@@ -9715,6 +9715,9 @@ j8jp.com##^script[nonce]:has-text(zaraz)
 !#else
 j8jp.com##+js(rmnt, script, zaraz)
 !#endif
+leagueofgraphs.com##+js(nostif, adblock)
+leagueofgraphs.com##.adbox
+gameszap.com##+js(no-xhr-if, ads)
 ! Link shortener filters go into their own dedicated list
 ! *** filters/ubo-link-shorteners.txt ***
 ! gplinks all domains (gplinks.co/EWu8)
@@ -10118,8 +10121,8 @@ reminimod.co,highkeyfinance.com,amanguides.com###wpsafe-link:others()
 blog.disheye.com###gourl:style(display: block !important;)
 blog.disheye.com###gourl:others()
 ! cuty.io (https://cutty.app/b6InEDRzF8NF)
-exego.app,cutlink.net,cutsy.net,cutyurls.com,cutty.app##.steps-to-earn, .flex.share-icons-container, .register-banner, fieldset, .partners-container, .actions
-exego.app,cutlink.net,cutsy.net,cutyurls.com,cutty.app##+js(aeld, click, handleClick)
+exego.app,cutlink.net,cutsy.net,cutyurls.com,cutty.app,cutnet.net##.steps-to-earn, .flex.share-icons-container, .register-banner, fieldset, .partners-container, .actions
+exego.app,cutlink.net,cutsy.net,cutyurls.com,cutty.app,cutnet.net##+js(aeld, click, handleClick)
 aduzz.com,bitcrypto.info###wpsafe-link:style(display: block !important;)
 aduzz.com,bitcrypto.info###wpsafe-link:others()
 aduzz.com,bitcrypto.info##+js(no-fetch-if, ads)
@@ -21150,6 +21153,7 @@ hackedgames.com,jouer.fr,prehackshub.com,pintgames.com##.ad-megaban-game-300
 jeux.com,playhub.com,playpink.com##.ad-title-pave
 playhub.com,playpink.com##.ad-title-sky
 ||play.turbommo.com^$3p
+||player.pepsia.com/sdk.js^$script,3p,domain=flibus.com
 yna.co.kr##.sub-content > .aside-box01
 /^https:\/\/[a-z]{7}\.com\/sub\/(?=[a-z]{0,9}[0-9A-Z])[0-9A-Za-z]{10}$/$frame,3p,match-case
 player.gayfor.us##+js(nowoif)
@@ -22049,8 +22053,8 @@ familyminded.com,foxvalleyfoodie.com,merriam-webster.com,news.com.au,playstation
 pc-builds.com,qtoptens.com,reuters.com,today.com,videogamer.com,wrestlinginc.com##+js(set, admiral, noopFunc)
 !#if cap_html_filtering
 abc17news.com,adoredbyalex.com,agrodigital.com,al.com,aliontherunblog.com,allaboutthetea.com,allmovie.com,allmusic.com,allthingsthrifty.com,amessagewithabottle.com,androidpolice.com,antyradio.pl,artforum.com,artnews.com,avherald.com,awkward.com,awkwardmom.com##^script:has-text('"v4ac1eiZr0"')
-bailiwickexpress.com,barnsleychronicle.com,becomingpeculiar.com,bethcakes.com,blogher.com,bluegraygal.com,briefeguru.de##^script:has-text('"v4ac1eiZr0"')
-carmagazine.co.uk,cattime.com,cbr.com,cbssports.com,chaptercheats.com,cleveland.com,collider.com,comingsoon.net,commercialobserver.com,competentedigitale.ro,crafty.house##^script:has-text('"v4ac1eiZr0"')
+bailiwickexpress.com,barnsleychronicle.com,becomingpeculiar.com,bethcakes.com,betweenenglandandiowa.com,blogher.com,bluegraygal.com,briefeguru.de##^script:has-text('"v4ac1eiZr0"')
+carmagazine.co.uk,cattime.com,cbr.com,cbssports.com,celiacandthebeast.com,chaptercheats.com,cleveland.com,collider.com,comingsoon.net,commercialobserver.com,competentedigitale.ro,crafty.house##^script:has-text('"v4ac1eiZr0"')
 dailyvoice.com,decider.com,didyouknowfacts.com,dogtime.com,dualshockers.com,dustyoldthing.com##^script:has-text('"v4ac1eiZr0"')
 faithhub.net,femestella.com,footwearnews.com,freeconvert.com,frogsandsnailsandpuppydogtail.com,fsm-media.com,funtasticlife.com,fwmadebycarli.com##^script:has-text('"v4ac1eiZr0"')
 gamerant.com,gfinityesports.com,givemesport.com,gulflive.com##^script:has-text('"v4ac1eiZr0"')
@@ -22061,7 +22065,7 @@ madeeveryday.com,maidenhead-advertiser.co.uk,makeuseof.com,mardomreport.net,mass
 nationalreview.com,nj.com,nordot.app,nothingbutnewcastle.com,nsjonline.com,nypost.com##^script:has-text('"v4ac1eiZr0"')
 oakvillenews.org,observer.com,oregonlive.com##^script:has-text('"v4ac1eiZr0"')
 pagesix.com,pennlive.com,pinkonthecheek.com,predic.ro,puckermom.com##^script:has-text('"v4ac1eiZr0"')
-qtoptens.com,realgm.com,robbreport.com,royalmailchat.co.uk##^script:has-text('"v4ac1eiZr0"')
+qtoptens.com,realgm.com,reelmama.com,robbreport.com,royalmailchat.co.uk##^script:has-text('"v4ac1eiZr0"')
 samchui.com,sandrarose.com,screenrant.com,sheknows.com,sherdog.com,sidereel.com,silive.com,simpleflying.com,sloughexpress.co.uk,spacenews.com,sportsgamblingpodcast.com,spotofteadesigns.com,stacysrandomthoughts.com,ssnewstelegram.com,superherohype.com,syracuse.com##^script:has-text('"v4ac1eiZr0"')
 tablelifeblog.com,thebeautysection.com,thecelticblog.com,thecurvyfashionista.com,thefashionspot.com,thegamer.com,thegamescabin.com,thenerdyme.com,thenonconsumeradvocate.com,theprudentgarden.com,timesnews.net,toyotaklub.org.pl,travelingformiles.com,tutsnode.org,tvline.com##^script:has-text('"v4ac1eiZr0"')
 viralviralvideos.com##^script:has-text('"v4ac1eiZr0"')
@@ -22069,8 +22073,8 @@ wannacomewith.com,wimp.com,windsorexpress.co.uk,woojr.com,worldoftravelswithkids
 cheatsheet.com,pwinsider.com##^script:has-text(admiral)
 !#else
 abc17news.com,adoredbyalex.com,agrodigital.com,al.com,aliontherunblog.com,allaboutthetea.com,allmovie.com,allmusic.com,allthingsthrifty.com,amessagewithabottle.com,androidpolice.com,antyradio.pl,artforum.com,artnews.com,avherald.com,awkward.com,awkwardmom.com##+js(rmnt, script, '"v4ac1eiZr0"')
-bailiwickexpress.com,barnsleychronicle.com,becomingpeculiar.com,bethcakes.com,blogher.com,bluegraygal.com,briefeguru.de##+js(rmnt, script, '"v4ac1eiZr0"')
-carmagazine.co.uk,cattime.com,cbr.com,cbssports.com,chaptercheats.com,cleveland.com,collider.com,comingsoon.net,commercialobserver.com,competentedigitale.ro,crafty.house##+js(rmnt, script, '"v4ac1eiZr0"')
+bailiwickexpress.com,barnsleychronicle.com,becomingpeculiar.com,bethcakes.com,betweenenglandandiowa.com,blogher.com,bluegraygal.com,briefeguru.de##+js(rmnt, script, '"v4ac1eiZr0"')
+carmagazine.co.uk,cattime.com,cbr.com,cbssports.com,celiacandthebeast.com,chaptercheats.com,cleveland.com,collider.com,comingsoon.net,commercialobserver.com,competentedigitale.ro,crafty.house##+js(rmnt, script, '"v4ac1eiZr0"')
 dailyvoice.com,decider.com,didyouknowfacts.com,dogtime.com,dualshockers.com,dustyoldthing.com##+js(rmnt, script, '"v4ac1eiZr0"')
 faithhub.net,femestella.com,footwearnews.com,freeconvert.com,frogsandsnailsandpuppydogtail.com,fsm-media.com,funtasticlife.com,fwmadebycarli.com##+js(rmnt, script, '"v4ac1eiZr0"')
 gamerant.com,gfinityesports.com,givemesport.com,gulflive.com##+js(rmnt, script, '"v4ac1eiZr0"')
@@ -22081,7 +22085,7 @@ madeeveryday.com,maidenhead-advertiser.co.uk,makeuseof.com,mardomreport.net,mass
 nationalreview.com,nj.com,nordot.app,nothingbutnewcastle.com,nsjonline.com,nypost.com##+js(rmnt, script, '"v4ac1eiZr0"')
 oakvillenews.org,observer.com,oregonlive.com##+js(rmnt, script, '"v4ac1eiZr0"')
 pagesix.com,pennlive.com,pinkonthecheek.com,predic.ro,puckermom.com##+js(rmnt, script, '"v4ac1eiZr0"')
-qtoptens.com,realgm.com,robbreport.com,royalmailchat.co.uk##+js(rmnt, script, '"v4ac1eiZr0"')
+qtoptens.com,realgm.com,reelmama.com,robbreport.com,royalmailchat.co.uk##+js(rmnt, script, '"v4ac1eiZr0"')
 samchui.com,sandrarose.com,screenrant.com,sheknows.com,sherdog.com,sidereel.com,silive.com,simpleflying.com,sloughexpress.co.uk,spacenews.com,sportsgamblingpodcast.com,spotofteadesigns.com,stacysrandomthoughts.com,ssnewstelegram.com,superherohype.com,syracuse.com##+js(rmnt, script, '"v4ac1eiZr0"')
 tablelifeblog.com,thebeautysection.com,thecelticblog.com,thecurvyfashionista.com,thefashionspot.com,thegamer.com,thegamescabin.com,thenerdyme.com,thenonconsumeradvocate.com,theprudentgarden.com,timesnews.net,toyotaklub.org.pl,travelingformiles.com,tutsnode.org,tvline.com##+js(rmnt, script, '"v4ac1eiZr0"')
 viralviralvideos.com##+js(rmnt, script, '"v4ac1eiZr0"')
@@ -22815,7 +22819,7 @@ everand.com##+js(no-fetch-if, /api/v1/events)
 ! zona11 .com anti-adb
 zona11.com##+js(nostif, keepChecking)
 kemiox.com##+js(rmnt, script, deblocker)
-||baeldung.com/wp-content/themes/baeldung/library/dist/js/ad-recovery.min.js$script,1p
+||baeldung.com/*/ad-recovery.min.js^$script,1p
 ||cdn.mxpnl.com/libs/mixpanel-2-latest.min.js$script,domain=obefitness.com,redirect=noopjs
 infinite-streaming.live##+js(acs, addEventListener, blocker)
 ! checkersmenu .us anti-adb
