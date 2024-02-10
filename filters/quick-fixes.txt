@@ -1,5 +1,5 @@
 ! Title: uBlock₀ filters – Quick fixes
-! Last modified: Sat, 10 Feb 2024 08:16:46 +0000
+! Last modified: Sat, 10 Feb 2024 13:20:36 +0000
 ! Expires: 8 hours
 ! Description: Immediate, temporary filters to fix websites
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -36,12 +36,12 @@ aternos.org##.ad-dfp:style(min-height: 0.1485mm !important; height: 0.1485mm !im
 ! pixsera
 ! https://github.com/uBlockOrigin/uAssets/issues/9123
 ! https://github.com/orgs/uBlockOrigin/teams/ublock-filters-volunteers/discussions/423/comments/6
-imgbncvnv.sbs,pixtryab.shop,imggune.shop,pictryhab.shop,pixbnab.shop,imgbnwe.shop,imgbbnhi.shop,imgnbii.shop,imghqqbg.shop##+js(aopr, console.clear)
-imgbncvnv.sbs,pixtryab.shop,imggune.shop,pictryhab.shop,pixbnab.shop,imgbnwe.shop,imgbbnhi.shop,imgnbii.shop,imghqqbg.shop##+js(nano-sib, timer)
-imgbncvnv.sbs,pixtryab.shop,imggune.shop,pictryhab.shop,pixbnab.shop,imgbnwe.shop,imgbbnhi.shop,imgnbii.shop,imghqqbg.shop##div[id][style^="position: fixed; display: block; width: 100%;"]
-imgbncvnv.sbs,pixtryab.shop,imggune.shop,pictryhab.shop,pixbnab.shop,imgbnwe.shop,imgbbnhi.shop,imgnbii.shop,imghqqbg.shop##div[style="width:100%;height:110px"]
-imgbncvnv.sbs,pixtryab.shop,imggune.shop,pictryhab.shop,pixbnab.shop,imgbnwe.shop,imgbbnhi.shop,imgnbii.shop,imghqqbg.shop##+js(nowoif, !/prcf.fiyar|themes|pixsense|.jpg/)
-imgbncvnv.sbs,pixtryab.shop,imggune.shop,pictryhab.shop,pixbnab.shop,imgbnwe.shop,imgbbnhi.shop,imgnbii.shop,imghqqbg.shop##div[class][style="display: block;"]
+imgbncvnv.sbs,pixtryab.shop,imggune.shop,pictryhab.shop,pixbnab.shop,imgbnwe.shop,imgbbnhi.shop,imgnbii.shop,imghqqbg.shop,imgyhq.shop##+js(aopr, console.clear)
+imgbncvnv.sbs,pixtryab.shop,imggune.shop,pictryhab.shop,pixbnab.shop,imgbnwe.shop,imgbbnhi.shop,imgnbii.shop,imghqqbg.shop,imgyhq.shop##+js(nano-sib, timer)
+imgbncvnv.sbs,pixtryab.shop,imggune.shop,pictryhab.shop,pixbnab.shop,imgbnwe.shop,imgbbnhi.shop,imgnbii.shop,imghqqbg.shop,imgyhq.shop##div[id][style^="position: fixed; display: block; width: 100%;"]
+imgbncvnv.sbs,pixtryab.shop,imggune.shop,pictryhab.shop,pixbnab.shop,imgbnwe.shop,imgbbnhi.shop,imgnbii.shop,imghqqbg.shop,imgyhq.shop##div[style="width:100%;height:110px"]
+imgbncvnv.sbs,pixtryab.shop,imggune.shop,pictryhab.shop,pixbnab.shop,imgbnwe.shop,imgbbnhi.shop,imgnbii.shop,imghqqbg.shop,imgyhq.shop##+js(nowoif, !/prcf.fiyar|themes|pixsense|.jpg/)
+imgbncvnv.sbs,pixtryab.shop,imggune.shop,pictryhab.shop,pixbnab.shop,imgbnwe.shop,imgbbnhi.shop,imgnbii.shop,imghqqbg.shop,imgyhq.shop##div[class][style="display: block;"]
 
 ! https://www.reddit.com/r/uBlockOrigin/comments/16lmeri/youtube_antiadblock_and_ads_september_18_2023/k1wl8df/
 !#if !cap_html_filtering
@@ -104,12 +104,11 @@ gamedrive.org##+js(aost, document.querySelector, /showModal|chooseAction|doActio
 gamedrive.org##+js(acs, eval, replace)
 
 ! perchance - broken by its dev
-perchance.org##+js(rpnt, script, '/if(\s){0,}\(..*\[\`.*\`\]\("."\)\) \{([\s\S]*?\}){2,}/gm', 'if (location.href.indexOf("ai-") !== -1) {String.prototype.includes=function (){return true};};riot.mount(\'app\', {generator: window.generatorData,dependencies: window.generatorDependenciesData,});window.successfulPageLoad = true;')
-perchance.org##+js(rmnt, script, '/"body"|"bo"\+"dy"|"bod"\+"y"|"b"\+"od"\+"y"|"b"\+"od"\+"y"|"b"[\s\S]{0,}\+[\s\S]{0,}"od"[\s\S]{0,}\+[\s\S]{0,}"y"|"b"[\s\S]{0,}"o"[\s\S]{0,}"d"[\s\S]{0,}"y"[\s\S]{0,}|`b[\s\S]{0,}`o[\s\S]{0,}`d[\s\S]{0,}`y[\s\S]{0,}|b\$|u006f|document\.body;|\["document"\]|\[[\s\S]{0,}"document"|`rep|\[`re|re`/g')
+perchance.org##+js(rmnt, script, /function start1WarnProcess\(\)|seconds 😳|\$\{helperNotice|window\.gdprDoesNotApply === false|localStorage\.clear\(\);|let maxHeight;|adCtn\.style\.cssText =/)
 
 ! ytlarge detection
 @@||ytlarge.com^$ghide
-@@||pagead2.googlesyndication.com^$script,domain=ytlarge.com
+@@||googlesyndication.com^$script,xhr,domain=ytlarge.com
 @@||g.doubleclick.net/pagead/ads?$frame,domain=ytlarge.com
 ||googleads.g.doubleclick.net/pagead/ads$frame,removeparam=/^(?:correlator|f[cr-w]|p[e-sv]|u_|ga_|url|dt|adk)/,domain=ytlarge.com
 ytlarge.com##.adsbygoogle
@@ -117,8 +116,10 @@ ytlarge.com##.adsbygoogle
 
 ! Ad-Shield
 ! https://github.com/uBlockOrigin/uAssets/issues/21385
-/loader.min.js$xhr,script,domain=loawa.com|ygosu.com|sportalkorea.com|algumon.com|hancinema.net|enetnews.co.kr|edaily.co.kr|economist.co.kr|etoday.co.kr|hankyung.com|isplus.com|hometownstation.com|kagit.kr|inven.co.kr|honkailab.com|warcraftrumbledeck.com|genshinlab.com|thestockmarketwatch.com|thephoblographer.com,replace=/\)\]\(\(function [a-zA-Z0-9]{2}\([a-zA-Z0-9\,]{2,5}\){var/)]((function neutralized(){var/g
-/loader.min.js$xhr,script,domain=loawa.com|ygosu.com|sportalkorea.com|algumon.com|hancinema.net|enetnews.co.kr|edaily.co.kr|economist.co.kr|etoday.co.kr|hankyung.com|isplus.com|hometownstation.com|kagit.kr|inven.co.kr|honkailab.com|warcraftrumbledeck.com|genshinlab.com|thestockmarketwatch.com|thephoblographer.com,replace=/\)\]\(\(function [a-zA-Z0-9]{2}\([a-zA-Z0-9]{2}\)\{/)]((function neutralized() {/
+!#if !cap_html_filtering
+loawa.com,ygosu.com,sportalkorea.com,algumon.com,hancinema.net,enetnews.co.kr,edaily.co.kr,economist.co.kr,etoday.co.kr,hankyung.com,isplus.com,hometownstation.com,kagit.kr,inven.co.kr,honkailab.com,warcraftrumbledeck.com,genshinlab.com,thestockmarketwatch.com,thephoblographer.com,issuya.com##+js(no-fetch-if, /static\.criteo\.net|adsbygoogle/, length:150000-150200)
+loawa.com,ygosu.com,sportalkorea.com,algumon.com,hancinema.net,enetnews.co.kr,edaily.co.kr,economist.co.kr,etoday.co.kr,hankyung.com,isplus.com,hometownstation.com,kagit.kr,inven.co.kr,honkailab.com,warcraftrumbledeck.com,genshinlab.com,thestockmarketwatch.com,thephoblographer.com,issuya.com#@#+js(no-fetch-if, /static\.criteo\.net|adsbygoogle/)
+!#endif
 
 ! https://github.com/uBlockOrigin/uAssets/issues/22067
 @@||free-mp3-download.net^$script,1p
@@ -144,7 +145,7 @@ infinityscans.xyz,infinityscans.net##+js(rpnt, script, /\(function\(.*\(\);\}/, 
 ! next-episode .net
 !next-episode.net##+js(rmnt, script, '/[\s\S]{0,}head[\s\S]{1900,}/')
 !next-episode.net##+js(rpnt, script, '/.then[\s\S]{0,}?;/g')
-next-episode.net##+js(rmnt, script, '/\d+\+\d/')
+next-episode.net##+js(rmnt, script, '/\d+\+\d|64/')
 
 ! https://github.com/easylist/easylist/commit/007a89df225391115bcdd2820d013e4cc775851d
 ||d3nn82uaxijpm6.cloudfront.net^$script,badfilter
@@ -163,22 +164,28 @@ cookomix.com##+js(nostif, detected, 5000)
 cookomix.com##.AdMB
 
 ! https://github.com/uBlockOrigin/uAssets/issues/19729
-||startgaming.net/*&utm_source=Torrentgalaxy&utm_medium=$doc,popup
-torrentgalaxy.to,tgx.rs###maln > [class] > [class] > [style*="max-width"] > div:first-child:has(center a:not([onmouseover]) img)
-torrentgalaxy.to,tgx.rs###maln > [class] > [class] > [style*="max-width"] > [id].outer > [class] > div:first-child:has(a:not([onmouseover]) img)
-torrentgalaxy.to,tgx.rs###maln > [class] > [class] > div:last-child > .outer > [class*="slidingDivf"] > [style="margin-bottom:10px;"]:has(a:not([onmouseover]) img)
-torrentgalaxy.to,tgx.rs##div[class*="slidingDiv"] > [style="overflow-x:auto;"] > [class] > div:last-child > [style]:has(a:not([onmouseover]) img)
-torrentgalaxy.to,tgx.rs##[style*="max-width"] + [style] > .panel-primary > *:not([id]) > * [style="margin-top:10px;"]:has(a:not([onmouseover]) img)
-torrentgalaxy.to,tgx.rs##a[href^="/hy?r"][href$="&saerch"]
-torrentgalaxy.to##div:not([class], [id]) > a > div:not([class], [id]) > img[class="img-responsive hpcover"]
+||startgaming.net/*&utm_*=Torrentgalaxy$doc,popup
+||startgaming.net/*affil=Torrentgalaxy$doc,popup
+torrentgalaxy.to,tgx.rs##.container-fluid + [id] > [class] > [class] > [style*="max-width"] > div:first-child:has(center a:not([onmouseover*="overlib"]) img)
+torrentgalaxy.to,tgx.rs##.container-fluid + [id] > [class] > [class] > [style*="max-width"] > [id].outer > [class] > div:first-child:has(a:not([onmouseover*="overlib"]) img)
+torrentgalaxy.to,tgx.rs##.container-fluid + [id] > [class] > [class] > div:last-child > .outer > [class*="slidingDivf"] > [style="margin-bottom:10px;"]:has(a:not([onmouseover*="overlib"]) img)
+torrentgalaxy.to,tgx.rs##div[class*="slidingDiv"] > [style="overflow-x:auto;"] > [class] > div:last-child > [style]:has(a:not([onmouseover*="overlib"]) img)
+torrentgalaxy.to,tgx.rs##[style*="max-width"] + [style] > .panel-primary > *:not([id]) > * [style="margin-top:10px;"]:has(a:not([onmouseover*="overlib"]) img)
+torrentgalaxy.to,tgx.rs##a[href^="/hx?r"][href$="&saerch"]
+torrentgalaxy.to,tgx.rs##div:not([class]) > div:not([class], [id]) > a > img[class="img-responsive hpcover"]
 ||torrentgalaxy.to/*.jpg$image,1p
 ||tgx.rs/*.jpg$image,1p
-@@||torrentgalaxy.to/common/$image,1p
+@@||torrentgalaxy.to/common/images/$image,1p
+@@||torrentgalaxy.to/common/favicon/$image,1p
 @@||torrentgalaxy.to/captcha/captcha_show$image,1p
-@@||tgx.rs/common/$image,1p
+@@||tgx.rs/common/images/$image,1p
+@@||tgx.rs/common/favicon/$image,1p
 @@||tgx.rs/captcha/captcha_show$image,1p
 
 ! https://github.com/uBlockOrigin/uAssets/issues/20586#issuecomment-1933022731
 $removeparam=si,domain=youtu.be|youtube-nocookie.com|music.youtube.com|www.youtube.com,badfilter
 $removeparam=si,domain=youtu.be|youtube-nocookie.com|youtube.com,badfilter
 $removeparam=si,doc,domain=open.spotify.com|soundcloud.com|youtube.com|youtu.be|zappos.com,badfilter
+
+! https://github.com/uBlockOrigin/uAssets/issues/22432
+@@||cloudfront.net^$xhr,domain=dailymotion.com
