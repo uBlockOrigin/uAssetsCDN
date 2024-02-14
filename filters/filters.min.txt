@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Wed, 14 Feb 2024 06:20:13 +0000
-! Diff-Path: ../patches/2024.2.14.439.patch#ublock-filters
+! Last modified: Wed, 14 Feb 2024 12:31:08 +0000
+! Diff-Path: ../patches/2024.2.14.754.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -13,18 +13,18 @@ tv.youtube.com##+js(trusted-replace-xhr-response, '"adPlacements"', '"no_ads"', 
 www.youtube.com##+js(trusted-replace-fetch-response, /"adPlacements.*?([A-Z]"\}|"\}{2})\}\]\,/, , player?key=)
 www.youtube.com##+js(trusted-replace-fetch-response, /\"adSlots.*?\}\]\}\}\]\,/, , player?key=)
 !#if env_firefox
-||www.youtube.com/playlist?list=$xhr,replace=/"adPlacements.*?([A-Z]"\}|"\}{2})\}\]\,//
-||www.youtube.com/playlist?list=$xhr,replace=/"adSlots.*?\}\]\}\}\]\,//
-||www.youtube.com/watch?v=$doc,xhr,replace=/"adPlacements.*?([A-Z]"\}|"\}{2})\}\]\,//
-||www.youtube.com/watch?v=$doc,xhr,replace=/"adSlots.*?\}\]\}\}\]\,//
-||www.youtube.com/youtubei/v1/player?key=$xhr,replace=/"adPlacements.*?([A-Z]"\}|"\}{2})\}\]\,//
-||www.youtube.com/youtubei/v1/player?key=$xhr,replace=/"adSlots.*?\}\]\}\}\]\,//
-||www.youtube.com/playlist?list=$xhr,replace=/"auxiliaryUi":\{"messageRenderers":\{"bkaEnforcementMessageViewModel.*?e\}\}\}\,//
-||www.youtube.com/playlist?list=$xhr,replace=/("trackingParam":"kx_fmPxhoPZR)[-_0-9A-Za-z]{150}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{43}BwOcCE59TDtslLKPQ-SS"\})/\$1\$2/
-||www.youtube.com/watch?v=$doc,xhr,replace=/"auxiliaryUi":\{"messageRenderers":\{"bkaEnforcementMessageViewModel.*?e\}\}\}\,//
-||www.youtube.com/watch?v=$doc,xhr,replace=/("trackingParam":"kx_fmPxhoPZR)[-_0-9A-Za-z]{150}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{43}BwOcCE59TDtslLKPQ-SS"\})/\$1\$2/
-||www.youtube.com/youtubei/v1/player?key=$xhr,replace=/"auxiliaryUi":\{"messageRenderers":\{"bkaEnforcementMessageViewModel.*?e\}\}\}\,//
-||www.youtube.com/youtubei/v1/player?key=$xhr,replace=/("trackingParam":"kx_fmPxhoPZR)[-_0-9A-Za-z]{150}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{43}BwOcCE59TDtslLKPQ-SS"\})/\$1\$2/
+||www.youtube.com/playlist?list=$xhr,1p,replace=/"adPlacements.*?([A-Z]"\}|"\}{2})\}\]\,//
+||www.youtube.com/playlist?list=$xhr,1p,replace=/"adSlots.*?\}\]\}\}\]\,//
+||www.youtube.com/watch?v=$doc,xhr,1p,replace=/"adPlacements.*?([A-Z]"\}|"\}{2})\}\]\,//
+||www.youtube.com/watch?v=$doc,xhr,1p,replace=/"adSlots.*?\}\]\}\}\]\,//
+||www.youtube.com/youtubei/v1/player?key=$xhr,1p,replace=/"adPlacements.*?([A-Z]"\}|"\}{2})\}\]\,//
+||www.youtube.com/youtubei/v1/player?key=$xhr,1p,replace=/"adSlots.*?\}\]\}\}\]\,//
+||www.youtube.com/playlist?list=$xhr,1p,replace=/"auxiliaryUi":\{"messageRenderers":\{"bkaEnforcementMessageViewModel.*?e\}\}\}\,//
+||www.youtube.com/playlist?list=$xhr,1p,replace=/("trackingParam":"kx_fmPxhoPZR)[-_0-9A-Za-z]{150}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{43}BwOcCE59TDtslLKPQ-SS"\})/\$1\$2/
+||www.youtube.com/watch?v=$doc,xhr,1p,replace=/"auxiliaryUi":\{"messageRenderers":\{"bkaEnforcementMessageViewModel.*?e\}\}\}\,//
+||www.youtube.com/watch?v=$doc,xhr,1p,replace=/("trackingParam":"kx_fmPxhoPZR)[-_0-9A-Za-z]{150}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{43}BwOcCE59TDtslLKPQ-SS"\})/\$1\$2/
+||www.youtube.com/youtubei/v1/player?key=$xhr,1p,replace=/"auxiliaryUi":\{"messageRenderers":\{"bkaEnforcementMessageViewModel.*?e\}\}\}\,//
+||www.youtube.com/youtubei/v1/player?key=$xhr,1p,replace=/("trackingParam":"kx_fmPxhoPZR)[-_0-9A-Za-z]{150}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{43}BwOcCE59TDtslLKPQ-SS"\})/\$1\$2/
 !#endif
 m.youtube.com,music.youtube.com,tv.youtube.com,www.youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, ytInitialPlayerResponse.playerAds, undefined)
 m.youtube.com,music.youtube.com,tv.youtube.com,www.youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, ytInitialPlayerResponse.adPlacements, undefined)
@@ -9735,30 +9735,32 @@ pornovka.cz##+js(no-fetch-if, ads)
 musichq.pe##+js(rmnt, script, shown_at)
 musichq.pe##+js(nowoif)
 ||voxiom.io^$xhr,1p,redirect-rule=nooptext
+! sexyscope.net Preroll Ads
+sexyscope.net##+js(set, adList, [])
 hieunguyenphoto.com###detect-adblock-zone
 hieunguyenphoto.com##+js(nostif, adblock)
 hieunguyenphoto.com##+js(nano-sib, countdown)
 ! Link shortener filters go into their own dedicated list
 ! *** filters/ubo-link-shorteners.txt ***
 ! gplinks all domains (gplinks.co/EWu8)
-*$frame,redirect-rule=noopframe,domain=gplinks.co|bharatsarkarijobalert.com|seobar.in|rktemplates.in|odiasongmuzic.com|mktechword.com|picassoappk.com|finley-aaron-love.com|bmremix.in|sbkeditsofficials.in|acejankari.com|odishadjss.in|rojgarsamachar.xyz|techlokye.com|onlinehelpblog.com|dhamakamusics.in|taazatimes24.com|jkssbnotes.com|hindikahanistory.in|azcodinghub.com|remixpapa.in|indisarkrijob.com|mynewsmedia.co|theringtonesworld.in|jobkijankari.in|newsloti.com
-@@||gplinks.in/track/$script,xhr,domain=gplinks.co|bharatsarkarijobalert.com|seobar.in|rktemplates.in|odiasongmuzic.com|mktechword.com|picassoappk.com|finley-aaron-love.com|bmremix.in|sbkeditsofficials.in|acejankari.com|odishadjss.in|rojgarsamachar.xyz|techlokye.com|onlinehelpblog.com|dhamakamusics.in|taazatimes24.com|jkssbnotes.com|hindikahanistory.in|azcodinghub.com|remixpapa.in|indisarkrijob.com|mynewsmedia.co|theringtonesworld.in|jobkijankari.in|newsloti.com
-@@||doubleclick.net^$script,xhr,domain=bharatsarkarijobalert.com|seobar.in|rktemplates.in|odiasongmuzic.com|mktechword.com|picassoappk.com|finley-aaron-love.com|bmremix.in|sbkeditsofficials.in|acejankari.com|odishadjss.in|rojgarsamachar.xyz|techlokye.com|onlinehelpblog.com|dhamakamusics.in|taazatimes24.com|jkssbnotes.com|hindikahanistory.in|azcodinghub.com|remixpapa.in|indisarkrijob.com|mynewsmedia.co|theringtonesworld.in|jobkijankari.in|newsloti.com
-@@*$ghide,domain=gplinks.co|bharatsarkarijobalert.com|seobar.in|rktemplates.in|odiasongmuzic.com|mktechword.com|picassoappk.com|finley-aaron-love.com|bmremix.in|sbkeditsofficials.in|acejankari.com|odishadjss.in|rojgarsamachar.xyz|techlokye.com|onlinehelpblog.com|dhamakamusics.in|taazatimes24.com|jkssbnotes.com|hindikahanistory.in|azcodinghub.com|remixpapa.in|indisarkrijob.com|mynewsmedia.co|theringtonesworld.in|jobkijankari.in|newsloti.com
-bharatsarkarijobalert.com,seobar.in,rktemplates.in,odiasongmuzic.com,mktechword.com,picassoappk.com,finley-aaron-love.com,bmremix.in,sbkeditsofficials.in,acejankari.com,odishadjss.in,rojgarsamachar.xyz,techlokye.com,onlinehelpblog.com,dhamakamusics.in,taazatimes24.com,jkssbnotes.com,hindikahanistory.in,azcodinghub.com,remixpapa.in,indisarkrijob.com,mynewsmedia.co,theringtonesworld.in,jobkijankari.in,newsloti.com##center:others()
-bharatsarkarijobalert.com,seobar.in,rktemplates.in,odiasongmuzic.com,mktechword.com,picassoappk.com,finley-aaron-love.com,bmremix.in,sbkeditsofficials.in,acejankari.com,odishadjss.in,rojgarsamachar.xyz,techlokye.com,onlinehelpblog.com,dhamakamusics.in,taazatimes24.com,jkssbnotes.com,hindikahanistory.in,azcodinghub.com,remixpapa.in,indisarkrijob.com,mynewsmedia.co,theringtonesworld.in,jobkijankari.in,newsloti.com###SmileyBanner:remove()
-bharatsarkarijobalert.com,seobar.in,rktemplates.in,odiasongmuzic.com,mktechword.com,picassoappk.com,finley-aaron-love.com,bmremix.in,sbkeditsofficials.in,acejankari.com,odishadjss.in,rojgarsamachar.xyz,techlokye.com,onlinehelpblog.com,dhamakamusics.in,taazatimes24.com,jkssbnotes.com,hindikahanistory.in,azcodinghub.com,remixpapa.in,indisarkrijob.com,mynewsmedia.co,theringtonesworld.in,jobkijankari.in,newsloti.com##+js(aopw, AdBDetected)
-bharatsarkarijobalert.com,seobar.in,rktemplates.in,odiasongmuzic.com,mktechword.com,picassoappk.com,finley-aaron-love.com,bmremix.in,sbkeditsofficials.in,acejankari.com,odishadjss.in,rojgarsamachar.xyz,techlokye.com,onlinehelpblog.com,dhamakamusics.in,taazatimes24.com,jkssbnotes.com,hindikahanistory.in,azcodinghub.com,remixpapa.in,indisarkrijob.com,mynewsmedia.co,theringtonesworld.in,jobkijankari.in,newsloti.com##+js(set, count, 0)
-bharatsarkarijobalert.com,seobar.in,rktemplates.in,odiasongmuzic.com,mktechword.com,picassoappk.com,finley-aaron-love.com,bmremix.in,sbkeditsofficials.in,acejankari.com,odishadjss.in,rojgarsamachar.xyz,techlokye.com,onlinehelpblog.com,dhamakamusics.in,taazatimes24.com,jkssbnotes.com,hindikahanistory.in,azcodinghub.com,remixpapa.in,indisarkrijob.com,mynewsmedia.co,theringtonesworld.in,jobkijankari.in,newsloti.com##[id*="iframe"], [id*="gpt_unit"], [id*="div-gpt-"]:style(height:0.0001px !important;)
+*$frame,redirect-rule=noopframe,domain=gplinks.co|theringtonesworld.in|jobkijankari.in|newsloti.com|newzwala.co.in
+@@||gplinks.in/track/$script,xhr,domain=gplinks.co|theringtonesworld.in|jobkijankari.in|newsloti.com|newzwala.co.in
+@@||doubleclick.net^$script,xhr,domain=theringtonesworld.in|jobkijankari.in|newsloti.com|newzwala.co.in
+@@*$ghide,domain=gplinks.co|theringtonesworld.in|jobkijankari.in|newsloti.com|newzwala.co.in
+theringtonesworld.in,jobkijankari.in,newsloti.com,newzwala.co.in##center:others()
+theringtonesworld.in,jobkijankari.in,newsloti.com,newzwala.co.in###SmileyBanner:remove()
+theringtonesworld.in,jobkijankari.in,newsloti.com,newzwala.co.in##+js(aopw, AdBDetected)
+theringtonesworld.in,jobkijankari.in,newsloti.com,newzwala.co.in##+js(set, count, 0)
+theringtonesworld.in,jobkijankari.in,newsloti.com,newzwala.co.in##[id*="iframe"], [id*="gpt_unit"], [id*="div-gpt-"]:style(height:0.0001px !important;)
 gplinks.co##.bg-soft-primary, a.exclude-pop.smartlink, .exclude-pop.quiz-container, #PlayQuiz, #quiz-frame, .exclude-popad
 ||gamezop.com^$domain=gplinks.*
 gplinks.co##+js(set, blurred, false)
 gplinks.co##+js(aopr, clickCount)
 *$script,3p,denyallow=cloudflare.com|github.io|google.com|googleapis.com|gstatic.com|hwcdn.net|jquery.com|recaptcha.net|tipsforce.com|unpkg.com,domain=gplinks.co
 ! XpShort New (http://xpshort.com/Alpha_5_Complete_Batch)
-hindialphabet.online,dissenttimes.com,malaaiwap.com,khesarilalyadavmp3.in,dhunwap.com.in##+js(nano-sib, _0x, *, 0.001)
-hindialphabet.online,dissenttimes.com,malaaiwap.com,khesarilalyadavmp3.in,dhunwap.com.in##.safeb:style(display: block !important;)
-hindialphabet.online,dissenttimes.com,malaaiwap.com,khesarilalyadavmp3.in,dhunwap.com.in##h2~*, #safeform~*, #sidebar, .entry-title, h2, .entry-content.post-body, .post-footer, .all-flex, #breadcrumb, .comments-system-blogger
+jajbat.com##+js(nano-sib, _0x, *, 0.001)
+jajbat.com##.safeb:style(display: block !important;)
+jajbat.com##h2~*, #safeform~*, #sidebar, .entry-title, h2, .entry-content.post-body, .post-footer, .all-flex, #breadcrumb, .comments-system-blogger
 xpshort.com##+js(set, blurred, false)
 xpshort.com##.banner
 go.publicearn.com##.page-header > h3, .banner, .bg-soft-primary
@@ -9828,6 +9830,8 @@ clk.*##+js(set, blurred, false)
 ! ez4short.com/oynPc14?src=PSA
 ez4short.com##+js(aopr, app_vars.force_disable_adblock)
 ez4short.com##+js(set, blurred, false)
+ez4short.com##.faq
+ez4short.com##footer
 techmody.io##+js(nano-sib, , *, 0)
 tech5s.co##+js(noeval-if, ads)
 tech5s.co,ez4mods.com##+js(nano-sib, /.?/, *, 0.02)
@@ -9844,9 +9848,9 @@ veganab.co,camdigest.com###wpsafe-link, #section2:style(display: block !importan
 veganab.co,camdigest.com###wpsafe-link, #section2:others()
 techy.veganab.co##.text-left, div.inst.box, .banner-inner
 ! earn2me.com (earn2me.com/kVFvyX)
-recipese.com,easyworldbusiness.com,riveh.com###yuidea-snp, #yuidea-btn-after, a[href]:style(display: block !important;)
-recipese.com,easyworldbusiness.com,riveh.com##center, [src*="google.com/recaptcha/"]:others()
-recipese.com,easyworldbusiness.com,riveh.com##+js(nano-sib, timer, *, 0.02)
+nichapk.com,recipese.com,easyworldbusiness.com,riveh.com###yuidea-snp, #yuidea-btn-after, a[href]:style(display: block !important;)
+nichapk.com,recipese.com,easyworldbusiness.com,riveh.com##center, [src*="google.com/recaptcha/"]:others()
+nichapk.com,recipese.com,easyworldbusiness.com,riveh.com##+js(nano-sib, timer, *, 0.02)
 blog.filepresident.com##.box-main > [src], .content, .r-bg, .short, .download-btn, h4
 naukrilelo.in##+js(no-fetch-if, ads)
 naukrilelo.in##+js(nano-sib, timer, 1300)
@@ -10516,7 +10520,7 @@ gamereactor.asia,gamereactor.cn,gamereactor.cz,gamereactor.de,gamereactor.dk,gam
 ! player on clipx.tv
 xxxporns.org##.adBlock
 a-eroland.net,hhmanga.com,nyahentai.re##.__isboostReturnAd
-gamerant.com,howtogeek.com,makeuseof.com,screenrant.com,xda-developers.com##.adsninja-ad-zone
+androidpolice.com,gamerant.com,howtogeek.com,makeuseof.com,screenrant.com,xda-developers.com##.adsninja-ad-zone
 !----- 2023 -----
 facebook.com##.m[data-status-bar-color] > .m[data-type="vscroller"] > .m[data-mcomponent="MContainer"]:is(.bg-s2, .bg-s3):has-text(/(Sponsored|Gesponsert|Sponsorlu|Sponsorowane|Ispoonsara godhameera|Geborg|Bersponsor|Ditaja|Disponsori|Giisponsoran|Sponzorováno|Sponsoreret|Publicidad|May Sponsor|Sponsorisée|Oipytyvôva|Ɗaukar Nayin|Sponzorirano|Uterwa inkunga|Sponsorizzato|Imedhaminiwa|Hirdetés|Misy Mpiantoka|Gesponsord|Sponset|Patrocinado|Patrocinado|Sponsorizat|Sponzorované|Sponsoroitu|Sponsrat|Được tài trợ|Χορηγούμενη|Спонсорирано|Спонзорирано|Ивээн тэтгэсэн|Реклама|Спонзорисано|במימון|سپانسرڈ|دارای پشتیبانی مالی|ስፖንሰር የተደረገ|प्रायोजित|ተደረገ|प|प्रायोजित|স্পনসর্ড|ਪ੍ਰਯੋਜਿਤ|પ્રાયોજિત|ପ୍ରାୟୋଜିତ|செய்யப்பட்ட செய்யப்பட்ட|చేయబడినది చేయబడినది|ಪ್ರಾಯೋಜಿಸಲಾಗಿದೆ|ചെയ്‌തത് ചെയ്‌തത്|ලද ලද ලද|สนับสนุน สนับสนุน รับ สนับสนุน สนับสนุน|ကြော်ငြာ ကြော်ငြာ|ឧបត្ថម្ភ ឧបត្ថម្ភ ឧបត្ថម្ភ|광고|贊助|赞助内容|広告|സ്‌പോൺസർ ചെയ്‌തത്)/) + .m:is(.bg-s2, .bg-s3):has(.native-text[style^="color"]):not(:has(.m:empty)):has(+ .m:is(.bg-s2, .bg-s3) .m[data-mcomponent="ImageArea"])
 facebook.com##.m[data-status-bar-color] > .m[data-type="vscroller"] > .m[data-mcomponent="MContainer"]:is(.bg-s2, .bg-s3):has-text(/(Sponsored|Gesponsert|Sponsorlu|Sponsorowane|Ispoonsara godhameera|Geborg|Bersponsor|Ditaja|Disponsori|Giisponsoran|Sponzorováno|Sponsoreret|Publicidad|May Sponsor|Sponsorisée|Oipytyvôva|Ɗaukar Nayin|Sponzorirano|Uterwa inkunga|Sponsorizzato|Imedhaminiwa|Hirdetés|Misy Mpiantoka|Gesponsord|Sponset|Patrocinado|Patrocinado|Sponsorizat|Sponzorované|Sponsoroitu|Sponsrat|Được tài trợ|Χορηγούμενη|Спонсорирано|Спонзорирано|Ивээн тэтгэсэн|Реклама|Спонзорисано|במימון|سپانسرڈ|دارای پشتیبانی مالی|ስፖንሰር የተደረገ|प्रायोजित|ተደረገ|प|प्रायोजित|স্পনসর্ড|ਪ੍ਰਯੋਜਿਤ|પ્રાયોજિત|ପ୍ରାୟୋଜିତ|செய்யப்பட்ட செய்யப்பட்ட|చేయబడినది చేయబడినది|ಪ್ರಾಯೋಜಿಸಲಾಗಿದೆ|ചെയ്‌തത് ചെയ്‌തത്|ලද ලද ලද|สนับสนุน สนับสนุน รับ สนับสนุน สนับสนุน|ကြော်ငြာ ကြော်ငြာ|ឧបត្ថម្ភ ឧបត្ថម្ភ ឧបត្ថម្ភ|광고|贊助|赞助内容|広告|സ്‌പോൺസർ ചെയ്‌തത്)/) + .m:is(.bg-s2, .bg-s3):has(.native-text[style^="color"]):not(:has(.m:empty)) + .m:is(.bg-s2, .bg-s3):has(.m[data-mcomponent="ImageArea"])
@@ -13746,6 +13750,7 @@ actionviewphotography.com,exporntoons.net,mat6tube.com,noodlemagazine.com,tyler-
 actionviewphotography.com,exporntoons.net,mat6tube.com,noodlemagazine.com,tyler-brown.com,ukdevilz.com##noindex
 actionviewphotography.com,exporntoons.net,mat6tube.com,noodlemagazine.com,tyler-brown.com,ukdevilz.com##+js(nano-stb, download, 1100)
 ||tbpot.com^
+||ipvertnet.com/clickunder/
 ||binpartner.com^$3p
 ||olymptrade.com^$3p
 mysexgames.com##+js(aopr, loadTool)
@@ -15629,14 +15634,14 @@ eplayer.click##+js(aopr, AaDetector)
 ustream.click##+js(acs, RegExp, 'shift')
 ustream.click##^script:has-text('shift')
 ustream.click##^script:has-text(\'shift\')
-1cloudfile.com##+js(nowoif)
-||browsingcontredir.com^
-||mizalandz.click^
 ! performance slowndown by site's antiadb code
 1cloudfile.com##+js(nosiif, !display)
+1cloudfile.com##+js(nowoif)
 1cloudfile.com##.uk-text-center
 1cloudfile.com##.preview-download-wrapper
 1cloudfile.com##.content-preview-wrapper
+||browsingcontredir.com^
+||mizalandz.click^
 straatosphere.com##+js(nostif, showModal)
 straatosphere.com##html:style(overflow: auto !important;)
 animotvslashz.blogspot.com##+js(aopr, _pop)
@@ -19645,12 +19650,13 @@ artribune.com##+js(set, td_ad_background_click_link, undefined)
 artribune.com##+js(rc, td-ad-background-link)
 ||link.theplatform.com/s/*/media*=rotten_tomatoes_video$xhr,removeparam=/^((?!SMIL|formats).)*$/
 *$script,domain=grabcrypto.co,redirect-rule=noopjs
-https://www.reddit.com/r/uBlockOrigin/comments/147qio5/issues_all_the_time_with_motorsportcom/
 ||mstm.motorsport.com^$script,1p,redirect-rule=noopjs
+@@||mstm.motorsport.com/mstm.js^$script,xhr,1p
+autosport.com,motorsport.com#@#.ms-hapb
+autosport.com,motorsport.com##.ms-hapb:style(min-height: 1px !important; height: 1px !important;)
+autosport.com,motorsport.com##^.ms-hapb
 autosport.com,motorsport.com##+js(noeval-if, interactionCount)
-!#if !ext_devbuild
-autosport.com,motorsport.com##+js(set, DOMTokenList.prototype.contains, trueFunc)
-!#else
+!#if ext_devbuild
 autosport.com,motorsport.com##+js(trusted-replace-argument, document.querySelector, 0, noopFunc, condition, adblock)
 !#endif
 autosport.com,motorsport.com##+js(cookie-remover, '/^\d{2,}/')
