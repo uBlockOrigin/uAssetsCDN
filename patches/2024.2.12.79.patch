@@ -1,8 +1,8 @@
-diff name:ublock-annoyances lines:66 checksum:e5a0a87cc4
+diff name:ublock-annoyances lines:76 checksum:4d1ca5044d
 d3 2
 a4 2
-! Last modified: Thu, 15 Feb 2024 18:17:47 +0000
-! Diff-Path: ../patches/2024.2.15.1104.patch#ublock-annoyances
+! Last modified: Thu, 15 Feb 2024 20:15:53 +0000
+! Diff-Path: ../patches/2024.2.15.1400.patch#ublock-annoyances
 d336 1
 a336 4
 ! hide popup
@@ -17,12 +17,14 @@ d580 3
 a582 2
 ! necessary
 remarkable.com##+js(trusted-click-element, button[data-cy="cookie-banner-necessary"])
-a586 5
+a586 7
 ! deny. wolfswinkel.de/wolfswinkel.fr/wolfswinkel.shop/..
 wolfswinkel.*##+js(trusted-set-cookie, CookieConsent, %7B%22Mode%22%3A0%7D, , , reload, 1)
 ! functional cookies only
 vreden.de##+js(trusted-set-local-storage-item, persist:privacy, '{"allowExternalContent":"false","allowTracking":"false","allowFunctionalCookies":"true","allowRequiredCookies":"true","showConsentBanner":"false","_persist":"{\"version\":-1,\"rehydrated\":true}"}')
 netzwelt.de##+js(trusted-click-element, h2 ~ div[class^="_"] > div[class^="_"] > a[rel="noopener noreferrer"][target="_self"][class^="_"]:only-child)
+! functional
+www.aok.de##+js(trusted-set-cookie, aok_cookie_settings, '{"functional":{"key":"functional","name":"Funktionale Cookies","required":true,"approved":true},"comfort":{"key":"comfort","name":"Komfort-Cookies","required":false,"approved":false},"tracking":{"key":"tracking","name":"Marketing-Cookies","required":false,"approved":false}}')
 d3623 2
 a3624 2
 pitesti24.ro,samsungtechwin.com,cours-de-droit.net,iptv4best.com,blogvisaodemercado.pt,kapitalis.com,tiempo.hn,winmeen.com,ibps.in,visse.com.br,javsubtitle.co,learninsta.com,licensekeys.org,mediahiburan.my,tipssehatcantik.com,anime-drama.jp,jbjbgame.com,viatasisanatate.com,ziarulargesul.ro,globaldefensecorp.com,gossipnextdoor.com,coffeeapps.ir,media.framu.world,immobiliaremia.com,colegiosconcertados.info,bigdatauni.com,riwyat.com,rukim.id,visefierbinti.ro,cyberkrafttraining.com,theaircurrent.com,ncert-solutions.com,ncertsolutions.guru,nocturnetls.net,clockks.com,ananda-yoga.ro,poolpiscina.com,infodifesa.it,getective.com,flashdumpfiles.com,formatatmak.com,drkrok.com,alphagirlreviews.com,kitchennovel.com,voxvalachorum.ro,cracksone.com,day-hoc.org,onlineonderdelenshop.nl,primicia.com.ve,tech-recipes.com,postcourier.com.pg,afrikmag.com,maduras.vip,aprendeinglessila.com,kicknews.today,koalasplayground.com,hellokpop.com,hayatbilgileri.com,moneyexcel.com,placementstore.com,neuroteam-metz.de,codedosa.com,liveyourmaths.com,newspao.gr,ieltsliz.com,programasvirtualespc.net,tempatwisataseru.com,wikiofcelebs.com,jornaljoca.com.br,arcanescans.com,filmzone.com,hiraethtranslation.com,kaystls.site,home.novel-gate.com##^script[id^="wpcp_"]
@@ -44,7 +46,7 @@ aboutchromebooks.com,ancient.eu,comingsoon.net,daysoftheyear.com,edn.com,gearjun
 d4326 1
 a4326 1
 ||cdn.jsdelivr.net/npm/disable-devtool$script,3p
-a4402 20
+a4402 28
 ! bharatavani .in anti copy, context menu
 bharatavani.in##+js(aeld, /cut|copy|paste|contextmenu/)
 delfi.lt##+js(aeld, copy)
@@ -65,11 +67,19 @@ animefire.*##+js(ra, oncontextmenu|ondragstart)
 #@#[data-freestar-ad]
 ##[data-freestar-ad]:not(:empty)
 ||pub.network/core/prebid-universal-creative.js^$script,3p,redirect-rule=noopjs
-diff name:ublock-badware lines:16 checksum:9195a1b36d
+! ohli365. vip anti devtools, contextmenu, f-keys
+||ohli365.vip/js/apms.db.js$script
+ohli365.vip##+js(ra, oncontextmenu|onselectstart|ondragstart)
+!#if cap_html_filtering
+inattvcom117.xyz##^script:has-text(detectDevTool)
+!#else
+inattvcom117.xyz##+js(rmnt, script, detectDevTool)
+!#endif
+diff name:ublock-badware lines:16 checksum:5fc0eccd58
 d3 2
 a4 2
 ! Last modified: Thu, 15 Feb 2024 17:30:12 +0000
-! Diff-Path: ../patches/2024.2.15.1104.patch#ublock-badware
+! Diff-Path: ../patches/2024.2.15.1400.patch#ublock-badware
 a657 2
 .com/vpnupdate/*/1/index.html?$doc
 ||apphasten.com^$all
@@ -82,11 +92,11 @@ a2685 5
 ||igluumars.click^$all
 ||poixtre.click^$all
 ||ygabgga.click^$all
-diff name:ublock-filters lines:269 checksum:f2397135ef
+diff name:ublock-filters lines:279 checksum:8216625c69
 d3 2
 a4 2
-! Last modified: Thu, 15 Feb 2024 17:31:39 +0000
-! Diff-Path: ../patches/2024.2.15.1104.patch#ublock-filters
+! Last modified: Thu, 15 Feb 2024 19:26:53 +0000
+! Diff-Path: ../patches/2024.2.15.1400.patch#ublock-filters
 d15 6
 a20 14
 !#if env_firefox
@@ -118,7 +128,13 @@ a3149 3
 ashemaletube.com##li[class]:has(a[href^="https://shemale.show/"][rel="sponsored"])
 ashemaletube.com##.js-toggle-content-wrapper a[href^="https://shemale.show/"][rel="sponsored"]:upward(.js-toggle-content-wrapper)
 ashemaletube.com##.ads-wrapper
+d3336 1
 d3339 1
+a3339 1
+pcgamestorrents.com##a[href^="https://pcgamestorrents.com/ffll"]
+d3341 1
+a3341 1
+pcgamestorrents.com,pcgamestorrents.org##a[href][aria-label="ad2"]
 d4390 1
 a4390 1
 nowtv.com.tr##+js(set, adblockDetector, trueFunc)
@@ -297,6 +313,9 @@ www.chip.de##^script:has-text((Math.PI).toFixed(10).slice(0, -1);)
 www.chip.de##+js(rmnt, script, .slice(0\, -1); })
 www.chip.de##+js(rmnt, script, (Math.PI).toFixed(10).slice(0\, -1);)
 !#endif
+d19542 1
+a19542 1
+arcjav.com,bluemedialink.online,buffstreams.*,crackstreams.*,game3rb.com,igg-games.com,manhwalist.com,mc-hacks.net,miraculous.*,mycivillinks.com,nflstreams.me,s2dfree.to,secretlink.xyz,soap2day.*,tennisstreams.*,tv247.us,vidsrc.*,vipboxtv.*,woiden.com,wonderapk.com,worldcupstream.pm##+js(acs, navigator, FingerprintJS)
 d19595 1
 a19596 4
 @@||mstm.motorsport.com/mstm.js^$script,xhr,1p
@@ -329,8 +348,8 @@ a21673 2
 moviesapi.club,stream.anplay.in###video_player ~ div[id]:has(> div[style^="position:fixed;inset:0px;z-index"] > a[target="_blank"])
 d21779 2
 a21780 2
-download.megaup.net##a img:not([src="images/main_logo_inverted.png"], [src="/downloadd.png"]):matches-css(height: /^[2-4]{1}[0-9]{2}(\.[0-9]+)?px$/):style(visibility: hidden !important;)
-download.megaup.net##+js(spoof-css, a img:not([src="images/main_logo_inverted.png"]\, [src="/downloadd.png"]), visibility, visible)
+download.megaup.net##a img:not([src="images/main_logo_inverted.png"]):matches-css(height: /^[2-4]{1}[0-9]{2}(\.[0-9]+)?px$/):style(visibility: hidden !important;)
+download.megaup.net##+js(spoof-css, a img:not([src="images/main_logo_inverted.png"]), visibility, visible)
 d22066 1
 a22066 1
 nationalreview.com,neoskosmos.com,nj.com,nordot.app,nothingbutnewcastle.com,nsjonline.com,nypost.com##^script:has-text('"v4ac1eiZr0"')
@@ -352,17 +371,18 @@ a22451 2
 @@||animefire.*^$script,1p
 a22597 1
 cursomecanet.com##[id^="div-gpt-ad"]:not([style^="width: 1px; height: 1px; position: absolute; left: -10000px; top: -"])
-diff name:ublock-privacy lines:19 checksum:547bfcc761
+d22663 5
+diff name:ublock-privacy lines:19 checksum:b739886314
 d3 2
 a4 2
-! Last modified: Thu, 15 Feb 2024 13:38:28 +0000
-! Diff-Path: ../patches/2024.2.15.1104.patch#ublock-privacy
+! Last modified: Thu, 15 Feb 2024 19:11:24 +0000
+! Diff-Path: ../patches/2024.2.15.1400.patch#ublock-privacy
 d129 5
 a133 5
-loawa.com,ygosu.com,sportalkorea.com,algumon.com,hancinema.net,enetnews.co.kr,edaily.co.kr,economist.co.kr,etoday.co.kr,hankyung.com,isplus.com,hometownstation.com,kagit.kr,inven.co.kr,viva100.com,joongdo.co.kr,jjang0u.com,tenbizt.com,tvreport.co.kr,newautopost.co.kr,mememedia.co.kr,mobilitytv.co.kr,cboard.net,a-ha.io,interfootball.co.kr,fourfourtwo.co.kr,apkmirror.com,genshinlab.com,newdaily.co.kr,meconomynews.com,brandbrief.co.kr,thephoblographer.com,dogdrip.net,honkailab.com,warcraftrumbledeck.com,mlbpark.donga.com,gamingdeputy.com,thestockmarketwatch.com,motorgraph.com,thesaurus.net,maketecheasier.com,tweaksforgeeks.com,issuya.com,alle-tests.nl,topstarnews.net,allthetests.com,motorbikecatalog.com,heraldcorp.com,automobile-catalog.com##+js(set-local-storage-item, adshield-analytics-uuid, $remove$)
-loawa.com,ygosu.com,sportalkorea.com,algumon.com,hancinema.net,enetnews.co.kr,edaily.co.kr,economist.co.kr,etoday.co.kr,hankyung.com,isplus.com,hometownstation.com,kagit.kr,inven.co.kr,viva100.com,joongdo.co.kr,jjang0u.com,tenbizt.com,tvreport.co.kr,newautopost.co.kr,mememedia.co.kr,mobilitytv.co.kr,cboard.net,a-ha.io,interfootball.co.kr,fourfourtwo.co.kr,apkmirror.com,genshinlab.com,newdaily.co.kr,meconomynews.com,brandbrief.co.kr,thephoblographer.com,dogdrip.net,honkailab.com,warcraftrumbledeck.com,mlbpark.donga.com,gamingdeputy.com,thestockmarketwatch.com,motorgraph.com,thesaurus.net,maketecheasier.com,tweaksforgeeks.com,issuya.com,alle-tests.nl,topstarnews.net,allthetests.com,motorbikecatalog.com,heraldcorp.com,automobile-catalog.com##+js(set-local-storage-item, as_profile_cache, $remove$)
-loawa.com,ygosu.com,sportalkorea.com,algumon.com,hancinema.net,enetnews.co.kr,edaily.co.kr,economist.co.kr,etoday.co.kr,hankyung.com,isplus.com,hometownstation.com,kagit.kr,inven.co.kr,viva100.com,joongdo.co.kr,jjang0u.com,tenbizt.com,tvreport.co.kr,newautopost.co.kr,mememedia.co.kr,mobilitytv.co.kr,cboard.net,a-ha.io,interfootball.co.kr,fourfourtwo.co.kr,apkmirror.com,genshinlab.com,newdaily.co.kr,meconomynews.com,brandbrief.co.kr,thephoblographer.com,dogdrip.net,honkailab.com,warcraftrumbledeck.com,mlbpark.donga.com,gamingdeputy.com,thestockmarketwatch.com,motorgraph.com,thesaurus.net,maketecheasier.com,tweaksforgeeks.com,issuya.com,alle-tests.nl,topstarnews.net,allthetests.com,motorbikecatalog.com,heraldcorp.com,automobile-catalog.com##+js(set-local-storage-item, as_accetpable_ads_blocked_cache, $remove$)
-loawa.com,ygosu.com,sportalkorea.com,algumon.com,hancinema.net,enetnews.co.kr,edaily.co.kr,economist.co.kr,etoday.co.kr,hankyung.com,isplus.com,hometownstation.com,kagit.kr,inven.co.kr,viva100.com,joongdo.co.kr,jjang0u.com,tenbizt.com,tvreport.co.kr,newautopost.co.kr,mememedia.co.kr,mobilitytv.co.kr,cboard.net,a-ha.io,interfootball.co.kr,fourfourtwo.co.kr,apkmirror.com,genshinlab.com,newdaily.co.kr,meconomynews.com,brandbrief.co.kr,thephoblographer.com,dogdrip.net,honkailab.com,warcraftrumbledeck.com,mlbpark.donga.com,gamingdeputy.com,thestockmarketwatch.com,motorgraph.com,thesaurus.net,maketecheasier.com,tweaksforgeeks.com,issuya.com,alle-tests.nl,topstarnews.net,allthetests.com,motorbikecatalog.com,heraldcorp.com,automobile-catalog.com##+js(set-local-storage-item, as_adblock_cache, $remove$)
+loawa.com,ygosu.com,sportalkorea.com,algumon.com,hancinema.net,enetnews.co.kr,edaily.co.kr,economist.co.kr,etoday.co.kr,hankyung.com,isplus.com,hometownstation.com,kagit.kr,inven.co.kr,viva100.com,joongdo.co.kr,jjang0u.com,tenbizt.com,tvreport.co.kr,newautopost.co.kr,mememedia.co.kr,mobilitytv.co.kr,cboard.net,a-ha.io,interfootball.co.kr,fourfourtwo.co.kr,apkmirror.com,genshinlab.com,newdaily.co.kr,meconomynews.com,brandbrief.co.kr,thephoblographer.com,dogdrip.net,honkailab.com,warcraftrumbledeck.com,mlbpark.donga.com,gamingdeputy.com,thestockmarketwatch.com,motorgraph.com,thesaurus.net,maketecheasier.com,tweaksforgeeks.com,issuya.com,alle-tests.nl,topstarnews.net,allthetests.com,motorbikecatalog.com,heraldcorp.com,automobile-catalog.com,g-enews.com##+js(set-local-storage-item, adshield-analytics-uuid, $remove$)
+loawa.com,ygosu.com,sportalkorea.com,algumon.com,hancinema.net,enetnews.co.kr,edaily.co.kr,economist.co.kr,etoday.co.kr,hankyung.com,isplus.com,hometownstation.com,kagit.kr,inven.co.kr,viva100.com,joongdo.co.kr,jjang0u.com,tenbizt.com,tvreport.co.kr,newautopost.co.kr,mememedia.co.kr,mobilitytv.co.kr,cboard.net,a-ha.io,interfootball.co.kr,fourfourtwo.co.kr,apkmirror.com,genshinlab.com,newdaily.co.kr,meconomynews.com,brandbrief.co.kr,thephoblographer.com,dogdrip.net,honkailab.com,warcraftrumbledeck.com,mlbpark.donga.com,gamingdeputy.com,thestockmarketwatch.com,motorgraph.com,thesaurus.net,maketecheasier.com,tweaksforgeeks.com,issuya.com,alle-tests.nl,topstarnews.net,allthetests.com,motorbikecatalog.com,heraldcorp.com,automobile-catalog.com,g-enews.com##+js(set-local-storage-item, as_profile_cache, $remove$)
+loawa.com,ygosu.com,sportalkorea.com,algumon.com,hancinema.net,enetnews.co.kr,edaily.co.kr,economist.co.kr,etoday.co.kr,hankyung.com,isplus.com,hometownstation.com,kagit.kr,inven.co.kr,viva100.com,joongdo.co.kr,jjang0u.com,tenbizt.com,tvreport.co.kr,newautopost.co.kr,mememedia.co.kr,mobilitytv.co.kr,cboard.net,a-ha.io,interfootball.co.kr,fourfourtwo.co.kr,apkmirror.com,genshinlab.com,newdaily.co.kr,meconomynews.com,brandbrief.co.kr,thephoblographer.com,dogdrip.net,honkailab.com,warcraftrumbledeck.com,mlbpark.donga.com,gamingdeputy.com,thestockmarketwatch.com,motorgraph.com,thesaurus.net,maketecheasier.com,tweaksforgeeks.com,issuya.com,alle-tests.nl,topstarnews.net,allthetests.com,motorbikecatalog.com,heraldcorp.com,automobile-catalog.com,g-enews.com##+js(set-local-storage-item, as_accetpable_ads_blocked_cache, $remove$)
+loawa.com,ygosu.com,sportalkorea.com,algumon.com,hancinema.net,enetnews.co.kr,edaily.co.kr,economist.co.kr,etoday.co.kr,hankyung.com,isplus.com,hometownstation.com,kagit.kr,inven.co.kr,viva100.com,joongdo.co.kr,jjang0u.com,tenbizt.com,tvreport.co.kr,newautopost.co.kr,mememedia.co.kr,mobilitytv.co.kr,cboard.net,a-ha.io,interfootball.co.kr,fourfourtwo.co.kr,apkmirror.com,genshinlab.com,newdaily.co.kr,meconomynews.com,brandbrief.co.kr,thephoblographer.com,dogdrip.net,honkailab.com,warcraftrumbledeck.com,mlbpark.donga.com,gamingdeputy.com,thestockmarketwatch.com,motorgraph.com,thesaurus.net,maketecheasier.com,tweaksforgeeks.com,issuya.com,alle-tests.nl,topstarnews.net,allthetests.com,motorbikecatalog.com,heraldcorp.com,automobile-catalog.com,g-enews.com##+js(set-local-storage-item, as_adblock_cache, $remove$)
 apkmirror.com,meconomynews.com,brandbrief.co.kr,mlbpark.donga.com,motorgraph.com,topstarnews.net,heraldcorp.com##+js(noeval-if, /07c225f3\.online|content-loader\.com|css-load\.com|html-load\.com/)
 d135 1
 a135 1
@@ -372,11 +392,11 @@ a138 1
 apkmirror.com,meconomynews.com,brandbrief.co.kr,mlbpark.donga.com,motorgraph.com,heraldcorp.com##+js(rmnt, script, KCgpPT57bGV0IGU)
 a564 1
 /^https:\/\/mudah\.my\/[a-zA-Z0-9]{16}\/[a-zA-Z0-9]{16}\?apiKey=/$script,1p,domain=mudah.my
-diff name:ublock-quick-fixes lines:55 checksum:57bbd82fee
+diff name:ublock-quick-fixes lines:56 checksum:f1a02ee81e
 d3 2
 a4 2
-! Last modified: Thu, 15 Feb 2024 17:02:55 +0000
-! Diff-Path: ../patches/2024.2.15.1104.patch#ublock-quick-fixes
+! Last modified: Thu, 15 Feb 2024 20:53:20 +0000
+! Diff-Path: ../patches/2024.2.15.1400.patch#ublock-quick-fixes
 d33 6
 a38 6
 pixnbrqw.sbs,picmsh.sbs##+js(aopr, console.clear)
@@ -398,8 +418,9 @@ a48 2
 www.youtube.com##+js(trusted-rpnt, script, /^(\(function serverContract\(\))/s, "caches.open('yt-appshell-assets').then(a=>['a4aa4e18','2144b1c0','691ad9c2'].forEach(i=>a.delete(`/s/desktop/${i}/jsbin/desktop_polymer.vflset/desktop_polymer.js`)));$1")
 d59 27
 d90 2
-a91 1
-perchance.org##+js(rmnt, script, '/"body"|"bo"\+"dy"|"bod"\+"y"|"b"\+"od"\+"y"|"b"\+"od"\+"y"|"b"[\s\S]{0,}\+[\s\S]{0,}"od"[\s\S]{0,}\+[\s\S]{0,}"y"|"b"[\s\S]{0,}"o"[\s\S]{0,}"d"[\s\S]{0,}"y"[\s\S]{0,}|`b[\s\S]{0,}`o[\s\S]{0,}`d[\s\S]{0,}`y[\s\S]{0,}|b\$|u006f|document\.body;|\["document"\]|\[[\s\S]{0,}"document"|`\$\{\s*"|Please disable|mddd4sff4de1d34344|"riot"|"setTimeout"|replaceAll\s*\(\s*"|"ri o t"|"setTim eo ut"|window\s*\.\s*riot|\!window\.da_z3q3EsZ1|`\+`|`rep|\[`re|re`|\}r\$/g')
+a91 2
+perchance.org##+js(rmnt, script, /Please disable|mddd4sff4dee1d34344|"riot"|"setTimeout"|window\.da_z3qe3EsZ1|successfulPageL\$/)
+perchance.org##+js(rmnt, script, /replaceAll\s*\(\s*("|'|`)/)
 a94 1
 @@||fundingchoicesmessages.google.com^$script,xhr,domain=ytlarge.com
 d99 5
@@ -428,11 +449,11 @@ igg-games.com##a[href$=".php"]
 ||igg-games.com/wp-content/uploads/2024/02/naa1.jpg$image,1p
 ||igg-games.com/wp-content/uploads/2024/02/naa2.jpg$image,1p
 bild.de##+js(rpnt, script, "adBlockWallEnabled":true, "adBlockWallEnabled":false)
-diff name:ublock-unbreak lines:14 checksum:6647d34863
+diff name:ublock-unbreak lines:14 checksum:6269be8b92
 d3 2
 a4 2
 ! Last modified: Wed, 14 Feb 2024 19:07:43 +0000
-! Diff-Path: ../patches/2024.2.15.1104.patch#ublock-unbreak
+! Diff-Path: ../patches/2024.2.15.1400.patch#ublock-unbreak
 d897 1
 a897 2
 ||amazon-adsystem.com/*/apstag.js$xhr,redirect-rule=amazon_apstag.js:5
@@ -443,11 +464,11 @@ ecom.wixapps.net##+js(set, Sentry, {})
 ecom.wixapps.net##+js(set, Sentry.init, noopFunc)
 ! sportskeeda. com blocked video
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$script,redirect-rule=google-ima.js,domain=sportskeeda.com
-diff name:easylist lines:2100 checksum:5dd04de625
+diff name:easylist lines:2129 checksum:b5bdd959a7
 d4 2
 a5 2
-! Last modified: Thu, 15 Feb 2024 16:00:05 +0000
-! Diff-Path: ../patches/2024.2.15.1104.patch#easylist
+! Last modified: Thu, 15 Feb 2024 19:11:24 +0000
+! Diff-Path: ../patches/2024.2.15.1400.patch#easylist
 d298 1
 a298 1
 /admanager/*$~object,domain=~admanager.line.biz|~blog.google|~konograma.com|~sevio.com
@@ -966,6 +987,8 @@ a29000 1
 ||ewtdzpwufzsnc.com^
 d29065 1
 d29073 1
+a29075 1
+||existenceassociationvoice.com^
 d29121 1
 a29136 1
 ||extensionworthwhile.com^
@@ -1204,6 +1227,8 @@ a33888 1
 ||intruderalreadypromising.com^
 a33895 1
 ||inumbreonr.com
+a33903 1
+||investcoma.com^
 a33940 1
 ||ionismscoldn.info^
 d33962 1
@@ -1551,6 +1576,8 @@ a39494 1
 ||oatscheapen.com^
 a39552 1
 ||obsanluvx.com^
+a39617 1
+||ocoaksib.com^
 d39622 1
 a39637 1
 ||oczqhythihhu.com^
@@ -1561,7 +1588,8 @@ d39727 1
 d39756 1
 d39788 1
 d39795 1
-a39795 1
+a39795 2
+||oiavdib.com^
 ||oijorfkfwtdswv.xyz^
 a39818 1
 ||ojuhjcmhemvs.com^
@@ -1569,6 +1597,8 @@ d39862 1
 a39877 1
 ||olnjitvizo.com^
 d39882 1
+a39928 1
+||ommopxpfuofm.com^
 a39937 1
 ||omouswoma.info^
 d39953 1
@@ -1637,6 +1667,8 @@ a41230 1
 a41234 1
 ||permissivegrimlychore.com^
 d41286 1
+a41319 1
+||pfyscjwxjcqdsqc.com^
 a41384 1
 ||phepofte.net^
 d41439 1
@@ -1859,6 +1891,8 @@ a45146 1
 ||scoreasleepbother.com^
 a45191 1
 ||sdfsdvc.com^
+a45200 1
+||sdxtxvq.com^
 a45235 1
 ||secondlyundone.com^
 d45267 1
@@ -2207,6 +2241,8 @@ a51045 1
 a51060 1
 ||whiskerssunflowertumbler.com^
 d51109 1
+a51147 1
+||whustemu.com^
 d51163 1
 d51179 1
 a51250 1
@@ -2299,6 +2335,8 @@ a52622 1
 ||zipradarindifferent.com^
 a52664 1
 ||zmhwaiapbtfq.com^
+a52667 1
+||zncsdysorwms.com^
 d52746 1
 a52821 1
 ||adpointrtb.com^$document
@@ -2338,12 +2376,16 @@ a55039 1
 a55117 1
 ||d71e6dd31a026d45.com^$popup
 d55148 1
+a55152 1
+||declareave.com^$popup
 a55202 1
 ||divergeimperfect.com^$popup
 a55296 1
 ||eastrk-dn.com^$popup
 a55301 1
 ||eclkmpsa.com^$popup
+a55385 1
+||existenceassociationvoice.com^$popup
 d55429 1
 a55441 1
 ||felingual.com^$popup
@@ -2360,6 +2402,8 @@ a55852 1
 ||ifsnickshriek.click^$popup
 a55918 1
 ||inumbreonr.com^$popup
+a55919 1
+||investcoma.com^$popup
 a56141 1
 ||llalo.click^$popup
 d56211 1
@@ -2377,6 +2421,8 @@ a56478 1
 ||novibet.partners^$popup
 a56494 1
 ||nukeluck.net^$popup
+a56523 1
+||ocoaksib.com^$popup
 a56530 1
 ||offergate-games-download1.com^$popup
 a56557 1
@@ -2438,6 +2484,8 @@ a58055 1
 ||yolage.uno^$popup
 a58813 1
 ||1390582286.rsc.cdn77.org^
+a58822 1
+||1687097253.rsc.cdn77.org^
 a58824 1
 ||1874562524.rsc.cdn77.org^
 a58827 1
@@ -2446,6 +2494,8 @@ a59077 1
 ||js.surecart.com/v1/affiliates?
 a59253 1
 ||torrindex.net/images/ads/
+a59298 1
+||winonexd.b-cdn.net^
 a59464 1
 ||d1kx6hl0p7bemr.cloudfront.net^
 a60289 1
@@ -2544,11 +2594,11 @@ a69340 1
 d69513 1
 a69513 1
 @@||imasdk.googleapis.com/js/sdkloader/ima3_dai.js$domain=247sports.com|4029tv.com|bloomberg.co.jp|bloomberg.com|cbc.ca|cbssports.com|embed.comicbook.com|gbnews.com|history.com|kcci.com|kcra.com|ketv.com|kmbc.com|koat.com|koco.com|ksbw.com|mynbc5.com|paramountplus.com|s.yimg.jp|sbs.com.au|southpark.cc.com|tv.rakuten.co.jp|vk.sportsbull.jp|wapt.com|wbaltv.com|wcvb.com|wdsu.com|wesh.com|wgal.com|wisn.com|wjcl.com|wlky.com|wlwt.com|wmtw.com|wmur.com|worldsurfleague.com|wpbf.com|wtae.com|wvtm13.com|wxii12.com|wyff4.com
-diff name:easyprivacy lines:39 checksum:a0891db025
+diff name:easyprivacy lines:39 checksum:eb2235154a
 d4 2
 a5 2
 ! Last modified: Thu, 15 Feb 2024 16:00:05 +0000
-! Diff-Path: ../patches/2024.2.15.1104.patch#easyprivacy
+! Diff-Path: ../patches/2024.2.15.1400.patch#easyprivacy
 d808 1
 a808 1
 /event-tracking/*$domain=~github.com

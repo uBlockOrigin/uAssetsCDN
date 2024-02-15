@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Annoyances
 ! Expires: 7 days
-! Last modified: Thu, 15 Feb 2024 18:17:47 +0000
-! Diff-Path: ../patches/2024.2.15.1104.patch#ublock-annoyances
+! Last modified: Thu, 15 Feb 2024 20:15:53 +0000
+! Diff-Path: ../patches/2024.2.15.1400.patch#ublock-annoyances
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/annoyances.txt ***
@@ -591,6 +591,8 @@ wolfswinkel.*##+js(trusted-set-cookie, CookieConsent, %7B%22Mode%22%3A0%7D, , , 
 ! functional cookies only
 vreden.de##+js(trusted-set-local-storage-item, persist:privacy, '{"allowExternalContent":"false","allowTracking":"false","allowFunctionalCookies":"true","allowRequiredCookies":"true","showConsentBanner":"false","_persist":"{\"version\":-1,\"rehydrated\":true}"}')
 netzwelt.de##+js(trusted-click-element, h2 ~ div[class^="_"] > div[class^="_"] > a[rel="noopener noreferrer"][target="_self"][class^="_"]:only-child)
+! functional
+www.aok.de##+js(trusted-set-cookie, aok_cookie_settings, '{"functional":{"key":"functional","name":"Funktionale Cookies","required":true,"approved":true},"comfort":{"key":"comfort","name":"Komfort-Cookies","required":false,"approved":false},"tracking":{"key":"tracking","name":"Marketing-Cookies","required":false,"approved":false}}')
 ! *** filters/annoyances-others.txt ***
 mimaletadepeliculas.blogspot.com##+js(aopr, document.oncontextmenu)
 mimaletadepeliculas.blogspot.com##+js(acs, document.onselectstart)
@@ -4427,3 +4429,11 @@ animefire.*##+js(ra, oncontextmenu|ondragstart)
 #@#[data-freestar-ad]
 ##[data-freestar-ad]:not(:empty)
 ||pub.network/core/prebid-universal-creative.js^$script,3p,redirect-rule=noopjs
+! ohli365. vip anti devtools, contextmenu, f-keys
+||ohli365.vip/js/apms.db.js$script
+ohli365.vip##+js(ra, oncontextmenu|onselectstart|ondragstart)
+!#if cap_html_filtering
+inattvcom117.xyz##^script:has-text(detectDevTool)
+!#else
+inattvcom117.xyz##+js(rmnt, script, detectDevTool)
+!#endif
