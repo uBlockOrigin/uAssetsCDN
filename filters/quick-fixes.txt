@@ -1,5 +1,5 @@
 ! Title: uBlock₀ filters – Quick fixes
-! Last modified: Thu, 15 Feb 2024 01:26:19 +0000
+! Last modified: Thu, 15 Feb 2024 11:41:59 +0000
 ! Expires: 8 hours
 ! Description: Immediate, temporary filters to fix websites
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -36,12 +36,12 @@ aternos.org##.ad-dfp:style(min-height: 0.1485mm !important; height: 0.1485mm !im
 ! pixsera
 ! https://github.com/uBlockOrigin/uAssets/issues/9123
 ! https://github.com/orgs/uBlockOrigin/teams/ublock-filters-volunteers/discussions/423/comments/6
-pixnbrqw.sbs##+js(aopr, console.clear)
-pixnbrqw.sbs##+js(nano-sib, timer)
-pixnbrqw.sbs##div[id][style^="position: fixed; display: block; width: 100%;"]
-pixnbrqw.sbs##div[style="width:100%;height:110px"]
-pixnbrqw.sbs##+js(nowoif, !/prcf.fiyar|themes|pixsense|.jpg/)
-pixnbrqw.sbs##div[class][style="display: block;"]
+pixnbrqw.sbs,picmsh.sbs##+js(aopr, console.clear)
+pixnbrqw.sbs,picmsh.sbs##+js(nano-sib, timer)
+pixnbrqw.sbs,picmsh.sbs##div[id][style^="position: fixed; display: block; width: 100%;"]
+pixnbrqw.sbs,picmsh.sbs##div[style="width:100%;height:110px"]
+pixnbrqw.sbs,picmsh.sbs##+js(nowoif, !/prcf.fiyar|themes|pixsense|.jpg/)
+pixnbrqw.sbs,picmsh.sbs##div[class][style="display: block;"]
 
 ! https://www.reddit.com/r/uBlockOrigin/comments/16lmeri/youtube_antiadblock_and_ads_september_18_2023/k1wl8df/
 !#if !cap_html_filtering
@@ -49,12 +49,13 @@ pixnbrqw.sbs##div[class][style="display: block;"]
 youtube.com##+js(json-prune, playerResponse.adPlacements playerResponse.playerAds playerResponse.adSlots adPlacements playerAds adSlots legacyImportant)
 !#endif
 !#endif
+!#if ext_devbuild
 ||youtube.com/s/desktop/*/cssbin/$css,xhr,uritransform=/desktop\/[0-9a-f]{8}\/cssbin/desktop\/691ad9c2\/cssbin/,domain=www.youtube.com
 ||youtube.com/s/desktop/*/jsbin/$script,xhr,uritransform=/desktop\/[0-9a-f]{8}\/jsbin/desktop\/691ad9c2\/jsbin/,domain=www.youtube.com
 @@||youtube.com/s/desktop/*/jsbin/serviceworker-kevlar-appshell.vflset/$script,xhr,uritransform=/desktop\/[0-9a-f]{8}\/jsbin/desktop\/691ad9c2\/jsbin/,domain=www.youtube.com
-!#if ext_devbuild
-www.youtube.com##+js(remove-cache-storage-item, yt-appshell-assets, /\/jsbin\/desktop_polymer\.vflset\/desktop_polymer\.js$/)
+www.youtube.com##+js(remove-cache-storage-item, yt-appshell-assets, /\/s\/desktop\/[0-9a-f]{8}\/(?:cs|j)sbin\//)
 !#else
+||youtube.com/s/desktop/*/jsbin/desktop_polymer.vflset/desktop_polymer.js$script,xhr,uritransform=/desktop\/[0-9a-f]{8}\/jsbin/desktop\/691ad9c2\/jsbin/,domain=www.youtube.com
 www.youtube.com##+js(trusted-rpnt, script, /^(\(function serverContract\(\))/s, "caches.open('yt-appshell-assets').then(a=>['a4aa4e18','2144b1c0','691ad9c2'].forEach(i=>a.delete(`/s/desktop/${i}/jsbin/desktop_polymer.vflset/desktop_polymer.js`)));$1")
 !#endif
 
@@ -77,7 +78,7 @@ gamedrive.org##+js(acs, eval, replace)
 
 ! perchance - broken by its dev
 perchance.org##+js(rpnt, script, '/if(\s){0,}\(..*\[\`.*\`\]\("."\)\) \{([\s\S]*?\}){2,}/gm', 'if (location.href.indexOf("ai-") !== -1) {String.prototype.includes=function (){return true};};riot.mount(\'app\', {generator: window.generatorData,dependencies: window.generatorDependenciesData,});window.successfulPageLoad = true;')
-perchance.org##+js(rmnt, script, '/"body"|"bo"\+"dy"|"bod"\+"y"|"b"\+"od"\+"y"|"b"\+"od"\+"y"|"b"[\s\S]{0,}\+[\s\S]{0,}"od"[\s\S]{0,}\+[\s\S]{0,}"y"|"b"[\s\S]{0,}"o"[\s\S]{0,}"d"[\s\S]{0,}"y"[\s\S]{0,}|`b[\s\S]{0,}`o[\s\S]{0,}`d[\s\S]{0,}`y[\s\S]{0,}|b\$|u006f|document\.body;|\["document"\]|\[[\s\S]{0,}"document"|`\$\{\s*"|mddd4ff4ded34344|"riot"|"setTimeout"|"setT"\+"imeout"|"r"\+"iot"|"docu"\+"ment"|window\s*\.\s*riot|\!window\.a_z3q3sZ1|`\+`|`rep|\[`re|re`|\}r\$/g')
+perchance.org##+js(rmnt, script, '/"body"|"bo"\+"dy"|"bod"\+"y"|"b"\+"od"\+"y"|"b"\+"od"\+"y"|"b"[\s\S]{0,}\+[\s\S]{0,}"od"[\s\S]{0,}\+[\s\S]{0,}"y"|"b"[\s\S]{0,}"o"[\s\S]{0,}"d"[\s\S]{0,}"y"[\s\S]{0,}|`b[\s\S]{0,}`o[\s\S]{0,}`d[\s\S]{0,}`y[\s\S]{0,}|b\$|u006f|document\.body;|\["document"\]|\[[\s\S]{0,}"document"|`\$\{\s*"|Please disable|mddd4sff4ded34344|"riot"|"setTimeout"|replaceAll\("|"ri ot"|"setTimeo ut"|window\s*\.\s*riot|\!window\.da_z3q3sZ1|`\+`|`rep|\[`re|re`|\}r\$/g')
 
 ! ytlarge detection
 @@||ytlarge.com^$ghide
