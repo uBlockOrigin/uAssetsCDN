@@ -1,12 +1,12 @@
-diff name:ublock-annoyances lines:3 checksum:18d68f85b0
+diff name:ublock-annoyances lines:3 checksum:3301d93b4b
 d4 1
 a4 1
-! Diff-Path: ../patches/2024.2.20.1107.patch#ublock-annoyances
-diff name:ublock-badware lines:25 checksum:adae6753ad
+! Diff-Path: ../patches/2024.2.20.1398.patch#ublock-annoyances
+diff name:ublock-badware lines:25 checksum:86219c0088
 d3 2
 a4 2
 ! Last modified: Tue, 20 Feb 2024 16:55:13 +0000
-! Diff-Path: ../patches/2024.2.20.1107.patch#ublock-badware
+! Diff-Path: ../patches/2024.2.20.1398.patch#ublock-badware
 a1107 1
 ||zhikunux.com^$all
 a2724 18
@@ -28,11 +28,27 @@ a2724 18
 ||take-money-happy.site^$doc
 ||tw-happy.space^$doc
 ||tw-lucky.site^$doc
-diff name:ublock-filters lines:54 checksum:ec76093773
+diff name:ublock-filters lines:70 checksum:991c0c9f79
 d3 2
 a4 2
-! Last modified: Tue, 20 Feb 2024 18:25:59 +0000
-! Diff-Path: ../patches/2024.2.20.1107.patch#ublock-filters
+! Last modified: Tue, 20 Feb 2024 19:19:39 +0000
+! Diff-Path: ../patches/2024.2.20.1398.patch#ublock-filters
+d10 1
+a10 1
+www.youtube.com##+js(trusted-replace-xhr-response, /"adPlacements.*?([A-Z]"\}|"\}{2})\}\]\,/, , /playlist\?list=|player\?|watch\?v=|youtubei\/v1\/player/)
+d12 3
+a14 3
+tv.youtube.com##+js(trusted-replace-xhr-response, '"adPlacements"', '"no_ads"', /playlist\?list=|player\?|watch\?v=|youtubei\/v1\/player/)
+www.youtube.com##+js(trusted-replace-fetch-response, /"adPlacements.*?([A-Z]"\}|"\}{2})\}\]\,/, , player?)
+www.youtube.com##+js(trusted-replace-fetch-response, /\"adSlots.*?\}\]\}\}\]\,/, , player?)
+d20 2
+a21 2
+||www.youtube.com/youtubei/v1/player?$xhr,1p,replace=/"adPlacements.*?([A-Z]"\}|"\}{2})\}\]\,//
+||www.youtube.com/youtubei/v1/player?$xhr,1p,replace=/"adSlots.*?\}\]\}\}\]\,//
+d26 2
+a27 2
+||www.youtube.com/youtubei/v1/player?$xhr,1p,replace=/"auxiliaryUi":\{"messageRenderers":\{"bkaEnforcementMessageViewModel.*?e\}\}\}\,//
+||www.youtube.com/youtubei/v1/player?$xhr,1p,replace=/("trackingParam":"kx_fmPxhoPZR)[-_0-9A-Za-z]{150}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{43}BwOcCE59TDtslLKPQ-SS"\})/\$1\$2/
 d368 1
 a368 1
 *$3p,denyallow=cloudflare.com|googleapis.com|gstatic.com|support.send.cm|userscloud.net,domain=userscloud.com
@@ -83,50 +99,127 @@ a20737 1
 a21696 2
 ||tagan.adlightning.com^$script,domain=dgb.lol,redirect-rule=noopjs
 dgb.lol###addiv
-diff name:ublock-privacy lines:3 checksum:235ef9eb3c
+diff name:ublock-privacy lines:3 checksum:f5a6caf71a
 d4 1
 a4 1
-! Diff-Path: ../patches/2024.2.20.1107.patch#ublock-privacy
-diff name:ublock-quick-fixes lines:3 checksum:e4e832841a
+! Diff-Path: ../patches/2024.2.20.1398.patch#ublock-privacy
+diff name:ublock-quick-fixes lines:21 checksum:3e3dbdc98f
+d3 2
+a4 2
+! Last modified: Tue, 20 Feb 2024 19:27:44 +0000
+! Diff-Path: ../patches/2024.2.20.1398.patch#ublock-quick-fixes
+d45 3
+a47 3
+||youtube.com/s/desktop/*/cssbin/$css,xhr,uritransform=/desktop\/[0-9a-f]{8}\/cssbin/desktop\/09f82e1d\/cssbin/,domain=www.youtube.com
+||youtube.com/s/desktop/*/jsbin/$script,xhr,uritransform=/desktop\/[0-9a-f]{8}\/jsbin/desktop\/09f82e1d\/jsbin/,domain=www.youtube.com
+@@||youtube.com/s/desktop/*/jsbin/serviceworker-kevlar-appshell.vflset/$script,xhr,uritransform=/desktop\/[0-9a-f]{8}\/jsbin/desktop\/09f82e1d\/jsbin/,domain=www.youtube.com
+d50 2
+a51 10
+||youtube.com/s/desktop/*/jsbin/desktop_polymer.vflset/desktop_polymer.js$script,xhr,uritransform=/desktop\/[0-9a-f]{8}\/jsbin/desktop\/09f82e1d\/jsbin/,domain=www.youtube.com
+www.youtube.com##+js(trusted-rpnt, script, /^(\(function serverContract\(\))/s, "caches.open('yt-appshell-assets').then(a=>['bdb59273','87423d78','09f82e1d'].forEach(i=>a.delete(`/s/desktop/${i}/jsbin/desktop_polymer.vflset/desktop_polymer.js`)));$1")
+!#endif
+www.youtube.com##+js(trusted-replace-fetch-response, /"adPlacements.*?([A-Z]"\}|"\}{2})\}\]\,/, , player?)
+www.youtube.com##+js(trusted-replace-fetch-response, /\"adSlots.*?\}\]\}\}\]\,/, , player?)
+!#if env_firefox
+||www.youtube.com/youtubei/v1/player?$xhr,1p,replace=/"adPlacements.*?([A-Z]"\}|"\}{2})\}\]\,//
+||www.youtube.com/youtubei/v1/player?$xhr,1p,replace=/"adSlots.*?\}\]\}\}\]\,//
+||www.youtube.com/youtubei/v1/player?$xhr,1p,replace=/"auxiliaryUi":\{"messageRenderers":\{"bkaEnforcementMessageViewModel.*?e\}\}\}\,//
+||www.youtube.com/youtubei/v1/player?$xhr,1p,replace=/("trackingParam":"kx_fmPxhoPZR)[-_0-9A-Za-z]{150}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{43}BwOcCE59TDtslLKPQ-SS"\})/\$1\$2/
+diff name:ublock-unbreak lines:3 checksum:672ced9c60
 d4 1
 a4 1
-! Diff-Path: ../patches/2024.2.20.1107.patch#ublock-quick-fixes
-diff name:ublock-unbreak lines:3 checksum:d87c00092c
-d4 1
-a4 1
-! Diff-Path: ../patches/2024.2.20.1107.patch#ublock-unbreak
-diff name:easylist lines:24 checksum:a2c5136f96
+! Diff-Path: ../patches/2024.2.20.1398.patch#ublock-unbreak
+diff name:easylist lines:81 checksum:5d144f0a82
 d4 2
 a5 2
-! Last modified: Tue, 20 Feb 2024 15:58:05 +0000
-! Diff-Path: ../patches/2024.2.20.1107.patch#easylist
+! Last modified: Tue, 20 Feb 2024 19:19:39 +0000
+! Diff-Path: ../patches/2024.2.20.1398.patch#easylist
 a19 1
 &sadbl=1&abtg=1
+a18639 1
+||1wtwaq.xyz^
+a18723 1
+||2ecfa1db15.com^
+a25902 1
+||crninkvhariuh.com^
+a26250 1
+||daiteshu.net^
+a27891 1
+||eanangelsa.info^
+a28586 1
+||enoneahbu.com^
+a31645 1
+||gratifiedsacrificetransformation.com^
+a32970 1
+||htfgmojisulelt.com^
+a33101 1
+||hwof.info^
 a35200 1
 ||keedaipa.xyz^
+a38644 1
+||narrucp.com^
+a39978 1
+||ojygidujyn.com^
 a40359 1
 ||opsookiz.net^
+a40491 1
+||osjhvtxsyiuyjv.com^
+a40985 1
+||pantrydivergegene.com^
+a42201 1
+||positionavailreproach.com^
+a44747 1
+||rouhavenever.com^
+a44996 1
+||ruxgqemwywx.com^
+a44997 1
+||ruzxzebrupa.com^
+a45609 1
+||sergerbearing.top^
+a46388 1
+||sniejankmqq.com^
+a48702 1
+||totalnicenewz.com^
 d49050 1
 a51306 1
 ||whandpolista.com^
+a51721 1
+||womangathering.com^
+a51843 1
+||wpbeyqjfg.com^
+a52737 1
+||yvlvbcumfhsdeu.com^
+a54679 1
+||1wtwaq.xyz^$popup
+a55703 1
+||enoneahbu.com^$popup
+a57056 1
+||pantrydivergegene.com^$popup
 a59690 1
 ||trstx.org/overroll/
+a59947 1
+||d1r9f6frybgiqo.cloudfront.net^
 a61286 1
 ||finish.addurl.biz/webroot/ads/adsterra/
 d63669 2
 a63670 2
 androidauthority.com##.--_-___Yb
 androidauthority.com##.--_-___mb
+a67722 1
+kuncomic.com##div[style$="min-height: 280px;"]
+d67741 1
 d69209 1
 a69209 1
 18porn.sex,amateur8.com,anyporn.com,area51.porn,bigtitslust.com,eachporn.com,fapster.xxx,fpo.xxx,freeporn8.com,hentai-moon.com,its.porn,izlesimdiporno.com,pervertslut.com,porngem.com,porntop.com,sexpornimages.com,sexvid.xxx,sortporn.com,tktube.com,uiporn.com,xhamster.com##.sponsor
-diff name:easyprivacy lines:13 checksum:8f8ed70a36
+diff name:easyprivacy lines:15 checksum:2151e05ddd
 d4 2
 a5 2
-! Last modified: Tue, 20 Feb 2024 15:58:05 +0000
-! Diff-Path: ../patches/2024.2.20.1107.patch#easyprivacy
+! Last modified: Tue, 20 Feb 2024 19:19:39 +0000
+! Diff-Path: ../patches/2024.2.20.1398.patch#easyprivacy
 a3322 1
 ||stats.rip^
+a11153 1
+||trackingapi.trendemon.com/api/events/pageview?
 d12124 1
 a12124 1
 ||oval.id/tracker/
