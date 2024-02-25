@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Quick fixes
 ! Expires: 12 hours
-! Last modified: Sat, 24 Feb 2024 18:46:25 +0000
-! Diff-Path: ../patches/2024.2.25.501.patch#ublock-quick-fixes
+! Last modified: Sun, 25 Feb 2024 11:17:29 +0000
+! Diff-Path: ../patches/2024.2.25.800.patch#ublock-quick-fixes
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/quick-fixes.txt ***
@@ -66,9 +66,9 @@ jayservicestuff.com##+js(set, console.clear, undefined)
 ! perchance - broken by its dev
 ||perchance.org/api/count?key=abp$xhr,1p
 !#if cap_html_filtering
-perchance.org##^script:has-text(/Please di__s_a_ble|has1Analytics|hasIframe|usingAdPowered\$|alreadyAddedAdvertIfNeeded = false;|adProvider1Name =|\/\/ anti-ad|hasVariables\(\)/)
+perchance.org##^script:has-text(/your ad blocker to|Analytics|has1Iframe|=== \(`|AddedAdvertIfNeeded = false;|adProvider2Name =|\/\/\s{4\,}a/)
 !#else
-perchance.org##+js(rmnt, script, /Please di__s_a_ble|has1Analytics|hasIframe|usingAdPowered\$|alreadyAddedAdvertIfNeeded = false;|adProvider1Name =|\/\/ anti-ad|hasVariables\(\)/)
+perchance.org##+js(rmnt, script, /your ad blocker to|Analytics|has1Iframe|=== \(`|AddedAdvertIfNeeded = false;|adProvider2Name =|\/\/\s{4\,}a/)
 !#endif
 ! ytlarge detection
 @@||ytlarge.com^$ghide
@@ -92,8 +92,7 @@ free-mp3-download.net##.adsbygoogle-noablate:style(max-height: 1px !important; v
 free-mp3-download.net##ins.adsbygoogle:style(max-height: 1px !important; visibility: hidden !important;)
 !#endif
 infinityscans.xyz,infinityscans.net##+js(rmnt, script, throw Error, condition, /^\s*\(?function.*\);\}\}\(\)\)\);/)
-infinityscans.xyz,infinityscans.net##+js(rpnt, script, /function .*\)\);/, , condition, includes)
-infinityscans.xyz,infinityscans.net##+js(rpnt, script, /function .*\(\);\}/, , condition, !![])
+infinityscans.xyz,infinityscans.net##+js(rpnt, script, /function .*\(\);\}/, , condition, \x74\x72)
 infinityscans.xyz,infinityscans.net##+js(rpnt, script, /\(function\(.*\(\);\}/, , condition, throw Error)
 ! next-episode .net
 !next-episode.net##+js(rmnt, script, '/[\s\S]{0,}head[\s\S]{1900,}/')
@@ -108,17 +107,19 @@ iwb.jp##body:style(display: block !important;)
 iwb.jp###main:style(display: block !important;)
 *$document,csp=default-src 'self' 'unsafe-inline' data: *.bootstrapcdn.com *.cloudflare.com *.google.com *.googleapis.com *.gstatic.com *.hcaptcha.com *.jquery.com .jwpcdn.com *.recaptcha.net *.video-delivery.net *.youtube.com *.zencdn.net i.doodcdn.co img.doodcdn.co,domain=d0000d.com|do0od.com|dood.la|dood.pm|dood.re|dood.sh|dood.so|dood.to|dood.watch|dood.wf|dood.ws|dood.yt|doods.pro|doodstream.co|doodstream.com|doodstream.me|dooood.com,badfilter
 *$subdocument,csp=default-src 'self' 'unsafe-inline' data: *.bootstrapcdn.com *.cloudflare.com *.google.com *.googleapis.com *.gstatic.com *.hcaptcha.com *.jquery.com .jwpcdn.com *.recaptcha.net *.video-delivery.net *.youtube.com *.zencdn.net i.doodcdn.co img.doodcdn.co,domain=d0000d.com|do0od.com|dood.la|dood.pm|dood.re|dood.sh|dood.so|dood.to|dood.watch|dood.wf|dood.ws|dood.yt|doods.pro|doodstream.co|doodstream.com|doodstream.me|dooood.com,badfilter
-igg-games.com##a[href^="https://igg-games.com/b1flix"], a[aria-label="dwdsw"], a[aria-label="fdgg"], a[aria-label="aswd"]
+igg-games.com##a[href^="https://igg-games.com/c1flix3"], a[aria-label="faadgg"], a[aria-label="fdgg"], a[aria-label="aswd"]
 igg-games.com##.uk-margin-medium-top > *:first-child:has(img[src^="https://igg-games.com/wp-content/uploads/"])
+igg-games.com##.uk-margin-medium-top > *:first-child + a:has(img[src^="https://igg-games.com/wp-content/uploads/"])
 igg-games.com##article > a:has(img[loading="lazy"][width][height])
 igg-games.com###tm-sidebar > div:not([class], [id]):has(a[rel] > img[src^="https://igg-games.com/wp-content/uploads/"])
 igg-games.com##aside > :not(:first-child) a[href] img
 igg-games.com##a[href$=".php"]
-||igg-games.com/wp-content/uploads/2024/02/dfswsdf.jpg$image
 ||igg-games.com/wp-content/uploads/2024/02/hhh3.png$image
-||igg-games.com/wp-content/uploads/2023/12/naa2.jpg$image
 ||igg-games.com/wp-content/uploads/2021/02/hh1.gif$image
 ||igg-games.com/wp-content/uploads/2024/02/naa1.jpg$image
+||igg-games.com/wp-content/uploads/2024/02/aaa.jpg$image
+||igg-games.com/wp-content/uploads/2024/02/aaa.jpg$image
+||igg-games.com/wp-content/uploads/2024/02/sss.jpg$image
 ||paddle.com/paddle/assets/images/health-check.gif?$badfilter
 /^https?:\/\/(?:[0-9a-z]{10,13}|[0-9a-z]{6})\.[^\/]*\/[a-zA-Z0-9\/\+\-]{80,106}$/$script,1p,match-case,strict3p,badfilter
 ||pixiv.org^$badfilter
