@@ -1,5 +1,5 @@
 ! Title: uBlock₀ filters – Quick fixes
-! Last modified: Mon, 26 Feb 2024 07:19:18 +0000
+! Last modified: Mon, 26 Feb 2024 14:10:32 +0000
 ! Expires: 8 hours
 ! Description: Immediate, temporary filters to fix websites
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -36,12 +36,12 @@ aternos.org##.ad-dfp:style(min-height: 0.1485mm !important; height: 0.1485mm !im
 ! pixsera
 ! https://github.com/uBlockOrigin/uAssets/issues/9123
 ! https://github.com/orgs/uBlockOrigin/teams/ublock-filters-volunteers/discussions/423/comments/6
-pixnbrqw.sbs,picmsh.sbs,imgpke.sbs,picuenr.sbs,imgolemn.sbs##+js(aopr, console.clear)
-pixnbrqw.sbs,picmsh.sbs,imgpke.sbs,picuenr.sbs,imgolemn.sbs##+js(nano-sib, timer)
-pixnbrqw.sbs,picmsh.sbs,imgpke.sbs,picuenr.sbs,imgolemn.sbs##div[id][style^="position: fixed; display: block; width: 100%;"]
-pixnbrqw.sbs,picmsh.sbs,imgpke.sbs,picuenr.sbs,imgolemn.sbs##div[style="width:100%;height:110px"]
-pixnbrqw.sbs,picmsh.sbs,imgpke.sbs,picuenr.sbs,imgolemn.sbs##+js(nowoif, !/prcf.fiyar|themes|pixsense|.jpg/)
-pixnbrqw.sbs,picmsh.sbs,imgpke.sbs,picuenr.sbs,imgolemn.sbs##div[class][style="display: block;"]
+imgoebn.sbs##+js(aopr, console.clear)
+imgoebn.sbs##+js(nano-sib, timer)
+imgoebn.sbs##div[id][style^="position: fixed; display: block; width: 100%;"]
+imgoebn.sbs##div[style="width:100%;height:110px"]
+imgoebn.sbs##+js(nowoif, !/prcf.fiyar|themes|pixsense|.jpg/)
+imgoebn.sbs##div[class][style="display: block;"]
 
 ! https://www.reddit.com/r/uBlockOrigin/comments/16lmeri/youtube_antiadblock_and_ads_september_18_2023/k1wl8df/
 !#if !env_mv3
@@ -69,6 +69,12 @@ www.youtube.com##+js(trusted-replace-fetch-response, /\"adSlots.*?\}\]\}\}\]\,/,
 ||www.youtube.com/youtubei/v1/player?$xhr,1p,replace=/"auxiliaryUi":\{"messageRenderers":\{"bkaEnforcementMessageViewModel.*?e\}\}\}\,//
 ||www.youtube.com/youtubei/v1/player?$xhr,1p,replace=/("trackingParam":"kx_fmPxhoPZR)[-_0-9A-Za-z]{150}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{43}BwOcCE59TDtslLKPQ-SS"\})/\$1\$2/
 !#endif
+m.youtube.com,music.youtube.com,www.youtube.com##+js(set, ytInitialPlayerResponse.playerConfig.ssapConfig, undefined)
+m.youtube.com,music.youtube.com,www.youtube.com##+js(set, ytInitialPlayerResponse.streamingData.serverAbrStreamingUrl, undefined)
+m.youtube.com,music.youtube.com,www.youtube.com##+js(json-prune-fetch-response, playerResponse.playerConfig.ssapConfig playerConfig.ssapConfig)
+m.youtube.com,music.youtube.com,www.youtube.com##+js(json-prune-fetch-response, playerResponse.streamingData.serverAbrStreamingUrl streamingData.serverAbrStreamingUrl)
+m.youtube.com,music.youtube.com,www.youtube.com##+js(json-prune-xhr-response, playerResponse.playerConfig.ssapConfig playerConfig.ssapConfig)
+m.youtube.com,music.youtube.com,www.youtube.com##+js(json-prune-xhr-response, playerResponse.streamingData.serverAbrStreamingUrl streamingData.serverAbrStreamingUrl)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/18476
 ! VOE sites
@@ -78,11 +84,19 @@ jayservicestuff.com##+js(set, console.clear, undefined)
 
 ! perchance - broken by its dev
 ||perchance.org/api/count?key=abp$xhr,1p
-!#if cap_html_filtering
-perchance.org##^script:has-text(/di__s_a__ble|check1Script2Load|!!window|has2Iframe|has2Variables|has3Anal3ytics|===\s*\(\s*`|async\s*function\s*a|adProvider4Name =|\/\/adngin/)
-!#else
-perchance.org##+js(rmnt, script, /di__s_a__ble|check1Script2Load|!!window|has2Iframe|has2Variables|has3Anal3ytics|===\s*\(\s*`|async\s*function\s*a|adProvider4Name =|\/\/adngin/)
-!#endif
+||perchance.org/api/count?key=abt$xhr,1p
+*$script,redirect-rule=noopjs,domain=perchance.org
+@@||securepubads.g.doubleclick.net/tag/js/gpt.js$script,domain=perchance.org
+@@||securepubads.g.doubleclick.net/pagead/managed/js/gpt/$script,domain=perchance.org
+@@||googletagmanager.com/gtag/js?$script,domain=perchance.org
+@@||securepubads.g.doubleclick.net/tag/js/gpt.js$script,domain=perchance.org
+@@||a.pub.network/perchance-org/pubfig.min.js$script,domain=perchance.org
+@@||a.pub.network/core/pubfig/*/pubfig.engine.js$script,domain=perchance.org
+@@||a.pub.network/core/prebid-analytics-*.js$script,domain=perchance.org
+@@||pub.network/v2/sites/perchance-org/configs?$xhr,domain=perchance.org
+@@||cdn.snigelweb.com/adengine/perchance.org/loader.js$xhr,domain=perchance.org
+@@||perchance.org^$ghide
+perchance.org##+js(no-fetch-if, google-analytics)
 
 ! ytlarge detection
 @@||ytlarge.com^$ghide
@@ -111,6 +125,7 @@ free-mp3-download.net##ins.adsbygoogle:style(max-height: 1px !important; visibil
 ! https://github.com/uBlockOrigin/uAssets/issues/20401
 infinityscans.xyz,infinityscans.net##+js(rmnt, script, throw Error, condition, /^\s*\(?function.*\);\}\}\(\)\)\);/)
 infinityscans.xyz,infinityscans.net##+js(rpnt, script, /function .*\(\);\}/, , condition, \x74\x72)
+infinityscans.xyz,infinityscans.net##+js(rpnt, script, /function .*adsbygoogle.*\)\)\;/)
 infinityscans.xyz,infinityscans.net##+js(rpnt, script, /\(function\(.*\(\);\}/, , condition, throw Error)
 
 ! next-episode .net
@@ -120,9 +135,16 @@ infinityscans.xyz,infinityscans.net##+js(rpnt, script, /\(function\(.*\(\);\}/, 
 @@||pagead2.googlesyndication.com^$script,domain=next-episode.net
 
 ! https://github.com/uBlockOrigin/uAssets/issues/14204
-||es.ylilauta.org^$doc,popup,ping
-||es.ylilauta.org^
-ylilauta.org##iframe.a
+ylilauta.org##header + div.card.a:remove()
+ylilauta.org##.style-new_replies > div:first-child.card.a:remove()
+ylilauta.org##.thread-replies > div.card.a:remove()
+||es.ylilauta.org^$ping,popup
+||es.ylilauta.org/t/$xhr
+!#if cap_html_filtering
+||ylilauta.org/api/community/board/load-threads|$xhr,replace=/card a/card nnn/g
+ylilauta.org##div.card.nnn
+ylilauta.org##div.card.nnn + a[href="/user/gold"]
+!#endif
 
 ! https://github.com/uBlockOrigin/uAssets/issues/21578
 iwb.jp##+js(alert-buster)
@@ -147,22 +169,6 @@ igg-games.com##a[href$=".php"]
 ||igg-games.com/wp-content/uploads/2024/02/aaa.jpg$image
 ||igg-games.com/wp-content/uploads/2024/02/aaa.jpg$image
 ||igg-games.com/wp-content/uploads/2024/02/sss.jpg$image
-
-! https://github.com/uBlockOrigin/uAssets/issues/22521
-||paddle.com/paddle/assets/images/health-check.gif?$badfilter
-
-! https://github.com/AdguardTeam/AdguardFilters/issues/173023
-/^https?:\/\/(?:[0-9a-z]{10,13}|[0-9a-z]{6})\.[^\/]*\/[a-zA-Z0-9\/\+\-]{80,106}$/$script,1p,match-case,strict3p,badfilter
-
-! https://github.com/easylist/easylist/commit/95265b58528f3203d879194c1a0e9f580082fb66
-||pixiv.org^$badfilter
-
-! https://github.com/uBlockOrigin/uAssets/issues/22552
-mobile.de##+js(set, optimizelyDatafile, {})
-mobile.de##+js(set, optimizelyDatafile.featureFlags, [])
-
-! https://github.com/uBlockOrigin/uAssets/issues/22621
-tutorialspoint.com#@#.panel-htop.layout-panel-east
 
 ! https://github.com/uBlockOrigin/uAssets/discussions/17361#discussioncomment-8576317
 /customad.js$badfilter
