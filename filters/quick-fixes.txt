@@ -1,5 +1,5 @@
 ! Title: uBlock₀ filters – Quick fixes
-! Last modified: Mon, 26 Feb 2024 14:10:32 +0000
+! Last modified: Mon, 26 Feb 2024 19:12:15 +0000
 ! Expires: 8 hours
 ! Description: Immediate, temporary filters to fix websites
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -85,18 +85,11 @@ jayservicestuff.com##+js(set, console.clear, undefined)
 ! perchance - broken by its dev
 ||perchance.org/api/count?key=abp$xhr,1p
 ||perchance.org/api/count?key=abt$xhr,1p
-*$script,redirect-rule=noopjs,domain=perchance.org
-@@||securepubads.g.doubleclick.net/tag/js/gpt.js$script,domain=perchance.org
-@@||securepubads.g.doubleclick.net/pagead/managed/js/gpt/$script,domain=perchance.org
-@@||googletagmanager.com/gtag/js?$script,domain=perchance.org
-@@||securepubads.g.doubleclick.net/tag/js/gpt.js$script,domain=perchance.org
-@@||a.pub.network/perchance-org/pubfig.min.js$script,domain=perchance.org
-@@||a.pub.network/core/pubfig/*/pubfig.engine.js$script,domain=perchance.org
-@@||a.pub.network/core/prebid-analytics-*.js$script,domain=perchance.org
-@@||pub.network/v2/sites/perchance-org/configs?$xhr,domain=perchance.org
-@@||cdn.snigelweb.com/adengine/perchance.org/loader.js$xhr,domain=perchance.org
-@@||perchance.org^$ghide
-perchance.org##+js(no-fetch-if, google-analytics)
+!#if cap_html_filtering
+perchance.org##^script:has-text(/has4Variables|di__s_ab_le|__id5_finalization_registry|already1AddedAdve3rtIfNeeded =|window.freestar.config = |scripts =|iframes =|cookies =|hasIfr6ame|has3Anal6ytics|quantserve|checkResLoad|return new Promise|cdn\.sni\$|document\.head\.appendChild\(el\);|document\.querySelector\("#main"\)/)
+!#else
+perchance.org##+js(rmnt, script, /has4Variables|di__s_ab_le|__id5_finalization_registry|already1AddedAdve3rtIfNeeded =|window.freestar.config = |scripts =|iframes =|cookies =|hasIfr6ame|has3Anal6ytics|quantserve|checkResLoad|return new Promise|cdn\.sni\$|document\.head\.appendChild\(el\);|document\.querySelector\("#main"\)/)
+!#endif
 
 ! ytlarge detection
 @@||ytlarge.com^$ghide
@@ -135,15 +128,13 @@ infinityscans.xyz,infinityscans.net##+js(rpnt, script, /\(function\(.*\(\);\}/, 
 @@||pagead2.googlesyndication.com^$script,domain=next-episode.net
 
 ! https://github.com/uBlockOrigin/uAssets/issues/14204
-ylilauta.org##header + div.card.a:remove()
-ylilauta.org##.style-new_replies > div:first-child.card.a:remove()
-ylilauta.org##.thread-replies > div.card.a:remove()
 ||es.ylilauta.org^$ping,popup
 ||es.ylilauta.org/t/$xhr
 !#if cap_html_filtering
-||ylilauta.org/api/community/board/load-threads|$xhr,replace=/card a/card nnn/g
-ylilauta.org##div.card.nnn
-ylilauta.org##div.card.nnn + a[href="/user/gold"]
+||ylilauta.org/api/community/board/load-threads$xhr,replace=/card a/card b/g
+ylilauta.org##div:not([id]).card.a:remove()
+||ylilauta.org^$doc,xhr,replace=/<\/body>/<div id="removeaaa" class="card a"><\/div><div id="removeaaa1" class="card a"><\/div><div id="removeaaa2" class="card a"><\/div><div id="removeaaa3" class="card a"><\/div><div id="removeaaa4" class="card a"><\/div><div id="removeaaa5" class="card a"><\/div><div id="removeaaa6" class="card a"><\/div><div id="removeaaa7" class="card a"><\/div><div id="removeaaa8" class="card a"><\/div><div id="removeaaa9" class="card a"><\/div><div id="removeaaa10" class="card a"><\/div><div id="removeaaa11" class="card a"><\/div><div id="removeaaa12" class="card a"><\/div>/g
+ylilauta.org##div.card.a[id^="removeaaa"]
 !#endif
 
 ! https://github.com/uBlockOrigin/uAssets/issues/21578
