@@ -1,8 +1,8 @@
-diff name:ublock-annoyances lines:34 checksum:c3650c1b6c
+diff name:ublock-annoyances lines:38 checksum:97bea7b4f4
 d3 2
 a4 2
-! Last modified: Tue, 27 Feb 2024 06:45:10 +0000
-! Diff-Path: ../patches/2024.2.27.624.patch#ublock-annoyances
+! Last modified: Tue, 27 Feb 2024 14:14:46 +0000
+! Diff-Path: ../patches/2024.2.27.920.patch#ublock-annoyances
 d79 1
 a79 1
 scaleway.com##+js(trusted-set-cookie, _scw_rgpd_hash, 408362395)
@@ -15,7 +15,7 @@ a158 1
 tomsguide.com##+js(trusted-set-cookie, consentUUID, cefc5c9f-0e4c-4d6f-ad00-41a1e49409ed_27_29)
 a202 1
 hyperoptic.com##+js(trusted-set-cookie, ho_cookie_consent, essential)
-a625 7
+a625 10
 ! Social + Remaining cookie
 gld.nl,omroepwest.nl,rtvnoord.nl##+js(trusted-set-cookie, consent-cookie-toggles, [{%22type%22:%22social%22%2C%22value%22:3}%2C{%22type%22:%22remaining%22%2C%22value%22:3}])
 ! "Ok" button
@@ -23,21 +23,25 @@ luminousindia.com##+js(trusted-set-local-storage-item, lms_cookies, nk9jfSLYwDn7
 ! functional, remove "id", allow recaptcha
 stilord.com,stilord.pl,stilord.de,stilord.fr##+js(trusted-set-cookie, plenty-shop-cookie, '{"necessary":{"amazonPay":true,"consent":true,"consentActiveStatus":true,"externalId":true,"session":true,"csrf":true,"paypal-cookies":true},"tracking":{"googleanalytics":false,"bingads":false},"marketing":{"googleads":false,"facebookpixel":false,"pinterest":false},"media":{"reCaptcha":true},"convenience":{"languageDetection":false}}')
 cdn.privacy-mgmt.com##+js(trusted-click-element, button[aria-label="Agree"])
+! esprit.co.uk,esprit.nl,esprit.fr,esprit.de,esprit.at 
+! disabled selections
+esprit.*##+js(trusted-set-cookie, CONSENTMGR, 'c1:0|c2:0|c3:0|c4:0|c5:0|c6:0|c7:0|c8:0|c9:0|c10:0|c11:0|c12:0|c13:0|c14:0|c15:0|ts:1709021997479|consent:false|id:018de9a4f59200821a700cf146e80406f001906700ef8')
 d4461 1
 a4461 1
 animefire.plus##+js(ra, oncontextmenu|ondragstart)
-a4475 6
+a4475 7
 indeed.com##body[style*="overflow"] > div[class]:has(> #passport-modal-overlay):style(opacity: 0 !important; visibility: collapse !important;)
 indeed.com##body[style*="overflow"]:has(> div[class] > #passport-modal-overlay):style(overflow: auto !important; position: relative !important; padding-right: 0px !important; inset: unset !important;)
 mostrodifirenze.com##+js(acs, document.oncontextmenu)
 dngz.net##+js(aopr, document.oncontextmenu)
 dngz.net##+js(aopr, document.onkeydown)
 dngz.net##+js(set, forbidDebug, noopFunc)
-diff name:ublock-badware lines:16 checksum:95457e2660
+vnexpress.net##+js(set, adblock, 2)
+diff name:ublock-badware lines:18 checksum:c2e93c488b
 d3 2
 a4 2
-! Last modified: Mon, 26 Feb 2024 21:53:37 +0000
-! Diff-Path: ../patches/2024.2.27.624.patch#ublock-badware
+! Last modified: Tue, 27 Feb 2024 12:23:01 +0000
+! Diff-Path: ../patches/2024.2.27.920.patch#ublock-badware
 d668 2
 a669 2
 /^https?:\/\/[0-9a-z]*\.?[-0-9a-z]{4,}\.[a-z]{2,11}\/(?:[0-9a-z]{6,10}\/)?\/?(?:article\d{4}\.doc)?\?u=[0-9a-z]{7}&o=[0-9a-z]{7}/$doc,frame,match-case
@@ -50,11 +54,13 @@ a984 1
 &t=mono|$doc,domain=info
 a2749 1
 ||rich-cash.site^$doc
-diff name:ublock-filters lines:141 checksum:5aff2b944a
+a3196 1
+||informations-clients.info^$all
+diff name:ublock-filters lines:157 checksum:2616487a36
 d3 2
 a4 2
-! Last modified: Tue, 27 Feb 2024 06:39:55 +0000
-! Diff-Path: ../patches/2024.2.27.624.patch#ublock-filters
+! Last modified: Tue, 27 Feb 2024 13:27:14 +0000
+! Diff-Path: ../patches/2024.2.27.920.patch#ublock-filters
 a9 2
 tv.youtube.com##+js(trusted-replace-xhr-response, '"adPlacements"', '"no_ads"', /playlist\?list=|player\?|watch\?v=|youtubei\/v1\/player/)
 !#if !cap_html_filtering
@@ -62,6 +68,22 @@ d12 1
 d15 1
 a15 1
 !#else
+d70 1
+a70 1
+giga.de,kino.de,desired.de,chip.de,focus.de,teltarif.de##^script:has-text(DisplayAcceptableAdIfAdblocked)
+d72 1
+a72 1
+giga.de,kino.de,desired.de,chip.de,focus.de,teltarif.de##+js(rmnt, script, DisplayAcceptableAdIfAdblocked)
+a73 5
+||giga.de/special/gutscheine/*.png$script,1p
+||desired.de/image/*.gif$script,1p
+||kino.de/mages/*.png$script,1p
+||teltarif.de/img/$script,1p
+teltarif.de,kino.de,desired.de,giga.de##img[referrerpolicy="unsafe-url"][src^="/img/"][src$=".jpg"]
+d137 1
+d139 1
+d142 1
+d145 3
 a293 7
 ! ads placeholders
 eisamay.com,indiatimes.com,samayam.com,vijaykarnataka.com##.wdt-taboola
@@ -128,15 +150,15 @@ deano.me,themehospital.co.uk,resplace.com##+js(acs, jQuery, this)
 eurotruck2.com.br##+js(aeld, load, nextFunction)
 d9780 9
 a9788 9
-*$frame,redirect-rule=noopframe,domain=gplinks.co|theringtonesworld.in|jobkijankari.in|newsloti.com|newzwala.co.in|iplquotes.com|kaisekareblog.com|w3hindi.in|jobwaala.in|nhmgujarat.in|minijankari.com|news36tech.com|gptproguide.com|odiamusicsong.com
-@@||gplinks.in/track/$script,xhr,domain=gplinks.co|theringtonesworld.in|jobkijankari.in|newsloti.com|newzwala.co.in|iplquotes.com|kaisekareblog.com|w3hindi.in|jobwaala.in|nhmgujarat.in|minijankari.com|news36tech.com|gptproguide.com|odiamusicsong.com
-@@||doubleclick.net^$script,xhr,domain=theringtonesworld.in|jobkijankari.in|newsloti.com|newzwala.co.in|iplquotes.com|kaisekareblog.com|w3hindi.in|jobwaala.in|nhmgujarat.in|minijankari.com|news36tech.com|gptproguide.com|odiamusicsong.com
-@@*$ghide,domain=gplinks.co|theringtonesworld.in|jobkijankari.in|newsloti.com|newzwala.co.in|iplquotes.com|kaisekareblog.com|w3hindi.in|jobwaala.in|nhmgujarat.in|minijankari.com|news36tech.com|gptproguide.com|odiamusicsong.com
-theringtonesworld.in,jobkijankari.in,newsloti.com,newzwala.co.in,iplquotes.com,kaisekareblog.com,w3hindi.in,jobwaala.in,nhmgujarat.in,minijankari.com,news36tech.com,gptproguide.com,odiamusicsong.com##center:others()
-theringtonesworld.in,jobkijankari.in,newsloti.com,newzwala.co.in,iplquotes.com,kaisekareblog.com,w3hindi.in,jobwaala.in,nhmgujarat.in,minijankari.com,news36tech.com,gptproguide.com,odiamusicsong.com###SmileyBanner:remove()
-theringtonesworld.in,jobkijankari.in,newsloti.com,newzwala.co.in,iplquotes.com,kaisekareblog.com,w3hindi.in,jobwaala.in,nhmgujarat.in,minijankari.com,news36tech.com,gptproguide.com,odiamusicsong.com##+js(aopw, AdBDetected)
-theringtonesworld.in,jobkijankari.in,newsloti.com,newzwala.co.in,iplquotes.com,kaisekareblog.com,w3hindi.in,jobwaala.in,nhmgujarat.in,minijankari.com,news36tech.com,gptproguide.com,odiamusicsong.com##+js(set, count, 0)
-theringtonesworld.in,jobkijankari.in,newsloti.com,newzwala.co.in,iplquotes.com,kaisekareblog.com,w3hindi.in,jobwaala.in,nhmgujarat.in,minijankari.com,news36tech.com,gptproguide.com,odiamusicsong.com##[id*="iframe"], [id*="gpt_unit"], [id*="div-gpt-"]:style(height:0.0001px !important;)
+*$frame,redirect-rule=noopframe,domain=gplinks.co|theringtonesworld.in|jobkijankari.in|newsloti.com|newzwala.co.in|iplquotes.com|kaisekareblog.com|w3hindi.in|jobwaala.in|nhmgujarat.in|minijankari.com|news36tech.com|gptproguide.com|odiamusicsong.com|anumin.com
+@@||gplinks.in/track/$script,xhr,domain=gplinks.co|theringtonesworld.in|jobkijankari.in|newsloti.com|newzwala.co.in|iplquotes.com|kaisekareblog.com|w3hindi.in|jobwaala.in|nhmgujarat.in|minijankari.com|news36tech.com|gptproguide.com|odiamusicsong.com|anumin.com
+@@||doubleclick.net^$script,xhr,domain=theringtonesworld.in|jobkijankari.in|newsloti.com|newzwala.co.in|iplquotes.com|kaisekareblog.com|w3hindi.in|jobwaala.in|nhmgujarat.in|minijankari.com|news36tech.com|gptproguide.com|odiamusicsong.com|anumin.com
+@@*$ghide,domain=gplinks.co|theringtonesworld.in|jobkijankari.in|newsloti.com|newzwala.co.in|iplquotes.com|kaisekareblog.com|w3hindi.in|jobwaala.in|nhmgujarat.in|minijankari.com|news36tech.com|gptproguide.com|odiamusicsong.com|anumin.com
+theringtonesworld.in,jobkijankari.in,newsloti.com,newzwala.co.in,iplquotes.com,kaisekareblog.com,w3hindi.in,jobwaala.in,nhmgujarat.in,minijankari.com,news36tech.com,gptproguide.com,odiamusicsong.com,anumin.com##center:others()
+theringtonesworld.in,jobkijankari.in,newsloti.com,newzwala.co.in,iplquotes.com,kaisekareblog.com,w3hindi.in,jobwaala.in,nhmgujarat.in,minijankari.com,news36tech.com,gptproguide.com,odiamusicsong.com,anumin.com###SmileyBanner:remove()
+theringtonesworld.in,jobkijankari.in,newsloti.com,newzwala.co.in,iplquotes.com,kaisekareblog.com,w3hindi.in,jobwaala.in,nhmgujarat.in,minijankari.com,news36tech.com,gptproguide.com,odiamusicsong.com,anumin.com##+js(aopw, AdBDetected)
+theringtonesworld.in,jobkijankari.in,newsloti.com,newzwala.co.in,iplquotes.com,kaisekareblog.com,w3hindi.in,jobwaala.in,nhmgujarat.in,minijankari.com,news36tech.com,gptproguide.com,odiamusicsong.com,anumin.com##+js(set, count, 0)
+theringtonesworld.in,jobkijankari.in,newsloti.com,newzwala.co.in,iplquotes.com,kaisekareblog.com,w3hindi.in,jobwaala.in,nhmgujarat.in,minijankari.com,news36tech.com,gptproguide.com,odiamusicsong.com,anumin.com##[id*="iframe"], [id*="gpt_unit"], [id*="div-gpt-"]:style(height:0.0001px !important;)
 a10244 1
 @@||profitsfly.com/antonimos/ctandrei.js$domain=sinonimos.de
 d10903 2
@@ -192,11 +214,11 @@ client.pylexnodes.net##a.box-title:has-text(Ads)
 d22763 1
 a22763 1
 sonixgvn.net##+js(nostif, EzoIvent)
-diff name:ublock-privacy lines:13 checksum:95ce5593d7
+diff name:ublock-privacy lines:13 checksum:ca7aeec020
 d3 2
 a4 2
 ! Last modified: Tue, 27 Feb 2024 06:28:27 +0000
-! Diff-Path: ../patches/2024.2.27.624.patch#ublock-privacy
+! Diff-Path: ../patches/2024.2.27.920.patch#ublock-privacy
 a222 1
 linkedin.com##+js(href-sanitizer, a[href^="https://www.linkedin.com/redir/redirect?url=http"], ?url)
 d517 1
@@ -206,11 +228,11 @@ d567 1
 a567 2
 ||view.mngusr.com^$domain=chapmanganato.to|manganato.com
 ||analytics.strapi.io^
-diff name:ublock-quick-fixes lines:60 checksum:988b7aa3f3
+diff name:ublock-quick-fixes lines:66 checksum:e2f9ec36d2
 d3 2
 a4 2
-! Last modified: Mon, 26 Feb 2024 23:09:09 +0000
-! Diff-Path: ../patches/2024.2.27.624.patch#ublock-quick-fixes
+! Last modified: Tue, 27 Feb 2024 15:06:18 +0000
+! Diff-Path: ../patches/2024.2.27.920.patch#ublock-quick-fixes
 d33 6
 a38 7
 imgoebn.sbs##+js(aopr, console.clear)
@@ -235,25 +257,31 @@ www.youtube.com##+js(trusted-rpnt, script, /^(\(function serverContract\(\))/s, 
 a60 6
 m.youtube.com,music.youtube.com,www.youtube.com##+js(set, ytInitialPlayerResponse.playerConfig.ssapConfig, undefined)
 m.youtube.com,music.youtube.com,www.youtube.com##+js(set, ytInitialPlayerResponse.streamingData.serverAbrStreamingUrl, undefined)
-m.youtube.com,music.youtube.com,www.youtube.com##+js(json-prune-fetch-response, playerResponse.playerConfig.ssapConfig playerConfig.ssapConfig)
-m.youtube.com,music.youtube.com,www.youtube.com##+js(json-prune-fetch-response, playerResponse.streamingData.serverAbrStreamingUrl streamingData.serverAbrStreamingUrl)
-m.youtube.com,music.youtube.com,www.youtube.com##+js(json-prune-xhr-response, playerResponse.playerConfig.ssapConfig playerConfig.ssapConfig)
-m.youtube.com,music.youtube.com,www.youtube.com##+js(json-prune-xhr-response, playerResponse.streamingData.serverAbrStreamingUrl streamingData.serverAbrStreamingUrl)
-d67 12
-a78 6
+m.youtube.com,music.youtube.com,www.youtube.com##+js(json-prune, playerResponse.playerConfig.ssapConfig playerConfig.ssapConfig)
+m.youtube.com,music.youtube.com,www.youtube.com##+js(json-prune, playerResponse.streamingData.serverAbrStreamingUrl streamingData.serverAbrStreamingUrl)
+! m.youtube.com,music.youtube.com,www.youtube.com##+js(json-prune-xhr-response, playerResponse.playerConfig.ssapConfig playerConfig.ssapConfig)
+! m.youtube.com,music.youtube.com,www.youtube.com##+js(json-prune-xhr-response, playerResponse.streamingData.serverAbrStreamingUrl streamingData.serverAbrStreamingUrl)
+a66 1
 ||perchance.org/api/count?key=abt$xhr,1p
-!#if cap_html_filtering
-perchance.org##^script:has-text(/ariables\(\)|to keep this generator|ation_registry|already1AddedAdve5rtIfNeeded =|window\s*.\s*freestar\s*.\s*config\s*= |scripts\s*=|iframes\s*=|cookies\s*=|hasIfr9ame|has3Anal9ytics|quant|checkRes1Load|return\s*new\s*Promise|snigelweb|document\s*\.\s*head\s*\.\s*appendChild\s*\(\s*el\s*\)\s*;|document\s*\.\s*querySelector\s*\(\s*"#main"\s*\)|\$\s*\{\s*"\s*"\}\s*s/)
-!#else
-perchance.org##+js(rmnt, script, /ariables\(\)|to keep this generator|ation_registry|already1AddedAdve5rtIfNeeded =|window\s*.\s*freestar\s*.\s*config\s*= |scripts\s*=|iframes\s*=|cookies\s*=|hasIfr9ame|has3Anal9ytics|quant|checkRes1Load|return\s*new\s*Promise|snigelweb|document\s*\.\s*head\s*\.\s*appendChild\s*\(\s*el\s*\)\s*;|document\s*\.\s*querySelector\s*\(\s*"#main"\s*\)|\$\s*\{\s*"\s*"\}\s*s/)
-!#endif
+a78 1
+perchance.org##+js(set, window.__id5_finalization_registry, {})
 d101 2
-a102 2
+a102 1
 infinityscans.xyz,infinityscans.net##+js(rpnt, script, /function .*\(\);\}/, , condition, \x74\x72)
-infinityscans.xyz,infinityscans.net##+js(rpnt, script, /function .*adsbygoogle.*\)\)\;/)
+a103 1
+infinityscans.xyz,infinityscans.net##+js(rpnt, script, Apache)
 d109 3
-a111 1
-||es.ylilauta.org^$frame,redirect=noopframe
+a111 10
+!#if cap_html_filtering
+||ylilauta.org/api/community/board/load-threads$xhr,replace=/card a/card bbb/g
+ylilauta.org##div.card.bbb
+ylilauta.org##div.card.bbb + a[href="/user/gold"]
+!#if !env_mobile
+||ylilauta.org^$doc,xhr,replace=/\<div class\="card a"\>/<div id="hdewafdwaf"><\/div><div class="card a">/g
+ylilauta.org###hdewafdwaf:has(+ iframe.a):style(background-color: black !important; position: relative !important; height: 416px !important; width: 100.5% !important; margin-top: -416px !important; top: 430px !important; grid-column: 1 / -1;)
+ylilauta.org###hdewafdwaf:has(+ div.card.bbb)
+!#endif
+!#endif
 d117 1
 a117 1
 igg-games.com##a[href^="https://igg-games.com/c1flix3"], a[aria-label="faadgg"], a[aria-label="fdgg"], a[aria-label="aswd"]
@@ -267,16 +295,16 @@ a133 4
 ||igg-games.com/wp-content/uploads/2024/02/aaa.jpg$image
 ||igg-games.com/wp-content/uploads/2024/02/sss.jpg$image
 /customad.js$badfilter
-diff name:ublock-unbreak lines:4 checksum:dfd59bd302
+diff name:ublock-unbreak lines:4 checksum:a30014b839
 d3 2
 a4 2
 ! Last modified: Mon, 26 Feb 2024 14:10:32 +0000
-! Diff-Path: ../patches/2024.2.27.624.patch#ublock-unbreak
-diff name:easylist lines:282 checksum:460519ae53
+! Diff-Path: ../patches/2024.2.27.920.patch#ublock-unbreak
+diff name:easylist lines:295 checksum:3bc8b53b03
 d4 2
 a5 2
-! Last modified: Tue, 27 Feb 2024 04:41:34 +0000
-! Diff-Path: ../patches/2024.2.27.624.patch#easylist
+! Last modified: Tue, 27 Feb 2024 13:27:14 +0000
+! Diff-Path: ../patches/2024.2.27.920.patch#easylist
 d150 1
 d715 1
 a1238 1
@@ -485,6 +513,9 @@ a64297 1
 d64319 1
 a64319 1
 12news.com,9news.com,9to5google.com,9to5mac.com,aad.org,advfn.com,all3dp.com,allaboutcookies.org,allnovel.net,athleticbusiness.com,audiokarma.org,beeradvocate.com,beliefnet.com,bizjournals.com,biznews.com,bolavip.com,businessinsider.com,cbs8.com,cc.com,ccjdigital.com,computerworld.com,dailytrust.com,delish.com,driven.co.nz,ecr.co.za,electrek.co,engineeringnews.co.za,equipmentworld.com,etcanada.com,footyheadlines.com,fox10phoenix.com,fox13news.com,fox26houston.com,fox29.com,fox2detroit.com,fox32chicago.com,fox35orlando.com,fox4news.com,fox5atlanta.com,fox5dc.com,fox5ny.com,fox7austin.com,fox9.com,foxbusiness.com,foxla.com,foxnews.com,funkidslive.com,gfinityesports.com,globalspec.com,gmanetwork.com,grammarbook.com,hbr.org,howstuffworks.com,huffpost.com,insidehook.com,insider.com,intouchweekly.com,khou.com,koat.com,ktvu.com,lifeandstylemag.com,macstories.net,mail.com,mangakakalot.app,memuplay.com,metro.us,metrophiladelphia.com,miningweekly.com,mixed-news.com,mobilesyrup.com,modernhealthcare.com,msnbc.com,my9nj.com,namemc.com,nbcnews.com,newrepublic.com,nzherald.co.nz,oneesports.gg,opb.org,papermag.com,physiology.org,pixiv.net,punchng.com,qns.com,realsport101.com,reason.com,refinery29.com,roadandtrack.com,scroll.in,seattletimes.com,songkick.com,sportskeeda.com,thelocal.at,thelocal.ch,thelocal.de,thelocal.dk,thelocal.es,thelocal.fr,thelocal.it,thelocal.no,thelocal.se,themarketherald.ca,tmz.com,toofab.com,uploadvr.com,usmagazine.com,vanguardngr.com,wogx.com,wral.com##.ad-container
+a64427 2
+newindian.in##.add160x600
+newindian.in##.add160x600-right
 d64539 1
 a64539 1
 afrsmartinvestor.com.au,afternoondc.in,allmovie.com,allmusic.com,bolnews.com,brw.com.au,gq.co.za,imageupscaler.com,mja.com.au,ocregister.com,online-convert.com,orangecounty.com,petrolplaza.com,pornicom.com,premier.org.uk,premierchristianity.com,premierchristianradio.com,premiergospel.org.uk,radio.com,sidereel.com,spine-health.com,yourdictionary.com##.advertising
@@ -505,6 +536,8 @@ a65071 1
 180gadgets.com,247media.com.ng,academicful.com,alltechnerd.com,americansongwriter.com,androidsage.com,animatedtimes.com,anoopcnair.com,askpython.com,asurascans.com,australiangeographic.com.au,autodaily.com.au,bigleaguepolitics.com,borncity.com,boxingnews24.com,browserhow.com,charlieintel.com,chillinghistory.com,chromeunboxed.com,circuitbasics.com,conservativebrief.com,cookingwithdog.com,corrosionhour.com,crimereads.com,cryptobriefing.com,cryptopotato.com,cryptoreporter.info,cryptoslate.com,dailynewshungary.com,dcenquirer.com,dexdotexe.com,eurweb.com,exeo.app,fandomwire.com,firstsportz.com,flickeringmyth.com,flyingmag.com,freemagazines.top,gadgetinsiders.com,gameinfinitus.com,gatewaynews.co.za,geekdashboard.com,getdroidtips.com,goodyfeed.com,greekreporter.com,hard-drive.net,hollywoodinsider.com,hollywoodunlocked.com,indianhealthyrecipes.com,inspiredtaste.net,iotwreport.com,jojolandsmanga.com,journeybytes.com,journeyjunket.com,libertyunlocked.com,linuxfordevices.com,lithub.com,medicotopics.com,medievalists.net,mpost.io,nationalfile.com,nintendoeverything.com,notalwaysright.com,nsw2u.com,organicfacts.net,patriotfetch.com,premiumtimesng.com,protrumpnews.com,pureinfotech.com,redrightvideos.com,reneweconomy.com.au,reptilesmagazine.com,respawnfirst.com,rezence.com,roadaheadonline.co.za,rok.guide,sciencenotes.org,sdnews.com,simscommunity.info,small-screen.co.uk,storypick.com,streamingbetter.com,superwatchman.com,talkers.com,tech-latest.com,techpp.com,techrounder.com,techviral.net,thecinemaholic.com,thecricketlounge.com,thedriven.io,thegamehaus.com,thegatewaypundit.com,thegeekpage.com,thenipslip.com,thewincentral.com,trendingpolitics.com,trendingpoliticsnews.com,twistedvoxel.com,videogamer.com,walletinvestor.com,waves4you.com,wbiw.com,welovetrump.com,wepc.com,win.gg,wisden.com,zerohanger.com##.code-block
 a65227 1
 marketwatch.com##.cxense-loading
+a65260 1
+newindian.in##.deskad
 d65928 1
 a65928 1
 agcanada.com,allmusic.com,allrecipes.com,allthatsinteresting.com,autoaction.com.au,autos.ca,ballstatedaily.com,bdonline.co.uk,boardgamegeek.com,bravewords.com,broadcastnow.co.uk,cantbeunseen.com,cattime.com,chairmanlol.com,chemistryworld.com,citynews.ca,comingsoon.net,coolmathgames.com,crn.com.au,diyfail.com,dogtime.com,drugtargetreview.com,edmunds.com,europeanpharmaceuticalreview.com,explainthisimage.com,foodandwine.com,foodista.com,freshbusinessthinking.com,funnyexam.com,funnytipjars.com,gamesindustry.biz,iamdisappoint.com,imedicalapps.com,itnews.com.au,japanisweird.com,jta.org,legion.org,lifezette.com,liveoutdoors.com,milesplit.com,monocle.com,morefailat11.com,moviemistakes.com,nbl.com.au,nfcw.com,objectiface.com,passedoutphotos.com,playstationlifestyle.net,precisionvaccinations.com,rollcall.com,roulettereactions.com,searchenginesuggestions.com,shinyshiny.tv,shitbrix.com,sparesomelol.com,spoiledphotos.com,spokesman.com,sportsnet.ca,sportsvite.com,stopdroplol.com,straitstimes.com,suffolknews.co.uk,supersport.com,tattoofailure.com,thedriven.io,thefashionspot.com,thestar.com.my,titantv.com,tutorialrepublic.com,where.ca,yoimaletyoufinish.com##.leaderboard
@@ -512,6 +545,8 @@ a66151 1
 radioyacht.com##.mpc-carousel__wrapper
 a66216 1
 firstpost.com##.newtopadd
+a66599 1
+newindian.in##.rhs-ad2
 a66601 1
 firstpost.com##.rhs-tp-ad
 d66700 1
@@ -532,6 +567,8 @@ clevelandclinic.org##[data-identity="leaderboard-ad"]
 d68272 1
 a68272 1
 boxthislap.org,unknowncheats.me##img[width="300px"]
+a68349 1
+imgur.com##.Post-item:has(.Post-item-external-ad)
 a68357 1
 slickdeals.net##.bp-p-filterGrid_item:has(.bp-c-label--promoted)
 a68368 1
@@ -545,6 +582,8 @@ a68632 1
 finance.yahoo.com##.sdaContainer
 a69030 1
 xvideos.name###publicidad-video
+a69101 1
+redgifs.com##._advertTab_hvumk_1
 a69569 1
 pornhub.com##.realsex
 d70014 1
@@ -552,14 +591,18 @@ a70014 1
 tube8.es,tube8.fr,youporngay.com##video[autoplay]
 a70032 1
 pornhub.com##div[class="video-wrapper"] > .clear.hd:has(.adsbytrafficjunky)
+a70210 1
+@@||live.primis.tech^$xmlhttprequest,domain=xxlmag.com
 d70468 1
 a70468 1
 @@||imasdk.googleapis.com/js/sdkloader/ima3.js$domain=247sports.com|api.screen9.com|autokult.pl|bbc.com|blastingnews.com|bloomberg.co.jp|bloomberg.com|bsfuji.tv|cbc.ca|cbsnews.com|cbssports.com|chicagotribune.com|clickorlando.com|cnet.com|crunchyroll.com|delish.com|distro.tv|doubtnut.com|einthusan.tv|embed.comicbook.com|etonline.com|farfeshplus.com|filmweb.pl|game.goo.ne.jp|game.pointmall.rakuten.net|gamebox.gesoten.com|gamepix.com|games.usatoday.com|gbnews.com|geo.dailymotion.com|givemesport.com|goodmorningamerica.com|goodstream.uno|gospodari.com|howstuffworks.com|humix.com|ignboards.com|iheart.com|insideedition.com|irctc.co.in|klix.ba|lemino.docomo.ne.jp|locipo.jp|maharashtratimes.com|metacritic.com|minigame.aeriagames.jp|missoulian.com|myspace.com|nettavisen.no|paralympic.org|paramountplus.com|player.abacast.net|player.earthtv.com|player.performgroup.com|plex.tv|pointmall.rakuten.co.jp|popculture.com|realmadrid.com|rte.ie|rumble.com|s.yimg.jp|scrippsdigital.com|sonyliv.com|southpark.lat|southparkstudios.com|sportsbull.jp|sportsport.ba|success-games.net|synk-casualgames.com|tbs.co.jp|tdn.com|truvid.com|tubitv.com|tv-asahi.co.jp|tv.rakuten.co.jp|tver.jp|tvp.pl|univtec.com|video.tv-tokyo.co.jp|vlive.tv|watch.nba.com|wbal.com|weather.com|webdunia.com|wellgames.com|worldsurfleague.com|wowbiz.ro|wsj.com|wtk.pl|xda-developers.com|zdnet.com|zeebiz.com
-diff name:easyprivacy lines:53 checksum:04884c8b0b
+diff name:easyprivacy lines:57 checksum:58c6b723c4
 d4 2
 a5 2
-! Last modified: Tue, 27 Feb 2024 04:41:34 +0000
-! Diff-Path: ../patches/2024.2.27.624.patch#easyprivacy
+! Last modified: Tue, 27 Feb 2024 10:53:52 +0000
+! Diff-Path: ../patches/2024.2.27.920.patch#easyprivacy
+a85 1
+/2.120.0/main.js
 a1990 1
 /snowplow-tracker.tatest.js
 a2733 1
@@ -586,6 +629,8 @@ a12746 1
 ||ampltd.medal.tv^
 a12809 1
 ||armedangels.com/javascript/script.js
+a12968 1
+||cpb.esprit.*/91405.js
 a13118 1
 ||faro-collector-prod-*.grafana.net^
 a13320 1
