@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Quick fixes
 ! Expires: 12 hours
-! Last modified: Tue, 27 Feb 2024 15:06:18 +0000
-! Diff-Path: ../patches/2024.2.27.920.patch#ublock-quick-fixes
+! Last modified: Tue, 27 Feb 2024 19:05:40 +0000
+! Diff-Path: ../patches/2024.2.27.1219.patch#ublock-quick-fixes
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/quick-fixes.txt ***
@@ -44,7 +44,6 @@ youtube.com##+js(json-prune, playerResponse.adPlacements playerResponse.playerAd
 !#endif
 !#endif
 ||googlevideo.com/videoplayback*&ctier=L&*%2Cctier%2C$xhr,3p,domain=m.youtube.com|music.youtube.com|www.youtube.com
-youtube.com##body > ytd-app > #content.ytd-app.style-scope > tp-yt-app-drawer#guide.ytd-app.style-scope[align="start"][role="navigation"][style^="transition-duration:"][position] + ytd-mini-guide-renderer.ytd-app.style-scope + ytd-page-manager#page-manager.ytd-app.style-scope > ytd-watch-flexy.ytd-page-manager.style-scope[video-id][js-panel-height_][flexy][rounded-info-panel][role="main"][style^="--ytd-watch-flexy-"] > #single-column-container.ytd-watch-flexy.style-scope + #columns.ytd-watch-flexy.style-scope > #primary.ytd-watch-flexy.style-scope > #primary-inner.ytd-watch-flexy.style-scope > #player.ytd-watch-flexy.style-scope > #player-container-outer.ytd-watch-flexy.style-scope > #player-container-inner.ytd-watch-flexy.style-scope > #player-container.ytd-watch-flexy.style-scope[role="complementary"][style] > ytd-player#ytd-player.ytd-watch-flexy.style-scope[style] > #container.ytd-player.style-scope > #movie_player.playing-mode.html5-video-player[data-version^="/s/player/"][aria-label] > .ytp-ad-module.video-ads[data-layer]:not(:empty)
 www.youtube.com##+js(remove-cache-storage-item, yt-appshell-assets, /\/s\/desktop\/[0-9a-f]{8}\/(?:cs|j)sbin\//)
 www.youtube.com##+js(remove-cache-storage-item, yt-appshell-assets, /\/s\/player\/[0-9a-f]{8}\/(?:player_ias\.vflset\/|www-player\.css)/)
 ! ||youtube.com/s/desktop/*/cssbin/$css,xhr,uritransform=/desktop\/[0-9a-f]{8}\/cssbin/desktop\/0f128ffd\/cssbin/,domain=www.youtube.com
@@ -63,10 +62,7 @@ www.youtube.com##+js(trusted-replace-fetch-response, /\"adSlots.*?\}\]\}\}\]\,/,
 !#endif
 m.youtube.com,music.youtube.com,www.youtube.com##+js(set, ytInitialPlayerResponse.playerConfig.ssapConfig, undefined)
 m.youtube.com,music.youtube.com,www.youtube.com##+js(set, ytInitialPlayerResponse.streamingData.serverAbrStreamingUrl, undefined)
-m.youtube.com,music.youtube.com,www.youtube.com##+js(json-prune, playerResponse.playerConfig.ssapConfig playerConfig.ssapConfig)
-m.youtube.com,music.youtube.com,www.youtube.com##+js(json-prune, playerResponse.streamingData.serverAbrStreamingUrl streamingData.serverAbrStreamingUrl)
-! m.youtube.com,music.youtube.com,www.youtube.com##+js(json-prune-xhr-response, playerResponse.playerConfig.ssapConfig playerConfig.ssapConfig)
-! m.youtube.com,music.youtube.com,www.youtube.com##+js(json-prune-xhr-response, playerResponse.streamingData.serverAbrStreamingUrl streamingData.serverAbrStreamingUrl)
+m.youtube.com,music.youtube.com,www.youtube.com##+js(json-prune, playerResponse.playerConfig.ssapConfig playerResponse.streamingData.serverAbrStreamingUrl playerConfig.ssapConfig streamingData.serverAbrStreamingUrl)
 ! VOE sites
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$script,3p,redirect=google-ima.js,domain=jayservicestuff.com
 jayservicestuff.com##+js(nowoif)
@@ -122,9 +118,10 @@ infinityscans.xyz,infinityscans.net##+js(rpnt, script, Apache)
 ylilauta.org##div.card.bbb
 ylilauta.org##div.card.bbb + a[href="/user/gold"]
 !#if !env_mobile
-||ylilauta.org^$doc,xhr,replace=/\<div class\="card a"\>/<div id="hdewafdwaf"><\/div><div class="card a">/g
-ylilauta.org###hdewafdwaf:has(+ iframe.a):style(background-color: black !important; position: relative !important; height: 416px !important; width: 100.5% !important; margin-top: -416px !important; top: 430px !important; grid-column: 1 / -1;)
-ylilauta.org###hdewafdwaf:has(+ div.card.bbb)
+||ylilauta.org^$doc,xhr,replace=/\<div class\="card a"\>/<div id="hdewafdwaf"><\/div><div><\/div><div class="card a">/g
+ylilauta.org###hdewafdwaf:has(+ div + iframe.a):style(background-color: black !important; position: relative !important; height: 416px !important; width: 100.5% !important; margin-top: -400px !important; top: 436px !important; grid-column: 1 / -1;)
+ylilauta.org###hdewafdwaf:has(+ div + div.card.bbb)
+ylilauta.org###hdewafdwaf + div
 !#endif
 !#endif
 iwb.jp##+js(alert-buster)
