@@ -1,24 +1,29 @@
-diff name:ublock-annoyances lines:15 checksum:3409475a02
+diff name:ublock-annoyances lines:20 checksum:07e05b1a07
 d3 2
 a4 2
-! Last modified: Thu, 29 Feb 2024 11:09:51 +0000
-! Diff-Path: ../patches/2024.2.29.1040.patch#ublock-annoyances
+! Last modified: Thu, 29 Feb 2024 20:46:04 +0000
+! Diff-Path: ../patches/2024.2.29.1341.patch#ublock-annoyances
+d43 1
+a43 1
+consent.google.*##[data-p*="/consent.google."]:has(button[jsname="tWT92d"])
 d311 1
 a311 1
 consent.youtube.com##[data-p*="/consent.youtube.com"]:has(button[jsname="tWT92d"])
 d630 1
 a630 1
 gld.nl,omroepwest.nl,omroepzeeland.nl,omropfryslan.nl,rijnmond.nl,rtvdrenthe.nl,rtvnoord.nl,rtvutrecht.nl##+js(trusted-set-cookie, consent-cookie-toggles, [{%22type%22:%22social%22%2C%22value%22:3}%2C{%22type%22:%22remaining%22%2C%22value%22:3}])
-a639 4
+a639 6
 ls-tc.de##+js(trusted-set-cookie, disclaimer, 2015040809)
 21vek.by##+js(trusted-set-local-storage-item, partner-cookies, '{"value":{"isAnalyticsCookies":false,"isFunctionalCookies":true}}')
 mobile-fueling.de##+js(set-cookie, cookieControl, true)
 mobile-fueling.de##+js(trusted-set-cookie, cookieControlPrefs, ["comfort"])
-diff name:ublock-badware lines:108 checksum:b712916209
+! reject all
+bfmtv.com##+js(trusted-set-cookie, euconsent-v2, CP6vdoAP6vdoAAHABBENApEgAAAAAAAAAAAAAAAAAAAA.YAAAAAAAAAAA)
+diff name:ublock-badware lines:108 checksum:6703ae149d
 d3 2
 a4 2
 ! Last modified: Wed, 28 Feb 2024 14:21:21 +0000
-! Diff-Path: ../patches/2024.2.29.1040.patch#ublock-badware
+! Diff-Path: ../patches/2024.2.29.1341.patch#ublock-badware
 d237 1
 d320 1
 d344 1
@@ -123,11 +128,11 @@ d2978 1
 d2980 1
 d3131 1
 d3200 1
-diff name:ublock-filters lines:263 checksum:76f4f56f13
+diff name:ublock-filters lines:273 checksum:0b00ce1930
 d3 2
 a4 2
-! Last modified: Thu, 29 Feb 2024 17:20:27 +0000
-! Diff-Path: ../patches/2024.2.29.1040.patch#ublock-filters
+! Last modified: Thu, 29 Feb 2024 21:11:18 +0000
+! Diff-Path: ../patches/2024.2.29.1341.patch#ublock-filters
 d69 1
 d71 1
 a71 1
@@ -319,11 +324,19 @@ d10432 1
 a10432 1
 !loanoffering.in###startButton, #tp98, #rtg-snp2, [src*="google.com/recaptcha"]:others()
 d10661 3
-a10677 1
+d10678 2
+a10679 1
 made-by.org###overlay
 d10681 2
+d10712 12
 d10728 4
+d10739 1
+d10752 3
+d10778 1
 d10818 1
+d10847 2
+d10873 2
+d10898 1
 d10952 1
 d11346 2
 d12398 1
@@ -383,19 +396,21 @@ d20777 1
 d20802 1
 d21497 1
 d21509 2
+a21524 1
+recipahi.com##+js(aeld, DOMContentLoaded, AdBlock)
 d21741 1
 d22370 1
 a22370 1
 yhmgo.com##+js(m3u-prune, /^[a-z0-9]{13}o.*\.ts|adjump|^[a-z0-9]{12}1\d+\.ts/, .m3u8)
-diff name:ublock-privacy lines:3 checksum:b38dd4da2a
+diff name:ublock-privacy lines:3 checksum:adfa43ed35
 d4 1
 a4 1
-! Diff-Path: ../patches/2024.2.29.1040.patch#ublock-privacy
-diff name:ublock-quick-fixes lines:38 checksum:fd1ac78033
+! Diff-Path: ../patches/2024.2.29.1341.patch#ublock-privacy
+diff name:ublock-quick-fixes lines:44 checksum:3d797db6a9
 d3 2
 a4 2
-! Last modified: Thu, 29 Feb 2024 16:59:14 +0000
-! Diff-Path: ../patches/2024.2.29.1040.patch#ublock-quick-fixes
+! Last modified: Thu, 29 Feb 2024 19:10:12 +0000
+! Diff-Path: ../patches/2024.2.29.1341.patch#ublock-quick-fixes
 d33 6
 a38 7
 imgoebn.sbs,picnwqez.sbs##+js(aopr, console.clear)
@@ -413,13 +428,19 @@ a82 4
 @@||amazon-adsystem.com/aax2/apstag.js$script,domain=perchance.org
 @@||cdn.id5-sync.com/api/*/id5-api.js$script,domain=perchance.org
 d85 2
-a86 3
+a86 9
 perchance.org##+js(set, window.Criteo, {})
 perchance.org##+js(set, window.Criteo.PubTag, {})
-perchance.org##+js(set, window.freestar.analytics , {})
+perchance.org##+js(set, window.freestar.analytics, {})
+perchance.org##+js(set, window.freestar.analytics.track, {})
+!#if cap_html_filtering
+perchance.org##^script:has-text(/di__s_a_b_le|chec3kRes1Load|has7Variab4les|ntserve|__id5_finaliz|PubTag|__halo_loaded__|hasI3fr9ame|has3Analy0tics|already1AddedAd3vertIfNeeded\s*=|ad1Provider6Name\s*===|\/\/\s*CMP|let\s*script\s*=|scri3pts\s*=|ifra2mes\s*=|coo1kies\s*=|clasi\s*=|snige|window\s*\.\s*freestar\s*\?|userGaveAdConsent\s*\|\||i > 10|`abp/)
+!#else
+perchance.org##+js(rmnt, script, /di__s_a_b_le|chec3kRes1Load|has7Variab4les|ntserve|__id5_finaliz|PubTag|__halo_loaded__|hasI3fr9ame|has3Analy0tics|already1AddedAd3vertIfNeeded\s*=|ad1Provider6Name\s*===|\/\/\s*CMP|let\s*script\s*=|scri3pts\s*=|ifra2mes\s*=|coo1kies\s*=|clasi\s*=|snige|window\s*\.\s*freestar\s*\?|userGaveAdConsent\s*\|\||i > 10|`abp/)
+!#endif
 d111 1
 a111 1
-infinityscans.xyz,infinityscans.net##+js(rpnt, script, /Android|Apache|Chrome/)
+infinityscans.xyz,infinityscans.net##+js(rpnt, script, /'height'\,'.*'\,'XMLHttpRequest'/, 'height'\,''\,'XMLHttpRequest')
 d117 11
 d144 1
 a147 7
@@ -430,11 +451,11 @@ farsroid.com##div.labeled-dw-ads:style(position: absolute !important; top: -1000
 farsroid.com##div.site-middle-banners:style(position: absolute !important; top: -10000px !important;)
 farsroid.com##div.single-text-ads:style(position: absolute !important; top: -10000px !important;)
 @@||s.yimg.jp/images/listing/tool/cv/ytag.js$domain=redstoneonline.jp
-diff name:ublock-unbreak lines:11 checksum:040e9641c0
+diff name:ublock-unbreak lines:11 checksum:6121c62baa
 d3 2
 a4 2
 ! Last modified: Thu, 29 Feb 2024 15:59:24 +0000
-! Diff-Path: ../patches/2024.2.29.1040.patch#ublock-unbreak
+! Diff-Path: ../patches/2024.2.29.1341.patch#ublock-unbreak
 d2025 1
 a2025 3
 @@||connatix.com^$script,domain=accuweather.com
@@ -442,11 +463,11 @@ a2025 3
 deadline.com#@#.cnx-player-wrapper
 a2466 1
 ||tiqcdn.com^$badfilter
-diff name:easylist lines:152 checksum:21f4e40f78
+diff name:easylist lines:196 checksum:d2d7b62f1a
 d4 2
 a5 2
-! Last modified: Thu, 29 Feb 2024 15:59:24 +0000
-! Diff-Path: ../patches/2024.2.29.1040.patch#easylist
+! Last modified: Thu, 29 Feb 2024 18:59:49 +0000
+! Diff-Path: ../patches/2024.2.29.1341.patch#easylist
 d911 1
 a911 1
 /jshexi.hj?lb=
@@ -456,20 +477,32 @@ a17765 1
 ###kargo-player
 a18321 1
 ||06a21eff24.com^
+a19121 1
+||9bf9309f6f.com^
 a20133 1
 ||afeerdah.net^
 a20535 1
 ||alddoggess.com^
 a20650 1
 ||allsports4free.online^
+a21624 1
+||atpansagean.com^
 a22431 1
 ||beckfaster.com^
 a22486 1
 ||beggarlymeatcan.com^
+a22601 1
+||berrieralbe.com^
+a22951 1
+||bkrmyhynjddpl.com^
 a23264 1
 ||boorgagilden.com^
+a23342 1
+||bouphaig.net^
 a24788 1
 ||civetformity.com^
+a26786 1
+||dhkecbu.com^
 a27205 1
 ||doastaib.xyz^
 a29112 1
@@ -478,12 +511,18 @@ a30251 1
 ||fovdvoz.com^
 a31117 1
 ||gjhksxthokyjlm.com^
+a31345 1
+||gmuinujsn.com^
 a31924 1
 ||guywireincorp.com^
+a31967 1
+||gygibjzjtq.com^
 a32464 1
 ||hfugukhcea.com^
 a33023 1
 ||hugenicholas.com^
+a33235 1
+||ibortvgbkvpmes.com^
 a33283 1
 ||idealintruder.com^
 a33398 1
@@ -492,6 +531,8 @@ a34060 1
 ||iosqmookf.com^
 a34652 1
 ||jikbwoozvci.com^
+a35751 1
+||kuesjmznhhid.com^
 a36055 1
 ||lbylqeravmowq.top^
 a36821 1
@@ -502,14 +543,22 @@ a38010 1
 ||mndjcojpsdcr.com^
 a38539 1
 ||mxgboxq.com^
+a38622 1
+||mzotuklkorr.com^
 a38761 1
 ||naulme.info^
+a39724 1
+||oaksandtheircle.info^
+a40127 1
+||oldsia.xyz^
 a41122 1
 ||paragraphopera.com^
 a41252 1
 ||paughtyrostrum.com^
 a41293 1
 ||pbacijttzozq.com^
+a41612 1
+||pfjfrxayglyouj.com^
 a42597 1
 ||prhbdkmdtobn.com^
 a42632 1
@@ -522,6 +571,16 @@ a46202 1
 ||sierrasectormacaroni.com^
 a46668 1
 ||soeverbabi.com^
+a47455 1
+||stunning-lift.com^
+a48124 1
+||tegleebs.com^
+a49557 1
+||typsxumcsjw.com^
+a49634 1
+||udgpjfdzxrvecn.com^
+a49915 1
+||unhappyswitch.com^
 a50174 1
 ||usainoad.net^
 a50411 1
@@ -530,8 +589,12 @@ a50460 1
 ||vbrbgki.com^
 a50893 1
 ||vlkxsrhi.com^
+a51500 1
+||welltodoresource.com^
 a58516 1
 ||variabilityproducing.com^$popup
+a58670 1
+||welltodoresource.com^$popup
 a58816 1
 ||zeechoog.net^$popup
 a61318 1
@@ -542,6 +605,8 @@ a61481 1
 d62371 1
 a62371 1
 |about:blank#$popup,domain=22pixx.xyz|adblockstrtape.link|animepahe.com|aniwave.to|bitporno.com|cdnqq.net|clipconverter.cc|dailyuploads.net|dood.la|dood.so|dood.to|dood.video|dood.watch|dood.ws|doodcdn.com|embed.embedz.click|flashx.net|fmovies.to|gospeljingle.com|hqq.tv|imagetwist.com|kissanime-ru.ws|mixdrop.bz|mixdrop.sx|mp4upload.com|onlystream.tv|playtube.ws|popads.net|powvideo.net|powvldeo.cc|putlocker.style|run-syndicate.com|sdmoviespoint.online|soap2day.tf|spcdn.cc|strcloud.link|streamani.net|streamsb.net|streamtape.cc|streamtape.com|streamtape.site|strtape.cloud|strtape.tech|strtapeadblock.club|strtapeadblock.me|strtpe.link|tapecontent.net|turboimagehost.com|upstream.to|uptostream.com|uptostream.eu|uptostream.fr|uptostream.link|userload.co|vev.red|vevo.io|vidcloud.co|videobin.co|videowood.tv|vidoza.net|voe.sx|vortez.net|vshare.eu|vumoo.to|waaw.to|watchserieshd.tv
+a62685 1
+||player.javboys.cam/js/script_
 a62689 1
 ||pornalin.com/skd
 a62857 1
@@ -595,11 +660,11 @@ a68563 1
 offidocs.com##[id^="ja-container-prev"]
 a68920 1
 hentaiasmr.moe###bottom-tab
-diff name:easyprivacy lines:75 checksum:a4f94a2ca3
+diff name:easyprivacy lines:78 checksum:1bd49bee1a
 d4 2
 a5 2
-! Last modified: Thu, 29 Feb 2024 15:59:24 +0000
-! Diff-Path: ../patches/2024.2.29.1040.patch#easyprivacy
+! Last modified: Thu, 29 Feb 2024 18:59:49 +0000
+! Diff-Path: ../patches/2024.2.29.1341.patch#easyprivacy
 d86 1
 a1308 1
 /log/metrics?
@@ -644,6 +709,7 @@ a7731 1
 a7854 1
 ||worriedwine.com^
 d8025 1
+d8664 1
 a9009 2
 ||adnz.co/dmp/publisher.js
 ||adnz.co/header.js
@@ -651,6 +717,8 @@ a9557 1
 ||connect.facebook.net^*/pcm.js$third-party
 a10041 1
 ||i.posthog.com^
+a12352 1
+||ukw.jp/taglog/
 a13432 1
 ||megatron.igraal.com^
 a14021 1
