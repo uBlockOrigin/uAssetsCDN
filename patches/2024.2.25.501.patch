@@ -1,8 +1,8 @@
-diff name:ublock-annoyances lines:35 checksum:bebbe39bd7
+diff name:ublock-annoyances lines:42 checksum:8146ce53e6
 d3 2
 a4 2
-! Last modified: Thu, 29 Feb 2024 07:13:37 +0000
-! Diff-Path: ../patches/2024.2.29.439.patch#ublock-annoyances
+! Last modified: Thu, 29 Feb 2024 11:09:51 +0000
+! Diff-Path: ../patches/2024.2.29.754.patch#ublock-annoyances
 d79 1
 a79 1
 scaleway.com##+js(trusted-set-cookie, _scw_rgpd_hash, 408362395)
@@ -16,7 +16,12 @@ tomsguide.com##+js(trusted-set-cookie, consentUUID, cefc5c9f-0e4c-4d6f-ad00-41a1
 a202 2
 hyperoptic.com##+js(trusted-set-cookie, ho_cookie_consent, essential)
 education.lego.com##+js(trusted-set-cookie, LEGO_COOKIE_SETTINGS, '{"preferences":[{"key":"necessary","value":true},{"key":"analytics","value":false},{"key":"legomarketing","value":false},{"key":"thirdparty","value":false}]}')
-a627 11
+d308 1
+a308 1
+consent.youtube.com##[data-p*="/consent.youtube.com"]:has(button[jsname="tWT92d"])
+d627 1
+a627 14
+gld.nl,omroepwest.nl,omroepzeeland.nl,omropfryslan.nl,rijnmond.nl,rtvdrenthe.nl,rtvnoord.nl,rtvutrecht.nl##+js(trusted-set-cookie, consent-cookie-toggles, [{%22type%22:%22social%22%2C%22value%22:3}%2C{%22type%22:%22remaining%22%2C%22value%22:3}])
 ! "Ok" button
 luminousindia.com##+js(trusted-set-local-storage-item, lms_cookies, nk9jfSLYwDn7O5xP0UhgFw==)
 ! functional, remove "id", allow recaptcha
@@ -28,17 +33,19 @@ esprit.*##+js(trusted-set-cookie, CONSENTMGR, 'c1:0|c2:0|c3:0|c4:0|c5:0|c6:0|c7:
 lekarnalemon.cz##+js(trusted-set-cookie, cookiesSettings, %7B%22necessary%22%3Atrue%2C%22preferential%22%3Atrue%7D, , , reload, 1)
 ls-tc.de##+js(trusted-set-cookie, disclaimer, 2015040809)
 21vek.by##+js(trusted-set-local-storage-item, partner-cookies, '{"value":{"isAnalyticsCookies":false,"isFunctionalCookies":true}}')
+mobile-fueling.de##+js(set-cookie, cookieControl, true)
+mobile-fueling.de##+js(trusted-set-cookie, cookieControlPrefs, ["comfort"])
 d4464 3
 a4480 4
 dngz.net##+js(aopr, document.oncontextmenu)
 dngz.net##+js(aopr, document.onkeydown)
 dngz.net##+js(set, forbidDebug, noopFunc)
 vnexpress.net##+js(set, adblock, 2)
-diff name:ublock-badware lines:116 checksum:cc7a02ecc7
+diff name:ublock-badware lines:116 checksum:c741f7a2d5
 d3 2
 a4 2
 ! Last modified: Wed, 28 Feb 2024 14:21:21 +0000
-! Diff-Path: ../patches/2024.2.29.439.patch#ublock-badware
+! Diff-Path: ../patches/2024.2.29.754.patch#ublock-badware
 d237 1
 d320 1
 d344 1
@@ -151,11 +158,11 @@ d3128 1
 d3197 1
 a3197 1
 ||informations-clients.info^$all
-diff name:ublock-filters lines:248 checksum:af71c51248
+diff name:ublock-filters lines:274 checksum:b27a26ba12
 d3 2
 a4 2
-! Last modified: Thu, 29 Feb 2024 05:31:57 +0000
-! Diff-Path: ../patches/2024.2.29.439.patch#ublock-filters
+! Last modified: Thu, 29 Feb 2024 12:22:23 +0000
+! Diff-Path: ../patches/2024.2.29.754.patch#ublock-filters
 a9 2
 tv.youtube.com##+js(trusted-replace-xhr-response, '"adPlacements"', '"no_ads"', /playlist\?list=|player\?|watch\?v=|youtubei\/v1\/player/)
 !#if !cap_html_filtering
@@ -185,6 +192,10 @@ d418 2
 d422 1
 d594 1
 d792 1
+d935 1
+a935 2
+www.msn.com##+js(json-prune-fetch-response, properties.componentConfigs.slideshowConfigs.slideshowSettings.interstitialNativeAds, , propsToMatch, url:consumptionpage/gallery_windows/config.json)
+www.msn.com##+js(json-prune-fetch-response, *, list.*.link.ad list.*.link.kicker, propsToMatch, url:appconfig/default/config.json)
 d977 1
 d1188 1
 a1188 3
@@ -219,6 +230,20 @@ d4487 3
 d4505 1
 a4533 1
 cambabe.*##+js(acs, crakPopInParams)
+a4586 1
+||grammarly.com/*utm_source=$popup,domain=duplichecker.com|plagiarismchecker.co|plagiarismdetector.net|searchenginereports.net|smallseotools.com
+d4588 8
+a4595 5
+duplichecker.com,plagiarismchecker.co,plagiarismdetector.net,searchenginereports.net##+js(nostif, showPopup)
+duplichecker.com##[class^="atasifub"], .jetdew
+plagiarismchecker.co##[class^="lala-"], #topbox, #afterbox
+||plagiarismchecker.co/imgimg$image,1p
+plagiarismdetector.net##a[rel*="nofollow"][rel*="noopener"]:has(> img.img-fluid[src^="https://plagiarismdetector.net/pd-imgs/"])
+d4597 1
+a4598 2
+searchenginereports.net##.grammarly-overall
+||searchenginereports.net/theAdGMC/$image,1p
+d4603 4
 d5502 2
 d5566 6
 d5577 2
@@ -273,21 +298,25 @@ imagefap.com##+js(acs, $, popCookie)
 ! END: Rules from filters.txt
 d9604 3
 a9606 3
-puzzle-loop.com,puzzle-words.com,puzzle-chess.com,puzzle-thermometers.com,puzzle-norinori.com,puzzle-minesweeper.com,puzzle-slant.com,puzzle-lits.com,puzzle-galaxies.com,puzzle-tents.com,puzzle-battleships.com,puzzle-pipes.com,puzzle-hitori.com,puzzle-heyawake.com,puzzle-shingoki.com,puzzle-masyu.com,puzzle-stitches.com,puzzle-aquarium.com,puzzle-tapa.com,puzzle-star-battle.com,puzzle-kakurasu.com,puzzle-skyscrapers.com,puzzle-futoshiki.com,puzzle-shakashaka.com,puzzle-kakuro.com,puzzle-jigsaw-sudoku.com,puzzle-killer-sudoku.com,puzzle-binairo.com,puzzle-nonograms.com,puzzle-sudoku.com,puzzle-light-up.com,puzzle-bridges.com,puzzle-shikaku.com,puzzle-nurikabe.com,puzzle-dominosa.com###MainContainer > [id]:has(> [id^="btIn"] > #bannerTop):style(position: absolute !important; top: -10000px !important;)
-puzzle-loop.com,puzzle-words.com,puzzle-chess.com,puzzle-thermometers.com,puzzle-norinori.com,puzzle-minesweeper.com,puzzle-slant.com,puzzle-lits.com,puzzle-galaxies.com,puzzle-tents.com,puzzle-battleships.com,puzzle-pipes.com,puzzle-hitori.com,puzzle-heyawake.com,puzzle-shingoki.com,puzzle-masyu.com,puzzle-stitches.com,puzzle-aquarium.com,puzzle-tapa.com,puzzle-star-battle.com,puzzle-kakurasu.com,puzzle-skyscrapers.com,puzzle-futoshiki.com,puzzle-shakashaka.com,puzzle-kakuro.com,puzzle-jigsaw-sudoku.com,puzzle-killer-sudoku.com,puzzle-binairo.com,puzzle-nonograms.com,puzzle-sudoku.com,puzzle-light-up.com,puzzle-bridges.com,puzzle-shikaku.com,puzzle-nurikabe.com,puzzle-dominosa.com###MainContainer > [id^="bannerTopSpacer"]:style(position: absolute !important; top: -10000px !important;)
-puzzle-loop.com,puzzle-words.com,puzzle-chess.com,puzzle-thermometers.com,puzzle-norinori.com,puzzle-minesweeper.com,puzzle-slant.com,puzzle-lits.com,puzzle-galaxies.com,puzzle-tents.com,puzzle-battleships.com,puzzle-pipes.com,puzzle-hitori.com,puzzle-heyawake.com,puzzle-shingoki.com,puzzle-masyu.com,puzzle-stitches.com,puzzle-aquarium.com,puzzle-tapa.com,puzzle-star-battle.com,puzzle-kakurasu.com,puzzle-skyscrapers.com,puzzle-futoshiki.com,puzzle-shakashaka.com,puzzle-kakuro.com,puzzle-jigsaw-sudoku.com,puzzle-killer-sudoku.com,puzzle-binairo.com,puzzle-nonograms.com,puzzle-sudoku.com,puzzle-light-up.com,puzzle-bridges.com,puzzle-shikaku.com,puzzle-nurikabe.com,puzzle-dominosa.com###MainContainer + [id]:has(> #bannerSide):style(position: absolute !important; top: -10000px !important;)
+puzzle-loop.com,puzzle-words.com,puzzle-chess.com,puzzle-thermometers.com,puzzle-norinori.com,puzzle-minesweeper.com,puzzle-slant.com,puzzle-lits.com,puzzle-galaxies.com,puzzle-tents.com,puzzle-battleships.com,puzzle-pipes.com,puzzle-hitori.com,puzzle-heyawake.com,puzzle-shingoki.com,puzzle-masyu.com,puzzle-stitches.com,puzzle-aquarium.com,puzzle-tapa.com,puzzle-star-battle.com,puzzle-kakurasu.com,puzzle-skyscrapers.com,puzzle-futoshiki.com,puzzle-shakashaka.com,puzzle-kakuro.com,puzzle-jigsaw-sudoku.com,puzzle-killer-sudoku.com,puzzle-binairo.com,puzzle-nonograms.com,puzzle-sudoku.com,puzzle-light-up.com,puzzle-bridges.com,puzzle-shikaku.com,puzzle-nurikabe.com,puzzle-dominosa.com###MainContainer > [id]:has(> [id^="btIn"] > #bannerTop):style(clip-path: circle(0) !important;)
+puzzle-loop.com,puzzle-words.com,puzzle-chess.com,puzzle-thermometers.com,puzzle-norinori.com,puzzle-minesweeper.com,puzzle-slant.com,puzzle-lits.com,puzzle-galaxies.com,puzzle-tents.com,puzzle-battleships.com,puzzle-pipes.com,puzzle-hitori.com,puzzle-heyawake.com,puzzle-shingoki.com,puzzle-masyu.com,puzzle-stitches.com,puzzle-aquarium.com,puzzle-tapa.com,puzzle-star-battle.com,puzzle-kakurasu.com,puzzle-skyscrapers.com,puzzle-futoshiki.com,puzzle-shakashaka.com,puzzle-kakuro.com,puzzle-jigsaw-sudoku.com,puzzle-killer-sudoku.com,puzzle-binairo.com,puzzle-nonograms.com,puzzle-sudoku.com,puzzle-light-up.com,puzzle-bridges.com,puzzle-shikaku.com,puzzle-nurikabe.com,puzzle-dominosa.com###MainContainer > [id^="bannerTopSpacer"]:style(clip-path: circle(0) !important;)
+puzzle-loop.com,puzzle-words.com,puzzle-chess.com,puzzle-thermometers.com,puzzle-norinori.com,puzzle-minesweeper.com,puzzle-slant.com,puzzle-lits.com,puzzle-galaxies.com,puzzle-tents.com,puzzle-battleships.com,puzzle-pipes.com,puzzle-hitori.com,puzzle-heyawake.com,puzzle-shingoki.com,puzzle-masyu.com,puzzle-stitches.com,puzzle-aquarium.com,puzzle-tapa.com,puzzle-star-battle.com,puzzle-kakurasu.com,puzzle-skyscrapers.com,puzzle-futoshiki.com,puzzle-shakashaka.com,puzzle-kakuro.com,puzzle-jigsaw-sudoku.com,puzzle-killer-sudoku.com,puzzle-binairo.com,puzzle-nonograms.com,puzzle-sudoku.com,puzzle-light-up.com,puzzle-bridges.com,puzzle-shikaku.com,puzzle-nurikabe.com,puzzle-dominosa.com###MainContainer + [id]:has(> #bannerSide):style(clip-path: circle(0) !important;)
 d9608 1
 d9676 1
 a9676 1
 @@||js.estat.com/js/$script,domain=rmcbfmplay.com
 d9724 1
-a9724 1
+a9724 2
 visionpapers.org##+js(rmnt, script, adblockimg)
+visionpapers.org##+js(nano-sib, disabled)
 a9730 2
 faqwiki.us##+js(nostif, EzoIvent)
 faqwiki.us##+js(aopr, antiAdBlockerHandler)
+d9734 1
+a9734 1
+misskey.io,misskey.oga.ninja,mk.yopo.work,sushi.ski,trpger.us,warpday.net,zadankai.club##+js(json-prune-fetch-response, ads.[].imageUrl, , propsToMatch, url:api/meta)
 d9758 1
-a9771 30
+a9771 34
 ! tvlive.fctvhd.com antiadb
 *$image,redirect-rule=2x2.png,domain=tvlive.fctvhd.com
 cheater.ninja##+js(nostif, _0x)
@@ -318,6 +347,10 @@ kickassanime.*##.latest-update > .row > div:has(.hide-button)
 dankmemer.lol##+js(nostif, nads)
 petri.com###enlivy-kit-popup-overlay
 petri.com##body:style(overflow: auto !important;)
+@@||custommapposter.com^$ghide
+custommapposter.com##.adsbygoogle
+custommapposter.com##+js(no-fetch-if, googlesyndication)
+ creepypasta.com##[data-pid^="ad-"]:remove()
 d9775 9
 a9783 9
 *$frame,redirect-rule=noopframe,domain=gplinks.co|theringtonesworld.in|jobkijankari.in|newsloti.com|newzwala.co.in|iplquotes.com|kaisekareblog.com|w3hindi.in|jobwaala.in|nhmgujarat.in|minijankari.com|news36tech.com|gptproguide.com|odiamusicsong.com|anumin.com|awolio.com
@@ -400,11 +433,11 @@ a22552 3
 client.pylexnodes.net##+js(rmnt, script, onerror)
 client.pylexnodes.net##.ad-banner-square
 client.pylexnodes.net##a.box-title:has-text(Ads)
-diff name:ublock-privacy lines:13 checksum:65366bf0fb
+diff name:ublock-privacy lines:13 checksum:d2cb9110a7
 d3 2
 a4 2
 ! Last modified: Wed, 28 Feb 2024 05:35:11 +0000
-! Diff-Path: ../patches/2024.2.29.439.patch#ublock-privacy
+! Diff-Path: ../patches/2024.2.29.754.patch#ublock-privacy
 d201 1
 a201 1
 ! ||hktvmall.com/yuicombo?$script,removeparam=/_ui/shared/common/js/InappCommunicationManager.js
@@ -414,11 +447,11 @@ d567 1
 a567 2
 ||view.mngusr.com^$domain=chapmanganato.to|manganato.com
 ||analytics.strapi.io^
-diff name:ublock-quick-fixes lines:75 checksum:e2801c79ea
+diff name:ublock-quick-fixes lines:75 checksum:194a1ae2ac
 d3 2
 a4 2
 ! Last modified: Wed, 28 Feb 2024 23:32:05 +0000
-! Diff-Path: ../patches/2024.2.29.439.patch#ublock-quick-fixes
+! Diff-Path: ../patches/2024.2.29.754.patch#ublock-quick-fixes
 d33 6
 a38 8
 imgoebn.sbs,picnwqez.sbs##+js(aopr, console.clear)
@@ -490,18 +523,20 @@ farsroid.com#@#div.single-text-ads:style(max-height: 1px !important; opacity: 0 
 farsroid.com##div.labeled-dw-ads:style(position: absolute !important; top: -10000px !important;)
 farsroid.com##div.site-middle-banners:style(position: absolute !important; top: -10000px !important;)
 farsroid.com##div.single-text-ads:style(position: absolute !important; top: -10000px !important;)
-diff name:ublock-unbreak lines:6 checksum:5b4d6dc7e6
+diff name:ublock-unbreak lines:8 checksum:171dced228
 d3 2
 a4 2
-! Last modified: Wed, 28 Feb 2024 01:15:39 +0000
-! Diff-Path: ../patches/2024.2.29.439.patch#ublock-unbreak
+! Last modified: Thu, 29 Feb 2024 07:52:19 +0000
+! Diff-Path: ../patches/2024.2.29.754.patch#ublock-unbreak
+a2466 1
+||tiqcdn.com^$badfilter
 a2496 1
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$script,redirect-rule=google-ima.js,domain=ufc.com
-diff name:easylist lines:512 checksum:93cac738d5
+diff name:easylist lines:512 checksum:1013ea8f47
 d4 2
 a5 2
 ! Last modified: Thu, 29 Feb 2024 07:13:37 +0000
-! Diff-Path: ../patches/2024.2.29.439.patch#easylist
+! Diff-Path: ../patches/2024.2.29.754.patch#easylist
 d150 1
 d912 1
 a912 1
@@ -1010,11 +1045,11 @@ a70223 1
 d70481 1
 a70481 1
 @@||imasdk.googleapis.com/js/sdkloader/ima3.js$domain=247sports.com|api.screen9.com|autokult.pl|bbc.com|blastingnews.com|bloomberg.co.jp|bloomberg.com|bsfuji.tv|cbc.ca|cbsnews.com|cbssports.com|chicagotribune.com|clickorlando.com|cnet.com|crunchyroll.com|delish.com|distro.tv|doubtnut.com|einthusan.tv|embed.comicbook.com|etonline.com|farfeshplus.com|filmweb.pl|game.goo.ne.jp|game.pointmall.rakuten.net|gamebox.gesoten.com|gamepix.com|games.usatoday.com|gbnews.com|geo.dailymotion.com|givemesport.com|goodmorningamerica.com|goodstream.uno|gospodari.com|howstuffworks.com|humix.com|ignboards.com|iheart.com|insideedition.com|irctc.co.in|klix.ba|lemino.docomo.ne.jp|locipo.jp|maharashtratimes.com|metacritic.com|minigame.aeriagames.jp|missoulian.com|myspace.com|nettavisen.no|paralympic.org|paramountplus.com|player.abacast.net|player.earthtv.com|player.performgroup.com|plex.tv|pointmall.rakuten.co.jp|popculture.com|realmadrid.com|rte.ie|rumble.com|s.yimg.jp|scrippsdigital.com|sonyliv.com|southpark.lat|southparkstudios.com|sportsbull.jp|sportsport.ba|success-games.net|synk-casualgames.com|tbs.co.jp|tdn.com|truvid.com|tubitv.com|tv-asahi.co.jp|tv.rakuten.co.jp|tver.jp|tvp.pl|univtec.com|video.tv-tokyo.co.jp|vlive.tv|watch.nba.com|wbal.com|weather.com|webdunia.com|wellgames.com|worldsurfleague.com|wowbiz.ro|wsj.com|wtk.pl|xda-developers.com|zdnet.com|zeebiz.com
-diff name:easyprivacy lines:50 checksum:8f47eb6f9e
+diff name:easyprivacy lines:50 checksum:235a2d0aa3
 d4 2
 a5 2
 ! Last modified: Thu, 29 Feb 2024 03:36:13 +0000
-! Diff-Path: ../patches/2024.2.29.439.patch#easyprivacy
+! Diff-Path: ../patches/2024.2.29.754.patch#easyprivacy
 a1732 1
 /pubcid.min.js
 a1990 1
