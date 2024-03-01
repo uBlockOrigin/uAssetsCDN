@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Fri, 01 Mar 2024 17:03:01 +0000
-! Diff-Path: ../patches/2024.3.1.1106.patch#ublock-filters
+! Last modified: Fri, 01 Mar 2024 22:04:46 +0000
+! Diff-Path: ../patches/2024.3.1.1399.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -21,11 +21,11 @@ www.youtube.com##+js(trusted-replace-fetch-response, /\"adSlots.*?\}\]\}\}\]\,/,
 ||www.youtube.com/youtubei/v1/player?$xhr,1p,replace=/"adPlacements.*?([A-Z]"\}|"\}{2})\}\]\,//
 ||www.youtube.com/youtubei/v1/player?$xhr,1p,replace=/"adSlots.*?\}\]\}\}\]\,//
 ||www.youtube.com/playlist?list=$xhr,1p,replace=/"auxiliaryUi":\{"messageRenderers":\{"bkaEnforcementMessageViewModel.*?e\}\}\}\,//
-||www.youtube.com/playlist?list=$xhr,1p,replace=/("trackingParam":"kx_fmPxhoPZR)[-_0-9A-Za-z]{150}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{43}BwOcCE59TDtslLKPQ-SS"\})/\$1\$2/
+||www.youtube.com/playlist?list=$xhr,1p,replace=/("trackingParam":"k[-_0-9A-Za-z]{2}fmPxho[-_0-9A-Za-z]{3})[-_0-9A-Za-z]{150}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{55}lLKPQ[-_0-9A-Za-z]{2}S"\})/\$1\$2/
 ||www.youtube.com/watch?v=$doc,xhr,1p,replace=/"auxiliaryUi":\{"messageRenderers":\{"bkaEnforcementMessageViewModel.*?e\}\}\}\,//
-||www.youtube.com/watch?v=$doc,xhr,1p,replace=/("trackingParam":"kx_fmPxhoPZR)[-_0-9A-Za-z]{150}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{43}BwOcCE59TDtslLKPQ-SS"\})/\$1\$2/
+||www.youtube.com/watch?v=$doc,xhr,1p,replace=/("trackingParam":"k[-_0-9A-Za-z]{2}fmPxho[-_0-9A-Za-z]{3})[-_0-9A-Za-z]{150}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{55}lLKPQ[-_0-9A-Za-z]{2}S"\})/\$1\$2/
 ||www.youtube.com/youtubei/v1/player?$xhr,1p,replace=/"auxiliaryUi":\{"messageRenderers":\{"bkaEnforcementMessageViewModel.*?e\}\}\}\,//
-||www.youtube.com/youtubei/v1/player?$xhr,1p,replace=/("trackingParam":"kx_fmPxhoPZR)[-_0-9A-Za-z]{150}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{43}BwOcCE59TDtslLKPQ-SS"\})/\$1\$2/
+||www.youtube.com/youtubei/v1/player?$xhr,1p,replace=/("trackingParam":"k[-_0-9A-Za-z]{2}fmPxho[-_0-9A-Za-z]{3})[-_0-9A-Za-z]{150}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{55}lLKPQ[-_0-9A-Za-z]{2}S"\})/\$1\$2/
 !#endif
 m.youtube.com,music.youtube.com,tv.youtube.com,www.youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, ytInitialPlayerResponse.playerAds, undefined)
 m.youtube.com,music.youtube.com,tv.youtube.com,www.youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, ytInitialPlayerResponse.adPlacements, undefined)
@@ -9703,6 +9703,7 @@ player.javboys.cam##+js(nowoif)
 apkmoddone.com##+js(nostif, 1e3*)
 ||technicalcity.b-cdn.net/css/inlab.$domain=technical.city
 technical.city##.container > div[style^="margin-bottom:"]
+embed.embedz.click##+js(aeld, load, _0x)
 ! Link shortener filters go into their own dedicated list
 ! *** filters/ubo-link-shorteners.txt ***
 ! gplinks all domains (gplinks.co/EWu8)
@@ -16447,7 +16448,7 @@ zerion.cc,zerocoin.top,zitss.xyz,zooqle.*,zpaste.net,zplayer.live##+js(rmnt, scr
 ://www.*.com/js/css/$script,3p,to=com
 =e3&*,0|$script,3p,to=com
 =e3&*,1|$script,3p,to=com
-/^https:\/\/www\.[a-z]{8,16}\.com\/(?:images\/)?(?:static\/)?(?:common\/)?(?:assets\/)?(?:scripts\/)?(?:api\/)?(?:js\/)?(?:[a-z]{3})?(?:[a-z]dom4|dotdotdot|editor|[a-z](?:ire)?base|[a-z]ie8|fviz|jfloating|leaflet\.toolbar|masync|mijs|[a-z]jsonform|proj4|sext-all|sha|ummenu|viz)\.js$/$script,3p,match-case
+/^https:\/\/www\.[a-z]{8,16}\.com\/(?:images\/)?(?:static\/)?(?:common\/)?(?:assets\/)?(?:scripts\/)?(?:api\/)?(?:js\/)?(?:[a-z]{3})?(?:[a-z]dom4|dotdotdot|editor|[a-z](?:ire)?base|[a-z]ie8|jfloating|leaflet\.toolbar|masync|mijs|[a-z]jsonform|proj4|sext-all|sha|ummenu|[a-z]?viz)\.js$/$script,3p,match-case
 ||pushtoast-a.akamaihd.net^$script,3p
 ||nsfwr34.com/ad_schedule/
 mdy48tn97.com##+js(nowoif)
@@ -20672,6 +20673,9 @@ luciferdonghua.in###overplay
 link68.net,traffic123.net##+js(set, blurred, false)
 @@||assettoworld.com^$script,1p
 assettoworld.com##.nitro-ad
+@@||assettoworld.b-cdn.net^$script,domain=assettoworld.com
+assettoworld.com##+js(no-fetch-if, doubleclick)
+assettoworld.com##.nitro-ads
 ! webcreator-journal.com anti-adb
 webcreator-journal.com##+js(nostif, getComputedStyle)
 game-2u.com##+js(noeval-if, ads)
@@ -20990,7 +20994,6 @@ linkshub.to##[href="https://crack-status.com/"]
 ||critomiron.click^$all
 bellesa.co##[href*="preroll"]:upward(2)
 ||res.cloudinary.com/$image,domain=bellesa.co
-@@||assettoworld.b-cdn.net^$script,domain=assettoworld.com
 satkurier.pl##+js(no-fetch-if, ads)
 @@||mailgen.biz^$script,1p
 cazztv.xyz##+js(noeval-if, show)
