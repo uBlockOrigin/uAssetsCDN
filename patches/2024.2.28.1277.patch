@@ -1,8 +1,8 @@
-diff name:ublock-annoyances lines:29 checksum:d6a682499e
+diff name:ublock-annoyances lines:29 checksum:b67bca8d1c
 d3 2
 a4 2
 ! Last modified: Sun, 03 Mar 2024 12:22:03 +0000
-! Diff-Path: ../patches/2024.3.3.920.patch#ublock-annoyances
+! Diff-Path: ../patches/2024.3.3.1219.patch#ublock-annoyances
 d43 1
 a43 1
 consent.google.*##[data-p*="/consent.google."]:has(button[jsname="tWT92d"])
@@ -28,11 +28,11 @@ spieljochbahn.at##+js(trusted-set-cookie, omCookieConsent, 'group-1.1,group-3.1,
 screenflash.io##+js(trusted-set-local-storage-item, consents, '{"device":false,"personalizedContent":false,"googleAdsense":false,"googleRecaptcha":false,"youtube":true}')
 sogeti.com##+js(trusted-set-cookie, ConsentCookie, 'required:1,functional:1,analytic:0')
 d689 1
-diff name:ublock-badware lines:21 checksum:78259c5f28
+diff name:ublock-badware lines:21 checksum:443e54690c
 d3 2
 a4 2
 ! Last modified: Sun, 03 Mar 2024 14:53:11 +0000
-! Diff-Path: ../patches/2024.3.3.920.patch#ublock-badware
+! Diff-Path: ../patches/2024.3.3.1219.patch#ublock-badware
 d608 1
 a608 1
 .com/pl?o=$doc
@@ -50,11 +50,11 @@ a726 1
 ||hackwave.pro^$all
 a3084 1
 ||okun.shop^$doc
-diff name:ublock-filters lines:319 checksum:80509d8430
+diff name:ublock-filters lines:324 checksum:219a14a10a
 d3 2
 a4 2
-! Last modified: Sun, 03 Mar 2024 15:03:09 +0000
-! Diff-Path: ../patches/2024.3.3.920.patch#ublock-filters
+! Last modified: Sun, 03 Mar 2024 18:12:24 +0000
+! Diff-Path: ../patches/2024.3.3.1219.patch#ublock-filters
 d24 1
 a24 2
 ||www.youtube.com/playlist?list=$xhr,1p,replace=/("trackingParam":"kx_fmPxhoPZR)[-_0-9A-Za-z]{150}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{55}lLKPQ-SS"\})/\$1\$2/
@@ -289,8 +289,13 @@ d15637 1
 a15637 1
 1cloudfile.com##.advert-wrapper:style(visibility: hidden !important)
 d16198 1
-a16198 1
-pinterest.*##[data-grid-item]:has([aria-label]:not([aria-label*="pinterest"])[href^="http"])
+a16198 6
+!pinterest.*##[data-grid-item]:has([aria-label]:not([aria-label*="pinterest"])[href^="http"])
+!#if !env_mobile
+pinterest.*##[data-grid-item]:has([data-test-pin-id] [data-test-id^="one-tap-desktop"] > a[href^="http"][rel="nofollow"])
+!#else
+pinterest.*##[data-grid-item]:has([data-test-pin-id] a[href^="http"][rel] [data-test-id="pincard-oneTap-with-link"])
+!#endif
 d16502 1
 a16502 1
 w-hentai.com,watch-series.*,watchaccordingtojimonline.com,watchbrooklynnine-nine.com,watchdowntonabbeyonline.com,watchelementaryonline.com,watcheronline.net,watchgleeonline.com,watchhowimetyourmother.online,watchjavidol.com,watchkobestreams.info,watchlostonline.net,watchlouieonline.com,watchmadmenonline.com,watchmonkonline.com,watchonceuponatimeonline.com,watchparksandrecreation.net,watchprettylittleliarsonline.com,watchrulesofengagementonline.com,watchseries.*,watchthekingofqueens.com,watchthemiddleonline.com,watchtvchh.xyz,webcamrips.com,wickedspot.org,wincest.xyz,witanime.best,wolverdon.fun,wolverdonx.com,wordcounter.icu,worldcupstream.pm,worldmovies.store,worldstreams.click,wpdeployit.com,wqstreams.tk,wwwsct.com##^script[data-cfasync]:has-text(/h=decodeURIComponent|popundersPerIP/)
@@ -370,20 +375,20 @@ d21704 1
 d22345 1
 a22345 1
 alpha.vidzstore.com,streamtwo.vidzstore.com###myModal
-diff name:ublock-privacy lines:8 checksum:e441b18d0a
+diff name:ublock-privacy lines:8 checksum:caaebcc04f
 d3 2
 a4 2
 ! Last modified: Sun, 03 Mar 2024 13:19:55 +0000
-! Diff-Path: ../patches/2024.3.3.920.patch#ublock-privacy
+! Diff-Path: ../patches/2024.3.3.1219.patch#ublock-privacy
 d182 2
 d624 1
 a624 1
 duplichecker.com,plagiarismchecker.co,plagiarismdetector.net,searchenginereports.net,smallseotools.com##.icon_animation samp:style(animation: none !important;)
-diff name:ublock-quick-fixes lines:47 checksum:e208b5c34a
+diff name:ublock-quick-fixes lines:52 checksum:7df69fe74a
 d3 2
 a4 2
-! Last modified: Sun, 03 Mar 2024 11:22:22 +0000
-! Diff-Path: ../patches/2024.3.3.920.patch#ublock-quick-fixes
+! Last modified: Sun, 03 Mar 2024 18:17:04 +0000
+! Diff-Path: ../patches/2024.3.3.1219.patch#ublock-quick-fixes
 d33 7
 a39 7
 imgoebn.sbs,picnwqez.sbs,imgjajhe.sbs,pixjnwe.sbs##+js(aopr, console.clear)
@@ -420,18 +425,23 @@ d116 1
 a116 1
 infinityscans.xyz,infinityscans.net##+js(rpnt, script, )||!, )||)
 d122 5
-a151 6
+a151 11
 @@||s.yimg.jp/images/listing/tool/cv/ytag.js$domain=redstoneonline.jp
 ||archive.org/includes/analytics.js$badfilter
 ||scis.tbs.co.jp^$badfilter
 webtoons.com#@#+js(set, ccsrv, '')
 webtoons.com#@#+js(set, lcs_SerName, '')
 facebook.com,facebookwkhpilnemxj7asaniu7vnjjbiltxjqhye3mhbshg7kx5tfyd.onion#@#div[aria-posinset] :is(h3, h4) span > a[href]:not([href^="/groups/"]):not([href*="section_header_type"]):matches-attr(href="/__cft__\[0\]=[-\w]{270,}/"):upward(div[aria-posinset]):style(height: 0 !important; overflow: hidden !important;)
-diff name:ublock-unbreak lines:25 checksum:57134e2c33
+!#if !env_mobile
+pinterest.*##[data-grid-item]:has([data-test-pin-id] [data-test-id^="one-tap-desktop"] > a[href^="http"][rel="nofollow"])
+!#else
+pinterest.*##[data-grid-item]:has([data-test-pin-id] a[href^="http"][rel] [data-test-id="pincard-oneTap-with-link"])
+!#endif
+diff name:ublock-unbreak lines:25 checksum:57293166f8
 d3 2
 a4 2
 ! Last modified: Sun, 03 Mar 2024 03:11:56 +0000
-! Diff-Path: ../patches/2024.3.3.920.patch#ublock-unbreak
+! Diff-Path: ../patches/2024.3.3.1219.patch#ublock-unbreak
 d2025 1
 a2025 3
 @@||connatix.com^$script,domain=accuweather.com
@@ -453,11 +463,11 @@ biologianet.com##+js(set-constant, UOLPD, {})
 biologianet.com##+js(set-constant, UOLPD.dataLayer, {})
 biologianet.com##+js(set-constant, __configuredDFPTags, {})
 ||my.goabode.com/assets/js/fp2.min.js$script,domain=my.goabode.com,redirect=fingerprint2.js,important
-diff name:easylist lines:427 checksum:dc0ba52bf3
+diff name:easylist lines:427 checksum:6192bd656b
 d4 2
 a5 2
 ! Last modified: Sun, 03 Mar 2024 09:54:42 +0000
-! Diff-Path: ../patches/2024.3.3.920.patch#easylist
+! Diff-Path: ../patches/2024.3.3.1219.patch#easylist
 d20 1
 a20 1
 &sadbl=1$third-party
@@ -881,11 +891,11 @@ xnxx.com,xvideos.com###ad-footer
 a68963 1
 hentaiasmr.moe###bottom-tab
 d70090 1
-diff name:easyprivacy lines:96 checksum:6cd619181c
+diff name:easyprivacy lines:96 checksum:2f650da41f
 d4 2
 a5 2
 ! Last modified: Sun, 03 Mar 2024 07:46:58 +0000
-! Diff-Path: ../patches/2024.3.3.920.patch#easyprivacy
+! Diff-Path: ../patches/2024.3.3.1219.patch#easyprivacy
 a1307 1
 /log/metrics?
 a2149 1
