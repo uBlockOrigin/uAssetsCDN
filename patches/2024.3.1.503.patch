@@ -1,11 +1,12 @@
-diff name:ublock-annoyances lines:31 checksum:79615a824c
+diff name:ublock-annoyances lines:34 checksum:859cffcf27
 d3 2
 a4 2
-! Last modified: Mon, 04 Mar 2024 11:49:14 +0000
-! Diff-Path: ../patches/2024.3.5.437.patch#ublock-annoyances
-a205 2
+! Last modified: Tue, 05 Mar 2024 11:02:46 +0000
+! Diff-Path: ../patches/2024.3.5.755.patch#ublock-annoyances
+a205 3
 planningportal.co.uk##+js(trusted-set-cookie, cookie_preferences, {%22performance%22:false%2C%22marketing%22:false%2C%22necessary%22:true})
 steuerbot.com##+js(trusted-set-local-storage-item, cookies, '{"essential":true,"performance":false,"marketing":false}')
+vadhander.hogakusten.com##+js(trusted-set-local-storage-item, cookie_consent, '{"consent":true,"necessary":true,"preference":false,"statistics":false,"marketing":false}')
 a646 6
 ! reject ad storage, analytics, personalization_storage
 onlia.ca##+js(trusted-set-cookie, CookiesConsent, '{"ad_storage":"denied","analytics_storage":"denied","personalization_storage":"denied"}')
@@ -14,6 +15,8 @@ screenflash.io##+js(trusted-set-local-storage-item, consents, '{"device":false,"
 sogeti.com##+js(trusted-set-cookie, ConsentCookie, 'required:1,functional:1,analytic:0')
 transferxl.com##+js(trusted-set-cookie, txl_consent_status, functional, , , domain, transferxl.com)
 d696 1
+a1622 1
+sh.reddit.com,www.reddit.com##+js(trusted-set-local-storage-item, xpromo-consolidation, $currentDate$)
 d3693 4
 a3696 4
 /wp-content/plugins/wccp-pro/*$domain=ferroviando.com.br|counciloflove.com|gourmetscans.net|infokik.com|kulinarnastronamocy.pl|jafekri.com|truyenbanquyen.com|ezmanga.net
@@ -30,11 +33,11 @@ ferroviando.com.br,counciloflove.com,infokik.com,kulinarnastronamocy.pl,jafekri.
 d4203 1
 a4203 1
 ymovies.vip,aniwatch.to,megacloud.tv,hianime.to##+js(set, devtoolsDetector.launch, noopFunc)
-diff name:ublock-badware lines:22 checksum:a924be7405
+diff name:ublock-badware lines:22 checksum:9722ffe1f4
 d3 2
 a4 2
 ! Last modified: Tue, 05 Mar 2024 06:25:43 +0000
-! Diff-Path: ../patches/2024.3.5.437.patch#ublock-badware
+! Diff-Path: ../patches/2024.3.5.755.patch#ublock-badware
 d608 1
 a608 1
 .com/pl?o=$doc
@@ -53,11 +56,11 @@ a726 1
 a3084 2
 ||okun.shop^$doc
 ||espacefidelitefree.fr^$all
-diff name:ublock-filters lines:188 checksum:4ba9a55865
+diff name:ublock-filters lines:210 checksum:7dab087ba3
 d3 2
 a4 2
-! Last modified: Tue, 05 Mar 2024 06:58:30 +0000
-! Diff-Path: ../patches/2024.3.5.437.patch#ublock-filters
+! Last modified: Tue, 05 Mar 2024 12:32:40 +0000
+! Diff-Path: ../patches/2024.3.5.755.patch#ublock-filters
 d24 1
 a24 2
 ||www.youtube.com/playlist?list=$xhr,1p,replace=/("trackingParam":"kx_fmPxhoPZR)[-_0-9A-Za-z]{150}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{55}lLKPQ-SS"\})/\$1\$2/
@@ -78,6 +81,7 @@ hltv.org##.leftCol > aside:first-child:has(> .ggbe-firstcol-box > a[href] > img[
 d923 1
 a923 1
 www.msn.com##+js(json-prune-fetch-response, *, list.*.link.ad list.*.link.kicker, propsToMatch, url:content/v1/cms/api/amp)
+d1069 9
 a3405 1
 sbs.com.au##+js(set, odabd, false)
 d4537 3
@@ -89,7 +93,19 @@ d4549 1
 d5980 2
 d5985 1
 d5989 3
+d9117 1
 d9321 2
+a9348 10
+vidsrc.*##+js(nosiif, /devtool|0x/)
+vidsrc.*##+js(set, console.clear, trueFunc)
+vidsrc.*##+js(nowoif)
+vidsrc.*##+js(aopr, __Y)
+vidsrc.*###pop_asdf
+||encumbranceunderlineheadmaster.com^
+||katebugs.com^
+embed.smashystream.com###addiv
+*$script,3p,denyallow=gstatic.com,domain=streambucket.net
+player.smashy.stream##.react-responsive-modal-root
 d9505 4
 a9508 4
 puzzle-loop.com,puzzle-words.com,puzzle-chess.com,puzzle-thermometers.com,puzzle-norinori.com,puzzle-minesweeper.com,puzzle-slant.com,puzzle-lits.com,puzzle-galaxies.com,puzzle-tents.com,puzzle-battleships.com,puzzle-pipes.com,puzzle-hitori.com,puzzle-heyawake.com,puzzle-shingoki.com,puzzle-masyu.com,puzzle-stitches.com,puzzle-aquarium.com,puzzle-tapa.com,puzzle-star-battle.com,puzzle-kakurasu.com,puzzle-skyscrapers.com,puzzle-futoshiki.com,puzzle-shakashaka.com,puzzle-kakuro.com,puzzle-jigsaw-sudoku.com,puzzle-killer-sudoku.com,puzzle-binairo.com,puzzle-nonograms.com,puzzle-sudoku.com,puzzle-light-up.com,puzzle-bridges.com,puzzle-shikaku.com,puzzle-nurikabe.com,puzzle-dominosa.com###MainContainer > [id]:has(> [id^="btIn"] > #bannerTop)
@@ -163,12 +179,18 @@ pinterest.*##[data-grid-item]:has([data-test-pin-id] [data-test-id^="one-tap-des
 !#else
 pinterest.*##[data-grid-item]:has([data-test-pin-id] a[href^="http"][rel] [data-test-id="pincard-oneTap-with-link"])
 !#endif
+d16397 1
+a16397 1
+kantotflix.net,kantotinyo.com,kaoskrew.org,kaplog.com,keeplinks.*,keepvid.*,keralahd.*,keralatvbox.com,khatrimazaful.*,khatrimazafull.*,kickassanimes.io,kimochi.info,kimochi.tv,kinemania.tv,konstantinova.net,koora-online.live,kunmanga.com,kutmoney.com,kwithsub.com##^script[data-cfasync]:has-text(/h=decodeURIComponent|popundersPerIP/)
 d16404 1
 a16404 1
 safego.cc,safetxt.*,sakurafile.com,satoshi-win.xyz,scat.gold,scatfap.com,scatkings.com,scnlog.me,scripts-webmasters.net,serie-turche.com,serijefilmovi.com,sexcomics.me,sexdicted.com,sexgay18.com,sexofilm.co,sextgem.com,sextgem.com,sextubebbw.com,sgpics.net,shadowrangers.*,shadowrangers.live,shahee4u.cam,shahi4u.*,shahid4u1.*,shahid4uu.*,shahiid-anime.net,shavetape.*,shemale6.com,shinden.pl,short.es,shortearn.*,shorten.*,shorttey.*,shortzzy.*,showmanga.blog.fc2.com,shrt10.com,shurt.pw,sideplusleaks.net,silverblog.tv,silverblog.tv,silverpic.com,sinhalasub.life,sinsitio.site,sinvida.me,skidrowcpy.com,skidrowfull.com,skidrowreloaded.com,skymovieshd.*,slut.mom,smallencode.me,smoner.com,smplace.com,soccerinhd.com,socceron.name,socceronline.*,softairbay.com,softarchive.*,sokobj.com,songsio.com,souexatasmais.com,sportbar.live,sportea.online,sports-stream.*,sportskart.xyz,sportstream1.cfd,sporttuna.site,srt.am,srts.me,sshhaa.*,stakes100.xyz,stapadblockuser.*,stape.*,stapewithadblock.*,starmusiq.*,stbemuiptv.com,stockingfetishvideo.com,strcloud.*,stream.crichd.vip,stream.lc,stream25.xyz,streamadblocker.*,streamadblockplus.*,streambee.to,streamcdn.*,streamcenter.pro,streamers.watch,streamgo.to,streamhub.*,streamkiste.tv,streamnoads.com,streamoporn.xyz,streamoupload.xyz,streamservicehd.click,streamsport.*,streamta.*,streamtape.*,streamtapeadblockuser.*,streamvid.net,strikeout.*,strtape.*,strtapeadblock.*,strtapeadblocker.*,strtapewithadblock.*,strtpe.*,subtitleporn.com,subtitles.cam,suicidepics.com,supertelevisionhd.com,supexfeeds.com,swatchseries.*,swzz.xyz,sxnaar.com##^script[data-cfasync]:has-text(/h=decodeURIComponent|popundersPerIP/)
 d16408 1
 a16408 1
 w-hentai.com,watch-series.*,watchaccordingtojimonline.com,watchbrooklynnine-nine.com,watchdowntonabbeyonline.com,watchelementaryonline.com,watcheronline.net,watchgleeonline.com,watchhowimetyourmother.online,watchjavidol.com,watchkobestreams.info,watchlostonline.net,watchlouieonline.com,watchmadmenonline.com,watchmonkonline.com,watchonceuponatimeonline.com,watchparksandrecreation.net,watchprettylittleliarsonline.com,watchrulesofengagementonline.com,watchseries.*,watchthekingofqueens.com,watchthemiddleonline.com,watchtvchh.xyz,webcamrips.com,wickedspot.org,wincest.xyz,witanime.best,wolverdon.fun,wolverdonx.com,wordcounter.icu,worldcupstream.pm,worldmovies.store,worldstreams.click,wpdeployit.com,wqstreams.tk,wwwsct.com##^script[data-cfasync]:has-text(/h=decodeURIComponent|popundersPerIP/)
+d16424 1
+a16424 1
+kantotflix.net,kantotinyo.com,kaoskrew.org,kaplog.com,keeplinks.*,keepvid.*,keralahd.*,keralatvbox.com,khatrimazaful.*,khatrimazafull.*,kickassanimes.io,kimochi.info,kimochi.tv,kinemania.tv,konstantinova.net,koora-online.live,kunmanga.com,kutmoney.com,kwithsub.com##+js(rmnt, script, /h=decodeURIComponent|popundersPerIP/)
 d16431 1
 a16431 1
 sadisflix.*,safego.cc,safetxt.*,sakurafile.com,satoshi-win.xyz,scat.gold,scatfap.com,scatkings.com,scnlog.me,scripts-webmasters.net,serie-turche.com,serijefilmovi.com,sexcomics.me,sexdicted.com,sexgay18.com,sexofilm.co,sextgem.com,sextgem.com,sextubebbw.com,sgpics.net,shadowrangers.*,shadowrangers.live,shahee4u.cam,shahi4u.*,shahid4u1.*,shahid4uu.*,shahiid-anime.net,shavetape.*,shemale6.com,shinden.pl,short.es,shortearn.*,shorten.*,shorttey.*,shortzzy.*,showmanga.blog.fc2.com,shrt10.com,shurt.pw,sideplusleaks.net,silverblog.tv,silverblog.tv,silverpic.com,sinhalasub.life,sinsitio.site,sinvida.me,skidrowcpy.com,skidrowfull.com,skidrowreloaded.com,skymovieshd.*,slut.mom,smallencode.me,smoner.com,smplace.com,soccerinhd.com,socceron.name,socceronline.*,softairbay.com,softarchive.*,sokobj.com,songsio.com,souexatasmais.com,sportbar.live,sportea.online,sports-stream.*,sportskart.xyz,sportstream1.cfd,sporttuna.site,srt.am,srts.me,sshhaa.*,stakes100.xyz,stapadblockuser.*,stape.*,stapewithadblock.*,starmusiq.*,stbemuiptv.com,stockingfetishvideo.com,strcloud.*,stream.crichd.vip,stream.lc,stream25.xyz,streamadblocker.*,streamadblockplus.*,streambee.to,streamcdn.*,streamcenter.pro,streamers.watch,streamgo.to,streamhub.*,streamkiste.tv,streamnoads.com,streamoporn.xyz,streamoupload.xyz,streamservicehd.click,streamsport.*,streamta.*,streamtape.*,streamtapeadblockuser.*,streamvid.net,strikeout.*,strtape.*,strtapeadblock.*,strtapeadblocker.*,strtapewithadblock.*,strtpe.*,subtitleporn.com,subtitles.cam,suicidepics.com,supertelevisionhd.com,supexfeeds.com,swatchseries.*,swzz.xyz,sxnaar.com##+js(rmnt, script, /h=decodeURIComponent|popundersPerIP/)
@@ -185,6 +207,9 @@ a16904 1
 ||h-flash.com/data/image/candyai/$frame,1p
 a17869 1
 kuncomic.com##+js(nano-sib, countdownTime, 1500)
+d18564 1
+a18564 1
+/loader.min.js$xhr,script,domain=loawa.com|ygosu.com|sportalkorea.com|enetnews.co.kr|edaily.co.kr|economist.co.kr|etoday.co.kr|hankyung.com|isplus.com|hometownstation.com|inven.co.kr|honkailab.com|warcraftrumbledeck.com|genshinlab.com|thestockmarketwatch.com|thephoblographer.com|issuya.com,replace=/\(\(function [a-zA-Z0-9]{2}\([a-zA-Z0-9\,]{2,5}\){var/((function neutralized(){var/g
 d19537 5
 a19541 5
 ||mstm.motorsport.com^$script,xhr,redirect-rule=noopjs
@@ -242,11 +267,11 @@ d22348 1
 a22348 2
 royalroad.com##.portlet:has(> h6)
 ||royalroad.com/a$frame,1p
-diff name:ublock-privacy lines:13 checksum:4ca997bfa0
+diff name:ublock-privacy lines:13 checksum:f802101e70
 d3 2
 a4 2
 ! Last modified: Tue, 05 Mar 2024 06:42:39 +0000
-! Diff-Path: ../patches/2024.3.5.437.patch#ublock-privacy
+! Diff-Path: ../patches/2024.3.5.755.patch#ublock-privacy
 d182 2
 d202 1
 a202 1
@@ -256,20 +281,20 @@ a569 1
 d624 1
 a624 1
 duplichecker.com,plagiarismchecker.co,plagiarismdetector.net,searchenginereports.net,smallseotools.com##.icon_animation samp:style(animation: none !important;)
-diff name:ublock-quick-fixes lines:41 checksum:2978e3d7af
+diff name:ublock-quick-fixes lines:46 checksum:f3109dd062
 d3 2
 a4 2
-! Last modified: Mon, 04 Mar 2024 23:35:31 +0000
-! Diff-Path: ../patches/2024.3.5.437.patch#ublock-quick-fixes
+! Last modified: Tue, 05 Mar 2024 11:00:08 +0000
+! Diff-Path: ../patches/2024.3.5.755.patch#ublock-quick-fixes
 d33 7
 a39 7
-imgoebn.sbs,picnwqez.sbs,imgjajhe.sbs,pixjnwe.sbs##+js(aopr, console.clear)
-imgoebn.sbs,picnwqez.sbs,imgjajhe.sbs,pixjnwe.sbs##+js(nano-sib, timer)
-imgoebn.sbs,picnwqez.sbs,imgjajhe.sbs,pixjnwe.sbs##div[id][style^="position: fixed; display: block; width: 100%;"]
-imgoebn.sbs,picnwqez.sbs,imgjajhe.sbs,pixjnwe.sbs##div[style="width:100%;height:110px"]
-imgoebn.sbs,picnwqez.sbs,imgjajhe.sbs,pixjnwe.sbs##+js(nowoif, !/prcf.fiyar|themes|pixsense|.jpg/)
-imgoebn.sbs,picnwqez.sbs,imgjajhe.sbs,pixjnwe.sbs##div[class][style="display: block;"]
-@@/wp-content/plugins/deadblocker/1.js$script,1p
+imgoebn.sbs,picnwqez.sbs,imgjajhe.sbs,pixjnwe.sbs,pixkfjtrkf.shop##+js(aopr, console.clear)
+imgoebn.sbs,picnwqez.sbs,imgjajhe.sbs,pixjnwe.sbs,pixkfjtrkf.shop##+js(nano-sib, timer)
+imgoebn.sbs,picnwqez.sbs,imgjajhe.sbs,pixjnwe.sbs,pixkfjtrkf.shop##div[id][style^="position: fixed; display: block; width: 100%;"]
+imgoebn.sbs,picnwqez.sbs,imgjajhe.sbs,pixjnwe.sbs,pixkfjtrkf.shop##div[style="width:100%;height:110px"]
+imgoebn.sbs,picnwqez.sbs,imgjajhe.sbs,pixjnwe.sbs,pixkfjtrkf.shop##+js(nowoif, !/prcf.fiyar|themes|pixsense|.jpg/)
+imgoebn.sbs,picnwqez.sbs,imgjajhe.sbs,pixjnwe.sbs,pixkfjtrkf.shop##div[class][style="display: block;"]
+@@/wp-content/plugins/deadblocker/2.js$script,1p
 d68 3
 a70 3
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$script,3p,redirect=google-ima.js,domain=sharonwhiledemocratic.com
@@ -277,17 +302,20 @@ sharonwhiledemocratic.com##+js(nowoif)
 sharonwhiledemocratic.com##+js(set, console.clear, undefined)
 a71 1
 ||eu-1-id5-sync.com^
-a88 4
+a88 7
 @@||a.pub.network/core/analytics/*/analytics.min.js$script,domain=perchance.org
 @@||cdn.hadronid.net/hadron.js?$script,domain=perchance.org
 @@||google-analytics.com/analytics.js$script,domain=perchance.org
 @@||secure.quantserve.com/quant.js$script,domain=perchance.org
+@@||id.hadron.ad.gt^$script,xhr,domain=perchance.org
+@@||p.ad.gt/api/$script,domain=perchance.org
+@@||a.ad.gt/api/$script,domain=perchance.org
 d91 9
 d124 1
 a124 2
 infinityscans.xyz,infinityscans.net##+js(rpnt, script, '||!, '||)
 infinityscans.xyz,infinityscans.net##+js(rpnt, script, )||!, )||)
-a155 10
+a155 12
 ||archive.org/includes/analytics.js$badfilter
 ||scis.tbs.co.jp^$badfilter
 webtoons.com#@#+js(set, ccsrv, '')
@@ -298,11 +326,13 @@ pinterest.*##[data-grid-item]:has([data-test-pin-id] [data-test-id^="one-tap-des
 !#else
 pinterest.*##[data-grid-item]:has([data-test-pin-id] a[href^="http"][rel] [data-test-id="pincard-oneTap-with-link"])
 !#endif
-diff name:ublock-unbreak lines:14 checksum:d1568f3a4f
+10play.com.au##+js(set, moatPrebidApi, {})
+10play.com.au##+js(set, moatPrebidApi.getMoatTargetingForPage, noopFunc)
+diff name:ublock-unbreak lines:14 checksum:e5be9832ab
 d3 2
 a4 2
 ! Last modified: Sun, 03 Mar 2024 03:11:56 +0000
-! Diff-Path: ../patches/2024.3.5.437.patch#ublock-unbreak
+! Diff-Path: ../patches/2024.3.5.755.patch#ublock-unbreak
 a2306 1
 uol.com.br##+js(set, __configuredDFPTags, {})
 d2435 1
@@ -313,11 +343,11 @@ biologianet.com##+js(set-constant, UOLPD, {})
 biologianet.com##+js(set-constant, UOLPD.dataLayer, {})
 biologianet.com##+js(set-constant, __configuredDFPTags, {})
 ||my.goabode.com/assets/js/fp2.min.js$script,domain=my.goabode.com,redirect=fingerprint2.js,important
-diff name:easylist lines:1607 checksum:c002879394
+diff name:easylist lines:1817 checksum:85191ae453
 d4 2
 a5 2
-! Last modified: Tue, 05 Mar 2024 06:58:30 +0000
-! Diff-Path: ../patches/2024.3.5.437.patch#easylist
+! Last modified: Tue, 05 Mar 2024 10:33:04 +0000
+! Diff-Path: ../patches/2024.3.5.755.patch#easylist
 d20 1
 a20 1
 &sadbl=1$third-party
@@ -379,6 +409,8 @@ d19236 1
 a19338 1
 ||absentlybiddingleopard.com^
 d19356 1
+a19377 1
+||abzjkaridcit.com^
 d19408 1
 d19471 2
 a19487 1
@@ -478,6 +510,8 @@ d21722 2
 d21731 4
 d21739 3
 d21750 1
+a21750 1
+||auloibunch.top^
 d21753 1
 d21760 2
 d21765 1
@@ -594,7 +628,11 @@ d24090 1
 d24108 1
 a24109 1
 ||carelesstableinevitably.com^
+a24116 1
+||cariousinevitably.com^
 d24127 1
+a24148 1
+||cashbeside.com^
 d24357 1
 d24486 1
 a24508 1
@@ -630,6 +668,8 @@ a25319 1
 a25352 1
 ||comradeorientalfinance.com^
 d25357 1
+a25431 1
+||conquerleaseholderwiggle.com^
 d25441 1
 a25442 1
 ||consistpromised.com^
@@ -651,11 +691,19 @@ d25640 1
 d25762 1
 a25784 1
 ||crdfifmrm.com^
+a25827 1
+||cribbewildered.com^
+a25834 1
+||crimeevokeprodigal.com^
+a25858 1
+||crockerycrowdedincidentally.com^
 d25870 1
 d25880 1
 d25920 1
 d25952 1
 d25999 1
+a26023 1
+||cushawbaized.com^
 a26067 1
 ||cxeiymnwjyyi.xyz^
 d26098 1
@@ -666,11 +714,15 @@ d26159 1
 d26163 1
 d26183 1
 d26237 1
+a26281 1
+||darrylfuranes.top^
 d26346 1
 a26390 1
 ||dd0122893e.com^
 d26405 1
 d26422 1
+a26449 1
+||decidedmonsterfarrier.com^
 d26462 1
 d26484 1
 a26487 1
@@ -685,11 +737,16 @@ d26814 1
 a26820 1
 ||dialedbollox.com^
 d26851 1
-a26883 1
+a26883 2
+||dignityprop.com^
 ||dignityunattractivefungus.com^
 d26958 1
+a27013 1
+||discussedirrelevant.com^
 a27046 1
 ||disobediencecalculatormaiden.com^
+a27079 1
+||dissatisfactionrespiration.com^
 d27111 1
 d27133 1
 d27140 1
@@ -715,6 +772,8 @@ d27744 1
 d27818 1
 d27833 2
 d27858 1
+a27895 1
+||earningstwigrider.com^
 d27943 1
 a27973 1
 ||ebolat.xyz^
@@ -730,6 +789,8 @@ a28273 1
 ||eiimvmchepssb.xyz^
 d28295 1
 d28303 1
+a28361 1
+||elhdxexnra.xyz^
 d28399 1
 d28409 1
 d28411 1
@@ -761,6 +822,8 @@ a28959 1
 ||everyoneawokeparable.com^
 d29056 1
 d29064 1
+a29158 1
+||extendingboundsbehave.com^
 d29204 1
 a29247 1
 ||f27386cec2.com^
@@ -768,6 +831,8 @@ d29260 1
 d29267 1
 d29329 1
 d29333 1
+a29377 1
+||fangsswissmeddling.com^
 d29386 1
 d29398 1
 a29400 1
@@ -800,6 +865,10 @@ a29811 1
 a29835 1
 ||fishingtouching.com^
 d29877 1
+a29910 1
+||flannellegendary.com^
+a29927 1
+||flatteringscanty.com^
 a29951 1
 ||fleetingretiredsafe.com^
 a29999 1
@@ -813,6 +882,8 @@ d30179 1
 a30184 1
 ||forgivenessdeportdearly.com^
 d30209 1
+a30213 1
+||formedwrapped.com^
 a30234 1
 ||fortcratesubsequently.com^
 a30246 1
@@ -827,6 +898,8 @@ d30509 1
 d30526 1
 a30544 1
 ||funnelgloveaffable.com^
+a30565 1
+||furtheradmittedsickness.com^
 a30614 1
 ||fwsprpowva.com^
 a30633 1
@@ -861,10 +934,14 @@ a31351 1
 a31363 1
 ||gmelinalegua.top^
 d31605 1
+a31610 1
+||gradecomposuresanctify.com^
 d31644 1
 a31655 1
 ||grantinsanemerriment.com^
 d31670 1
+a31673 1
+||gratifiedshoot.com^
 d31698 1
 a31748 1
 ||griddedwarling.top^
@@ -890,6 +967,8 @@ d32095 1
 d32128 1
 a32137 1
 ||hangoveratomeventually.com^
+a32138 1
+||hankrivuletperjury.com^
 d32148 1
 a32174 1
 ||harmless-sample.pro^
@@ -899,8 +978,12 @@ a32282 1
 d32305 1
 a32315 1
 ||headclutterdialogue.com^
+a32341 1
+||heavenproxy.com^
 d32366 1
 d32368 1
+a32387 1
+||helmetregent.com^
 d32397 1
 d32412 1
 d32415 1
@@ -908,6 +991,8 @@ d32634 1
 d32640 1
 d32696 1
 d32719 1
+a32754 1
+||hockeysacredbond.com^
 d32782 1
 d32927 1
 d32976 1
@@ -929,6 +1014,8 @@ d33219 1
 d33284 1
 a33404 1
 ||ignobleordinalembargo.com^
+a33431 1
+||ihqnckvpfx.com^
 d33466 1
 d33503 1
 a33548 1
@@ -940,7 +1027,11 @@ a33588 1
 a33651 1
 ||improvedcolumnist.com^
 d33678 1
+a33720 1
+||increaseplanneddoubtful.com^
 d33725 1
+a33738 1
+||indignationstripesseal.com^
 d33774 1
 d33793 1
 d33809 1
@@ -949,6 +1040,8 @@ a33835 1
 a33891 1
 ||inquiryblue.com^
 d33896 1
+a33901 1
+||insensitivedramaaudience.com^
 a33953 1
 ||instructiveengine.pro^
 d33958 1
@@ -962,8 +1055,9 @@ a34043 1
 a34080 1
 ||iokqtntsuwshtjh.com^
 d34148 1
-a34216 1
+a34216 2
 ||isobelheartburntips.com^
+||isobelincidentally.com^
 a34267 1
 ||itpqdzs.com^
 d34295 1
@@ -979,6 +1073,8 @@ a34541 1
 d34569 1
 d34580 1
 d34598 1
+a34600 1
+||jerusalemstatedstill.com^
 d34618 1
 a34665 1
 ||jhflrmgrer.com^
@@ -1030,6 +1126,10 @@ a35670 1
 a35749 1
 ||krqmfmh.com^
 d35786 1
+a35846 1
+||kwiydaw.com^
+a35902 1
+||labourcucumberarena.com^
 d35911 1
 d35919 1
 d35977 1
@@ -1049,9 +1149,15 @@ a36177 1
 ||lecticashaptan.com^
 d36228 1
 d36263 1
+a36336 1
+||liabilityspend.com^
 d36341 1
 d36373 1
+a36420 1
+||limeaboriginal.com^
 d36429 1
+a36443 1
+||linendamns.top^
 d36477 1
 a36502 1
 ||literaturerehearsesteal.com^
@@ -1069,6 +1175,8 @@ d36750 1
 a36764 1
 ||looverfamose.top^
 d36803 1
+a36807 1
+||louseflippantsettle.com^
 a36867 1
 ||lptrck.com^
 d36919 1
@@ -1083,6 +1191,10 @@ a37031 1
 d37045 1
 d37047 1
 d37106 1
+a37130 1
+||machodongon.com^
+a37145 1
+||madeupdependant.com^
 d37200 1
 a37227 1
 ||maintenancewinning.com^
@@ -1091,10 +1203,14 @@ a37272 1
 ||malljazz.com^
 a37274 1
 ||maltohoo.xyz^
+a37303 1
+||maneuptown.com^
 a37347 1
 ||margaritaimmense.com^
 d37392 1
 d37405 1
+a37420 1
+||maternityiticy.com^
 d37422 1
 d37425 1
 a37426 1
@@ -1102,10 +1218,16 @@ a37426 1
 d37429 1
 d37507 1
 d37543 1
+a37546 1
+||measuredsanctify.com^
 d37710 1
 d37755 1
 a37778 1
 ||mglfhedrib.com^
+a37810 1
+||microwavedisguises.com^
+a37851 1
+||mildoverridecarbonate.com^
 a37881 1
 ||mindlessswim.pro^
 d37891 1
@@ -1124,6 +1246,8 @@ a38230 1
 d38257 1
 a38275 1
 ||morenonfictiondiscontent.com^
+a38479 1
+||mulberrydoubloons.com^
 d38497 1
 d38549 1
 a38549 1
@@ -1140,6 +1264,8 @@ d38918 1
 d38950 1
 d38986 1
 d39118 1
+a39206 1
+||nimxfbepwldtso.com^
 d39233 1
 d39262 1
 a39267 1
@@ -1147,13 +1273,21 @@ a39267 1
 d39314 1
 d39324 1
 d39333 1
+a39341 1
+||noiselessvegetables.com^
+a39371 1
+||nonesleepbridle.com^
 d39391 1
+a39479 1
+||nourishmentrespective.com^
 d39501 1
 d39569 1
 d39637 1
 d39692 1
 d39721 1
 d39726 1
+a39728 1
+||nzfhloo.com^
 a39862 1
 ||obrom.xyz^
 d39897 1
@@ -1175,6 +1309,8 @@ d40082 1
 a40085 1
 ||ohjhsopp.com^
 d40111 1
+a40132 1
+||ojtatygrl.xyz^
 d40160 1
 d40274 1
 d40303 1
@@ -1188,30 +1324,45 @@ d40624 1
 d40630 1
 d40636 1
 d40649 1
-a40653 1
+a40653 2
 ||osekwacuoxt.xyz^
+||osesuntent.top^
 a40685 1
 ||ostensiblecompetitive.com^
 d40697 1
 d40701 1
 a40722 1
 ||otrzcixradze.com^
+a40777 1
+||ourdreamsanswer.info^
 d40791 1
 d40829 1
+a40829 1
+||outlookreservebennet.com^
 d40900 1
 d40968 1
 d40970 1
 a41035 1
 ||pacificvernonoutskirts.com^
+a41093 1
+||painfullyconfession.com^
 a41098 1
 ||paintednarra.top^
+a41107 1
+||pajamasgnat.com^
+a41114 1
+||palatedaylight.com^
 d41130 1
 a41132 1
 ||pamphletthump.com^
 d41141 1
+a41202 1
+||parliamentarypublicationfruitful.com^
 d41209 1
 d41279 2
 d41295 1
+a41479 1
+||peesopit.net^
 a41545 1
 ||perceptiongrandparents.com^
 d41587 1
@@ -1229,6 +1380,10 @@ a41759 1
 d41817 1
 a41824 1
 ||phyllinvoluta.com^
+a41906 1
+||pillthingy.com^
+a41938 1
+||piouspoemgoodnight.com^
 a41968 1
 ||piteevoo.com^
 d41970 1
@@ -1237,6 +1392,8 @@ d42062 1
 d42073 1
 a42098 1
 ||plenitudesellerministry.com^
+a42143 1
+||plungecarbon.com^
 d42192 1
 d42208 1
 d42234 1
@@ -1246,6 +1403,10 @@ d42260 1
 d42274 1
 a42350 1
 ||popularpillcolumns.com^
+a42371 1
+||porcelainviolationshe.com^
+a42437 1
+||potterdullmanpower.com^
 a42439 1
 ||pouchadjoinmama.com^
 a42525 1
@@ -1256,11 +1417,15 @@ a42556 1
 d42576 1
 d42633 1
 d42691 1
+a42717 1
+||probangavatara.top^
 a42735 1
 ||produceduniversitydire.com^
 d42804 1
 a42814 1
 ||properlycrumple.com^
+a42827 1
+||propositionfadedplague.com^
 d42858 1
 d42886 1
 a42895 1
@@ -1295,10 +1460,16 @@ a43763 1
 ||qxjlqqknkzr.com^
 a43774 1
 ||qybriakrlcyow.com^
+a43830 1
+||radiodogcollaroctober.com^
 d43847 1
+a43893 1
+||rangformer.com^
 d43926 1
 d44037 1
 d44074 1
+a44149 1
+||recurvegowland.top^
 a44219 1
 ||referwhimperceasless.com^
 a44255 1
@@ -1321,10 +1492,16 @@ d44555 1
 d44594 1
 d44636 1
 d44735 1
+a44777 1
+||riversingratitudestifle.com^
+a44821 1
+||rmervvazoakky.top^
 a44829 1
 ||rmvvawqobqvaq.top^
 a44842 1
 ||rnnkubyvk.com^
+a44849 1
+||roadformedomission.com^
 d44882 1
 d44903 1
 a44948 1
@@ -1335,6 +1512,8 @@ a45039 1
 d45063 1
 d45099 1
 d45171 1
+a45231 1
+||rustypassportbarbecue.com^
 d45236 1
 a45258 1
 ||rweltlwphtkbd.com^
@@ -1345,9 +1524,13 @@ d45313 1
 a45314 1
 ||s7feh.top^
 d45347 1
+a45367 1
+||sagaciouslikedfireextinguisher.com^
 a45402 1
 ||salivamenupremise.com^
 d45418 1
+a45437 1
+||sanctuarylivestockcousins.com^
 d45461 1
 d45463 1
 a45505 1
@@ -1364,6 +1547,8 @@ a45701 1
 d45759 1
 a45794 1
 ||selectedhoarfrost.com^
+a45815 1
+||semblanceindulgebellamy.com^
 d45818 1
 d45831 1
 d45852 1
@@ -1380,8 +1565,6 @@ a45923 1
 ||settledchagrinpass.com^
 d45988 1
 d46046 1
-a46047 1
-||sharonwhiledemocratic.com^
 a46064 1
 ||shavetulip.com^
 a46070 1
@@ -1393,14 +1576,22 @@ d46147 1
 d46184 1
 a46195 1
 ||showdoyoukno.info^
+a46241 1
+||shuttersurveyednaive.com^
 d46271 1
+a46279 1
+||signalsuedejolly.com^
 d46286 1
 d46322 1
 d46325 1
 d46328 1
+a46344 1
+||sinkingswap.com^
 d46369 1
 d46376 1
 d46378 2
+a46388 1
+||sixingmudland.top^
 d46406 1
 d46427 1
 d46459 1
@@ -1411,6 +1602,8 @@ d46530 1
 a46550 1
 ||sluiceagrarianvigorous.com^
 d46589 1
+a46595 1
+||smibhwlmwiseq.com^
 d46618 1
 d46630 1
 a46638 1
@@ -1422,6 +1615,8 @@ a46681 1
 d46697 1
 a46755 1
 ||soilthesaurus.com^
+a46772 1
+||solfafrate.top^
 a46791 1
 ||somehowlighter.com^
 d46818 1
@@ -1429,9 +1624,13 @@ d46828 1
 a46847 1
 ||sorryconstructiontrustworthy.com^
 d46860 1
+a46860 1
+||soughtflaredeeper.com^
 d46909 1
 a46911 1
 ||sparrowfencingnumerous.com^
+a46921 1
+||speakinchreprimand.com^
 a46935 1
 ||specialtymet.com^
 d46988 1
@@ -1454,6 +1653,8 @@ d47355 2
 a47379 1
 ||stokoaks.net^
 d47406 1
+a47412 1
+||stoursas.xyz^
 a47416 1
 ||stowamends.com^
 a47428 1
@@ -1461,6 +1662,8 @@ a47428 1
 d47486 1
 d47503 1
 d47508 1
+a47526 1
+||stupiditydecision.com^
 d47529 1
 d47594 1
 d47603 1
@@ -1478,6 +1681,8 @@ a47716 1
 d47728 1
 a47741 1
 ||surveyedmadame.com^
+a47749 1
+||suspicionsrespectivelycobbler.com^
 d47771 1
 a47808 1
 ||sweptbroadarchly.com^
@@ -1489,6 +1694,8 @@ d47873 1
 a47889 1
 ||syndromegarlic.com^
 d47905 1
+a47983 1
+||tailorendorsementtranslation.com^
 d47999 1
 d48026 1
 d48035 1
@@ -1506,8 +1713,12 @@ a48133 1
 d48148 1
 d48237 1
 d48273 1
+a48344 1
+||thanksthat.com^
 d48386 1
 d48394 1
+a48410 1
+||thembriskjumbo.com^
 d48412 1
 d48422 1
 d48449 1
@@ -1520,6 +1731,8 @@ d48570 1
 a48570 1
 ||thresholdunusual.com^
 d48613 1
+a48635 1
+||ticketsrubbingroundabout.com^
 d48650 1
 d48657 1
 d48659 2
@@ -1527,6 +1740,8 @@ d48698 1
 d48728 1
 a48728 1
 ||tirecolloquialinterest.com^
+a48739 1
+||titanicimmunehomesick.com^
 d48742 1
 d48761 1
 d48791 1
@@ -1551,16 +1766,21 @@ d49168 1
 d49174 1
 d49192 1
 d49251 1
+a49264 1
+||trickvealwagon.com^
 d49270 1
 d49381 1
 d49391 1
 a49497 1
 ||turbostats.xyz^
 d49574 1
+a49577 1
+||twistedhorriblybrainless.com^
 a49592 1
 ||twwxjqsk.com^
-a49594 1
+a49594 2
 ||txjhmbn.com^
+||txnhmdvka.com^
 d49607 1
 a49657 1
 ||uabpuwz.com^
@@ -1574,6 +1794,8 @@ d49840 1
 d49869 1
 d49881 1
 d49901 2
+a49905 1
+||unbuttonfootprintssoftened.com^
 d49999 1
 d50001 1
 d50012 1
@@ -1583,8 +1805,12 @@ d50049 1
 d50074 2
 d50110 1
 d50123 1
+a50130 1
+||upeatunzone.com^
 a50165 1
 ||uprightsaunagather.com^
+a50196 1
+||upwardbodies.com^
 a50215 1
 ||urgentprotections.com^
 d50344 1
@@ -1596,6 +1822,8 @@ a50472 1
 d50494 1
 d50559 1
 d50562 1
+a50595 1
+||vengeancehurriedly.com^
 d50602 1
 d50614 1
 d50621 1
@@ -1617,7 +1845,11 @@ a51178 1
 ||vvpojbsibm.xyz^
 d51214 1
 d51219 1
+a51258 1
+||wagroyalcrap.com^
 d51311 1
+a51341 1
+||washedgrimlyhill.com^
 d51361 1
 d51390 1
 d51408 1
@@ -1635,6 +1867,8 @@ a51614 1
 a51616 1
 ||wfredir.net^
 d51635 1
+a51639 1
+||whaleapartmenthumor.com^
 d51655 1
 a51740 1
 ||whizzerknucks.com^
@@ -1653,6 +1887,8 @@ d51955 1
 d51974 1
 a51986 1
 ||wkoeoaavamqek.top^
+a51989 1
+||wkwqljwykollz.top^
 a52021 1
 ||wmwwmbjkmrlv.top^
 a52060 1
@@ -1686,9 +1922,13 @@ d52664 1
 a52664 1
 ||xvhgtyvpaav.xyz^
 d52699 1
+a52763 1
+||yarerspeeder.com^
 a52771 1
 ||yausbprxfft.xyz^
 d52802 1
+a52821 1
+||yellsurpass.com^
 d52922 1
 a52930 1
 ||ymfvgeselqws.com^
@@ -1921,11 +2161,11 @@ a68955 1
 heb.com#?#div[class^="sc-"]:-abp-has(> div[data-qe-id="productCard"]:-abp-contains(Promoted))
 a68998 1
 xnxx.com,xvideos.com###ad-footer
-diff name:easyprivacy lines:30 checksum:2e373d8239
+diff name:easyprivacy lines:30 checksum:a9f99194ee
 d4 2
 a5 2
 ! Last modified: Tue, 05 Mar 2024 04:55:32 +0000
-! Diff-Path: ../patches/2024.3.5.437.patch#easyprivacy
+! Diff-Path: ../patches/2024.3.5.755.patch#easyprivacy
 a2150 1
 /storefront.google-analytics-4.min.js
 a2460 1
