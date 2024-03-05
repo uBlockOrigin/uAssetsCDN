@@ -1,5 +1,5 @@
 ! Title: uBlock filters
-! Last modified: Tue, 05 Mar 2024 12:17:56 +0000
+! Last modified: Tue, 05 Mar 2024 15:29:16 +0000
 ! Expires: 5 days
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Homepage: https://github.com/uBlockOrigin/uAssets
@@ -16,16 +16,16 @@
 ! https://github.com/uBlockOrigin/uAssets/pull/18106/
 tv.youtube.com##+js(trusted-replace-xhr-response, '"adPlacements"', '"no_ads"', /playlist\?list=|player\?|watch\?v=|youtubei\/v1\/player/)
 !#if !cap_html_filtering
-www.youtube.com##+js(trusted-replace-xhr-response, /"adPlacements.*?([A-Z]"\}|"\}{2})\}\]\,/, , /playlist\?list=|player\?|watch\?v=|youtubei\/v1\/player/)
+www.youtube.com##+js(trusted-replace-xhr-response, /"adPlacements.*?([A-Z]"\}|"\}{2\,4})\}\]\,/, , /playlist\?list=|player\?|watch\?v=|youtubei\/v1\/player/)
 www.youtube.com##+js(trusted-replace-xhr-response, /"adPlacements.*?("adSlots"|"adBreakHeartbeatParams")/gms, $1, youtubei/v1/player)
-www.youtube.com##+js(trusted-replace-fetch-response, /"adPlacements.*?([A-Z]"\}|"\}{2})\}\]\,/, , player?)
+www.youtube.com##+js(trusted-replace-fetch-response, /"adPlacements.*?([A-Z]"\}|"\}{2\,4})\}\]\,/, , player?)
 www.youtube.com##+js(trusted-replace-fetch-response, /\"adSlots.*?\}\]\}\}\]\,/, , player?)
 !#else
-||www.youtube.com/playlist?list=$xhr,1p,replace=/"adPlacements.*?([A-Z]"\}|"\}{2})\}\]\,//
+||www.youtube.com/playlist?list=$xhr,1p,replace=/"adPlacements.*?([A-Z]"\}|"\}{2\,4})\}\]\,//
 ||www.youtube.com/playlist?list=$xhr,1p,replace=/"adSlots.*?\}\]\}\}\]\,//
-||www.youtube.com/watch?v=$doc,xhr,1p,replace=/"adPlacements.*?([A-Z]"\}|"\}{2})\}\]\,//
+||www.youtube.com/watch?v=$doc,xhr,1p,replace=/"adPlacements.*?([A-Z]"\}|"\}{2\,4})\}\]\,//
 ||www.youtube.com/watch?v=$doc,xhr,1p,replace=/"adSlots.*?\}\]\}\}\]\,//
-||www.youtube.com/youtubei/v1/player?$xhr,1p,replace=/"adPlacements.*?([A-Z]"\}|"\}{2})\}\]\,//
+||www.youtube.com/youtubei/v1/player?$xhr,1p,replace=/"adPlacements.*?([A-Z]"\}|"\}{2\,4})\}\]\,//
 ||www.youtube.com/youtubei/v1/player?$xhr,1p,replace=/"adSlots.*?\}\]\}\}\]\,//
 ||www.youtube.com/playlist?list=$xhr,1p,replace=/"auxiliaryUi":\{"messageRenderers":\{"bkaEnforcementMessageViewModel.*?e\}\}\}\,//
 ||www.youtube.com/playlist?list=$xhr,1p,replace=/("trackingParam":"kx_fmPxhoPZR)[-_0-9A-Za-z]{150}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{55}lLKPQ-SS"\})/\$1\$2/
@@ -4919,6 +4919,18 @@ igg-games.com##[href^="https://tm-offers"]
 igg-games.com#@#.uk-panel.widget-text
 igg-games.com##.uk-panel.widget-text:style(height: 0px !important; visibility: collapse;)
 igg-games.com##.widget_advads_ad_widget
+igg-games.com##a[href^="https://igg-games.com/c1flix"], a[aria-label="faadgg"], a[aria-label="fdgg"], a[aria-label="aswd"]
+igg-games.com##.uk-margin-medium-top > *:first-child:has(img[src^="https://igg-games.com/wp-content/uploads/"])
+igg-games.com##.uk-margin-medium-top > *:first-child + a:has(img[src^="https://igg-games.com/wp-content/uploads/"])
+igg-games.com##article > a:has(img[loading="lazy"][width][height])
+igg-games.com###tm-sidebar > div:not([class], [id]):has(a[rel] > img[src^="https://igg-games.com/wp-content/uploads/"])
+igg-games.com##aside > :not(:first-child) a[href] img
+igg-games.com##a[href$=".php"]
+||igg-games.com/wp-content/uploads/2024/02/hhh3.png$image
+||igg-games.com/wp-content/uploads/2021/02/hh1.gif$image
+||igg-games.com/wp-content/uploads/2024/02/naa1.jpg$image
+||igg-games.com/wp-content/uploads/2024/02/aaa.jpg$image
+||igg-games.com/wp-content/uploads/2024/02/sss.jpg$image
 pcgamestorrents.com##[href*="banner"]
 ||pcgamestorrents.com/*.gif$image
 pcgamestorrents.com##a[href^="https://pcgamestorrents.com/ffll"]
@@ -8765,15 +8777,9 @@ ustream.to##.overlay
 ! canalesportivo. live
 fr.streamon-sport.ru,hoca4u.com##+js(acs, document.createElement, onerror)
 
-! https://github.com/NanoMeow/QuickReports/issues/888
-||allsports4free.online^$3p
-
 ! https://github.com/uBlockOrigin/uAssets/issues/5242
 sound-park.*,soundpark.*,soundpark-club.*##+js(acs, $, open)
 sound-park.*,soundpark.*,soundpark-club.*##+js(acs, document.createElement, script)
-
-! https://github.com/uBlockOrigin/uAssets/issues/5245
-@@||bomcondutor.pt^$ghide
 
 ! paladinsdecks.com anti adb
 ||paladinsdecks.com/fileadmin/*/fab.min.js$script,1p,redirect=fuckadblock.js-3.2.0

@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Tue, 05 Mar 2024 12:32:40 +0000
-! Diff-Path: ../patches/2024.3.5.755.patch#ublock-filters
+! Last modified: Tue, 05 Mar 2024 17:13:55 +0000
+! Diff-Path: ../patches/2024.3.5.1043.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -9,16 +9,16 @@
 ! @@||youtube.com/get_video_info?*timedtext_editor$xhr,1p
 tv.youtube.com##+js(trusted-replace-xhr-response, '"adPlacements"', '"no_ads"', /playlist\?list=|player\?|watch\?v=|youtubei\/v1\/player/)
 !#if !cap_html_filtering
-www.youtube.com##+js(trusted-replace-xhr-response, /"adPlacements.*?([A-Z]"\}|"\}{2})\}\]\,/, , /playlist\?list=|player\?|watch\?v=|youtubei\/v1\/player/)
+www.youtube.com##+js(trusted-replace-xhr-response, /"adPlacements.*?([A-Z]"\}|"\}{2\,4})\}\]\,/, , /playlist\?list=|player\?|watch\?v=|youtubei\/v1\/player/)
 www.youtube.com##+js(trusted-replace-xhr-response, /"adPlacements.*?("adSlots"|"adBreakHeartbeatParams")/gms, $1, youtubei/v1/player)
-www.youtube.com##+js(trusted-replace-fetch-response, /"adPlacements.*?([A-Z]"\}|"\}{2})\}\]\,/, , player?)
+www.youtube.com##+js(trusted-replace-fetch-response, /"adPlacements.*?([A-Z]"\}|"\}{2\,4})\}\]\,/, , player?)
 www.youtube.com##+js(trusted-replace-fetch-response, /\"adSlots.*?\}\]\}\}\]\,/, , player?)
 !#else
-||www.youtube.com/playlist?list=$xhr,1p,replace=/"adPlacements.*?([A-Z]"\}|"\}{2})\}\]\,//
+||www.youtube.com/playlist?list=$xhr,1p,replace=/"adPlacements.*?([A-Z]"\}|"\}{2\,4})\}\]\,//
 ||www.youtube.com/playlist?list=$xhr,1p,replace=/"adSlots.*?\}\]\}\}\]\,//
-||www.youtube.com/watch?v=$doc,xhr,1p,replace=/"adPlacements.*?([A-Z]"\}|"\}{2})\}\]\,//
+||www.youtube.com/watch?v=$doc,xhr,1p,replace=/"adPlacements.*?([A-Z]"\}|"\}{2\,4})\}\]\,//
 ||www.youtube.com/watch?v=$doc,xhr,1p,replace=/"adSlots.*?\}\]\}\}\]\,//
-||www.youtube.com/youtubei/v1/player?$xhr,1p,replace=/"adPlacements.*?([A-Z]"\}|"\}{2})\}\]\,//
+||www.youtube.com/youtubei/v1/player?$xhr,1p,replace=/"adPlacements.*?([A-Z]"\}|"\}{2\,4})\}\]\,//
 ||www.youtube.com/youtubei/v1/player?$xhr,1p,replace=/"adSlots.*?\}\]\}\}\]\,//
 ||www.youtube.com/playlist?list=$xhr,1p,replace=/"auxiliaryUi":\{"messageRenderers":\{"bkaEnforcementMessageViewModel.*?e\}\}\}\,//
 ||www.youtube.com/playlist?list=$xhr,1p,replace=/("trackingParam":"kx_fmPxhoPZR)[-_0-9A-Za-z]{150}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{55}lLKPQ-SS"\})/\$1\$2/
@@ -3287,6 +3287,18 @@ igg-games.com##[href^="https://tm-offers"]
 igg-games.com#@#.uk-panel.widget-text
 igg-games.com##.uk-panel.widget-text:style(height: 0px !important; visibility: collapse;)
 igg-games.com##.widget_advads_ad_widget
+igg-games.com##a[href^="https://igg-games.com/c1flix"], a[aria-label="faadgg"], a[aria-label="fdgg"], a[aria-label="aswd"]
+igg-games.com##.uk-margin-medium-top > *:first-child:has(img[src^="https://igg-games.com/wp-content/uploads/"])
+igg-games.com##.uk-margin-medium-top > *:first-child + a:has(img[src^="https://igg-games.com/wp-content/uploads/"])
+igg-games.com##article > a:has(img[loading="lazy"][width][height])
+igg-games.com###tm-sidebar > div:not([class], [id]):has(a[rel] > img[src^="https://igg-games.com/wp-content/uploads/"])
+igg-games.com##aside > :not(:first-child) a[href] img
+igg-games.com##a[href$=".php"]
+||igg-games.com/wp-content/uploads/2024/02/hhh3.png$image
+||igg-games.com/wp-content/uploads/2021/02/hh1.gif$image
+||igg-games.com/wp-content/uploads/2024/02/naa1.jpg$image
+||igg-games.com/wp-content/uploads/2024/02/aaa.jpg$image
+||igg-games.com/wp-content/uploads/2024/02/sss.jpg$image
 pcgamestorrents.com##[href*="banner"]
 ||pcgamestorrents.com/*.gif$image
 pcgamestorrents.com##a[href^="https://pcgamestorrents.com/ffll"]
@@ -5599,10 +5611,8 @@ ustream.to##.overlay
 *$script,redirect-rule=noopjs,domain=ustream.to
 ! canalesportivo. live
 fr.streamon-sport.ru,hoca4u.com##+js(acs, document.createElement, onerror)
-||allsports4free.online^$3p
 sound-park.*,soundpark.*,soundpark-club.*##+js(acs, $, open)
 sound-park.*,soundpark.*,soundpark-club.*##+js(acs, document.createElement, script)
-@@||bomcondutor.pt^$ghide
 ! paladinsdecks.com anti adb
 ||paladinsdecks.com/fileadmin/*/fab.min.js$script,1p,redirect=fuckadblock.js-3.2.0
 @@||paladinsdecks.com/ad/banner/*$xhr,1p
@@ -9326,12 +9336,10 @@ apkmirror.com##^script:has-text("'.ains'")
 !#if !cap_html_filtering
 apkmirror.com##+js(rmnt, script, "'.ains'")
 !#endif
-vidsrc.*##+js(nosiif, /devtool|0x/)
-vidsrc.*##+js(set, console.clear, trueFunc)
+vidsrc.*##+js(nosiif, /0x|sandCheck/)
 vidsrc.*##+js(nowoif)
 vidsrc.*##+js(aopr, __Y)
 vidsrc.*###pop_asdf
-||encumbranceunderlineheadmaster.com^
 ||katebugs.com^
 embed.smashystream.com###addiv
 *$script,3p,denyallow=gstatic.com,domain=streambucket.net
@@ -9707,19 +9715,20 @@ camsrip.com##+js(rmnt, script, googlesyndication)
 ! recherche-ebook .fr anti-adb
 recherche-ebook.fr##+js(set, nitroAds.abp, true)
 *$script,3p,redirect-rule=noop.js,domain=streamelements.com
-mahabhulekh712.in##+js(acs, document.createElement, fakeAd)
+royaledudes.io##+js(no-xhr-if, adinplay.com)
+royaledudes.io##.gifts
 ! Link shortener filters go into their own dedicated list
 ! *** filters/ubo-link-shorteners.txt ***
 ! gplinks all domains (gplinks.co/EWu8)
-*$frame,redirect-rule=noopframe,domain=gplinks.co|theringtonesworld.in|jobkijankari.in|newsloti.com|newzwala.co.in|iplquotes.com|kaisekareblog.com|w3hindi.in|jobwaala.in|nhmgujarat.in|minijankari.com|news36tech.com|gptproguide.com|odiamusicsong.com|anumin.com|awolio.com|lyricsx.in|financialstudy.me|foreverhealth.in|eternalcbse.in|smartsetkari.in
-@@||gplinks.in/track/$script,xhr,domain=gplinks.co|theringtonesworld.in|jobkijankari.in|newsloti.com|newzwala.co.in|iplquotes.com|kaisekareblog.com|w3hindi.in|jobwaala.in|nhmgujarat.in|minijankari.com|news36tech.com|gptproguide.com|odiamusicsong.com|anumin.com|awolio.com|lyricsx.in|financialstudy.me|foreverhealth.in|eternalcbse.i|smartsetkari.in
-@@||doubleclick.net^$script,xhr,domain=theringtonesworld.in|jobkijankari.in|newsloti.com|newzwala.co.in|iplquotes.com|kaisekareblog.com|w3hindi.in|jobwaala.in|nhmgujarat.in|minijankari.com|news36tech.com|gptproguide.com|odiamusicsong.com|anumin.com|awolio.com|lyricsx.in|financialstudy.me|foreverhealth.in|eternalcbse.in|smartsetkari.in
-@@*$ghide,domain=gplinks.co|theringtonesworld.in|jobkijankari.in|newsloti.com|newzwala.co.in|iplquotes.com|kaisekareblog.com|w3hindi.in|jobwaala.in|nhmgujarat.in|minijankari.com|news36tech.com|gptproguide.com|odiamusicsong.com|anumin.com|awolio.com|lyricsx.in|financialstudy.me|foreverhealth.in|eternalcbse.in|smartsetkari.in
-theringtonesworld.in,jobkijankari.in,newsloti.com,newzwala.co.in,iplquotes.com,kaisekareblog.com,w3hindi.in,jobwaala.in,nhmgujarat.in,minijankari.com,news36tech.com,gptproguide.com,odiamusicsong.com,anumin.com,awolio.com,lyricsx.in,financialstudy.me,foreverhealth.in,eternalcbse.in,smartsetkari.in##center:others()
-theringtonesworld.in,jobkijankari.in,newsloti.com,newzwala.co.in,iplquotes.com,kaisekareblog.com,w3hindi.in,jobwaala.in,nhmgujarat.in,minijankari.com,news36tech.com,gptproguide.com,odiamusicsong.com,anumin.com,awolio.com,lyricsx.in,financialstudy.me,foreverhealth.in,eternalcbse.in,smartsetkari.in###SmileyBanner:remove()
-theringtonesworld.in,jobkijankari.in,newsloti.com,newzwala.co.in,iplquotes.com,kaisekareblog.com,w3hindi.in,jobwaala.in,nhmgujarat.in,minijankari.com,news36tech.com,gptproguide.com,odiamusicsong.com,anumin.com,awolio.com,lyricsx.in,financialstudy.me,foreverhealth.in,eternalcbse.in,smartsetkari.in##+js(aopw, AdBDetected)
-theringtonesworld.in,jobkijankari.in,newsloti.com,newzwala.co.in,iplquotes.com,kaisekareblog.com,w3hindi.in,jobwaala.in,nhmgujarat.in,minijankari.com,news36tech.com,gptproguide.com,odiamusicsong.com,anumin.com,awolio.com,lyricsx.in,financialstudy.me,foreverhealth.in,eternalcbse.in,smartsetkari.in##+js(set, count, 0)
-theringtonesworld.in,jobkijankari.in,newsloti.com,newzwala.co.in,iplquotes.com,kaisekareblog.com,w3hindi.in,jobwaala.in,nhmgujarat.in,minijankari.com,news36tech.com,gptproguide.com,odiamusicsong.com,anumin.com,awolio.com,lyricsx.in,financialstudy.me,foreverhealth.in,eternalcbse.in,smartsetkari.in##[id*="iframe"], [id*="gpt_unit"], [id*="div-gpt-"]:style(height:0.0001px !important;)
+*$frame,redirect-rule=noopframe,domain=anumin.com|awolio.com|cgbsesupport.com|eternalcbse.in|financialstudy.me|foreverhealth.in|gplinks.co|gptproguide.com|iplquotes.com|jobkijankari.in|jobwaala.in|kaisekareblog.com|lyricsx.in|minijankari.com|news36tech.com|newsloti.com|newzwala.co.in|nhmgujarat.in|odiamusicsong.com|smartsetkari.in|theringtonesworld.in|w3hindi.in
+@@||gplinks.in/track/$script,xhr,domain=anumin.com|awolio.com|cgbsesupport.com|eternalcbse.i|financialstudy.me|foreverhealth.in|gplinks.co|gptproguide.com|iplquotes.com|jobkijankari.in|jobwaala.in|kaisekareblog.com|lyricsx.in|minijankari.com|news36tech.com|newsloti.com|newzwala.co.in|nhmgujarat.in|odiamusicsong.com|smartsetkari.in|theringtonesworld.in|w3hindi.in
+@@||doubleclick.net^$script,xhr,domain=anumin.com|awolio.com|cgbsesupport.com|eternalcbse.i|financialstudy.me|foreverhealth.in|gplinks.co|gptproguide.com|iplquotes.com|jobkijankari.in|jobwaala.in|kaisekareblog.com|lyricsx.in|minijankari.com|news36tech.com|newsloti.com|newzwala.co.in|nhmgujarat.in|odiamusicsong.com|smartsetkari.in|theringtonesworld.in|w3hindi.in
+@@*$ghide,domain=anumin.com|awolio.com|cgbsesupport.com|eternalcbse.i|financialstudy.me|foreverhealth.in|gplinks.co|gptproguide.com|iplquotes.com|jobkijankari.in|jobwaala.in|kaisekareblog.com|lyricsx.in|minijankari.com|news36tech.com|newsloti.com|newzwala.co.in|nhmgujarat.in|odiamusicsong.com|smartsetkari.in|theringtonesworld.in|w3hindi.in
+anumin.com,awolio.com,cgbsesupport.com,eternalcbse.in,financialstudy.me,foreverhealth.in,gptproguide.com,iplquotes.com,jobkijankari.in,jobwaala.in,kaisekareblog.com,lyricsx.in,minijankari.com,news36tech.com,newsloti.com,newzwala.co.in,nhmgujarat.in,odiamusicsong.com,smartsetkari.in,theringtonesworld.in,w3hindi.in##center:others()
+anumin.com,awolio.com,cgbsesupport.com,eternalcbse.in,financialstudy.me,foreverhealth.in,gptproguide.com,iplquotes.com,jobkijankari.in,jobwaala.in,kaisekareblog.com,lyricsx.in,minijankari.com,news36tech.com,newsloti.com,newzwala.co.in,nhmgujarat.in,odiamusicsong.com,smartsetkari.in,theringtonesworld.in,w3hindi.in###SmileyBanner:remove()
+anumin.com,awolio.com,cgbsesupport.com,eternalcbse.in,financialstudy.me,foreverhealth.in,gptproguide.com,iplquotes.com,jobkijankari.in,jobwaala.in,kaisekareblog.com,lyricsx.in,minijankari.com,news36tech.com,newsloti.com,newzwala.co.in,nhmgujarat.in,odiamusicsong.com,smartsetkari.in,theringtonesworld.in,w3hindi.in##+js(aopw, AdBDetected)
+anumin.com,awolio.com,cgbsesupport.com,eternalcbse.in,financialstudy.me,foreverhealth.in,gptproguide.com,iplquotes.com,jobkijankari.in,jobwaala.in,kaisekareblog.com,lyricsx.in,minijankari.com,news36tech.com,newsloti.com,newzwala.co.in,nhmgujarat.in,odiamusicsong.com,smartsetkari.in,theringtonesworld.in,w3hindi.in##+js(set, count, 0)
+anumin.com,awolio.com,cgbsesupport.com,eternalcbse.in,financialstudy.me,foreverhealth.in,gptproguide.com,iplquotes.com,jobkijankari.in,jobwaala.in,kaisekareblog.com,lyricsx.in,minijankari.com,news36tech.com,newsloti.com,newzwala.co.in,nhmgujarat.in,odiamusicsong.com,smartsetkari.in,theringtonesworld.in,w3hindi.in##[id*="iframe"], [id*="gpt_unit"], [id*="div-gpt-"]:style(height:0.0001px !important;)
 gplinks.co##.bg-soft-primary, a.exclude-pop.smartlink, .exclude-pop.quiz-container, #PlayQuiz, #quiz-frame, .exclude-popad
 ||gamezop.com^$domain=gplinks.*
 gplinks.co##+js(set, blurred, false)
@@ -11933,9 +11942,10 @@ newsbomb.gr##.banner-area
 ibeconomist.com##+js(nostif, adsense)
 getitfree.cn##+js(acs, document.getElementById, .style)
 *$script,3p,domain=webmusic.*
-/^https:\/\/(?:cdn77\.)?aj[0-9a-z]{2}\d{2}\.online\/[0-9a-z]{8}\.js$/$script,3p
-/^https:\/\/(?:cdn77\.)?aj[0-9a-z]{2}\d{2}\.bid\/[0-9a-z]{8}\.js$/$script,3p
-/^https:\/\/(?:cdn77\.)?aj[0-9a-z]{2}\d{2}\.online\/[-_0-9a-zA-Z]{70,}$/$frame,3p
+/^https:\/\/(?:cdn77\.)?aj[0-9a-z]{2}\d{2}\.online\/[0-9a-z]{8}\.js$/$script,3p,to=online
+/^https:\/\/(?:cdn77\.)?aj[0-9a-z]{2}\d{2}\.bid\/[0-9a-z]{8}\.js$/$script,3p,to=bid
+/^https:\/\/(?:cdn77\.)?aj[0-9a-z]{2}\d{2}\.online\/[-_0-9A-Za-z]{70,}$/$frame,3p,to=online
+/^https:\/\/(?:cdn77\.)?aj\d{4}\.bid\/[-_0-9A-Za-z]{80,}\?/$xhr,3p,to=bid
 smallpocketlibrary.com##+js(aopr, adBlockDetected)
 ! iinbinlist.com/osqa.net/vanhawks.com anti-adb
 *$xhr,redirect-rule=nooptext,domain=iinbinlist.com|osqa.net|vanhawks.com
