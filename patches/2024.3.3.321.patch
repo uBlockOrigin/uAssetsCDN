@@ -1,8 +1,11 @@
-diff name:ublock-annoyances lines:37 checksum:60f87859d8
+diff name:ublock-annoyances lines:44 checksum:54ce5bbcbb
 d3 2
 a4 2
-! Last modified: Wed, 06 Mar 2024 16:35:34 +0000
-! Diff-Path: ../patches/2024.3.6.1104.patch#ublock-annoyances
+! Last modified: Wed, 06 Mar 2024 21:52:28 +0000
+! Diff-Path: ../patches/2024.3.6.1399.patch#ublock-annoyances
+a43 2
+consent.youtube.com##+js(trusted-click-element, [action="https://consent.youtube.com/save"][style="display:inline;"] [name="set_eom"][value="true"] ~ .basebuttonUIModernization[value][aria-label])
+consent.youtube.com##body.bodyUIModernization:has([action="https://consent.youtube.com/save"] .saveButtonUIModernization[value][aria-label])
 a206 2
 steuerbot.com##+js(trusted-set-local-storage-item, cookies, '{"essential":true,"performance":false,"marketing":false}')
 vadhander.hogakusten.com##+js(trusted-set-local-storage-item, cookie_consent, '{"consent":true,"necessary":true,"preference":false,"statistics":false,"marketing":false}')
@@ -30,17 +33,21 @@ ferroviando.com.br,counciloflove.com,infokik.com,kulinarnastronamocy.pl,jafekri.
 d4206 1
 a4206 1
 ymovies.vip,aniwatch.to,megacloud.tv,hianime.to##+js(set, devtoolsDetector.launch, noopFunc)
-a4503 5
+a4503 9
 vidsrc.*##+js(acs, RegExp.prototype.toString, .join(""))
 vidsrc.*##+js(aeld, keydown, 123)
 vidsrc.*##+js(nosiif, devtool)
 vidsrc.*##+js(set, console.clear, trueFunc)
 embtaku.pro##+js(aost, Promise, /isEnable|isOpen/)
-diff name:ublock-badware lines:16 checksum:6db6c8fdd9
+! mrbenne. com anti select, right click, f-keys, print
+mrbenne.com##+js(rmnt, script, /Clipboard|oncontextmenu|wpcp|keyCode/)
+mrbenne.com##+js(ra, oncontextmenu|ondragstart|onselectstart|onload|onblur)
+mrbenne.com##+js(rmnt, style, /-webkit-user-select|webkit-appearance/)
+diff name:ublock-badware lines:16 checksum:58b469a730
 d3 2
 a4 2
 ! Last modified: Wed, 06 Mar 2024 07:38:47 +0000
-! Diff-Path: ../patches/2024.3.6.1104.patch#ublock-badware
+! Diff-Path: ../patches/2024.3.6.1399.patch#ublock-badware
 d608 1
 a608 1
 .com/pl?o=$doc
@@ -53,11 +60,11 @@ a2974 1
 ||revancedapps.*^$all,domain=~revanced.app
 a3089 1
 ||espacefidelitefree.fr^$all
-diff name:ublock-filters lines:202 checksum:fe1fc3cc31
+diff name:ublock-filters lines:214 checksum:66299c41bb
 d3 2
 a4 2
-! Last modified: Wed, 06 Mar 2024 15:56:00 +0000
-! Diff-Path: ../patches/2024.3.6.1104.patch#ublock-filters
+! Last modified: Wed, 06 Mar 2024 21:53:42 +0000
+! Diff-Path: ../patches/2024.3.6.1399.patch#ublock-filters
 d12 1
 a12 1
 www.youtube.com##+js(trusted-replace-xhr-response, /"adPlacements.*?([A-Z]"\}|"\}{2\,4})\}\]\,/, , /playlist\?list=|player\?|watch\?v=|youtubei\/v1\/player/)
@@ -130,6 +137,10 @@ vidsrc.*###pop_asdf
 embed.smashystream.com###addiv
 *$script,3p,denyallow=gstatic.com,domain=streambucket.net
 player.smashy.stream##.react-responsive-modal-root
+d9360 2
+a9361 2
+aniwave.to,anix.to,fmoviesz.to##+js(nowoif, _blank)
+aniwave.to,anix.to,fmoviesz.to##+js(set-cookie, __pf, 1)
 d9497 4
 a9500 4
 @@/^https:\/\/www\.puzzle-[a-z]+\.com\//$script,from=puzzle-loop.com|puzzle-words.com|puzzle-chess.com|puzzle-thermometers.com|puzzle-norinori.com|puzzle-minesweeper.com|puzzle-slant.com|puzzle-lits.com|puzzle-galaxies.com|puzzle-tents.com|puzzle-battleships.com|puzzle-pipes.com|puzzle-hitori.com|puzzle-heyawake.com|puzzle-shingoki.com|puzzle-masyu.com|puzzle-stitches.com|puzzle-aquarium.com|puzzle-tapa.com|puzzle-star-battle.com|puzzle-kakurasu.com|puzzle-skyscrapers.com|puzzle-futoshiki.com|puzzle-shakashaka.com|puzzle-kakuro.com|puzzle-jigsaw-sudoku.com|puzzle-killer-sudoku.com|puzzle-binairo.com|puzzle-nonograms.com|puzzle-sudoku.com|puzzle-light-up.com|puzzle-bridges.com|puzzle-shikaku.com|puzzle-nurikabe.com|puzzle-dominosa.com
@@ -139,7 +150,7 @@ puzzle-loop.com,puzzle-words.com,puzzle-chess.com,puzzle-thermometers.com,puzzle
 d9706 1
 a9706 1
 embedz.click##+js(aeld, load, _0x)
-a9707 12
+a9707 19
 camsrip.com##+js(rmnt, script, googlesyndication)
 ! recherche-ebook .fr anti-adb
 recherche-ebook.fr##+js(set, nitroAds.abp, true)
@@ -152,6 +163,13 @@ zonebourse.com##+js(trusted-replace-argument, document.getElementById, 0, null, 
 scriptzhub.com##+js(nostif, show())
 stfly.xyz##+js(rmnt, script, justDetectAdblock)
 ||fulltv.video^$3p
+||ver.gratis^$3p
+!#if cap_html_filtering
+treasl.com##^script:has-text(antiAdBlock)
+!#else
+treasl.com##+js(rmnt, script, antiAdBlock)
+!#endif
+mrbenne.com##+js(rmnt, script, /fairAdblock|popMagic/)
 d9711 10
 a9720 10
 *$frame,redirect-rule=noopframe,domain=anumin.com|awolio.com|cgbsesupport.com|eternalcbse.in|financialstudy.me|foreverhealth.in|gplinks.co|gptproguide.com|iplquotes.com|jobkijankari.in|jobwaala.in|kaisekareblog.com|learnwithsaif.in|lyricsx.in|minijankari.com|news36tech.com|newsloti.com|newzwala.co.in|nhmgujarat.in|odiamusicsong.com|smartsetkari.in|sugargliderfaqs.com|theringtonesworld.in|w3hindi.in
@@ -196,8 +214,6 @@ a13080 1
 a14681 1
 *$script,3p,domain=m2list.com,denyallow=ajax.googleapis.com|cdnjs.cloudflare.com
 d15542 1
-a15542 1
-1cloudfile.com##.advert-wrapper:style(visibility: hidden !important)
 d16103 1
 a16103 6
 !pinterest.*##[data-grid-item]:has([aria-label]:not([aria-label*="pinterest"])[href^="http"])
@@ -244,6 +260,9 @@ e-kakoh.com,earlymemorials.com,earninginwork.com,easyjapanesee.com,easytodoit.co
 d20624 1
 a20624 1
 labstory.in,ladypopularblog.com,lamorgues.com,lampungkerja.com,lapaginadealberto.com,lascelebrite.com,latinlucha.es,law101.org.za,lawweekcolorado.com,learnedclub.com,learnmany.in,learnodo-newtonic.com,learnospot.com,learnslovak.online,lebois-racing.com,leechyscripts.net,leeapk.com,legendaryrttextures.com,lendrive.web.id,letrasgratis.com.ar,levismodding.co.uk,lgcnews.com,lglbmm.com,lheritierblog.com,ligaset.com,limcasports.xyz,limontorrent.com,limontorrents.com,linkskibe.com,linkvoom.com,linux-talks.com,linuxexplain.com,lionsfan.net,literarysomnia.com,littlepandatranslations.com,livefootballempire.com,lk21org.com,loanpapa.in,locurainformaticadigital.com,logofootball.net,lookism.me,lordfix.xyz,lotus-tours.com.hk,ltpcalculator.in,luchaonline.com,luciferdonghua.in,luckymood777.com,lucrebem.com.br,lustesthd.cloud,lustesthd.lat,lycee-maroc.com##+js(noeval-if, /chp_?ad/)
+d20630 1
+a20630 1
+radiantsong.com,rabo.no,ralli.ee,ranjeet.best,ranourano.xyz,raulmalea.ro,rbs.ta36.com,rbscripts.net,rctechsworld.in,readfast.in,realfreelancer.com,recipenp.com,redbubbletools.com,redfaucet.site,reeell.com,renierassociatigroup.com,reportbangla.com,reprezentacija.rs,retire49.com,retrotv.org,revistaapolice.com.br,ribbelmonster.de,rightdark-scan.com,rinconpsicologia.com,ritacandida.com,rocdacier.com,rollingwheel.xyz,romaierioggi.it,romaniasoft.ro,romviet.com,roshy.tv,roznamasiasat.com,rseducationinfo.com,rsfinanceinfo.com,rsinsuranceinfo.com,rssoftwareinfo.com,rubyskitchenrecipes.uk,rumanicandle.online,ruyamanga.com,rv-ecommerce.com,ryanmoore.marketing,ryansharich.com##+js(noeval-if, /chp_?ad/)
 d20632 1
 a20632 1
 ta3arof.net,taariikh.net,tabonitobrasil.tv,taisha-diet.com,talentstareducation.com,tamilanzone.com,tamilhit.tech,tamilnaadi.com,tatsublog.com,tbazzar.com,teachersupdates.net,team-octavi.com,team-rcv.xyz,teamkong.tk,teamupinternational.com,techacrobat.com,techastuces.com,techbytesblog.com,techdriod.com,techedubyte.com,techiepirates.com,techiestalk.in,techkeshri.com,technewslive.org,technewsrooms.com,technicalviral.com,technorj.com,technorozen.com,techoreview.com,techprakash.com,techsbucket.com,techstwo.com,techyhigher.com,techyrick.com,tecnomd.com,tecnoscann.com,tedenglish.site,tehnar.net.ua,tehnotone.com,telephone-soudan.com,teluguhitsandflops.com,temporeale.info,tenbaiquest.com,tespedia.com,testious.com,thangdangblog.com,thaript.com,the-loop.xyz,theapothecarydiariesmanga.com,thebigblogs.com,thermoprzepisy.pl,theworldobits.com,thebreakermanga.online,thecannalysts.blog,theconomy.me,thegamearcade.com,theinternettaughtme.com,thejoblives.com,thelastgamestandingexp.com,theliveupdate.com,thenewsglobe.net,theprofoundreport.com,thesleak.com,thesportsupa.com,thewambugu.com,throwsmallstone.com,titfuckvideos.com,tirumalatirupatiyatra.in,tnewsnetwork.com,today-obits.com,todays-obits.com,toeflgratis.com,tokoasrimotedanpayet.my.id,toorco.com,top10trends.net,topfaucet.us,topsworldnews.com,toptenknowledge.com,torrentdofilmeshd.net,torrentgame.org,totally.top,towerofgod.top,tr3fit.xyz,trendflatt.com,trendohunts.com,trgtkls.org,tukangsapu.net,tunabagel.net,turkeymenus.com,turkishseriestv.net,tutorialesdecalidad.com,tutorialsduniya.com,tw.xn--h9jepie9n6a5394exeq51z.com##+js(noeval-if, /chp_?ad/)
@@ -256,11 +275,11 @@ d22349 1
 a22349 2
 royalroad.com##.portlet:has(> h6)
 ||royalroad.com/a$frame,1p
-diff name:ublock-privacy lines:12 checksum:67da37cc59
+diff name:ublock-privacy lines:12 checksum:083bddb45c
 d3 2
 a4 2
 ! Last modified: Tue, 05 Mar 2024 06:42:39 +0000
-! Diff-Path: ../patches/2024.3.6.1104.patch#ublock-privacy
+! Diff-Path: ../patches/2024.3.6.1399.patch#ublock-privacy
 d200 1
 a200 1
 ! ||hktvmall.com/yuicombo?$script,removeparam=/_ui/shared/common/js/util/jquery.analytics-utils.js
@@ -269,11 +288,11 @@ a567 1
 d622 1
 a622 1
 duplichecker.com,plagiarismchecker.co,plagiarismdetector.net,searchenginereports.net,smallseotools.com##.icon_animation samp:style(animation: none !important;)
-diff name:ublock-quick-fixes lines:39 checksum:7444ffef16
+diff name:ublock-quick-fixes lines:39 checksum:eac23516b1
 d3 2
 a4 2
 ! Last modified: Wed, 06 Mar 2024 14:56:08 +0000
-! Diff-Path: ../patches/2024.3.6.1104.patch#ublock-quick-fixes
+! Diff-Path: ../patches/2024.3.6.1399.patch#ublock-quick-fixes
 d33 7
 a39 7
 imgoebn.sbs,picnwqez.sbs,imgjajhe.sbs,pixjnwe.sbs,pixkfjtrkf.shop##+js(aopr, console.clear)
@@ -309,20 +328,20 @@ pinterest.*##[data-grid-item]:has([data-test-pin-id] a[href^="http"][rel] [data-
 !#endif
 10play.com.au##+js(set, moatPrebidApi, {})
 10play.com.au##+js(set, moatPrebidApi.getMoatTargetingForPage, noopFunc)
-diff name:ublock-unbreak lines:8 checksum:2f532f0bca
+diff name:ublock-unbreak lines:8 checksum:6cfd6033b5
 d3 2
 a4 2
 ! Last modified: Wed, 06 Mar 2024 15:30:54 +0000
-! Diff-Path: ../patches/2024.3.6.1104.patch#ublock-unbreak
+! Diff-Path: ../patches/2024.3.6.1399.patch#ublock-unbreak
 a2509 3
 @@||code.giraff.io/data/widget-vslv.js$script,domain=vs.lv
 @@||data.giraff.io/track/vslv.js$script,domain=vs.lv
 @@||a.giraff.io/data/*json$script,domain=vs.lv
-diff name:easylist lines:2307 checksum:a2e814e66e
+diff name:easylist lines:2320 checksum:d1478fcca6
 d4 2
 a5 2
-! Last modified: Wed, 06 Mar 2024 15:56:00 +0000
-! Diff-Path: ../patches/2024.3.6.1104.patch#easylist
+! Last modified: Wed, 06 Mar 2024 19:21:06 +0000
+! Diff-Path: ../patches/2024.3.6.1399.patch#easylist
 d20 1
 a20 1
 &sadbl=1$third-party
@@ -389,6 +408,8 @@ a19379 1
 d19410 1
 a19435 1
 ||accuserannouncementadulthood.com^
+a19457 1
+||achejoos.com^
 d19473 2
 a19489 1
 ||acornexhaustpreviously.com^
@@ -1104,6 +1125,8 @@ a30265 1
 a30271 1
 ||fossagetentie.top^
 d30285 1
+a30325 1
+||fqxjrbepn.com^
 a30378 1
 ||freezereraserelated.com^
 d30466 1
@@ -1558,6 +1581,8 @@ a38600 1
 d38701 1
 a38704 1
 ||mzodalowsh.com^
+a38753 1
+||naiglipu.xyz^
 d38817 1
 d38926 2
 d38931 1
@@ -2415,6 +2440,8 @@ a52982 1
 d53008 1
 d53073 1
 d53108 1
+a53156 1
+||ywopyohpihnkppc.xyz^
 a53237 1
 ||zbfxzpawfeoo.com^
 a53242 1
@@ -2576,6 +2603,8 @@ a66037 1
 kickassanimes.io##.latest-update > .mt-0.row > .col-12.col-lg-4.col-md-6
 a66306 1
 smallseotools.com##.mx-auto.d-block
+a66597 1
+spin.com##.promo-lead
 d66651 1
 a66708 1
 m.tribunnews.com##.reserved-topmedium
@@ -2610,6 +2639,9 @@ kickassanimes.io##[href^="https://l.erodatalabs.com/s/"]
 d67806 1
 d68015 1
 d68020 1
+a68226 2
+spin.com##div[id*="-promo-lead-"]
+spin.com##div[id*="-promo-mrec-"]
 a68264 1
 searchenginereports.net##div[id^="theBdsy_"]
 d68272 1
@@ -2618,19 +2650,19 @@ kuncomic.com##div[style*="height: 2"][style*="text-align: center"]
 d68396 1
 a68396 1
 1337x.to##img[src*="data:image"]
-a68476 1
-twidouga.net###container > .item:not(:has(> a[href*="https://video.twimg.com/"]))
 a68536 1
 forums.socialmediagirls.com##.uix_nodeList > div[class="block"]:has([href^="/link-forums/"])
 a68845 1
 plagiarismchecker.co###topbox
+a69601 1
+twidouga.net##.item_w360
 a70125 1
 twiman.net##div[class*="my-"][class*="px\]"]
-diff name:easyprivacy lines:45 checksum:c86bd1db8c
+diff name:easyprivacy lines:45 checksum:55faac72e9
 d4 2
 a5 2
 ! Last modified: Wed, 06 Mar 2024 13:13:33 +0000
-! Diff-Path: ../patches/2024.3.6.1104.patch#easyprivacy
+! Diff-Path: ../patches/2024.3.6.1399.patch#easyprivacy
 a1900 1
 /scripts/track_visit.php?
 a2078 1
