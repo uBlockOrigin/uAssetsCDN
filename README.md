@@ -7,7 +7,6 @@ CDN content mirroring uAssets
 This site is used as a [Content Delivery Network](https://en.wikipedia.org/wiki/Content_delivery_network) for [uBlock Origin's own filter lists](https://github.com/uBlockOrigin/uAssets/tree/master/filters):
 
 * [uBlock's `assets.json`](./ublock/assets.json) (internal)
-    * [uBlock's `assets.1.57.json`](./ublock/assets.1.57.json) (internal)
 * [uBlock's `assets.dev.json`](./ublock/assets.dev.json) (internal)
 * [Bad filter lists](./filters/badlists.txt) (internal)
 * uBlock filter lists
