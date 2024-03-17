@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Annoyances
 ! Expires: 7 days
-! Last modified: Sun, 17 Mar 2024 03:29:17 +0000
-! Diff-Path: ../patches/2024.3.17.558.patch#ublock-annoyances
+! Last modified: Sun, 17 Mar 2024 13:46:13 +0000
+! Diff-Path: ../patches/2024.3.17.859.patch#ublock-annoyances
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/annoyances.txt ***
@@ -179,7 +179,7 @@ ladbible.com,unilad.com,gamingbible.com,sportbible.com,tyla.com,ladbiblegroup.co
 sportbible.com#@#+js(remove-class, sp-message-open, html, stay)
 sportbible.com#@#div[id^="sp_message_container_"]
 @@||consent.sportbible.com^$domain=sportbible.com
-m2o.it,deejay.it,capital.it,ilmattino.it,leggo.it,libero.it,tiscali.it##+js(trusted-click-element, 'button.iubenda-cs-customize-btn, button.iub-cmp-reject-btn, button#iubFooterBtn')
+m2o.it,deejay.it,capital.it,ilmattino.it,leggo.it,libero.it,tiscali.it##+js(trusted-click-element, 'button.iubenda-cs-customize-btn, button.iub-cmp-reject-btn, button#iubFooterBtn', , 1000)
 m2o.it,deejay.it,capital.it,ilmattino.it,leggo.it,libero.it,tiscali.it##html[style="overflow: hidden;"]:style(overflow: auto !important)
 m2o.it,deejay.it,capital.it,ilmattino.it,leggo.it,libero.it,tiscali.it##[id^="iubenda"]
 ilmattino.it,leggo.it##.banner:has([href="javascript:acceptAllCookies();void(0);"])
@@ -215,6 +215,7 @@ arena.pl##+js(trusted-set-cookie, consentCookie, '{"arena-functional":true,"sent
 monkeytype.com##+js(trusted-set-local-storage-item, acceptedCookies, '{"security":true,"analytics":false}')
 govirtuo.com##+js(trusted-set-cookie, cookieConsent, technical=true&analytics=false&advertising=false)
 govirtuo.com##+js(trusted-set-cookie, acceptTracking, '{"technical":true,"analytics":false,"advertising":false}')
+deal.by##+js(trusted-set-cookie, gdprConsent, %7B%22adv%22%3Afalse%2C%22func%22%3Afalse%2C%22tech%22%3Afalse%7D, , , domain, deal.by)
 !! Needs additional cookies
 ! Closing Optanon Alert Box
 1001games.com,1001hry.cz,1001jeux.fr,1001jocuri.ro,1001jogos.com.br,1001jogos.pt,1001pelit.com,1001spiele.de,elkspel.nl,gamespot.com,giochixl.it,glamour.com,grajteraz.pl,isladejuegos.com,jatekokxl.hu,mtvuutiset.fi,paixnidiaxl.gr,pushsquare.com,spelo.se,spillespill.no,spilxl.dk,thejournal.ie,thetrainline.com,vkmag.com,zdnet.com##+js(trusted-set-cookie, OptanonAlertBoxClosed, $currentDate$, 1year)
@@ -681,6 +682,8 @@ my.smartpost.ee##+js(trusted-set-cookie, cookieConsent, '{"necessary":1}')
 extrudr.com##+js(trusted-set-cookie, cc_cookie,'{"categories":["necessary"],"level":["necessary"],"revision":1,"data":null,"rfc_cookie":true,"consent_date":"1","consent_uuid":"1","last_consent_update":"1"}')
 ! marketing/stats=0, removed "id" variable.
 vilagitasok.hu##+js(trusted-set-cookie, UN_cookie_consent_v2,'{"marketing":0,"statistics":0,"personalization":0,"time":1}', , , reload, 1)
+! refuse cookies
+eneco.nl##+js(trusted-click-element, button[data-label="Weigeren"], , 500)
 ! *** filters/annoyances-others.txt ***
 mimaletadepeliculas.blogspot.com##+js(aopr, document.oncontextmenu)
 mimaletadepeliculas.blogspot.com##+js(acs, document.onselectstart)
@@ -845,6 +848,8 @@ jusbrasil.com.br##+js(aeld, /^(?:contextmenu|copy)$/, preventDefault)
 descarga-animex.*##+js(aeld, /^(?:contextmenu|keydown)$/)
 deezer.com##+js(aopr, onbeforeunload)
 deezer.com###modal_login:upward(2)
+deezer.com##.chakra-portal:has(> .chakra-modal__overlay)
+deezer.com##body.force-scrollbar:style(overflow-y: scroll !important;)
 tvtropes.org##+js(set, valid_user, true)
 ||global.proper.io/tvtropes.min.js$script,redirect=noopjs,domain=tvtropes.org
 springfieldspringfield.co.uk##+js(aopr, addLink)
@@ -1379,6 +1384,7 @@ m.youtube.com###mealbar\:3 > ytm-mealbar.mealbar-promo-renderer
 m.youtube.com,music.youtube.com,tv.youtube.com,www.youtube.com,youtubekids.com##+js(set, ytInitialPlayerResponse.auxiliaryUi.messageRenderers.upsellDialogRenderer, undefined)
 m.youtube.com,music.youtube.com,tv.youtube.com,www.youtube.com,youtubekids.com##+js(json-prune, auxiliaryUi.messageRenderers.upsellDialogRenderer)
 m.youtube.com,music.youtube.com,tv.youtube.com,www.youtube.com,youtubekids.com,youtube-nocookie.com##+js(href-sanitizer, a[href^="https://www.youtube.com/redirect?event=video_description"][href*="&q=http"], ?q)
+www.youtube.com##ytd-browse[page-subtype="home"] :is(ytd-rich-grid-row, #contents.ytd-rich-grid-row):style(display: contents !important)
 buienradar.nl##+js(set, hideBannerBlockedMessage, true)
 buienradar.nl###adholderContainerHeader
 ||lightboxcdn.com^$domain=foreignpolicy.com
@@ -3217,7 +3223,7 @@ virpe.cc##+js(set, document.oncontextmenu, noopFunc)
 northjersey.com,independentmail.com,usatoday.com##.gnt_mol_oy
 northjersey.com,independentmail.com,usatoday.com##html.gnt__mo:style(overflow-y:scroll !important;pointer-events: unset !important;user-select: unset !important;margin-right: unset !important;)
 */wp-content/plugins/smio-push-notification
-titulky.com##+js(acs, $, "fade")
+titulky.com##+js(acs, $, '"input"')
 ||d3fkv551xkjrmm.cloudfront.net/js/detection.js$script,domain=denofgeek.com
 ! cintateknologi. com anti select
 cintateknologi.com##*:style(-webkit-touch-callout: default !important; -webkit-user-select: text !important; -moz-user-select: text !important; -ms-user-select: text !important; user-select: text !important;)
