@@ -1,5 +1,5 @@
 ! Title: uBlock filters (2023)
-! Last modified: Mon, 18 Mar 2024 03:53:19 +0000
+! Last modified: Mon, 18 Mar 2024 12:40:02 +0000
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -294,6 +294,7 @@ rbbtoday.com##.cx-top-news
 president.jp##.recommend
 kobe-np.co.jp##section.sec:has(> #piano_recs_inline_title)
 vivi.tv##.section__inner:has(> #recommended-posts-result)
+augsburger-allgemeine.de,nikkansports.com##div[id^="cx_"]
 ! ziyu.net
 jin115.com,livedoor.biz#?#.plugin-memo:has(> div.side > script[src*="ziyu.net/"])
 okutta.net##.article__footer > div[style="height:500px; overflow-y:scroll;"]
@@ -5040,6 +5041,11 @@ freeltc.online##+js(noeval-if, ads)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/20792
 twitter.com##[data-testid="primaryColumn"] [data-testid="cellInnerDiv"] > div:has([data-testid$="-impression-pixel"]):remove()
+!#if ext_devbuild
+twitter.com##+js(json-prune-xhr-response, data.home.home_timeline_urt.instructions.[].entries.[-].content.itemContent.promotedMetadata, , propsToMatch, url:/api/graphql)
+twitter.com##+js(json-prune-xhr-response, data.search_by_raw_query.search_timeline.timeline.instructions.[].entries.[-].content.itemContent.promotedMetadata, , propsToMatch, url:/api/graphql)
+twitter.com##+js(json-prune-xhr-response, data.threaded_conversation_with_injections_v2.instructions.[].entries.[-].content.items.[].item.itemContent.promotedMetadata, , propsToMatch, url:/api/graphql)
+!#endif
 
 ! https://github.com/uBlockOrigin/uAssets/issues/20794
 daotranslate.com##+js(aost, setTimeout, ads)
