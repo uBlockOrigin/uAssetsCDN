@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Wed, 20 Mar 2024 09:53:56 +0000
-! Diff-Path: ../patches/2024.3.20.754.patch#ublock-filters
+! Last modified: Wed, 20 Mar 2024 17:20:25 +0000
+! Diff-Path: ../patches/2024.3.20.1040.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -365,7 +365,7 @@ facebook.com,facebookwkhpilnemxj7asaniu7vnjjbiltxjqhye3mhbshg7kx5tfyd.onion###wa
 facebook.com,facebookwkhpilnemxj7asaniu7vnjjbiltxjqhye3mhbshg7kx5tfyd.onion###watch_feed div:not([class]) > div:not([class]) div[class] span[class] > a[aria-label="広告"]:upward(div:not([class]) > div:not([class]))
 facebook.com,facebookwkhpilnemxj7asaniu7vnjjbiltxjqhye3mhbshg7kx5tfyd.onion###watch_feed div:not([class]) > div:not([class]) div[class] [class] > a[href*="utm_source=facebook"] span[class] > span[class][style*="-webkit-line-clamp"]:has-text(広告):upward(div:not([class]) > div:not([class]))
 !#if cap_html_filtering
-||www.facebook.com^$doc,replace=/\{"brs_content_label":[^,]+,"category":"SPONSORED"[^\n]+"cursor":"[^"]+"\}/{}/
+! ||www.facebook.com^$doc,replace=/\{"brs_content_label":[^,]+,"category":"SPONSORED"[^\n]+"cursor":"[^"]+"\}/{}/
 ||www.facebook.com/api/graphql/$xhr,replace=/\{"brs_content_label":[^,]+,"category":"SPONSORED"[^\n]+"cursor":"[^"]+"\}/{}/
 !#else
 ! www.facebook.com##+js(trusted-replace-xhr-response, '/\{"brs_content_label":[^,]+,"category":"SPONSORED"[^\n]+"cursor":"[^"]+"\}/', {}, /api/graphql)
@@ -9540,6 +9540,11 @@ vanillatweaks.net##+js(nano-sib, downloadTimer)
 infinityscans.xyz,infinityscans.net##+js(no-fetch-if, googlesyndication, length:150000-150200)
 infinityscans.xyz,infinityscans.net##+js(no-fetch-if, bidgear, length:8132)
 infinityscans.xyz,infinityscans.net##+js(nowoif)
+infinityscans.xyz,infinityscans.net##+js(rmnt, script, throw Error, condition, /^\s*\(?function.*\);\}\}\(\)\)\);/)
+infinityscans.xyz,infinityscans.net##+js(rpnt, script, /function .*\(\);\}/, , condition, \x74\x72)
+infinityscans.xyz,infinityscans.net##+js(rpnt, script, /\(function\(.*\(\);\}/, , condition, throw Error)
+infinityscans.xyz,infinityscans.net##+js(rpnt, script, '||!, '||)
+infinityscans.xyz,infinityscans.net##+js(rpnt, script, )||!, )||)
 *$script,redirect-rule=noopjs,domain=infinityscans.xyz|infinityscans.net
 *$xhr,domain=infinityscans.xyz|infinityscans.net,redirect-rule=nooptext
 *$frame,redirect-rule=noopframe,domain=infinityscans.xyz|infinityscans.net
@@ -9787,14 +9792,14 @@ olx.in##[id^="baxter-ads"]:upward([class])
 ! Link shortener filters go into their own dedicated list
 ! *** filters/ubo-link-shorteners.txt ***
 ! gplinks all domains (gplinks.co/EWu8)
-*$frame,redirect-rule=noopframe,domain=awolio.com|cgbsesupport.com|eternalcbse.in|foreverhealth.in|gplinks.co|jobwaala.in|kaisekareblog.com|learnwithsaif.in|minijankari.com|news36tech.com|newsloti.com|newzwala.co.in|nhmgujarat.in|odiamusicsong.com|smartsetkari.in|sugargliderfaqs.com|theringtonesworld.in|w3hindi.in|recruitmentrasta.in|picassoappk.com|geniuseducares.com|pmyojanasarkari.in|netflixvip.in|mghindinews.in|gentletrail.in|ndlifestylego.com|raidersixgameapk.com|potter-world.com|sarkariexam365.com|digitalfacts4u.com|odiasongsworld.com|friv4school.in|instander.me|jankari4u.com|trancebazar.com|mdsuuniversity.org|odishadjs.link
-@@||gplinks.in/track/$script,xhr,domain=anumin.com|awolio.com|cgbsesupport.com|eternalcbse.i|foreverhealth.in|gplinks.co|jobwaala.in|kaisekareblog.com|learnwithsaif.in|minijankari.com|news36tech.com|newsloti.com|newzwala.co.in|nhmgujarat.in|odiamusicsong.com|smartsetkari.in|sugargliderfaqs.com|theringtonesworld.in|w3hindi.in|recruitmentrasta.in|picassoappk.com|geniuseducares.com|pmyojanasarkari.in|netflixvip.in|mghindinews.in|gentletrail.in|ndlifestylego.com|raidersixgameapk.com|potter-world.com|sarkariexam365.com|digitalfacts4u.com|odiasongsworld.com|friv4school.in|instander.me|jankari4u.com|trancebazar.com|mdsuuniversity.org|odishadjs.link
-@@||doubleclick.net^$script,xhr,domain=anumin.com|awolio.com|cgbsesupport.com|eternalcbse.i|foreverhealth.in|gplinks.co|jobwaala.in|kaisekareblog.com|learnwithsaif.in|minijankari.com|news36tech.com|newsloti.com|newzwala.co.in|nhmgujarat.in|odiamusicsong.com|smartsetkari.in|sugargliderfaqs.com|theringtonesworld.in|w3hindi.in|recruitmentrasta.in|picassoappk.com|geniuseducares.com|pmyojanasarkari.in|netflixvip.in|mghindinews.in|gentletrail.in|ndlifestylego.com|raidersixgameapk.com|potter-world.com|sarkariexam365.com|digitalfacts4u.com|odiasongsworld.com|friv4school.in|instander.me|jankari4u.com|trancebazar.com|mdsuuniversity.org|odishadjs.link
-@@*$ghide,domain=anumin.com|awolio.com|cgbsesupport.com|eternalcbse.i|foreverhealth.in|gplinks.co|jobwaala.in|kaisekareblog.com|learnwithsaif.in|minijankari.com|news36tech.com|newsloti.com|newzwala.co.in|nhmgujarat.in|odiamusicsong.com|smartsetkari.in|sugargliderfaqs.com|theringtonesworld.in|w3hindi.in|recruitmentrasta.in|picassoappk.com|geniuseducares.com|pmyojanasarkari.in|netflixvip.in|mghindinews.in|gentletrail.in|ndlifestylego.com|raidersixgameapk.com|potter-world.com|sarkariexam365.com|digitalfacts4u.com|odiasongsworld.com|friv4school.in|instander.me|jankari4u.com|trancebazar.com|mdsuuniversity.org|odishadjs.link
-anumin.com,awolio.com,cgbsesupport.com,eternalcbse.in,foreverhealth.in,jobwaala.in,kaisekareblog.com,learnwithsaif.in,minijankari.com,news36tech.com,newsloti.com,newzwala.co.in,nhmgujarat.in,odiamusicsong.com,smartsetkari.in,sugargliderfaqs.com,theringtonesworld.in,w3hindi.in,recruitmentrasta.in,picassoappk.com,geniuseducares.com,pmyojanasarkari.in,netflixvip.in,mghindinews.in,gentletrail.in,ndlifestylego.com,raidersixgameapk.com,potter-world.com,sarkariexam365.com,digitalfacts4u.com,odiasongsworld.com,friv4school.in,instander.me,jankari4u.com,trancebazar.com,mdsuuniversity.org,odishadjs.link###SmileyBanner:remove()
-anumin.com,awolio.com,cgbsesupport.com,eternalcbse.in,foreverhealth.in,jobwaala.in,kaisekareblog.com,learnwithsaif.in,minijankari.com,news36tech.com,newsloti.com,newzwala.co.in,nhmgujarat.in,odiamusicsong.com,smartsetkari.in,sugargliderfaqs.com,theringtonesworld.in,w3hindi.in,recruitmentrasta.in,picassoappk.com,geniuseducares.com,pmyojanasarkari.in,netflixvip.in,mghindinews.in,gentletrail.in,ndlifestylego.com,raidersixgameapk.com,potter-world.com,sarkariexam365.com,digitalfacts4u.com,odiasongsworld.com,friv4school.in,instander.me,jankari4u.com,trancebazar.com,mdsuuniversity.org,odishadjs.link##+js(aopw, AdBDetected)
-anumin.com,awolio.com,cgbsesupport.com,eternalcbse.in,foreverhealth.in,jobwaala.in,kaisekareblog.com,learnwithsaif.in,minijankari.com,news36tech.com,newsloti.com,newzwala.co.in,nhmgujarat.in,odiamusicsong.com,smartsetkari.in,sugargliderfaqs.com,theringtonesworld.in,w3hindi.in,recruitmentrasta.in,picassoappk.com,geniuseducares.com,pmyojanasarkari.in,netflixvip.in,mghindinews.in,gentletrail.in,ndlifestylego.com,raidersixgameapk.com,potter-world.com,sarkariexam365.com,digitalfacts4u.com,odiasongsworld.com,friv4school.in,instander.me,jankari4u.com,trancebazar.com,mdsuuniversity.org,odishadjs.link##+js(set, count, 0)
-anumin.com,awolio.com,cgbsesupport.com,eternalcbse.in,foreverhealth.in,jobwaala.in,kaisekareblog.com,learnwithsaif.in,minijankari.com,news36tech.com,newsloti.com,newzwala.co.in,nhmgujarat.in,odiamusicsong.com,smartsetkari.in,sugargliderfaqs.com,theringtonesworld.in,w3hindi.in,recruitmentrasta.in,picassoappk.com,geniuseducares.com,pmyojanasarkari.in,netflixvip.in,mghindinews.in,gentletrail.in,ndlifestylego.com,raidersixgameapk.com,potter-world.com,sarkariexam365.com,digitalfacts4u.com,odiasongsworld.com,friv4school.in,instander.me,jankari4u.com,trancebazar.com,mdsuuniversity.org,odishadjs.link##[id*="iframe"], [id*="gpt_unit"], [id*="div-gpt-"]:style(height:0.0001px !important;)
+*$frame,redirect-rule=noopframe,domain=awolio.com|cgbsesupport.com|eternalcbse.in|foreverhealth.in|gplinks.co|jobwaala.in|kaisekareblog.com|learnwithsaif.in|minijankari.com|news36tech.com|newzwala.co.in|nhmgujarat.in|odiamusicsong.com|smartsetkari.in|sugargliderfaqs.com|theringtonesworld.in|w3hindi.in|picassoappk.com|geniuseducares.com|pmyojanasarkari.in|netflixvip.in|mghindinews.in|gentletrail.in|ndlifestylego.com|raidersixgameapk.com|potter-world.com|sarkariexam365.com|digitalfacts4u.com|odiasongsworld.com|friv4school.in|instander.me|jankari4u.com|trancebazar.com|mdsuuniversity.org|odishadjs.link|pagalmp3status.com
+@@||gplinks.in/track/$script,xhr,domain=anumin.com|awolio.com|cgbsesupport.com|eternalcbse.i|foreverhealth.in|gplinks.co|jobwaala.in|kaisekareblog.com|learnwithsaif.in|minijankari.com|news36tech.com|newzwala.co.in|nhmgujarat.in|odiamusicsong.com|smartsetkari.in|sugargliderfaqs.com|theringtonesworld.in|w3hindi.in|picassoappk.com|geniuseducares.com|pmyojanasarkari.in|netflixvip.in|mghindinews.in|gentletrail.in|ndlifestylego.com|raidersixgameapk.com|potter-world.com|sarkariexam365.com|digitalfacts4u.com|odiasongsworld.com|friv4school.in|instander.me|jankari4u.com|trancebazar.com|mdsuuniversity.org|odishadjs.link|pagalmp3status.com
+@@||doubleclick.net^$script,xhr,domain=anumin.com|awolio.com|cgbsesupport.com|eternalcbse.i|foreverhealth.in|gplinks.co|jobwaala.in|kaisekareblog.com|learnwithsaif.in|minijankari.com|news36tech.com|newzwala.co.in|nhmgujarat.in|odiamusicsong.com|smartsetkari.in|sugargliderfaqs.com|theringtonesworld.in|w3hindi.in|picassoappk.com|geniuseducares.com|pmyojanasarkari.in|netflixvip.in|mghindinews.in|gentletrail.in|ndlifestylego.com|raidersixgameapk.com|potter-world.com|sarkariexam365.com|digitalfacts4u.com|odiasongsworld.com|friv4school.in|instander.me|jankari4u.com|trancebazar.com|mdsuuniversity.org|odishadjs.link|pagalmp3status.com
+@@*$ghide,domain=anumin.com|awolio.com|cgbsesupport.com|eternalcbse.i|foreverhealth.in|gplinks.co|jobwaala.in|kaisekareblog.com|learnwithsaif.in|minijankari.com|news36tech.com|newzwala.co.in|nhmgujarat.in|odiamusicsong.com|smartsetkari.in|sugargliderfaqs.com|theringtonesworld.in|w3hindi.in|picassoappk.com|geniuseducares.com|pmyojanasarkari.in|netflixvip.in|mghindinews.in|gentletrail.in|ndlifestylego.com|raidersixgameapk.com|potter-world.com|sarkariexam365.com|digitalfacts4u.com|odiasongsworld.com|friv4school.in|instander.me|jankari4u.com|trancebazar.com|mdsuuniversity.org|odishadjs.link|pagalmp3status.com
+anumin.com,awolio.com,cgbsesupport.com,eternalcbse.in,foreverhealth.in,jobwaala.in,kaisekareblog.com,learnwithsaif.in,minijankari.com,news36tech.com,newzwala.co.in,nhmgujarat.in,odiamusicsong.com,smartsetkari.in,sugargliderfaqs.com,theringtonesworld.in,w3hindi.in,picassoappk.com,geniuseducares.com,pmyojanasarkari.in,netflixvip.in,mghindinews.in,gentletrail.in,ndlifestylego.com,raidersixgameapk.com,potter-world.com,sarkariexam365.com,digitalfacts4u.com,odiasongsworld.com,friv4school.in,instander.me,jankari4u.com,trancebazar.com,mdsuuniversity.org,odishadjs.link,pagalmp3status.com###SmileyBanner:remove()
+anumin.com,awolio.com,cgbsesupport.com,eternalcbse.in,foreverhealth.in,jobwaala.in,kaisekareblog.com,learnwithsaif.in,minijankari.com,news36tech.com,newzwala.co.in,nhmgujarat.in,odiamusicsong.com,smartsetkari.in,sugargliderfaqs.com,theringtonesworld.in,w3hindi.in,picassoappk.com,geniuseducares.com,pmyojanasarkari.in,netflixvip.in,mghindinews.in,gentletrail.in,ndlifestylego.com,raidersixgameapk.com,potter-world.com,sarkariexam365.com,digitalfacts4u.com,odiasongsworld.com,friv4school.in,instander.me,jankari4u.com,trancebazar.com,mdsuuniversity.org,odishadjs.link,pagalmp3status.com##+js(aopw, AdBDetected)
+anumin.com,awolio.com,cgbsesupport.com,eternalcbse.in,foreverhealth.in,jobwaala.in,kaisekareblog.com,learnwithsaif.in,minijankari.com,news36tech.com,newzwala.co.in,nhmgujarat.in,odiamusicsong.com,smartsetkari.in,sugargliderfaqs.com,theringtonesworld.in,w3hindi.in,picassoappk.com,geniuseducares.com,pmyojanasarkari.in,netflixvip.in,mghindinews.in,gentletrail.in,ndlifestylego.com,raidersixgameapk.com,potter-world.com,sarkariexam365.com,digitalfacts4u.com,odiasongsworld.com,friv4school.in,instander.me,jankari4u.com,trancebazar.com,mdsuuniversity.org,odishadjs.link,pagalmp3status.com##+js(set, count, 0)
+anumin.com,awolio.com,cgbsesupport.com,eternalcbse.in,foreverhealth.in,jobwaala.in,kaisekareblog.com,learnwithsaif.in,minijankari.com,news36tech.com,newzwala.co.in,nhmgujarat.in,odiamusicsong.com,smartsetkari.in,sugargliderfaqs.com,theringtonesworld.in,w3hindi.in,picassoappk.com,geniuseducares.com,pmyojanasarkari.in,netflixvip.in,mghindinews.in,gentletrail.in,ndlifestylego.com,raidersixgameapk.com,potter-world.com,sarkariexam365.com,digitalfacts4u.com,odiasongsworld.com,friv4school.in,instander.me,jankari4u.com,trancebazar.com,mdsuuniversity.org,odishadjs.link,pagalmp3status.com##[id*="iframe"], [id*="gpt_unit"], [id*="div-gpt-"]:style(height:0.0001px !important;)
 gplinks.co##.adb-overlay
 gplinks.co##a.exclude-pop.smartlink, .exclude-pop.quiz-container, #PlayQuiz, #quiz-frame, .exclude-popad
 ||gamezop.com^$domain=gplinks.*
@@ -10649,6 +10654,7 @@ poder360.com.br##.box-advertising
 4hu.tv##.wrap > #btmBox
 wunderground.com##.ad-wrap
 mmtv01.xyz,spankbang.mov###pop.div_pop
+pages.lazada.co.id##.lzd-call-app-download-popup
 !#endif
 ! *** uAssets:filters/filters-2020.txt ***
 *$script,redirect-rule=noopjs,domain=arcai.com
@@ -18214,13 +18220,13 @@ utopiascans.com##+js(ra, href, [href*="discord"])
 @@||d2y8ttytgze7qt.cloudfront.net^$xhr,domain=streamingcommunity.*
 @@||scws.xyz^$xhr,domain=streamingcommunity.*
 @@||streamingcommunity.*/$xhr,1p
+@@/popup*$script,1p,domain=streamingcommunity.*
+streamingcommunity.*##+js(no-xhr-if, /thaudray\.com|putchumt\.com/)
 !#if env_firefox
 @@||googletagmanager.com/gtag/js$xhr,domain=streamingcommunity.*
-streamingcommunity.*##+js(no-xhr-if, thaudray.com)
 !#endif
 !#if !env_firefox
 ||googletagmanager.com^$xhr,domain=streamingcommunity.*,redirect-rule=noop.js
-||thaudray.com^$script,xhr,redirect-rule=noop.js,domain=streamingcommunity.*
 !#endif
 ! tennistream. com => players => popups
 larsenik.com##+js(nowoif)
@@ -21606,7 +21612,8 @@ needrom.com##+js(nostif, /adsbygoogle|adblock/)
 adelsfun.com,advantien.com,bailbondsfinder.com,bg-gledai.*,bigpiecreative.com,childrenslibrarylady.com,classifarms.com,comtasq.ca,crone.es,ctrmarketingsolutions.com,dropnudes.com,ftuapps.dev,genzsport.com,ghscanner.com,gledaitv.*,grsprotection.com,gruporafa.com.br,inmatefindcalifornia.com,inmatesearchidaho.com,itsonsitetv.com,mfmfinancials.com,myproplugins.com,onehack.us,ovester.com,paste.bin.sx,privatenudes.com,renoconcrete.ca,richieashbeck.com,sat.technology,short1ink.com,stpm.co.uk,wegotcookies.co##+js(aeld, load, abDetectorPro)
 adelsfun.com,advantien.com,bailbondsfinder.com,bg-gledai.*,bigpiecreative.com,childrenslibrarylady.com,classifarms.com,comtasq.ca,crone.es,ctrmarketingsolutions.com,dropnudes.com,ftuapps.dev,genzsport.com,gledaitv.*,grsprotection.com,gruporafa.com.br,inmatefindcalifornia.com,inmatesearchidaho.com,itsonsitetv.com,mfmfinancials.com,myproplugins.com,onehack.us,ovester.com,paste.bin.sx,privatenudes.com,renoconcrete.ca,richieashbeck.com,short1ink.com,stpm.co.uk,wegotcookies.co##+js(no-xhr-if, googlesyndication)
 ghscanner.com,sat.technology##+js(no-fetch-if, googlesyndication)
-ftuapps.dev,onehack.us##+js(nostif, modal)
+onehack.us##+js(nostif, modal)
+ftuapps.dev##+js(nostif, ai_)
 maps4heroes.com#@#ins.adsbygoogle
 cuevana8.com##+js(nowoif)
 cuevana8.com##[href*="premium/"]
