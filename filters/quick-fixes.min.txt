@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Quick fixes
 ! Expires: 12 hours
-! Last modified: Thu, 28 Mar 2024 07:13:39 +0000
-! Diff-Path: ../patches/2024.3.28.623.patch#ublock-quick-fixes
+! Last modified: Thu, 28 Mar 2024 15:16:55 +0000
+! Diff-Path: ../patches/2024.3.28.921.patch#ublock-quick-fixes
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/quick-fixes.txt ***
@@ -94,14 +94,17 @@ perchance.org##div[style*="var"][style*="min-height"]:has([data-freestar-ad])
 !next-episode.net##+js(rpnt, script, '/.then[\s\S]{0,}?;/g')
 !next-episode.net##+js(rmnt, script, '/\d+\+\d|64|\+\+|\+1|adbl|ablk|[\s\S]{0,}(\.\.|function)[\s\S]{1800,}|document\[/i')
 @@||pagead2.googlesyndication.com^$script,domain=next-episode.net
+decrypt.day##ins.adsbygoogle > *:style(position: relative !important; left: -10000px !important;)
 !#if ext_devbuild
+!#if env_chromium
+decrypt.day#@#ins.adsbygoogle > *:style(position: relative !important; left: -10000px !important;)
 decrypt.day##ins.adsbygoogle:style(clip-path: circle(0) !important;)
 decrypt.day##+js(spoof-css, ins.adsbygoogle, clip-path, none)
-!#else
-decrypt.day##ins.adsbygoogle > *:style(position: relative !important; left: -10000px !important;)
+!#endif
 !#endif
 decrypt.day##+js(no-fetch-if, adsbygoogle)
 @@||decrypt.day^$ghide
+@@||decrypt.day^$xhr,1p
 @@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$script,domain=decrypt.day
 @@||pagead2.googlesyndication.com/pagead/managed/js/adsense/*/show_ads_impl$script,domain=decrypt.day
 @@||googletagmanager.com/gtag/js$script,domain=decrypt.day
@@ -126,3 +129,5 @@ raenonx.cc##body > div[class] > [class="flex flex-col w-full"]:has(> button.butt
 raenonx.cc##+js(no-fetch-if, /google|doubleclick/, length:100)
 /adutils.$badfilter
 pixiv.net##.ad-mobile-anchor
+nieru.net#@#.ad-space:not(.textads):not(.adbox)
+nieru.net#@#.adWidget
