@@ -1,8 +1,8 @@
-diff name:ublock-annoyances lines:37 checksum:5f3d604f65
+diff name:ublock-annoyances lines:39 checksum:2a5e3919cf
 d3 2
 a4 2
-! Last modified: Mon, 01 Apr 2024 12:19:59 +0000
-! Diff-Path: ../patches/2024.4.1.861.patch#ublock-annoyances
+! Last modified: Mon, 01 Apr 2024 15:17:51 +0000
+! Diff-Path: ../patches/2024.4.1.1159.patch#ublock-annoyances
 d75 1
 a75 1
 bbc.com##+js(trusted-click-element, [data-testid="consentBanner"] > button[data-testid="banner-button"], , 1000)
@@ -13,7 +13,7 @@ actu.fr,elconfidencial.com,rtl.lu##+js(trusted-click-element, #didomi-notice-agr
 d342 2
 a343 1
 ledauphine.com##+js(trusted-click-element, button[id="didomi-notice-agree-button"])
-a711 7
+a711 9
 ! only necessary
 eurocard.com##+js(trusted-click-element, .button--necessary-approve, , 2000)
 ! stats/marketing/personalization=disable, time and id=1
@@ -21,6 +21,8 @@ tlkhorgaszaruhaz.hu##+js(trusted-set-cookie, UN_cookie_consent_v2, %7B%22marketi
 ! Aggred to consent
 derstandard.at,derstandard.de##+js(trusted-set-cookie, consentUUID, 191c03c5-1154-4937-aa26-ced186f90097_30, , , reload, 1)
 cencenelec.eu##+js(trusted-set-cookie, cookieconsent, saved=1&functional=1&analytics=0&marketing=0, , , reload, 1)
+! required only, optional/analytics = false
+white.market##+js(trusted-set-cookie, cookie-consent, '{"required":true,"optional":false,"analytics":false}')
 d4179 1
 a4179 1
 fullxh.com,hamsterix.*,megaxh.com,unlockxh4.com,xhadult2.com,xhadult3.com,xhadult4.com,xhadult5.com,xhamster.*,xhamster1.*,xhamster10.*,xhamster11.*,xhamster12.*,xhamster13.*,xhamster14.*,xhamster15.*,xhamster16.*,xhamster17.*,xhamster18.*,xhamster19.*,xhamster20.*,xhamster2.*,xhamster3.*,xhamster4.*,xhamster46.com,xhamster5.*,xhamster7.*,xhamster8.*,xhday.com,xhday1.com,xhmoon5.com,xhplanet1.com,xhplanet2.com,xhreal2.com,xhreal3.com,xhtab2.com,xhvictory.com,xhwebsite.com,xhwebsite2.com,xhwide1.com,xhwide8.com##+js(no-fetch-if, /ad\.php|api\/ads/)
@@ -36,11 +38,11 @@ raenonx.cc##body > div[class] > [class="flex flex-col w-full"]:has(> button.butt
 !#if !env_firefox
 raenonx.cc##body > div[id][data-floating-ui-portal]:has-text(/blocker/i)
 !#endif
-diff name:ublock-badware lines:26 checksum:d20f595e91
+diff name:ublock-badware lines:26 checksum:f998234506
 d3 2
 a4 2
 ! Last modified: Mon, 01 Apr 2024 02:04:56 +0000
-! Diff-Path: ../patches/2024.4.1.861.patch#ublock-badware
+! Diff-Path: ../patches/2024.4.1.1159.patch#ublock-badware
 a671 4
 ||girlsml.com^$all
 ||pussycat1.online^$all
@@ -63,11 +65,11 @@ a3163 4
 ||acir.postofficeweb.com/grupoacir/$all
 ! openphish
 ||hybridtoken.org^$doc,domain=~fnbo.com
-diff name:ublock-filters lines:119 checksum:a012e0a6fd
+diff name:ublock-filters lines:115 checksum:7b60d622aa
 d3 2
 a4 2
-! Last modified: Mon, 01 Apr 2024 14:17:51 +0000
-! Diff-Path: ../patches/2024.4.1.861.patch#ublock-filters
+! Last modified: Mon, 01 Apr 2024 17:24:14 +0000
+! Diff-Path: ../patches/2024.4.1.1159.patch#ublock-filters
 d24 2
 a25 2
 ||www.youtube.com/playlist?list=$xhr,1p,replace=/("trackingParam":"kx_fmPxhoPZR)[-_0-9A-Za-z]{50}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{55}lLKPQ-SS"\})/\$1\$2/
@@ -86,9 +88,10 @@ a3103 1
 nzbstars.com##+js(acs, document.getElementById, adblocker)
 a5968 1
 thestreameast.*##+js(aopr, aclib)
-a5974 2
+a5974 3
 ||eagamerz.com^$popup
 ||supertracker200.com^$popup
+||tcgjpib.com^
 a8854 4
 freep.com##.teal-video-wrap
 freep.com##.gnt_em_vp__tavp.gnt_em
@@ -101,14 +104,9 @@ a9503 4
 puzzle-loop.com,puzzle-words.com,puzzle-chess.com,puzzle-thermometers.com,puzzle-norinori.com,puzzle-minesweeper.com,puzzle-slant.com,puzzle-lits.com,puzzle-galaxies.com,puzzle-tents.com,puzzle-battleships.com,puzzle-pipes.com,puzzle-hitori.com,puzzle-heyawake.com,puzzle-shingoki.com,puzzle-masyu.com,puzzle-stitches.com,puzzle-aquarium.com,puzzle-tapa.com,puzzle-star-battle.com,puzzle-kakurasu.com,puzzle-skyscrapers.com,puzzle-futoshiki.com,puzzle-shakashaka.com,puzzle-kakuro.com,puzzle-jigsaw-sudoku.com,puzzle-killer-sudoku.com,puzzle-binairo.com,puzzle-nonograms.com,puzzle-sudoku.com,puzzle-light-up.com,puzzle-bridges.com,puzzle-shikaku.com,puzzle-nurikabe.com,puzzle-dominosa.com###MainContainer > [id]:has(> [id^="btIn"] > #bannerTop)
 !#else
 d9506 6
-a9812 19
+a9812 14
 maos4alaw.online##+js(noeval-if, ads)
-!#if cap_html_filtering
-cnpics.org##^script:has-text(pop1stp)
-!#else
-cnpics.org##+js(rmnt, script, pop1stp)
-!#endif
-cnpics.org##+js(aopr, detectAdBlock)
+cnpics.org,ovabee.com,porn4f.com,cnxx.me,ai18.pics##+js(rmnt, script, /detectAdBlock|pop1stp/)
 pupupul.site##+js(aopr, popUrl)
 cuervotv.me##+js(nowoif)
 !#if cap_html_filtering
@@ -183,16 +181,16 @@ a22518 3
 cimanow.cc###ad1
 d22533 1
 d22537 1
-diff name:ublock-privacy lines:4 checksum:b41f9b789f
+diff name:ublock-privacy lines:4 checksum:0db07e69bd
 d3 2
 a4 2
 ! Last modified: Sun, 31 Mar 2024 00:06:25 +0000
-! Diff-Path: ../patches/2024.4.1.861.patch#ublock-privacy
-diff name:ublock-quick-fixes lines:38 checksum:bf3f90f0d6
+! Diff-Path: ../patches/2024.4.1.1159.patch#ublock-privacy
+diff name:ublock-quick-fixes lines:39 checksum:f94d3db1cb
 d3 2
 a4 2
-! Last modified: Mon, 01 Apr 2024 14:14:06 +0000
-! Diff-Path: ../patches/2024.4.1.861.patch#ublock-quick-fixes
+! Last modified: Mon, 01 Apr 2024 16:23:44 +0000
+! Diff-Path: ../patches/2024.4.1.1159.patch#ublock-quick-fixes
 a28 2
 @@||hb.vntsm.com/v3/live/ad-manager-bundle.min.js$script,domain=aternos.org
 @@||hb.vntsm.com/ab/live/fatum/ad-manager-bundle.min.js$script,domain=aternos.org
@@ -218,29 +216,30 @@ a49 14
 ||www.youtube.com/youtubei/v1/player?$xhr,1p,replace=/("trackingParam":"kx_fmPxhoPZR)[-_0-9A-Za-z]{50}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{55}lLKPQ-SS"\})/\$1\$2/
 ||www.youtube.com/youtubei/v1/player?$xhr,1p,replace=/("trackingParam":"k5DfmPxhoXpR)[-_0-9A-Za-z]{50}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{151}lLKPQGiS"\})/\$1\$2/
 !#endif
-a97 3
+a97 4
 !#if env_chromium
-@@||pagead2.googlesyndication.com/favicon.ico$xhr,domain=decrypt.day
+@@||googlesyndication.com^$xhr,domain=decrypt.day
+||pagead2.googlesyndication.com/getconfig/sodar?$xhr,important,domain=decrypt.day
 !#endif
 d99 1
 d108 7
 d117 4
 a122 1
 download.megaup.net##+js(rpnt, script, /\!\==?\s*_/g, ==_)
-diff name:ublock-unbreak lines:8 checksum:38a28b4235
+diff name:ublock-unbreak lines:8 checksum:83959567d0
 d3 2
 a4 2
 ! Last modified: Mon, 01 Apr 2024 11:21:45 +0000
-! Diff-Path: ../patches/2024.4.1.861.patch#ublock-unbreak
+! Diff-Path: ../patches/2024.4.1.1159.patch#ublock-unbreak
 d106 6
 a2526 2
 @@||cdn.pendo.io/agent/static/*/pendo.js$script,domain=secure.backblaze.com
 @@||data.pendo.io/data/guide.js/*$script,domain=secure.backblaze.com
-diff name:easylist lines:119 checksum:70a05f85f6
+diff name:easylist lines:119 checksum:03b34218cf
 d4 2
 a5 2
 ! Last modified: Mon, 01 Apr 2024 13:09:34 +0000
-! Diff-Path: ../patches/2024.4.1.861.patch#easylist
+! Diff-Path: ../patches/2024.4.1.1159.patch#easylist
 d249 1
 a249 1
 /adbanners/*$image
@@ -356,11 +355,11 @@ a70401 1
 sailingmagazine.net##center > font
 a72306 1
 redgifs.com##[class^="_advertLiveButton_"]
-diff name:easyprivacy lines:21 checksum:859194e932
+diff name:easyprivacy lines:21 checksum:401ebc5ee7
 d4 2
 a5 2
 ! Last modified: Sun, 31 Mar 2024 09:55:03 +0000
-! Diff-Path: ../patches/2024.4.1.861.patch#easyprivacy
+! Diff-Path: ../patches/2024.4.1.1159.patch#easyprivacy
 a5303 1
 ||shareasale-analytics.com^$third-party
 d12912 1
