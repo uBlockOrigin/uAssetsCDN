@@ -1,8 +1,8 @@
-diff name:ublock-annoyances lines:41 checksum:28f918384e
+diff name:ublock-annoyances lines:49 checksum:5f3d604f65
 d3 2
 a4 2
-! Last modified: Sun, 31 Mar 2024 20:41:18 +0000
-! Diff-Path: ../patches/2024.4.1.561.patch#ublock-annoyances
+! Last modified: Mon, 01 Apr 2024 12:19:59 +0000
+! Diff-Path: ../patches/2024.4.1.861.patch#ublock-annoyances
 d75 1
 a75 1
 bbc.com##+js(trusted-click-element, [data-testid="consentBanner"] > button[data-testid="banner-button"], , 1000)
@@ -13,13 +13,16 @@ actu.fr,elconfidencial.com,rtl.lu##+js(trusted-click-element, #didomi-notice-agr
 d342 2
 a343 1
 ledauphine.com##+js(trusted-click-element, button[id="didomi-notice-agree-button"])
-a709 6
+a709 9
 ! Created date=1, ANALYTICS_STORAGE status = DENIED
 auto.nl##+js(trusted-set-local-storage-item, cookieConsent, '{"created":"1","versionNumber":2,"consents":[{"type":"ANALYTICS_STORAGE","status":"DENIED"},{"type":"AD_STORAGE","status":"DENIED"},{"type":"AD_USER_DATA","status":"DENIED"},{"type":"AD_PERSONALIZATION","status":"DENIED"}],"gtmParams":{"analytics_storage":"granted","ad_storage":"denied","ad_user_data":"denied","ad_personalization":"denied"}}')
 ! only necessary
 eurocard.com##+js(trusted-click-element, .button--necessary-approve, , 2000)
 ! stats/marketing/personalization=disable, time and id=1
 tlkhorgaszaruhaz.hu##+js(trusted-set-cookie, UN_cookie_consent_v2, %7B%22marketing%22%3A0%2C%22statistics%22%3A0%2C%22personalization%22%3A0%2C%22time%22%3A1711880201%2C%22id%22%3A%221%22%7D, , , reload, 1)
+! Aggred to consent
+derstandard.at,derstandard.de##+js(trusted-set-cookie, consentUUID, 191c03c5-1154-4937-aa26-ced186f90097_30, , , reload, 1)
+cencenelec.eu##+js(trusted-set-cookie, cookieconsent, saved=1&functional=1&analytics=0&marketing=0, , , reload, 1)
 d761 1
 d3415 1
 a3415 1
@@ -36,15 +39,20 @@ ymovies.vip,aniwatch.to,megacloud.tv,hianime.to,rapid-cloud.co,rabbitstream.net,
 d4389 7
 a4395 1
 !#if env_chromium
-a4593 3
+a4593 8
 ! thenation.com anti-adb
 ||site-config.com^$3p
 ||content-settings.com^$3p
-diff name:ublock-badware lines:59 checksum:b3d8f3e3af
+raenonx.cc##div[class^="flex flex-row w-full h-full"]:has(.adsbygoogle)
+raenonx.cc##body > div[class] > [class="flex flex-col w-full"]:has(> button.button-clickable-bg-opaque > div > svg)
+!#if !env_firefox
+raenonx.cc##body > div[id][data-floating-ui-portal]:has-text(/blocker/i)
+!#endif
+diff name:ublock-badware lines:59 checksum:d20f595e91
 d3 2
 a4 2
 ! Last modified: Mon, 01 Apr 2024 02:04:56 +0000
-! Diff-Path: ../patches/2024.4.1.561.patch#ublock-badware
+! Diff-Path: ../patches/2024.4.1.861.patch#ublock-badware
 a671 4
 ||girlsml.com^$all
 ||pussycat1.online^$all
@@ -100,11 +108,23 @@ a3147 4
 ||acir.postofficeweb.com/grupoacir/$all
 ! openphish
 ||hybridtoken.org^$doc,domain=~fnbo.com
-diff name:ublock-filters lines:200 checksum:cce75c19db
+diff name:ublock-filters lines:221 checksum:a012e0a6fd
 d3 2
 a4 2
-! Last modified: Mon, 01 Apr 2024 07:29:42 +0000
-! Diff-Path: ../patches/2024.4.1.561.patch#ublock-filters
+! Last modified: Mon, 01 Apr 2024 14:17:51 +0000
+! Diff-Path: ../patches/2024.4.1.861.patch#ublock-filters
+d24 2
+a25 2
+||www.youtube.com/playlist?list=$xhr,1p,replace=/("trackingParam":"kx_fmPxhoPZR)[-_0-9A-Za-z]{50}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{55}lLKPQ-SS"\})/\$1\$2/
+||www.youtube.com/playlist?list=$xhr,1p,replace=/("trackingParam":"k5DfmPxhoXpR)[-_0-9A-Za-z]{50}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{151}lLKPQGiS"\})/\$1\$2/
+d27 2
+a28 2
+||www.youtube.com/watch?v=$doc,xhr,1p,replace=/("trackingParam":"kx_fmPxhoPZR)[-_0-9A-Za-z]{50}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{55}lLKPQ-SS"\})/\$1\$2/
+||www.youtube.com/watch?v=$doc,xhr,1p,replace=/("trackingParam":"k5DfmPxhoXpR)[-_0-9A-Za-z]{50}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{151}lLKPQGiS"\})/\$1\$2/
+d30 2
+a31 2
+||www.youtube.com/youtubei/v1/player?$xhr,1p,replace=/("trackingParam":"kx_fmPxhoPZR)[-_0-9A-Za-z]{50}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{55}lLKPQ-SS"\})/\$1\$2/
+||www.youtube.com/youtubei/v1/player?$xhr,1p,replace=/("trackingParam":"k5DfmPxhoXpR)[-_0-9A-Za-z]{50}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{151}lLKPQGiS"\})/\$1\$2/
 d97 3
 d780 1
 d782 2
@@ -147,16 +167,13 @@ a9505 1
 ||d3mw273ubcaiex.cloudfront.net/images/ad/$image
 d9507 1
 d9510 1
-a9510 10
-!#if ext_devbuild
+a9510 7
+!#if cap_html_filtering
+||d3lj2s469wtjp0.cloudfront.net/build/js/public/$script,3p,replace=/\{\("undefined".*\("bound"\)/{(false/,domain=puzzle-loop.com|puzzle-words.com|puzzle-chess.com|puzzle-thermometers.com|puzzle-norinori.com|puzzle-minesweeper.com|puzzle-slant.com|puzzle-lits.com|puzzle-galaxies.com|puzzle-tents.com|puzzle-battleships.com|puzzle-pipes.com|puzzle-hitori.com|puzzle-heyawake.com|puzzle-shingoki.com|puzzle-masyu.com|puzzle-stitches.com|puzzle-aquarium.com|puzzle-tapa.com|puzzle-star-battle.com|puzzle-kakurasu.com|puzzle-skyscrapers.com|puzzle-futoshiki.com|puzzle-shakashaka.com|puzzle-kakuro.com|puzzle-jigsaw-sudoku.com|puzzle-killer-sudoku.com|puzzle-binairo.com|puzzle-nonograms.com|puzzle-sudoku.com|puzzle-light-up.com|puzzle-bridges.com|puzzle-shikaku.com|puzzle-nurikabe.com|puzzle-dominosa.com
+puzzle-loop.com,puzzle-words.com,puzzle-chess.com,puzzle-thermometers.com,puzzle-norinori.com,puzzle-minesweeper.com,puzzle-slant.com,puzzle-lits.com,puzzle-galaxies.com,puzzle-tents.com,puzzle-battleships.com,puzzle-pipes.com,puzzle-hitori.com,puzzle-heyawake.com,puzzle-shingoki.com,puzzle-masyu.com,puzzle-stitches.com,puzzle-aquarium.com,puzzle-tapa.com,puzzle-star-battle.com,puzzle-kakurasu.com,puzzle-skyscrapers.com,puzzle-futoshiki.com,puzzle-shakashaka.com,puzzle-kakuro.com,puzzle-jigsaw-sudoku.com,puzzle-killer-sudoku.com,puzzle-binairo.com,puzzle-nonograms.com,puzzle-sudoku.com,puzzle-light-up.com,puzzle-bridges.com,puzzle-shikaku.com,puzzle-nurikabe.com,puzzle-dominosa.com###MainContainer > [id]:has(> [id^="btIn"] > #bannerTop)
+!#else
 puzzle-loop.com,puzzle-words.com,puzzle-chess.com,puzzle-thermometers.com,puzzle-norinori.com,puzzle-minesweeper.com,puzzle-slant.com,puzzle-lits.com,puzzle-galaxies.com,puzzle-tents.com,puzzle-battleships.com,puzzle-pipes.com,puzzle-hitori.com,puzzle-heyawake.com,puzzle-shingoki.com,puzzle-masyu.com,puzzle-stitches.com,puzzle-aquarium.com,puzzle-tapa.com,puzzle-star-battle.com,puzzle-kakurasu.com,puzzle-skyscrapers.com,puzzle-futoshiki.com,puzzle-shakashaka.com,puzzle-kakuro.com,puzzle-jigsaw-sudoku.com,puzzle-killer-sudoku.com,puzzle-binairo.com,puzzle-nonograms.com,puzzle-sudoku.com,puzzle-light-up.com,puzzle-bridges.com,puzzle-shikaku.com,puzzle-nurikabe.com,puzzle-dominosa.com###MainContainer > [id]:has(> [id^="btIn"] > #bannerTop):style(clip-path: circle(0) !important;)
 puzzle-loop.com,puzzle-words.com,puzzle-chess.com,puzzle-thermometers.com,puzzle-norinori.com,puzzle-minesweeper.com,puzzle-slant.com,puzzle-lits.com,puzzle-galaxies.com,puzzle-tents.com,puzzle-battleships.com,puzzle-pipes.com,puzzle-hitori.com,puzzle-heyawake.com,puzzle-shingoki.com,puzzle-masyu.com,puzzle-stitches.com,puzzle-aquarium.com,puzzle-tapa.com,puzzle-star-battle.com,puzzle-kakurasu.com,puzzle-skyscrapers.com,puzzle-futoshiki.com,puzzle-shakashaka.com,puzzle-kakuro.com,puzzle-jigsaw-sudoku.com,puzzle-killer-sudoku.com,puzzle-binairo.com,puzzle-nonograms.com,puzzle-sudoku.com,puzzle-light-up.com,puzzle-bridges.com,puzzle-shikaku.com,puzzle-nurikabe.com,puzzle-dominosa.com##+js(spoof-css, #MainContainer > [id]:has(> [id^="btIn"] > #bannerTop), clip-path, none)
-!#else
-puzzle-loop.com,puzzle-words.com,puzzle-chess.com,puzzle-thermometers.com,puzzle-norinori.com,puzzle-minesweeper.com,puzzle-slant.com,puzzle-lits.com,puzzle-galaxies.com,puzzle-tents.com,puzzle-battleships.com,puzzle-pipes.com,puzzle-hitori.com,puzzle-heyawake.com,puzzle-shingoki.com,puzzle-masyu.com,puzzle-stitches.com,puzzle-aquarium.com,puzzle-tapa.com,puzzle-star-battle.com,puzzle-kakurasu.com,puzzle-skyscrapers.com,puzzle-futoshiki.com,puzzle-shakashaka.com,puzzle-kakuro.com,puzzle-jigsaw-sudoku.com,puzzle-killer-sudoku.com,puzzle-binairo.com,puzzle-nonograms.com,puzzle-sudoku.com,puzzle-light-up.com,puzzle-bridges.com,puzzle-shikaku.com,puzzle-nurikabe.com,puzzle-dominosa.com###MainContainer > [id]:has(> [id^="btIn"] > #bannerTop) > *:style(width: 0px !important; pointer-events: none !important;)
-puzzle-loop.com,puzzle-words.com,puzzle-chess.com,puzzle-thermometers.com,puzzle-norinori.com,puzzle-minesweeper.com,puzzle-slant.com,puzzle-lits.com,puzzle-galaxies.com,puzzle-tents.com,puzzle-battleships.com,puzzle-pipes.com,puzzle-hitori.com,puzzle-heyawake.com,puzzle-shingoki.com,puzzle-masyu.com,puzzle-stitches.com,puzzle-aquarium.com,puzzle-tapa.com,puzzle-star-battle.com,puzzle-kakurasu.com,puzzle-skyscrapers.com,puzzle-futoshiki.com,puzzle-shakashaka.com,puzzle-kakuro.com,puzzle-jigsaw-sudoku.com,puzzle-killer-sudoku.com,puzzle-binairo.com,puzzle-nonograms.com,puzzle-sudoku.com,puzzle-light-up.com,puzzle-bridges.com,puzzle-shikaku.com,puzzle-nurikabe.com,puzzle-dominosa.com###MainContainer > [id]:has(> [id^="btIn"] > #bannerTop) a
-!#endif
-!#if cap_html_filtering
-||d3lj2s469wtjp0.cloudfront.net/build/js/public/new/nonograms-$script,3p,replace=/\{\("undefined".*\("bound"\)/{(false/,domain=puzzle-loop.com|puzzle-words.com|puzzle-chess.com|puzzle-thermometers.com|puzzle-norinori.com|puzzle-minesweeper.com|puzzle-slant.com|puzzle-lits.com|puzzle-galaxies.com|puzzle-tents.com|puzzle-battleships.com|puzzle-pipes.com|puzzle-hitori.com|puzzle-heyawake.com|puzzle-shingoki.com|puzzle-masyu.com|puzzle-stitches.com|puzzle-aquarium.com|puzzle-tapa.com|puzzle-star-battle.com|puzzle-kakurasu.com|puzzle-skyscrapers.com|puzzle-futoshiki.com|puzzle-shakashaka.com|puzzle-kakuro.com|puzzle-jigsaw-sudoku.com|puzzle-killer-sudoku.com|puzzle-binairo.com|puzzle-nonograms.com|puzzle-sudoku.com|puzzle-light-up.com|puzzle-bridges.com|puzzle-shikaku.com|puzzle-nurikabe.com|puzzle-dominosa.com
 !#endif
 d9515 1
 a9515 1
@@ -166,7 +183,7 @@ a9518 1
 /wp-content/uploads/adb$script,domain=mhdsports.*|mhdsportstv.*|mhdtvsports.*|mhdtvworld.*|mhdtvmax.*|mhdstream.*|mhdtvmax.*
 a9741 1
 sfchronicle.com##+js(set-session-storage-item, realm.Oidc.3pc, $remove$)
-a9807 18
+a9807 21
 pesmodding.com#@#.button-ad
 ||tlh.gedidigital.it/tlh.js$script,domain=lastampa.it
 maos4alaw.online##+js(noeval-if, ads)
@@ -185,20 +202,28 @@ andhrafriends.com##+js(rmnt, script, popunder)
 !#endif
 andhrafriends.com##+js(set, one_time, 1)
 andhrafriends.com##+js(set-cookie, popunder, yes)
+xmateur.com##+js(set, flashvars.protect_block, '')
+xmateur.com##+js(set, flashvars.popunder_url, '')
+xmateur.com##+js(set, flashvars.video_click_url, '')
 d9811 8
-a9818 8
-*$frame,redirect-rule=noopframe,domain=awolio.com|cgbsesupport.com|eternalcbse.in|foreverhealth.in|gplinks.co|jobwaala.in|kaisekareblog.com|learnwithsaif.in|minijankari.com|news36tech.com|nhmgujarat.in|odiamusicsong.com|sugargliderfaqs.com|theringtonesworld.in|w3hindi.in|picassoappk.com|geniuseducares.com|pmyojanasarkari.in|netflixvip.in|mghindinews.in|gentletrail.in|raidersixgameapk.com|sarkariexam365.com|digitalfacts4u.com|odiasongsworld.com|friv4school.in|instander.me|jankari4u.com|trancebazar.com|mdsuuniversity.org|odishadjs.link|pagalmp3status.com|flyshayari.com|powerrangergames.com|kishanganjnews.in|tipdoot.in|dinakondukathe.com|nrvlivability.org|remixodia.link|aksharamedia.com|mcqquestionbank.com|barmanmusic.com.in|msdsu.org|newsivae.in|kinemastermods.in|jobeducareer.com
-@@||gplinks.in/track/$script,xhr,domain=anumin.com|awolio.com|cgbsesupport.com|eternalcbse.i|foreverhealth.in|gplinks.co|jobwaala.in|kaisekareblog.com|learnwithsaif.in|minijankari.com|news36tech.com|nhmgujarat.in|odiamusicsong.com|sugargliderfaqs.com|theringtonesworld.in|w3hindi.in|picassoappk.com|geniuseducares.com|pmyojanasarkari.in|netflixvip.in|mghindinews.in|gentletrail.in|raidersixgameapk.com|sarkariexam365.com|digitalfacts4u.com|odiasongsworld.com|friv4school.in|instander.me|jankari4u.com|trancebazar.com|mdsuuniversity.org|odishadjs.link|pagalmp3status.com|flyshayari.com|powerrangergames.com|kishanganjnews.in|tipdoot.in|dinakondukathe.com|nrvlivability.org|remixodia.link|aksharamedia.com|mcqquestionbank.com|barmanmusic.com.in|msdsu.org|newsivae.in|kinemastermods.in|jobeducareer.com
-@@||doubleclick.net^$script,xhr,domain=anumin.com|awolio.com|cgbsesupport.com|eternalcbse.i|foreverhealth.in|gplinks.co|jobwaala.in|kaisekareblog.com|learnwithsaif.in|minijankari.com|news36tech.com|nhmgujarat.in|odiamusicsong.com|sugargliderfaqs.com|theringtonesworld.in|w3hindi.in|picassoappk.com|geniuseducares.com|pmyojanasarkari.in|netflixvip.in|mghindinews.in|gentletrail.in|raidersixgameapk.com|sarkariexam365.com|digitalfacts4u.com|odiasongsworld.com|friv4school.in|instander.me|jankari4u.com|trancebazar.com|mdsuuniversity.org|odishadjs.link|pagalmp3status.com|flyshayari.com|powerrangergames.com|kishanganjnews.in|tipdoot.in|dinakondukathe.com|nrvlivability.org|remixodia.link|aksharamedia.com|mcqquestionbank.com|barmanmusic.com.in|msdsu.org|newsivae.in|kinemastermods.in|jobeducareer.com
-@@*$ghide,domain=anumin.com|awolio.com|cgbsesupport.com|eternalcbse.i|foreverhealth.in|gplinks.co|jobwaala.in|kaisekareblog.com|learnwithsaif.in|minijankari.com|news36tech.com|nhmgujarat.in|odiamusicsong.com|sugargliderfaqs.com|theringtonesworld.in|w3hindi.in|picassoappk.com|geniuseducares.com|pmyojanasarkari.in|netflixvip.in|mghindinews.in|gentletrail.in|raidersixgameapk.com|sarkariexam365.com|digitalfacts4u.com|odiasongsworld.com|friv4school.in|instander.me|jankari4u.com|trancebazar.com|mdsuuniversity.org|odishadjs.link|pagalmp3status.com|flyshayari.com|powerrangergames.com|kishanganjnews.in|tipdoot.in|dinakondukathe.com|nrvlivability.org|remixodia.link|aksharamedia.com|mcqquestionbank.com|barmanmusic.com.in|msdsu.org|newsivae.in|kinemastermods.in|jobeducareer.com
-anumin.com,awolio.com,cgbsesupport.com,eternalcbse.in,foreverhealth.in,jobwaala.in,kaisekareblog.com,learnwithsaif.in,minijankari.com,news36tech.com,nhmgujarat.in,odiamusicsong.com,sugargliderfaqs.com,theringtonesworld.in,w3hindi.in,picassoappk.com,geniuseducares.com,pmyojanasarkari.in,netflixvip.in,mghindinews.in,gentletrail.in,raidersixgameapk.com,sarkariexam365.com,digitalfacts4u.com,odiasongsworld.com,friv4school.in,instander.me,jankari4u.com,trancebazar.com,mdsuuniversity.org,odishadjs.link,pagalmp3status.com,flyshayari.com,powerrangergames.com,kishanganjnews.in,tipdoot.in,dinakondukathe.com,nrvlivability.org,remixodia.link,aksharamedia.com,mcqquestionbank.com,barmanmusic.com.in,msdsu.org,newsivae.in,kinemastermods.in,jobeducareer.com###SmileyBanner:remove()
-anumin.com,awolio.com,cgbsesupport.com,eternalcbse.in,foreverhealth.in,jobwaala.in,kaisekareblog.com,learnwithsaif.in,minijankari.com,news36tech.com,nhmgujarat.in,odiamusicsong.com,sugargliderfaqs.com,theringtonesworld.in,w3hindi.in,picassoappk.com,geniuseducares.com,pmyojanasarkari.in,netflixvip.in,mghindinews.in,gentletrail.in,raidersixgameapk.com,sarkariexam365.com,digitalfacts4u.com,odiasongsworld.com,friv4school.in,instander.me,jankari4u.com,trancebazar.com,mdsuuniversity.org,odishadjs.link,pagalmp3status.com,flyshayari.com,powerrangergames.com,kishanganjnews.in,tipdoot.in,dinakondukathe.com,nrvlivability.org,remixodia.link,aksharamedia.com,mcqquestionbank.com,barmanmusic.com.in,msdsu.org,newsivae.in,kinemastermods.in,jobeducareer.com##+js(aopw, AdBDetected)
-anumin.com,awolio.com,cgbsesupport.com,eternalcbse.in,foreverhealth.in,jobwaala.in,kaisekareblog.com,learnwithsaif.in,minijankari.com,news36tech.com,nhmgujarat.in,odiamusicsong.com,sugargliderfaqs.com,theringtonesworld.in,w3hindi.in,picassoappk.com,geniuseducares.com,pmyojanasarkari.in,netflixvip.in,mghindinews.in,gentletrail.in,raidersixgameapk.com,sarkariexam365.com,digitalfacts4u.com,odiasongsworld.com,friv4school.in,instander.me,jankari4u.com,trancebazar.com,mdsuuniversity.org,odishadjs.link,pagalmp3status.com,flyshayari.com,powerrangergames.com,kishanganjnews.in,tipdoot.in,dinakondukathe.com,nrvlivability.org,remixodia.link,aksharamedia.com,mcqquestionbank.com,barmanmusic.com.in,msdsu.org,newsivae.in,kinemastermods.in,jobeducareer.com##+js(set, count, 0)
-anumin.com,awolio.com,cgbsesupport.com,eternalcbse.in,foreverhealth.in,jobwaala.in,kaisekareblog.com,learnwithsaif.in,minijankari.com,news36tech.com,nhmgujarat.in,odiamusicsong.com,sugargliderfaqs.com,theringtonesworld.in,w3hindi.in,picassoappk.com,geniuseducares.com,pmyojanasarkari.in,netflixvip.in,mghindinews.in,gentletrail.in,raidersixgameapk.com,sarkariexam365.com,digitalfacts4u.com,odiasongsworld.com,friv4school.in,instander.me,jankari4u.com,trancebazar.com,mdsuuniversity.org,odishadjs.link,pagalmp3status.com,flyshayari.com,powerrangergames.com,kishanganjnews.in,tipdoot.in,dinakondukathe.com,nrvlivability.org,remixodia.link,aksharamedia.com,mcqquestionbank.com,barmanmusic.com.in,msdsu.org,newsivae.in,kinemastermods.in,jobeducareer.com##[id*="iframe"], [id*="gpt_unit"], [id*="div-gpt-"]:style(height:0.0001px !important;)
+a9818 10
+*$frame,redirect-rule=noopframe,domain=gplinks.co|msdsu.org|newsivae.in|kinemastermods.in|jobeducareer.com|heybeng.com|e-gujarati.in
+@@||gplinks.in/track/$script,xhr,domain=gplinks.co|msdsu.org|newsivae.in|kinemastermods.in|jobeducareer.com|heybeng.com|e-gujarati.in
+@@||googlesyndication.com^$script,xhr,domain=msdsu.org|newsivae.in|kinemastermods.in|jobeducareer.com|heybeng.com|e-gujarati.in
+@@||doubleclick.net^$script,xhr,domain=msdsu.org|newsivae.in|kinemastermods.in|jobeducareer.com|heybeng.com|e-gujarati.in
+@@*$ghide,domain=gplinks.co|msdsu.org|newsivae.in|kinemastermods.in|jobeducareer.com|heybeng.com|e-gujarati.in
+e-gujarati.in,heybeng.com,msdsu.org,newsivae.in,kinemastermods.in,jobeducareer.com##center:others()
+e-gujarati.in,heybeng.com,msdsu.org,newsivae.in,kinemastermods.in,jobeducareer.com###SmileyBanner:remove()
+e-gujarati.in,heybeng.com,msdsu.org,newsivae.in,kinemastermods.in,jobeducareer.com##+js(aopw, AdBDetected)
+e-gujarati.in,heybeng.com,msdsu.org,newsivae.in,kinemastermods.in,jobeducareer.com##+js(set, count, 0)
+e-gujarati.in,heybeng.com,msdsu.org,newsivae.in,kinemastermods.in,jobeducareer.com##[id*="iframe"], [id*="gpt_unit"], [id*="div-gpt-"]:style(height:0.0001px !important;)
 a10277 1
 @@/adpartner.min.js$script,domain=tiktokcounter.net
-a10588 1
-pmkisanlists.in##+js(aopr, antiAdBlockerHandler)
+d10468 2
+a10470 3
+cookad.net,pmkisanlists.in,shramikcard.in,shareus.io##+js(aopr, antiAdBlockerHandler)
+cookad.net,pmkisanlists.in,shramikcard.in###bottomNewButton, #bottomButton:remove-attr(disabled)
+cookad.net,pmkisanlists.in,shramikcard.in##div#shrs_main_container, .tag, .link-open-modal:others()
 d10604 1
 a10604 1
 *##ins.adsbygoogle[data-ad-slot]
@@ -281,6 +306,10 @@ in-jpn.com##+js(aost, navigator, sakigake)
 d21204 1
 a21204 1
 7daystodiemods.com,7review.com,avitter.net,bi-girl.net,carryflix.icu,dark5k.com,fairyhorn.cc,gojo2.com,gorecenter.com,huitranslation.com,javhdvideo.org,nakiny.com,nemumemo.com,peppe8o.com,phodoi.vn,savingsomegreen.com,tutsnode.*##+js(aopr, b2a)
+d21472 1
+a21472 2
+||rekidai-info.github.io/_app/immutable/components/pages/index/_page.svelte-$script,replace=/try\{.*?catch.*?push\(\)\}catch\{//
+||rekidai-info.github.io/_app/immutable/components/pages/index/_page.svelte-$script,replace=/throw new Error\("Error Loading Rekidai Data."\)\}throw new Error\("Ad block detected."\)//
 d21552 1
 a21552 1
 maps4heroes.com#@#ins.adsbygoogle[data-ad-slot]
@@ -301,25 +330,24 @@ d22551 1
 d22589 1
 a22589 1
 fplstatistics.co.uk#@#ins.adsbygoogle[data-ad-slot]
-diff name:ublock-privacy lines:4 checksum:623f5739aa
+diff name:ublock-privacy lines:4 checksum:b41f9b789f
 d3 2
 a4 2
 ! Last modified: Sun, 31 Mar 2024 00:06:25 +0000
-! Diff-Path: ../patches/2024.4.1.561.patch#ublock-privacy
-diff name:ublock-quick-fixes lines:55 checksum:02fe56b3bb
+! Diff-Path: ../patches/2024.4.1.861.patch#ublock-privacy
+diff name:ublock-quick-fixes lines:60 checksum:bf3f90f0d6
 d3 2
 a4 2
-! Last modified: Mon, 01 Apr 2024 01:51:09 +0000
-! Diff-Path: ../patches/2024.4.1.561.patch#ublock-quick-fixes
+! Last modified: Mon, 01 Apr 2024 14:14:06 +0000
+! Diff-Path: ../patches/2024.4.1.861.patch#ublock-quick-fixes
+a28 2
+@@||hb.vntsm.com/v3/live/ad-manager-bundle.min.js$script,domain=aternos.org
+@@||hb.vntsm.com/ab/live/fatum/ad-manager-bundle.min.js$script,domain=aternos.org
 d30 1
 a30 1
 aternos.org##.sidebar:style(width: 1.745px !important; padding: 1px !important)
-a31 5
+a31 1
 aternos.org###placement-takeover
-!#if env_chromium
-@@||hb.vntsm.com/v3/live/ad-manager-bundle.min.js$script,domain=aternos.org
-@@||hb.vntsm.com/ab/live/fatum/ad-manager-bundle.min.js$script,domain=aternos.org
-!#endif
 d33 6
 a38 6
 imgoebn.sbs,picnwqez.sbs,imgjajhe.sbs,pixjnwe.sbs,pixkfjtrkf.shop,pixkfkf.shop,pixdfdjkkr.shop,pixdfdj.shop,picnft.shop,pixrqqz.shop,picngt.shop,picjgfjet.shop,picjbet.shop,imgkkabm.shop,imgxabm.shop##+js(aopr, console.clear)
@@ -328,13 +356,24 @@ imgoebn.sbs,picnwqez.sbs,imgjajhe.sbs,pixjnwe.sbs,pixkfjtrkf.shop,pixkfkf.shop,p
 imgoebn.sbs,picnwqez.sbs,imgjajhe.sbs,pixjnwe.sbs,pixkfjtrkf.shop,pixkfkf.shop,pixdfdjkkr.shop,pixdfdj.shop,picnft.shop,pixrqqz.shop,picngt.shop,picjgfjet.shop,picjbet.shop,imgkkabm.shop,imgxabm.shop##div[style="width:100%;height:110px"]
 imgoebn.sbs,picnwqez.sbs,imgjajhe.sbs,pixjnwe.sbs,pixkfjtrkf.shop,pixkfkf.shop,pixdfdjkkr.shop,pixdfdj.shop,picnft.shop,pixrqqz.shop,picngt.shop,picjgfjet.shop,picjbet.shop,imgkkabm.shop,imgxabm.shop##+js(nowoif, !/prcf.fiyar|themes|pixsense|.jpg/)
 imgoebn.sbs,picnwqez.sbs,imgjajhe.sbs,pixjnwe.sbs,pixkfjtrkf.shop,pixkfkf.shop,pixdfdjkkr.shop,pixdfdj.shop,picnft.shop,pixrqqz.shop,picngt.shop,picjgfjet.shop,picjbet.shop,imgkkabm.shop,imgxabm.shop##div[class][style="display: block;"]
-d47 19
-a65 5
-!m.youtube.com,music.youtube.com,www.youtube.com##+js(set, ytInitialPlayerResponse.playerConfig.ssapConfig.ssapPrerollEnabled, false)
-!m.youtube.com,music.youtube.com,www.youtube.com##+js(set, ytInitialPlayerResponse.streamingData.serverAbrStreamingUrl, undefined)
-!m.youtube.com,music.youtube.com,www.youtube.com##+js(json-prune, playerResponse.streamingData.serverAbrStreamingUrl streamingData.serverAbrStreamingUrl)
-!m.youtube.com,music.youtube.com,www.youtube.com##+js(trusted-replace-fetch-response, "ssapPrerollEnabled":true, "ssapPrerollEnabled":false, player?)
-!m.youtube.com,music.youtube.com,www.youtube.com##+js(trusted-replace-xhr-response, "ssapPrerollEnabled":true, "ssapPrerollEnabled":false, player?)
+d47 16
+a62 1
+m.youtube.com,music.youtube.com,www.youtube.com##+js(trusted-rpnt, script, /^(\(function serverContract\(\))/s, '/*start*/(function(){const wrapper=(target,thisArg,args)=>{let content=Reflect.apply(target,thisArg,args);if(content.includes("ssapPrerollEnabled")){const modifiedContent=content.replace(/\n.\n.playerConfig\.ssapConfig\.ssapPrerollEnabled.{2}(?:tru|fals)e/,"");return modifiedContent;}return content;};const handler={apply:wrapper};window.atob=new Proxy(window.atob,handler);const scripts=document.querySelectorAll("script");for(let i=scripts.length-1;i>=0;i--){if(scripts[i].textContent.startsWith("/*start*/")){scripts[i].textContent=scripts[i].textContent.replace(/\/\*start\*\/(.*)\/\*end\*\//g,"");break}}}());/*end*/$1')
+a65 14
+!#if cap_html_filtering
+||www.youtube.com/playlist?list=$xhr,1p,replace=/("trackingParam":"kx_fmPxhoPZR)[-_0-9A-Za-z]{150}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{55}lLKPQ-SS"\})/\$1\$2/,badfilter
+||www.youtube.com/playlist?list=$xhr,1p,replace=/("trackingParam":"k5DfmPxhoXpR)[-_0-9A-Za-z]{150}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{151}lLKPQGiS"\})/\$1\$2/,badfilter
+||www.youtube.com/watch?v=$doc,xhr,1p,replace=/("trackingParam":"kx_fmPxhoPZR)[-_0-9A-Za-z]{150}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{55}lLKPQ-SS"\})/\$1\$2/,badfilter
+||www.youtube.com/watch?v=$doc,xhr,1p,replace=/("trackingParam":"k5DfmPxhoXpR)[-_0-9A-Za-z]{150}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{151}lLKPQGiS"\})/\$1\$2/,badfilter
+||www.youtube.com/youtubei/v1/player?$xhr,1p,replace=/("trackingParam":"kx_fmPxhoPZR)[-_0-9A-Za-z]{150}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{55}lLKPQ-SS"\})/\$1\$2/,badfilter
+||www.youtube.com/youtubei/v1/player?$xhr,1p,replace=/("trackingParam":"k5DfmPxhoXpR)[-_0-9A-Za-z]{150}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{151}lLKPQGiS"\})/\$1\$2/,badfilter
+||www.youtube.com/playlist?list=$xhr,1p,replace=/("trackingParam":"kx_fmPxhoPZR)[-_0-9A-Za-z]{50}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{55}lLKPQ-SS"\})/\$1\$2/
+||www.youtube.com/playlist?list=$xhr,1p,replace=/("trackingParam":"k5DfmPxhoXpR)[-_0-9A-Za-z]{50}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{151}lLKPQGiS"\})/\$1\$2/
+||www.youtube.com/watch?v=$doc,xhr,1p,replace=/("trackingParam":"kx_fmPxhoPZR)[-_0-9A-Za-z]{50}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{55}lLKPQ-SS"\})/\$1\$2/
+||www.youtube.com/watch?v=$doc,xhr,1p,replace=/("trackingParam":"k5DfmPxhoXpR)[-_0-9A-Za-z]{50}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{151}lLKPQGiS"\})/\$1\$2/
+||www.youtube.com/youtubei/v1/player?$xhr,1p,replace=/("trackingParam":"kx_fmPxhoPZR)[-_0-9A-Za-z]{50}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{55}lLKPQ-SS"\})/\$1\$2/
+||www.youtube.com/youtubei/v1/player?$xhr,1p,replace=/("trackingParam":"k5DfmPxhoXpR)[-_0-9A-Za-z]{50}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{151}lLKPQGiS"\})/\$1\$2/
+!#endif
 a96 1
 decrypt.day##ins.adsbygoogle > *:style(position: relative !important; left: -10000px !important;)
 a97 2
@@ -352,33 +391,30 @@ a111 4
 @@||pagead2.googlesyndication.com/favicon.ico$xhr,domain=decrypt.day
 !#endif
 d113 1
-d122 2
-d126 1
-a126 3
-!#if !env_firefox
-raenonx.cc##body > div[id][data-floating-ui-portal]:has-text(/blocker/i)
-!#endif
+d122 5
 a128 3
 ! #23097 #23098
 @@||imasdk.googleapis.com/js/core/bridge*.html$frame
 download.megaup.net##+js(rpnt, script, /\!\==?\s*_/g, ==_)
-diff name:ublock-unbreak lines:11 checksum:c71ef413ea
+diff name:ublock-unbreak lines:13 checksum:38a28b4235
 d3 2
 a4 2
-! Last modified: Mon, 01 Apr 2024 02:18:43 +0000
-! Diff-Path: ../patches/2024.4.1.561.patch#ublock-unbreak
+! Last modified: Mon, 01 Apr 2024 11:21:45 +0000
+! Diff-Path: ../patches/2024.4.1.861.patch#ublock-unbreak
 d106 6
 a641 1
 reuters.com#@#[class^="primary-video__container_"]
-a2522 3
+a2522 5
 ||guinsters286nedril.com^$badfilter
 @@||cdn.pendo.io/agent/static/*/pendo.js$script,domain=achieve.macmillanlearning.com
 @@||data.pendo.io/data/guide.js/$script,domain=achieve.macmillanlearning.com
-diff name:easylist lines:1104 checksum:249b7210ab
+@@||cdn.pendo.io/agent/static/*/pendo.js$script,domain=secure.backblaze.com
+@@||data.pendo.io/data/guide.js/*$script,domain=secure.backblaze.com
+diff name:easylist lines:1109 checksum:70a05f85f6
 d4 2
 a5 2
-! Last modified: Mon, 01 Apr 2024 07:29:42 +0000
-! Diff-Path: ../patches/2024.4.1.561.patch#easylist
+! Last modified: Mon, 01 Apr 2024 13:09:34 +0000
+! Diff-Path: ../patches/2024.4.1.861.patch#easylist
 d249 1
 a249 1
 /adbanners/*$image
@@ -414,6 +450,8 @@ d2854 1
 d2985 1
 d9924 2
 d11010 3
+d13566 1
+d13853 1
 d14052 1
 d14149 1
 d14367 1
@@ -452,8 +490,11 @@ d14717 1
 d14793 1
 d14795 2
 d14798 1
-d14803 1
 d14812 1
+d15459 2
+d15462 1
+d15492 1
+d16123 1
 a16694 1
 ##.top-dfp-wrapper
 a17083 1
@@ -1479,11 +1520,11 @@ a72222 1
 a72495 2
 !! ||imasdk.googleapis.com/js/core/bridge
 @@||imasdk.googleapis.com/js/core/bridge*.html$subdocument
-diff name:easyprivacy lines:44 checksum:9831253dd3
+diff name:easyprivacy lines:44 checksum:859194e932
 d4 2
 a5 2
 ! Last modified: Sun, 31 Mar 2024 09:55:03 +0000
-! Diff-Path: ../patches/2024.4.1.561.patch#easyprivacy
+! Diff-Path: ../patches/2024.4.1.861.patch#easyprivacy
 d1547 1
 d3379 1
 a3379 1
