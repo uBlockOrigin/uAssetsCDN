@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Mon, 08 Apr 2024 17:20:34 +0000
-! Diff-Path: ../patches/2024.4.8.1278.patch#ublock-filters
+! Last modified: Tue, 09 Apr 2024 02:25:13 +0000
+! Diff-Path: ../patches/2024.4.9.147.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -28,6 +28,9 @@ m.youtube.com,music.youtube.com,tv.youtube.com,www.youtube.com,youtubekids.com,y
 m.youtube.com,music.youtube.com,youtubekids.com,youtube-nocookie.com##+js(json-prune, playerResponse.adPlacements playerResponse.playerAds playerResponse.adSlots adPlacements playerAds adSlots important)
 youtube.com##.ytlr-horizontal-list-renderer__items > .yt-virtual-list__container > .yt-virtual-list__item--visible.yt-virtual-list__item--selected.yt-virtual-list__item:has-text(Ad)
 ||googlevideo.com/initplayback?source=youtube*&c=TVHTML5&oad=$xhr,domain=youtube.com
+! Shorts Ad
+m.youtube.com,music.youtube.com,tv.youtube.com,www.youtube.com,youtubekids.com,youtube-nocookie.com##+js(json-prune-fetch-response, reelWatchSequenceResponse.entries.[-].command.reelWatchEndpoint.adClientParams.isAd entries.[-].command.reelWatchEndpoint.adClientParams.isAd, , propsToMatch, url:/reel_watch_sequence?)
+m.youtube.com,music.youtube.com,tv.youtube.com,www.youtube.com,youtubekids.com,youtube-nocookie.com##+js(json-prune-fetch-response, overlay, overlay.shortsAdsRenderer, propsToMatch, url:/reel_item_watch?)
 ! AdDefend
 !#if env_chromium
 lablue.*##+js(nostif, push, 500)
@@ -9844,6 +9847,9 @@ fiuxy2.co##+js(rmnt, script, mega-enlace.com/ext.php?o=)
 voltupload.com##+js(nano-stb, download, 1000, 0.001)
 mylocal.co.uk##main > div > [id].scroll-mt-20:has(.items-center + div:has-text(/^Sponsored$/))
 @@||poweredby.jads.co^$script,frame,domain=video.pemersatu.org
+fastapi.tiangolo.com###announce-right .item:has(.sponsor-badge)
+roystream.com,voodc.com##+js(json-prune, *, *.adserverDomain)
+||nxszxho.com^
 ! Link shortener filters go into their own dedicated list
 ! *** filters/ubo-link-shorteners.txt ***
 ! gplinks all domains (gplinks.co/EWu8)
@@ -19723,6 +19729,7 @@ blog.textpage.xyz##+js(aopr, eazy_ad_unblocker)
 additudemag.com##body:not(.home) #content:style(margin-top: 13px !important;)
 additudemag.com##.primary-sidebar-ad
 welovemanga.one##+js(aopw, document.ready)
+*$script,3p,denyallow=cloudfront.net|disqus.com|disquscdn.com|fastlylb.net,domain=welovemanga.one
 techpp.com##.tppAds
 techpp.com##.side-inserter
 techpp.com##.brxe-div > div[class="brxe-container"] .adsbygoogle:upward(.brxe-container)
