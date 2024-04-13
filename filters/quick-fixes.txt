@@ -1,5 +1,5 @@
 ! Title: uBlock₀ filters – Quick fixes
-! Last modified: Fri, 12 Apr 2024 12:24:43 +0000
+! Last modified: Sat, 13 Apr 2024 10:54:42 +0000
 ! Expires: 8 hours
 ! Description: Immediate, temporary filters to fix websites
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -20,13 +20,15 @@
 @@||popads.net/js/adblock.js$script,domain=dropgalaxy.*|financemonk.net
 @@||cdn.jsdelivr.net/gh/prebid/*$script,domain=dropgalaxy.*|financemonk.net
 @@||fundingchoicesmessages.google.com^$script,domain=dropgalaxy.*|financemonk.net
+@@||googlesyndication.com^$frame,image,domain=dropgalaxy.*|financemonk.net
+@@||s10.histats.com/js15_as.js$script,domain=dropgalaxy.*|financemonk.net
 @@*$script,xhr,from=dropgalaxy.*|financemonk.net,to=googlesyndication.com|doubleclick.net|rsc.cdn77.org|vlitag.com|adoto.net|a2zapk.com|login.popmonetizer.com
-financemonk.net,dropgalaxy.*##+js(nowoif)
-financemonk.net,dropgalaxy.*##+js(trusted-set, document.visibilityState, visible)
-financemonk.net,dropgalaxy.com#@#+js(abort-current-script, document.onkeydown)
-financemonk.net,dropgalaxy.*##+js(set, supportedBrowsers, )
-financemonk.net,dropgalaxy.*##html.i-amphtml-inabox
-financemonk.net,dropgalaxy.*##[id^="TR-"][tr-id][style*="z-index: 9999"]
+dropgalaxy.*,financemonk.net##+js(nowoif)
+dropgalaxy.*,financemonk.net##+js(trusted-set, document.visibilityState, visible)
+dropgalaxy.*,financemonk.net#@#+js(abort-current-script, document.onkeydown)
+dropgalaxy.*,financemonk.net##+js(set, supportedBrowsers, )
+dropgalaxy.*,financemonk.net##html.i-amphtml-inabox
+dropgalaxy.*,financemonk.net##[id^="TR-"][tr-id][style*="z-index: 9999"]
 
 ! aternos anti adb
 @@||hb.vntsm.com/v3/live/ad-manager-bundle.min.js$script,domain=aternos.org
@@ -39,12 +41,12 @@ aternos.org###placement-takeover
 ! pixsera
 ! https://github.com/uBlockOrigin/uAssets/issues/9123
 ! https://github.com/orgs/uBlockOrigin/teams/ublock-filters-volunteers/discussions/423/comments/6
-imgjvmbbm.shop##+js(aopr, console.clear)
-imgjvmbbm.shop##+js(nano-sib, timer)
-imgjvmbbm.shop##div[id][style^="position: fixed; display: block; width: 100%;"]
-imgjvmbbm.shop##div[style="width:100%;height:110px"]
-imgjvmbbm.shop##+js(nowoif, !/prcf.fiyar|themes|pixsense|.jpg/)
-imgjvmbbm.shop##div[class][style="display: block;"]
+imgjbxzjv.shop##+js(aopr, console.clear)
+imgjbxzjv.shop##+js(nano-sib, timer)
+imgjbxzjv.shop##div[id][style^="position: fixed; display: block; width: 100%;"]
+imgjbxzjv.shop##div[style="width:100%;height:110px"]
+imgjbxzjv.shop##+js(nowoif, !/prcf.fiyar|themes|pixsense|.jpg/)
+imgjbxzjv.shop##div[class][style="display: block;"]
 
 ! https://www.reddit.com/r/uBlockOrigin/comments/16lmeri/youtube_antiadblock_and_ads_september_18_2023/k1wl8df/
 !#if !env_mv3
@@ -59,23 +61,6 @@ m.youtube.com,music.youtube.com,www.youtube.com##+js(trusted-rpnt, script, /^(\(
 m.youtube.com,music.youtube.com,www.youtube.com##+js(set, ytInitialPlayerResponse.playerConfig.ssapConfig, undefined)
 m.youtube.com,music.youtube.com,www.youtube.com##+js(set, ytInitialPlayerResponse.streamingData.serverAbrStreamingUrl, undefined)
 m.youtube.com,music.youtube.com,www.youtube.com##+js(json-prune, playerResponse.playerConfig.ssapConfig playerResponse.streamingData.serverAbrStreamingUrl playerConfig.ssapConfig streamingData.serverAbrStreamingUrl)
-!#if cap_html_filtering
-||www.youtube.com/playlist?list=$xhr,1p,replace=/("trackingParam":"kx_fmPxhoPZR)[-_0-9A-Za-z]{150}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{55}lLKPQ-SS"\})/\$1\$2/,badfilter
-||www.youtube.com/playlist?list=$xhr,1p,replace=/("trackingParam":"k5DfmPxhoXpR)[-_0-9A-Za-z]{150}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{151}lLKPQGiS"\})/\$1\$2/,badfilter
-||www.youtube.com/watch?v=$doc,xhr,1p,replace=/("trackingParam":"kx_fmPxhoPZR)[-_0-9A-Za-z]{150}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{55}lLKPQ-SS"\})/\$1\$2/,badfilter
-||www.youtube.com/watch?v=$doc,xhr,1p,replace=/("trackingParam":"k5DfmPxhoXpR)[-_0-9A-Za-z]{150}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{151}lLKPQGiS"\})/\$1\$2/,badfilter
-||www.youtube.com/youtubei/v1/player?$xhr,1p,replace=/("trackingParam":"kx_fmPxhoPZR)[-_0-9A-Za-z]{150}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{55}lLKPQ-SS"\})/\$1\$2/,badfilter
-||www.youtube.com/youtubei/v1/player?$xhr,1p,replace=/("trackingParam":"k5DfmPxhoXpR)[-_0-9A-Za-z]{150}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{151}lLKPQGiS"\})/\$1\$2/,badfilter
-||www.youtube.com/playlist?list=$xhr,1p,replace=/"auxiliaryUi":\{"messageRenderers":\{"bkaEnforcementMessageViewModel.*?e\}\}\}\,//,badfilter
-||www.youtube.com/playlist?list=$xhr,1p,replace=/("trackingParam":"kx_fmPxhoPZR)[-_0-9A-Za-z]{50}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{55}lLKPQ-SS"\})/\$1\$2/,badfilter
-||www.youtube.com/playlist?list=$xhr,1p,replace=/("trackingParam":"k5DfmPxhoXpR)[-_0-9A-Za-z]{50}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{151}lLKPQGiS"\})/\$1\$2/,badfilter
-||www.youtube.com/watch?v=$doc,xhr,1p,replace=/"auxiliaryUi":\{"messageRenderers":\{"bkaEnforcementMessageViewModel.*?e\}\}\}\,//,badfilter
-||www.youtube.com/watch?v=$doc,xhr,1p,replace=/("trackingParam":"kx_fmPxhoPZR)[-_0-9A-Za-z]{50}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{55}lLKPQ-SS"\})/\$1\$2/,badfilter
-||www.youtube.com/watch?v=$doc,xhr,1p,replace=/("trackingParam":"k5DfmPxhoXpR)[-_0-9A-Za-z]{50}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{151}lLKPQGiS"\})/\$1\$2/,badfilter
-||www.youtube.com/youtubei/v1/player?$xhr,1p,replace=/"auxiliaryUi":\{"messageRenderers":\{"bkaEnforcementMessageViewModel.*?e\}\}\}\,//,badfilter
-||www.youtube.com/youtubei/v1/player?$xhr,1p,replace=/("trackingParam":"kx_fmPxhoPZR)[-_0-9A-Za-z]{50}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{55}lLKPQ-SS"\})/\$1\$2/,badfilter
-||www.youtube.com/youtubei/v1/player?$xhr,1p,replace=/("trackingParam":"k5DfmPxhoXpR)[-_0-9A-Za-z]{50}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{151}lLKPQGiS"\})/\$1\$2/,badfilter
-!#endif
 ! Shorts Ad
 m.youtube.com,music.youtube.com,tv.youtube.com,www.youtube.com,youtubekids.com,youtube-nocookie.com##+js(json-prune-fetch-response, reelWatchSequenceResponse.entries.[-].command.reelWatchEndpoint.adClientParams.isAd entries.[-].command.reelWatchEndpoint.adClientParams.isAd, , propsToMatch, url:/reel_watch_sequence?)
 m.youtube.com,music.youtube.com,tv.youtube.com,www.youtube.com,youtubekids.com,youtube-nocookie.com##+js(json-prune-fetch-response, overlay, overlay.shortsAdsRenderer, propsToMatch, url:/reel_item_watch?)
@@ -197,13 +182,7 @@ www.chip.de###CR[class="Downloads-Select"] > #G32 > #M1 > [class="wrapper-safe"]
 www.chip.de###CR[class="Downloads-Getfile"] > #G32 > #M1 > [class="wrapper-safe"] > [class^="fb mt-"] > [class] > div[class]:has(a img[src*="https://im.chip.de/ii/"])
 
 ! Ad-Shield
-||657475b7-0095-478d-90d4-96ce440604f9.online^$doc,popup,font,css,ping
-||07c225f3.online^$image,3p,redirect=1x1.gif,badfilter
-||content-loader.com^$image,3p,redirect=1x1.gif,badfilter
-||css-load.com^$image,3p,redirect=1x1.gif,badfilter
-||html-load.com^$image,3p,redirect=1x1.gif,badfilter
-||html-load.cc^$image,3p,redirect=1x1.gif,badfilter
-/loader.min.js$xhr,script,domain=loawa.com|ygosu.com|sportalkorea.com|enetnews.co.kr|edaily.co.kr|economist.co.kr|etoday.co.kr|hankyung.com|isplus.com|hometownstation.com|inven.co.kr|honkailab.com|warcraftrumbledeck.com|genshinlab.com|thestockmarketwatch.com|thephoblographer.com|issuya.com|dogdrip.net|worldhistory.org,replace=/\.mark\(\(function [a-z0-9]{1,2}\([a-z0-9]{1,2},[a-z0-9]{1,2}\){var.*\]\]\)\}\)\)\),/.mark((function neutralized(a,b){var none = false;}))),/g
+||4e55.xyz^$doc,popup,font,css,ping
 
 ! https://www.facebook.com/watch flickering
 facebook.com,facebookwkhpilnemxj7asaniu7vnjjbiltxjqhye3mhbshg7kx5tfyd.onion#@##watch_feed div:not([class]) > div:not([class]) div[class] span[class] > a span[aria-labelledby]:has(> span[style="display: flex;"] > span[class]:has-text(/^S$/)):has(> span[style="display: flex;"] > span[class]:has-text(/^p$/)):has(> span[style="display: flex;"] > span[class]:has-text(/^d$/)):upward(div:not([class]) > div:not([class]))
