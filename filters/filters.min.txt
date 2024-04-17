@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Wed, 17 Apr 2024 10:14:37 +0000
-! Diff-Path: ../patches/2024.4.17.624.patch#ublock-filters
+! Last modified: Wed, 17 Apr 2024 15:12:01 +0000
+! Diff-Path: ../patches/2024.4.17.923.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -9880,6 +9880,10 @@ meteopool.org##+js(no-xhr-if, googlesyndication)
 lemino.docomo.ne.jp##+js(no-fetch-if, doubleclick.net)
 ||h.seznam.cz^$badfilter
 noicetranslations.blogspot.com##+js(aopr, checkAdsStatus)
+manwan.xyz##+js(nostif, alert)
+waploaded.com#@#.ad-slot:not(.adsbox):not(.adsbygoogle)
+! innateblogger. com detection
+innateblogger.com##+js(rmnt, script, adsbygoogle)
 ! Link shortener filters go into their own dedicated list
 ! *** filters/ubo-link-shorteners.txt ***
 ! gplinks all domains (gplinks.co/EWu8)
@@ -10714,8 +10718,11 @@ pages.lazada.co.id##.lzd-call-app-download-popup
 !#endif
 ! *** uAssets:filters/filters-2020.txt ***
 *$script,redirect-rule=noopjs,domain=arcai.com
-arcai.com##+js(no-fetch-if, googlesyndication)
-arcai.com##+js(set, Object.prototype.m_nLastTimeAdBlock, undefined)
+arcai.com##+js(set, pubAdsService, trueFunc)
+@@||doubleclick.net^$script,xhr,domain=arcai.com
+@@||fundingchoicesmessages.google.com^$script,domain=arcai.com
+@@||googletagservices.com/tag/js/gpt.js$script,domain=arcai.com
+@@*$ghide,domain=arcai.com
 de-baystars.doorblog.jp##+js(acs, document.addEventListener, google_ad_client)
 azm.to##+js(aopr, mm)
 *$script,3p,denyallow=jquery.com|hwcdn.net|plyr.io|fastly.net|jwpcdn.com|googleapis.com|zencdn.net|hcaptcha.com,domain=azm.to
@@ -16990,7 +16997,6 @@ h-flash.com##div[id^="randomzone"]
 ||gratisbitcoin.my.id^$3p
 clickscoin.com##.d-sm-block.d-none
 clickscoin.com##a[href^="https://albeitinflame.com/"]
-||googletagmanager.com/gtag/js$script,xhr,redirect=googletagmanager_gtm.js:5
 milf300.com##.bottom_space
 milf300.com##.container > .text-center[style="height: 100px;"]
 milf300.com##div[style="width: 300px;height: 250px;"]
@@ -18589,9 +18595,10 @@ canale.live##+js(nosiif, href)
 loawa.com,ygosu.com,sportalkorea.com,enetnews.co.kr,edaily.co.kr,economist.co.kr,etoday.co.kr,hankyung.com,isplus.com,hometownstation.com,inven.co.kr,honkailab.com,warcraftrumbledeck.com,genshinlab.com,thestockmarketwatch.com,thephoblographer.com,issuya.com,meeco.kr,etnews.com,iusm.co.kr,dogdrip.net,worldhistory.org,uttranews.com,text-compare.com,vipotv.com,bamgosu.site,etnewskorea.com##+js(no-fetch-if, /static\.criteo\.net|adsbygoogle/, length:150000-150200)
 loawa.com,ygosu.com,sportalkorea.com,enetnews.co.kr,edaily.co.kr,economist.co.kr,etoday.co.kr,hankyung.com,isplus.com,hometownstation.com,inven.co.kr,honkailab.com,warcraftrumbledeck.com,genshinlab.com,thestockmarketwatch.com,thephoblographer.com,issuya.com,meeco.kr,etnews.com,iusm.co.kr,dogdrip.net,worldhistory.org,uttranews.com,text-compare.com,vipotv.com,bamgosu.site,etnewskorea.com##+js(set, window.googletag.apiReady, false)
 *$frame,redirect-rule=noopframe,domain=ygosu.com|loawa.com|sportalkorea.com|enetnews.co.kr|edaily.co.kr|economist.co.kr|etoday.co.kr|hankyung.com|isplus.com|hometownstation.com|inven.co.kr|honkailab.com|warcraftrumbledeck.com|genshinlab.com|thestockmarketwatch.com|thephoblographer.com|issuya.com|meeco.kr|etnews.com|iusm.co.kr|dogdrip.net|worldhistory.org|uttranews.com|text-compare.com|vipotv.com|bamgosu.site|etnewskorea.com
-*$script,xhr,redirect-rule=noopjs,domain=ygosu.com|loawa.com|sportalkorea.com|enetnews.co.kr|edaily.co.kr|economist.co.kr|etoday.co.kr|hankyung.com|isplus.com|hometownstation.com|inven.co.kr|honkailab.com|warcraftrumbledeck.com|genshinlab.com|thestockmarketwatch.com|thephoblographer.com|issuya.com|meeco.kr|etnews.com|iusm.co.kr|dogdrip.net|worldhistory.org|uttranews.com|text-compare.com|vipotv.com|bamgosu.site|etnewskorea.com
+*$script,xhr,redirect-rule=noopjs,domain=ygosu.com|loawa.com|sportalkorea.com|enetnews.co.kr|edaily.co.kr|economist.co.kr|etoday.co.kr|hankyung.com|isplus.com|hometownstation.com|honkailab.com|warcraftrumbledeck.com|genshinlab.com|thestockmarketwatch.com|thephoblographer.com|issuya.com|meeco.kr|etnews.com|iusm.co.kr|dogdrip.net|worldhistory.org|uttranews.com|text-compare.com|vipotv.com|bamgosu.site|etnewskorea.com
 *$image,redirect-rule=1x1.gif,domain=ygosu.com|loawa.com|sportalkorea.com|enetnews.co.kr|edaily.co.kr|economist.co.kr|etoday.co.kr|hankyung.com|isplus.com|hometownstation.com|inven.co.kr|honkailab.com|warcraftrumbledeck.com|genshinlab.com|thestockmarketwatch.com|thephoblographer.com|issuya.com|meeco.kr|etnews.com|iusm.co.kr|dogdrip.net|worldhistory.org|uttranews.com|vipotv.com|bamgosu.site|etnewskorea.com
 @@*$ghide,domain=ygosu.com|loawa.com|sportalkorea.com|enetnews.co.kr|edaily.co.kr|economist.co.kr|etoday.co.kr|hankyung.com|isplus.com|hometownstation.com|inven.co.kr|honkailab.com|warcraftrumbledeck.com|genshinlab.com|thestockmarketwatch.com|thephoblographer.com|issuya.com|meeco.kr|etnews.com|iusm.co.kr|dogdrip.net|worldhistory.org|uttranews.com|text-compare.com|vipotv.com|bamgosu.site|etnewskorea.com
+*$script,xhr,3p,redirect-rule=noopjs,domain=inven.co.kr
 thestockmarketwatch.com,issuya.com,meeco.kr,dogdrip.net,vipotv.com##ins.adsbygoogle:style(height: 1px !important; visibility: hidden !important;)
 thestockmarketwatch.com#@#.adSpotPad
 thestockmarketwatch.com##.adSpotPad:style(height: 1px !important; min-height: 1px !important; visibility: hidden !important;)
@@ -20995,17 +21002,19 @@ mgnetu.com##+js(noeval-if, fairAdblock)
 bondagevalley.cc##+js(rmnt, script, innerHTML)
 ||bondagevalley.cc/upload/photos/kcs.webp
 ||aucdn.net/library/*.mp4|$media,domain=clgt.one
-! in-jpn.com anti-adb
-in-jpn.com##+js(aopr, Element.prototype.insertAdjacentHTML)
-in-jpn.com##+js(aopr, Node.prototype.appendChild)
+in-jpn.com,xth.jp##+js(aopr, Element.prototype.insertAdjacentHTML)
+in-jpn.com,xth.jp##+js(aopr, Node.prototype.appendChild)
 ||in-jpn.com^$script,redirect=noop.js
 ||in-jpn.com^$inline-script
-*$script,3p,domain=in-jpn.com
+||xth.jp^$script,redirect=noop.js
+||xth.jp^$inline-script
+*$script,3p,domain=in-jpn.com|xth.jp
 @@/^https:\/\/[a-z]*\.?in-jpn\.com\/wp-includes\/js\/jquery\/jquery(-migrate)?\.min\.js\?ver=\d\.\d\.\d{1,2}$/$script,1p,strict1p,match-case,domain=in-jpn.com
 @@/^https:\/\/[a-z]*\.?in-jpn\.com\/wp-includes\/js\/wp-emoji-release\.min\.js\?(?:ver=\?)?ver=\d\.\d\.\d{1,2}$/$script,1p,strict1p,match-case,domain=in-jpn.com
 @@/^https:\/\/[a-z]*\.?in-jpn\.com\/wp-content\/themes\/amphibious\/js\/(?:custom|enquire|fitvids|hover-intent|superfish)\.js\?ver=(?:\d\.\d(?:\.\d{1,2})?|r\d)$/$script,1p,strict1p,match-case,domain=in-jpn.com
 @@||in-jpn.com^$ghide
-in-jpn.com##[style*="z-index"]:empty
+@@||xth.jp^$ghide
+in-jpn.com##[style]:empty
 azaleasdolls.com##td[height="279"]
 azaleasdolls.com##td[width^="34"][height^="29"]
 azaleasdolls.com##td[width="164"][bgcolor="#FCDCE4"]
@@ -22467,7 +22476,7 @@ niaomea.me##+js(nowoif)
 redd.tube##+js(aopr, config)
 brotherfox91.*,customsfencei3.*,fencethoughgdrt.*,fencethroughout642.*,foxwent6ot.*,homebasis4d.*,includingbreath5ku.*,linelocatemfsn.*,littlesound6c.*,live-streamfootball.*,mindmotion93y8.*,monkeynecktj4w.*,neighbormajorkex.*,rbtv77.*,saddletopg3tk.*,superabbit.*,wholecommonrrvp.*,wintertold7nq.*##+js(no-xhr-if, googlesyndication, length:10)
 brotherfox91.*,customsfencei3.*,fencethoughgdrt.*,fencethroughout642.*,foxwent6ot.*,homebasis4d.*,includingbreath5ku.*,linelocatemfsn.*,littlesound6c.*,live-streamfootball.*,mindmotion93y8.*,monkeynecktj4w.*,neighbormajorkex.*,rbtv77.*,saddletopg3tk.*,superabbit.*,wholecommonrrvp.*,wintertold7nq.*##.d-l
-@@*$xhr,script,1p,domain=brotherfox91.*|customsfencei3.*|fencethoughgdrt.*|fencethroughout642.*|foxwent6ot.*|homebasis4d.*|includingbreath5ku.*|linelocatemfsn.*|littlesound6c.*|live-streamfootball.*|mindmotion93y8.*|monkeynecktj4w.*|neighbormajorkex.*|rbtv77.*|saddletopg3tk.*|superabbit.*|wholecommonrrvp.*|wintertold7nq.*
+@@*$xhr,script,1p,domain=announcedcatchix1t.*|brotherfox91.*|customsfencei3.*|fencethoughgdrt.*|fencethroughout642.*|foxwent6ot.*|homebasis4d.*|includingbreath5ku.*|linelocatemfsn.*|littlesound6c.*|live-streamfootball.*|mindmotion93y8.*|mightbadly4f.*|monkeynecktj4w.*|neighbormajorkex.*|pantogether6jpi.*|rbtv77.*|saddletopg3tk.*|soldrubber5xrp.*|superabbit.*|studyinghuman6js.*|wholecommonrrvp.*|wintertold7nq.*
 ggjav.com,ggjav.tv##+js(acs, $, popunder)
 ecamrips.com,showcamrips.com##+js(rmnt, script, document.head.appendChild)
 ecamrips.com,showcamrips.com##+js(acs, document.cookie, document.head.appendChild)
@@ -22489,7 +22498,12 @@ freewsad.com##+js(set-local-storage-item, email, true)
 karaoketexty.cz##+js(nostif, /native|\{n\(\)/)
 karaoketexty.cz##+js(ra, style, [style^="background"], stay)
 karaoketexty.cz##+js(ra, href, [target^="_"], stay)
-lk21official.*##+js(set, adsPlay, false)
+*.gif$domain=lk21official.*|nontondrama.*,image
+lk21official.*,nontondrama.*##+js(rmnt, script, adsPlay)
+nontondrama.*,playeriframe.*###admad
+lapakbuah.site##.content
+lapakbuah.site##.bg-dark.bottom
+lk21static.xyz##+js(nano-sib)
 lk21official.*###overlay
 stream.hownetwork.xyz###donate
 tucinehd.com##+js(nostif, nextFunction, 2000)

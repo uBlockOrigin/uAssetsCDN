@@ -1,5 +1,5 @@
 ! Title: uBlock filters (2023)
-! Last modified: Wed, 17 Apr 2024 07:54:24 +0000
+! Last modified: Wed, 17 Apr 2024 12:46:20 +0000
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -2091,17 +2091,20 @@ bondagevalley.cc##+js(rmnt, script, innerHTML)
 ! https://github.com/uBlockOrigin/uAssets/issues/17744
 ||aucdn.net/library/*.mp4|$media,domain=clgt.one
 
-! in-jpn.com anti-adb
-in-jpn.com##+js(aopr, Element.prototype.insertAdjacentHTML)
-in-jpn.com##+js(aopr, Node.prototype.appendChild)
+! https://github.com/AdguardTeam/AdguardFilters/issues/177237
+in-jpn.com,xth.jp##+js(aopr, Element.prototype.insertAdjacentHTML)
+in-jpn.com,xth.jp##+js(aopr, Node.prototype.appendChild)
 ||in-jpn.com^$script,redirect=noop.js
 ||in-jpn.com^$inline-script
-*$script,3p,domain=in-jpn.com
+||xth.jp^$script,redirect=noop.js
+||xth.jp^$inline-script
+*$script,3p,domain=in-jpn.com|xth.jp
 @@/^https:\/\/[a-z]*\.?in-jpn\.com\/wp-includes\/js\/jquery\/jquery(-migrate)?\.min\.js\?ver=\d\.\d\.\d{1,2}$/$script,1p,strict1p,match-case,domain=in-jpn.com
 @@/^https:\/\/[a-z]*\.?in-jpn\.com\/wp-includes\/js\/wp-emoji-release\.min\.js\?(?:ver=\?)?ver=\d\.\d\.\d{1,2}$/$script,1p,strict1p,match-case,domain=in-jpn.com
 @@/^https:\/\/[a-z]*\.?in-jpn\.com\/wp-content\/themes\/amphibious\/js\/(?:custom|enquire|fitvids|hover-intent|superfish)\.js\?ver=(?:\d\.\d(?:\.\d{1,2})?|r\d)$/$script,1p,strict1p,match-case,domain=in-jpn.com
 @@||in-jpn.com^$ghide
-in-jpn.com##[style*="z-index"]:empty
+@@||xth.jp^$ghide
+in-jpn.com##[style]:empty
 
 ! https://github.com/NanoMeow/QuickReports/issues/21
 ! https://github.com/uBlockOrigin/uAssets/issues/9578
@@ -4868,7 +4871,7 @@ redd.tube##+js(aopr, config)
 ! https://github.com/uBlockOrigin/uAssets/issues/20694
 brotherfox91.*,customsfencei3.*,fencethoughgdrt.*,fencethroughout642.*,foxwent6ot.*,homebasis4d.*,includingbreath5ku.*,linelocatemfsn.*,littlesound6c.*,live-streamfootball.*,mindmotion93y8.*,monkeynecktj4w.*,neighbormajorkex.*,rbtv77.*,saddletopg3tk.*,superabbit.*,wholecommonrrvp.*,wintertold7nq.*##+js(no-xhr-if, googlesyndication, length:10)
 brotherfox91.*,customsfencei3.*,fencethoughgdrt.*,fencethroughout642.*,foxwent6ot.*,homebasis4d.*,includingbreath5ku.*,linelocatemfsn.*,littlesound6c.*,live-streamfootball.*,mindmotion93y8.*,monkeynecktj4w.*,neighbormajorkex.*,rbtv77.*,saddletopg3tk.*,superabbit.*,wholecommonrrvp.*,wintertold7nq.*##.d-l
-@@*$xhr,script,1p,domain=brotherfox91.*|customsfencei3.*|fencethoughgdrt.*|fencethroughout642.*|foxwent6ot.*|homebasis4d.*|includingbreath5ku.*|linelocatemfsn.*|littlesound6c.*|live-streamfootball.*|mindmotion93y8.*|monkeynecktj4w.*|neighbormajorkex.*|rbtv77.*|saddletopg3tk.*|superabbit.*|wholecommonrrvp.*|wintertold7nq.*
+@@*$xhr,script,1p,domain=announcedcatchix1t.*|brotherfox91.*|customsfencei3.*|fencethoughgdrt.*|fencethroughout642.*|foxwent6ot.*|homebasis4d.*|includingbreath5ku.*|linelocatemfsn.*|littlesound6c.*|live-streamfootball.*|mindmotion93y8.*|mightbadly4f.*|monkeynecktj4w.*|neighbormajorkex.*|pantogether6jpi.*|rbtv77.*|saddletopg3tk.*|soldrubber5xrp.*|superabbit.*|studyinghuman6js.*|wholecommonrrvp.*|wintertold7nq.*
 
 ! https://ggjav.com /.tv popunder
 ggjav.com,ggjav.tv##+js(acs, $, popunder)
@@ -4911,8 +4914,13 @@ karaoketexty.cz##+js(nostif, /native|\{n\(\)/)
 karaoketexty.cz##+js(ra, style, [style^="background"], stay)
 karaoketexty.cz##+js(ra, href, [target^="_"], stay)
 
-! https://github.com/AdguardTeam/AdguardFilters/issues/159379
-lk21official.*##+js(set, adsPlay, false)
+! https://github.com/uBlockOrigin/uAssets/issues/23332
+*.gif$domain=lk21official.*|nontondrama.*,image
+lk21official.*,nontondrama.*##+js(rmnt, script, adsPlay)
+nontondrama.*,playeriframe.*###admad
+lapakbuah.site##.content
+lapakbuah.site##.bg-dark.bottom
+lk21static.xyz##+js(nano-sib)
 lk21official.*###overlay
 stream.hownetwork.xyz###donate
 
