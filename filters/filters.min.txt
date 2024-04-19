@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Fri, 19 Apr 2024 12:34:37 +0000
-! Diff-Path: ../patches/2024.4.19.755.patch#ublock-filters
+! Last modified: Fri, 19 Apr 2024 15:44:59 +0000
+! Diff-Path: ../patches/2024.4.19.1042.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -16442,7 +16442,16 @@ onlytech.com##+js(acs, $, test)
 @@*$ghide,domain=dev.miuiflash.com|djxmaza.in|thecubexguide.com|jytechs.in
 @@||googletagmanager.com^$script,domain=dev.miuiflash.com|djxmaza.in|thecubexguide.com|jytechs.in
 @@*$script,xhr,to=googlesyndication.com|doubleclick.net|fundingchoicesmessages.google.com,from=dev.miuiflash.com|djxmaza.in|thecubexguide.com|jytechs.in
-jytechs.in,dev.miuiflash.com,djxmaza.in,thecubexguide.com##[id*="div-gpt-ad-"], [id*="google_ads_"], #featuredimage, [href*="random-affiliate.atimaze.com"]:style(visibility: collapse !important;)
+jytechs.in,dev.miuiflash.com,djxmaza.in,thecubexguide.com##+js(nowoif, _blank)
+!#if env_firefox
+@@||googlesyndication.com^$frame,domain=djxmaza.in|dev.miuiflash.com|thecubexguide.com|jytechs.in
+jytechs.in,dev.miuiflash.com,djxmaza.in,thecubexguide.com##html.i-amphtml-inabox
+||devfiles.pages.dev/img/*.jpeg$image,domain=djxmaza.in|dev.miuiflash.com|thecubexguide.com|jytechs.in
+jytechs.in,djxmaza.in,miuiflash.com,thecubexguide.com##[href*="random-affiliate.atimaze.com"]
+!#else
+jytechs.in,dev.miuiflash.com,djxmaza.in,thecubexguide.com##[id*="div-gpt-ad-"], [id*="google_ads_"], #featuredimage, [href*="random-affiliate.atimaze.com"]:style(clip-path: circle(0) !important;)
+jytechs.in,dev.miuiflash.com,djxmaza.in,thecubexguide.com##+js(spoof-css, [id*="div-gpt-ad-"]\, [id*="google_ads_"]\, #featuredimage\, [href*="random-affiliate.atimaze.com"], clip-path, none)
+!#endif
 jytechs.in,djxmaza.in,miuiflash.com,thecubexguide.com#@##featuredimage
 akoam.*##+js(nowoif)
 javhdfree.icu##+js(aopr, __Y)
@@ -16530,14 +16539,15 @@ zerion.cc,zerocoin.top,zitss.xyz,zooqle.*,zpaste.net,zplayer.live##+js(rmnt, scr
 *$script,domain=onlyfullporn.video,3p,denyallow=twitter.com|facebook.net|vk.com|zencdn.net|unpkg.com|fastly.net|fbcdn.net
 *$script,3p,domain=moredesi.com,denyallow=google.com|wp.com|disqus.com|pinterest.com|fastlylb.net|fastly.net
 /^https:\/\/www\.[a-z]{8,14}\.com\/[a-z]{1,4}\.js$/$script,3p,match-case,from=~edu|~gov,to=com|~exploretock.com
-/^https:\/\/www\.[a-z]{8,16}\.com\/(?:[A-Za-z]+\/)*(?:[_0-9A-Za-z]{1,20}[-.])*[_0-9A-Za-z]{1,20}[-.]min\.js$/$script,3p,match-case,to=com,header=link:/adsco\.re\/>;rel=preconnect/
+/^https:\/\/www\.[a-z]{8,16}\.com\/(?:[A-Za-z]+\/)*(?:[_0-9A-Za-z]{1,20}[-.])*[_0-9A-Za-z]{1,20}\.js$/$script,3p,match-case,to=com,header=link:/adsco\.re\/>;rel=preconnect/
 ://www.*.css|$script,3p,to=com,header=link:/adsco\.re\/>;rel=preconnect/
 ://www.*/images/*.min.js|$script,3p,to=com,header=link:/adsco\.re\/>;rel=preconnect/
 ://www.*.com/css/$script,3p,to=com|~principalcdn.com,header=link:/adsco\.re\/>;rel=preconnect/
 ://www.*.com/js/css/$script,3p,header=link:/adsco\.re\/>;rel=preconnect/
 =e3&*,0|$script,3p,to=com
 =e3&*,1|$script,3p,to=com
-/^https:\/\/www\.[a-z]{8,16}\.com\/(?:fl\/)?(?:images\/)?(?:static\/)?(?:common\/)?(?:assets\/)?(?:scripts\/)?(?:api\/)?(?:js\/)?(?:[a-z]{3})?(?:[a-z]dom4|dotdotdot|editor|[a-z](?:ire)?base|[a-z]ie8|jfloating|jholmes|kcookies-monster|leaflet\.toolbar|masync|mijs|[a-z]jsonform|proj4|sext-all|sha|ummenu|[a-z]?viz)\.js$/$script,3p,match-case,to=com
+=3&*,0|$script,3p,to=com
+=3&*,1|$script,3p,to=com
 ||pushtoast-a.akamaihd.net^$script,3p
 ||nsfwr34.com/ad_schedule/
 mdy48tn97.com##+js(nowoif)
@@ -21009,22 +21019,18 @@ mgnetu.com##+js(noeval-if, fairAdblock)
 bondagevalley.cc##+js(rmnt, script, innerHTML)
 ||bondagevalley.cc/upload/photos/kcs.webp
 ||aucdn.net/library/*.mp4|$media,domain=clgt.one
-in-jpn.com,xth.jp##+js(aopr, Element.prototype.insertAdjacentHTML)
-in-jpn.com,xth.jp##+js(aopr, Node.prototype.appendChild)
+in-jpn.com,oninet.ne.jp,xth.jp##+js(aopr, Element.prototype.insertAdjacentHTML)
 ||in-jpn.com^$script,redirect=noop.js
-!||in-jpn.com^$inline-script
 ||xth.jp^$script,redirect=noop.js
-||xth.jp^$inline-script
-*$script,3p,domain=in-jpn.com|xth.jp
+||oninet.ne.jp^$script,redirect=noop.js
+*$script,3p,domain=in-jpn.com|oninet.ne.jp|xth.jp
 @@/^https:\/\/[a-z]*\.?in-jpn\.com\/wp-includes\/js\/jquery\/jquery(-migrate)?\.min\.js\?ver=\d\.\d\.\d{1,2}$/$script,1p,strict1p,match-case,domain=in-jpn.com
 @@/^https:\/\/[a-z]*\.?in-jpn\.com\/wp-includes\/js\/wp-emoji-release\.min\.js\?(?:ver=\?)?ver=\d\.\d\.\d{1,2}$/$script,1p,strict1p,match-case,domain=in-jpn.com
 @@/^https:\/\/[a-z]*\.?in-jpn\.com\/wp-content\/themes\/amphibious\/js\/(?:custom|enquire|fitvids|hover-intent|superfish)\.js\?ver=(?:\d\.\d(?:\.\d{1,2})?|r\d)$/$script,1p,strict1p,match-case,domain=in-jpn.com
 @@||in-jpn.com^$ghide
+@@||oninet.ne.jp^$ghide
 @@||xth.jp^$ghide
-||in-jpn.com^$script,replace=/if[\s\S\n]*?ブロックをオフ[\s\S\n]*?\}//
 in-jpn.com##[style]:empty
-in-jpn.com##+js(aopr, Node.prototype.removeChild)
-in-jpn.com##+js(trusted-rpnt, script, /(\/\* <!\[[\s\S\n]*)/, '(function($,w){var methods=(function(){var c={bcClass:\'sf-breadcrumb\',menuClass:\'sf-js-enabled\',anchorClass:\'sf-with-ul\',menuArrowClass:\'sf-arrows\'},ios=(function(){var ios=/^(?![\w\W]*Windows Phone)[\w\W]*(iPhone|iPad|iPod)/i.test(navigator.userAgent);if(ios){$(\'html\').css(\'cursor\',\'pointer\').on(\'click\',$.noop)} return ios})(),wp7=(function(){var style=document.documentElement.style;return(\'behavior\' in style&&\'fill\' in style&&/iemobile/i.test(navigator.userAgent))})(),unprefixedPointerEvents=(function(){return(!!w.PointerEvent)})(),toggleMenuClasses=function($menu,o,add){var classes=c.menuClass,method;if(o.cssArrows){classes+=\' \'+c.menuArrowClass} method=(add)?\'addClass\':\'removeClass\';$menu[method](classes)},setPathToCurrent=function($menu,o){return $menu.find(\'li.\'+o.pathClass).slice(0,o.pathLevels).addClass(o.hoverClass+\' \'+c.bcClass).filter(function(){return($(this).children(o.popUpSelector).hide().show().length)}).removeClass(o.pathClass)},toggleAnchorClass=function($li,add){var method=(add)?\'addClass\':\'removeClass\';$li.children(\'a\')[method](c.anchorClass)},toggleTouchAction=function($menu){var msTouchAction=$menu.css(\'ms-touch-action\');var touchAction=$menu.css(\'touch-action\');touchAction=touchAction||msTouchAction;touchAction=(touchAction===\'pan-y\')?\'auto\':\'pan-y\';$menu.css({\'ms-touch-action\':touchAction,\'touch-action\':touchAction})},getMenu=function($el){return $el.closest(\'.\'+c.menuClass)},getOptions=function($el){return getMenu($el).data(\'sfOptions\')},over=function(){var $this=$(this),o=getOptions($this);clearTimeout(o.sfTimer);$this.siblings().superfish(\'hide\').end().superfish(\'show\')},close=function(o){o.retainPath=($.inArray(this[0],o.$path)>-1);this.superfish(\'hide\');if(!this.parents(\'.\'+o.hoverClass).length){o.onIdle.call(getMenu(this));if(o.$path.length){$.proxy(over,o.$path)()}}},out=function(){var $this=$(this),o=getOptions($this);if(ios){$.proxy(close,$this,o)()}else{clearTimeout(o.sfTimer);o.sfTimer=setTimeout($.proxy(close,$this,o),o.delay)}},touchHandler=function(e){var $this=$(this),o=getOptions($this),$ul=$this.siblings(e.data.popUpSelector);if(o.onHandleTouch.call($ul)===!1){return this} if($ul.length>0&&$ul.is(\':hidden\')){$this.one(\'click.superfish\',!1);if(e.type===\'MSPointerDown\'||e.type===\'pointerdown\'){$this.trigger(\'focus\')}else{$.proxy(over,$this.parent(\'li\'))()}}},applyHandlers=function($menu,o){var targets=\'li:has(\'+o.popUpSelector+\')\';if($.fn.hoverIntent&&!o.disableHI){$menu.hoverIntent(over,out,targets)}else{$menu.on(\'mouseenter.superfish\',targets,over).on(\'mouseleave.superfish\',targets,out)} var touchevent=\'MSPointerDown.superfish\';if(unprefixedPointerEvents){touchevent=\'pointerdown.superfish\'} if(!ios){touchevent+=\' touchend.superfish\'} if(wp7){touchevent+=\' mousedown.superfish\'} $menu.on(\'focusin.superfish\',\'li\',over).on(\'focusout.superfish\',\'li\',out).on(touchevent,\'a\',o,touchHandler)};return{hide:function(instant){if(this.length){var $this=this,o=getOptions($this);if(!o){return this} var not=(o.retainPath===!0)?o.$path:\'\',$ul=$this.find(\'li.\'+o.hoverClass).add(this).not(not).removeClass(o.hoverClass).children(o.popUpSelector),speed=o.speedOut;if(instant){$ul.show();speed=0} o.retainPath=!1;if(o.onBeforeHide.call($ul)===!1){return this} $ul.stop(!0,!0).animate(o.animationOut,speed,function(){var $this=$(this);o.onHide.call($this)})} return this},show:function(){var o=getOptions(this);if(!o){return this} var $this=this.addClass(o.hoverClass),$ul=$this.children(o.popUpSelector);if(o.onBeforeShow.call($ul)===!1){return this} $ul.stop(!0,!0).animate(o.animation,o.speed,function(){o.onShow.call($ul)});return this},destroy:function(){return this.each(function(){var $this=$(this),o=$this.data(\'sfOptions\'),$hasPopUp;if(!o){return!1} $hasPopUp=$this.find(o.popUpSelector).parent(\'li\');clearTimeout(o.sfTimer);toggleMenuClasses($this,o);toggleAnchorClass($hasPopUp);toggleTouchAction($this);$this.off(\'.superfish\').off(\'.hoverIntent\');$hasPopUp.children(o.popUpSelector).attr(\'style\',function(i,style){if(typeof style!==\'undefined\'){return style.replace(/display[^;]+;?/g,\'\')}});o.$path.removeClass(o.hoverClass+\' \'+c.bcClass).addClass(o.pathClass);$this.find(\'.\'+o.hoverClass).removeClass(o.hoverClass);o.onDestroy.call($this);$this.removeData(\'sfOptions\')})},init:function(op){return this.each(function(){var $this=$(this);if($this.data(\'sfOptions\')){return!1} var o=$.extend({},$.fn.superfish.defaults,op),$hasPopUp=$this.find(o.popUpSelector).parent(\'li\');o.$path=setPathToCurrent($this,o);$this.data(\'sfOptions\',o);toggleMenuClasses($this,o,!0);toggleAnchorClass($hasPopUp,!0);toggleTouchAction($this);applyHandlers($this,o);$hasPopUp.not(\'.\'+c.bcClass).superfish(\'hide\',!0);o.onInit.call(this)})}}})();$.fn.superfish=function(method,args){if(methods[method]){return methods[method].apply(this,Array.prototype.slice.call(arguments,1))}else if(typeof method===\'object\'||!method){return methods.init.apply(this,arguments)}else{return $.error(\'Method \'+method+\' does not exist on jQuery.fn.superfish\')}};$.fn.superfish.defaults={popUpSelector:\'ul,.sf-mega\',hoverClass:\'sfHover\',pathClass:\'overrideThisToUse\',pathLevels:1,delay:800,animation:{opacity:\'show\'},animationOut:{opacity:\'hide\'},speed:\'normal\',speedOut:\'fast\',cssArrows:!0,disableHI:!1,onInit:$.noop,onBeforeShow:$.noop,onShow:$.noop,onBeforeHide:$.noop,onHide:$.noop,onIdle:$.noop,onDestroy:$.noop,onHandleTouch:$.noop}})(jQuery,window);$1')
 azaleasdolls.com##td[height="279"]
 azaleasdolls.com##td[width^="34"][height^="29"]
 azaleasdolls.com##td[width="164"][bgcolor="#FCDCE4"]
@@ -22883,11 +22889,11 @@ buxfaucet.com,faucetcaptcha.co.in,gameblog.in,needbux.com##+js(acs, eval, replac
 @@*$script,xhr,ghide,domain=uptoplay.net
 @@||googlesyndication.com^$frame,domain=uptoplay.net
 chickenkarts.io##+js(aopw, blockedAds)
-||blogger.googleusercontent.com/img/$image,domain=idlixofficials.com|idlixplus.com|idlixplus.net|idlixofficial.co
-idlixofficials.com,idlixplus.com,idlixplus.net,idlixofficial.co##+js(aost, document.getElementsByTagName, adsBlocked)
-idlixofficials.com,idlixplus.com,idlixplus.net,idlixofficial.co###repop
-idlixofficials.com,idlixplus.com,idlixplus.net,idlixofficial.co##+js(aost, document.querySelector, /(?!\bjquery\b)/)
-idlixofficials.com,idlixplus.com,idlixplus.net,idlixofficial.co#@#.module_single_ads
+||blogger.googleusercontent.com/img/$image,domain=idlixofficials.com|idlixplus.com|idlixplus.net|idlixofficial.co|idlixofficial.net
+idlixofficials.com,idlixplus.com,idlixplus.net,idlixofficial.co,idlixofficial.net##+js(aost, document.getElementsByTagName, adsBlocked)
+idlixofficials.com,idlixplus.com,idlixplus.net,idlixofficial.co,idlixofficial.net###repop
+idlixofficials.com,idlixplus.com,idlixplus.net,idlixofficial.co,idlixofficial.net##+js(aost, document.querySelector, /(?!\bjquery\b)/)
+idlixofficials.com,idlixplus.com,idlixplus.net,idlixofficial.co,idlixofficial.net#@#.module_single_ads
 @@||choralia.net/popu.js$script
 pl#@#.ad
 pl#@#[class$="-ads"]
