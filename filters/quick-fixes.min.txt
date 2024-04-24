@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Quick fixes
 ! Expires: 12 hours
-! Last modified: Wed, 24 Apr 2024 03:20:16 +0000
-! Diff-Path: ../patches/2024.4.24.438.patch#ublock-quick-fixes
+! Last modified: Wed, 24 Apr 2024 12:33:08 +0000
+! Diff-Path: ../patches/2024.4.24.764.patch#ublock-quick-fixes
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/quick-fixes.txt ***
@@ -35,12 +35,12 @@ aternos.org##.sidebar:style(width: 1.745px !important; padding: 1px !important)
 aternos.org##.ad-dfp:style(min-height: 0.1485mm !important; height: 0.1485mm !important;)
 aternos.org###placement-takeover
 ! pixsera
-imgjbxzjv.shop,imgjmgfgm.shop,picxnkjkhdf.sbs,imgxxbdf.sbs##+js(aopr, console.clear)
-imgjbxzjv.shop,imgjmgfgm.shop,picxnkjkhdf.sbs,imgxxbdf.sbs##+js(nano-sib, timer)
-imgjbxzjv.shop,imgjmgfgm.shop,picxnkjkhdf.sbs,imgxxbdf.sbs##div[id][style^="position: fixed; display: block; width: 100%;"]
-imgjbxzjv.shop,imgjmgfgm.shop,picxnkjkhdf.sbs,imgxxbdf.sbs##div[style="width:100%;height:110px"]
-imgjbxzjv.shop,imgjmgfgm.shop,picxnkjkhdf.sbs,imgxxbdf.sbs##+js(nowoif, !/prcf.fiyar|themes|pixsense|.jpg/)
-imgjbxzjv.shop,imgjmgfgm.shop,picxnkjkhdf.sbs,imgxxbdf.sbs##div[class][style="display: block;"]
+imgjbxzjv.shop,imgjmgfgm.shop,picxnkjkhdf.sbs,imgxxbdf.sbs,imgnngr.sbs##+js(aopr, console.clear)
+imgjbxzjv.shop,imgjmgfgm.shop,picxnkjkhdf.sbs,imgxxbdf.sbs,imgnngr.sbs##+js(nano-sib, timer)
+imgjbxzjv.shop,imgjmgfgm.shop,picxnkjkhdf.sbs,imgxxbdf.sbs,imgnngr.sbs##div[id][style^="position: fixed; display: block; width: 100%;"]
+imgjbxzjv.shop,imgjmgfgm.shop,picxnkjkhdf.sbs,imgxxbdf.sbs,imgnngr.sbs##div[style="width:100%;height:110px"]
+imgjbxzjv.shop,imgjmgfgm.shop,picxnkjkhdf.sbs,imgxxbdf.sbs,imgnngr.sbs##+js(nowoif, !/prcf.fiyar|themes|pixsense|.jpg/)
+imgjbxzjv.shop,imgjmgfgm.shop,picxnkjkhdf.sbs,imgxxbdf.sbs,imgnngr.sbs##div[class][style="display: block;"]
 !#if !env_mv3
 !#if !cap_html_filtering
 !#if env_firefox
@@ -93,7 +93,7 @@ decrypt.day##+js(no-fetch-if, adsbygoogle)
 ||fundingchoicesmessages.google.com^$xhr,important,domain=decrypt.day
 !#endif
 *$frame,redirect-rule=noopframe,domain=decrypt.day
-download.megaup.net##+js(rpnt, script, ]!=', ]==')
+download.megaup.net##+js(rpnt, script, &&, && false &&, condition, attribute)
 @@/^https:\/\/i\.pussyspace\.(?:com|net)\/(?:yip?|xvs)\/videos\/20\d{4}\/\d{2}\/\d{9}\/(?:original|thumbs_\d{2})\/\d{1,2}(?:\(m=e[0-9A-Za-z]{5,7}aaaa\)\(mh=[-_0-9A-Za-z]{16}\))?\.jpg$/$image,1p,domain=pussyspace.*,badfilter
 @@/^https:\/\/i\.pussyspace\.(?:com|net)\/(?:yip?|xvs)\/videos\/thumbs169l\/[0-9a-f]{2}\/[0-9a-f]{2}\/[0-9a-f]{2}\/[0-9a-f]{32}(?:-\d)?\/[0-9a-f]{32}\.\d{1,2}\.jpg$/$image,1p,domain=pussyspace.*,badfilter
 @@/^https:\/\/i\.pussyspace\.(?:com|net)\/(?:yip?|xvs)\/videos\/thumbs_5\/\d{1,2}(?:\(m=e[0-9A-Za-z]{5,7}aaaa\)\(mh=[-_0-9A-Za-z]{16}\))?\.jpg$/$image,1p,domain=pussyspace.*,badfilter
@@ -111,8 +111,8 @@ raenonx.cc##body > div[class] > style:first-child + .w-full:has(> .button-clicka
 raenonx.cc##.w-full:has(> style + div > style + div .adsbygoogle)
 raenonx.cc##.w-full > style + div[tabindex]:has(> style + div > style + div > p:has-text(advertisements))
 raenonx.cc##.w-full > div:has(> style + div > style + div > p:has-text(/advertisements|広告/))
-raenonx.cc##[id^="headlessui-"] [role="dialog"]:has-text(/ad-blocker|ad blocker|adblocker|広告/i)
-raenonx.cc##.flex-col > style + div[class]:has(> p > a[href$="/ads-and-credits"])
+raenonx.cc##[id^="headlessui-"] [role="dialog"]:has-text(/ad[- ]?blocker|広告/i)
+raenonx.cc##.flex-col.p-2 > style + div[class]:has(> p)
 @@*$xhr,3p,method=head,domain=raenonx.cc
 @@||googlesyndication.com/|$xhr,domain=raenonx.cc
 @@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$xhr,domain=raenonx.cc
@@ -128,14 +128,11 @@ puzzle-loop.com,puzzle-words.com,puzzle-chess.com,puzzle-thermometers.com,puzzle
 ||statics.1mv.xyz/statics/*.js|$script,3p,replace=/;return _0x[a-z0-9]+\['[_a-z]+'\]\['s'\]/;return false/
 ||statics.1mv.xyz/statics/*.js|$script,3p,replace=/;if\(null!==\(_0x[a-z0-9]+=this\['[_a-z]+'\]\)[^)]+\)return;/;if(true)return;/
 ! in-jpn.com anti-adb
-||in-jpn.com^$inline-script,badfilter
-||xth.jp^$inline-script,badfilter
-in-jpn.com,oninet.ne.jp,xth.jp#@#+js(aopr, Node.prototype.appendChild)
-in-jpn.com,oninet.ne.jp,xth.jp#@#+js(aopr, Element.prototype.insertAdjacentHTML)
-in-jpn.com##body > p[id]:remove-attr(id)
 in-jpn.com,oninet.ne.jp,xth.jp##body:style(color: #000 !important;)
 in-jpn.com#@#[style]:empty
 in-jpn.com,oninet.ne.jp,xth.jp##body div:matches-css(position: fixed):matches-css(background-color: /rgb/):matches-css(z-index: /\d+/)
+in-jpn.com##+js(set, navigator.brave, '')
+xth.jp##body:style(background: none !important;)
 !#if cap_html_filtering
 ||in-jpn.com^$script,replace=/function myFunc[\s\S\n]+?false;[\s\S\n]+?\}[\s\S\n]+?myFunc\(\); \}[\s\S\n]+?\}//
 in-jpn.com##+js(no-xhr-if, adsbygoogle)
