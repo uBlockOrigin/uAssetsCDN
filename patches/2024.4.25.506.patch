@@ -1,8 +1,8 @@
-diff name:ublock-annoyances lines:11 checksum:f1d2eece5a
+diff name:ublock-annoyances lines:11 checksum:5c2dffba17
 d3 2
 a4 2
 ! Last modified: Sat, 27 Apr 2024 02:54:55 +0000
-! Diff-Path: ../patches/2024.4.28.93.patch#ublock-annoyances
+! Diff-Path: ../patches/2024.4.28.386.patch#ublock-annoyances
 a222 1
 bol.com##+js(trusted-set-cookie, bolConsentChoices, source#OFC|version#6|int-tran#false|ext-tran#false|int-beh#false|ext-beh#false, , , domain, www.bol.com, reload, 1)
 a740 4
@@ -10,11 +10,11 @@ a740 4
 euronews.com##+js(trusted-set-local-storage-item, euconsent-v2, CP9oCIAP9oCIAAHABBENAwEgAAAAAAAAAAAAAAAAAAAA.YAAAAAAAAAAA)
 dr-beckmann.com##+js(trusted-click-element, #usercentrics-root >>> button[data-testid="uc-deny-all-button"])
 @@||usercentrics.eu^$domain=dr-beckmann.com
-diff name:ublock-badware lines:24 checksum:f15d5c7c08
+diff name:ublock-badware lines:24 checksum:a205de274e
 d3 2
 a4 2
 ! Last modified: Sat, 27 Apr 2024 14:18:05 +0000
-! Diff-Path: ../patches/2024.4.28.93.patch#ublock-badware
+! Diff-Path: ../patches/2024.4.28.386.patch#ublock-badware
 a620 2
 /lp_*.html?zoneid=$doc
 /vpn/adult/*/index.html?*p1=$doc
@@ -35,11 +35,11 @@ a2653 4
 d3294 1
 a3294 1
 ||nanoshield.pro/new_image2.jpg$all
-diff name:ublock-filters lines:101 checksum:cf2dfb7992
+diff name:ublock-filters lines:100 checksum:b87e766999
 d3 2
 a4 2
-! Last modified: Sun, 28 Apr 2024 01:23:35 +0000
-! Diff-Path: ../patches/2024.4.28.93.patch#ublock-filters
+! Last modified: Sun, 28 Apr 2024 05:55:07 +0000
+! Diff-Path: ../patches/2024.4.28.386.patch#ublock-filters
 a285 1
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$script,redirect-rule=google-ima.js,domain=m.economictimes.com
 a365 1
@@ -67,7 +67,7 @@ voodc.com##+js(json-prune, *, *.adserverDomain)
 roystream.com##+js(acs, JSON.parse, atob)
 1stream.eu,roystream.com##+js(nowoif)
 1stream.eu##+js(rmnt, script, runPop)
-a9907 12
+a9907 15
 !#if cap_html_filtering
 totalsportek.to,eztvx.to,topstreams.info##^script:has-text(adserverDomain)
 !#else
@@ -75,11 +75,14 @@ totalsportek.to,eztvx.to,topstreams.info##+js(rmnt, script, adserverDomain)
 !#endif
 /^https:\/\/[a-z]{7}\.com\/[0-9a-h]{1,15}\?[0-9a-zA-Z]{1,15}=[0-9a-zA-Z]{300,1300}(?:%3D){0,2}$/$xhr,3p,match-case,domain=totalsportek.to|eztvx.to|nepu.to|methstreams.com|topstreams.info
 /\/z-[a-z0-9]{7,10}(\.js)?$/$script,domain=nepu.to|methstreams.com
-/^https:\/\/[a-z]{7}\.com\/[0-9a-h]{1,15}\?[0-9a-zA-Z]{1,15}=[0-9a-zA-Z]{300,1300}/$xhr,3p,match-case,to=com,method=get,header=via:1.1 google
+/^https?:\/\/[a-z]{7}\.com\/[0-9a-h]{1,15}\?[0-9a-zA-Z]{1,15}=[0-9a-zA-Z]{300,1300}/$xhr,3p,match-case,to=com,method=get,header=via:1.1 google
 ! cricket sites popups
 crictime.is,freehit.eu,mobilecric.com##[href*="?key"][target="_blank"]:remove-attr(href)
 factorp.xyz##+js(nowoif)
 ||facileravagebased.com^
+||ads-twitter.com^$frame,redirect-rule=noopframe,domain=media.cms.markiza.sk
+@@||thorstin.ddns.net^$frame,domain=thorstin.nl
+ssstik.io##+js(no-xhr-if, googlesyndication)
 d9911 8
 a9918 8
 @@*$ghide,domain=gplinks.co|kinemastermods.in|jobeducareer.com|heybeng.com|e-gujarati.in|islamqahanafi.com|jobpataka.com|myarchive.in|wheelofpets.com|mygamesreward.com|tmxskyspace.in|rulingnews.com|dardmukti.in|cardekhoindia.in|techexpress360.in|jiosaavnproapk.download|gyansanatan.in|upscseva.in|mukhyamantriyojana.in|furecipes.com|dainandinvarta.com
@@ -122,30 +125,26 @@ a21070 1
 a21073 2
 in-jpn.com,oninet.ne.jp,xth.jp##body:style(color: #000 !important;)
 in-jpn.com,oninet.ne.jp,xth.jp##body div:matches-css(position: fixed):matches-css(background-color: /rgb/):matches-css(z-index: /\d+/)
-a21077 8
+a21077 4
 xth.jp##body:style(background: none !important;)
 xth.jp###ggH1:style(height: 50px !important; position: absolute !important; left:-4000px !important;)
 in-jpn.com##+js(trusted-replace-xhr-response, /.*/, , pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?)
 @@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$xhr,domain=in-jpn.com
-!#if cap_html_filtering
-||in-jpn.com^$script,replace=/var w_status[\s\S\n]+?doSakigake\(\);[\s\S\n]+?\}//
-xth.jp##^script:has-text(ブロックをオフにして下さい)
-!#endif
 d21088 2
 d21091 1
 a21091 3
 @@||dn0qt3r0xannq.cloudfront.net/nowgg-$script
 now.gg,now.us,xn--31byd1i.net##+js(no-fetch-if, googlesyndication)
 ||fundingchoicesmessages.google.com/i/pub$script,redirect-rule=noopjs,domain=now.gg|now.us|xn--31byd1i.net
-diff name:ublock-privacy lines:3 checksum:0b2a533371
+diff name:ublock-privacy lines:3 checksum:52f8dc7a07
 d4 1
 a4 1
-! Diff-Path: ../patches/2024.4.28.93.patch#ublock-privacy
-diff name:ublock-quick-fixes lines:31 checksum:4e3b91ea29
+! Diff-Path: ../patches/2024.4.28.386.patch#ublock-privacy
+diff name:ublock-quick-fixes lines:35 checksum:d586f5ff25
 d3 2
 a4 2
-! Last modified: Sat, 27 Apr 2024 13:26:32 +0000
-! Diff-Path: ../patches/2024.4.28.93.patch#ublock-quick-fixes
+! Last modified: Sun, 28 Apr 2024 05:55:07 +0000
+! Diff-Path: ../patches/2024.4.28.386.patch#ublock-quick-fixes
 d26 1
 d38 6
 a43 6
@@ -163,21 +162,25 @@ a59 3
 shannonpersonalcost.com##+js(nowoif)
 shannonpersonalcost.com##+js(set, console.clear, undefined)
 d97 12
+a133 1
+in-jpn.com##img:style(visibility: visible !important;)
 a135 1
 xth.jp###ggH1:style(height: 50px !important; position: absolute !important; left:-4000px !important;)
-d138 1
-a138 1
+d137 2
+a138 3
+||in-jpn.com^$script,replace=/var w_status[\s\S\n]+?doSakigake\(\);[\s\S\n]+?\}//,badfilter
+||in-jpn.com^$script,replace=/var w_stat[\s\S\n]+?doSakigake\(\);[\s\S\n]+?\}//
 xth.jp##^script:has-text(ブロックをオフにして下さい)
 d141 1
 a141 1
 @@||oninet.ne.jp/sakigakesoft/s/leaf_main.js$script,1p,strict1p
 a145 1
 @@||googletagmanager.com/gtag/js$domain=showroom-live.com
-diff name:ublock-unbreak lines:24 checksum:8dce160635
+diff name:ublock-unbreak lines:24 checksum:4859190dee
 d3 2
 a4 2
 ! Last modified: Sat, 27 Apr 2024 13:51:49 +0000
-! Diff-Path: ../patches/2024.4.28.93.patch#ublock-unbreak
+! Diff-Path: ../patches/2024.4.28.386.patch#ublock-unbreak
 d28 1
 a28 1
 */b/ss/*&aqe=$image,redirect=1x1.gif
@@ -198,11 +201,11 @@ a2545 3
 ||yieldlove.com/v2/yieldlove.js$script,domain=whatismyip.com,important
 whatismyip.com##+js(set, yieldlove_cmd, {})
 whatismyip.com##+js(set, yieldlove_cmd.push, noopFunc)
-diff name:easylist lines:309 checksum:cbc04142ea
+diff name:easylist lines:324 checksum:933c67b314
 d4 2
 a5 2
-! Last modified: Sun, 28 Apr 2024 01:23:35 +0000
-! Diff-Path: ../patches/2024.4.28.93.patch#easylist
+! Last modified: Sun, 28 Apr 2024 02:37:53 +0000
+! Diff-Path: ../patches/2024.4.28.386.patch#easylist
 d246 1
 a949 1
 /popin-min.js
@@ -227,6 +230,8 @@ a16972 1
 ##a[href^="https://go.bushheel.com/"]
 a16976 1
 ##a[href^="https://go.grinsbest.com/"]
+a17236 1
+###Player_Playoncontent_footer
 d17663 1
 a17663 1
 accuweather.com,deadline.com,elnuevoherald.com,heraldsun.com,olhardigital.com.br#@#.cnx-player-wrapper
@@ -484,9 +489,13 @@ topsmerch.com##.advertisement-2-box
 d68445 1
 a68445 1
 chron.com,ctinsider.com,ctpost.com,middletownpress.com,mysanantonio.com,seattlepi.com,sfgate.com##.ar16-9
+a68481 1
+indiatimes.com##.article_first_ad
 d68771 1
 a68771 1
 chosun.com##.box--bg-grey-20:has(.dfpAd)
+a69291 1
+tvfanatic.com##.feed_holder
 d69376 1
 a69376 1
 aframnews.com,afro.com,aurn.com,aviacionline.com,borneobulletin.com.bn,businessday.ng,businessofapps.com,chicagodefender.com,chimpreports.com,coinweek.com,collive.com,coralspringstalk.com,dailynews.co.zw,dailysport.co.uk,dallasvoice.com,defence-industry.eu,dieworkwear.com,draxe.com,gatewaynews.co.za,gayexpress.co.nz,gematsu.com,hamodia.com,islandecho.co.uk,jacksonvillefreepress.com,mediaplaynews.com,moviemaker.com,newpittsburghcourier.com,nondoc.com,richmondshiretoday.co.uk,sammobile.com,savannahtribune.com,spaceref.com,talkers.com,talkradioeurope.com,thegolfnewsnet.com,utdmercury.com,waamradio.com,womensagenda.com.au##.g
@@ -498,6 +507,15 @@ a71796 1
 itsfoss.com##a[href^="https://www.warp.dev"]
 a71956 1
 xing.com##div[data-qa="jobs-recommendation-ad"]
+a71976 1
+thewire.in##div[id^="ATD_"]
+a72021 2
+news18.com##div[style*="min-height"][style*="background"]
+news18.com##div[style*="min-height"][style*="justify-content:center;"]
+a72082 1
+worldstar.com,worldstarhiphop.com##div[style^="width:972px;height:250px;"]
+a72152 1
+thewire.in##span[style*="background: rgb(232, 233, 237); text-align: center;"]
 a72622 1
 google.ac,google.ad,google.ae,google.al,google.am,google.as,google.at,google.az,google.ba,google.be,google.bf,google.bg,google.bi,google.bj,google.bs,google.bt,google.by,google.ca,google.cat,google.cd,google.cf,google.cg,google.ch,google.ci,google.cl,google.cm,google.co.ao,google.co.bw,google.co.ck,google.co.cr,google.co.id,google.co.il,google.co.in,google.co.jp,google.co.ke,google.co.kr,google.co.ls,google.co.ma,google.co.mz,google.co.nz,google.co.th,google.co.tz,google.co.ug,google.co.uk,google.co.uz,google.co.ve,google.co.vi,google.co.za,google.co.zm,google.co.zw,google.com,google.com.af,google.com.ag,google.com.ai,google.com.ar,google.com.au,google.com.bd,google.com.bh,google.com.bn,google.com.bo,google.com.br,google.com.by,google.com.bz,google.com.co,google.com.cu,google.com.cy,google.com.do,google.com.ec,google.com.eg,google.com.et,google.com.fj,google.com.gh,google.com.gi,google.com.gt,google.com.hk,google.com.jm,google.com.jo,google.com.kh,google.com.kw,google.com.lb,google.com.ly,google.com.mm,google.com.mt,google.com.mx,google.com.my,google.com.na,google.com.ng,google.com.ni,google.com.np,google.com.om,google.com.pa,google.com.pe,google.com.pg,google.com.ph,google.com.pk,google.com.pr,google.com.py,google.com.qa,google.com.ru,google.com.sa,google.com.sb,google.com.sg,google.com.sl,google.com.sv,google.com.tj,google.com.tn,google.com.tr,google.com.tw,google.com.ua,google.com.uy,google.com.vc,google.com.ve,google.com.vn,google.cv,google.cz,google.de,google.dj,google.dk,google.dm,google.dz,google.ee,google.es,google.fi,google.fm,google.fr,google.ga,google.ge,google.gg,google.gl,google.gm,google.gp,google.gr,google.gy,google.hk,google.hn,google.hr,google.ht,google.hu,google.ie,google.im,google.iq,google.is,google.it,google.it.ao,google.je,google.jo,google.jp,google.kg,google.ki,google.kz,google.la,google.li,google.lk,google.lt,google.lu,google.lv,google.md,google.me,google.mg,google.mk,google.ml,google.mn,google.ms,google.mu,google.mv,google.mw,google.ne,google.ne.jp,google.ng,google.nl,google.no,google.nr,google.nu,google.pl,google.pn,google.ps,google.pt,google.ro,google.rs,google.ru,google.rw,google.sc,google.se,google.sh,google.si,google.sk,google.sm,google.sn,google.so,google.sr,google.st,google.td,google.tg,google.tl,google.tm,google.tn,google.to,google.tt,google.us,google.vg,google.vu,google.ws##div.FWfoJ > div[jsname="Nf35pd"] > div[class="R09YGb ilovz"]
 a72626 1
@@ -508,13 +526,19 @@ a73451 1
 hot.co.uk,hot.com##.p-search__action-results.badge-absolute.text-div-wrap.top
 a74278 1
 @@||yieldlove.com/v2/yieldlove.js$script,domain=whatismyip.com
-diff name:easyprivacy lines:73 checksum:f9402a231e
+diff name:easyprivacy lines:104 checksum:3ad68db4e3
 d4 2
 a5 2
-! Last modified: Sat, 27 Apr 2024 16:34:20 +0000
-! Diff-Path: ../patches/2024.4.28.93.patch#easyprivacy
+! Last modified: Sun, 28 Apr 2024 02:37:53 +0000
+! Diff-Path: ../patches/2024.4.28.386.patch#easyprivacy
+a342 1
+/api_adlog.php?
+a389 1
+/awpx_click.js
 a1694 1
 /plugins/civic-science/js/pixel.js
+a1706 1
+/plugins/wp-vgwort/*
 a1886 1
 /s/vestigo/measure
 d2459 1
@@ -535,6 +559,8 @@ a3076 1
 ||bouncex.net^
 a3088 1
 ||cdnwidget.com^
+a3194 1
+||hirsung.de^
 a3244 1
 ||mircheigeshoa.com^
 a3268 1
@@ -551,11 +577,26 @@ d5033 1
 d5864 1
 a7852 1
 ||validmemo.com^
+a8337 1
+||wp-worthy.de^$third-party
 a8450 1
 ||eland-tech.com^$third-party
+a8808 1
+||fulllab.com.br^$third-party
 d9854 1
+a10188 1
+||ip.momentummedia.com.au^
+d10224 1
+a10224 1
+||kinesis.*.amazonaws.com^$third-party,domain=~amazon.com
+a10790 1
+||run.app/events
+a11304 1
+||trustmary.io/agg-event
 a11545 1
 ||d1z3r0i09bwium.cloudfront.net^
+a12214 1
+||go.planetnine.com^
 a12404 1
 ||ocn-tag.sienca.jp/api/v1/event/pv
 a12422 1
@@ -570,15 +611,23 @@ a14542 1
 a14633 2
 ! mweb.jp
 mwed.jp##+js(acs, document.createElement, keen-tracking)
+a48962 1
+||mat.ukraine-nachrichten.de^
 a49019 1
 ||taz.de/count/
 a49761 2
 ||mwed.jp/assets/packs/js/measurements/
 ||newsdig.tbs.co.jp/op/analytics.js
+a49993 1
+||cs43.pikabu.ru^
+a50077 1
+||go-usertrack-importer.pub.24ur.si^
 a50346 1
 @@||kilimall.com&*/js/sensorsdata.min.js$script,domain=kilimall.co.ke
 a50435 1
 @@||rest.edit.site/geoip-service/geoip$domain=systemshouse.com
+a50457 1
+@@||simpleanalyticsexternal.com^$script,domain=inleo.io
 d50525 1
 a50525 1
 @@||googletagmanager.com/gtag/js$domain=9to5mac.com|academy.com|acornonline.com|aena.es|afisha.timepad.ru|aliexpress.com|carhartt-wip.com|cbslocal.com|cmoa.jp|devclass.com|dholic.co.jp|ejgiftcards.com|enmotive.com|euronics.ee|factory.pixiv.net|game.anymanager.io|herculesstands.com|honeystinger.com|hostingvergelijker.nl|huion.com|inforesist.org|kawasaki.com|liene-life.com|livongo.com|m.putlocker.how|mediaite.com|mirrativ.com|modehasen.de|montcopa.org|nihontsushin.com|oko.sh|panflix.com.br|papajohns.com|radiosarajevo.ba|rintraccialamiaspedizione.it|schwab.com|seatmaps.com|showroom-live.com|skylar.com|starblast.io|timparty.tim.it|toptal.com|virginmedia.com|virginplus.ca|winefolly.com|winhappy.com|xl-bygg.no|zf1.tohoku-epco.co.jp

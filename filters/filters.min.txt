@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Sun, 28 Apr 2024 01:23:35 +0000
-! Diff-Path: ../patches/2024.4.28.93.patch#ublock-filters
+! Last modified: Sun, 28 Apr 2024 05:55:07 +0000
+! Diff-Path: ../patches/2024.4.28.386.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -9922,11 +9922,14 @@ totalsportek.to,eztvx.to,topstreams.info##+js(rmnt, script, adserverDomain)
 !#endif
 /^https:\/\/[a-z]{7}\.com\/[0-9a-h]{1,15}\?[0-9a-zA-Z]{1,15}=[0-9a-zA-Z]{300,1300}(?:%3D){0,2}$/$xhr,3p,match-case,domain=totalsportek.to|eztvx.to|nepu.to|methstreams.com|topstreams.info
 /\/z-[a-z0-9]{7,10}(\.js)?$/$script,domain=nepu.to|methstreams.com
-/^https:\/\/[a-z]{7}\.com\/[0-9a-h]{1,15}\?[0-9a-zA-Z]{1,15}=[0-9a-zA-Z]{300,1300}/$xhr,3p,match-case,to=com,method=get,header=via:1.1 google
+/^https?:\/\/[a-z]{7}\.com\/[0-9a-h]{1,15}\?[0-9a-zA-Z]{1,15}=[0-9a-zA-Z]{300,1300}/$xhr,3p,match-case,to=com,method=get,header=via:1.1 google
 ! cricket sites popups
 crictime.is,freehit.eu,mobilecric.com##[href*="?key"][target="_blank"]:remove-attr(href)
 factorp.xyz##+js(nowoif)
 ||facileravagebased.com^
+||ads-twitter.com^$frame,redirect-rule=noopframe,domain=media.cms.markiza.sk
+@@||thorstin.ddns.net^$frame,domain=thorstin.nl
+ssstik.io##+js(no-xhr-if, googlesyndication)
 ! Link shortener filters go into their own dedicated list
 ! *** filters/ubo-link-shorteners.txt ***
 ! gplinks all domains (gplinks.co/EWu8)
@@ -21104,10 +21107,6 @@ xth.jp##body:style(background: none !important;)
 xth.jp###ggH1:style(height: 50px !important; position: absolute !important; left:-4000px !important;)
 in-jpn.com##+js(trusted-replace-xhr-response, /.*/, , pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?)
 @@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$xhr,domain=in-jpn.com
-!#if cap_html_filtering
-||in-jpn.com^$script,replace=/var w_status[\s\S\n]+?doSakigake\(\);[\s\S\n]+?\}//
-xth.jp##^script:has-text(ブロックをオフにして下さい)
-!#endif
 azaleasdolls.com##td[height="279"]
 azaleasdolls.com##td[width^="34"][height^="29"]
 azaleasdolls.com##td[width="164"][bgcolor="#FCDCE4"]
