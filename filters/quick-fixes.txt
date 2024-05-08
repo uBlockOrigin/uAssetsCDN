@@ -1,5 +1,5 @@
 ! Title: uBlock₀ filters – Quick fixes
-! Last modified: Wed, 08 May 2024 08:45:21 +0000
+! Last modified: Wed, 08 May 2024 12:27:08 +0000
 ! Expires: 8 hours
 ! Description: Immediate, temporary filters to fix websites
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -144,7 +144,13 @@ puzzle-loop.com,puzzle-words.com,puzzle-chess.com,puzzle-thermometers.com,puzzle
 oninet.ne.jp,xth.jp##[id]:has(> ins.adsbygoogle):style(height: 100px !important; position: absolute !important; left: -4000px !important;)
 oninet.ne.jp##table:style(visibility: visible !important;)
 oninet.ne.jp##^script[defer]:has-text(.clientHeight <)
+in-jpn.com,xth.jp##+js(set, myFunc, noopFunc)
+/blocker.css$domain=in-jpn.com|xth.jp
+@@/\.oninet\.ne\.jp\/sakigakesoft\/(?!sakigake)[a-z]{5,}-[a-z]{4,}-?[a-z]?\.js$/$script,1p,strict1p,domain=oninet.ne.jp
+*$script,3p,from=oninet.ne.jp,badfilter
+*$script,3p,denyallow=ampproject.org,domain=oninet.ne.jp
 !#if cap_html_filtering
+in-jpn.com,xth.jp##^script:has-text(/フィルタリングを無効|myFunc/)
 ||in-jpn.com^$script,replace=/w_mode==1/1/
 ||in-jpn.com^$script,replace=/function myFunc[\s\S\n]+?doSakigake\(\);[\s\S\n]+?\}//
 !#endif
@@ -174,3 +180,8 @@ drc1bk94f7rq8.cloudfront.net#@##ad_link
 
 ! https://github.com/easylist/easylist/commit/f81fab1f6739258f00b47beb8608a9e2e7f8b761
 ||go.oracle.com^$badfilter
+
+! https://github.com/uBlockOrigin/uAssets/issues/23617
+watson.de#@#+js(set, _sp_.config, undefined)
+||watson.de/image/$script,1p
+@@||googletagmanager.com/gtm.js$script,domain=watson.ch
