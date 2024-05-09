@@ -1,20 +1,24 @@
-diff name:ublock-annoyances lines:11 checksum:e739ea3578
+diff name:ublock-annoyances lines:15 checksum:41c7b5d2f9
 d3 2
 a4 2
-! Last modified: Thu, 09 May 2024 02:20:21 +0000
-! Diff-Path: ../patches/2024.5.9.440.patch#ublock-annoyances
+! Last modified: Thu, 09 May 2024 12:08:09 +0000
+! Diff-Path: ../patches/2024.5.9.757.patch#ublock-annoyances
+d50 1
+a50 1
+sourcepointcmp.bloomberg.com,sourcepointcmp.bloomberg.co.jp##+js(trusted-click-element, [title="Reject All"], , 1000)
 d4454 1
 a4454 1
 redecanais.*,redecanaistv.*,redisex.*,xn-----0b4asja7ccgu2b4b0gd0edbjm2jpa1b1e9zva7a0347s4da2797e8qri.xn--1ck2e1b,xn--90afacv0clj6ac0dxa.xn--p1ai,xn--90afacv0cu2a3cr.xn--p1ai##+js(rmnt, script, /closeWindow\(\)|clickIE\(\)|reEnable\(\)/)
-a4663 3
+a4663 4
 archon.gg##+js(set, __NEXT_DATA__.props.pageProps.adPlacements, undefined)
 archon.gg##[class^="ArchonLayout_containerSidebar"]:has(> [class^="Advertisements"])
 archon.gg##[class^="ArchonLayout_stickyFooterAd"]
-diff name:ublock-badware lines:31 checksum:29c68fc203
+naver.com##+js(aeld, /contextmenu|selectstart|dragstart/)
+diff name:ublock-badware lines:31 checksum:a182d1d4ad
 d3 2
 a4 2
 ! Last modified: Thu, 09 May 2024 04:51:08 +0000
-! Diff-Path: ../patches/2024.5.9.440.patch#ublock-badware
+! Diff-Path: ../patches/2024.5.9.757.patch#ublock-badware
 a623 6
 ||fervidpopsyk.com^$all
 ||dunabear.com^$all
@@ -42,11 +46,11 @@ a3152 4
 ||rakutentenn.com^$all
 ||tiktokvips.shop^$all,to=~rakuten.co.jp
 d3301 1
-diff name:ublock-filters lines:115 checksum:ac95becbcc
+diff name:ublock-filters lines:131 checksum:bfc0fdfbe0
 d3 2
 a4 2
-! Last modified: Thu, 09 May 2024 05:09:19 +0000
-! Diff-Path: ../patches/2024.5.9.440.patch#ublock-filters
+! Last modified: Thu, 09 May 2024 09:33:31 +0000
+! Diff-Path: ../patches/2024.5.9.757.patch#ublock-filters
 d68 1
 a68 1
 alpin.de,boersennews.de,chefkoch.de,chip.de,clever-tanken.de,desired.de,donnerwetter.de,fanfiktion.de,focus.de,formel1.de,frustfrei-lernen.de,gewinnspiele.tv,giga.de,gut-erklaert.de,kino.de,messen.de,nickles.de,nordbayern.de,spielfilm.de,teltarif.de,unsere-helden.com,weltfussball.at,watson.de##^script:has-text(DisplayAcceptableAdIfAdblocked)
@@ -56,6 +60,18 @@ alpin.de,boersennews.de,chefkoch.de,chip.de,clever-tanken.de,desired.de,donnerwe
 a75 1
 ||watson.de/image/$script,1p
 d6486 1
+d7967 1
+d7969 3
+a7971 1
+@@||ads.hausbau-forum.de/openad.js$script,1p
+a7972 7
+hausbau-forum.de##+js(set, detectAdblock, noopFunc)
+*$script,redirect-rule=noopjs,domain=hausbau-forum.de
+!#if cap_html_filtering
+hausbau-forum.de##^script:has-text(Adblock)
+!#else
+hausbau-forum.de##+js(rmnt, script, Adblock)
+!#endif
 a9801 1
 koyso.com##+js(nowoif, !koyso.com)
 d9929 2
@@ -67,7 +83,7 @@ a9930 5
 /^https?:\/\/[a-z]{5,12}\.com\/[0-9a-h]{1,15}\?[0-9a-zA-Z]{1,15}=[0-9a-zA-Z]{300,1300}/$xhr,3p,match-case,to=com,method=get,header=via:1.1 google
 d9989 1
 d9995 1
-a9995 8
+a9995 9
 !#if env_firefox
 $frame,csp=sandbox allow-downloads allow-forms allow-same-origin allow-scripts,to=~cloudflare.com|~dailymotion.com|~disqus.com|~facebook.com|~google.*|~hcaptcha.com|~ok.ru|~recaptcha.net|~youtu.be|~youtube.com,from=animeunity.to|hianime.to|kipflix.vercel.app|kissanime.*
 !#endif
@@ -76,6 +92,7 @@ xn-----0b4asja7ccgu2b4b0gd0edbjm2jpa1b1e9zva7a0347s4da2797e8qri.xn--1ck2e1b##+js
 xn-----0b4asja7ccgu2b4b0gd0edbjm2jpa1b1e9zva7a0347s4da2797e8qri.xn--1ck2e1b##[style="position: fixed; inset: 0px; z-index: 2147483647; pointer-events: auto;"]
 ! Popping Tool sites
 asianlbfm.net,schoolgirls-asia.org##+js(aopr, loadTool)
+||happymod.com/*/appx.php$frame,1p
 d10026 1
 a10026 1
 funkeypagali.com,careersides.com,nayisahara.com,wikifilmia.com,infinityskull.com,viewmyknowledge.com,iisfvirtual.in,starxinvestor.com##+js(noeval-if, /chp_?ad/)
@@ -151,6 +168,9 @@ a18785 1
 d18791 1
 a18791 1
 worldhistory.org,meeco.kr,etnews.com,iusm.co.kr,lamire.jp,picrew.me,uttranews.com,text-compare.com,vipotv.com,etnewskorea.com,gadgets360.com,mydaily.co.kr##^script[onload*="error-report.com"]
+d20830 1
+a20830 1
+e-food.jp,e-kakoh.com,earlymemorials.com,earninginwork.com,easyjapanesee.com,easytodoit.com,ecommercewebsite.store,eczpastpapers.net,editions-actu.org,editorsadda.com,edivaldobrito.com.br,edjerba.com,edukamer.info,egram.com.ng,einewelteinezukunft.de,elcriticodelatele.com,elcultura.pl,elearning-cpge.com,eleceedmanhwa.me,embraceinnerchaos.com,emperorscan.com,empleo.com.uy,encuentratutarea.com,encurtareidog.top,eng-news.com,english-dubbed.com,english-topics.com,english101.co.za,entenpost.com,epicpdf.com,epsilonakdemy.com,eramuslim.com,erreguete.gal,ervik.as,esportsmonk.com,esportsnext.com,et-invest.de,eternalhonoring.com,ethiopia.co.il,everydayhomeandgarden.com,eventiavversinews.*,evlenmekisteyenbayanlar.net,ewybory.eu,exam-results.in,exeking.top,expertskeys.com,ezmanga.net##+js(noeval-if, /chp_?ad/)
 d21164 1
 a21164 2
 *$script,3p,domain=in-jpn.com|xth.jp
@@ -158,61 +178,73 @@ a21164 2
 a21167 1
 @@/\.oninet\.ne\.jp\/sakigakesoft\/(?!sakigake)[a-z]{5,}-[a-z]{4,}-?[a-z]?\.js$/$script,1p,strict1p,domain=oninet.ne.jp
 d21183 3
-diff name:ublock-privacy lines:10 checksum:2a25748ac5
+diff name:ublock-privacy lines:10 checksum:52c15cc803
 d3 2
 a4 2
 ! Last modified: Wed, 08 May 2024 11:37:02 +0000
-! Diff-Path: ../patches/2024.5.9.440.patch#ublock-privacy
+! Diff-Path: ../patches/2024.5.9.757.patch#ublock-privacy
 d127 4
 a130 4
 loawa.com,ygosu.com,sportalkorea.com,enetnews.co.kr,edaily.co.kr,economist.co.kr,etoday.co.kr,hankyung.com,isplus.com,hometownstation.com,inven.co.kr,honkailab.com,warcraftrumbledeck.com,genshinlab.com,thestockmarketwatch.com,thephoblographer.com,issuya.com,worldhistory.org,meeco.kr,etnews.com,iusm.co.kr,dogdrip.net,etoland.co.kr,picrew.me,uttranews.com,text-compare.com,fntimes.com,javatpoint.com,vipotv.com,lamire.jp,bamgosu.site,etnewskorea.com,allthekingz.com,gadgets360.com,automobile-catalog.com,maketecheasier.com,thesaurus.net,wfmz.com,thestar.co.uk,yorkshirepost.co.uk,mydaily.co.kr##+js(set-local-storage-item, adshield-analytics-uuid, $remove$)
 loawa.com,ygosu.com,sportalkorea.com,enetnews.co.kr,edaily.co.kr,economist.co.kr,etoday.co.kr,hankyung.com,isplus.com,hometownstation.com,inven.co.kr,honkailab.com,warcraftrumbledeck.com,genshinlab.com,thestockmarketwatch.com,thephoblographer.com,issuya.com,worldhistory.org,meeco.kr,etnews.com,iusm.co.kr,dogdrip.net,etoland.co.kr,picrew.me,uttranews.com,text-compare.com,fntimes.com,javatpoint.com,vipotv.com,lamire.jp,bamgosu.site,etnewskorea.com,allthekingz.com,gadgets360.com,automobile-catalog.com,maketecheasier.com,thesaurus.net,wfmz.com,thestar.co.uk,yorkshirepost.co.uk,mydaily.co.kr##+js(set-local-storage-item, /_fa_dXVpZA==$/, $remove$)
 loawa.com,ygosu.com,sportalkorea.com,enetnews.co.kr,edaily.co.kr,economist.co.kr,etoday.co.kr,hankyung.com,isplus.com,hometownstation.com,inven.co.kr,honkailab.com,warcraftrumbledeck.com,genshinlab.com,thestockmarketwatch.com,thephoblographer.com,issuya.com,worldhistory.org,meeco.kr,etnews.com,iusm.co.kr,dogdrip.net,etoland.co.kr,picrew.me,uttranews.com,text-compare.com,fntimes.com,javatpoint.com,vipotv.com,lamire.jp,bamgosu.site,etnewskorea.com,allthekingz.com,gadgets360.com,automobile-catalog.com,maketecheasier.com,thesaurus.net,wfmz.com,thestar.co.uk,yorkshirepost.co.uk,mydaily.co.kr##+js(set-local-storage-item, /_fa_Y2FjaGVfaXNfYmxvY2tpbmdfYWNjZXB0YWJsZV9hZHM=$/, $remove$)
 loawa.com,ygosu.com,sportalkorea.com,enetnews.co.kr,edaily.co.kr,economist.co.kr,etoday.co.kr,hankyung.com,isplus.com,hometownstation.com,inven.co.kr,honkailab.com,warcraftrumbledeck.com,genshinlab.com,thestockmarketwatch.com,thephoblographer.com,issuya.com,worldhistory.org,meeco.kr,etnews.com,iusm.co.kr,dogdrip.net,etoland.co.kr,picrew.me,uttranews.com,text-compare.com,fntimes.com,javatpoint.com,vipotv.com,lamire.jp,bamgosu.site,etnewskorea.com,allthekingz.com,gadgets360.com,automobile-catalog.com,maketecheasier.com,thesaurus.net,wfmz.com,thestar.co.uk,yorkshirepost.co.uk,mydaily.co.kr##+js(set-local-storage-item, /_fa_Y2FjaGVfaXNfYmxvY2tpbmdfYWRz$/, $remove$)
-diff name:ublock-quick-fixes lines:16 checksum:d75f12d3dd
+diff name:ublock-quick-fixes lines:19 checksum:8397b541b2
 d3 2
 a4 2
-! Last modified: Wed, 08 May 2024 12:27:08 +0000
-! Diff-Path: ../patches/2024.5.9.440.patch#ublock-quick-fixes
+! Last modified: Thu, 09 May 2024 10:45:09 +0000
+! Diff-Path: ../patches/2024.5.9.757.patch#ublock-quick-fixes
+a98 1
+download.megaup.net##+js(rpnt, script, =!![], =false, condition, attribute)
 a122 5
-in-jpn.com,xth.jp##+js(set, myFunc, noopFunc)
-/blocker.css$domain=in-jpn.com|xth.jp
+in-jpn.com,xth.jp##+js(set, xmlr, noopFunc)
+/_nece.css$domain=in-jpn.com|xth.jp
 @@/\.oninet\.ne\.jp\/sakigakesoft\/(?!sakigake)[a-z]{5,}-[a-z]{4,}-?[a-z]?\.js$/$script,1p,strict1p,domain=oninet.ne.jp
 *$script,3p,from=oninet.ne.jp,badfilter
 *$script,3p,denyallow=ampproject.org,domain=oninet.ne.jp
 a123 1
-in-jpn.com,xth.jp##^script:has-text(/フィルタリングを無効|myFunc/)
-a138 3
+in-jpn.com,xth.jp##^script:has-text(/フィルタリングを無効|document\.head\.appendChild/)
+a138 4
 watson.de#@#+js(set, _sp_.config, undefined)
 ||watson.de/image/$script,1p
 @@||googletagmanager.com/gtm.js$script,domain=watson.ch
-diff name:ublock-unbreak lines:8 checksum:7172661e6c
+item.rakuten.co.jp#@##pagebody > table[width][border]:has(td[align="center"] > table[cellpadding="5"])
+diff name:ublock-unbreak lines:8 checksum:8f0dfca2a9
 d3 2
 a4 2
 ! Last modified: Wed, 08 May 2024 23:48:21 +0000
-! Diff-Path: ../patches/2024.5.9.440.patch#ublock-unbreak
+! Diff-Path: ../patches/2024.5.9.757.patch#ublock-unbreak
 a2549 3
 @@||partner-api.jobbio.com/channels/data$xhr,3p,domain=stackoverflow.jobs
 @@||partner-api.jobbio.com/channels/stack-overflow-jobs/feed$xhr,3p,domain=stackoverflow.jobs
 ||jobbio.com/channels/$xhr,3p,removeparam=visitor_id,domain=stackoverflow.jobs
-diff name:easylist lines:121 checksum:8c95ed5dba
+diff name:easylist lines:175 checksum:51688d6858
 d4 2
 a5 2
-! Last modified: Thu, 09 May 2024 04:47:47 +0000
-! Diff-Path: ../patches/2024.5.9.440.patch#easylist
+! Last modified: Thu, 09 May 2024 10:31:42 +0000
+! Diff-Path: ../patches/2024.5.9.757.patch#easylist
 d152 1
+a155 1
+/AC_OETags.js
 d174 2
 a175 1
 /ad/dfp/js/dfp.js
 d185 1
+d195 1
+a195 1
+/ad_banner/*$image,domain=~ccf.com.cn
 d210 1
 d305 1
 d326 1
 d351 1
+d364 1
+d376 1
 d384 1
 d400 1
 a400 1
 /adserve/*$script
+d405 1
+d427 1
 d429 1
 d447 1
 d454 1
@@ -222,13 +254,24 @@ a461 1
 d487 1
 a487 1
 /adz/js/adz.
-d503 1
-a503 1
+d494 2
+a495 2
+/aff_banner/*$image
+/aff_banners/*$image
+d500 4
+a503 4
+/affiliate/ad/*$image
+/affiliate/ads/*$image
+/affiliate/banner/*$image
 /affiliate/banners/*$image
+d561 1
+a561 1
+/banner/affiliate/*$image,subdocument
 d566 1
 d576 1
 d584 1
-d619 1
+d597 1
+d618 2
 a619 1
 /content/ads/*$~xmlhttprequest
 d651 1
@@ -242,14 +285,21 @@ a807 2
 d816 1
 a822 1
 /modules/mod_ijoomla_adagency_zone/*
+d830 1
+a830 1
+/nativeads/script/*
 d858 1
+d864 1
+d881 1
 d895 1
 d899 1
 a899 1
 /plugins/adrotate/library/*
 d921 1
 d931 1
-d972 1
+d971 2
+a972 1
+/RealMedia/ads/adstream_
 d1028 1
 a1028 1
 /servead/request/*$script,subdocument
@@ -261,11 +311,14 @@ d1071 1
 a1071 1
 /sp/delivery/js.php
 d1099 1
+d1135 1
 d1147 1
+d1163 1
 d1170 1
 a1170 1
 /webads/*$image,domain=~cccc.edu|~meatingplace.com
 d1214 1
+d1216 1
 d1460 1
 a1460 1
 /ad/postbid_handler1.0.9.js
@@ -275,6 +328,10 @@ a1469 1
 d1545 1
 a58332 1
 ||07e197.site^$document,popup
+a58360 1
+||f2f8.xyz^$document,popup
+a66693 1
+||schoolasiagirls.net/ban/
 d67066 1
 a67066 1
 battlefordsnow.com,cfjctoday.com,chatnewstoday.ca,ckpgtoday.ca,everythinggp.com,huskiefan.ca,larongenow.com,meadowlakenow.com,nanaimonewsnow.com,northeastnow.com,panow.com,rdnewsnow.com,sasknow.com,vernonmatters.ca###banner-header
@@ -283,12 +340,17 @@ a67482 1
 abbynews.com,biv.com,lakelandtoday.ca,orilliamatters.com,reddeeradvocate.com,sootoday.com,theprogress.com,time.com,timescolonist.com,vancouverisawesome.com###leaderboard-container
 a67504 1
 hilltimes.com###locked-sponsored-stories-inline
+d67730 1
+a67730 1
+2oceansvibe.com,pocketgamer.biz###skin
 a67812 1
 etherscan.io###t8xt5pt6kr-0-1
 d68313 2
 a68314 2
 bramptonguardian.com,guelphmercury.com,insideottawavalley.com,niagarathisweek.com,therecord.com,thespec.com,thestar.com,wellandtribune.ca##.adLabelWrapper
 bramptonguardian.com,insideottawavalley.com,therecord.com,thestar.com,wellandtribune.ca##.adLabelWrapperManual
+a68576 1
+happymod.com##.appx
 a68806 1
 ipolitics.ca,qpbriefing.com##.big-box
 d68813 1
@@ -303,9 +365,18 @@ cochranenow.com,discoverhumboldt.com,portageonline.com,swiftcurrentonline.com##.
 d69990 1
 a69990 1
 cbssports.com,nowthisnews.com,popsugar.com,scout.com,seeker.com,thedodo.com,thrillist.com##.leaderboard-wrap
+a70085 1
+firstpost.com##.mblad
+d70138 1
+a70138 1
+copyprogramming.com,imagecolorpicker.com##.min-h-250
+a70263 1
+firstpost.com##.newadd
 d70398 1
 a70398 1
 battlefordsnow.com,cfjctoday.com,chatnewstoday.ca,everythinggp.com,everythinglifestyle.ca,farmnewsnow.com,fraservalleytoday.ca,huskiefan.ca,larongenow.com,meadowlakenow.com,nanaimonewsnow.com,northeastnow.com,panow.com,rdnewsnow.com,rocketfan.ca,royalsfan.ca,sasknow.com,vernonmatters.ca##.parallax-breakout
+a70424 1
+tandfonline.com##.pb-ad
 d70469 1
 a70469 1
 thespec.com,wellandtribune.ca##.polarAds
@@ -313,15 +384,21 @@ a70900 1
 cbssports.com##.skybox-top-wrapper
 a71604 1
 etherscan.io##[data-t8xt5pt6kr-seq="0"]
+a71809 1
+imagecolorpicker.com##[style="height:250px"]
 d71924 1
 d72119 1
 a72119 1
 walmart.ca##div[data-automation^="HookLogicCarouses"]
-diff name:easyprivacy lines:17 checksum:9a69dd617f
+a72128 1
+thestudentroom.co.uk##div[data-freestar-ad]
+a72678 1
+benzinga.com##.video-player-wrapper
+diff name:easyprivacy lines:17 checksum:e944829d42
 d4 2
 a5 2
 ! Last modified: Thu, 09 May 2024 02:15:26 +0000
-! Diff-Path: ../patches/2024.5.9.440.patch#easyprivacy
+! Diff-Path: ../patches/2024.5.9.757.patch#easyprivacy
 a6632 1
 ||evasivejar.com^
 a9332 1

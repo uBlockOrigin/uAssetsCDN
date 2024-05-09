@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Quick fixes
 ! Expires: 12 hours
-! Last modified: Wed, 08 May 2024 12:27:08 +0000
-! Diff-Path: ../patches/2024.5.9.440.patch#ublock-quick-fixes
+! Last modified: Thu, 09 May 2024 10:45:09 +0000
+! Diff-Path: ../patches/2024.5.9.757.patch#ublock-quick-fixes
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/quick-fixes.txt ***
@@ -96,6 +96,7 @@ decrypt.day##+js(no-fetch-if, adsbygoogle)
 download.megaup.net##+js(rpnt, script, &&, && false &&, condition, attribute)
 download.megaup.net##+js(rpnt, script, ==![], ==![] && false, condition, attribute)
 download.megaup.net##+js(rpnt, script, ==false, ==true, condition, attribute)
+download.megaup.net##+js(rpnt, script, =!![], =false, condition, attribute)
 raenonx.cc##body > div[class] > style:first-child + .w-full:has(> .button-clickable-bg-opaque > .transform-smooth > svg)
 raenonx.cc##.w-full:has(> style + div > style + div .adsbygoogle)
 raenonx.cc##.w-full > style + div[tabindex]:has(> style + div > style + div > p:has-text(advertisements))
@@ -120,13 +121,13 @@ puzzle-loop.com,puzzle-words.com,puzzle-chess.com,puzzle-thermometers.com,puzzle
 oninet.ne.jp,xth.jp##[id]:has(> ins.adsbygoogle):style(height: 100px !important; position: absolute !important; left: -4000px !important;)
 oninet.ne.jp##table:style(visibility: visible !important;)
 oninet.ne.jp##^script[defer]:has-text(.clientHeight <)
-in-jpn.com,xth.jp##+js(set, myFunc, noopFunc)
-/blocker.css$domain=in-jpn.com|xth.jp
+in-jpn.com,xth.jp##+js(set, xmlr, noopFunc)
+/_nece.css$domain=in-jpn.com|xth.jp
 @@/\.oninet\.ne\.jp\/sakigakesoft\/(?!sakigake)[a-z]{5,}-[a-z]{4,}-?[a-z]?\.js$/$script,1p,strict1p,domain=oninet.ne.jp
 *$script,3p,from=oninet.ne.jp,badfilter
 *$script,3p,denyallow=ampproject.org,domain=oninet.ne.jp
 !#if cap_html_filtering
-in-jpn.com,xth.jp##^script:has-text(/フィルタリングを無効|myFunc/)
+in-jpn.com,xth.jp##^script:has-text(/フィルタリングを無効|document\.head\.appendChild/)
 ||in-jpn.com^$script,replace=/w_mode==1/1/
 ||in-jpn.com^$script,replace=/function myFunc[\s\S\n]+?doSakigake\(\);[\s\S\n]+?\}//
 !#endif
@@ -145,3 +146,4 @@ drc1bk94f7rq8.cloudfront.net#@##ad_link
 watson.de#@#+js(set, _sp_.config, undefined)
 ||watson.de/image/$script,1p
 @@||googletagmanager.com/gtm.js$script,domain=watson.ch
+item.rakuten.co.jp#@##pagebody > table[width][border]:has(td[align="center"] > table[cellpadding="5"])
