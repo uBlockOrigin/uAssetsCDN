@@ -1,8 +1,8 @@
-diff name:ublock-annoyances lines:15 checksum:41c7b5d2f9
+diff name:ublock-annoyances lines:15 checksum:666c802f35
 d3 2
 a4 2
 ! Last modified: Thu, 09 May 2024 12:08:09 +0000
-! Diff-Path: ../patches/2024.5.9.757.patch#ublock-annoyances
+! Diff-Path: ../patches/2024.5.9.1041.patch#ublock-annoyances
 d50 1
 a50 1
 sourcepointcmp.bloomberg.com,sourcepointcmp.bloomberg.co.jp##+js(trusted-click-element, [title="Reject All"], , 1000)
@@ -14,11 +14,13 @@ archon.gg##+js(set, __NEXT_DATA__.props.pageProps.adPlacements, undefined)
 archon.gg##[class^="ArchonLayout_containerSidebar"]:has(> [class^="Advertisements"])
 archon.gg##[class^="ArchonLayout_stickyFooterAd"]
 naver.com##+js(aeld, /contextmenu|selectstart|dragstart/)
-diff name:ublock-badware lines:31 checksum:a182d1d4ad
+diff name:ublock-badware lines:33 checksum:9316186b5e
 d3 2
 a4 2
-! Last modified: Thu, 09 May 2024 04:51:08 +0000
-! Diff-Path: ../patches/2024.5.9.757.patch#ublock-badware
+! Last modified: Thu, 09 May 2024 12:54:45 +0000
+! Diff-Path: ../patches/2024.5.9.1041.patch#ublock-badware
+a617 1
+||dattter.shop^$all
 a623 6
 ||fervidpopsyk.com^$all
 ||dunabear.com^$all
@@ -46,19 +48,22 @@ a3152 4
 ||rakutentenn.com^$all
 ||tiktokvips.shop^$all,to=~rakuten.co.jp
 d3301 1
-diff name:ublock-filters lines:134 checksum:bfc0fdfbe0
+diff name:ublock-filters lines:150 checksum:59ffb9d93d
 d3 2
 a4 2
-! Last modified: Thu, 09 May 2024 09:33:31 +0000
-! Diff-Path: ../patches/2024.5.9.757.patch#ublock-filters
+! Last modified: Thu, 09 May 2024 17:20:06 +0000
+! Diff-Path: ../patches/2024.5.9.1041.patch#ublock-filters
 d68 1
 a68 1
 alpin.de,boersennews.de,chefkoch.de,chip.de,clever-tanken.de,desired.de,donnerwetter.de,fanfiktion.de,focus.de,formel1.de,frustfrei-lernen.de,gewinnspiele.tv,giga.de,gut-erklaert.de,kino.de,messen.de,nickles.de,nordbayern.de,spielfilm.de,teltarif.de,unsere-helden.com,weltfussball.at,watson.de##^script:has-text(DisplayAcceptableAdIfAdblocked)
 d70 1
 a70 1
 alpin.de,boersennews.de,chefkoch.de,chip.de,clever-tanken.de,desired.de,donnerwetter.de,fanfiktion.de,focus.de,formel1.de,frustfrei-lernen.de,gewinnspiele.tv,giga.de,gut-erklaert.de,kino.de,messen.de,nickles.de,nordbayern.de,spielfilm.de,teltarif.de,unsere-helden.com,weltfussball.at,watson.de##+js(rmnt, script, DisplayAcceptableAdIfAdblocked)
-a75 1
-||watson.de/image/$script,1p
+d73 1
+a75 3
+.de/bilder/*.jpg|$script,1p
+.at/bilder/*.jpg|$script,1p
+.de/image/*.gif|$script,1p
 d6486 1
 d7967 1
 d7969 3
@@ -86,7 +91,7 @@ a9927 5
 !#endif
 /^https?:\/\/[a-z]{5,12}\.com\/[0-9a-h]{1,15}\?[0-9a-zA-Z]{1,15}=[0-9a-zA-Z]{300,1300}/$xhr,3p,match-case,to=com,method=get,header=via:1.1 google
 d9986 1
-a9991 9
+a9991 14
 !#if env_firefox
 $frame,csp=sandbox allow-downloads allow-forms allow-same-origin allow-scripts,to=~cloudflare.com|~dailymotion.com|~disqus.com|~facebook.com|~google.*|~hcaptcha.com|~ok.ru|~recaptcha.net|~youtu.be|~youtube.com,from=animeunity.to|hianime.to|kipflix.vercel.app|kissanime.*
 !#endif
@@ -96,6 +101,11 @@ xn-----0b4asja7ccgu2b4b0gd0edbjm2jpa1b1e9zva7a0347s4da2797e8qri.xn--1ck2e1b##[st
 ! Popping Tool sites
 asianlbfm.net,schoolgirls-asia.org##+js(aopr, loadTool)
 ||happymod.com/*/appx.php$frame,1p
+@@||paktech2.com^$ghide
+! timer to show image
+pimpandhost.com##+js(nano-stb, count)
+||imasdk.googleapis.com/js/sdkloader/ima3.js$script,domain=tv.okezone.com,redirect-rule=google-ima.js
+@@||cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/6.9.0/videojs-contrib-ads.min.js$script,domain=tv.okezone.com
 d10022 1
 a10022 1
 funkeypagali.com,careersides.com,nayisahara.com,wikifilmia.com,infinityskull.com,viewmyknowledge.com,iisfvirtual.in,starxinvestor.com##+js(noeval-if, /chp_?ad/)
@@ -143,6 +153,13 @@ cinedesi.in,thevouz.in,tejtime24.com##.remove-sticky
 cinedesi.in,thevouz.in,tejtime24.com#@#.quads-location
 cinedesi.in,thevouz.in,tejtime24.com##.quads-location:others()
 ||youtube.com^$domain=tejtime24.com|thevouz.in|cinedesi.in
+d10826 5
+a10830 5
+facebook.com##:matches-path(/^/$/) #screen-root > :not(.bg-s2) .m[data-type="vscroller"] > :is(.bg-s2, .bg-s3, .bg-s4):has(+ .m + :is(.bg-s2, .bg-s3, .bg-s4) > .m > .m .nb[style*="inset(0"] > .m[style*="margin-top:1px;"][style*="margin-left:1px;"]:is([style*="height:32px;"], [style*="height:35px;"]) div[data-mcomponent$="TextArea"]:not(:empty))
+facebook.com##:matches-path(/^/$/) #screen-root > :not(.bg-s2) .m[data-type="vscroller"] > :is(.bg-s2, .bg-s3, .bg-s4):has(+ :is(.bg-s2, .bg-s3, .bg-s4) > .m > .m .nb[style*="inset(0"] > .m[style*="margin-top:1px;"][style*="margin-left:1px;"]:is([style*="height:32px;"], [style*="height:35px;"]):not(:empty))
+facebook.com##:matches-path(/^/$/) #screen-root > :not(.bg-s2) .m[data-type="vscroller"] > :is(.bg-s2, .bg-s3, .bg-s4):has(> .m > .m .nb[style*="inset(0"] > .m[style*="margin-top:1px;"][style*="margin-left:1px;"]:is([style*="height:32px;"], [style*="height:35px;"]))
+facebook.com##:matches-path(/^/$/) #screen-root > :not(.bg-s2) .m[data-type="vscroller"] > :is(.bg-s2, .bg-s3, .bg-s4):has(> .m > .m .nb[style*="inset(0"] > .m[style*="margin-top:1px;"][style*="margin-left:1px;"]:is([style*="height:32px;"], [style*="height:35px;"])) + .m:not(:has(.m:empty))
+facebook.com##:matches-path(/^/$/) #screen-root > :not(.bg-s2) .m[data-type="vscroller"] > :is(.bg-s2, .bg-s3, .bg-s4):has(> .m > .m .nb[style*="inset(0"] > .m[style*="margin-top:1px;"][style*="margin-left:1px;"]:is([style*="height:32px;"], [style*="height:35px;"])) + .m:not(:has(.m:empty)) + .m:has(div[data-mcomponent$="TextArea"]:not(:empty)):has(+ .m .m[data-mcomponent$="TextArea"]:empty)
 d12664 1
 a12664 1
 ! wawacity. work | moe | tokyo
@@ -158,6 +175,7 @@ d13375 2
 a13376 2
 0123movie.*,123chill.*,123movies-free.*,123movies-org.*,123movies.*,123moviesfree.*,123movieshub.*,123movieweb.*,190.115.18.20,1hd.to,1stream.*,1todaypk.*,2kmovie.*,4movierulz.*,4movierulz1.*,5movies.*,5moviess.com,6hiidude.art,9kmovies.*,a8ix.*,acn.vin,adblocktape.*,adslink.pw,aflizmovies.com,ak4eg.*,algodaodocescan.com.br,aliezstream.pro,andyday.tv,anihdplay.com,animecurse.cz,animeflv.*,animesultra.net,animeonline.ninja,animeunity.*,animixplay.*,aniwatch.*,aniwatchtv.to,antenasports.ru,antennasports.ru,arc018.to,arbsd.*,asianhdplay.*,atishmkv.*,backfirstwo.site,bolly2tolly.*,bowfile.com,buffsports.me,buffstreams.*,clickndownload.*,comedyshow.to,cool-etv.net,couchtuner.*,crackstreamshd.click,cypherscans.xyz,d0000d.com,d0o0d.com,daddylivehd.*,defienietlynotme.com,direct-cloud.*,divicast.com,divxfilmeonline.net,dlhd.sx,d000d.com,do0od.com,dood.*,doods.pro,dooood.*,downloadhub.*,ds2play.com,ds2video.com,egybest.*,embed4u.xyz,embedme.*,embedplayer.*,embedstream.me,embtaku.pro,emovies.*,encurtandourl.com,engvideo.net,esportivos.site,ev01.sx,exee.app,f123movies.com,faselhd.*,faselhdwatch.*,faselhd-watch.*,file-upload.com,filecrypt.*,filemooon.*,film4e.com,filmeserialeonline.org,filmy-hit.*,finfang.*,fiveyardlab.com,flixhq.*,flostreams.xyz,flybid.net,fmoonembed.*,fmoonembed.pro,fmoviesfree.*,fmovieszfree.com,focus4ca.com,foot2live.cc,footybite.to,footyhunter.lol,forex-golds.com,forex-trnd.com,fmembed.cc,fr.streamon-sport.ru,freemovies.*,french-streams.cc,fsl-stream.lu,fslinks.org,fstream365.com,futemax.zip,game-2u.com,gamovideo.com,gdflix.*,gdtot.*,gembedhd.com,gocast2.com,gocast.pro,godzcast.com,gogohd.*,gokutv.*,gomovies.*,goone.pro,gotaku1.com,hdfriday.*,hdhub4u.*,hdmoviehub.*,hdtoday.tv,hellnaw.*,hianime.*,hihihaha1.xyz,hollymoviehd.*,huboflink.in,hurawatchz.to,iflixmovies.*,isaidub6.net,itopmusic.com,itopmusics.com,jockantv.com,jpopsingles.eu,kerapoxy.*,kickassanime.*,koora.vip,kunmanga.com,kuttymovies1.com,ligaset.com,likemanga.io,ling-online.*,linkupload.xyz,lrepacks.net,lulustream.com,luluvdo.com,mangaraw.*,mangareader.to,maxstream.*,mcrypto.club,medeberiyas.com,mega4upload.com,megadb.net,megafilmeshd50.com,megaupto.com,mhdsports.*,mhdsportstv.*,mhdtvsports.*,mkvcinemas.*,mlwbd.*,moonembed.*,movembed.cc,moviekids.tv,movieplay.*,movies2k.*,moviesda4.*,movieshd.watch,moviesjoy.*,moviesrulz.*,moviestowatch.tv,movieuniverse.*,mp3fusion.net,mp4upload.com,mreader.co,mydownloadtube.*,myflixerz.*,myflixertv.to,mylivestream.pro,mywatchseries.*,naijachoice.com.ng,naijanowell.com,netfilmes.org,netizensbuzz.com,nflstreams.me,niadd.com,niaomea.me,noblocktape.*,nolive.me,odiasia.sbs,oii.io,olympicstreams.me,pahe.plus,pesktop.com,pladrac.net,playgo1.cc,poclivetv.com,poscitechs.*,project-free-tv.*,projectfreetv.*,putlocker.*,radamel.icu,repack-games.com,rgeyyddl.*,roystream.com,s.to,sbnmp.bar,send.cm,serienstream.*,series2watch.*,seriesonline.*,seriestv.org,shadowrangers.live,shahed4u.*,shaheed4u.*,share.filesh.site,shinden.pl,shoot-yalla.live,shortenlinks.top,sinvida.me,smoner.com,soap2day-online.com,soccer100.shop,sportshub.*,ssoap2day.*,stakes100.xyz,strcloud.*,streamadblocker.*,streambtw.com,streamcloud.best,streamhub.*,streamnoads.com,streamonsport99.*,streamtape.*,streamvid.net,strtapewithadblock.*,sulleiman.com,swatchseries.*,tapeadsenjoyer.com,tapeantiads.com,tapeblocker.com,tapelovesads.org,tapenoads.com,tapewithadblock.org,techgeek.digital,theflixertv.to,thenextplanet1.*,tii.la,tnhitsda.net,todaypk.*,totalsportek.soccer,trendytalker.com,turcasmania.com,tvfutbol.info,tvpclive.com,up-4ever.net,upbaam.com,uploadhub.*,uproxy.*,uptomega.net,vadbam.net,vavada5com.com,veev.to,vid-guard.com,vidcloud9.*,videoplayer.*,vido.*,vidspeed.cc,vidsrc.*,vidtube.one,viidshar.com,vikistream.com,vipbox.*,vipleague.*,vixcloud.co,volokit2.com,vpcxz19p.xyz,watch-free.tv,watchcartoononline.*,watchmovierulz.*,watchmovies.*,watchomovies.*,watchonlinemoviespk.*,watchop.live,watchseries1.*,watchtvchh.xyz,wecast.to,worldstreams.click,xsportbox.com,yesmovies4u.*,yu2be.com,z12z0vla.*,zamundatv.com,zvision.link##+js(acs, document.documentElement, break;case $.)
 atlaq.com,bolly4umovies.*,douploads.net,moalm-qudwa.blogspot.com,shurt.pw##+js(aopr, zfgformats)
+d18688 2
 d18735 2
 a18736 2
 *$csp=script-src-attr 'none',domain=lamire.jp|picrew.me|mydaily.co.kr
@@ -181,22 +199,23 @@ a21160 2
 a21163 1
 @@/\.oninet\.ne\.jp\/sakigakesoft\/(?!sakigake)[a-z]{5,}-[a-z]{4,}-?[a-z]?\.js$/$script,1p,strict1p,domain=oninet.ne.jp
 d21179 3
-diff name:ublock-privacy lines:10 checksum:52c15cc803
+diff name:ublock-privacy lines:10 checksum:8ae4750c24
 d3 2
 a4 2
 ! Last modified: Wed, 08 May 2024 11:37:02 +0000
-! Diff-Path: ../patches/2024.5.9.757.patch#ublock-privacy
+! Diff-Path: ../patches/2024.5.9.1041.patch#ublock-privacy
 d127 4
 a130 4
 loawa.com,ygosu.com,sportalkorea.com,enetnews.co.kr,edaily.co.kr,economist.co.kr,etoday.co.kr,hankyung.com,isplus.com,hometownstation.com,inven.co.kr,honkailab.com,warcraftrumbledeck.com,genshinlab.com,thestockmarketwatch.com,thephoblographer.com,issuya.com,worldhistory.org,meeco.kr,etnews.com,iusm.co.kr,dogdrip.net,etoland.co.kr,picrew.me,uttranews.com,text-compare.com,fntimes.com,javatpoint.com,vipotv.com,lamire.jp,bamgosu.site,etnewskorea.com,allthekingz.com,gadgets360.com,automobile-catalog.com,maketecheasier.com,thesaurus.net,wfmz.com,thestar.co.uk,yorkshirepost.co.uk,mydaily.co.kr##+js(set-local-storage-item, adshield-analytics-uuid, $remove$)
 loawa.com,ygosu.com,sportalkorea.com,enetnews.co.kr,edaily.co.kr,economist.co.kr,etoday.co.kr,hankyung.com,isplus.com,hometownstation.com,inven.co.kr,honkailab.com,warcraftrumbledeck.com,genshinlab.com,thestockmarketwatch.com,thephoblographer.com,issuya.com,worldhistory.org,meeco.kr,etnews.com,iusm.co.kr,dogdrip.net,etoland.co.kr,picrew.me,uttranews.com,text-compare.com,fntimes.com,javatpoint.com,vipotv.com,lamire.jp,bamgosu.site,etnewskorea.com,allthekingz.com,gadgets360.com,automobile-catalog.com,maketecheasier.com,thesaurus.net,wfmz.com,thestar.co.uk,yorkshirepost.co.uk,mydaily.co.kr##+js(set-local-storage-item, /_fa_dXVpZA==$/, $remove$)
 loawa.com,ygosu.com,sportalkorea.com,enetnews.co.kr,edaily.co.kr,economist.co.kr,etoday.co.kr,hankyung.com,isplus.com,hometownstation.com,inven.co.kr,honkailab.com,warcraftrumbledeck.com,genshinlab.com,thestockmarketwatch.com,thephoblographer.com,issuya.com,worldhistory.org,meeco.kr,etnews.com,iusm.co.kr,dogdrip.net,etoland.co.kr,picrew.me,uttranews.com,text-compare.com,fntimes.com,javatpoint.com,vipotv.com,lamire.jp,bamgosu.site,etnewskorea.com,allthekingz.com,gadgets360.com,automobile-catalog.com,maketecheasier.com,thesaurus.net,wfmz.com,thestar.co.uk,yorkshirepost.co.uk,mydaily.co.kr##+js(set-local-storage-item, /_fa_Y2FjaGVfaXNfYmxvY2tpbmdfYWNjZXB0YWJsZV9hZHM=$/, $remove$)
 loawa.com,ygosu.com,sportalkorea.com,enetnews.co.kr,edaily.co.kr,economist.co.kr,etoday.co.kr,hankyung.com,isplus.com,hometownstation.com,inven.co.kr,honkailab.com,warcraftrumbledeck.com,genshinlab.com,thestockmarketwatch.com,thephoblographer.com,issuya.com,worldhistory.org,meeco.kr,etnews.com,iusm.co.kr,dogdrip.net,etoland.co.kr,picrew.me,uttranews.com,text-compare.com,fntimes.com,javatpoint.com,vipotv.com,lamire.jp,bamgosu.site,etnewskorea.com,allthekingz.com,gadgets360.com,automobile-catalog.com,maketecheasier.com,thesaurus.net,wfmz.com,thestar.co.uk,yorkshirepost.co.uk,mydaily.co.kr##+js(set-local-storage-item, /_fa_Y2FjaGVfaXNfYmxvY2tpbmdfYWRz$/, $remove$)
-diff name:ublock-quick-fixes lines:20 checksum:8397b541b2
+diff name:ublock-quick-fixes lines:22 checksum:2cc874608d
 d3 2
 a4 2
-! Last modified: Thu, 09 May 2024 10:45:09 +0000
-! Diff-Path: ../patches/2024.5.9.757.patch#ublock-quick-fixes
+! Last modified: Thu, 09 May 2024 13:09:30 +0000
+! Diff-Path: ../patches/2024.5.9.1041.patch#ublock-quick-fixes
+d75 21
 a98 1
 download.megaup.net##+js(rpnt, script, =!![], =false, condition, attribute)
 a122 5
@@ -207,26 +226,30 @@ in-jpn.com,xth.jp##+js(set, xmlr, noopFunc)
 *$script,3p,denyallow=ampproject.org,domain=oninet.ne.jp
 a123 1
 in-jpn.com,xth.jp##^script:has-text(/フィルタリングを無効|document\.head\.appendChild/)
+d127 5
 a137 5
 ||go.oracle.com^$badfilter
 watson.de#@#+js(set, _sp_.config, undefined)
 ||watson.de/image/$script,1p
 @@||googletagmanager.com/gtm.js$script,domain=watson.ch
 item.rakuten.co.jp#@##pagebody > table[width][border]:has(td[align="center"] > table[cellpadding="5"])
-diff name:ublock-unbreak lines:8 checksum:8f0dfca2a9
+diff name:ublock-unbreak lines:8 checksum:1c403dd086
 d3 2
 a4 2
 ! Last modified: Wed, 08 May 2024 23:48:21 +0000
-! Diff-Path: ../patches/2024.5.9.757.patch#ublock-unbreak
+! Diff-Path: ../patches/2024.5.9.1041.patch#ublock-unbreak
 a2549 3
 @@||partner-api.jobbio.com/channels/data$xhr,3p,domain=stackoverflow.jobs
 @@||partner-api.jobbio.com/channels/stack-overflow-jobs/feed$xhr,3p,domain=stackoverflow.jobs
 ||jobbio.com/channels/$xhr,3p,removeparam=visitor_id,domain=stackoverflow.jobs
-diff name:easylist lines:175 checksum:51688d6858
+diff name:easylist lines:265 checksum:3f2b029181
 d4 2
 a5 2
-! Last modified: Thu, 09 May 2024 10:31:42 +0000
-! Diff-Path: ../patches/2024.5.9.757.patch#easylist
+! Last modified: Thu, 09 May 2024 17:18:55 +0000
+! Diff-Path: ../patches/2024.5.9.1041.patch#easylist
+d149 1
+a149 1
+/_xa/ads_batch?
 d152 1
 a155 1
 /AC_OETags.js
@@ -240,21 +263,37 @@ a195 1
 d210 1
 d305 1
 d326 1
+d328 1
+d345 1
 d351 1
+d361 1
 d364 1
-d376 1
+d376 2
 d384 1
+d388 1
+a388 1
+/ads_image/*$image
 d400 1
 a400 1
 /adserve/*$script
 d405 1
+d409 1
+a409 1
+/adsforwp-front.min.css
+d412 1
+a412 1
+/adsimages/*$image,domain=~bdjobstoday.com
 d427 1
 d429 1
 d447 1
+d451 1
 d454 1
 d461 1
 a461 1
 /advert.$~script,~xmlhttprequest,domain=~advert.ae|~advert.club|~advert.com.tr|~advert.ee|~advert.ge|~advert.io|~advert.media|~advert.org.pl|~motortrader.com.my
+d473 1
+a473 1
+/advertising/banners/*$image
 d487 1
 a487 1
 /adz/js/adz.
@@ -268,7 +307,7 @@ a503 4
 /affiliate/ads/*$image
 /affiliate/banner/*$image
 /affiliate/banners/*$image
-d561 1
+d560 2
 a561 1
 /banner/affiliate/*$image,subdocument
 d566 1
@@ -279,6 +318,11 @@ d618 2
 a619 1
 /content/ads/*$~xmlhttprequest
 d651 1
+d704 1
+d735 1
+d749 1
+a749 1
+/img_ad/*$image,domain=~daily.co.jp|~ehonnavi.net
 d753 1
 a753 1
 /includes/ads/*$script
@@ -286,6 +330,7 @@ d807 1
 a807 2
 /media/plg_adbutlerads/*
 /media_ads/*$image
+d814 1
 d816 1
 a822 1
 /modules/mod_ijoomla_adagency_zone/*
@@ -294,13 +339,21 @@ a830 1
 /nativeads/script/*
 d858 1
 d864 1
-d881 1
+d870 1
+d881 2
+a882 1
+/phpads/adx.js
 d895 1
 d899 1
 a899 1
 /plugins/adrotate/library/*
+d913 1
 d921 1
 d931 1
+d951 1
+d960 1
+a960 1
+/publicidade/*$~xmlhttprequest
 d971 2
 a972 1
 /RealMedia/ads/adstream_
@@ -310,19 +363,32 @@ a1028 1
 d1031 2
 a1032 1
 /servlet/view/*$script
+d1050 1
+a1050 1
+/sidebar_ads/*$~xmlhttprequest
 d1060 1
 d1071 1
 a1071 1
 /sp/delivery/js.php
+d1095 1
+a1095 1
+/sponsors/ads/*$image
 d1099 1
+d1129 1
+d1131 1
 d1135 1
 d1147 1
 d1163 1
+d1165 2
+a1166 2
+/web/ads/*$image
+/web_ads/*$image
 d1170 1
 a1170 1
 /webads/*$image,domain=~cccc.edu|~meatingplace.com
-d1214 1
-d1216 1
+a1197 1
+/wp-content/plugins/thirstyaffiliates/*
+d1214 3
 d1460 1
 a1460 1
 /ad/postbid_handler1.0.9.js
@@ -330,10 +396,44 @@ d1469 1
 a1469 1
 /plugins/prebidjs/*$script
 d1545 1
+d5094 2
+d5243 1
+d5264 2
+d5269 1
+d5274 1
+d5333 1
+d5336 1
+d5344 1
+d5357 1
+d5364 1
+d5367 1
+d5372 1
+d5403 1
+d5406 2
+d5517 1
+d5536 5
+d5542 1
+d6087 1
+a17831 1
+||39268ea911.com^
+a22812 1
+||bourrepardale.com^
+a36620 1
+||kwbgmufi.com^
+a41701 1
+||onzazqarhmpi.com^
+a46608 1
+||ringingneo.com^
+a51591 1
+||trafficdecisions.com^
+a55440 1
+||xrpikxtnmvcm.com^
 a58332 1
 ||07e197.site^$document,popup
 a58360 1
 ||f2f8.xyz^$document,popup
+a62104 1
+||trafficdecisions.com^$popup
 a66693 1
 ||schoolasiagirls.net/ban/
 d67066 1
@@ -360,6 +460,8 @@ ipolitics.ca,qpbriefing.com##.big-box
 d68813 1
 a68813 1
 9gag.com,blackpoolgazette.co.uk,bundesliga.com,farminglife.com,hotstar.com,ipolitics.ca,lep.co.uk,northamptonchron.co.uk,qpbriefing.com,scotsman.com,shieldsgazette.com,talksport.com,the-sun.com,thescottishsun.co.uk,thestar.co.uk,thesun.co.uk,thesun.ie##.billboard
+a69204 1
+thestudentroom.co.uk##.custom-jucdap
 d69331 1
 a69535 1
 bowenislandundercurrent.com,coastreporter.net,delta-optimist.com,richmond-news.com,squamishchief.com,tricitynews.com##.ga-ext
@@ -384,12 +486,20 @@ tandfonline.com##.pb-ad
 d70469 1
 a70469 1
 thespec.com,wellandtribune.ca##.polarAds
+d70545 1
+a70545 1
+canstar.com.au,designspiration.com,investors.com,propertyguru.com.sg,search.installmac.com##.promoted
 a70900 1
 cbssports.com##.skybox-top-wrapper
 a71604 1
 etherscan.io##[data-t8xt5pt6kr-seq="0"]
+a71765 1
+homedepot.com##[id*="sponsored"]
 a71809 1
 imagecolorpicker.com##[style="height:250px"]
+a71853 2
+facebook.com,facebookwkhpilnemxj7asaniu7vnjjbiltxjqhye3mhbshg7kx5tfyd.onion##a[aria-label][href*="&fbclid="]
+facebook.com,facebookwkhpilnemxj7asaniu7vnjjbiltxjqhye3mhbshg7kx5tfyd.onion##a[aria-label][href*="26fbclid%"]
 d71924 1
 d72119 1
 a72119 1
@@ -398,17 +508,29 @@ a72128 1
 thestudentroom.co.uk##div[data-freestar-ad]
 a72678 1
 benzinga.com##.video-player-wrapper
-diff name:easyprivacy lines:17 checksum:e944829d42
+diff name:easyprivacy lines:29 checksum:f9f2407793
 d4 2
 a5 2
-! Last modified: Thu, 09 May 2024 02:15:26 +0000
-! Diff-Path: ../patches/2024.5.9.757.patch#easyprivacy
+! Last modified: Thu, 09 May 2024 17:18:55 +0000
+! Diff-Path: ../patches/2024.5.9.1041.patch#easyprivacy
+a330 1
+/api/reqAnalytic/*
 a6632 1
 ||evasivejar.com^
 a9332 1
 ||assistant.watson.appdomain.cloud/analytics/
+a9831 1
+||edge-hls.doppiocdn.live/ping
+a10619 1
+||piano.io/api/v3/customform/log/impression
+a12473 2
+||stlog.d.dmkt-sp.jp^
+||stlog.dmarket.docomo.ne.jp^
 a13824 1
 ||proporn.com/ajax/log/
+d13898 1
+a13898 1
+||run.app/events$domain=imgur.com|worldstar.com|worldstarhiphop.com
 d38988 1
 d50587 1
 a50587 1
