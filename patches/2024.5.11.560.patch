@@ -1,33 +1,155 @@
-diff name:ublock-annoyances lines:3 checksum:32298e86a7
-d4 1
-a4 1
-! Diff-Path: ../patches/2024.5.12.622.patch#ublock-annoyances
-diff name:ublock-badware lines:15 checksum:6f23ad58d0
+diff name:ublock-annoyances lines:5 checksum:d3df5b0651
 d3 2
 a4 2
-! Last modified: Sun, 12 May 2024 10:09:20 +0000
-! Diff-Path: ../patches/2024.5.12.622.patch#ublock-badware
+! Last modified: Sun, 12 May 2024 14:24:59 +0000
+! Diff-Path: ../patches/2024.5.12.920.patch#ublock-annoyances
+d8 743
+diff name:ublock-badware lines:102 checksum:547c95e2f7
+d3 2
+a4 2
+! Last modified: Sun, 12 May 2024 12:38:52 +0000
+! Diff-Path: ../patches/2024.5.12.920.patch#ublock-badware
+d215 1
+d224 1
+d377 1
+d444 1
+d471 1
+d538 2
+d549 1
+d554 1
 d690 2
 a695 4
 ||robloxexecuter.framer.website^$doc
 ||gramcheats.com^$doc
 ||cheats-2.gitbook.io^$doc
 ||mooncheats.shop^$doc
+d785 2
+d797 1
 a824 2
 ||hypernitro.ru^$all
 ||nitrohunt.com^$all
+d940 1
+d942 2
+d971 1
+d989 1
+d996 5
+d1008 1
+d1016 1
+d1018 1
+d1048 1
+d1056 1
+d1085 1
+d1088 1
+d1092 1
+d1098 1
+d1112 1
+d1168 2
+d1200 1
+d1204 1
+d1230 1
+d1302 1
+d1327 1
+d1330 1
+d1335 1
+d1361 1
+d1370 1
+d1392 1
+d1403 1
+d1520 1
+d1546 1
+d1567 2
+d1586 1
+d1632 1
+d1639 1
+d1700 1
+d1718 1
+d1725 1
+d1734 1
+d1866 1
+d1887 1
+d1945 1
+d1950 2
+d1953 2
+d1960 2
+d1997 1
+d2011 1
+d2067 1
+d2079 3
+d2105 1
+d2116 1
+d2126 1
+d2131 1
+d2135 1
+d2139 2
+d2153 1
+d2170 1
+d2210 2
+d2261 1
+d2293 1
+d2317 1
+d2440 1
+d2698 1
+d2771 1
+d2807 1
+d2854 1
+d2868 1
+d2872 1
+d3022 1
+d3067 2
+d3178 2
+d3193 1
 a3195 1
 ||lp-mypwd.pages.dev^$all
-diff name:ublock-filters lines:34 checksum:86e0d1433d
+d3221 1
+d3223 1
+d3230 1
+d3232 1
+d3236 1
+d3241 1
+d3249 2
+diff name:ublock-filters lines:67 checksum:cb880a2c2b
 d3 2
 a4 2
-! Last modified: Sun, 12 May 2024 09:45:18 +0000
-! Diff-Path: ../patches/2024.5.12.622.patch#ublock-filters
+! Last modified: Sun, 12 May 2024 14:43:02 +0000
+! Diff-Path: ../patches/2024.5.12.920.patch#ublock-filters
 d356 1
 a356 1
 facebook.com,facebookwkhpilnemxj7asaniu7vnjjbiltxjqhye3mhbshg7kx5tfyd.onion##:matches-path(/^\/(\?[a-z]+=\w+)?$/) div[aria-posinset] :is(h3, h4) span > a[href]:not([href^="/groups/"]):not([href*="section_header_type"]):matches-attr(href="/__cft__\[0\]=[-\w]{290,}/"):upward(div[aria-posinset]):style(height: 0 !important; overflow: hidden !important;)
-a10019 1
+a10000 31
+! Promoted products and stores on search page (/search), product page (/p), and find page (/find)
+tokopedia.com##+js(json-prune, 0.data.displayAdsV3.data.[-].__typename)
+tokopedia.com##+js(json-prune, 0.data.TopAdsProducts.data.[-].__typename)
+tokopedia.com##+js(json-prune, 0.data.topads.data.[-].__typename)
+!#if cap_html_filtering
+! Promoted products on search page (/search) carousels
+||tokopedia.com/graphql/InspirationCarousel$xhr,replace=/\{"id":\d{9,11}(?:(?!"ads":\{"id":"").)+?"ads":\{"id":"\d+".+?"__typename":"ProductCarouselV2"\},?//g
+||tokopedia.com/graphql/InspirationalCarousel$xhr,replace=/\{"category_id"(?:(?!"ads":\{"id":"").)+?"ads":\{"id":"\d+".+?"__typename":"ProductCarouselV2"\},?//g
+! Promoted products on mobile carousels of product page (/p) and cart page (/cart)
+||tokopedia.com/graphql/productRecommendation$xhr,replace=/\{"id":\d{9,11}(?:(?!"isTopads":false).)+?"isTopads":true.+?"__typename":"recommendationItem"\},//g
+||tokopedia.com/graphql/productRecommendation$xhr,replace=/,\{"id":\d{9,11}(?:(?!"isTopads":false).)+?"isTopads":true(?:(?!"__typename":"recommendationItem").)+?"__typename":"recommendationItem"\}(?=\])//
+! Promoted products on cart page (/cart)
+||tokopedia.com/graphql/RecomWidget$xhr,replace=/\{"(?:productS|s)lashedPrice"(?:(?!"isTopads":false).)+?"isTopads":true.+?"__typename":"recommendationItem"\},?//g
+||tokopedia.com/graphql/ProductRecommendationQuery$xhr,replace=/\{"appUrl"(?:(?!"isTopads":false).)+?"isTopads":true.+?"__typename":"recommendationItem"\},?//g
+!#else
+! Promoted products on search page (/search) carousels
+tokopedia.com##+js(trusted-replace-fetch-response, '/\{"id":\d{9,11}(?:(?!"ads":\{"id":"").)+?"ads":\{"id":"\d+".+?"__typename":"ProductCarouselV2"\},?/g', , /graphql/InspirationCarousel)
+tokopedia.com##+js(trusted-replace-fetch-response, '/\{"category_id"(?:(?!"ads":\{"id":"").)+?"ads":\{"id":"\d+".+?"__typename":"ProductCarouselV2"\},?/g', , /graphql/InspirationalCarousel)
+! Promoted products on mobile carousels of product page (/p) and cart page (/cart)
+tokopedia.com##+js(trusted-replace-fetch-response, '/\{"id":\d{9,11}(?:(?!"isTopads":false).)+?"isTopads":true.+?"__typename":"recommendationItem"\},/g', , /\/graphql\/productRecommendation/i)
+tokopedia.com##+js(trusted-replace-fetch-response, '/,\{"id":\d{9,11}(?:(?!"isTopads":false).)+?"isTopads":true(?:(?!"__typename":"recommendationItem").)+?"__typename":"recommendationItem"\}(?=\])/', , /\/graphql\/productRecommendation/i)
+! Promoted products on cart page (/cart)
+tokopedia.com##+js(trusted-replace-fetch-response, '/\{"(?:productS|s)lashedPrice"(?:(?!"isTopads":false).)+?"isTopads":true.+?"__typename":"recommendationItem"\},?/g', , /graphql/RecomWidget)
+tokopedia.com##+js(trusted-replace-fetch-response, '/\{"appUrl"(?:(?!"isTopads":false).)+?"isTopads":true.+?"__typename":"recommendationItem"\},?/g', , /graphql/ProductRecommendationQuery)
+!#endif
+! Promoted products cache on search page (/search), find page (/find), and product page (/p)
+!#if cap_html_filtering
+tokopedia.com##^script:has-text(displayAdsV3)
+!#else
+tokopedia.com##+js(rmnt, script, displayAdsV3)
+!#endif
+a10019 2
 ||redsky.target.com^$xhr,removeparam=include_sponsored
+target.com##+js(json-prune-fetch-response, data.search.products.[-].sponsored_ad.ad_source, , propsToMatch, url:/plp_search_v2?)
 d10478 8
 a10485 8
 *$script,xhr,redirect-rule=noopjs,domain=sinonimos.de|antonimos.de|quesignifi.ca|tiktokrealtime.com|tiktokcounter.net|tpayr.xyz|poqzn.xyz|ashrfd.xyz|rezsx.xyz|tryzt.xyz|ashrff.xyz|rezst.xyz|dawenet.com|erzar.xyz|waezm.xyz|waezg.xyz
@@ -37,7 +159,7 @@ a10485 8
 @@/adpartner.min.js$script,domain=sinonimos.de|antonimos.de|quesignifi.ca|tiktokrealtime.com|tiktokcounter.net|tpayr.xyz|poqzn.xyz|ashrfd.xyz|rezsx.xyz|tryzt.xyz|ashrff.xyz|rezst.xyz|dawenet.com|erzar.xyz|waezm.xyz|waezg.xyz
 !sinonimos.de,antonimos.de,quesignifi.ca,tiktokrealtime.com,tiktokcounter.net,tpayr.xyz,poqzn.xyz,ashrfd.xyz,rezsx.xyz,tryzt.xyz,ashrff.xyz,rezst.xyz,dawenet.com,erzar.xyz,waezm.xyz,waezg.xyz##+js(no-fetch-if, /doubleclick|google/)
 !sinonimos.de,antonimos.de,quesignifi.ca,tiktokrealtime.com,tiktokcounter.net,tpayr.xyz,poqzn.xyz,ashrfd.xyz,rezsx.xyz,tryzt.xyz,ashrff.xyz,rezst.xyz,dawenet.com,erzar.xyz,waezm.xyz,waezg.xyz##+js(set, isAdClickDone, true)
-!sinonimos.de,antonimos.de,quesignifi.ca,tiktokrealtime.com,tiktokcounter.net,tpayr.xyz,poqzn.xyz,ashrfd.xyz,rezsx.xyz,tryzt.xyz,ashrff.xyz,rezst.xyz,dawenet.com,erzar.xyz,waezm.xyz,waezg.xyz##+js(rpnt, script, /^(.?)/, document.addEventListener('DOMContentLoaded'\, ()=> {const i = document.createElement('iframe');i.style = 'height:0;width:0;border:0';i.id = 'a';document.body.appendChild(i);i.focus();});$1, sedCount, 1)
+sinonimos.de,antonimos.de,quesignifi.ca,tiktokrealtime.com,tiktokcounter.net,tpayr.xyz,poqzn.xyz,ashrfd.xyz,rezsx.xyz,tryzt.xyz,ashrff.xyz,rezst.xyz,dawenet.com,erzar.xyz,waezm.xyz,waezg.xyz##+js(rpnt, script, /^(.?)/, document.addEventListener('DOMContentLoaded'\, ()=> {const i = document.createElement('iframe');i.style = 'height:0;width:0;border:0';i.id = 'aswift_0';document.body.appendChild(i);i.focus();});$1, sedCount, 1)
 a16347 1
 @@*$ghide,domain=pinterest.*
 a19359 5
@@ -53,15 +175,15 @@ d20856 2
 a20857 2
 radiantsong.com,rabo.no,rahim-soft.com,rail-log.net,ralli.ee,ranjeet.best,ranourano.xyz,raulmalea.ro,rbs.ta36.com,rbscripts.net,rctechsworld.in,readfast.in,realfreelancer.com,recipenp.com,redbubbletools.com,redfaucet.site,reeell.com,renierassociatigroup.com,reportbangla.com,reprezentacija.rs,retire49.com,retrotv.org,revistaapolice.com.br,ribbelmonster.de,rightdark-scan.com,rinconpsicologia.com,ritacandida.com,rlshort.com,rocdacier.com,rollingwheel.xyz,romaierioggi.it,romaniasoft.ro,romviet.com,roshy.tv,roznamasiasat.com,rtxkeeda.com,rubyskitchenrecipes.uk,rumanicandle.online,ruyamanga.com,rv-ecommerce.com,ryanmoore.marketing,ryansharich.com##+js(noeval-if, /chp_?ad/)
 s1os.icu,s4msecurity.com,s920221683.online.de,sabishiidesu.com,saekita.com,samanarthishabd.in,samovies.net,samrudhiglobal.com,sanmiguellive.com,sararun.net,sarkariresult.social,satcesc.com,savegame.pro,sawwiz.com,scansatlanticos.com,schadeck.eu,sezia.com,schildempire.com,scholarshiplist.org,sciencebe21.in,scontianastro.com,scrap-blog.com,scripcheck.great-site.net,scriptsomg.com,searchmovie.wp.xdomain.jp,seasons-dlove.net,seirsanduk.com,seogroup.bookmarking.info,seoworld.in,setsuyakutoushi.com,serieshdpormega.com,server-tutorials.net,serverxfans.com,sezia.com,shadagetech.com,shanurdu.com,shimauma-log.com,shittokuadult.net,shlly.com,shogaisha-shuro.com,shogaisha-techo.com,shopkensaku.com,shorttrick.in,showrovblog.com,shrinklinker.com,shrinkus.tk,shrivardhantech.in,siimanga.cyou,siirtolayhaber.com,sim-kichi.monster,sivackidrum.net,sk8therapy.fr,skardu.pk,slawoslaw.pl,slowianietworza.pl,smallseotools.ai,smartinhome.pl,snowman-information.com,soccermlbstream.xyz,socebd.com,sociallyindian.com,softcobra.com,softrop.com,sohohindi.com,sosuroda.pl,south-park-tv.biz,soziologie-politik.de,sp500-up.com,space-faucet.com,spacestation-online.com,spardhanews.com,speak-english.net,speculationis.com,spinoff.link,spiritparting.com,sport-97.com,sportsblend.net,stablediffusionxl.com,stadelahly.net,stahnivideo.cz,stakes100.xyz,starsgtech.in,startupjobsportal.com,ster-blog.xyz,stireazilei.eu,stock-rom.com,streamseeds24.com,strefa.biz,studybullet.com,sufanblog.com,sukuyou.com,sundberg.ws,suneelkevat.com,super-ethanol.com,superpackpormega.com,surgicaltechie.com,swietaslowianskie.pl,sysguides.com,system32.ink##+js(noeval-if, /chp_?ad/)
-diff name:ublock-privacy lines:3 checksum:cf12bc5e16
+diff name:ublock-privacy lines:3 checksum:078fbb457c
 d4 1
 a4 1
-! Diff-Path: ../patches/2024.5.12.622.patch#ublock-privacy
-diff name:ublock-quick-fixes lines:16 checksum:936b2239ec
+! Diff-Path: ../patches/2024.5.12.920.patch#ublock-privacy
+diff name:ublock-quick-fixes lines:18 checksum:b38bb54e96
 d3 2
 a4 2
-! Last modified: Sun, 12 May 2024 09:56:56 +0000
-! Diff-Path: ../patches/2024.5.12.622.patch#ublock-quick-fixes
+! Last modified: Sun, 12 May 2024 13:42:11 +0000
+! Diff-Path: ../patches/2024.5.12.920.patch#ublock-quick-fixes
 d37 6
 a42 6
 imgjbxzjv.shop,imgjmgfgm.shop,picxnkjkhdf.sbs,imgxxbdf.sbs,imgnngr.sbs,imgjjtr.sbs,imgqbbds.sbs,imgbvdf.sbs,imgqnnnebrf.sbs,imgebrf.sbs##+js(aopr, console.clear)
@@ -72,17 +194,19 @@ imgjbxzjv.shop,imgjmgfgm.shop,picxnkjkhdf.sbs,imgxxbdf.sbs,imgnngr.sbs,imgjjtr.s
 imgjbxzjv.shop,imgjmgfgm.shop,picxnkjkhdf.sbs,imgxxbdf.sbs,imgnngr.sbs,imgjjtr.sbs,imgqbbds.sbs,imgbvdf.sbs,imgqnnnebrf.sbs,imgebrf.sbs##div[class][style="display: block;"]
 d75 4
 a78 1
-download.megaup.net##+js(rpnt, script, /'target'/, 'target' && false, attribute)
+download.megaup.net##+js(rpnt, script, /'target'/, 'target' && false, condition, attribute)
 d96 3
-diff name:ublock-unbreak lines:3 checksum:49777c388c
+a133 1
+||mozakin.com/v4/data/pcad.js$badfilter
+diff name:ublock-unbreak lines:3 checksum:c70a95f93b
 d4 1
 a4 1
-! Diff-Path: ../patches/2024.5.12.622.patch#ublock-unbreak
-diff name:easylist lines:135 checksum:7be460a4df
+! Diff-Path: ../patches/2024.5.12.920.patch#ublock-unbreak
+diff name:easylist lines:146 checksum:253ce1c63a
 d4 2
 a5 2
-! Last modified: Sun, 12 May 2024 09:56:56 +0000
-! Diff-Path: ../patches/2024.5.12.622.patch#easylist
+! Last modified: Sun, 12 May 2024 13:42:11 +0000
+! Diff-Path: ../patches/2024.5.12.920.patch#easylist
 d215 1
 a215 1
 /ad_rotator/*$image,script,domain=~spokane.exchange
@@ -122,6 +246,8 @@ d1001 1
 d1030 1
 d1035 1
 d1148 1
+a16226 1
+##.wpadcenter-ad-container
 a16457 1
 ##a[href^="https://ctjdwm.com/"]
 a16501 1
@@ -175,6 +301,7 @@ a63371 1
 ||bit.ly^$script,domain=dailyuploads.net|freeshot.live
 a65215 1
 ||absoluteanime.com/!bin/skin3/ads/
+d65388 1
 a65479 1
 ||hubcloud.day/video/bn/
 a65560 1
@@ -191,19 +318,27 @@ a69001 1
 100percentfedup.com,180gadgets.com,247media.com.ng,academicful.com,addapinch.com,alltechnerd.com,americansongwriter.com,androidsage.com,animatedtimes.com,anoopcnair.com,askpython.com,asurascans.com,australiangeographic.com.au,autodaily.com.au,bigleaguepolitics.com,borncity.com,boxingnews24.com,browserhow.com,charlieintel.com,chillinghistory.com,chromeunboxed.com,circuitbasics.com,coincodecap.com,conservativebrief.com,cookingwithdog.com,corrosionhour.com,crimereads.com,cryptobriefing.com,cryptopotato.com,cryptoreporter.info,cryptoslate.com,dafontfree.io,dailynewshungary.com,dcenquirer.com,dexdotexe.com,dorohedoro.online,epicdope.com,eurweb.com,exeo.app,fandomwire.com,firstsportz.com,flickeringmyth.com,flyingmag.com,freemagazines.top,gadgetinsiders.com,gameinfinitus.com,gamertweak.com,gatewaynews.co.za,geekdashboard.com,getdroidtips.com,goodyfeed.com,greekreporter.com,hard-drive.net,hollywoodinsider.com,hollywoodunlocked.com,indianhealthyrecipes.com,inspiredtaste.net,iotwreport.com,jojolandsmanga.com,journeybytes.com,journeyjunket.com,jujustukaisen.com,libertyunlocked.com,linuxfordevices.com,lithub.com,medicotopics.com,medievalists.net,mpost.io,mycariboonow.com,nationalfile.com,nintendoeverything.com,notalwaysright.com,nsw2u.com,organicfacts.net,patriotfetch.com,premiumtimesng.com,protrumpnews.com,pureinfotech.com,redrightvideos.com,reneweconomy.com.au,reptilesmagazine.com,respawnfirst.com,rezence.com,roadaheadonline.co.za,rok.guide,sciencenotes.org,sdnews.com,simscommunity.info,small-screen.co.uk,storypick.com,streamingbetter.com,superwatchman.com,talkandroid.com,talkers.com,tech-latest.com,techpp.com,techrounder.com,techviral.net,theblueoceansgroup.com,thecinemaholic.com,thecricketlounge.com,thedriven.io,thegamehaus.com,thegatewaypundit.com,thegeekpage.com,thelibertydaily.com,thenipslip.com,thewincentral.com,trendingpolitics.com,trendingpoliticsnews.com,twistedvoxel.com,videogamer.com,walletinvestor.com,waves4you.com,wbiw.com,welovetrump.com,wepc.com,win.gg,wisden.com,wnd.com,zerohanger.com##.code-block
 a69425 1
 mathgames.com##.frame-container
+a69708 2
+instacart.com##.image-banner-a-9l2sjs
+instacart.com##.image-banner-a-ak0wn
 a69972 1
 foodandwine.com##.lrs__wrapper
 a69994 1
 mathgames.com##.main-banner-adContainer
 a70618 1
 mathgames.com##.right-ad-override
+a70740 1
+instacart.com##.shoppable-list-a-las2t7
+a71409 1
+weisradio.com##.wp-image-931153
 d71597 1
 a71597 1
 9jaflaver.com,alaskapublic.org,allkeyshop.com,analyticsinsight.net,ancient-origins.net,animeidhentai.com,arabtimesonline.com,asura.gg,biblestudytools.com,bitcoinworld.co.in,cnx-software.com,coingolive.com,csstats.gg,digitallydownloaded.net,domaingang.com,downturk.net,fresherslive.com,gizmochina.com,glitched.online,glodls.to,guidedhacking.com,hackernoon.com,hubcloud.day,indishare.org,kaas.am,katfile.com,khmertimeskh.com,litecoin-faucet.com,mbauniverse.com,mediaite.com,mgnetu.com,myreadingmanga.info,newsfirst.lk,nexter.org,owaahh.com,parkablogs.com,pastemytxt.com,premiumtimesng.com,railcolornews.com,resultuniraj.co.in,retail.org.nz,ripplesnigeria.com,rtvonline.com,ryuugames.com,sashares.co.za,sofascore.com,thinknews.com.ng,timesuganda.com,totemtattoo.com,trancentral.tv,vumafm.co.za,yugatech.com,zmescience.com##[href*="bit.ly/"]
 a71885 1
 veev.to##a[href^="https://t.ly/"]
-a72269 1
+a72269 2
 xing.com##li[data-qa="notifications-ad"]
+instacart.com##li[data-testid="compact-item-list-header"]
 a74006 1
 hentai2read.com##a[href^="https://arf.moe/"]
 a74499 7
@@ -214,11 +349,11 @@ a74499 7
 @@||pinterest.it^$generichide
 @@||pinterest.jp^$generichide
 @@||pinterest.ph^$generichide
-diff name:easyprivacy lines:33 checksum:1ae3f4e272
+diff name:easyprivacy lines:35 checksum:762585ad9b
 d4 2
 a5 2
-! Last modified: Sat, 11 May 2024 22:24:15 +0000
-! Diff-Path: ../patches/2024.5.12.622.patch#easyprivacy
+! Last modified: Sun, 12 May 2024 13:42:11 +0000
+! Diff-Path: ../patches/2024.5.12.920.patch#easyprivacy
 a2998 1
 /track.octanemail.in/sapi/*$image
 a3057 1
@@ -239,6 +374,8 @@ a7868 1
 ||velvetquasar.com^
 a9475 1
 ||calvera-telemetry.polaris.me^
+a12431 1
+||logger.torimochi-ad.net^
 d14685 1
 a14685 1
 rollingstone.com,variety.com,cbsnews.com,thenerdstash.com,billboard.com,gamerant.com,givemesport.com,qtoptens.com,brobible.com,mensjournal.com,dualshockers.com,si.com,androidpolice.com,makeuseof.com,cbr.com,collider.com,thegamer.com,simpleflying.com,stealthoptional.com,xda-developers.com,howtogeek.com,screenrant.com##+js(abort-on-property-read, googletag)
