@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Quick fixes
 ! Expires: 12 hours
-! Last modified: Mon, 13 May 2024 21:04:28 +0000
-! Diff-Path: ../patches/2024.5.15.506.patch#ublock-quick-fixes
+! Last modified: Wed, 15 May 2024 12:47:08 +0000
+! Diff-Path: ../patches/2024.5.15.803.patch#ublock-quick-fixes
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/quick-fixes.txt ***
@@ -98,10 +98,11 @@ oninet.ne.jp##^script[defer]:has-text(.clientHeight <)
 *$script,3p,from=oninet.ne.jp,badfilter
 *$script,3p,denyallow=ampproject.org,domain=oninet.ne.jp
 !#if cap_html_filtering
-in-jpn.com,xth.jp##^script:has-text(/フィルタリングを無効|document\.head\.appendChild/)
+in-jpn.com,xth.jp##^script:has-text(フィルタリングを無効)
 ||in-jpn.com^$script,replace=/w_mode==1/1/
 ||in-jpn.com^$script,replace=/function myFunc[\s\S\n]+?doSakigake\(\);[\s\S\n]+?\}//
 !#endif
+in-jpn.com,xth.jp##+js(set, myFunc, noopFunc)
 ! breaking
 bloomberg.com,bloomberg.co.jp#@#[title="SP Consent Message"]
 !#if env_mobile
@@ -127,3 +128,7 @@ facebook.com,facebookwkhpilnemxj7asaniu7vnjjbiltxjqhye3mhbshg7kx5tfyd.onion#@#a[
 ||msgs.jp^$3p,badfilter
 ||tm.msgs.jp^
 enjoy4fun.com###fake-ads-dom
+rollingstone.com#@#+js(aopr, googletag)
+/AC_OETags.js$badfilter
+||livedoor.blogimg.jp/kee0501-kinsoku/$domain=kinsoku.blog.jp,badfilter
+||livedoor.blogimg.jp/kee0501-ihphds0p/$domain=kinsoku.blog.jp,badfilter
