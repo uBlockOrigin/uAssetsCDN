@@ -1,5 +1,5 @@
 ! Title: uBlock filters (2024)
-! Last modified: Wed, 22 May 2024 17:15:54 +0000
+! Last modified: Thu, 23 May 2024 03:52:51 +0000
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -1450,7 +1450,7 @@ kimdesene.org##+js(nowoif)
 ! pp server
 ! https://github.com/uBlockOrigin/uBlock-discussions/discussions/790#discussioncomment-9105136
 /^https?:\/\/[a-z]{8,15}\.xyz\/$/$xhr,3p,to=xyz,method=head,header=x-trace-id
-!#if ext_devbuild
+!#if env_firefox
 /^https?:\/\/[a-z]{8,15}\.com\/$/$xhr,3p,to=com,method=head,header=x-trace-id
 !#endif
 
@@ -1528,7 +1528,8 @@ totalsportek.to,eztvx.to,topstreams.info,lewblivehdplay.ru,claplivehdplay.ru##+j
 /^https:\/\/[a-z]{4,}\.(?:com|to)\/z-[a-z0-9]{7,10}(\.js)?$/$script,1p,strict1p,domain=com|to,header=etag:/^"[a-f0-9]{4,}-[a-f0-9]{4,}"$/
 !#endif
 ! https://github.com/uBlockOrigin/uAssets/issues/23459
-/^https?:\/\/[a-z]{5,12}\.com\/[0-9a-h]{1,17}\?[0-9a-zA-Z]{1,17}=[0-9a-zA-Z]{300,1300}/$xhr,3p,match-case,to=com,method=get,header=via:1.1 google
+! https://www.reddit.com/r/uBlockOrigin/comments/1cyfbpa/ad_block_stopped_working_on_sports_streaming/
+/^https?:\/\/[a-z]{5,12}\.com\/[0-9a-h]{1,19}\?[0-9a-zA-Z]{1,19}=[0-9a-zA-Z]{300,1300}/$xhr,3p,match-case,to=com,method=get,header=via:1.1 google
 
 ! cricket sites popups
 crictime.is,freehit.eu,mobilecric.com##[href*="?key"][target="_blank"]:remove-attr(href)
@@ -1732,8 +1733,9 @@ kimetsujbn.blogspot.com##+js(nowoif, !blogspot)
 ||gviet.vn/public/js/player/ads/ima3.js^$script,redirect-rule=google-ima.js,domain=vtvcab.vn
 
 ! https://github.com/uBlockOrigin/uAssets/issues/23734
-diablo4.th.gl##+js(set, nitroAds, {})
-diablo4.th.gl##+js(set, nitroAds.createAd, noopFunc)
+! https://github.com/uBlockOrigin/uAssets/issues/23804
+th.gl##+js(set, nitroAds, {})
+th.gl##+js(set, nitroAds.createAd, noopFunc)
 
 ! https://young-machine.com/
 ||fewcents.co/scripts/paywall-$3p
@@ -1777,3 +1779,6 @@ seriescultes.store##+js(ra, href, #clickfakeplayer)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/23800
 @@||testcoz.com^$ghide
+
+! https://poki.com/en/g/subway-surfers - ads
+||api.poki.com/ads/
