@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Quick fixes
 ! Expires: 12 hours
-! Last modified: Fri, 24 May 2024 11:14:57 +0000
-! Diff-Path: ../patches/2024.5.24.758.patch#ublock-quick-fixes
+! Last modified: Fri, 24 May 2024 15:08:15 +0000
+! Diff-Path: ../patches/2024.5.24.1043.patch#ublock-quick-fixes
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/quick-fixes.txt ***
@@ -72,7 +72,7 @@ sethniceletter.com##+js(set, console.clear, undefined)
 !next-episode.net##+js(rpnt, script, '/.then[\s\S]{0,}?;/g')
 !next-episode.net##+js(rmnt, script, '/\d+\+\d|64|\+\+|\+1|adbl|ablk|[\s\S]{0,}(\.\.|function)[\s\S]{1800,}|document\[/i')
 @@||pagead2.googlesyndication.com^$script,domain=next-episode.net
-download.megaup.net##+js(rpnt, script, ['name']!='id', ['name']!= true && false && ['name']!='id', condition, attribute)
+download.megaup.net##+js(rpnt, script, /for\s*\(\s*const.*?const/g, const, condition, attribute)
 raenonx.cc##body > div[class] > style:first-child + .w-full:has(> .button-clickable-bg-opaque > .transform-smooth > svg)
 raenonx.cc##.w-full:has(> style + div > style + div .adsbygoogle)
 raenonx.cc##[id^="headlessui-"] [role="dialog"]:has(.w-full > .w-full > .markdown > p > a[href="https://pks.raenonx.cc/en/docs/view/help/disable-adblock"])
@@ -109,6 +109,7 @@ kotobank.jp##+js(nostif, return, 7400)
 ||peraichi.com^$doc,badfilter
 famitsu.com##+js(set, TagProvider.cleanup, noopFunc)
 olx.bg,olx.com.br,olx.kz,olx.pl,olx.pt,olx.ro,olx.ua,olx.uz#@#[data-cy="l-card"]:has([data-testid="adCard-featured"])
+! Can be removed on 31th of May, 2024.
 www.google.*#@#+js(trusted-set-cookie, SOCS, CAESHAgBEhJnd3NfMjAyMzA2MTItMF9SQzIaAmZpIAEaBgiAzK6kBg, 1year)
 ||startpage.com/sp/sxpra?$badfilter
 finance.yahoo.co.jp#@#div[class] > section[class][id] > div[class*=" "]:has(span[style^="padding-top:"])
