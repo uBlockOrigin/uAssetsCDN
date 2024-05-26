@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Quick fixes
 ! Expires: 12 hours
-! Last modified: Sun, 26 May 2024 01:43:40 +0000
-! Diff-Path: ../patches/2024.5.26.562.patch#ublock-quick-fixes
+! Last modified: Sun, 26 May 2024 13:22:43 +0000
+! Diff-Path: ../patches/2024.5.26.860.patch#ublock-quick-fixes
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/quick-fixes.txt ***
@@ -72,7 +72,7 @@ brucevotewithin.com##+js(set, console.clear, undefined)
 !next-episode.net##+js(rpnt, script, '/.then[\s\S]{0,}?;/g')
 !next-episode.net##+js(rmnt, script, '/\d+\+\d|64|\+\+|\+1|adbl|ablk|[\s\S]{0,}(\.\.|function)[\s\S]{1800,}|document\[/i')
 @@||pagead2.googlesyndication.com^$script,domain=next-episode.net
-download.megaup.net##+js(rpnt, script, /for\s*\(\s*const.*?const/g, const, condition, attribute)
+download.megaup.net##+js(rpnt, script, /for\s*\(\s*(const|let|var).*?return;}}/g, , condition, attribute)
 raenonx.cc##body > div[class] > style:first-child + .w-full:has(> .button-clickable-bg-opaque > .transform-smooth > svg)
 raenonx.cc##.w-full:has(> style + div > style + div .adsbygoogle)
 raenonx.cc##[id^="headlessui-"] [role="dialog"]:has(.w-full > .w-full > .markdown > p > a[href="https://pks.raenonx.cc/en/docs/view/help/disable-adblock"])
@@ -92,10 +92,6 @@ in-jpn.com,xth.jp##^script:has-text(フィルタリングを無効)
 ||in-jpn.com^$script,replace=/function myFunc[\s\S\n]+?doSakigake\(\);[\s\S\n]+?\}//
 !#endif
 in-jpn.com,oninet.ne.jp,xth.jp##+js(set, myFunc, noopFunc)
-kotobank.jp##+js(nostif, return, 7400)
-/affiliate.js$badfilter
-||peraichi.com^$doc,badfilter
-famitsu.com##+js(set, TagProvider.cleanup, noopFunc)
 olx.bg,olx.com.br,olx.kz,olx.pl,olx.pt,olx.ro,olx.ua,olx.uz#@#[data-cy="l-card"]:has([data-testid="adCard-featured"])
 ! Can be removed on 31th of May, 2024.
 www.google.*#@#+js(trusted-set-cookie, SOCS, CAESHAgBEhJnd3NfMjAyMzA2MTItMF9SQzIaAmZpIAEaBgiAzK6kBg, 1year)
@@ -108,3 +104,6 @@ www.ebay.*##.srp-results > .s-item:has(.s-item__detail > span > span[aria-labell
 www.ebay.*##.srp-results > .s-item:has(.s-item__detail > span > span[aria-labelledby]:matches-css(filter: none) > div:matches-css(color: rgb(255, 255, 255)):matches-css(filter: invert(1)))
 www.ebay.*##.srp-results > .s-item:has(.s-item__detail > span > span[aria-labelledby]:matches-css(filter: none) > div:matches-css(color: rgb(0, 0, 0)):matches-css(filter: none))
 www.ebay.*##+js(rpnt, script, window.SFE.LazyLoading.initialize(300);, window.SFE.LazyLoading.initialize(300); !function(){let t=document.querySelectorAll("section > ul.b-list__items_nofooter > li.s-item");for(let e=0;e<t.length;e++){let l=t[e].querySelector('span[aria-hidden="true"][data-w]')\,r=(l=window.getComputedStyle(l).getPropertyValue("transform")).split("(")[1].split(")")[0].split("\,")\,a=r[0]\,o=Math.round(Math.atan2(r[1]\,a)*(180/Math.PI))\,i=t[e].querySelector('span[aria-hidden="true"][data-w]')\,n=(i=window.getComputedStyle(i\,"::before").getPropertyValue("transform")).split("(")[1].split(")")[0].split("\,")\,s=n[0]\,p=Math.round(Math.atan2(n[1]\,s)*(180/Math.PI));o+p>=-1&&o+p<=1&&(t[e].style.display="none")}}();)
+@@||googletagmanager.com/gtm.js$domain=eki-net.com
+/ad/img/*$image,domain=~jiji.com,badfilter
+/ad/img/*$image,domain=~eki-net.com|~jiji.com
