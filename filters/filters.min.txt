@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Sat, 01 Jun 2024 18:47:34 +0000
-! Diff-Path: ../patches/2024.6.2.97.patch#ublock-filters
+! Last modified: Sun, 02 Jun 2024 06:09:09 +0000
+! Diff-Path: ../patches/2024.6.2.388.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -30,7 +30,7 @@ youtube.com##.ytlr-horizontal-list-renderer__items > .yt-virtual-list__container
 ||googlevideo.com/initplayback?source=youtube*&c=TVHTML5&oad=$xhr,domain=youtube.com
 ! Shorts Ad
 m.youtube.com,music.youtube.com,tv.youtube.com,www.youtube.com,youtubekids.com,youtube-nocookie.com##+js(json-prune-fetch-response, reelWatchSequenceResponse.entries.[-].command.reelWatchEndpoint.adClientParams.isAd entries.[-].command.reelWatchEndpoint.adClientParams.isAd, , propsToMatch, url:/reel_watch_sequence?)
-m.youtube.com,music.youtube.com,tv.youtube.com,www.youtube.com,youtubekids.com,youtube-nocookie.com##+js(json-prune-fetch-response, overlay, overlay.shortsAdsRenderer, propsToMatch, url:/reel_item_watch?)
+! m.youtube.com,music.youtube.com,tv.youtube.com,www.youtube.com,youtubekids.com,youtube-nocookie.com##+js(json-prune-fetch-response, overlay, overlay.shortsAdsRenderer, propsToMatch, url:/reel_item_watch?)
 ! AdDefend
 !#if env_chromium
 lablue.*##+js(nostif, push, 500)
@@ -1009,6 +1009,7 @@ yts.*##+js(aopr, runAdblock)
 yts.*##+js(nowoif)
 yts.*##+js(nostif, "admc")
 yts.*##+js(acs, document.createElement, admc)
+yts.*##+js(aopw, Adcash)
 yts.*##^script:has-text(admc)
 */script/clock.js$script,domain=yts.*
 yts.*##[id*="container"][id^="id"]
@@ -9266,7 +9267,6 @@ buktube.com,fullxh.com,hamsterix.*,megaxh.com,movingxh.world,seexh.com,taoxh.lif
 buktube.com,fullxh.com,hamsterix.*,megaxh.com,movingxh.world,seexh.com,taoxh.life,unlockxh4.com,xhaccess.com,xhadult2.com,xhadult3.com,xhadult4.com,xhadult5.com,xhamster.*,xhamster1.*,xhamster10.*,xhamster11.*,xhamster12.*,xhamster13.*,xhamster14.*,xhamster15.*,xhamster16.*,xhamster17.*,xhamster18.*,xhamster19.*,xhamster20.*,xhamster2.*,xhamster3.*,xhamster4.*,xhamster42.*,xhamster46.com,xhamster5.*,xhamster7.*,xhamster8.*,xhbig.com,xhday.com,xhday1.com,xhmoon5.com,xhplanet1.com,xhplanet2.com,xhreal2.com,xhreal3.com,xhtab2.com,xhtree.com,xhvictory.com,xhwebsite.com,xhwebsite2.com,xhwide1.com##.VDkO-pxpremium-n-overlay
 !#endif
 /api/models/vast?userId=*&adblocked=$xhr,1p
-||enx5.online^
 &spotPageType=*&statsUID=$frame,xhr,3p
 /mlxhl/v*/for-page?$xhr
 xhamster20.*##.yxd-jbanner
@@ -9294,7 +9294,6 @@ brainly.*##+js(aopr, __brn_private_mode)
 *$script,redirect-rule=noopjs,domain=linkneverdie.net
 linkneverdie.net###adsqc
 linkneverdie.net##.quangcao
-||bidtimize.com^
 linkneverdie.net##.show.fade.modal-backdrop
 linkneverdie.net##body:style(overflow: auto !important;)
 linkneverdie.net#@#+js(nostif, t)
@@ -9328,7 +9327,6 @@ homemoviestube.com##.film-aside-ads
 homemoviestube.com##+js(aeld, click, clickCount)
 &vast=$xhr,domain=homemoviestube.com
 ||homemoviestube.com/b4b8.js
-||youservit.com^
 ! END: Rules from filters.txt
 ! START: Regional lists
 ! <<<<< czech slovak filters >>>>>
@@ -9552,8 +9550,6 @@ infinityscans.xyz,infinityscans.net##+js(rmnt, script, ;break;case $.)
 !#endif
 ! linkos. info/photogen. hair/sharedrive. yachts popups
 linkos.info,photogen.hair,sharedrive.*##+js(nowoif)
-||areamindless.com^
-||deeprootedstranded.com^
 pictoa.com##+js(aopw, tiPopAction)
 sunci.net,yoykp.com##+js(aopr, app_vars.please_disable_adblock)
 sunci.net,yoykp.com##+js(acs, navigator, FingerprintJS)
@@ -9697,7 +9693,6 @@ zoro.*##+js(nowoif)
 @@||forum.iptvkalite.com^$script,1p
 forum.iptvkalite.com##ins.adsbygoogle
 deano.me,themehospital.co.uk,resplace.com##+js(acs, jQuery, this)
-||adbyss.com^
 ||es.ylilauta.org^
 ylilauta.org##iframe.a
 eurotruck2.com.br##+js(aeld, load, nextFunction)
@@ -9866,7 +9861,6 @@ apl341.me,apl332.me,apl323.me###ads
 aliezstream.pro###openLinks:remove()
 ||crypto-ads.net/delivr^$3p
 ||thqgxvs.com^$3p
-||tikrailrou.com^
 dichvureviewmap.com##+js(no-fetch-if, googlesyndication)
 raenonx.cc##body > div[class] > style:first-child + .w-full:has(> .button-clickable-bg-opaque > .transform-smooth > svg)
 gunauc.net##+js(no-fetch-if, adsbygoogle)
@@ -9888,7 +9882,6 @@ fastapi.tiangolo.com###announce-right .item:has(.sponsor-badge)
 voodc.com##+js(json-prune, *, *.adserverDomain)
 roystream.com##+js(acs, JSON.parse, atob)
 1stream.eu,roystream.com##+js(nowoif)
-||nxszxho.com^
 ripleyfieldworktracker.com#@#.googleAds
 ripleyfieldworktracker.com##+js(acs, jQuery, ad-block)
 technofino.in##+js(no-fetch-if, googlesyndication)
@@ -9896,7 +9889,6 @@ ettvi.com##div[class*="ads"]:has-text(/Advertisement/i)
 ||beatstars.com/v3/promote/
 ||beatstars.com/promos?
 ! anti adblock on https://perchance.org/ai-chat
-||eu-1-id5-sync.com^
 ||perchance.org/api/count?key=abp$xhr,1p
 ||perchance.org/api/count?key=abt$xhr,1p
 perchance.org##+js(rpnt, script, scri12pts && ifra2mes && coo1kies, true)
@@ -9960,7 +9952,6 @@ totalsportek.to,eztvx.to,topstreams.info,lewblivehdplay.ru,claplivehdplay.ru,viw
 ! cricket sites popups
 crictime.is,freehit.eu,mobilecric.com##[href*="?key"][target="_blank"]:remove-attr(href)
 factorp.xyz##+js(nowoif)
-||facileravagebased.com^
 @@||thorstin.ddns.net^$frame,domain=thorstin.nl
 ssstik.io##+js(no-xhr-if, googlesyndication)
 animeunity.to##+js(rmnt, script, Popup)
@@ -9990,8 +9981,6 @@ choosingnothing.com###cvad
 choosingnothing.com###cvadclo
 choosingnothing.com##div[data-player] > a[href][style*="z-index"]
 ##a[href][style="cursor:pointer;width:100%;height:100%;z-index:10000000000000000;position:absolute;top:0;left:0;"]
-||excitingstory.click^
-||shoopsee.net^
 cryptorank.io##+js(nostif, ..., 300)
 cryptorank.io##tbody > tr:not(.init-scroll):has(a[href*="?"][target="_blank"])
 cryptorank.io##div[tabindex] > button:has-text(Buy $)
@@ -10087,7 +10076,7 @@ kimetsujbn.blogspot.com##+js(nowoif, !blogspot)
 ||gviet.vn/public/js/player/ads/ima3.js^$script,redirect-rule=google-ima.js,domain=vtvcab.vn
 th.gl##+js(set, nitroAds, {})
 th.gl##+js(set, nitroAds.createAd, noopFunc)
-||nitropay.com^$script,3p,redirect-rule=noopjs,domain=th.gl
+||s.nitropay.com/ads-*.js^$script,3p,redirect-rule=noopjs
 ||fewcents.co/scripts/paywall-$3p
 wetter3.de##+js(set, karte3, 18)
 @@||emailregex.com^$ghide
@@ -10112,7 +10101,6 @@ cybernews.com##body:style(overflow: auto !important;)
 ||fuseplatform.net^$script,3p,redirect-rule=noopjs,domain=shipspotting.com
 savegame.pro##+js(aost, document.getElementsByTagName, adsBlocked)
 savegame.pro##body > div:first-child[id]:has(> div > div > div > div > div + .adblock_title)
-||wowrapidly.com^
 digipuzzle.net###maindiv > tbody > tr > td[style="display:inline-block;width:180px;height:630px;text-align:left"]
 digipuzzle.net##+js(no-xhr-if, googlesyndication)
 knowt.com##div[class^="breakpoints_mdDownDisplayNone"]:has(#knowt_sticky_rightrail)
@@ -10127,7 +10115,6 @@ learn-cpp.org##+js(aeld, load, showcfkModal)
 learn-cpp.org###google-ad-right > div.mt-3
 learn-cpp.org##a[href^="https://codingforkids.io"]
 ||learn-cpp.org/static/img/banners/cfk/$image,1p
-||rtuew.xyz^
 cosmonova-broadcast.tv##+js(set, amodule.data, emptyArr)
 libertycity.net##+js(nano-sib, timer)
 ||gankana.com^
@@ -14435,8 +14422,6 @@ vkspeed.com##div.jw-cue-type-ads
 @@||acilissaati.com^$ghide
 acilissaati.com##ins.adsbygoogle
 whowantstuffs.blogspot.com##+js(acs, addEventListener, google_ad_client)
-@@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js^$script,domain=aiarticlespinner.co
-aiarticlespinner.co##[id^="topads_"]
 linkpoi.me##+js(acs, Math, replace)
 linkpoi.me##+js(aopr, app_vars.force_disable_adblock)
 linkpoi.me##+js(set, blurred, false)
@@ -18885,7 +18870,7 @@ cyberscoop.com##+js(set, init_welcome_ad, noopFunc)
 mboost.me##+js(nano-stb, setinteracted, 2000)
 mboost.me##+js(ra, href, .MediaStep, stay)
 mboost.me##.MediaStep:style(cursor: pointer !important;)
-||api.utreon.com/v1/videos?channel_handle$xhr,1p
+||api.*.com/v1/videos?channel_handle=$xhr,1p
 utreon.com##.ad-banner-static
 bloggertheme.xyz#@##ad-top
 bloggertheme.xyz##+js(nano-stb, waiting, 5000)
