@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Fri, 07 Jun 2024 16:08:30 +0000
-! Diff-Path: ../patches/2024.6.7.987.patch#ublock-filters
+! Last modified: Fri, 07 Jun 2024 21:13:42 +0000
+! Diff-Path: ../patches/2024.6.7.1282.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -10177,6 +10177,13 @@ stylisheleg4nt.com##+js(acs, document.documentElement, break;case $.)
 mp3y.info##+js(nowoif)
 ||mp3y.info/*.php^$frame
 @@||fx545.site^$ghide
+raidrush.net##+js(nostif, getComputedStyle(el))
+!#if env_firefox
+raidrush.net#@#.funbox
+raidrush.net#@##top_ga
+raidrush.net##.funbox:style(position: absolute !important; left: -10000px !important;)
+raidrush.net###top_ga:style(position: absolute !important; left: -10000px !important;)
+!#endif
 ! Link shortener filters go into their own dedicated list
 ! *** filters/ubo-link-shorteners.txt ***
 ! gplinks all domains (gplinks.co/EWu8)
@@ -21674,7 +21681,8 @@ newscon.org##+js(aopw, pbjs)
 newscon.org##+js(nosiif, ads)
 newscon.org##+js(nostif, adblock)
 newscon.org##+js(set, window.runningAdsAllowed, true)
-newscon.org##+js(set, WAITING_TIME, 0)
+newscon.org##+js(set, tOS1, 150)
+@@||newscon.org^$ghide
 arkadium.com##+js(set, __INITIAL_STATE__.gameLists.gamesNoPrerollIds.indexOf, trueFunc)
 arkadium.com##+js(nano-sib)
 arkadium.com#@#div[class^="Ad-adContainer"]
@@ -23231,6 +23239,7 @@ osuskinner.com,osuskins.net##.ad-300-250, .ad-billboard
 filext.com##+js(rpnt, script, /if\(.&&.\.target\)/, if(false))
 apkdrill.com##+js(noeval-if, deblocker)
 everand.com##+js(no-fetch-if, /api/v1/events)
+everand.com##+js(set, Scribd.Blob.AdBlockerModal, noopFunc)
 ! zona11 .com anti-adb
 zona11.com##+js(nostif, keepChecking)
 kemiox.com##+js(rmnt, script, deblocker)
