@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Fri, 14 Jun 2024 08:20:17 +0000
-! Diff-Path: ../patches/2024.6.14.506.patch#ublock-filters
+! Last modified: Fri, 14 Jun 2024 12:40:45 +0000
+! Diff-Path: ../patches/2024.6.14.804.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -26,6 +26,7 @@ m.youtube.com,music.youtube.com,tv.youtube.com,www.youtube.com,youtubekids.com,y
 m.youtube.com,music.youtube.com,tv.youtube.com,www.youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, ytInitialPlayerResponse.adSlots, undefined)
 m.youtube.com,music.youtube.com,tv.youtube.com,www.youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, playerResponse.adPlacements, undefined)
 m.youtube.com,music.youtube.com,youtubekids.com,youtube-nocookie.com##+js(json-prune, playerResponse.adPlacements playerResponse.playerAds playerResponse.adSlots adPlacements playerAds adSlots important)
+www.youtube.com##+js(json-prune-fetch-response, playerAds adPlacements adSlots playerResponse.playerAds playerResponse.adPlacements playerResponse.adSlots, , propsToMatch, /playlist?)
 youtube.com##.ytlr-horizontal-list-renderer__items > .yt-virtual-list__container > .yt-virtual-list__item--visible.yt-virtual-list__item--selected.yt-virtual-list__item:has-text(Ad)
 ||googlevideo.com/initplayback?source=youtube*&c=TVHTML5&oad=$xhr,domain=youtube.com
 ! Shorts Ad
@@ -9781,9 +9782,10 @@ sexempire.xyz###video_player ~ div[id]:has(> div[style^="position:fixed;inset:0p
 poki.com##div[class]:has(> div > div[style*="height"][style*="width"][style$="px; overflow: hidden;"] > [id*="_gp_"])
 web.businessuniqueidea.com##+js(aopr, b2a)
 !#if cap_html_filtering
-||tmailor.com/js/main_new.js$script,1p,replace=/if\(blocked\)/if(false)/g
+||tmailor.com/js/main_new.js^$script,1p,replace=/callback\(true\)/callback(false)/g
 !#else
 @@||pagead2.googlesyndication.com^$xhr,3p,domain=tmailor.com
+@@||tmailor.com^$ghide
 !#endif
 bgmateriali.com##+js(no-fetch-if, googlesyndication)
 ||bgmateriali.com/js/detector.js$script,1p
@@ -10840,7 +10842,6 @@ enagato.com##+js(set, blurred, false)
 codesnse.com##+js(set, go_popup, {})
 codesnse.com##+js(nano-sib, counter, *, 0.001)
 codesnse.com##[href^="https://app.adjust.com/"]
-codesnse.com###paras-btn-after:others()
 ! pandaznetwork.com (pandaznetwork.com/TN8cD)
 pandaznetwork.com##+js(set, blurred, false)
 freemodsapp.xyz###wpsafe-link:style(display: block !important;)
@@ -11229,7 +11230,6 @@ zone-annuaire.*##[style^="font-weight"]:has-text(PREMIUM)
 ||zone-annuaire.bond/main.js?v=$script,1p
 zone-annuaire.*##+js(nowoif)
 ||zone-annuaire.hair/main.js?v=$script
-notube.*,~notube.com##+js(ra, onClick)
 notube.*,~notube.com##+js(nowoif)
 *$script,redirect-rule=noopjs,domain=runmods.com
 runmods.com##+js(nano-sib)
@@ -22351,6 +22351,7 @@ turkishaudiocenter.com##+js(nostif, show)
 lifestyle.bg,money.bg,news.bg,topsport.bg,webcafe.bg##+js(no-fetch-if, method:GET)
 lifestyle.bg,money.bg,news.bg,topsport.bg,webcafe.bg##+js(nostif, google)
 lifestyle.bg,news.bg,topsport.bg,webcafe.bg##+js(aeld, DOMContentLoaded, location.replace)
+lifestyle.bg,news.bg,topsport.bg,webcafe.bg##+js(no-fetch-if, method:HEAD)
 @@/securepubads.$domain=lifestyle.bg|news.bg|topsport.bg,badfilter
 lifestyle.bg,news.bg,topsport.bg,webcafe.bg##.mc-layout__bannerContent
 mtg-print.com##+js(no-fetch-if, ads)
@@ -22477,10 +22478,10 @@ amateurporn.co##+js(set, flashvars.popunder_url, '')
 */wp-content/plugins/uncopy/
 filmisub.cc##+js(no-xhr-if, ads)
 filmisub.cc##+js(aost, setTimeout, adsBlocked)
-di.fm,jazzradio.com##+js(set, di.VAST.XHRURLHandler, noopFunc)
-di.fm,jazzradio.com##+js(no-xhr-if, googlesyndication)
-di.fm,jazzradio.com##+js(set, di.app.WebplayerApp.Ads.Supervisor.eligibleForPreroll, trueFunc)
-di.fm,jazzradio.com##+js(set, di.app.WebplayerApp.Ads.Supervisor.eligibleForMidroll, trueFunc)
+classicalradio.com,di.fm,jazzradio.com,radiotunes.com,rockradio.com,zenradio.com##+js(set, di.VAST.XHRURLHandler, noopFunc)
+classicalradio.com,di.fm,jazzradio.com,radiotunes.com,rockradio.com,zenradio.com##+js(no-xhr-if, googlesyndication)
+classicalradio.com,di.fm,jazzradio.com,radiotunes.com,rockradio.com,zenradio.com##+js(set, di.app.WebplayerApp.Ads.Supervisor.eligibleForPreroll, trueFunc)
+classicalradio.com,di.fm,jazzradio.com,radiotunes.com,rockradio.com,zenradio.com##+js(set, di.app.WebplayerApp.Ads.Supervisor.eligibleForMidroll, trueFunc)
 ||cdn77.org^$3p,domain=pricebefore.com
 ! admiral
 advocate.com,alternet.org,androidcure.com,arobasenet.com,attackofthefanboy.com,bodytr.com,cbssports.com,cleveland.com,clutchpoints.com,cultofmac.com,currentaffairs.gktoday.in,dailycaller.com,digitalmusicnews.com,dogtime.com,dotesports.com,epicstream.com,fallbrook247.com,feral-heart.com,gamesgames.com,gamerevolution.com,gazettenet.com,girlsgogames.co.uk,insidenova.com,jetztspielen.de,kasvekuvvet.net,leitesculinaria.com,nbcnews.com,notevibes.com,practicalpainmanagement.com,prad.de,progameguides.com,pwinsider.com,ranker.com,realityblurb.com,ruinmyweek.com,sanangelolive.com,sanfoundry.com,selfhacked.com,siliconera.com,simpleflying.com,son.co.za,sporcle.com,stealthoptional.com,stylecaster.com,thesportster.com,upi.com,viraliq.com,visualcapitalist.com,wegotthiscovered.com,primagames.com##+js(aopr, googletag)
