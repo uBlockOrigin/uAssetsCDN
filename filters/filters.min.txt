@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Sun, 16 Jun 2024 23:41:56 +0000
-! Diff-Path: ../patches/2024.6.17.98.patch#ublock-filters
+! Last modified: Mon, 17 Jun 2024 04:44:31 +0000
+! Diff-Path: ../patches/2024.6.17.390.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -2100,10 +2100,6 @@ freepdf-books.com##+js(nano-sib, myTimer, 1500)
 met.bz##+js(noeval)
 met.bz##+js(aopr, AaDetector)
 hideout.*##+js(acs, stop, adblock)
-oploverz.*##+js(nostif, popup)
-oploverz.*###overplay
-*.gif$domain=oploverz.*,image
-*$script,3p,denyallow=cloudflare.com|disqus.com|disquscdn.com|facebook.com|fastlylb.net|fbcdn.net|facebook.net|googleapis.com|jsdelivr.net|statically.io|githack.com|gitcdn.xyz|gitcdn.link|gitcdn.herokuapp.com|arc.io|fluidplayer.com,domain=oploverz.*
 @@||pastpapers.papacambridge.com^$ghide
 pastpapers.papacambridge.com##[id^="aswift"]
 mimaletadepeliculas.*##+js(aeld, load, advertising)
@@ -8141,9 +8137,6 @@ yggtorrent.*##+js(aopw, Fingerprint2)
 thefastlaneforum.com##+js(nostif, .show, 1000)
 zeeebatch.blogspot.com##+js(aopr, adBlockDetected)
 ||googlesyndication.com/pagead/js/adsbygoogle.js$script,redirect=noopjs:10,domain=infolokerserang.com
-*$xhr,redirect-rule=noop.txt,domain=tunein.com
-||imasdk.googleapis.com/js/sdkloader/ima3.js$script,3p,redirect-rule=google-ima.js,domain=tunein.com
-||imasdk.googleapis.com/pal/sdkloader/pal.js$script,3p,redirect-rule=noopjs,domain=tunein.com
 @@||luscious.net^$ghide
 luscious.net##.ad_lead
 *$script,redirect-rule=noopjs,domain=luscious.net
@@ -9309,6 +9302,14 @@ file-upload.com##^meta[http-equiv="refresh"]
 file-upload.*##+js(aopw, Fingerprint2)
 ||file-upload.*^$frame
 /werbebanner-$badfilter
+oploverz.*##+js(acs, $, popup)
+oploverz.*##+js(nostif, popup)
+oploverz.*###overplay
+*.gif$domain=oploverz.*,image
+*$script,3p,denyallow=cloudflare.com|disqus.com|disquscdn.com|facebook.com|fastlylb.net|fbcdn.net|facebook.net|googleapis.com|jsdelivr.net|statically.io|githack.com|gitcdn.xyz|gitcdn.link|gitcdn.herokuapp.com|arc.io|fluidplayer.com,domain=oploverz.*
+*$xhr,redirect-rule=noop.txt,domain=tunein.com
+||imasdk.googleapis.com/js/sdkloader/ima3.js$script,3p,redirect=google-ima.js,domain=tunein.com,important
+||imasdk.googleapis.com/pal/sdkloader/pal.js$script,3p,redirect=noopjs,domain=tunein.com,important
 ! END: Rules from filters.txt
 ! START: Regional lists
 ! <<<<< czech slovak filters >>>>>
@@ -9934,7 +9935,7 @@ rnbastreams.com,4kwebplay.xyz,qqwebplay.xyz,totalsportek.to,eztvx.to,topstreams.
 !#if env_firefox
 /^https:\/\/[a-z]{4,}\.(?:com|to)\/z-[a-z0-9]{7,10}(\.js)?$/$script,1p,strict1p,domain=com|to,header=etag:/^"[a-f0-9]{4,}-[a-f0-9]{4,}"$/
 !#endif
-/^https?:\/\/[a-z]{5,12}\.com\/[0-9a-h]{1,17}\?[0-9a-zA-Z]{1,21}=[0-9a-zA-Z]{300,1300}/$xhr,3p,match-case,to=com,method=get,header=via:/1[.:]1 (?:google|haproxy|nginx)/
+/^https?:\/\/[a-z]{5,12}\.com\/[0-9a-h]{1,17}\?[0-9a-zA-Z]{1,21}=[0-9a-zA-Z]{300,1300}/$xhr,3p,match-case,to=com,method=get,header=via:/1[.:]1/
 ! cricket sites popups
 crictime.is,freehit.eu,mobilecric.com##[href*="?key"][target="_blank"]:remove-attr(href)
 factorp.xyz##+js(nowoif)
@@ -10194,6 +10195,18 @@ lowcygier.pl##.tile-container-small:has(> a[href*="/?utm_term=index&utm_source=m
 lowcygier.pl##header.intro:style(margin-bottom: 0px !important;)
 vandaaginside.nl##+js(trusted-rpnt, script, '"adblock-detection","enabled":true', '"adblock-detection","enabled":false')
 uhdmovies.*##+js(nowoif)
+tech.unblockedgames.world##+js(nano-sib, /count|verify|isCompleted/, , 0.001)
+||analdinporn.com/rock-widget.php^$3p,frame
+rock.porn##+js(set, postroll, undefined)
+rock.porn##+js(set, interstitial, undefined)
+rock.porn###rock-widget-host
+rock.porn##.banner-sasd
+rock.porn##.banner-asd
+rock.porn##.fp-brand
+rock.porn##.maf
+rock.porn##.watch-link
+rock.porn##a[href^="https://wittered-mainging.com/"]
+www.tiktok.com##+js(json-prune-fetch-response, itemList.[-].ad_info.ad_id, , propsToMatch, url:api/recommend/item_list/)
 ! Link shortener filters go into their own dedicated list
 ! *** filters/ubo-link-shorteners.txt ***
 ! gplinks all domains (gplinks.co/EWu8)
@@ -18246,7 +18259,6 @@ reaperscans.id##+js(no-xhr-if, ads)
 *$media,redirect-rule=noopmp3-0.1s,domain=149.56.24.226
 layarkacaxxi.icu##+js(aopr, __Y)
 layarkacaxxi.icu##+js(nowoif)
-||static.doubleclick.net/instream/ad_status.js$xhr,redirect-rule=noop.js,domain=sshinjector.net
 valeronevijao.com,cigarlessarefy.com,figeterpiazine.com,yodelswartlike.com,generatesnitrosate.com,crownmakermacaronicism.com,chromotypic.com,gamoneinterrupted.com,metagnathtuggers.com,wolfdyslectic.com,rationalityaloelike.com,sizyreelingly.com,simpulumlamerop.com,urochsunloath.com,monorhinouscassaba.com,counterclockwisejacky.com,35volitantplimsoles5.com,scatch176duplicities.com,antecoxalbobbing1010.com,boonlessbestselling244.com,cyamidpulverulence530.com,guidon40hyporadius9.com,449unceremoniousnasoseptal.com,19turanosephantasia.com,30sensualizeexpression.com,321naturelikefurfuroid.com,745mingiestblissfully.com,greaseball6eventual20.com,toxitabellaeatrebates306.com,20demidistance9elongations.com,audaciousdefaulthouse.com,availedsmallest.com,fittingcentermondaysunday.com,fraudclatterflyingcar.com,launchreliantcleaverriver.com,matriculant401merited.com,realfinanceblogcenter.com,reputationsheriffkennethsand.com,telyn610zoanthropy.com,tubelessceliolymph.com,tummulerviolableness.com,un-block-voe.net,v-o-e-unblock.com,voe-un-block.com,voe-unblock.*,voeun-block.net,voeunbl0ck.com,voeunblck.com,voeunblk.com,voeunblock.com,voeunblock1.com,voeunblock2.com,voeunblock3.com##+js(acs, $, /\.fadeIn|\.show\(.?\)/)
 valeronevijao.com,cigarlessarefy.com,figeterpiazine.com,yodelswartlike.com,generatesnitrosate.com,crownmakermacaronicism.com,chromotypic.com,gamoneinterrupted.com,metagnathtuggers.com,wolfdyslectic.com,rationalityaloelike.com,sizyreelingly.com,simpulumlamerop.com,urochsunloath.com,monorhinouscassaba.com,counterclockwisejacky.com,35volitantplimsoles5.com,scatch176duplicities.com,antecoxalbobbing1010.com,boonlessbestselling244.com,cyamidpulverulence530.com,guidon40hyporadius9.com,449unceremoniousnasoseptal.com,19turanosephantasia.com,30sensualizeexpression.com,321naturelikefurfuroid.com,745mingiestblissfully.com,availedsmallest.com,greaseball6eventual20.com,toxitabellaeatrebates306.com,20demidistance9elongations.com,audaciousdefaulthouse.com,fittingcentermondaysunday.com,fraudclatterflyingcar.com,launchreliantcleaverriver.com,matriculant401merited.com,realfinanceblogcenter.com,reputationsheriffkennethsand.com,telyn610zoanthropy.com,tubelessceliolymph.com,tummulerviolableness.com,un-block-voe.net,v-o-e-unblock.com,voe-un-block.com,voe-unblock.*,voeun-block.net,voe.*,voeunbl0ck.com,voeunblck.com,voeunblk.com,voeunblock.com,voeunblock1.com,voeunblock2.com,voeunblock3.com##+js(nowoif)
 valeronevijao.com,cigarlessarefy.com,figeterpiazine.com,yodelswartlike.com,generatesnitrosate.com,crownmakermacaronicism.com,chromotypic.com,gamoneinterrupted.com,metagnathtuggers.com,wolfdyslectic.com,rationalityaloelike.com,sizyreelingly.com,simpulumlamerop.com,urochsunloath.com,monorhinouscassaba.com,counterclockwisejacky.com,35volitantplimsoles5.com,scatch176duplicities.com,antecoxalbobbing1010.com,boonlessbestselling244.com,cyamidpulverulence530.com,guidon40hyporadius9.com,449unceremoniousnasoseptal.com,19turanosephantasia.com,30sensualizeexpression.com,321naturelikefurfuroid.com,745mingiestblissfully.com,availedsmallest.com,greaseball6eventual20.com,toxitabellaeatrebates306.com,20demidistance9elongations.com,audaciousdefaulthouse.com,fittingcentermondaysunday.com,fraudclatterflyingcar.com,launchreliantcleaverriver.com,matriculant401merited.com,realfinanceblogcenter.com,reputationsheriffkennethsand.com,telyn610zoanthropy.com,tubelessceliolymph.com,tummulerviolableness.com,un-block-voe.net,v-o-e-unblock.com,voe-un-block.com,voe-unblock.*,voeun-block.net,voeunbl0ck.com,voeunblck.com,voeunblk.com,voeunblock.com,voeunblock1.com,voeunblock2.com,voeunblock3.com##+js(nostif, blocked)
@@ -19123,6 +19135,7 @@ thiepmung.com##+js(acs, nothingCanStopMeShowThisMessage)
 sponsorhunter.com##+js(aeld, click, window.focus)
 sponsorhunter.com##+js(set, popunder, undefined)
 rlxtech.tech##+js(nano-sib, count)
+rlxtech24h.com##+js(acs, document.createElement, AdBlock)
 ! moddroid.co => .com ads and popups
 moddroid.com##+js(nowoif)
 ||moddroid.com/static/js/pa-$script
@@ -20331,7 +20344,7 @@ petyado.com##td[width="800"][align="right"][valign="top"]
 tv2.no##.article-recommended
 @@||lecturel.com^$ghide
 lecturel.com##+js(aeld, load, nextFunction)
-||doubleclick.net/instream/ad_status.js$script,redirect=doubleclick_instream_ad_status.js
+||doubleclick.net/instream/ad_status.js^$script,xhr,redirect-rule=doubleclick_instream_ad_status.js:5
 pinloker.com,sekilastekno.com##+js(aeld, blur, counter)
 pinloker.com,sekilastekno.com,netfilm.app##+js(nowoif, /\.(com|net)\/4\//)
 pinloker.com,sekilastekno.com##+js(nano-sib, wait)
@@ -21653,8 +21666,10 @@ phineypet.com#@##adsiframe
 crewbase.net,phineypet.com###content > form[id]:has(> center > button):style(display: block !important;)
 ||phineypet.com/2x.png
 ||phineypet.com/300x600.png
+fapdrop.com##+js(no-fetch-if, doubleclick.net/instream/ad_status.js, war:doubleclick_instream_ad_status.js)
 fapdrop.com##+js(nostif, redURL)
 fapdrop.com##[href^="https://t.crdefault1.com/"]
+fapdrop.com##.king-ads
 embedgram.com##+js(nowoif)
 @@||ay.delivery/client-v2.js$script,domain=diep.io
 cellmapper.net##+js(nostif, /children\('ins'\)|Adblock|adsbygoogle/)
