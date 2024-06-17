@@ -1,5 +1,5 @@
 ! Title: uBlock₀ filters – Quick fixes
-! Last modified: Sun, 16 Jun 2024 23:41:10 +0000
+! Last modified: Mon, 17 Jun 2024 15:46:25 +0000
 ! Expires: 8 hours
 ! Description: Immediate, temporary filters to fix websites
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -47,8 +47,8 @@ youtube.com##+js(json-prune, playerResponse.adPlacements playerResponse.playerAd
 !#endif
 ||googlevideo.com/videoplayback*&ctier=L&*%2Cctier%2C$xhr,3p,domain=m.youtube.com|music.youtube.com|www.youtube.com
 !!#if ext_devbuild
-m.youtube.com,music.youtube.com,www.youtube.com##+js(trusted-rpnt, script, (function() {window.ytplayer=, /*start*/(()=>{let t=document.location.href\,e=[]\,n=[]\,o=!1;const r=Array.prototype.push\,i={apply:(t\,i\,a)=>(window.yt?.config_?.EXPERIMENT_FLAGS?.html5_enable_ssap_entity_id&&a[0]&&a[0]!==window&&"number"==typeof a[0].start&&a[0].end&&"ssap"===a[0].namespace&&a[0].id&&(o||0!==a[0]?.start||n.includes(a[0].id)||(e.length=0\,n.length=0\,o=!0\,r.call(e\,a[0])\,r.call(n\,a[0].id))\,o&&0!==a[0]?.start&&!n.includes(a[0].id)&&(r.call(e\,a[0])\,r.call(n\,a[0].id)))\,Reflect.apply(t\,i\,a))};window.Array.prototype.push=new Proxy(window.Array.prototype.push\,i)\,document.addEventListener("DOMContentLoaded"\,(function(){if(!window.yt?.config_?.EXPERIMENT_FLAGS?.html5_enable_ssap_entity_id)return;const r=()=>{const t=document.querySelector("video");if(t&&e.length){const r=Math.round(t.duration)\,i=Math.round(e.at(-1).end/1e3);if(0===t.currentTime&&r&&r===i){const r=Math.ceil(e.at(-1).start/1e3);t.currentTime<r&&(t.currentTime=r\,o=!1\,e.length=0\,n.length=0)}}};r();new MutationObserver((()=>{t!==document.location.href?(t=document.location.href\,e.length=0\,n.length=0\,o=!1\,r()):r()})).observe(document\,{childList:!0\,subtree:!0})}))})();document.currentScript.textContent=document.currentScript.textContent.replace(/\/\*start\*\/(.*)\/\*end\*\//g\,"");/*end*/(function() {window.ytplayer=, sedCount, 1)
-m.youtube.com,music.youtube.com,www.youtube.com##+js(nano-stb, [native code], 17000, 0.001)
+www.youtube.com##+js(trusted-rpnt, script, (function() {window.ytplayer=, /*start*/(()=>{let t=document.location.href\,e=[]\,n=[]\,o=""\,i=!1;const r=Array.prototype.push\,a={apply:(t\,o\,a)=>(window.yt?.config_?.EXPERIMENT_FLAGS?.html5_enable_ssap_entity_id&&a[0]&&a[0]!==window&&"number"==typeof a[0].start&&a[0].end&&"ssap"===a[0].namespace&&a[0].id&&(i||0!==a[0]?.start||n.includes(a[0].id)||(e.length=0\,n.length=0\,i=!0\,r.call(e\,a[0])\,r.call(n\,a[0].id))\,i&&0!==a[0]?.start&&!n.includes(a[0].id)&&(r.call(e\,a[0])\,r.call(n\,a[0].id)))\,Reflect.apply(t\,o\,a))};window.Array.prototype.push=new Proxy(window.Array.prototype.push\,a)\,document.addEventListener("DOMContentLoaded"\,(function(){if(!window.yt?.config_?.EXPERIMENT_FLAGS?.html5_enable_ssap_entity_id)return;const r=()=>{const t=document.querySelector("video");if(t&&e.length){const r=Math.round(t.duration)\,a=Math.round(e.at(-1).end/1e3)\,l=n.join("\,");if(r&&r===a&&o!==l){const r=Math.ceil(e.at(-1).start/1e3);t.currentTime<r&&(t.currentTime=r\,i=!1\,e.length=0\,n.length=0\,o=l)}}};r();new MutationObserver((()=>{t!==document.location.href?(t=document.location.href\,e.length=0\,n.length=0\,i=!1\,r()):r()})).observe(document\,{childList:!0\,subtree:!0})}))})();document.currentScript.textContent=document.currentScript.textContent.replace(/\/\*start\*\/(.*)\/\*end\*\//g\,"");/*end*/(function() {window.ytplayer=, sedCount, 1)
+www.youtube.com##+js(nano-stb, [native code], 17000, 0.001)
 !!#endif
 
 ! https://github.com/uBlockOrigin/uAssets/issues/20586#issuecomment-2144781835
@@ -79,7 +79,7 @@ ytlarge.com##ins.adsbygoogle[data-ad-slot]
 @@||pagead2.googlesyndication.com^$script,domain=next-episode.net
 
 ! https://github.com/uBlockOrigin/uAssets/issues/20505
-download.megaup.net##+js(rpnt, script, /for\s*\(\s*(const|let|var).*?return;\}\}.*?\);return;\}/g, , condition, attribute)
+download.megaup.net##+js(rpnt, script, /for\s*\(\s*(const|let|var).*?return\;\}\}/g, , condition, attribute)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/21353
 raenonx.cc##div[class*="main_announcement-animation"]:has(> [class*="announcement"] > .markdown > p > a[href$="/docs/view/site/ads-and-credits"])
@@ -107,22 +107,12 @@ japscan.lol#@#[class^="copine"]
 japscan.lol##+js(no-fetch-if, www.japscan.lol/imgs/japo/reader)
 ||www.japscan.lol/imgs/japo/reader$image,1p,redirect=1x1.gif
 
-! https://github.com/uBlockOrigin/uAssets/issues/24009
-@@||taplytics.com^$domain=royalbank.com
-
 ! Ad-Shield
 ! https://github.com/uBlockOrigin/uAssets/issues/24109
 ||html-load.com/loader.min.js$script,domain=indiatimes.com|recipes.timesofindia.com
 ||indiatimes.com/itads_
 ||indiatimes.com/lgads_
 ||indiatimes.com/toiads_
-
-! https://www.reddit.com/r/uBlockOrigin/comments/1dcnc7u/my_website_is_flagged_as_badware_risks_by_ubo/
-/^https:\/\/(?:ai|art|get)?-?midjourney(?:s|ai)[^\/]+\//$doc,domain=~midjourney.com|~edu|~gov,badfilter
-
-! https://github.com/uBlockOrigin/uAssets/issues/23033
-lewdninja.com,new.lewd.ninja#@#div[class^="box ~!@$"]:not(:empty)
-lewdninja.com,new.lewd.ninja##div[class^="box ~!@$"]:not(body > div)
 
 ! https://github.com/AdguardTeam/AdguardFilters/commit/7816c5ca977ddf32a7212e778f21becb9fe7dcbf
 bipblog.com#@#.main_center_block[style^="margin"]
@@ -134,3 +124,6 @@ instagram.com##+js(json-prune, data.xdt_injected_story_units.ad_media_items)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/20364
 @@*$xhr,script,3p,from=announcedcatchix1t.shop|brotherfox91.shop|currentcolorq2dv.shop|customsfencei3.shop|determinemousecshe.shop|fencethoughgdrt.shop|fencethroughout642.shop|foxwent6ot.shop|havingmovementu8x.shop|homebasis4d.shop|includingbreath5ku.shop|ironwinter6m.shop|leadmorning4ivn.shop|linelocatemfsn.shop|littlesound6c.shop|mindmotion93y8.shop|mightbadly4f.shop|monkeynecktj4w.shop|neighbormajorkex.shop|nervousdoctor9bx.shop|pantogether6jpi.shop|publicspeed5c.shop|quietlywheat23.shop|saddletopg3tk.shop|soldrubber5xrp.shop|somehowrockyng.shop|strangernervousql.shop|superabbit.shop|supportrightufd.shop|studyinghuman6js.shop|wholecommonrrvp.shop|wintertold7nq.shop,to=shop|autos
+
+! https://github.com/easylist/easylist/commit/a956208b28d6b4965711a0c0f3cf4da4df42be7b
+gizmodo.jp#@#.l-ad
