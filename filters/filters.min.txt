@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Thu, 20 Jun 2024 22:56:31 +0000
-! Diff-Path: ../patches/2024.6.21.93.patch#ublock-filters
+! Last modified: Fri, 21 Jun 2024 03:28:33 +0000
+! Diff-Path: ../patches/2024.6.21.324.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -2140,13 +2140,6 @@ befap.com##+js(aopw, tiPopAction)
 befap.com##.row-middle
 tubemania.org##+js(nowoif)
 ||tubemania.org^$frame,1p
-readcomiconline.*##+js(aopr, adblockDetector)
-||vliplatform.com^$3p
-readcomiconline.*##.adsbyvli:upward(div[style^="width: 300px; height: 250px"])
-readcomiconline.*##.divCloseBut
-*$script,3p,denyallow=cloudfront.net|disqus.com|disquscdn.com|edgecastcdn.net|facebook.net|fastlylb.net|fbcdn.net|twitter.com|x.com,domain=readcomiconline.*
-readcomiconline.*##+js(aeld, mousedown, localStorage)
-/ads/bid300*.aspx
 wp-time.com##a[href^="https://goo.gl/"]:has(img)
 wp-time.com###pop-ad-wrap
 #@#.reklama
@@ -9302,6 +9295,14 @@ oploverz.*###overplay
 *$xhr,redirect-rule=noop.txt,domain=tunein.com
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$script,3p,redirect=google-ima.js,domain=tunein.com,important
 ||imasdk.googleapis.com/pal/sdkloader/pal.js$script,3p,redirect=noopjs,domain=tunein.com,important
+readcomiconline.*##+js(no-xhr-if, /adskeeper|googlesyndication/)
+readcomiconline.*##+js(aopr, adblockDetector)
+||vliplatform.com^$3p
+readcomiconline.*##.adsbyvli:upward(div[style^="width: 300px; height: 250px"])
+readcomiconline.*##.divCloseBut
+*$script,3p,denyallow=cloudfront.net|disqus.com|disquscdn.com|edgecastcdn.net|facebook.net|fastlylb.net|fbcdn.net|twitter.com|x.com,domain=readcomiconline.*
+readcomiconline.*##+js(aeld, mousedown, localStorage)
+/ads/bid300*.aspx
 ! END: Rules from filters.txt
 ! START: Regional lists
 ! <<<<< czech slovak filters >>>>>
@@ -23100,8 +23101,8 @@ cimanow.cc###ad1
 qiwi.gg##+js(aeld, , sessionStorage)
 qiwi.gg##+js(nowoif, , 10)
 qiwi.gg##+js(acs, globalThis, break;case)
-qiwi.gg##+js(aost, document.createElement, /createDecoy|onClick/)
-*$frame,3p,domain=qiwi.gg
+qiwi.gg##+js(aost, document.createElement, createDecoy)
+*$frame,3p,domain=qiwi.gg,to=~cloudflare.com
 *$xhr,3p,domain=qiwi.gg,denyallow=cloudflarestorage.com
 ||qiwi.gg/sw.js$script,1p
 ||cloudfront.net/?$script,3p,domain=qiwi.gg
