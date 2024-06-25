@@ -1,10 +1,16 @@
 ! Title: uBlock filters – Unbreak
 ! Expires: 5 days
-! Last modified: Mon, 24 Jun 2024 12:17:30 +0000
-! Diff-Path: ../patches/2024.6.25.265.patch#ublock-unbreak
+! Last modified: Tue, 25 Jun 2024 06:46:57 +0000
+! Diff-Path: ../patches/2024.6.25.563.patch#ublock-unbreak
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/unbreak.txt ***
+! START: Email trackings
+! password reset link broken on coindesk.com
+@@||awstrack.me/*auth.coindesk.com$doc,popup
+! swagbucks.com - restore inactive
+@@||awstrack.me/*cmd=ac-inactive-restore$doc,popup
+! END: Email trackings
 ||2mdn.net/instream/video/client.js$script,redirect=noopjs,domain=video.foxnews.com
 ||cdn.krxd.net^$script,redirect=noopjs,domain=video.foxnews.com
 @@||akamaihd.net/player/*/akamai/amp/prebid/*$script,domain=static.foxnews.com
@@ -2578,8 +2584,6 @@ share.hntv.tv##+js(set, sensorsDataAnalytic201505.track, noopFunc)
 optimum.net##+js(set, s, {})
 optimum.net##+js(set, s.tl, noopFunc)
 @@||usabilla.com^$script,domain=nos.nl
-! password reset link broken on coindesk.com
-@@||awstrack.me/*auth.coindesk.com$doc,popup
 @@||jssdkcdns.mparticle.com/js/*/mparticle.js^$script,3p,domain=syfy.com
 pvrcinemas.com##+js(set, SalesforceInteractions, {})
 pvrcinemas.com##+js(set, SalesforceInteractions.CatalogObjectInteractionName)
@@ -2620,3 +2624,6 @@ tv5mondeplus.com##+js(cookie-remover, didomi_token)
 tv5mondeplus.com##+js(set-local-storage-item, didomi_token, $remove$)
 premio.io##+js(no-fetch-if, cloudflare.com/cdn-cgi/trace)
 ||algolia.io/1/isalive$badfilter
+@@||tierlists.com/detroitchicago/tulsa.js^$script,1p
+||tierlists.com^$script,1p,redirect-rule=noopjs
+tierlists.com##+js(nano-stb, /TDELAY|EzoIvent/, *, 0.001)
