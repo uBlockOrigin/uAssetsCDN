@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Quick fixes
 ! Expires: 12 hours
-! Last modified: Sat, 29 Jun 2024 02:04:25 +0000
-! Diff-Path: ../patches/2024.6.29.506.patch#ublock-quick-fixes
+! Last modified: Sat, 29 Jun 2024 11:41:42 +0000
+! Diff-Path: ../patches/2024.6.29.802.patch#ublock-quick-fixes
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/quick-fixes.txt ***
@@ -91,7 +91,7 @@ raenonx.cc##html[style*="hidden"]:style(overflow: visible !important;)
 ||raenonx.cc/api/scripts
 japscan.lol#@#+js(acs, EventTarget.prototype.addEventListener, '/((ad-img|banner)-|interstitial|getComputedStyle|\)break;else)[\s\S]{1,5000}$/')
 japscan.lol##+js(acs, EventTarget.prototype.addEventListener, /mgid_iframe|ad[_-]|sessionStorage/)
-japscan.lol##+js(rmnt, script, /while \(!!\[\]\)|String\(\)\.fromCharCode|\.join\(\w+\)\.split\(\w+\)/)
+japscan.lol##+js(rmnt, script, /while \(!!\[\]\)|String\(\)\.fromCharCode|\.join\(\w+\)\.split\(\w+\)|"undefined"/)
 japscan.lol##+js(aeld, load, /function.{1\,3000}$/)
 japscan.lol##+js(aost, onload, inlineScript)
 @@||japscan.lol^$ghide
@@ -108,12 +108,13 @@ japscan.lol##+js(no-fetch-if, www.japscan.lol/imgs/japo/reader)
 forumactif.com#@#.croco_wrapper, [onclick*="_"], [onclick*="var"], [onmousedown*="x"], [style*="height: 90px;"]
 kotobank.jp##+js(nostif, return)
 !#if cap_html_filtering
-client.falixnodes.net##^script:has-text(/detectAdBlock|\(typeof .+? \=\=\=? "undefined"\)|typeof adngin|_0x|rrbmpdjjpkcitijkf|'\/func'/)
+client.falixnodes.net##^script:has-text(/detectAdBlock|\(typeof .+? \=\=\=? "undefined"\)|typeof adngin|_0x|'\/func'/)
 !#else
-client.falixnodes.net##+js(rmnt, script, /detectAdBlock|\(typeof .+? \=\=\=? "undefined"\)|typeof adngin|_0x|rrbmpdjjpkcitijkf|'\/func'/)
+client.falixnodes.net##+js(rmnt, script, /detectAdBlock|\(typeof .+? \=\=\=? "undefined"\)|typeof adngin|_0x|'\/func'/)
 !#endif
 client.falixnodes.net##+js(rpnt, script, typeof window.googlescriptloaded, typeof window.googlescriptloaded === true && typeof window.googlescriptloaded)
 client.falixnodes.net##+js(rpnt, script, (window.googlescriptloaded, (window.googlescriptloaded === undefined || true || window.googlescriptloaded)
 matsukiyococokara-online.com#@#.storyblock-wrapper
 @@||fireworkapi1.com^$domain=matsukiyococokara-online.com
 kimcartoon.*##+js(rmnt, script, /^\s+setTimeout/)
+||fewcents.co^$3p
