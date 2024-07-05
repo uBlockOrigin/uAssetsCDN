@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Fri, 05 Jul 2024 08:14:40 +0000
-! Diff-Path: ../patches/2024.7.5.564.patch#ublock-filters
+! Last modified: Fri, 05 Jul 2024 13:39:25 +0000
+! Diff-Path: ../patches/2024.7.5.863.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -10307,6 +10307,8 @@ questloops.com##+js(aopr, b2a)
 ||instacart.ca/graphql?operationName=DisplayAdPlacement^$xhr,1p
 onlybabes.site##+js(acs, $, btoa)
 coomer.su,kemono.su##+js(acs, String.fromCharCode, \x)
+audiobookbay.lu##a[href*="?f="]
+audiobookbay.lu##a[href^="/"]:matches-attr(href=/^\/[-a-z0-9]+$/) img
 ! Link shortener filters go into their own dedicated list
 ! *** filters/ubo-link-shorteners.txt ***
 ! gplinks all domains (gplinks.co/EWu8)
@@ -14881,6 +14883,11 @@ olympicstreams.me##.position-absolute
 buffstreams.*##+js(nowoif)
 buffstreams.*##+js(acs, setTimeout, admc)
 buffstreams.*##+js(json-prune, *, *.adserverDomain)
+!#if cap_html_filtering
+buffstreams.*##^script:has-text(/aclib\.runPop|aclib/)
+!#else
+buffstreams.*##+js(acs, document.createElement, /aclib|runPop/)
+!#endif
 buffstreams.*##.position-absolute
 buffstreams.*##.m-1.fw-bold.btn-danger.btn
 nsfwyoutube.com##pp
@@ -19167,7 +19174,7 @@ logicieleducatif.fr##[data-ez-ph-id]
 ||html-load.com/report?$xhr
 ||html-load.cc^$font,ping,doc,popup
 ||html-load.cc/report?$xhr
-||html-load.com/loader.min.js$domain=ndtvprofit.com
+||html-load.com/loader.min.js$domain=ndtvprofit.com|javatpoint.com
 *$popup,domain=html-load.cc|07c225f3.online|content-loader.com|css-load.com|html-load.com|html-load.cc
 /\.(xyz|online|site)\/[a-z0-9]{7}\/[a-z0-9]{50,}$/$match-case,popup,domain=ygosu.com|loawa.com|sportalkorea.com|edaily.co.kr|economist.co.kr|etoday.co.kr|isplus.com|hometownstation.com|inven.co.kr|honkailab.com|genshinlab.com|thestockmarketwatch.com|thephoblographer.com|issuya.com|etnews.com|iusm.co.kr|dogdrip.net|worldhistory.org|text-compare.com|bamgosu.site|etnewskorea.com|automobile-catalog.com|maketecheasier.com|thesaurus.net|gadgets360.com|thestar.co.uk|yorkshirepost.co.uk|mydaily.co.kr|ndtvprofit.com|badmouth1.com|logicieleducatif.fr|taxguru.in|globalrph.com|raenonx.cc|sportsrec.com|reportera.co.kr|carscoops.com|slobodnadalmacija.hr|flatpanelshd.com|wfmz.com|videogamemods.com
 a-ha.io,cboard.net,jjang0u.com,joongdo.co.kr,viva100.com,thephoblographer.com,gamingdeputy.com,thesaurus.net,alle-tests.nl,maketecheasier.com,automobile-catalog.com,motorbikecatalog.com##+js(noeval-if, /07c225f3\.online|content-loader\.com|css-load\.com|html-load\.com/)
@@ -20228,7 +20235,6 @@ cdnm4m.nl##+js(nowoif)
 euro2024direct.ru##+js(acs, document.documentElement, break;case $.)
 ||mrmnd.com^
 ||ss-mndsrv.b-cdn.net^
-||html-load.com/loader.min.js$domain=javatpoint.com
 ! *** uAssets:filters/filters-2023.txt ***
 streamhide.to##+js(acs, setTimeout, checkADB)
 guccihide.com##+js(nowoif)

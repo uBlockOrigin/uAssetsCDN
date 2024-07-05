@@ -1,8 +1,8 @@
-diff name:ublock-annoyances lines:15 checksum:0fd58bd956
+diff name:ublock-annoyances lines:15 checksum:366b7f5e6b
 d3 2
 a4 2
 ! Last modified: Thu, 04 Jul 2024 01:02:00 +0000
-! Diff-Path: ../patches/2024.7.5.564.patch#ublock-annoyances
+! Diff-Path: ../patches/2024.7.5.863.patch#ublock-annoyances
 a3967 10
 techgyd.com##+js(acs, document.oncontextmenu, nocontextmenu)
 techgyd.com##body * :not(input):not(textarea):style(user-select: text !important; -ms-user-select: text !important; -moz-user-select: text !important; -khtml-user-select: text !important; -webkit-user-select: text !important; -webkit-touch-callout: default !important;)
@@ -14,11 +14,11 @@ karsaz-law.com##+js(acs, document.oncontextmenu, nocontextmenu)
 karsaz-law.com##+js(aopw, disableSelection)
 karsaz-law.com##+js(aopw, disableEnterKey)
 karsaz-law.com##+js(rpnt, style, @media print)
-diff name:ublock-badware lines:254 checksum:0f1f10b5cf
+diff name:ublock-badware lines:257 checksum:a0c6cd748d
 d3 2
 a4 2
-! Last modified: Fri, 05 Jul 2024 07:04:18 +0000
-! Diff-Path: ../patches/2024.7.5.564.patch#ublock-badware
+! Last modified: Fri, 05 Jul 2024 10:52:53 +0000
+! Diff-Path: ../patches/2024.7.5.863.patch#ublock-badware
 d158 1
 d183 1
 d228 1
@@ -72,8 +72,11 @@ d1071 1
 d1080 1
 d1084 1
 d1093 3
-a1097 1
+a1097 4
 ||npajp.icu^$all
+||web-telegvm.org^$all
+||m-k-r-5.com^$all
+||if-eku3a-fp.com^$all
 d1107 1
 d1123 1
 d1134 1
@@ -269,11 +272,11 @@ a3394 13
 d3449 4
 d3485 1
 d3500 1
-diff name:ublock-filters lines:140 checksum:10970fe30d
+diff name:ublock-filters lines:149 checksum:90530b5b56
 d3 2
 a4 2
-! Last modified: Fri, 05 Jul 2024 08:14:40 +0000
-! Diff-Path: ../patches/2024.7.5.564.patch#ublock-filters
+! Last modified: Fri, 05 Jul 2024 13:39:25 +0000
+! Diff-Path: ../patches/2024.7.5.863.patch#ublock-filters
 a547 1
 quora.com##div[class^="q-box dom_annotate_question_answer_item_"] .q-box.qu-borderTop:has(.dom_annotate_google_ad)
 d6258 4
@@ -291,13 +294,15 @@ d10233 2
 a10234 2
 modrinth.com##section.normal-page__content :is([href^="https://billing.bloom.host/"],[href^="https://minefort.com/"],[href^="https://www.ocean-hosting.top/"],[href^="https://billing.apexminecrafthosting.com/"],[href^="https://mcph.info/"], [href*="/kinetic/"], [href*="/creeperhost"], [href^="https://www.akliz.net/"]) > img
 curseforge.com##:is(.project-description,div.project-detail__content) [href^="/linkout?remoteUrl=http"]:is([href*="billing.bloom.host"],[href*="minefort.com"],[href*="www.ocean-hosting.top"],[href*="billing.apexminecrafthosting.com"],[href*="mcph.info"]) > img
-a10304 6
+a10304 8
 yourstory.com###header-collapse-trigger:style(top: 0 !important; margin-top: 0 !important;)
 questloops.com##+js(noeval-if, /chp_?ad/)
 questloops.com##+js(aopr, b2a)
 ||instacart.ca/graphql?operationName=DisplayAdPlacement^$xhr,1p
 onlybabes.site##+js(acs, $, btoa)
 coomer.su,kemono.su##+js(acs, String.fromCharCode, \x)
+audiobookbay.lu##a[href*="?f="]
+audiobookbay.lu##a[href^="/"]:matches-attr(href=/^\/[-a-z0-9]+$/) img
 d10328 1
 a10328 2
 sinonimos.de,antonimos.de,quesignifi.ca,tiktokrealtime.com,tiktokcounter.net,tpayr.xyz,poqzn.xyz,ashrfd.xyz,rezsx.xyz,tryzt.xyz,ashrff.xyz,rezst.xyz,dawenet.com,erzar.xyz,waezm.xyz,waezg.xyz,cryptednews.space,vivuq.com,swgop.com,vbnmll.com,telcoinfo.online,dshytb.com##+js(nostif, documentElement.innerHTML)
@@ -362,8 +367,13 @@ d14816 1
 a14816 2
 @@||skmedix.pl^$ghide,script,1p
 ||skmedix.pl/cdn-cgi/zaraz/$script,1p,important
-a14858 1
+a14858 6
 buffstreams.*##+js(json-prune, *, *.adserverDomain)
+!#if cap_html_filtering
+buffstreams.*##^script:has-text(/aclib\.runPop|aclib/)
+!#else
+buffstreams.*##+js(acs, document.createElement, /aclib|runPop/)
+!#endif
 a16259 1
 ||audiobooks4soul.com/*.custom-ads-block-detector.
 d17016 1
@@ -380,17 +390,19 @@ d19111 2
 a19112 2
 *$doc,csp=script-src-attr 'none',domain=lamire.jp|picrew.me|mydaily.co.kr|badmouth1.com|taxguru.in|sportsrec.com|reportera.co.kr|tweaksforgeeks.com|fourfourtwo.co.kr|flatpanelshd.com|wfmz.com|videogamemods.com
 ||html-load.com/loader.min.js$domain=lamire.jp|picrew.me|mydaily.co.kr|badmouth1.com|taxguru.in|sportsrec.com|reportera.co.kr|tweaksforgeeks.com|fourfourtwo.co.kr|flatpanelshd.com|wfmz.com|videogamemods.com
+d19156 1
+a19156 1
+||html-load.com/loader.min.js$domain=ndtvprofit.com|javatpoint.com
 d19158 1
 a19158 1
 /\.(xyz|online|site)\/[a-z0-9]{7}\/[a-z0-9]{50,}$/$match-case,popup,domain=ygosu.com|loawa.com|sportalkorea.com|edaily.co.kr|economist.co.kr|etoday.co.kr|isplus.com|hometownstation.com|inven.co.kr|honkailab.com|genshinlab.com|thestockmarketwatch.com|thephoblographer.com|issuya.com|etnews.com|iusm.co.kr|dogdrip.net|worldhistory.org|text-compare.com|bamgosu.site|etnewskorea.com|automobile-catalog.com|maketecheasier.com|thesaurus.net|gadgets360.com|thestar.co.uk|yorkshirepost.co.uk|mydaily.co.kr|ndtvprofit.com|badmouth1.com|logicieleducatif.fr|taxguru.in|globalrph.com|raenonx.cc|sportsrec.com|reportera.co.kr|carscoops.com|slobodnadalmacija.hr|flatpanelshd.com|wfmz.com|videogamemods.com
 d19162 1
 a19162 1
 worldhistory.org,etnews.com,iusm.co.kr,lamire.jp,picrew.me,text-compare.com,etnewskorea.com,gadgets360.com,mydaily.co.kr,ndtvprofit.com,badmouth1.com,logicieleducatif.fr,taxguru.in,sportsrec.com,reportera.co.kr,tweaksforgeeks.com,fourfourtwo.co.kr,flatpanelshd.com,wfmz.com,videogamemods.com##^script[onload*="error-report.com"]
-a20213 4
+a20213 3
 euro2024direct.ru##+js(acs, document.documentElement, break;case $.)
 ||mrmnd.com^
 ||ss-mndsrv.b-cdn.net^
-||html-load.com/loader.min.js$domain=javatpoint.com
 d21215 1
 a21215 1
 daemon-hentai.com,daij1n.info,dailytechupdates.in,dailyweb.pl,davidsonbuilders.com,dabangbastar.com,day4news.com,daybuy.tw,deathonnews.com,dejongeturken.com,delvein.tech,demonictl.com,demonyslowianskie.pl,depressionhurts.us,derusblog.com,descargaranimes.com,descargaseriestv.com,design4months.com,desirenovel.com,desktopsolution.org,destakenewsgospel.com,destinationsjourney.com,detikbangka.com,dev-dark-blog.pantheonsite.io,devilreturnstoschooldays.online,devopslanka.com,dewfuneralhomenews.com,dhankasamaj.com,diamondfansub.com,diencobacninh.com,digitalseoninja.com,dignityobituary.com,diplomaexamcorner.com,dipprofit.com,dir-tech.com,diskizone.com,diversanews.com,diyprojectslab.com,djqunjab.in,djsofchhattisgarh.in,dma-upd.org,dominican-republic.co.il,donghuaworld.com,donlego.com,doublemindtech.com,doumura.com,downloadbatch.me,downloader.is,downloads.sayrodigital.net,downloadtanku.org,dpscomputing.com,drake-scans.com,drakecomic.com,dubaitime.net,dvd-flix.com,dvdgayonline.com##+js(noeval-if, /chp_?ad/)
@@ -410,11 +422,11 @@ techedubyte.com##.gmr-banner-insidecontent
 d23267 1
 a23269 1
 @@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$xhr,domain=veev.to
-diff name:ublock-privacy lines:16 checksum:ab261b0dc8
+diff name:ublock-privacy lines:16 checksum:9ccb26c3a7
 d3 2
 a4 2
 ! Last modified: Fri, 05 Jul 2024 04:53:45 +0000
-! Diff-Path: ../patches/2024.7.5.564.patch#ublock-privacy
+! Diff-Path: ../patches/2024.7.5.863.patch#ublock-privacy
 d127 5
 a131 5
 loawa.com,ygosu.com,sportalkorea.com,edaily.co.kr,economist.co.kr,etoday.co.kr,isplus.com,hometownstation.com,honkailab.com,genshinlab.com,thestockmarketwatch.com,thephoblographer.com,issuya.com,worldhistory.org,etnews.com,iusm.co.kr,dogdrip.net,etoland.co.kr,picrew.me,text-compare.com,fntimes.com,javatpoint.com,lamire.jp,bamgosu.site,etnewskorea.com,allthekingz.com,gadgets360.com,automobile-catalog.com,maketecheasier.com,thesaurus.net,wfmz.com,thestar.co.uk,yorkshirepost.co.uk,mydaily.co.kr,raenonx.cc,ndtvprofit.com,badmouth1.com,logicieleducatif.fr,taxguru.in,islamicfinder.org,aikatu.jp,secure-signup.net,globalrph.com,sportsrec.com,reportera.co.kr,slobodnadalmacija.hr,flatpanelshd.com,videogamemods.com##+js(set-local-storage-item, adshield-analytics-uuid, $remove$)
@@ -427,11 +439,11 @@ $removeparam=_branch_match_id
 $removeparam=_branch_referrer
 a664 1
 timesofindia.indiatimes.com##+js(no-fetch-if, tvid.in/log/)
-diff name:ublock-quick-fixes lines:19 checksum:f4342aa532
+diff name:ublock-quick-fixes lines:19 checksum:b0d539ccc2
 d3 2
 a4 2
 ! Last modified: Fri, 05 Jul 2024 05:21:03 +0000
-! Diff-Path: ../patches/2024.7.5.564.patch#ublock-quick-fixes
+! Diff-Path: ../patches/2024.7.5.863.patch#ublock-quick-fixes
 d80 1
 a80 1
 download.megaup.net##+js(rpnt, script, /for\s*\(\s*(const|let|var).*return;\}/g, , condition, attribute)
@@ -447,11 +459,11 @@ hikaku.kurashiru.com#@#a[rel="nofollow sponsored"]
 hikaku.kurashiru.com##a[class^="side-banner_side_fixed_banner_"]
 $frame,csp=sandbox allow-downloads allow-forms allow-same-origin allow-scripts,to=~buymeacoffee.com|~chatango.com|~cloudflare.com|~dailymotion.com|~discord.com|~disqus.com|~edgecastcdn.net|~emturbovid.com|~facebook.com|~frembed.*|~google.*|~hcaptcha.com|~mixdrop.*|~ok.ru|~recaptcha.net|~twitter.com|~vixcloud.co|~youtu.be|~youtube.com|~x.com,from=1jour1film.homes|7mmtv.sx|animefever.cc|animeunity.to|antennasports.ru|detodopeliculas.nu|euro2024direct.ru|hianime.to|kickassanime.*|kipflix.vercel.app|kissanime.*|seriescultes.store|soccerinhd.com|xsportbox.com,badfilter
 $frame,csp=sandbox allow-downloads allow-forms allow-same-origin allow-scripts,to=~buymeacoffee.com|~chatango.com|~cloudflare.com|~dailymotion.com|~discord.com|~disqus.com|~edgecastcdn.net|~emturbovid.com|~facebook.com|~frembed.*|~google.*|~hcaptcha.com|~mixdrop.*|~ok.ru|~recaptcha.net|~twitter.com|~vixcloud.co|~youtu.be|~youtube.com|~x.com,from=1jour1film.homes|animefever.cc|animeunity.to|antennasports.ru|detodopeliculas.nu|euro2024direct.ru|hianime.to|kickassanime.*|kipflix.vercel.app|kissanime.*|seriescultes.store|soccerinhd.com|xsportbox.com
-diff name:ublock-unbreak lines:12 checksum:d275a24c4f
+diff name:ublock-unbreak lines:12 checksum:753b79b840
 d3 2
 a4 2
 ! Last modified: Fri, 05 Jul 2024 09:21:46 +0000
-! Diff-Path: ../patches/2024.7.5.564.patch#ublock-unbreak
+! Diff-Path: ../patches/2024.7.5.863.patch#ublock-unbreak
 a2632 7
 /frontend-metrics^$xhr,redirect-rule=nooptext
 ||imasdk.googleapis.com/js/sdkloader/ima3.js^$script,3p,redirect=google-ima.js,domain=4gtv.tv,important
@@ -460,11 +472,11 @@ a2632 7
 @@||assets.adobedtm.com/*-source.min.js$script,domain=chegg.com
 @@||client.perimeterx.net/PXzYvFOXaC/main.min.js$script,domain=chegg.com
 @@||pxchk.net/api/v2/collector^$xhr,domain=chegg.com
-diff name:easylist lines:274 checksum:007480034b
+diff name:easylist lines:284 checksum:315ccb7092
 d4 2
 a5 2
-! Last modified: Fri, 05 Jul 2024 01:49:26 +0000
-! Diff-Path: ../patches/2024.7.5.564.patch#easylist
+! Last modified: Fri, 05 Jul 2024 13:14:13 +0000
+! Diff-Path: ../patches/2024.7.5.863.patch#easylist
 d407 1
 a407 1
 /adv_out.js$third-party
@@ -654,6 +666,8 @@ a55915 1
 ||c31133f7.xyz^$document,popup
 a55923 1
 ||d23d450d.xyz^$document,popup
+a55944 1
+||fe30a5b4.xyz^$document,popup
 a57190 1
 ||edttmar.com^$popup
 d60471 1
@@ -679,8 +693,13 @@ a65891 1
 sitepoint.com##._ap_apex_ad-container
 a65939 1
 tfn.scot##.absolute-mid-page-unit
+a66142 1
+thetruthaboutcars.com##.ads-fluid-wrap
 a66650 1
 indiatimes.com##.bottom-ad-height
+d66838 1
+a66838 1
+100percentfedup.com,180gadgets.com,247media.com.ng,academicful.com,addapinch.com,aiarticlespinner.co,allaboutfpl.com,alltechnerd.com,americanmilitarynews.com,americansongwriter.com,androidsage.com,animatedtimes.com,anoopcnair.com,askpython.com,asurascans.com,australiangeographic.com.au,autodaily.com.au,bigleaguepolitics.com,bohemian.com,borncity.com,boxingnews24.com,browserhow.com,charlieintel.com,chillinghistory.com,chromeunboxed.com,circuitbasics.com,coincodecap.com,conservativebrief.com,corrosionhour.com,crimereads.com,cryptobriefing.com,cryptointelligence.co.uk,cryptopotato.com,cryptoreporter.info,cryptoslate.com,dafontfree.io,dailynewshungary.com,dcenquirer.com,dexdotexe.com,dorohedoro.online,epicdope.com,eurweb.com,exeo.app,fandomwire.com,firstsportz.com,flickeringmyth.com,flyingmag.com,freemagazines.top,gadgetinsiders.com,gameinfinitus.com,gamertweak.com,gatewaynews.co.za,geekdashboard.com,getdroidtips.com,goodyfeed.com,greekreporter.com,hard-drive.net,hollywoodinsider.com,hollywoodunlocked.com,indianhealthyrecipes.com,inspiredtaste.net,iotwreport.com,jojolandsmanga.com,journeybytes.com,journeyjunket.com,jujustukaisen.com,libertyunlocked.com,linuxfordevices.com,lithub.com,meaningfulspaces.com,medicotopics.com,medievalists.net,mpost.io,mycariboonow.com,nationalfile.com,nintendoeverything.com,notalwaysright.com,nsw2u.com,nxbrew.com,organicfacts.net,patriotfetch.com,premiumtimesng.com,protrumpnews.com,pureinfotech.com,redrightvideos.com,reneweconomy.com.au,reptilesmagazine.com,respawnfirst.com,rezence.com,roadaheadonline.co.za,rok.guide,saabplanet.com,sciencenotes.org,sdnews.com,simscommunity.info,small-screen.co.uk,storypick.com,streamingbetter.com,superwatchman.com,talkandroid.com,talkers.com,tech-latest.com,techpp.com,techrounder.com,techviral.net,theblueoceansgroup.com,thecinemaholic.com,thecricketlounge.com,thedriven.io,thegamehaus.com,thegatewaypundit.com,thegeekpage.com,thelibertydaily.com,thenipslip.com,thepeoplesvoice.tv,thewincentral.com,trendingpolitics.com,trendingpoliticsnews.com,twistedvoxel.com,videogamer.com,walletinvestor.com,waves4you.com,wbiw.com,welovetrump.com,wepc.com,win.gg,wisden.com,wnd.com,zerohanger.com##.code-block
 a67192 1
 channelnewsasia.com##.fast-ads-wrapper
 d67208 1
@@ -699,6 +718,8 @@ a69138 1
 adsoftheworld.com,futurism.com##.tracking-widest
 a69470 1
 cumbriacrack.com##[data-hbwrap]
+a69487 1
+gumtree.com##[data-q="section-middle"] > div[style^="display:grid;margin"]
 a69500 1
 swimsuit.si.com##[data-target="ad"]
 a69514 1
@@ -715,6 +736,7 @@ a69923 1
 sitepoint.com##div.inline-content
 a70068 1
 ecosia.org##div[data-test-id="mainline-result-productAds"]
+d70148 1
 a70421 1
 avxhm.se##[data-localize]:has(a[href^="https://canv.ai/"])
 a70677 1
@@ -735,11 +757,14 @@ a72025 1
 jav.gallery##[href="https://jjgirls.com/sex/GoChaturbate"]
 a72501 1
 @@||v.fwmrm.net/?$xmlhttprequest
-diff name:easyprivacy lines:6689 checksum:89963a05e8
+diff name:easyprivacy lines:6694 checksum:dfef830d19
 d4 2
 a5 2
-! Last modified: Fri, 05 Jul 2024 07:04:18 +0000
-! Diff-Path: ../patches/2024.7.5.564.patch#easyprivacy
+! Last modified: Fri, 05 Jul 2024 10:09:26 +0000
+! Diff-Path: ../patches/2024.7.5.863.patch#easyprivacy
+a2897 2
+.redsift.com/e/o/$image
+.revolut.com/q/$image
 a6637 1
 ||effulgenttempest.com^
 a7433 1
@@ -747,6 +772,8 @@ a7433 1
 d8484 1
 d9720 1
 d10340 1
+a12588 1
+||mail-count.matsui.co.jp^
 a12632 1
 ||sp-trk.com^$third-party
 d14908 6
