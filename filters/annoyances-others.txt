@@ -1,5 +1,5 @@
 ! Title: uBlock filters – Other Annoyances
-! Last modified: Sat, 06 Jul 2024 09:36:21 +0000
+! Last modified: Sat, 06 Jul 2024 15:15:23 +0000
 ! Expires: 7 days
 ! Description: |
 !   Filters optimized for uBlock Origin, to be used with EasyList's
@@ -392,9 +392,9 @@ facebook.com,facebookcorewwwi.onion,facebookwkhpilnemxj7asaniu7vnjjbiltxjqhye3mh
 facebook.com,facebookcorewwwi.onion,facebookwkhpilnemxj7asaniu7vnjjbiltxjqhye3mhbshg7kx5tfyd.onion##.userContentWrapper:has-text(Popular Across Facebook)
 ! https://github.com/uBlockOrigin/uAssets/issues/3367#issuecomment-1993620105 - "Suggested for you" posts
 !#if cap_html_filtering
-||www.facebook.com/api/graphql/$xhr,replace=/\{"brs_content_label":[^,]+,"category":"ENGAGEMENT[^\n]+"cursor":"[^"]+"\}/{}/g
+||www.facebook.com/api/graphql/$xhr,replace=/\{"brs_content_label":[^\n]+?"category":"ENGAGEMENT[^\n]+?"cursor":"[^"]+"\}/{}/g
 !#else
-www.facebook.com##+js(trusted-replace-xhr-response, '/\{"brs_content_label":[^,]+,"category":"ENGAGEMENT[^\n]+"cursor":"[^"]+"\}/g', {}, /api/graphql)
+www.facebook.com##+js(trusted-replace-xhr-response, /\{"brs_content_label":[^\n]+?"category":"ENGAGEMENT[^\n]+?"cursor":"[^"]+"\}/g, {}, /api/graphql)
 !#endif
 ! FB link redirection
 www.facebook.com##+js(json-prune, require.0.3.0.__bbox.define.[].2.is_linkshim_supported require.0.3.0.__bbox.define.[].2.click_ids)
@@ -7577,6 +7577,7 @@ cabinetexpert.ro##style:has-text(@media print):remove()
 
 ! topperlearning. com anti right click, copy, f-keys
 topperlearning.com##+js(aeld, /contextmenu|keydown/)
+topperlearning.com##*:style(user-select: text !important; -ms-user-select: text !important; -moz-user-select: text !important; -khtml-user-select: text !important; -webkit-user-select: text !important; -webkit-touch-callout: default !important;)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/23851
 weibo.com##+js(nowoif, &disp=popup, 1)
