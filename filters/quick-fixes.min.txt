@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Quick fixes
 ! Expires: 12 hours
-! Last modified: Tue, 09 Jul 2024 10:19:10 +0000
-! Diff-Path: ../patches/2024.7.9.804.patch#ublock-quick-fixes
+! Last modified: Tue, 09 Jul 2024 15:40:18 +0000
+! Diff-Path: ../patches/2024.7.9.1109.patch#ublock-quick-fixes
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/quick-fixes.txt ***
@@ -113,28 +113,36 @@ client.falixnodes.net##+js(rmnt, script, /detectAdBlock|\(typeof .+? \=\=\=? ("u
 client.falixnodes.net##+js(rpnt, script, typeof window.googlescriptloaded, typeof window.googlescriptloaded === true && typeof window.googlescriptloaded)
 client.falixnodes.net##+js(rpnt, script, (window.googlescriptloaded, (window.googlescriptloaded === undefined || true || window.googlescriptloaded)
 ! kimcartoon.*,kisscartoon.se,kc.linksgen.com##+js(aopw, xaZlE)
-kimcartoon.*,kisscartoon.se,kc.linksgen.com##+js(aost, jQuery.fn.html, /^(?!.*jquery).*(Scripts|inlineScript)/i)
+! kimcartoon.*,kisscartoon.se,kc.linksgen.com##+js(aost, jQuery.fn.html, /^(?!.*jquery).*(Scripts|inlineScript)/i)
 @@*$xhr,1p,domain=kimcartoon.*|kisscartoon.se|kc.linksgen.com
 !||kimcartoon.li/Scripts/ozzz.min.js
 ! kimcartoon.*##+js(rmnt, script, AdBlock)
-@@||pv.sohu.com/cityjson$domain=ems.com.cn
-hikaku.kurashiru.com#@#a[rel="nofollow sponsored"]
-hikaku.kurashiru.com##a[class^="side-banner_side_fixed_banner_"]
+kimcartoon.*#@#+js(nostif, /tryHard|leHz|Adb|divContentVideo/)
+kimcartoon.*##+js(nostif, /tryHard|leHz|Adb/)
 $frame,csp=sandbox allow-downloads allow-forms allow-same-origin allow-scripts,to=~buymeacoffee.com|~chatango.com|~cloudflare.com|~dailymotion.com|~discord.com|~disqus.com|~edgecastcdn.net|~emturbovid.com|~facebook.com|~frembed.*|~google.*|~hcaptcha.com|~mixdrop.*|~ok.ru|~recaptcha.net|~twitter.com|~vixcloud.co|~youtu.be|~youtube.com|~x.com,from=1jour1film.homes|7mmtv.sx|animefever.cc|animeunity.to|antennasports.ru|detodopeliculas.nu|euro2024direct.ru|hianime.to|kickassanime.*|kipflix.vercel.app|kissanime.*|seriescultes.store|soccerinhd.com|xsportbox.com,badfilter
 ||atlassian.net/rest/collectors/$third-party,badfilter
 crazystudy.info#@#.category-advertorial
 ! exploader.net ads, anti-adb
-exploader.net##+js(nostif, daotag)
+exploader.net#@#+js(nostif, daotag)
 exploader.net#@#[data-style]
-exploader.net##a[href^="#"]
-exploader.net##div[style*="1120px;"][style*="450px;"]
-exploader.net##div[style*="305px"][style*="align-items:"]
+exploader.net#@#a[href^="#"]
+exploader.net#@#div[style*="1120px;"][style*="450px;"]
+exploader.net#@#div[style*="305px"][style*="align-items:"]
 ||exploader.net/d/$image
 ||dmm.co.jp^$popup,domain=exploader.net
 exploader.net#@#div[class^="d_"]
 exploader.net#@#div[class^="d_"]:not(#js_download)
 exploader.net#@#[data-style]:not(#js_download)
-exploader.net###download:style(display: block !important;)
+exploader.net#@#div[class^="d_"]:not(#js_download)
+exploader.net#@#[data-style]:not(#js_download)
+exploader.net##a[link*="al.dmm.co.jp"]
+exploader.net###wrapper > div[data-style][style*="fixed"]
+exploader.net##article > div[style*="305px"][style*="align-items:"]
+exploader.net##div[style*="1120px;"][style*="450px;"]:style(height: 0 !important; overflow: hidden !important;)
+||exploader.net/js/$xhr,redirect=noop.txt
+exploader.net##+js(no-xhr-if, .js)
 *$script,domain=veev.to,redirect-rule=noopjs
 /smartserve-$badfilter
 ||gateway.pinata.cloud^$3p,badfilter
+pcguide.com#@#.wepc-takeover
+m.yahoo.co.jp#@#body:style(overflow: auto !important; height: auto !important;)

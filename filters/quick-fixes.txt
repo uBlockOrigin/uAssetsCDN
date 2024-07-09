@@ -1,5 +1,5 @@
 ! Title: uBlock₀ filters – Quick fixes
-! Last modified: Tue, 09 Jul 2024 10:19:10 +0000
+! Last modified: Tue, 09 Jul 2024 15:40:18 +0000
 ! Expires: 8 hours
 ! Description: Immediate, temporary filters to fix websites
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -132,17 +132,12 @@ client.falixnodes.net##+js(rpnt, script, (window.googlescriptloaded, (window.goo
 
 ! https://github.com/uBlockOrigin/uAssets/issues/24217
 ! kimcartoon.*,kisscartoon.se,kc.linksgen.com##+js(aopw, xaZlE)
-kimcartoon.*,kisscartoon.se,kc.linksgen.com##+js(aost, jQuery.fn.html, /^(?!.*jquery).*(Scripts|inlineScript)/i)
+! kimcartoon.*,kisscartoon.se,kc.linksgen.com##+js(aost, jQuery.fn.html, /^(?!.*jquery).*(Scripts|inlineScript)/i)
 @@*$xhr,1p,domain=kimcartoon.*|kisscartoon.se|kc.linksgen.com
 !||kimcartoon.li/Scripts/ozzz.min.js
 ! kimcartoon.*##+js(rmnt, script, AdBlock)
-
-! https://github.com/easylist/easylist/commit/43558f45cfb0cad01f968e6e4c65effdce1dce0e
-@@||pv.sohu.com/cityjson$domain=ems.com.cn
-
-! https://github.com/AdguardTeam/AdguardFilters/commit/e4215f7a8a33c965dde2d9daf481c05dd77a8566
-hikaku.kurashiru.com#@#a[rel="nofollow sponsored"]
-hikaku.kurashiru.com##a[class^="side-banner_side_fixed_banner_"]
+kimcartoon.*#@#+js(nostif, /tryHard|leHz|Adb|divContentVideo/)
+kimcartoon.*##+js(nostif, /tryHard|leHz|Adb/)
 
 ! https://github.com/uBlockOrigin/uBlock-discussions/discussions/790#discussioncomment-9958805
 $frame,csp=sandbox allow-downloads allow-forms allow-same-origin allow-scripts,to=~buymeacoffee.com|~chatango.com|~cloudflare.com|~dailymotion.com|~discord.com|~disqus.com|~edgecastcdn.net|~emturbovid.com|~facebook.com|~frembed.*|~google.*|~hcaptcha.com|~mixdrop.*|~ok.ru|~recaptcha.net|~twitter.com|~vixcloud.co|~youtu.be|~youtube.com|~x.com,from=1jour1film.homes|7mmtv.sx|animefever.cc|animeunity.to|antennasports.ru|detodopeliculas.nu|euro2024direct.ru|hianime.to|kickassanime.*|kipflix.vercel.app|kissanime.*|seriescultes.store|soccerinhd.com|xsportbox.com,badfilter
@@ -154,17 +149,24 @@ $frame,csp=sandbox allow-downloads allow-forms allow-same-origin allow-scripts,t
 crazystudy.info#@#.category-advertorial
 
 ! exploader.net ads, anti-adb
-exploader.net##+js(nostif, daotag)
+exploader.net#@#+js(nostif, daotag)
 exploader.net#@#[data-style]
-exploader.net##a[href^="#"]
-exploader.net##div[style*="1120px;"][style*="450px;"]
-exploader.net##div[style*="305px"][style*="align-items:"]
+exploader.net#@#a[href^="#"]
+exploader.net#@#div[style*="1120px;"][style*="450px;"]
+exploader.net#@#div[style*="305px"][style*="align-items:"]
 ||exploader.net/d/$image
 ||dmm.co.jp^$popup,domain=exploader.net
 exploader.net#@#div[class^="d_"]
 exploader.net#@#div[class^="d_"]:not(#js_download)
 exploader.net#@#[data-style]:not(#js_download)
-exploader.net###download:style(display: block !important;)
+exploader.net#@#div[class^="d_"]:not(#js_download)
+exploader.net#@#[data-style]:not(#js_download)
+exploader.net##a[link*="al.dmm.co.jp"]
+exploader.net###wrapper > div[data-style][style*="fixed"]
+exploader.net##article > div[style*="305px"][style*="align-items:"]
+exploader.net##div[style*="1120px;"][style*="450px;"]:style(height: 0 !important; overflow: hidden !important;)
+||exploader.net/js/$xhr,redirect=noop.txt
+exploader.net##+js(no-xhr-if, .js)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/24220
 *$script,domain=veev.to,redirect-rule=noopjs
@@ -174,3 +176,9 @@ exploader.net###download:style(display: block !important;)
 
 ! https://github.com/uBlockOrigin/uBOL-home/issues/141#issuecomment-2214640673
 ||gateway.pinata.cloud^$3p,badfilter
+
+! https://github.com/uBlockOrigin/uAssets/issues/24428
+pcguide.com#@#.wepc-takeover
+
+! https://github.com/AdguardTeam/AdguardFilters/issues/183083
+m.yahoo.co.jp#@#body:style(overflow: auto !important; height: auto !important;)
