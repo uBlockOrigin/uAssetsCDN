@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Tue, 09 Jul 2024 23:11:12 +0000
-! Diff-Path: ../patches/2024.7.9.1404.patch#ublock-filters
+! Last modified: Wed, 10 Jul 2024 03:59:50 +0000
+! Diff-Path: ../patches/2024.7.10.267.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -9014,6 +9014,7 @@ xstory-fr.com##+js(aeld, popstate)
 xstory-fr.com##+js(nostif, location.href)
 xvideos.com,xvideos2.com##+js(nowoif)
 xvideos.com,xvideos2.com##+js(aeld, click, ShouldShow)
+||xvideos.com/lvcsm/abck-banners/
 1337x.*##+js(rmnt, script, style)
 1337x.*##+js(aost, document.createElement, _0x)
 1337x.*,x1337x.*##+js(nowoif, , 1)
@@ -9041,7 +9042,10 @@ x1337x.eu##.mgbox
 @@||torrage.info/torrent.php$popup,domain=1337x.to
 1337x.*,x1337x.*##+js(aeld, popstate)
 1337x.*,x1337x.*##+js(aost, navigator, FingerprintJS)
-||x1337x.*/mm.js$script,1p
+1337x.*,x1337x.*##+js(aost, localStorage, .js)
+1337x.*,x1337x.*##+js(aost, onload, .js)
+/ma.js^$script,domain=1337x.*|x1337x.*
+/mm.js^$script,domain=1337x.*|x1337x.*
 cheatcloud.cc,cheater.ninja,cheatermad.com,cheatsquad.gg##+js(nano-sib, clearInterval)
 cheatsquad.gg##+js(nosiif, visibility, 1000)
 cheatermad.com##+js(nostif, offset)
@@ -9332,8 +9336,16 @@ bharathwick.com##+js(rmnt, script, deblocker)
 ||amazonaws.com/pubs/trib/aatribscriptcheck$script,3p
 ||amazonaws.com/pubs/trib/aa_adb_modal$script,3p
 ||amazonaws.com/pubs/trib/triblive_$script,3p
-animesuge.to,aniwave.to,aniwave.vc,anix.to,bflix.to,bflixhd.to,flixflare.to,flixhive.to,flixhq.bz,flixtorz.to,fmoviesz.to,fmovies24.to,hurawatch.bz,hurawatch2.to,losmoviesz.to,mangafire.to,moviestowatch.id,soap2dayx.to##+js(nowoif, _blank)
-animesuge.to,aniwave.to,aniwave.vc,anix.to,anix.vc,bflix.to,bflixhd.to,flixflare.to,flixhive.to,flixhq.bz,flixtorz.to,fmoviesz.to,fmovies24.to,hurawatch.bz,hurawatch2.to,losmoviesz.to,mangafire.to,moviestowatch.id,soap2dayx.to##+js(set-cookie, __pf, 1)
+animesuge.to,aniwave.*,anix.to,bflix.to,bflixhd.to,flixflare.to,flixhive.to,flixhq.bz,flixtorz.to,fmoviesz.to,fmovies24.to,hurawatch.bz,hurawatch2.to,losmoviesz.to,mangafire.to,moviestowatch.id,soap2dayx.to##+js(nowoif, _blank)
+animesuge.to,aniwave.*,anix.to,anix.vc,bflix.to,bflixhd.to,flixflare.to,flixhive.to,flixhq.bz,flixtorz.to,fmoviesz.to,fmovies24.to,hurawatch.bz,hurawatch2.to,losmoviesz.to,mangafire.to,moviestowatch.id,soap2dayx.to##+js(set-cookie, __pf, 1)
+!#if cap_html_filtering
+aniwave.*##^script:has-text(document.write)
+!#else
+aniwave.*##+js(acs, document.write)
+!#endif
+aniwave.*##.adx
+aniwave.*##.text-center:has(script + a[target="_blank"])
+||aniwave.*/assets/_bnx/$image,1p
 ||platform.pubadx.one^$3p
 ||delivery.r2b2.cz^$3p
 ! filemoon ads
@@ -22881,6 +22893,7 @@ donghuaworld.com##^script:has-text(adsBlocked)
 donghuaworld.com##+js(rmnt, script, adsBlocked)
 !#endif
 donghuaworld.com##+js(nowoif, _blank)
+donghuaworld.com##+js(aost, document.getElementsByTagName, adsBlocked)
 flixscans.com##+js(no-fetch-if, googlesyndication)
 flixscans.com##.teaser-buttom
 @@||alwingulla.com/88/tag.min.js$domain=darkino.*
@@ -23327,7 +23340,6 @@ veev.to##+js(nowoif)
 veev.to##+js(rmnt, script, popundersPerIP)
 veev.to##+js(set, fapit.check, noopFunc)
 veev.to##+js(aopr, XMLHttpRequest.prototype.onreadystatechange)
-veev.to##+js(set, $veevplayer.context.$adblock.isEnabled, false)
 ||magsrv.com/ad-provider.js$script,domain=veev.to,redirect-rule=noopjs
 @@||veev.to^$ghide
 veev.to#@#.avb-active
