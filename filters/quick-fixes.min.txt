@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Quick fixes
 ! Expires: 12 hours
-! Last modified: Sun, 14 Jul 2024 03:05:25 +0000
-! Diff-Path: ../patches/2024.7.14.207.patch#ublock-quick-fixes
+! Last modified: Sun, 14 Jul 2024 08:18:23 +0000
+! Diff-Path: ../patches/2024.7.14.509.patch#ublock-quick-fixes
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/quick-fixes.txt ***
@@ -51,11 +51,7 @@ youtube.com##+js(json-prune, playerResponse.adPlacements playerResponse.playerAd
 !#endif
 !#endif
 ||googlevideo.com/videoplayback*&ctier=L&*%2Cctier%2C$xhr,3p,domain=m.youtube.com|music.youtube.com|www.youtube.com
-!#if ext_devbuild
 www.youtube.com##+js(trusted-replace-node-text, script, (function() {window.ytplayer=, '/*start*/(()=>{let t=document.location.href,e=[],n=[],o="",i=!1;const r=Array.prototype.push,a={apply:(t,o,a)=>(window.yt?.config_?.EXPERIMENT_FLAGS?.html5_enable_ssap_entity_id&&a[0]&&a[0]!==window&&"number"==typeof a[0].start&&a[0].end&&"ssap"===a[0].namespace&&a[0].id&&(i||0!==a[0]?.start||n.includes(a[0].id)||(e.length=0,n.length=0,i=!0,r.call(e,a[0]),r.call(n,a[0].id)),i&&0!==a[0]?.start&&!n.includes(a[0].id)&&(r.call(e,a[0]),r.call(n,a[0].id))),Reflect.apply(t,o,a))};window.Array.prototype.push=new Proxy(window.Array.prototype.push,a),document.addEventListener("DOMContentLoaded",(function(){if(!window.yt?.config_?.EXPERIMENT_FLAGS?.html5_enable_ssap_entity_id)return;const r=()=>{const t=document.querySelector("video");if(t&&e.length){const r=Math.round(t.duration),a=Math.round(e.at(-1).end/1e3),l=n.join(",");if(r&&r===a&&o!==l){const r=e.at(-1).start/1e3;t.currentTime<r&&(t.currentTime=r,i=!1,e.length=0,n.length=0,o=l)}}};r();new MutationObserver((()=>{t!==document.location.href?(t=document.location.href,e.length=0,n.length=0,i=!1,r()):r()})).observe(document,{childList:!0,subtree:!0})}))})();if(window.trustedTypes){const escapeHTMLPolicy=trustedTypes.createPolicy("myEscapePolicy",{createScript:string=>string.replace(/\/\*start\*\/(.*)\/\*end\*\//g,"")});document.currentScript.textContent=escapeHTMLPolicy.createScript(document.currentScript.textContent);}else{document.currentScript.textContent=document.currentScript.textContent.replace(/\/\*start\*\/(.*)\/\*end\*\//g,"");}/*end*/(function() {window.ytplayer=', sedCount, 1)
-!#else
-www.youtube.com##+js(trusted-rpnt, script, (function() {window.ytplayer=, /*start*/(()=>{let t=document.location.href\,e=[]\,n=[]\,o=""\,i=!1;const r=Array.prototype.push\,a={apply:(t\,o\,a)=>(window.yt?.config_?.EXPERIMENT_FLAGS?.html5_enable_ssap_entity_id&&a[0]&&a[0]!==window&&"number"==typeof a[0].start&&a[0].end&&"ssap"===a[0].namespace&&a[0].id&&(i||0!==a[0]?.start||n.includes(a[0].id)||(e.length=0\,n.length=0\,i=!0\,r.call(e\,a[0])\,r.call(n\,a[0].id))\,i&&0!==a[0]?.start&&!n.includes(a[0].id)&&(r.call(e\,a[0])\,r.call(n\,a[0].id)))\,Reflect.apply(t\,o\,a))};window.Array.prototype.push=new Proxy(window.Array.prototype.push\,a)\,document.addEventListener("DOMContentLoaded"\,(function(){if(!window.yt?.config_?.EXPERIMENT_FLAGS?.html5_enable_ssap_entity_id)return;const r=()=>{const t=document.querySelector("video");if(t&&e.length){const r=Math.round(t.duration)\,a=Math.round(e.at(-1).end/1e3)\,l=n.join("\,");if(r&&r===a&&o!==l){const r=e.at(-1).start/1e3;t.currentTime<r&&(t.currentTime=r\,i=!1\,e.length=0\,n.length=0\,o=l)}}};r();new MutationObserver((()=>{t!==document.location.href?(t=document.location.href\,e.length=0\,n.length=0\,i=!1\,r()):r()})).observe(document\,{childList:!0\,subtree:!0})}))})();document.currentScript.textContent=document.currentScript.textContent.replace(/\/\*start\*\/(.*)\/\*end\*\//g\,"");/*end*/(function() {window.ytplayer=, sedCount, 1)
-!#endif
 www.youtube.com##+js(nano-stb, [native code], 17000, 0.001)
 ! VOE sites
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$script,3p,redirect=google-ima.js,domain=jasminetesttry.com,important
@@ -128,20 +124,15 @@ kimcartoon.li,kc.linksgen.com,kisscartoon.se##+js(set, isAdb, false)
 kimcartoon.li,kc.linksgen.com,kisscartoon.se##+js(no-fetch-if, bidgear)
 ! @@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$script,domain=kimcartoon.li
 kimcartoon.li##+js(rmnt, script, length > 0)
-kimcartoon.li##+js(set, marveldc, noopFunc)
+kimcartoon.li##+js(nostif, marveldc)
 kimcartoon.li###divContentVideo:style(display: block !important;)
 kimcartoon.li###centerDivVideo > div[id]:has(> img[src^="https://i.imgur.com"])
-$frame,csp=sandbox allow-downloads allow-forms allow-same-origin allow-scripts,to=~buymeacoffee.com|~chatango.com|~cloudflare.com|~dailymotion.com|~discord.com|~disqus.com|~edgecastcdn.net|~emturbovid.com|~facebook.com|~frembed.*|~google.*|~hcaptcha.com|~mixdrop.*|~ok.ru|~recaptcha.net|~twitter.com|~vixcloud.co|~youtu.be|~youtube.com|~x.com,from=1jour1film.homes|7mmtv.sx|animefever.cc|animeunity.to|antennasports.ru|detodopeliculas.nu|euro2024direct.ru|hianime.to|kickassanime.*|kipflix.vercel.app|kissanime.*|seriescultes.store|soccerinhd.com|xsportbox.com,badfilter
-||atlassian.net/rest/collectors/$third-party,badfilter
-crazystudy.info#@#.category-advertorial
 ! exploader.net ads, anti-adb
 exploader.net#@#+js(nostif, daotag)
 exploader.net#@#[data-style]
 exploader.net#@#a[href^="#"]
 exploader.net#@#div[style*="1120px;"][style*="450px;"]
 exploader.net#@#div[style*="305px"][style*="align-items:"]
-||exploader.net/d/$image
-||dmm.co.jp^$popup,domain=exploader.net
 exploader.net#@#div[class^="d_"]
 exploader.net#@#div[class^="d_"]:not(#js_download)
 exploader.net#@#[data-style]:not(#js_download)
