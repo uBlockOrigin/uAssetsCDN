@@ -1,5 +1,5 @@
 ! Title: uBlock₀ filters – Quick fixes
-! Last modified: Sun, 14 Jul 2024 08:18:23 +0000
+! Last modified: Sun, 14 Jul 2024 12:05:55 +0000
 ! Expires: 8 hours
 ! Description: Immediate, temporary filters to fix websites
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -56,7 +56,7 @@ youtube.com##+js(json-prune, playerResponse.adPlacements playerResponse.playerAd
 !#endif
 !#endif
 ||googlevideo.com/videoplayback*&ctier=L&*%2Cctier%2C$xhr,3p,domain=m.youtube.com|music.youtube.com|www.youtube.com
-www.youtube.com##+js(trusted-replace-node-text, script, (function() {window.ytplayer=, '/*start*/(()=>{let t=document.location.href,e=[],n=[],o="",i=!1;const r=Array.prototype.push,a={apply:(t,o,a)=>(window.yt?.config_?.EXPERIMENT_FLAGS?.html5_enable_ssap_entity_id&&a[0]&&a[0]!==window&&"number"==typeof a[0].start&&a[0].end&&"ssap"===a[0].namespace&&a[0].id&&(i||0!==a[0]?.start||n.includes(a[0].id)||(e.length=0,n.length=0,i=!0,r.call(e,a[0]),r.call(n,a[0].id)),i&&0!==a[0]?.start&&!n.includes(a[0].id)&&(r.call(e,a[0]),r.call(n,a[0].id))),Reflect.apply(t,o,a))};window.Array.prototype.push=new Proxy(window.Array.prototype.push,a),document.addEventListener("DOMContentLoaded",(function(){if(!window.yt?.config_?.EXPERIMENT_FLAGS?.html5_enable_ssap_entity_id)return;const r=()=>{const t=document.querySelector("video");if(t&&e.length){const r=Math.round(t.duration),a=Math.round(e.at(-1).end/1e3),l=n.join(",");if(r&&r===a&&o!==l){const r=e.at(-1).start/1e3;t.currentTime<r&&(t.currentTime=r,i=!1,e.length=0,n.length=0,o=l)}}};r();new MutationObserver((()=>{t!==document.location.href?(t=document.location.href,e.length=0,n.length=0,i=!1,r()):r()})).observe(document,{childList:!0,subtree:!0})}))})();if(window.trustedTypes){const escapeHTMLPolicy=trustedTypes.createPolicy("myEscapePolicy",{createScript:string=>string.replace(/\/\*start\*\/(.*)\/\*end\*\//g,"")});document.currentScript.textContent=escapeHTMLPolicy.createScript(document.currentScript.textContent);}else{document.currentScript.textContent=document.currentScript.textContent.replace(/\/\*start\*\/(.*)\/\*end\*\//g,"");}/*end*/(function() {window.ytplayer=', sedCount, 1)
+www.youtube.com##+js(trusted-rpnt, script, (function() {window.ytplayer=, /*start*/(()=>{let t=document.location.href\,e=[]\,n=[]\,o=""\,i=!1;const r=Array.prototype.push\,a={apply:(t\,o\,a)=>(window.yt?.config_?.EXPERIMENT_FLAGS?.html5_enable_ssap_entity_id&&a[0]&&a[0]!==window&&"number"==typeof a[0].start&&a[0].end&&"ssap"===a[0].namespace&&a[0].id&&(i||0!==a[0]?.start||n.includes(a[0].id)||(e.length=0\,n.length=0\,i=!0\,r.call(e\,a[0])\,r.call(n\,a[0].id))\,i&&0!==a[0]?.start&&!n.includes(a[0].id)&&(r.call(e\,a[0])\,r.call(n\,a[0].id)))\,Reflect.apply(t\,o\,a))};window.Array.prototype.push=new Proxy(window.Array.prototype.push\,a)\,document.addEventListener("DOMContentLoaded"\,(function(){if(!window.yt?.config_?.EXPERIMENT_FLAGS?.html5_enable_ssap_entity_id)return;const r=()=>{const t=document.querySelector("video");if(t&&e.length){const r=Math.round(t.duration)\,a=Math.round(e.at(-1).end/1e3)\,l=n.join("\,");if(r&&r===a&&o!==l){const r=e.at(-1).start/1e3;t.currentTime<r&&(t.currentTime=r\,i=!1\,e.length=0\,n.length=0\,o=l)}}};r();new MutationObserver((()=>{t!==document.location.href?(t=document.location.href\,e.length=0\,n.length=0\,i=!1\,r()):r()})).observe(document\,{childList:!0\,subtree:!0})}))})();if(window.trustedTypes){const escapeHTMLPolicy=trustedTypes.createPolicy("myEscapePolicy"\,{createScript:string=>string.replace(/\/\*start\*\/(.*)\/\*end\*\//g\,"")});document.currentScript.textContent=escapeHTMLPolicy.createScript(document.currentScript.textContent);}else{document.currentScript.textContent=document.currentScript.textContent.replace(/\/\*start\*\/(.*)\/\*end\*\//g\,"");}/*end*/(function() {window.ytplayer=, sedCount, 1)
 www.youtube.com##+js(nano-stb, [native code], 17000, 0.001)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/18476
@@ -84,7 +84,7 @@ ytlarge.com##ins.adsbygoogle[data-ad-slot]
 @@||pagead2.googlesyndication.com^$script,domain=next-episode.net
 
 ! https://github.com/uBlockOrigin/uAssets/issues/20505
-download.megaup.net##+js(rpnt, script, /for\s*\(\s*(const|let|var).*?;return;\}\}/g, , condition, attribute)
+download.megaup.net##+js(rpnt, script, /for\s*\(\s*(const|let|var).*?;return;\}\}.*?;return;\}/g, , condition, attribute)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/21353
 raenonx.cc##div[class*="main_announcement-animation"]:has(> [class*="announcement"] > .markdown > p > a[href$="/docs/view/site/ads-and-credits"])
@@ -148,20 +148,6 @@ kimcartoon.li###divContentVideo:style(display: block !important;)
 kimcartoon.li###centerDivVideo > div[id]:has(> img[src^="https://i.imgur.com"])
 
 ! exploader.net ads, anti-adb
-exploader.net#@#+js(nostif, daotag)
-exploader.net#@#[data-style]
-exploader.net#@#a[href^="#"]
-exploader.net#@#div[style*="1120px;"][style*="450px;"]
-exploader.net#@#div[style*="305px"][style*="align-items:"]
-exploader.net#@#div[class^="d_"]
-exploader.net#@#div[class^="d_"]:not(#js_download)
-exploader.net#@#[data-style]:not(#js_download)
-exploader.net#@#div[class^="d_"]:not(#js_download)
-exploader.net#@#[data-style]:not(#js_download)
-exploader.net##a[link*="al.dmm.co.jp"]
-exploader.net###wrapper > div[data-style][style*="fixed"]
-exploader.net##article > div[style*="305px"][style*="align-items:"]
-exploader.net##div[style*="1120px;"][style*="450px;"]:style(height: 0 !important; overflow: hidden !important;)
 ||exploader.net/js/$xhr,redirect=noop.txt
 exploader.net##+js(no-xhr-if, .js)
 exploader.net##+js(set, load_daotag, true)
@@ -173,9 +159,6 @@ veev.to##+js(set, XMLHttpRequest.prototype.readyState, 4)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/24420
 /smartserve-$badfilter
-
-! https://github.com/uBlockOrigin/uBOL-home/issues/141#issuecomment-2214640673
-||gateway.pinata.cloud^$3p,badfilter
 
 ! https://github.com/uBlockOrigin/uAssets/issues/24428
 pcguide.com#@#.wepc-takeover
@@ -191,3 +174,6 @@ www.reddit.com#@#+js(trusted-replace-outbound-text, JSON.stringify, '/^{"csrf_to
 
 ! https://github.com/uBlockOrigin/uAssets/issues/24381#issuecomment-2226793580
 audiobookbay.lu#@#a[href*="?f="]
+
+! https://github.com/uBlockOrigin/uAssets/issues/24475
+||hl.cn^$doc,badfilter
