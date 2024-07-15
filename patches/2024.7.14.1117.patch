@@ -1,19 +1,29 @@
-diff name:ublock-annoyances lines:10 checksum:5da1ddbf04
+diff name:ublock-annoyances lines:10 checksum:fe8262bff8
 d3 2
 a4 2
 ! Last modified: Mon, 15 Jul 2024 07:43:56 +0000
-! Diff-Path: ../patches/2024.7.15.862.patch#ublock-annoyances
+! Diff-Path: ../patches/2024.7.15.1159.patch#ublock-annoyances
 d3675 1
 a3675 1
 arras.io,arras.netlify.app,arrax.io##+js(set, ramp.addUnits, noopFunc)
 d3998 1
 a3998 1
 readcomiconline.li##+js(rmnt, script, checkAdsBlocked)
-diff name:ublock-badware lines:32 checksum:717ba3b60e
+diff name:ublock-badware lines:43 checksum:c1f2dd4a3b
 d3 2
 a4 2
-! Last modified: Mon, 15 Jul 2024 04:57:30 +0000
-! Diff-Path: ../patches/2024.7.15.862.patch#ublock-badware
+! Last modified: Mon, 15 Jul 2024 16:20:08 +0000
+! Diff-Path: ../patches/2024.7.15.1159.patch#ublock-badware
+d675 1
+a680 1
+||www.youtube.com/channel/UCCmzcphyrH6Br5eNUnQR2mw/$doc
+d696 1
+d702 1
+a703 2
+||owncheatz.com^$doc
+||blazehack.top^$doc
+a1063 1
+||t-pia.me^$all
 a3048 1
 ||saham.hugaf.dev^$all,to=~fedex.com
 d3056 1
@@ -42,11 +52,12 @@ a3277 2
 ! game sites
 a3341 1
 ||rr.nu^$doc
-diff name:ublock-filters lines:41 checksum:a0b2ab037f
+d3564 3
+diff name:ublock-filters lines:41 checksum:18259a0c5d
 d3 2
 a4 2
 ! Last modified: Mon, 15 Jul 2024 12:33:42 +0000
-! Diff-Path: ../patches/2024.7.15.862.patch#ublock-filters
+! Diff-Path: ../patches/2024.7.15.1159.patch#ublock-filters
 d7443 11
 d9022 2
 a9023 2
@@ -84,27 +95,33 @@ d23357 2
 d23360 1
 a23360 1
 *$script,domain=veev.to,redirect-rule=noopjs
-diff name:ublock-privacy lines:3 checksum:5827bfa770
-d4 1
-a4 1
-! Diff-Path: ../patches/2024.7.15.862.patch#ublock-privacy
-diff name:ublock-quick-fixes lines:24 checksum:5e0d4e90a9
+diff name:ublock-privacy lines:7 checksum:4ca3af4111
 d3 2
 a4 2
-! Last modified: Mon, 15 Jul 2024 10:05:20 +0000
-! Diff-Path: ../patches/2024.7.15.862.patch#ublock-quick-fixes
+! Last modified: Mon, 15 Jul 2024 17:38:00 +0000
+! Diff-Path: ../patches/2024.7.15.1159.patch#ublock-privacy
+a603 2
+! tf tracking
+||test.torrentfreak.com^
+diff name:ublock-quick-fixes lines:26 checksum:71259cb0b4
+d3 2
+a4 2
+! Last modified: Mon, 15 Jul 2024 17:19:56 +0000
+! Diff-Path: ../patches/2024.7.15.1159.patch#ublock-quick-fixes
 d92 1
 a92 1
 japscan.lol##+js(acs, document.querySelector)
-d121 4
-a124 4
-kimcartoon.*,kc.linksgen.com,kisscartoon.se##+js(aost, $, /[a-z]+[A-Z]+[a-z]* inlineScript[^i]+inlineScript:\d+:1$/)
-kimcartoon.*,kc.linksgen.com,kisscartoon.se##+js(aost, document.getElementById, /[a-z]+[A-Z]+[a-z]* inlineScript[^i]+inlineScript:\d+:1$/)
-kimcartoon.*,kc.linksgen.com,kisscartoon.se##+js(set, isAdb, false)
-kimcartoon.*,kc.linksgen.com,kisscartoon.se##+js(no-fetch-if, bidgear)
-d128 2
-a129 2
-! kimcartoon.li###divContentVideo:style(display: block !important;)
+a120 1
+kimcartoon.li,kc.linksgen.com,kisscartoon.se##+js(rpnt, script, window.dataLayer =, '/*start*/(function(){const e={apply:(e,t,o)=>{if(o[0]?.includes("<img src=")){throw new ReferenceError();};return Reflect.apply(e,t,o)}};window.RegExp.prototype.test=new Proxy(window.RegExp.prototype.test,e)})();(function(){const e={apply:(e,r,n)=>{console.log(e,r,n);if(!(new Error).stack.includes("applyRules")&&r&&r instanceof Element&&r.matches("#centerDivVideo"))throw new ReferenceError;return Reflect.apply(e,r,n)}};window.Element.prototype.removeChild=new Proxy(window.Element.prototype.removeChild,e)})();document.currentScript.textContent=document.currentScript.textContent.replace(/\/\*start\*\/(.*)\/\*end\*\//g,"");/*end*/window.dataLayer =', sedCount, 1)
+a124 2
+kimcartoon.li###gameover > div:has(> img[style="width: 100%;"])
+kimcartoon.li###centerDivVideo > div[id]:not(#divContentVideo):not(:has(video)):remove()
+d126 2
+a127 2
+! kimcartoon.li##+js(rmnt, script, length > 0)
+! kimcartoon.li##+js(nostif, marveldc)
+d129 1
+a129 1
 ! kimcartoon.li###centerDivVideo > div[id]:has(> img[src^="https://i.imgur.com"])
 d134 3
 a136 2
@@ -112,26 +129,28 @@ a136 2
 veev.to##+js(json-prune, file.disable_adb file.file_a)
 d144 1
 a144 1
-www.reddit.com##+js(trusted-replace-outbound-text, JSON.stringify, '/^{"([^"]*(toke|token|toekn)[^"]*)":"[0-9a-z]+","info":\[{.*"action_info":.*}]}$/', '{"$1":"","info":[{"action_info":{"success":true,"trigger_type":"","page_type":null},"request":{"server_render_id":"","canonical_url":""},"screenview_id":"","screen":{"height":"","width":""},"adblock":{"enabled":false},"source":"global","action":"view","noun":"screen","referrer":{"url":"","domain":""},"client_timestamp":"","correlation_id":""}]}')
-diff name:ublock-unbreak lines:7 checksum:ce9fe6a6cd
+www.reddit.com##+js(trusted-replace-outbound-text, JSON.stringify, '/^{"([^"]*(tkn|toke|token|toekn)[^"]*)":"[0-9a-z]+","info":\[{.*"action_info":.*}]}$/', '{"$1":"","info":[{"action_info":{"success":true,"trigger_type":"","page_type":null},"request":{"server_render_id":"","canonical_url":""},"screenview_id":"","screen":{"height":"","width":""},"adblock":{"enabled":false},"source":"global","action":"view","noun":"screen","referrer":{"url":"","domain":""},"client_timestamp":"","correlation_id":""}]}')
+diff name:ublock-unbreak lines:7 checksum:56a6637162
 d3 2
 a4 2
 ! Last modified: Sun, 14 Jul 2024 18:52:54 +0000
-! Diff-Path: ../patches/2024.7.15.862.patch#ublock-unbreak
+! Diff-Path: ../patches/2024.7.15.1159.patch#ublock-unbreak
 a2310 2
 ||tm.jsuol.com.br/modules/external/admanager/noticias_ads.js$script,domain=uol.com.br,important
 uol.com.br##+js(set, URL_VAST_YOUTUBE, {})
-diff name:easylist lines:40 checksum:aa732a5586
+diff name:easylist lines:44 checksum:fc66411162
 d4 2
 a5 2
-! Last modified: Mon, 15 Jul 2024 10:05:20 +0000
-! Diff-Path: ../patches/2024.7.15.862.patch#easylist
+! Last modified: Mon, 15 Jul 2024 16:10:03 +0000
+! Diff-Path: ../patches/2024.7.15.1159.patch#easylist
 d15964 1
 d65274 1
 d65647 1
 d65760 1
 a65760 1
 forums.bluemoon-mcfc.co.uk,gpfans.com###snack_mpu
+a65946 1
+videocardz.com###vc-intermid-desktop-ad
 a66496 1
 harvardmagazine.com##.adsbygoogle-block
 d66553 1
@@ -140,6 +159,8 @@ aan.com,aarp.org,additudemag.com,animax-asia.com,apkforpc.com,audioxpress.com,ax
 a66738 1
 bnnbloomberg.ca##.b-ads-custom
 d66850 1
+a67717 1
+videocardz.com##.google-sidebar
 d68208 2
 a68605 1
 dermatologytimes.com##.pb-24
@@ -162,11 +183,47 @@ cumbriacrack.com,euromaidanpress.com##[data-hbwrap]
 a70104 1
 gpfans.com##[style="margin:10px auto 10px auto; text-align:center; width:100%; overflow:hidden; min-height: 250px;"]
 d70756 1
-diff name:easyprivacy lines:12 checksum:e47f84ae88
+diff name:easyprivacy lines:48 checksum:a7343445ad
 d4 2
 a5 2
-! Last modified: Mon, 15 Jul 2024 07:43:56 +0000
-! Diff-Path: ../patches/2024.7.15.862.patch#easyprivacy
+! Last modified: Mon, 15 Jul 2024 16:10:03 +0000
+! Diff-Path: ../patches/2024.7.15.1159.patch#easyprivacy
+a6340 1
+||burgersalt.com^
+a6573 1
+||defensevest.com^
+a6813 1
+||funoverbored.com^
+a7075 1
+||managedpush.com^
+a7122 1
+||mindfulgem.com^
+a7167 1
+||niftygraphs.com^
+a7210 1
+||ourblogthing.com^
+a7349 1
+||puppytooth.com^
+a7416 1
+||refundradar.com^
+a7448 1
+||rigorlab.com^
+a7455 1
+||rockpebbles.com^
+a7477 1
+||saltsacademy.com^
+a7637 1
+||snowmentor.com^
+a7695 1
+||springolive.com^
+a7697 1
+||sproutingbag.com^
+a7886 1
+||tinyswans.com^
+a7892 1
+||toomanyalts.com^
+a7947 1
+||unknowncontrol.com^
 d14363 2
 d14562 1
 d52491 1
