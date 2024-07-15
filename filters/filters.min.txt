@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Mon, 15 Jul 2024 04:07:28 +0000
-! Diff-Path: ../patches/2024.7.15.564.patch#ublock-filters
+! Last modified: Mon, 15 Jul 2024 12:33:42 +0000
+! Diff-Path: ../patches/2024.7.15.862.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -7440,17 +7440,6 @@ mangahere.onl##.container.ads-container
 ||mangahere.onl/adsbygoogle.js$script,redirect=noopjs,1p
 soy502.com##+js(acs, document.getElementById, length)
 *$script,3p,denyallow=101placeonline.com|bootstrapcdn.com|cloudflare.com|cloudflare.net|disqus.com|disquscdn.com|fastly.net|fastlylb.net|google.com|googleapis.com|gstatic.com|hcaptcha.com|hwcdn.net|jquery.com|jsdelivr.net|jwpcdn.com|recaptcha.net|sportscentral.io,domain=mlbstreams.to|nbastreams.to|nflbite.com|nflstreams.to|nhlstreams.to|soccerstreams.net
-hentaihaven.xxx##+js(noeval-if, debugger)
-*$xhr,redirect-rule=nooptext,domain=hentaihaven.xxx
-hentaihaven.xxx##+js(nowoif)
-@@||hentaihaven.xxx^$script,1p
-@@||hentaihaven.xxx^$ghide
-||imasdk.googleapis.com/js/sdkloader/ima3.js$script,redirect-rule=google-ima.js,domain=hentaihaven.xxx
-! hentaihaven .com/icu ads, popup
-||hentaihaven.icu/wp-content/plugins/sscript-manager/
-||mult-imgs.cyou/images/*.gif$image,domain=hentaihaven.xxx
-! interstitial page
-hentaihaven.xxx##+js(aopw, Script_Manager)
 openloadmovies.*##+js(aopr, AaDetector)
 streamango.*###ad_buts
 naughtymachinima.com##+js(aopr, loadTool)
@@ -9019,8 +9008,8 @@ x1337x.eu##.mgbox
 @@||torrage.info/torrent.php$popup,domain=1337x.to
 1337x.*,x1337x.*##+js(aeld, popstate)
 1337x.*,x1337x.*##+js(aost, navigator, FingerprintJS)
-1337x.*,x1337x.*##+js(aost, localStorage, .js)
-1337x.*,x1337x.*##+js(aost, onload, .js)
+1337x.*,x1337x.*##+js(aost, localStorage, /https:\/\/x?1337x\.[a-z]+\/\S+\.js/)
+1337x.*,x1337x.*##+js(aost, onload, /https:\/\/x?1337x\.[a-z]+\/\S+\.js/)
 /ma.js^$script,domain=1337x.*|x1337x.*
 /mm.js^$script,domain=1337x.*|x1337x.*
 cheatcloud.cc,cheater.ninja,cheatermad.com,cheatsquad.gg##+js(nano-sib, clearInterval)
@@ -9301,6 +9290,23 @@ acortalo.*,acortar.*,megadescarga.net,megadescargas.net##+js(set, sync, true)
 @@*$ghide,domain=acortalo.*|acortar.*|megadescarga.net
 *$popunder,domain=acortalo.*|acortar.*|megadescarga.net|megadescargas.net
 ||imasdk.googleapis.com/js/sdkloader/ima3.js^$script,3p,redirect-rule=google-ima.js,domain=acortalink.*
+hentaihaven.xxx##+js(noeval-if, debugger)
+*$xhr,redirect-rule=nooptext,domain=hentaihaven.xxx
+hentaihaven.xxx##+js(nowoif)
+hentaihaven.xxx##+js(set, PlayerLogic.prototype.detectADB, noopFunc)
+hentaihaven.xxx##+js(no-fetch-if, ads-twitter.com)
+hentaihaven.xxx##+js(json-prune, *, all)
+hentaihaven.xxx##.hhzt
+hentaihaven.xxx##.code-block
+||aj3038.bid^
+@@||hentaihaven.xxx^$script,1p
+@@||hentaihaven.xxx^$ghide
+||imasdk.googleapis.com/js/sdkloader/ima3.js$script,redirect-rule=google-ima.js,domain=hentaihaven.xxx
+! hentaihaven .com/icu ads, popup
+||hentaihaven.icu/wp-content/plugins/sscript-manager/
+||mult-imgs.cyou/images/*.gif$image,domain=hentaihaven.xxx
+! interstitial page
+hentaihaven.xxx##+js(aopw, Script_Manager)
 ! END: Rules from filters.txt
 ! START: Regional lists
 ! <<<<< czech slovak filters >>>>>
@@ -10354,13 +10360,12 @@ gplinks.*##a.exclude-pop.smartlink, .exclude-pop.quiz-container, #PlayQuiz, #qui
 gplinks.*##+js(set, blurred, false)
 gplinks.*##+js(aopr, clickCount)
 *$script,3p,denyallow=cloudflare.com|github.io|google.com|googleapis.com|gstatic.com|hwcdn.net|jquery.com|recaptcha.net|tipsforce.com|unpkg.com,domain=gplinks.*
-*$script,xhr,redirect-rule=noopjs,domain=sinonimos.de|antonimos.de|quesignifi.ca|tiktokrealtime.com|tiktokcounter.net|tpayr.xyz|poqzn.xyz|ashrfd.xyz|rezsx.xyz|tryzt.xyz|ashrff.xyz|rezst.xyz|dawenet.com|erzar.xyz|waezm.xyz|waezg.xyz|blackwoodacademy.org|cryptednews.space|vivuq.com|swgop.com|vbnmll.com|telcoinfo.online|dshytb.com
+*$xhr,redirect-rule=noopjs,method=get|post,from=antonimos.de|ashrfd.xyz|ashrff.xyz|blackwoodacademy.org|cryptednews.space|dawenet.com|dshytb.com|erzar.xyz|poqzn.xyz|quesignifi.ca|rezst.xyz|rezsx.xyz|sinonimos.de|swgop.com|telcoinfo.online|tiktokcounter.net|tiktokrealtime.com|tpayr.xyz|tryzt.xyz|vbnmll.com|vivuq.com|waezg.xyz|waezm.xyz
+@@*$xhr,method=head,domain=antonimos.de|ashrfd.xyz|ashrff.xyz|blackwoodacademy.org|cryptednews.space|dawenet.com|dshytb.com|erzar.xyz|poqzn.xyz|quesignifi.ca|rezst.xyz|rezsx.xyz|sinonimos.de|swgop.com|telcoinfo.online|tiktokcounter.net|tiktokrealtime.com|tpayr.xyz|tryzt.xyz|vbnmll.com|vivuq.com|waezg.xyz|waezm.xyz
 @@*$ghide,domain=sinonimos.de|antonimos.de|quesignifi.ca|tiktokrealtime.com|tiktokcounter.net|tpayr.xyz|poqzn.xyz|ashrfd.xyz|rezsx.xyz|tryzt.xyz|ashrff.xyz|rezst.xyz|dawenet.com|erzar.xyz|waezm.xyz|waezg.xyz|blackwoodacademy.org|cryptednews.space|vivuq.com|swgop.com|vbnmll.com|telcoinfo.online|dshytb.com
 @@*$script,1p,domain=sinonimos.de|antonimos.de|quesignifi.ca|tiktokrealtime.com|tiktokcounter.net|tpayr.xyz|poqzn.xyz|ashrfd.xyz|rezsx.xyz|tryzt.xyz|ashrff.xyz|rezst.xyz|dawenet.com|erzar.xyz|waezm.xyz|waezg.xyz|blackwoodacademy.org|cryptednews.space|vivuq.com|swgop.com|vbnmll.com|telcoinfo.online|dshytb.com
 @@||profitsfly.com^$script,domain=sinonimos.de|antonimos.de|quesignifi.ca|tiktokrealtime.com|tiktokcounter.net|tpayr.xyz|poqzn.xyz|ashrfd.xyz|rezsx.xyz|tryzt.xyz|ashrff.xyz|rezst.xyz|dawenet.com|erzar.xyz|waezm.xyz|waezg.xyz|blackwoodacademy.org|cryptednews.space|vivuq.com|swgop.com|vbnmll.com|telcoinfo.online|dshytb.com
 @@/adpartner.min.js$script,domain=sinonimos.de|antonimos.de|quesignifi.ca|tiktokrealtime.com|tiktokcounter.net|tpayr.xyz|poqzn.xyz|ashrfd.xyz|rezsx.xyz|tryzt.xyz|ashrff.xyz|rezst.xyz|dawenet.com|erzar.xyz|waezm.xyz|waezg.xyz|blackwoodacademy.org|cryptednews.space|vivuq.com|swgop.com|vbnmll.com|telcoinfo.online|dshytb.com
-sinonimos.de,antonimos.de,quesignifi.ca,tiktokrealtime.com,tiktokcounter.net,tpayr.xyz,poqzn.xyz,ashrfd.xyz,rezsx.xyz,tryzt.xyz,ashrff.xyz,rezst.xyz,dawenet.com,erzar.xyz,waezm.xyz,waezg.xyz,cryptednews.space,vivuq.com,swgop.com,vbnmll.com,telcoinfo.online,dshytb.com##+js(no-fetch-if, ads)
-sinonimos.de,antonimos.de,quesignifi.ca,tiktokrealtime.com,tiktokcounter.net,tpayr.xyz,poqzn.xyz,ashrfd.xyz,rezsx.xyz,tryzt.xyz,ashrff.xyz,rezst.xyz,dawenet.com,erzar.xyz,waezm.xyz,waezg.xyz,cryptednews.space,vivuq.com,swgop.com,vbnmll.com,telcoinfo.online,dshytb.com##+js(no-fetch-if, method:HEAD)
 sinonimos.de,antonimos.de,quesignifi.ca,tiktokrealtime.com,tiktokcounter.net,tpayr.xyz,poqzn.xyz,ashrfd.xyz,rezsx.xyz,tryzt.xyz,ashrff.xyz,rezst.xyz,dawenet.com,erzar.xyz,waezm.xyz,waezg.xyz,cryptednews.space,vivuq.com,swgop.com,vbnmll.com,telcoinfo.online,dshytb.com##+js(nostif, documentElement.innerHTML)
 sinonimos.de,antonimos.de,quesignifi.ca,tiktokrealtime.com,tiktokcounter.net,tpayr.xyz,poqzn.xyz,ashrfd.xyz,rezsx.xyz,tryzt.xyz,ashrff.xyz,rezst.xyz,dawenet.com,erzar.xyz,waezm.xyz,waezg.xyz,blackwoodacademy.org,cryptednews.space,vivuq.com,swgop.com,vbnmll.com,telcoinfo.online,dshytb.com##+js(trusted-replace-node-text, script, /^([^{])/, "document.addEventListener('DOMContentLoaded',()=>{const i=document.createElement('iframe');i.style='height:0;width:0;border:0';i.id='aswift_0';document.body.appendChild(i);i.focus();const f=document.createElement('div');f.id='9JJFp';document.body.appendChild(f);});$1", sedCount, 2)
 sinonimos.de,antonimos.de,quesignifi.ca,tiktokrealtime.com,tiktokcounter.net,tpayr.xyz,poqzn.xyz,ashrfd.xyz,rezsx.xyz,tryzt.xyz,ashrff.xyz,rezst.xyz,dawenet.com,erzar.xyz,waezm.xyz,waezg.xyz,blackwoodacademy.org,cryptednews.space,vivuq.com,swgop.com,vbnmll.com,telcoinfo.online,dshytb.com##+js(set, document.hasFocus, trueFunc)
