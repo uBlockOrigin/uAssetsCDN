@@ -1,8 +1,8 @@
-diff name:ublock-annoyances lines:12 checksum:3d16f594d5
+diff name:ublock-annoyances lines:12 checksum:fce8e05963
 d3 2
 a4 2
 ! Last modified: Tue, 16 Jul 2024 18:36:17 +0000
-! Diff-Path: ../patches/2024.7.17.390.patch#ublock-annoyances
+! Diff-Path: ../patches/2024.7.17.679.patch#ublock-annoyances
 d3457 4
 a3460 4
 animesuge.to,aniwave.*,flixhq.*,flixrave.to,fmovies24.*,fmoviesz.*,hdtoday.so,hurawatch.bz,vidplay.site,vid2faf.site##+js(nostif, ||null)
@@ -11,11 +11,11 @@ animesuge.to,aniwave.*,bflix.io,flixhq.*,flixrave.to,fmovies.*,fmovies24.*,fmovi
 animesuge.to,aniwave.*,anix.*,hdtoday.so,hurawatch.bz,vidplay.*,vid2faf.site##+js(set, DisDevTool, undefined)
 a4002 1
 autopareri.com##+js(no-fetch-if, googlesyndication)
-diff name:ublock-badware lines:53 checksum:396b4bfd6d
+diff name:ublock-badware lines:74 checksum:f4a2e2edae
 d3 2
 a4 2
-! Last modified: Wed, 17 Jul 2024 05:06:14 +0000
-! Diff-Path: ../patches/2024.7.17.390.patch#ublock-badware
+! Last modified: Wed, 17 Jul 2024 06:48:04 +0000
+! Diff-Path: ../patches/2024.7.17.679.patch#ublock-badware
 d675 1
 a680 1
 ||www.youtube.com/channel/UCCmzcphyrH6Br5eNUnQR2mw/$doc
@@ -65,13 +65,59 @@ a3577 3
 ||withsecurify.com^
 ||securifyguard.com^
 ||getsecurify.com^
-diff name:ublock-filters lines:89 checksum:55a1318348
+a3579 20
+||blue-softs.com^$all
+||softs-download.com^$all
+||iemcan.com^$all
+||hvacpartstechnician.com^$all
+||pmequebeclic.com^$all
+||sirokataldea.com^$all
+||senmendai.net^$all
+||download-ai.top^$all
+||sites.google.com/view/blue-softs^$all
+||sites.google.com/view/xtaskbar-themes^$all
+||sites.google.com/view/newtaskbar-themes^$all
+||sites.google.com/view/awesome-themes-desktop^$all
+||sites.google.com/view/taskbar-themes^$all
+||sites.google.com/view/ai-image-3d^$all
+||sites.google.com/view/taskbar-themess^$all
+||sites.google.com/view/softs-download^$all
+||sites.google.com/view/sora-ai-v2^$all
+/^https:\/\/[a-z]{6,19}\.(?:com|net)\/js\?t=[_a-z0-9]+&ns=[a-z]{2}$/$script,3p,strict3p,match-case,to=com|net
+/^https:\/\/[a-z]{6,19}\.(?:com|net)\/(?:static_)?file\/\?t=[_a-z0-9]+&ns=[a-z]{2}$/$frame,popup,3p,strict3pmatch-case,to=com|net
+/^https:\/\/[a-z]{6,19}\.(?:com|net)\/(?:static_)?file\/\?t=[_a-z0-9]+&ns=[a-z]{2}$/$doc,match-case,domain=com|net
+diff name:ublock-filters lines:114 checksum:37a41b6fce
 d3 2
 a4 2
-! Last modified: Wed, 17 Jul 2024 05:29:25 +0000
-! Diff-Path: ../patches/2024.7.17.390.patch#ublock-filters
-a360 1
-www.facebook.com##+js(json-prune-xhr-response, data.viewer.instream_video_ads data.scrubber, , propsToMatch, /api/graphql)
+! Last modified: Wed, 17 Jul 2024 06:44:05 +0000
+! Diff-Path: ../patches/2024.7.17.679.patch#ublock-filters
+d341 1
+a341 1
+web.facebook.com,www.facebook.com##+js(json-prune, require.0.3.0.__bbox.require.[].3.1.__bbox.result.data.node, require.0.3.0.__bbox.require.[].3.1.__bbox.result.data.node.sponsored_data.ad_id)
+d343 1
+a343 1
+web.facebook.com,www.facebook.com##+js(json-prune, require.0.3.0.__bbox.require.[].3.[-].__bbox.result.data.node.sponsored_data.ad_id)
+d345 1
+a345 1
+web.facebook.com,www.facebook.com##+js(json-prune, require.0.3.0.__bbox.require.[].3.1.__bbox.result.data.serpResponse.results.edges.[-].relay_rendering_strategy.view_model.story.sponsored_data.ad_id)
+d347 4
+a350 4
+||facebook.com/api/graphql/$xhr,replace=/\{"brs_content_label":[^,]+,"(?:category|feed_story_category)":"SPONSORED"[^\n]+"cursor":"[^"]+"\}/{}/g,domain=web.facebook.com|www.facebook.com
+||facebook.com/api/graphql/$xhr,replace=/\{"node":\{"role":"SEARCH_ADS"[^\n]+?cursor":[^}]+\}/{}/g,domain=web.facebook.com|www.facebook.com
+||facebook.com/api/graphql/$xhr,replace=/\{"node":\{"__typename":"MarketplaceFeedAdStory"[^\n]+?"cursor":(?:null|"\{[^\n]+?\}"|[^\n]+?MarketplaceSearchFeedStoriesEdge")\}/{}/g,domain=web.facebook.com|www.facebook.com
+||facebook.com/api/graphql/$xhr,replace=/\{"node":\{"__typename":"VideoHomeFeedUnitSectionComponent"[^\n]+?"sponsored_data":\{"ad_id"[^\n]+?"cursor":null\}/{}/,domain=web.facebook.com|www.facebook.com
+d352 9
+a360 10
+web.facebook.com,www.facebook.com##+js(trusted-replace-xhr-response, '/\{"brs_content_label":[^,]+,"(?:category|feed_story_category)":"SPONSORED"[^\n]+"cursor":"[^}]+\}/g', {}, /api/graphql)
+web.facebook.com,www.facebook.com##+js(trusted-replace-xhr-response, /\{"node":\{"role":"SEARCH_ADS"[^\n]+?cursor":[^}]+\}/g, {}, /api/graphql)
+web.facebook.com,www.facebook.com##+js(trusted-replace-xhr-response, /\{"node":\{"__typename":"MarketplaceFeedAdStory"[^\n]+?"cursor":(?:null|"\{[^\n]+?\}"|[^\n]+?MarketplaceSearchFeedStoriesEdge")\}/g, {}, /api/graphql)
+web.facebook.com,www.facebook.com##+js(trusted-replace-xhr-response, /\{"node":\{"__typename":"VideoHomeFeedUnitSectionComponent"[^\n]+?"sponsored_data":\{"ad_id"[^\n]+?"cursor":null\}/, {}, /api/graphql)
+!#endif
+web.facebook.com,www.facebook.com##+js(json-prune, require.0.3.0.__bbox.require.[].3.1.__bbox.result.data.node, require.0.3.0.__bbox.require.[].3.1.__bbox.result.data.node.story.sponsored_data.ad_id)
+web.facebook.com,www.facebook.com##+js(json-prune, require.0.3.0.__bbox.require.[].3.1.__bbox.result.data.marketplace_search.feed_units.edges.[-].node.story.sponsored_data.ad_id)
+web.facebook.com,www.facebook.com##+js(json-prune, require.0.3.0.__bbox.require.[].3.1.__bbox.result.data.viewer.marketplace_feed_stories.edges.[-].node.story.sponsored_data.ad_id)
+web.facebook.com,www.facebook.com###seo_pivots ~ div > div[style^="max-width"] > div[class] > div[style^="max-width"]:has(a[href^="/ads/about/?"])
+web.facebook.com,www.facebook.com##+js(json-prune-xhr-response, data.viewer.instream_video_ads data.scrubber, , propsToMatch, /api/graphql)
 d7443 11
 d9022 2
 a9023 2
@@ -155,11 +201,11 @@ d23157 2
 a23158 2
 app.axenthost.com##+js(set, nitroAds.queue.push, noopFunc)
 !app.axenthost.com##+js(nosiif, /(?:_0x|\)\+")/)
-diff name:ublock-privacy lines:13 checksum:53c02d0265
+diff name:ublock-privacy lines:13 checksum:d83ffaa37a
 d3 2
 a4 2
 ! Last modified: Tue, 16 Jul 2024 15:23:47 +0000
-! Diff-Path: ../patches/2024.7.17.390.patch#ublock-privacy
+! Diff-Path: ../patches/2024.7.17.679.patch#ublock-privacy
 d109 1
 a114 1
 ||eldorado.gg/main.$script,1p,replace=/\,dataUnlocker:\{scriptName:\".*?\"\}//
@@ -169,11 +215,11 @@ a119 2
 a603 2
 ! tf tracking
 ||test.torrentfreak.com^
-diff name:ublock-quick-fixes lines:52 checksum:5cb96b7bec
+diff name:ublock-quick-fixes lines:52 checksum:2ef6180202
 d3 2
 a4 2
-! Last modified: Wed, 17 Jul 2024 04:15:27 +0000
-! Diff-Path: ../patches/2024.7.17.390.patch#ublock-quick-fixes
+! Last modified: Wed, 17 Jul 2024 09:09:18 +0000
+! Diff-Path: ../patches/2024.7.17.679.patch#ublock-quick-fixes
 d77 11
 a87 14
 *$script,redirect-rule=noopjs,domain=djxmaza.in|thecubexguide.com|dev.miuiflash.com|jytechs.in
@@ -192,7 +238,7 @@ jytechs.in,dev.miuiflash.com,djxmaza.in,thecubexguide.com##html.i-amphtml-inabox
 jytechs.in,dev.miuiflash.com,djxmaza.in,thecubexguide.com##+js(rpnt, script, wpemojiSettings);, 'wpemojiSettings); /*start*/ !function(){"use strict";let t={log:window.console.log.bind(console),getPropertyValue:CSSStyleDeclaration.prototype.getPropertyValue,setAttribute:Element.prototype.setAttribute,getAttribute:Element.prototype.getAttribute,appendChild:Element.prototype.appendChild,remove:Element.prototype.remove,cloneNode:Element.prototype.cloneNode,Element_attributes:Object.getOwnPropertyDescriptor(Element.prototype,"attributes").get,Array_splice:Array.prototype.splice,Array_join:Array.prototype.join,createElement:document.createElement,getComputedStyle:window.getComputedStyle,Reflect:Reflect,Proxy:Proxy,crypto:window.crypto,Uint8Array:Uint8Array,Object_defineProperty:Object.defineProperty.bind(Object),Object_getOwnPropertyDescriptor:Object.getOwnPropertyDescriptor.bind(Object),String_replace:String.prototype.replace},e=t.crypto.getRandomValues.bind(t.crypto),r=function(e,r,l){return"toString"===r?e.toString.bind(e):t.Reflect.get(e,r,l)},l=function(r){let o=function(t){return t.toString(16).padStart(2,"0")},p=new t.Uint8Array((r||40)/2);e(p);let n=t.String_replace.call(t.Array_join.call(Array.from(p,o),""),/^\d+/g,"");return n.length<3?l(r):n},o=l(15);window.MutationObserver=new t.Proxy(window.MutationObserver,{construct:function(e,r){let l=r[0],p=function(e,r){for(let p=e.length,n=p-1;n>=0;--n){let c=e[n];if("childList"===c.type&&c.addedNodes.length>0){let i=c.addedNodes;for(let a=0,y=i.length;a<y;++a){let u=i[a];if(u.localName===o){t.Array_splice.call(e,n,1);break}}}}0!==e.length&&l(e,r)};r[0]=p;let n=t.Reflect.construct(e,r);return n},get:r}),window.getComputedStyle=new t.Proxy(window.getComputedStyle,{apply(e,l,p){let n=t.Reflect.apply(e,l,p);if("none"===t.getPropertyValue.call(n,"clip-path"))return n;let c=p[0],i=t.createElement.call(document,o);t.setAttribute.call(i,"class",t.getAttribute.call(c,"class")),t.setAttribute.call(i,"id",t.getAttribute.call(c,"id")),t.setAttribute.call(i,"style",t.getAttribute.call(c,"style")),t.appendChild.call(document.body,i);let a=t.getPropertyValue.call(t.getComputedStyle.call(window,i),"clip-path");return t.remove.call(i),t.Object_defineProperty(n,"clipPath",{get:(()=>a).bind(null)}),n.getPropertyValue=new t.Proxy(n.getPropertyValue,{apply:(e,r,l)=>"clip-path"!==l[0]?t.Reflect.apply(e,r,l):a,get:r}),n},get:r})}(); document.currentScript.textContent=document.currentScript.textContent.replace(/\/\*start\*\/(.*)\/\*end\*\//g,"");/*end*/')
 d90 1
 a90 1
-japscan.lol##+js(rmnt, script, /while \(!!\[\]\)|String\(\)\.fromCharCode|\.join\(\w+\)\.split\(\w+\)|"undefined"|_\$|\$_|\[\d+\][^=]*==|\.join|\.substr|\.charAt|\.reduce|!!|\$document|return new Function|var [^=]+=window\[/)
+japscan.lol##+js(rmnt, script, /while \(!!\[\]\)|String\(\)\.fromCharCode|\.join\(\w+\)\.split\(\w+\)|"undefined"|_\$|\$_|\[\d+\][^=]*==|\.join|\.substr|\.charAt|\.reduce|!!|\$document|break;else|var [^=]+=window\[/)
 d121 5
 a125 8
 ! kimcartoon.li,kc.linksgen.com,kisscartoon.se##+js(rpnt, script, window.dataLayer =, '/*start*/(function(){const e={apply:(e,t,o)=>{if(o[0]?.includes("<img src=")){throw new ReferenceError();};return Reflect.apply(e,t,o)}};window.RegExp.prototype.test=new Proxy(window.RegExp.prototype.test,e)})();(function(){const e={apply:(e,r,n)=>{console.log(e,r,n);if(!(new Error).stack.includes("applyRules")&&r&&r instanceof Element&&r.matches("#centerDivVideo"))throw new ReferenceError;return Reflect.apply(e,r,n)}};window.Element.prototype.removeChild=new Proxy(window.Element.prototype.removeChild,e)})();document.currentScript.textContent=document.currentScript.textContent.replace(/\/\*start\*\/(.*)\/\*end\*\//g,"");/*end*/window.dataLayer =', sedCount, 1)
@@ -204,15 +250,15 @@ kimcartoon.li,kc.linksgen.com,kisscartoon.se##+js(no-fetch-if, bidgear)
 kimcartoon.li###gameover > div:has(> img[style="width: 100%;"])
 ! kimcartoon.li###centerDivVideo > div[id]:not(#divContentVideo):not(:has(video)):remove()
 d127 4
-a130 4
+a130 3
 kimcartoon.li,kc.linksgen.com,kisscartoon.se##+js(nostif, userAgent)
 ! kimcartoon.li###divContentVideo:style(display: block !important;)
 ! kimcartoon.li###centerDivVideo > div[id]:has(> img[src^="https://i.imgur.com"])
-kimcartoon.li##+js(rmnt, script, dcmarvel)
 d132 6
-a137 4
+a137 5
 exploader.net#@#+js(set, load_daotag, true)
-exploader.net##.information > div[id]:remove-attr(id)
+exploader.net#@#+js(ra, id, .information > div[id])
+exploader.net##+js(acs, Element.prototype.innerHTML)
 veev.to##+js(set, XMLHttpRequest.prototype.readyState, true)
 !veev.to##+js(json-prune, file.disable_adb file.file_a)
 d139 2
@@ -222,18 +268,18 @@ www.reddit.com##+js(trusted-replace-outbound-text, JSON.stringify, '/^{"([^"]*(t
 ||contabostorage.com^$all,to=~gov.uk,badfilter
 rekidai-info.github.io#@#+js(no-fetch-if, /a(dsbygoogle)?\.js/)
 @@*$xhr,domain=rekidai-info.github.io
-diff name:ublock-unbreak lines:6 checksum:78359b0fc4
+diff name:ublock-unbreak lines:6 checksum:ffa57c2e0c
 d3 2
 a4 2
 ! Last modified: Tue, 16 Jul 2024 17:33:13 +0000
-! Diff-Path: ../patches/2024.7.17.390.patch#ublock-unbreak
+! Diff-Path: ../patches/2024.7.17.679.patch#ublock-unbreak
 a2653 1
 jprime.jp##+js(trusted-rpnt, script, var ISMLIB, !function(){const o={apply:(o\,n\,r)=>(new Error).stack.includes("refreshad")?0:Reflect.apply(o\,n\,r)};window.Math.floor=new Proxy(window.Math.floor\,o)}();var ISMLIB)
-diff name:easylist lines:123 checksum:46fbe2c038
+diff name:easylist lines:127 checksum:24cb059188
 d4 2
 a5 2
-! Last modified: Wed, 17 Jul 2024 04:15:27 +0000
-! Diff-Path: ../patches/2024.7.17.390.patch#easylist
+! Last modified: Wed, 17 Jul 2024 08:53:56 +0000
+! Diff-Path: ../patches/2024.7.17.679.patch#easylist
 d15647 1
 a15647 1
 ! Generic mobile element
@@ -269,6 +315,8 @@ a51769 1
 ||washokanap.com^
 a55634 1
 ||mediatradecraft.com^$third-party
+a55677 1
+||newormedia.com^$third-party
 a55786 1
 ||prezna.com^$third-party
 a56101 1
@@ -317,6 +365,8 @@ afro.com,ghacks.net##.category-sponsored
 d67169 1
 a67169 1
 100percentfedup.com,180gadgets.com,247media.com.ng,academicful.com,addapinch.com,aiarticlespinner.co,allaboutfpl.com,alltechnerd.com,americanmilitarynews.com,americansongwriter.com,androidsage.com,animatedtimes.com,anoopcnair.com,askpython.com,asurascans.com,australiangeographic.com.au,autodaily.com.au,bigleaguepolitics.com,bipartisanreport.com,bohemian.com,borncity.com,boxingnews24.com,browserhow.com,charlieintel.com,chillinghistory.com,chromeunboxed.com,circuitbasics.com,coincodecap.com,conservativebrief.com,corrosionhour.com,crimereads.com,cryptobriefing.com,cryptointelligence.co.uk,cryptopotato.com,cryptoreporter.info,cryptoslate.com,dafontfree.io,dailynewshungary.com,dcenquirer.com,dexdotexe.com,dorohedoro.online,epicdope.com,eurweb.com,exeo.app,fandomwire.com,firstsportz.com,flickeringmyth.com,flyingmag.com,freemagazines.top,gadgetinsiders.com,gameinfinitus.com,gamertweak.com,gatewaynews.co.za,geekdashboard.com,getdroidtips.com,goodyfeed.com,greekreporter.com,hard-drive.net,hollywoodinsider.com,hollywoodunlocked.com,indianhealthyrecipes.com,inspiredtaste.net,iotwreport.com,jojolandsmanga.com,journeybytes.com,journeyjunket.com,jujustukaisen.com,libertyunlocked.com,linuxfordevices.com,lithub.com,meaningfulspaces.com,medicotopics.com,medievalists.net,mpost.io,mycariboonow.com,nationalfile.com,nintendoeverything.com,notalwaysright.com,nsw2u.com,nxbrew.com,organicfacts.net,patriotfetch.com,politizoom.com,premiumtimesng.com,protrumpnews.com,pureinfotech.com,redrightvideos.com,reneweconomy.com.au,reptilesmagazine.com,respawnfirst.com,rezence.com,roadaheadonline.co.za,rok.guide,saabplanet.com,sciencenotes.org,sdnews.com,simscommunity.info,small-screen.co.uk,storypick.com,streamingbetter.com,superwatchman.com,talkandroid.com,talkers.com,tech-latest.com,techpp.com,techrounder.com,techviral.net,theblueoceansgroup.com,thecinemaholic.com,thecricketlounge.com,thedriven.io,thegamehaus.com,thegatewaypundit.com,thegeekpage.com,thelibertydaily.com,thenipslip.com,thepeoplesvoice.tv,thewincentral.com,trendingpolitics.com,trendingpoliticsnews.com,twistedvoxel.com,videogamer.com,walletinvestor.com,washingtonblade.com,waves4you.com,wbiw.com,welovetrump.com,wepc.com,win.gg,wisden.com,wnd.com,zerohanger.com##.code-block
+a67678 1
+just-food.com##.gdm-company-profile-unit__container
 a67714 1
 videocardz.com##.google-sidebar
 a67990 1
@@ -353,11 +403,11 @@ a73122 1
 d73124 1
 a73124 1
 @@||g.doubleclick.net/pagead/managed/js/gpt/$script,domain=adamtheautomator.com|allestoringen.be|allestoringen.nl|aussieoutages.com|canadianoutages.com|downdetector.ae|downdetector.ca|downdetector.co.nz|downdetector.co.uk|downdetector.co.za|downdetector.com|downdetector.com.ar|downdetector.com.br|downdetector.dk|downdetector.es|downdetector.fi|downdetector.fr|downdetector.hk|downdetector.ie|downdetector.in|downdetector.it|downdetector.jp|downdetector.mx|downdetector.no|downdetector.pl|downdetector.pt|downdetector.ru|downdetector.se|downdetector.sg|downdetector.tw|downdetector.web.tr|filmweb.pl|ictnews.org|journaldequebec.com|mediaite.com|thestar.co.uk|xn--allestrungen-9ib.at|xn--allestrungen-9ib.ch|xn--allestrungen-9ib.de|yorkshirepost.co.uk
-diff name:easyprivacy lines:201 checksum:3d4992672d
+diff name:easyprivacy lines:205 checksum:b51180d252
 d4 2
 a5 2
-! Last modified: Wed, 17 Jul 2024 04:15:27 +0000
-! Diff-Path: ../patches/2024.7.17.390.patch#easyprivacy
+! Last modified: Wed, 17 Jul 2024 08:53:56 +0000
+! Diff-Path: ../patches/2024.7.17.679.patch#easyprivacy
 a262 1
 /analytics.plausible.js
 a1527 1
@@ -386,6 +436,8 @@ a6772 1
 ||flourishinginnovation.com^
 a6813 1
 ||funoverbored.com^
+a6826 1
+||gardenovens.com^
 a7075 1
 ||managedpush.com^
 a7122 1
@@ -410,6 +462,8 @@ a7695 1
 ||springolive.com^
 a7697 1
 ||sproutingbag.com^
+a7824 1
+||tackytrains.com^
 a7886 1
 ||tinyswans.com^
 a7892 1
