@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Quick fixes
 ! Expires: 12 hours
-! Last modified: Tue, 23 Jul 2024 01:20:51 +0000
-! Diff-Path: ../patches/2024.7.23.440.patch#ublock-quick-fixes
+! Last modified: Tue, 23 Jul 2024 12:05:27 +0000
+! Diff-Path: ../patches/2024.7.23.762.patch#ublock-quick-fixes
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/quick-fixes.txt ***
@@ -120,19 +120,17 @@ client.falixnodes.net##+js(rpnt, script, (window.loadscript, (window.loadscript 
 !kimcartoon.*##+js(rpnt, script, /^\(function/, '/*start*/(function(){const e={apply:(e,t,o)=>{if(o[0]?.includes("<img src=")){throw new ReferenceError();};return Reflect.apply(e,t,o)}};window.RegExp.prototype.test=new Proxy(window.RegExp.prototype.test,e)})();document.currentScript.textContent=document.currentScript.textContent.replace(/\/\*start\*\/(.*)\/\*end\*\//g,"");/*end*/(function', sedCount, 1)
 !#endif
 ! kimcartoon.li,kc.linksgen.com,kisscartoon.se##+js(rpnt, script, window.dataLayer =, '/*start*/(function(){const e={apply:(e,t,o)=>{if(o[0]?.includes("<img src=")){throw new ReferenceError();};return Reflect.apply(e,t,o)}};window.RegExp.prototype.test=new Proxy(window.RegExp.prototype.test,e)})();(function(){const e={apply:(e,r,n)=>{console.log(e,r,n);if(!(new Error).stack.includes("applyRules")&&r&&r instanceof Element&&r.matches("#centerDivVideo"))throw new ReferenceError;return Reflect.apply(e,r,n)}};window.Element.prototype.removeChild=new Proxy(window.Element.prototype.removeChild,e)})();document.currentScript.textContent=document.currentScript.textContent.replace(/\/\*start\*\/(.*)\/\*end\*\//g,"");/*end*/window.dataLayer =', sedCount, 1)
-kimcartoon.li,kc.linksgen.com,kisscartoon.se##+js(acs, setTimeout, /navigator\.userAgent;\n\s+if \(\w/)
+kimcartoon.li,kc.linksgen.com,kisscartoon.se##+js(acs, setTimeout, /navigator\.userAgent;\n\s+if \(\w|i.*\..*i.*m.*g.*u.*r.*\..*c.*o.*m/)
 kimcartoon.li,kc.linksgen.com,kisscartoon.se##+js(aost, $, /[a-z]+[A-Z]+[a-z]* inlineScript[^i]+inlineScript:\d+:1$/)
 kimcartoon.li,kc.linksgen.com,kisscartoon.se##+js(aost, document.getElementById, /[a-z]+[A-Z]+[a-z]* inlineScript[^i]+inlineScript:\d+:1$/)
 kimcartoon.li,kc.linksgen.com,kisscartoon.se##+js(set, isAdb, false)
 kimcartoon.li,kc.linksgen.com,kisscartoon.se##+js(no-fetch-if, bidgear)
 ! kimcartoon.li###centerDivVideo > div[id]:not(#divContentVideo):not(:has(video)):remove()
 ! @@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$script,domain=kimcartoon.li
-kimcartoon.li,kc.linksgen.com,kisscartoon.se##+js(rmnt, script, /i.*\..*i.*m.*g.*u.*r.*\..*c.*o.*m[^\n]+\n[\s\n]+\}/)
+kimcartoon.li,kc.linksgen.com,kisscartoon.se##+js(rmnt, script, _batCheck)
 kimcartoon.li,kc.linksgen.com,kisscartoon.se###divContentVideo:style(display: block !important;)
 kimcartoon.li,kc.linksgen.com,kisscartoon.se###centerDivVideo > div[id]:has(> img[src^="https://i.imgur.com"])
 ! exploader.net ads, anti-adb
-exploader.net#@#+js(acs, document.createElement, error)
-exploader.net#@#+js(acs, $, ajax)
 exploader.net#@#+js(rmnt, script, window.load_daotag)
 exploader.net#@#+js(rmnt, script, !window.load_daotag)
 exploader.net#@#+js(rmnt, script, $.ajax)
@@ -141,15 +139,16 @@ exploader.net#@#+js(rmnt, script, /\$\.ajax|result === false/)
 exploader.net#@#+js(rmnt, script, /\$\.ajax|document\.getElementById\(\'([0-9A-z]+)\'\)\.style\.display = \'block\';\n?document\.getElementById\(\'([0-9A-z]+)\'\)\.style\.display = \'none\';\n?\}\n?[0-9A-z]+ = false;\n?if \([0-9A-z]+\) \{\n?document\.getElementById\(\'\1\'\)/)
 exploader.net#@#+js(no-xhr-if, .js)
 exploader.net##+js(trusted-rpnt, script, /(if \(\! window\.[0-9A-z]+\) \{\n?if[\S\s]+?\}\n?\})/g, if(window.canRunAds){throw new Error()};$1)
-||exploader.net/js/$script,redirect=prebid-ads.js,important
-||exploader.net/js/$xhr,redirect=prebid-ads.js,important
+||exploader.net/js/$script,redirect=prebid-ads.js:10
+||exploader.net/js/$xhr,redirect=prebid-ads.js:10
 !#if env_mobile
 exploader.net###firstpop
 exploader.net##+js(trusted-rpnt, script, /[0-9A-z]{20\,}\.innerHTML = \'<a style.+?a>\';/g)
 !#endif
-veev.to##+js(aopr, XMLHttpRequest.prototype.getResponseHeader)
+@@||a.magsrv.com/ad-provider.js$xhr,domain=veev.to
 ! reddit data collection
 www.reddit.com##+js(trusted-replace-outbound-text, JSON.stringify, '/^{"([^"]*[a-z][^"]*)":"[0-9a-z]+","info":\[{.*"action_info":.*}]}$/', '{"$1":"","info":[{"action_info":{"success":true,"trigger_type":"","page_type":null},"request":{"server_render_id":"","canonical_url":""},"screenview_id":"","screen":{"height":"","width":""},"adblock":{"enabled":false},"source":"global","action":"view","noun":"screen","referrer":{"url":"","domain":""},"client_timestamp":"","correlation_id":""}]}')
 /visit?id=$badfilter
 ||geojs.io^$third-party,badfilter
 ||imasdk.googleapis.com/js/sdkloader/ima3_debug.js$script,domain=cbsnews.com,redirect=google-ima.js,important,badfilter
+@@||googletagmanager.com/gtm.js$domain=j-wave.co.jp|tbsradio.jp
