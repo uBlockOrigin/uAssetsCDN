@@ -1,5 +1,5 @@
 ! Title: uBlock₀ filters – Quick fixes
-! Last modified: Wed, 24 Jul 2024 08:24:05 +0000
+! Last modified: Wed, 24 Jul 2024 11:18:37 +0000
 ! Expires: 8 hours
 ! Description: Immediate, temporary filters to fix websites
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -149,26 +149,22 @@ kimcartoon.li,kc.linksgen.com,kisscartoon.se##+js(no-fetch-if, bidgear)
 kimcartoon.li,kc.linksgen.com,kisscartoon.se##+js(trusted-replace-argument, document.getElementById, 0, undefined, condition, divContentVideo)
 ! kimcartoon.li###centerDivVideo > div[id]:not(#divContentVideo):not(:has(video)):remove()
 ! @@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$script,domain=kimcartoon.li
-kimcartoon.li,kc.linksgen.com,kisscartoon.se##+js(rmnt, script, _batCheck)
+kimcartoon.li,kc.linksgen.com,kisscartoon.se##+js(rmnt, script, _btaCheck)
 kimcartoon.li,kc.linksgen.com,kisscartoon.se###divContentVideo:style(display: block !important;)
 kimcartoon.li,kc.linksgen.com,kisscartoon.se###centerDivVideo > div[id]:has(> img[src^="https://i.imgur.com"])
 @@||kimcartoon.li/ads2/$frame,1p
 @@||kc.linksgen.com/ads2/$frame,1p
 
 ! exploader.net ads, anti-adb
-exploader.net#@#+js(rmnt, script, window.load_daotag)
-exploader.net#@#+js(rmnt, script, !window.load_daotag)
-exploader.net#@#+js(rmnt, script, $.ajax)
 exploader.net#@#+js(rmnt, script, /\$\.ajax|result/)
 exploader.net#@#+js(rmnt, script, /\$\.ajax|result === false/)
 exploader.net#@#+js(rmnt, script, /\$\.ajax|document\.getElementById\(\'([0-9A-z]+)\'\)\.style\.display = \'block\';\n?document\.getElementById\(\'([0-9A-z]+)\'\)\.style\.display = \'none\';\n?\}\n?[0-9A-z]+ = false;\n?if \([0-9A-z]+\) \{\n?document\.getElementById\(\'\1\'\)/)
 exploader.net#@#+js(no-xhr-if, .js)
-exploader.net##+js(trusted-rpnt, script, /(if \(\! window\.[0-9A-z]+\) \{\n?[\S\s]+?\}\n?\})/g, if(window.canRunAds){throw new Error()};$1)
+exploader.net##+js(trusted-rpnt, script, /(if \(\! window\.[0-9A-z]+\) \n?\{\n?window[\S\s]+?\})/g, if(!window.canRunAds){throw new Error()};$1)
 ||exploader.net/js/$script,redirect=prebid-ads.js:10
 ||exploader.net/js/$xhr,redirect=prebid-ads.js:10
 !#if env_mobile
 exploader.net###firstpop
-exploader.net##+js(trusted-rpnt, script, /[0-9A-z]{20\,}\.innerHTML = \'<a style.+?a>\';/g)
 !#endif
 
 ! https://github.com/uBlockOrigin/uAssets/issues/24220
