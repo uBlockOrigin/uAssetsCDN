@@ -1,5 +1,5 @@
 ! Title: uBlock₀ filters – Quick fixes
-! Last modified: Thu, 25 Jul 2024 14:01:24 +0000
+! Last modified: Thu, 25 Jul 2024 17:35:20 +0000
 ! Expires: 8 hours
 ! Description: Immediate, temporary filters to fix websites
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -58,6 +58,8 @@ youtube.com##+js(json-prune, playerResponse.adPlacements playerResponse.playerAd
 ||googlevideo.com/videoplayback*&ctier=L&*%2Cctier%2C$xhr,3p,domain=m.youtube.com|music.youtube.com|www.youtube.com
 www.youtube.com##+js(trusted-rpnt, script, (function() {window.ytplayer=, /*start*/(()=>{let t=document.location.href\,e=[]\,n=[]\,o=""\,i=!1;const r=Array.prototype.push\,a={apply:(t\,o\,a)=>(window.yt?.config_?.EXPERIMENT_FLAGS?.html5_enable_ssap_entity_id&&a[0]&&a[0]!==window&&"number"==typeof a[0].start&&a[0].end&&"ssap"===a[0].namespace&&a[0].id&&(i||0!==a[0]?.start||n.includes(a[0].id)||(e.length=0\,n.length=0\,i=!0\,r.call(e\,a[0])\,r.call(n\,a[0].id))\,i&&0!==a[0]?.start&&!n.includes(a[0].id)&&(r.call(e\,a[0])\,r.call(n\,a[0].id)))\,Reflect.apply(t\,o\,a))};window.Array.prototype.push=new Proxy(window.Array.prototype.push\,a)\,document.addEventListener("DOMContentLoaded"\,(function(){if(!window.yt?.config_?.EXPERIMENT_FLAGS?.html5_enable_ssap_entity_id)return;const r=()=>{const t=document.querySelector("video");if(t&&e.length){const r=Math.round(t.duration)\,a=Math.round(e.at(-1).end/1e3)\,l=n.join("\,");if(r&&r===a&&o!==l){const r=e.at(-1).start/1e3;t.currentTime<r&&(t.currentTime=r\,i=!1\,e.length=0\,n.length=0\,o=l)}}};r();new MutationObserver((()=>{t!==document.location.href?(t=document.location.href\,e.length=0\,n.length=0\,i=!1\,r()):r()})).observe(document\,{childList:!0\,subtree:!0})}))})();if(window.trustedTypes){const escapeHTMLPolicy=trustedTypes.createPolicy("myEscapePolicy"\,{createScript:string=>string.replace(/\/\*start\*\/(.*)\/\*end\*\//g\,"")});document.currentScript.textContent=escapeHTMLPolicy.createScript(document.currentScript.textContent);}else{document.currentScript.textContent=document.currentScript.textContent.replace(/\/\*start\*\/(.*)\/\*end\*\//g\,"");}/*end*/(function() {window.ytplayer=, sedCount, 1)
 www.youtube.com##+js(nano-stb, [native code], 17000, 0.001)
+! https://www.reddit.com/r/uBlockOrigin/comments/1ebwr6c/is_ublock_broken_again_or_am_i_doing_something/
+www.youtube.com##+js(json-prune-fetch-response, playerAds adPlacements adSlots playerResponse.playerAds playerResponse.adPlacements playerResponse.adSlots, , propsToMatch, /player?)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/18476
 ! VOE sites
@@ -133,11 +135,8 @@ client.falixnodes.net##+js(rpnt, script, typeof window.loadscript, typeof window
 client.falixnodes.net##+js(rpnt, script, (window.loadscript, (window.loadscript === undefined || true || window.googlescriptloaded)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/2320
-freemcserver.net##+js(nosiif, 0x)
-freemcserver.net##+js(nostif, ){}})
-freemcserver.net##+js(nostif, ')]());})
-freemcserver.net##+js(nostif, );}catch()
-freemcserver.net##+js(nostif, ;});})
+@@||cdn.jsdelivr.net/gh/Levii22/$domain=freemcserver.net
+@@||prod.fennec.atp.fox/js/fennec.js|$xhr,domain=freemcserver.net
 
 ! https://github.com/uBlockOrigin/uAssets/issues/24217
 ! kimcartoon.*,kisscartoon.se,kc.linksgen.com##+js(aost, jQuery.fn.html, /^(?!.*jquery).*(Scripts|inlineScript)/i)
@@ -177,6 +176,7 @@ exploader.net#@#+js(no-xhr-if, .js)
 exploader.net###preview_images > span[class^="tracking_"] > div[style="position: fixed;"] > div[data-pr]
 exploader.net#@#div[style*="1120px;"][style*="450px;"]:style(height: 0 !important; overflow: hidden !important;)
 exploader.net##article > div[style="margin-left: -63px;width: 1120px;height: 450px;margin-bottom: 5px;display: flex;align-items: center;"]:style(position: absolute !important; left: -3000px !important;)
+exploader.net##+js(spoof-css, article > div[style="margin-left: -63px;width: 1120px;height: 450px;margin-bottom: 5px;display: flex;align-items: center;"] > div, left, auto)
 !#if env_mobile
 exploader.net###firstpop
 !#endif
@@ -204,3 +204,7 @@ www.yahoo.com#@#.sticky
 
 ! https://www.reddit.com/r/uBlockOrigin/comments/1eb0wlg/weathercom_cannot_load/
 weather.com#@#+js(trusted-set-cookie, consentUUID, df843851-527a-4aec-8dab-5ba35e570618_32_33)
+
+! https://github.com/uBlockOrigin/uAssets/issues/24620
+@@||googletagmanager.com/gtm.js$script,domain=kinepolis.*
+@@||googletagmanager.com/gtag/js$script,domain=kinepolis.*
