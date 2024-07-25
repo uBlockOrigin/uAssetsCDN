@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Badware risks
 ! Expires: 5 days
-! Last modified: Wed, 24 Jul 2024 22:18:43 +0000
-! Diff-Path: ../patches/2024.7.25.269.patch#ublock-badware
+! Last modified: Thu, 25 Jul 2024 05:58:19 +0000
+! Diff-Path: ../patches/2024.7.25.564.patch#ublock-badware
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/badware.txt ***
@@ -3058,7 +3058,6 @@ c0c9d.cmi.rj.gov.br,cambe.pr.gov.br##^responseheader(location)
 ! phishing
 /^https:\/\/vietg[a-z]v[0-9]*\.cc\//$doc,domain=cc
 ||clickhereecraigslist.tripod.com^$all
-||1234854.com^$all,to=~shopify.com
 ||thriveinclusion.com^$all,to=~web.de
 ||talktalk0.godaddysites.com^$all,to=~talktalk.co.uk
 ||unclepigva.com^$all,to=~chase.com
@@ -3075,6 +3074,10 @@ c0c9d.cmi.rj.gov.br,cambe.pr.gov.br##^responseheader(location)
 /^https:\/\/www\.[a-z]{4,5}\.[a-z]{3,7}\/[a-z0-9]{36}\.html\b/$doc,match-case,domain=com|info|website|~edu|~gov|~google.com
 ||colegiovilamilitar.com.br/*/linkedin_^$all,to=~linkedin.com
 ||hand-to-hand.cfolks.pl^$all,to=~ram.co.za
+||mybluehost.me/intesasanpaolo/$doc,domain=~intesasanpaolo.com
+! shopify
+||1234854.com^$all,to=~shopify.com
+||suoncopbaonk.com^$all,to=~shopify.com
 ! paypal
 ||paypal-complete.com^$all
 ||prizegift.top^$all
@@ -3082,6 +3085,7 @@ c0c9d.cmi.rj.gov.br,cambe.pr.gov.br##^responseheader(location)
 /\/recharge\d?\.(?:html|php)\?mobile=\d{10}\b/$doc,match-case,domain=~jio.com|~edu|~gov
 /offer.php?rechargenumber=$doc,domain=~jio.com|~edu|~gov
 /offer.html?rechargenumber=$doc,domain=~jio.com|~edu|~gov
+/\/offer\.(?:html|php)\?(?:mobile|rechargenumber)=\d{10}\b/$doc,match-case,domain=~jio.com|~edu|~gov
 ! apple
 ||com/isignesp.php^$doc,domain=com|~apple.com
 ||help/isignesp.php^$doc,domain=help|~apple.com
@@ -3138,7 +3142,10 @@ c0c9d.cmi.rj.gov.br,cambe.pr.gov.br##^responseheader(location)
 ||allegrocolombia.com^$all
 ||allegrocx.com^$all
 ||allegro-online.ru^$all
-##html[lang][style] > body[ontouchstart=""] > div#app[data-v-app=""] > div#app[class] > div.grow
+~edu,~gov##html[lang][style] > body[ontouchstart=""] > div#app[data-v-app=""] > div#app[class] > div.grow
+/^https:\/\/allegro[a-z]{2,}\.shop\//$doc,domain=shop
+||allegroshop.shop^$all
+||allegrocn.shop^$all
 ! rackspace
 ||racks.pages.dev^$all,to=~rackspace.com
 ||rackweb-----support*.weebly.com^$all,to=~rackspace.com
@@ -3172,6 +3179,7 @@ c0c9d.cmi.rj.gov.br,cambe.pr.gov.br##^responseheader(location)
 ||servicemailorange25.wixsite.com^$all,to=~orange.fr
 ||assistancesosh.wixsite.com^$all,to=~orange.fr
 /or/.espace-.client/(;authentication.htm^$doc,domain=~orange.fr
+||tw1.ru/Orange/$doc,domain=~orange.fr
 ! amazon
 ||amazon-*.shop^$doc
 ||amazon-shopping.shop^$all
@@ -3183,7 +3191,7 @@ c0c9d.cmi.rj.gov.br,cambe.pr.gov.br##^responseheader(location)
 ||shop73.online^$all
 ||syae3289.top^$all
 ||ww26mb8.top^$all
-##html[lang][data-dpr="1"][style] > body.bluetheme.false > div#app.wrapper
+~amazon.com,~edu,~gov##html##html[lang][data-dpr="1"][style] > body.bluetheme.false > div#app.wrapper
 ||mybluehost.me/wp-admin/amz/$doc
 ! ebay
 ||c.vn-ebayn.vip^$all
@@ -3192,11 +3200,14 @@ c0c9d.cmi.rj.gov.br,cambe.pr.gov.br##^responseheader(location)
 ||vilbuy.com^$all
 ||ebaydw.com^$all
 ||ebayhelpre.org^$all
+||ebay-european.com^$all
 ||show.naturecircle.shop^$all
 ||51eabay.com^$all
 ||135buy.com^$all
 ||ebaydw.cc^$all
 ||pages.dev/errors/validateCaptcha^$doc
+||shopvip-alibaba.com^$all
+~alibaba.com,~edu,~gov##html[lang][translate] > body.deeppurple-theme:not([id]) > div#app:not([class]) > div.aiz-main-wrapper:not([id])
 ! AT&T
 ||wixsite.com/att-support/$doc
 ||diwapa3051.wixsite.com^$all
@@ -3252,6 +3263,8 @@ c0c9d.cmi.rj.gov.br,cambe.pr.gov.br##^responseheader(location)
 ||itaconsorciodigital.com.br^$all,to=~itau.com.br
 ||americanexpressempresas.com^$all,to=~americanexpress.com
 ||wizardpayroll.com.ar^$all,to=~hsbc.com
+||amigosdelasfinanzas.com^$all,to=~bancocajasocial.com
+||e-cmv.ph^$all,to=~grupobancolombia.com
 ||recompensaszurichsantander.com.mx^$all
 ||upsdelivery-nl.com^$all,to=~bancosantander.es
 ||santander.cf.sandbox.motrada.ch^$all,to=~santanderbank.com|~santander.co.uk
@@ -3279,9 +3292,12 @@ c0c9d.cmi.rj.gov.br,cambe.pr.gov.br##^responseheader(location)
 ||xn--d1aqfkf.xn--p1ai/bitrix/.../GlobalSources/$all,to=~dhl.com
 ||app.farmaciadelmonestironline.com/SER/dnkdl/$all,to=~dhl.com
 ||solutionfun.info^$all
-||zdrhuagh.elementor.cloud/*/index.html$all
 ||leatherqueen.shop^$all
 ||dhl-express-ppd.infanion.com^$all,to=~dhl.com
+||elementor.cloud/*/ENGHUY645/$doc,domain=~dhl.com
+! whatsapp
+||ann.tess1.top^$all
+||play.funfourmob.com^$all
 ! instagram
 ||instagram-mail.net^$all
 ||privrendom.com^$all
@@ -3324,6 +3340,8 @@ c0c9d.cmi.rj.gov.br,cambe.pr.gov.br##^responseheader(location)
 /^https:\/\/business\.[a-z]+confirm\.com\/meta-community-standard\d{15}\/?/$doc,match-case,domain=com
 /\.(?:pages\.dev|surge\.sh)\/help\/contact\/\d{14,19}\b/$doc,match-case,domain=pages.dev|surge.sh|~facebook.com
 ||business-help-temp-$doc
+/\.cfd\/contract\/\d{14,19}\b/$doc,match-case,domain=cfd|~facebook.com
+||business-center-$doc
 ||instructions-video.vercel.app/detailed_video.mp4$media
 ! shopping sites
 /api/user/do_login|$xhr,1p,to=com|info,method=post,header=access-control-allow-headers:/authorization\,content-type\,if-match\,if-modified-since\,if-none-match\,if-unmodified-since\,x-requested-with/i
@@ -3349,6 +3367,7 @@ c0c9d.cmi.rj.gov.br,cambe.pr.gov.br##^responseheader(location)
 ||11steam.com^$all
 ||st-invite.com^$all
 ||gtm.you1.cn^$all
+||steamxiazai.cn^$all
 ||steamcommunitylog.chez.com^$all
 ||steam.workshop*.com^$doc
 /^https:\/\/stea[a-z]{1,4}o[mn][a-z]{4,7}y[a-z]?\.com\//$doc,domain=com|~steamcommunity.com
@@ -3410,6 +3429,7 @@ c0c9d.cmi.rj.gov.br,cambe.pr.gov.br##^responseheader(location)
 ||iamnew.powerappsportals.com^$all
 ||post.nationalrent.ru^$all
 ||hyuiko.live^$all
+||gocolonial.local-user.com^$all
 ||cashum.unam.mx/wp-content/backups-dup-pro/imports/index.htm$all
 ||od.atami.no/one_drive.html$all
 ||johnhstngs4.wixsite.com^$all
@@ -3431,6 +3451,7 @@ c0c9d.cmi.rj.gov.br,cambe.pr.gov.br##^responseheader(location)
 ||supplieradvisor.ciamlogin.com^$all
 ||e-messsage.com^$all
 ||supp0rt.co.za^$all
+||ariabcon.com^$all
 ! telegram
 ||telegramhcn.com^$all
 ||web.telegram.data-bees.cn^$all
@@ -3545,6 +3566,20 @@ c0c9d.cmi.rj.gov.br,cambe.pr.gov.br##^responseheader(location)
 ||dropbox*.weebly.com^$doc
 /^https:\/\/([a-z]-){10,15}[a-z]\.(?:com|net|org)\.tr\//$doc,domain=com.tr|net.tr|org.tr
 /views/go/start.php^$doc
+/^https:\/\/pub-[a-f0-9]{32}\.r2\.dev/be[a0-9]\d{2,3}\.html\b/$doc,match-case,domain=r2.dev
+||pub-*.r2.dev/adobe2024.html^$doc
+r2.dev##html[lang] > body:not([class]):not([id]) > div.container-fluid:not([id]) > div.row[style^="background-image"][style*="data:image/jpeg;base64"]
+||pub-*.r2.dev/owa.html^$doc
+r2.dev##html[lang] > body.signInBg[oncontextmenu="return false;"][style]:not([id]) > div#mainLogonDiv.mouse
+! docusign.com
+||pub-*.r2.dev/alt_type.html^$doc,domain=~docusign.com
+||pub-*.r2.dev/doc_start.html^$doc,domain=~docusign.com
+||pub-*.r2.dev/dse_sign.html^$doc,domain=~docusign.com
+||pub-*.r2.dev/secure_response.html^$doc,domain=~docusign.com
+||pub-*.r2.dev/utility_base.html^$doc,domain=~docusign.com
+||r2.dev/auth_*.html^$doc,domain=~docusign.com
+||r2.dev/response_*.html^$doc,domain=~docusign.com
+r2.dev##html.account-server[lang] > body.site-content[onload="Z()"]:not([id]) > div#root:not([class]) > div.ink-authentication:not([id])
 ||khach-hang-the-$doc
 ||lazada.gg^$all
 ||chamsockhachhang-$doc
@@ -3597,6 +3632,15 @@ c0c9d.cmi.rj.gov.br,cambe.pr.gov.br##^responseheader(location)
 ||hangtietkiem.com^$all,to=~giaohangtietkiem.vn
 ||tcvnhomefic.com^$all,to=~mbbank.com.vn
 ||lapdatinternet.net^$all,to=~sctv.com.vn
+||hethongnhanvien.com^$all,to=~lazada.vn
+||lazadaevent.com^$all,to=~lazada.vn
+||tikifreeship.vip^$all,to=~tiki.vn
+||vntiki.vip^$all,to=~tiki.vn
+||momoshopvip.com^$all,to=~momo.vn
+||baovietcom.vip^$all,to=~baovietbank.vn
+||mcqdvn.com^$all,to=~mbbank.com.vn
+||hethongvaynhanh247.com^$all
+||bethivetranh2024.weebly.com^$all
 ||puttyconnect.info^$all
 ||astrosphere.world^$all
 ||marketplace-item-*.000.pe^$doc
