@@ -1,5 +1,5 @@
 ! Title: uBlock₀ filters – Quick fixes
-! Last modified: Thu, 25 Jul 2024 22:33:23 +0000
+! Last modified: Fri, 26 Jul 2024 14:27:17 +0000
 ! Expires: 8 hours
 ! Description: Immediate, temporary filters to fix websites
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -86,7 +86,7 @@ ytlarge.com##ins.adsbygoogle[data-ad-slot]
 @@||pagead2.googlesyndication.com^$script,domain=next-episode.net
 
 ! https://github.com/uBlockOrigin/uAssets/issues/20505
-download.megaup.net##+js(rpnt, script, /for\s*\(\s*(const|let|var).*?;return;\}\}.*?;return;\}/g, , condition, attribute)
+download.megaup.net##+js(rpnt, script, /for\s*\(\s*(const|let|var).*?;return;\}\}.*;return;\}/g, , condition, attribute)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/17548
 ! https://github.com/uBlockOrigin/uAssets/issues/24504
@@ -156,7 +156,7 @@ kimcartoon.li,kc.linksgen.com,kisscartoon.se##+js(no-fetch-if, bidgear)
 kimcartoon.li,kc.linksgen.com,kisscartoon.se##+js(trusted-replace-argument, document.getElementById, 0, undefined, condition, divContentVideo)
 ! kimcartoon.li###centerDivVideo > div[id]:not(#divContentVideo):not(:has(video)):remove()
 ! @@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$script,domain=kimcartoon.li
-! kimcartoon.li,kc.linksgen.com,kisscartoon.se##+js(rmnt, script, Check)
+kimcartoon.li,kc.linksgen.com,kisscartoon.se##+js(rmnt, script, #gameover)
 kimcartoon.li,kc.linksgen.com,kisscartoon.se###divContentVideo:style(display: block !important;)
 kimcartoon.li,kc.linksgen.com,kisscartoon.se###centerDivVideo > div[id]:has(> img[src^="https://i.imgur.com"])
 @@||kc.linksgen.com^$frame,1p,strict1p
@@ -208,3 +208,15 @@ weather.com#@#+js(trusted-set-cookie, consentUUID, df843851-527a-4aec-8dab-5ba35
 
 ! https://github.com/uBlockOrigin/uAssets/issues/20379
 *$xhr,3p,domain=app.axenthost.com,redirect-rule=nooptext
+
+! https://github.com/uBlockOrigin/uAssets/issues/24630
+/^https:\/\/apple\.[a-z0-9]{6}\.com\//$domain=com|~apple.com,badfilter
+
+! https://github.com/uBlockOrigin/uAssets/issues/24631
+#@#html[lang][style] > body:not([id]) > uni-app.uni-app--maxwidth > uni-page[data-page] > uni-page-wrapper > uni-page-body
+#@#html[lang][style] > body[ontouchstart=""] > div#app[data-v-app=""] > div#app[class] > div.grow
+#@#html[lang] > body:not([class]):not([id]) > div.container.hid[style] > div.box-login:not([id]) > form#formNohp[onsubmit="sendNohp(event);"]:not([class])
+#@#html[lang][data-dpr="1"][style] > body.bluetheme.false > div#app.wrapper
+#@#html[lang][translate] > body.deeppurple-theme:not([id]) > div#app:not([class]) > div.aiz-main-wrapper:not([id])
+#@#html[lang] > body[style="opacity: 1;"]:not([class]):not([id]) > div.wrapper.xbg-101:not([id]) > div.w3-display-container[style]:not([id])
+#@#html[data-dpr="1"][style] > body[style]:not([class]):not([id]) > div#app:not([class]) > div.main:not([id])
