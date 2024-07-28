@@ -1,5 +1,5 @@
 ! Title: uBlock filters (2024)
-! Last modified: Sun, 28 Jul 2024 14:00:40 +0000
+! Last modified: Sun, 28 Jul 2024 20:18:56 +0000
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -539,6 +539,7 @@ jpopsingles.eu##+js(noeval-if, adsBlocked)
 /ap-plugin-scripteo/frontend/img/728x90.png$image,redirect-rule=1x1.gif
 ! https://www.reddit.com/r/uBlockOrigin/comments/1dyvn5w/ubo_getting_detected_on_jpopsingleseu/
 jpopsingles.eu##+js(aeld, DOMContentLoaded, document.documentElement.lang.toLowerCase)
+jpopsingles.eu##+js(rmnt, script, adsSrc)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/1932
 megawarez.org##+js(aopw, smrtSB)
@@ -2683,3 +2684,10 @@ cinemitas.org,cinelatino.net,cineplus123.org,paraveronline.org,pobreflix.vc,verp
 
 ! https://cracksports.me/ - popups
 cracksports.me##+js(acs, JSON.parse, atob)
+
+! https://github.com/uBlockOrigin/uAssets/issues/24656
+!#if cap_html_filtering
+mlbbite.net,mlbstreams.ai##^script:has-text(adserverDomain)
+!#else
+mlbbite.net,mlbstreams.ai##+js(rmnt, script, adserverDomain)
+!#endif
