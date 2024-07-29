@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Quick fixes
 ! Expires: 12 hours
-! Last modified: Mon, 29 Jul 2024 05:02:55 +0000
-! Diff-Path: ../patches/2024.7.29.508.patch#ublock-quick-fixes
+! Last modified: Mon, 29 Jul 2024 10:32:27 +0000
+! Diff-Path: ../patches/2024.7.29.805.patch#ublock-quick-fixes
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/quick-fixes.txt ***
@@ -84,6 +84,7 @@ japscan.lol##+js(acs, document.getElementsByClassName, Function)
 japscan.lol##+js(acs, Function, new Function)
 japscan.lol##+js(acs, eval, function)
 japscan.lol##+js(acs, document.getElementById, function)
+japscan.lol##+js(aeld, DOMContentLoaded, /\(\)=>\{\S+===/)
 @@||japscan.lol^$ghide
 japscan.lol#@##blur-inter
 japscan.lol#@##promo.sticky-top
@@ -94,9 +95,9 @@ japscan.lol##+js(no-fetch-if, www.japscan.lol/imgs/)
 ||www.japscan.lol/imgs/j*.jpg^$image,1p,redirect=1x1.gif
 ||japscan.lol^$csp=sandbox allow-forms allow-same-origin allow-scripts allow-modals allow-orientation-lock allow-pointer-lock allow-presentation allow-top-navigation
 !#if cap_html_filtering
-client.falixnodes.net##^script:has-text(/detectAdBlock|\(typeof [a-z]{10,25} \=\=\=? ("undefined"|"function")\)|typeof adngin|_0x|'\/func'/)
+client.falixnodes.net##^script:has-text(/detectAdBlock|\(typeof [a-z]{10,25} \=\=\=? ("undefined"|"function")\)|_0x|'\/func'/)
 !#else
-client.falixnodes.net##+js(rmnt, script, /detectAdBlock|\(typeof [a-z]{10\,25} \=\=\=? ("undefined"|"function")\)|typeof adngin|_0x|'\/func'/)
+client.falixnodes.net##+js(rmnt, script, /detectAdBlock|\(typeof [a-z]{10,25} \=\=\=? ("undefined"|"function")\)|_0x|'\/func'/)
 !#endif
 client.falixnodes.net##+js(rpnt, script, typeof window.loadscript, typeof window.loadscript === true && typeof window.googlescriptloaded)
 client.falixnodes.net##+js(rpnt, script, (window.loadscript, (window.loadscript === undefined || true || window.googlescriptloaded)
@@ -126,9 +127,9 @@ kimcartoon.li,kc.linksgen.com,kisscartoon.se###centerDivVideo > div[id]:has(> im
 @@||kc.linksgen.com^$frame,1p,strict1p
 @@||kimcartoon.li^$frame,1p,strict1p
 @@||kisscartoon.se^$frame,1p,strict1p
-||kc.linksgen.com/Ads/$frame,important
-||kimcartoon.li/Ads/$frame,important
-||kisscartoon.se/Ads/$frame,important
+||kc.linksgen.com/Ads/clickadu300.aspx$frame,important
+||kimcartoon.li/Ads/clickadu300.aspx$frame,important
+||kisscartoon.se/Ads/clickadu300.aspx$frame,important
 kimcartoon.*,kc.linksgen.com,kisscartoon.*#@#+js()
 kimcartoon.li,kc.linksgen.com,kisscartoon.se#@##divContentVideo:style(display: block !important;)
 kimcartoon.li,kc.linksgen.com,kisscartoon.se#@##centerDivVideo > div[id]:has(> img[src^="https://i.imgur.com"])
@@ -148,8 +149,6 @@ exploader.net##+js(spoof-css, article > div[style="margin-left: -63px;width: 112
 exploader.net###firstpop
 !#endif
 veev.to##+js(trusted-set, __abburi, {"value": "https://veev.to/assets/videoplayer/df8fdb9.js"})
-/visit?id=$badfilter
-||geojs.io^$third-party,badfilter
 ||imasdk.googleapis.com/js/sdkloader/ima3_debug.js$script,domain=cbsnews.com,redirect=google-ima.js,important,badfilter
 @@||googletagmanager.com/gtm.js$domain=j-wave.co.jp|tbsradio.jp
 www.yahoo.com#@#.sticky
@@ -165,3 +164,4 @@ weather.com#@#+js(trusted-set-cookie, consentUUID, df843851-527a-4aec-8dab-5ba35
 #@#html[lang][translate] > body.deeppurple-theme:not([id]) > div#app:not([class]) > div.aiz-main-wrapper:not([id])
 #@#html[lang] > body[style="opacity: 1;"]:not([class]):not([id]) > div.wrapper.xbg-101:not([id]) > div.w3-display-container[style]:not([id])
 #@#html[data-dpr="1"][style] > body[style]:not([class]):not([id]) > div#app:not([class]) > div.main:not([id])
+||nikkansports.com/mod2015/js/piano/members_only.js$badfilter

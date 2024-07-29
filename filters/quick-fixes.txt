@@ -1,5 +1,5 @@
 ! Title: uBlock₀ filters – Quick fixes
-! Last modified: Mon, 29 Jul 2024 05:02:55 +0000
+! Last modified: Mon, 29 Jul 2024 10:32:27 +0000
 ! Expires: 8 hours
 ! Description: Immediate, temporary filters to fix websites
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -101,6 +101,7 @@ japscan.lol##+js(acs, document.getElementsByClassName, Function)
 japscan.lol##+js(acs, Function, new Function)
 japscan.lol##+js(acs, eval, function)
 japscan.lol##+js(acs, document.getElementById, function)
+japscan.lol##+js(aeld, DOMContentLoaded, /\(\)=>\{\S+===/)
 @@||japscan.lol^$ghide
 japscan.lol#@##blur-inter
 japscan.lol#@##promo.sticky-top
@@ -113,9 +114,9 @@ japscan.lol##+js(no-fetch-if, www.japscan.lol/imgs/)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/18260
 !#if cap_html_filtering
-client.falixnodes.net##^script:has-text(/detectAdBlock|\(typeof [a-z]{10,25} \=\=\=? ("undefined"|"function")\)|typeof adngin|_0x|'\/func'/)
+client.falixnodes.net##^script:has-text(/detectAdBlock|\(typeof [a-z]{10,25} \=\=\=? ("undefined"|"function")\)|_0x|'\/func'/)
 !#else
-client.falixnodes.net##+js(rmnt, script, /detectAdBlock|\(typeof [a-z]{10\,25} \=\=\=? ("undefined"|"function")\)|typeof adngin|_0x|'\/func'/)
+client.falixnodes.net##+js(rmnt, script, /detectAdBlock|\(typeof [a-z]{10,25} \=\=\=? ("undefined"|"function")\)|_0x|'\/func'/)
 !#endif
 client.falixnodes.net##+js(rpnt, script, typeof window.loadscript, typeof window.loadscript === true && typeof window.googlescriptloaded)
 client.falixnodes.net##+js(rpnt, script, (window.loadscript, (window.loadscript === undefined || true || window.googlescriptloaded)
@@ -149,9 +150,9 @@ kimcartoon.li,kc.linksgen.com,kisscartoon.se###centerDivVideo > div[id]:has(> im
 @@||kc.linksgen.com^$frame,1p,strict1p
 @@||kimcartoon.li^$frame,1p,strict1p
 @@||kisscartoon.se^$frame,1p,strict1p
-||kc.linksgen.com/Ads/$frame,important
-||kimcartoon.li/Ads/$frame,important
-||kisscartoon.se/Ads/$frame,important
+||kc.linksgen.com/Ads/clickadu300.aspx$frame,important
+||kimcartoon.li/Ads/clickadu300.aspx$frame,important
+||kisscartoon.se/Ads/clickadu300.aspx$frame,important
 
 kimcartoon.*,kc.linksgen.com,kisscartoon.*#@#+js()
 kimcartoon.li,kc.linksgen.com,kisscartoon.se#@##divContentVideo:style(display: block !important;)
@@ -175,12 +176,6 @@ exploader.net###firstpop
 
 ! https://github.com/uBlockOrigin/uAssets/issues/24220
 veev.to##+js(trusted-set, __abburi, {"value": "https://veev.to/assets/videoplayer/df8fdb9.js"})
-
-! https://github.com/uBlockOrigin/uAssets/issues/24539
-/visit?id=$badfilter
-
-! https://github.com/uBlockOrigin/uAssets/issues/24591
-||geojs.io^$third-party,badfilter
 
 ! https://www.cbsnews.com/video/president-biden-ends-candidacy-60-minutes-video-2024-07-21/ - video breakage
 ||imasdk.googleapis.com/js/sdkloader/ima3_debug.js$script,domain=cbsnews.com,redirect=google-ima.js,important,badfilter
@@ -212,3 +207,6 @@ weather.com#@#+js(trusted-set-cookie, consentUUID, df843851-527a-4aec-8dab-5ba35
 #@#html[lang][translate] > body.deeppurple-theme:not([id]) > div#app:not([class]) > div.aiz-main-wrapper:not([id])
 #@#html[lang] > body[style="opacity: 1;"]:not([class]):not([id]) > div.wrapper.xbg-101:not([id]) > div.w3-display-container[style]:not([id])
 #@#html[data-dpr="1"][style] > body[style]:not([class]):not([id]) > div#app:not([class]) > div.main:not([id])
+
+! https://github.com/AdguardTeam/AdguardFilters/commit/bd790df5e1ddbf7cdf74c7cedc2fcd9d8f309076
+||nikkansports.com/mod2015/js/piano/members_only.js$badfilter
