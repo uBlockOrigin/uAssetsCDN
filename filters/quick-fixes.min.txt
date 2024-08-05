@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Quick fixes
 ! Expires: 12 hours
-! Last modified: Mon, 05 Aug 2024 10:06:11 +0000
-! Diff-Path: ../patches/2024.8.5.626.patch#ublock-quick-fixes
+! Last modified: Mon, 05 Aug 2024 14:41:36 +0000
+! Diff-Path: ../patches/2024.8.5.923.patch#ublock-quick-fixes
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/quick-fixes.txt ***
@@ -77,7 +77,7 @@ japscan.lol##+js(acs, eval, function)
 japscan.lol##+js(acs, document.getElementById, function)
 japscan.lol##+js(acs, addEventListener, String.fromCharCode)
 !japscan.lol##+js(aeld, DOMContentLoaded, /=>\{.+?;[$-_0-9A-z]{1\,10}\([$-_0-9A-z]{1\,10}\)===[$-_0-9A-z]{1\,10}&&[$-_0-9A-z]{1\,10}\(\).{5\,500};\}/)
-japscan.lol##+js(aeld, DOMContentLoaded, /\)\(\);\s*\}.{400\,500}$/)
+japscan.lol##+js(aeld, DOMContentLoaded, /\)\(\)\s*;\s*\}.{400\,500}$/)
 @@||japscan.lol^$ghide
 japscan.lol#@##blur-inter
 japscan.lol#@##promo.sticky-top
@@ -94,8 +94,11 @@ client.falixnodes.net##+js(rmnt, script, /detectAdBlock|\(typeof [a-z]{10,25} \=
 !#endif
 client.falixnodes.net##+js(rpnt, script, typeof window.loadscript, typeof window.loadscript === true && typeof window.googlescriptloaded)
 client.falixnodes.net##+js(rpnt, script, (window.loadscript, (window.loadscript === undefined || true || window.googlescriptloaded)
-/freemcserver\.net\/assets\/[a-zA-Z0-9]{10,42}\/[a-zA-Z0-9]{10,42}.*?\.js\?v=17/$script,1p,match-case,important,domain=freemcserver.net|~panel.freemcserver.net
+/https:\/\/freemcserver\.net\/assets\/.*?\.js\?v=17/$script,1p,strict1p,match-case,domain=freemcserver.net|~panel.freemcserver.net
+@@||freemcserver.net/assets/*/yii.js?v=17$script,1p
+@@||freemcserver.net/assets/*/jquery.js?v=17$script,1p
 freemcserver.net##+js(no-fetch-if, sodar?)
+freemcserver.net,~panel.freemcserver.net##+js(nostif, ')]();})
 ! kimcartoon.*,kisscartoon.se,kc.linksgen.com##+js(aost, jQuery.fn.html, /^(?!.*jquery).*(Scripts|inlineScript)/i)
 @@*$xhr,1p,domain=kimcartoon.*|kisscartoon.se|kc.linksgen.com
 ! kimcartoon.*##+js(nostif, /tryHard|leHz|Adb/)
@@ -104,38 +107,27 @@ freemcserver.net##+js(no-fetch-if, sodar?)
 !#else
 !kimcartoon.*##+js(rpnt, script, /^\(function/, '/*start*/(function(){const e={apply:(e,t,o)=>{if(o[0]?.includes("<img src=")){throw new ReferenceError();};return Reflect.apply(e,t,o)}};window.RegExp.prototype.test=new Proxy(window.RegExp.prototype.test,e)})();document.currentScript.textContent=document.currentScript.textContent.replace(/\/\*start\*\/(.*)\/\*end\*\//g,"");/*end*/(function', sedCount, 1)
 !#endif
-kimcartoon.li,kc.linksgen.com,kisscartoon.se##+js(acs, setTimeout, /navigator\.userAgent;\n\s+if \(\w|i.*\..*i.*m.*g.*u.*r.*\..*c.*o.*m/)
+!kimcartoon.li,kc.linksgen.com,kisscartoon.se##+js(acs, setTimeout, /navigator\.userAgent;\n\s+if \(\w|i.*\..*i.*m.*g.*u.*r.*\..*c.*o.*m/)
 kimcartoon.li,kc.linksgen.com,kisscartoon.se##+js(set, isAdb, false)
 kimcartoon.li,kc.linksgen.com,kisscartoon.se##+js(no-fetch-if, bidgear)
 kimcartoon.li,kc.linksgen.com,kisscartoon.se##+js(trusted-replace-argument, document.getElementById, 0, undefined, condition, divContentVideo)
 ! @@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$script,domain=kimcartoon.li
 kimcartoon.li,kc.linksgen.com,kisscartoon.se##+js(acs, $, /divContentVideo(?![\s\S]*\.src)/)
+kimcartoon.li,kc.linksgen.com,kisscartoon.se##+js(acs, $, cpe = true)
+kimcartoon.li,kc.linksgen.com,kisscartoon.se##+js(nostif, navigator.userAgent)
 kimcartoon.li,kc.linksgen.com,kisscartoon.se###divContentVideo:style(display: block !important;)
 kimcartoon.li,kc.linksgen.com,kisscartoon.se###centerDivVideo > div[id]:has(> img[src^="https://i.imgur.com"])
 @@||kc.linksgen.com^$frame,1p,strict1p
 @@||kimcartoon.li^$frame,1p,strict1p
 @@||kisscartoon.se^$frame,1p,strict1p
+||kc.linksgen.com/Ads/bid300a.aspx$frame,1p,important
+||kimcartoon.li/Ads/bid300a.aspx$frame,1p,important
+||kisscartoon.se/Ads/bid300a.aspx$frame,1p,important
 ! kimcartoon.li,kc.linksgen.com,kisscartoon.se##+js(rmnt, script, _btcCheck)
 @@||platform.bidgear.com/pubbidgear-ad.js$xhr,domain=kimcartoon.li|kisscartoon.se|kc.linksgen.com
-! exploader.net ads, anti-adb
-exploader.net#@#div[style*="1120px;"][style*="450px;"]:style(height: 0 !important; overflow: hidden !important;)
-exploader.net##article > div[style="margin-left: -63px;width: 1120px;height: 450px;margin-bottom: 5px;display: flex;align-items: center;"]:style(position: absolute !important; left: -3000px !important;)
-exploader.net##+js(spoof-css, article > div[style="margin-left: -63px;width: 1120px;height: 450px;margin-bottom: 5px;display: flex;align-items: center;"] > div, left, auto)
-!#if env_mobile
-exploader.net###firstpop
-!#endif
 !veev.to##+js(trusted-set, __abburi, {"value": "https://veev.to/assets/videoplayer/df8fdb9.js"})
 @@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$xhr,domain=veev.to
 veev.to##+js(trusted-suppress-native-method, XMLHttpRequest.prototype.open, | "adsbygoogle", prevent)
 *$xhr,3p,domain=app.axenthost.com,redirect-rule=nooptext
 @@*$xhr,3p,method=get,domain=app.axenthost.com
 @@||axenthost.com^$ghide
-#@#html[lang][style] > body:not([id]) > uni-app.uni-app--maxwidth > uni-page[data-page] > uni-page-wrapper > uni-page-body
-#@#html[lang][style] > body[ontouchstart=""] > div#app[data-v-app=""] > div#app[class] > div.grow
-#@#html[lang] > body:not([class]):not([id]) > div.container.hid[style] > div.box-login:not([id]) > form#formNohp[onsubmit="sendNohp(event);"]:not([class])
-#@#html[lang][data-dpr="1"][style] > body.bluetheme.false > div#app.wrapper
-#@#html[lang][translate] > body.deeppurple-theme:not([id]) > div#app:not([class]) > div.aiz-main-wrapper:not([id])
-#@#html[lang] > body[style="opacity: 1;"]:not([class]):not([id]) > div.wrapper.xbg-101:not([id]) > div.w3-display-container[style]:not([id])
-#@#html[data-dpr="1"][style] > body[style]:not([class]):not([id]) > div#app:not([class]) > div.main:not([id])
-||nikkansports.com/mod2015/js/piano/members_only.js$badfilter
-||kinesis.*.amazonaws.com^$third-party,domain=~amazon.com,badfilter
