@@ -1,5 +1,5 @@
 ! Title: uBlock₀ filters – Quick fixes
-! Last modified: Tue, 06 Aug 2024 22:09:49 +0000
+! Last modified: Wed, 07 Aug 2024 06:21:12 +0000
 ! Expires: 8 hours
 ! Description: Immediate, temporary filters to fix websites
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -39,9 +39,10 @@ youtube.com##+js(json-prune, playerResponse.adPlacements playerResponse.playerAd
 !#endif
 !#endif
 ||googlevideo.com/videoplayback*&ctier=L&*%2Cctier%2C$xhr,3p,domain=m.youtube.com|music.youtube.com|www.youtube.com
-!#if !env_chromium
-www.youtube.com##+js(trusted-rpnt, script, (function() {window.ytplayer=, /*start*/(()=>{let t=document.location.href\,e=[]\,n=[]\,o=!1\,r="";const i=Array.prototype.push\,a={apply:(t\,r\,a)=>(window.yt?.config_?.EXPERIMENT_FLAGS?.html5_enable_ssap_entity_id&&a[0]&&a[0]!==window&&"number"==typeof a[0].start&&a[0].end&&"ssap"===a[0].namespace&&a[0].id&&(o||0!==a[0]?.start||n.includes(a[0].id)||(e.length=0\,n.length=0\,o=!0\,i.call(e\,a[0])\,i.call(n\,a[0].id))\,o&&0!==a[0]?.start&&!n.includes(a[0].id)&&(i.call(e\,a[0])\,i.call(n\,a[0].id)))\,Reflect.apply(t\,r\,a))};window.Array.prototype.push=new Proxy(window.Array.prototype.push\,a)\,document.addEventListener("DOMContentLoaded"\,(function(){if(!window.yt?.config_?.EXPERIMENT_FLAGS?.html5_enable_ssap_entity_id)return;const i=()=>{const t=document.querySelector("video");if(t&&e.length){const i=Math.round(t.duration)\,a=Math.round(e.at(-1).end/1e3)\,c=n.join("\,");if(!1===t.loop&&r!==c&&i&&i===a){const n=e.at(-1).start/1e3;t.currentTime<n&&(t.currentTime=n\,o=!1\,r=c)}else if(!0===t.loop&&i&&i===a){const n=e.at(-1).start/1e3;t.currentTime<n&&(t.currentTime=n\,o=!1\,r=c)}}};i();new MutationObserver((()=>{t!==document.location.href?(t=document.location.href\,e.length=0\,n.length=0\,o=!1\,i()):i()})).observe(document\,{childList:!0\,subtree:!0})}))})();if(window.trustedTypes){const escapeHTMLPolicy=trustedTypes.createPolicy("myEscapePolicy"\,{createScript:string=>string.replace(/\/\*start\*\/(.*)\/\*end\*\//g\,"")});document.currentScript.textContent=escapeHTMLPolicy.createScript(document.currentScript.textContent);}else{document.currentScript.textContent=document.currentScript.textContent.replace(/\/\*start\*\/(.*)\/\*end\*\//g\,"");}/*end*/(function() {window.ytplayer=, sedCount, 1)
+www.youtube.com##+js(trusted-rpnt, script, (function serverContract(), (()=>{let e="";document.addEventListener("DOMContentLoaded"\,(function(){if(!window.yt?.config_?.EXPERIMENT_FLAGS?.html5_enable_ssap_entity_id)return;const t=()=>{const t=document.getElementById("movie_player");if(!t)return;const n=t.querySelector("video");if(!n)return;const o=t.getVideoStats()?.ssap;if(n.duration&&o&&o.includes("vid.nvd")){const i=parseInt(o.split("st.").at(-1).split(";")[0])/1e3;let r=[];for(const e of o.matchAll(/\bcpn\.([-\w]+)/g))r.push(e[1]);const s=r.join("\,");(!1===n.loop&&e!==s&&n.currentTime<i||!0===n.loop&&n.currentTime<i||.001===n.currentTime&&n.currentTime<i)&&(t.seekTo(i)\,e=s)}};t();new MutationObserver((()=>{t()})).observe(document\,{childList:!0\,subtree:!0})}))})();(function serverContract(), sedCount, 1)
 www.youtube.com##+js(nano-stb, [native code], 17000, 0.001)
+!#if cap_html_filtering
+||www.youtube.com/s/player/*/base.js$script,xhr,replace=/if\(e===""\)/if(0)/
 !#endif
 ! https://www.reddit.com/r/uBlockOrigin/comments/1ebwr6c/is_ublock_broken_again_or_am_i_doing_something/
 www.youtube.com##+js(json-prune-fetch-response, playerAds adPlacements adSlots playerResponse.playerAds playerResponse.adPlacements playerResponse.adSlots [].playerResponse.adPlacements [].playerResponse.playerAds [].playerResponse.adSlots, , propsToMatch, /player?)
@@ -95,7 +96,6 @@ japscan.lol##+js(acs, Array, function)
 japscan.lol##+js(acs, JSON.parse, function)
 japscan.lol##+js(acs, document.getElementsByClassName, Function)
 japscan.lol##+js(acs, Function, new Function)
-japscan.lol##+js(acs, eval, function)
 japscan.lol##+js(acs, document.getElementById, function)
 japscan.lol##+js(acs, addEventListener, String.fromCharCode)
 @@||japscan.lol^$ghide
@@ -147,20 +147,20 @@ kimcartoon.li,kc.linksgen.com,kisscartoon.se##+js(acs, $, cpe = true)
 kimcartoon.li,kc.linksgen.com,kisscartoon.se##+js(nostif, navigator.userAgent)
 kimcartoon.li,kc.linksgen.com,kisscartoon.se###divContentVideo:style(display: block !important;)
 kimcartoon.li,kc.linksgen.com,kisscartoon.se###centerDivVideo > div[id]:has(> img[src^="https://i.imgur.com"])
-kimcartoon.li,kc.linksgen.com,kisscartoon.se##+js(rmnt, script, /xbc(?![\s\S]*\.src)/)
+kimcartoon.li,kc.linksgen.com,kisscartoon.se##+js(rmnt, script, /_btcCheck(?![\s\S]*\.src)|i\.imgur\.com[\s\S]*?(\.remove\(\)|\.innerHTML)/)
 @@||kc.linksgen.com^$frame,1p,strict1p
 @@||kimcartoon.li^$frame,1p,strict1p
 @@||kisscartoon.se^$frame,1p,strict1p
 ||kc.linksgen.com/Ads/bid300a.aspx$frame,1p,important
 ||kimcartoon.li/Ads/bid300a.aspx$frame,1p,important
 ||kisscartoon.se/Ads/bid300a.aspx$frame,1p,important
-! kimcartoon.li,kc.linksgen.com,kisscartoon.se##+js(rmnt, script, _btcCheck)
 @@||platform.bidgear.com/pubbidgear-ad.js$xhr,domain=kimcartoon.li|kisscartoon.se|kc.linksgen.com
 
 ! https://github.com/uBlockOrigin/uAssets/issues/24220
 !veev.to##+js(trusted-set, __abburi, {"value": "https://veev.to/assets/videoplayer/df8fdb9.js"})
 @@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$xhr,domain=veev.to
 veev.to##+js(trusted-suppress-native-method, XMLHttpRequest.prototype.open, | "adsbygoogle", prevent)
+veev.to##+js(trusted-suppress-native-method, XMLHttpRequest.prototype.open, |"ad-provider.js", prevent)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/20379
 *$xhr,3p,domain=app.axenthost.com,redirect-rule=nooptext
@@ -170,3 +170,6 @@ veev.to##+js(trusted-suppress-native-method, XMLHttpRequest.prototype.open, | "a
 ! Better to counter the old filter for a while... https://github.com/uBlockOrigin/uAssets/commit/f44ac328b718bab3118f759880128fe420afb906
 ! https://www.reddit.com/r/uBlockOrigin/comments/1ekkkp1/google_constantly_reverting_to_light_mode_and/
 www.google.*#@#+js(trusted-set-cookie, SOCS, CAISNQgQEitib3FfaWRlbnRpdHlmcm9udGVuZHVpc2VydmVyXzIwMjQwNTE0LjA2X3AwGgJmaSADGgYIgOu0sgY, 1year)
+
+! https://github.com/uBlockOrigin/uAssets/issues/24796
+||e11956.x.akamaiedge.net^$badfilter
