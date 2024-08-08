@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Thu, 08 Aug 2024 12:58:28 +0000
-! Diff-Path: ../patches/2024.8.8.805.patch#ublock-filters
+! Last modified: Thu, 08 Aug 2024 18:18:28 +0000
+! Diff-Path: ../patches/2024.8.8.1110.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -10413,6 +10413,11 @@ olympicstreams.ru##+js(aost, Object, Pop)
 avxhm.se##[data-localize]:has(a[href^="https://icerbox.com/"])
 avxhm.se##center:has(a[href^="https://canv.ai/"])
 avxhm.se##center:has(a[href^="https://canv.ai/"]) ~ span:has(a[href^="https://canv.ai/"])
+!#if cap_html_filtering
+ext.to##^script:has-text(adserverDomain)
+!#else
+ext.to##+js(rmnt, script, adserverDomain)
+!#endif
 ! Link shortener filters go into their own dedicated list
 ! *** filters/ubo-link-shorteners.txt ***
 ! gplinks all domains (gplinks.co/EWu8)
@@ -15020,6 +15025,8 @@ nudeof.com##div.happy-section
 @@||skmedix.pl^$ghide,script,1p
 ||skmedix.pl/cdn-cgi/zaraz/$script,1p,important
 *$frame,redirect-rule=noopframe,domain=skmedix.pl
+skmedix.pl##+js(cookie-remover)
+skmedix.pl##+js(trusted-click-element, button.fc-button)
 yxoshort.com##+js(aopr, app_vars.force_disable_adblock)
 yxoshort.com##+js(set, blurred, false)
 yxoshort.com##.banner
@@ -22260,6 +22267,7 @@ truyentranhfull.net##+js(rmnt, script, ai_adb)
 /adpia_click_popup_after.js
 @@||endowmentoverhangutmost.com/*/code.js^$script,3p,domain=empire-stream.*|empire-streaming.*|empire-streamz.*
 @@||brittlesturdyunlovable.com/*/code.js^$script,3p,domain=empire-stream.*|empire-streaming.*|empire-streamz.*
+@@||brittlesturdyunlovable.com/get/$script,3p,domain=empire-stream.*|empire-streaming.*|empire-streamz.*
 @@*$ghide,domain=empire-stream.*|empire-streaming.*|empire-streamz.*
 empire-stream.*,empire-streaming.*,empire-streamz.*##.direct-lads
 empire-stream.*,empire-streaming.*,empire-streamz.*##+js(set, empire.pop, undefined)
