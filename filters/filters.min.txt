@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Fri, 09 Aug 2024 05:30:52 +0000
-! Diff-Path: ../patches/2024.8.9.565.patch#ublock-filters
+! Last modified: Fri, 09 Aug 2024 13:43:56 +0000
+! Diff-Path: ../patches/2024.8.9.864.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -27,6 +27,8 @@ m.youtube.com,music.youtube.com,tv.youtube.com,www.youtube.com,youtubekids.com,y
 m.youtube.com,music.youtube.com,tv.youtube.com,www.youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, playerResponse.adPlacements, undefined)
 m.youtube.com,music.youtube.com,youtubekids.com,youtube-nocookie.com##+js(json-prune, playerResponse.adPlacements playerResponse.playerAds playerResponse.adSlots adPlacements playerAds adSlots important)
 www.youtube.com##+js(json-prune-fetch-response, playerAds adPlacements adSlots playerResponse.playerAds playerResponse.adPlacements playerResponse.adSlots, , propsToMatch, /playlist?)
+www.youtube.com##+js(json-prune-fetch-response, playerAds adPlacements adSlots playerResponse.playerAds playerResponse.adPlacements playerResponse.adSlots [].playerResponse.adPlacements [].playerResponse.playerAds [].playerResponse.adSlots, , propsToMatch, /player?)
+www.youtube.com##+js(json-prune-xhr-response, playerAds adPlacements adSlots playerResponse.playerAds playerResponse.adPlacements playerResponse.adSlots [].playerResponse.adPlacements [].playerResponse.playerAds [].playerResponse.adSlots, , propsToMatch, /player?)
 youtube.com##.ytlr-horizontal-list-renderer__items > .yt-virtual-list__container > .yt-virtual-list__item--visible.yt-virtual-list__item--selected.yt-virtual-list__item:has-text(Ad)
 ||googlevideo.com/initplayback?source=youtube*&c=TVHTML5&oad=$xhr,domain=youtube.com
 ! Shorts Ad
@@ -10400,6 +10402,12 @@ avxhm.se##center:has(a[href^="https://canv.ai/"])
 avxhm.se##center:has(a[href^="https://canv.ai/"]) ~ span:has(a[href^="https://canv.ai/"])
 ||heraldnet.com/wp-content/plugins/incognito_dectector/js/incognito-detector.js$script,1p
 repack-games.com##+js(rmnt, script, ai_adb)
+! hesgoal-*.io detection
+hesgoal-tv.io,hesgoal-vip.io##+js(rmnt, script, /adbl/i)
+! hesgoal. watch popups
+||hesgoal.watch^$csp=sandbox allow-forms allow-same-origin allow-scripts allow-modals allow-orientation-lock allow-pointer-lock allow-presentation allow-top-navigation
+homesports.net##+js(aeld, DOMContentLoaded, fetch)
+||ssstik.cam^$csp=sandbox allow-forms allow-same-origin allow-scripts allow-modals allow-orientation-lock allow-pointer-lock allow-presentation allow-top-navigation
 ! Link shortener filters go into their own dedicated list
 ! *** filters/ubo-link-shorteners.txt ***
 ! gplinks all domains (gplinks.co/EWu8)
