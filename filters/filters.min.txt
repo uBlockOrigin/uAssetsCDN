@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Sat, 10 Aug 2024 01:12:17 +0000
-! Diff-Path: ../patches/2024.8.10.100.patch#ublock-filters
+! Last modified: Sat, 10 Aug 2024 05:21:54 +0000
+! Diff-Path: ../patches/2024.8.10.323.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -347,11 +347,13 @@ web.facebook.com,www.facebook.com##+js(json-prune, require.0.3.0.__bbox.require.
 web.facebook.com,www.facebook.com##+js(json-prune, require.0.3.0.__bbox.require.[].3.1.__bbox.result.data.serpResponse.results.edges.[-].relay_rendering_strategy.view_model.story.sponsored_data.ad_id)
 !#if cap_html_filtering
 ||facebook.com/api/graphql/$xhr,replace=/\{"brs_content_label":[^,]+,"[^"]+":"SPONSORED"[^\n]+"cursor":"[^"]+"\}/{}/g,domain=web.facebook.com|www.facebook.com
+||facebook.com/api/graphql/$xhr,replace=/\{"brs_content_label":[^\n]+?"category":"SPONSORED"[^\n]+"cursor":"[^"]+"\}/{}/g,domain=web.facebook.com|www.facebook.com
 ||facebook.com/api/graphql/$xhr,replace=/\{"node":\{"role":"SEARCH_ADS"[^\n]+?cursor":[^}]+\}/{}/g,domain=web.facebook.com|www.facebook.com
 ||facebook.com/api/graphql/$xhr,replace=/\{"node":\{"__typename":"MarketplaceFeedAdStory"[^\n]+?"cursor":(?:null|"\{[^\n]+?\}"|[^\n]+?MarketplaceSearchFeedStoriesEdge")\}/{}/g,domain=web.facebook.com|www.facebook.com
 ||facebook.com/api/graphql/$xhr,replace=/\{"node":\{"__typename":"VideoHomeFeedUnitSectionComponent"[^\n]+?"sponsored_data":\{"ad_id"[^\n]+?"cursor":null\}/{}/,domain=web.facebook.com|www.facebook.com
 !#else
 web.facebook.com,www.facebook.com##+js(trusted-replace-xhr-response, '/\{"brs_content_label":[^,]+,"[^"]+":"SPONSORED"[^\n]+"cursor":"[^}]+\}/g', {}, /api/graphql)
+web.facebook.com,www.facebook.com##+js(trusted-replace-xhr-response, '/\{"brs_content_label":[^\n]+?"category":"SPONSORED"[^\n]+"cursor":"[^"]+"\}/g', {}, /api/graphql)
 web.facebook.com,www.facebook.com##+js(trusted-replace-xhr-response, /\{"node":\{"role":"SEARCH_ADS"[^\n]+?cursor":[^}]+\}/g, {}, /api/graphql)
 web.facebook.com,www.facebook.com##+js(trusted-replace-xhr-response, /\{"node":\{"__typename":"MarketplaceFeedAdStory"[^\n]+?"cursor":(?:null|"\{[^\n]+?\}"|[^\n]+?MarketplaceSearchFeedStoriesEdge")\}/g, {}, /api/graphql)
 web.facebook.com,www.facebook.com##+js(trusted-replace-xhr-response, /\{"node":\{"__typename":"VideoHomeFeedUnitSectionComponent"[^\n]+?"sponsored_data":\{"ad_id"[^\n]+?"cursor":null\}/, {}, /api/graphql)
@@ -8874,7 +8876,6 @@ vidsrc.*##+js(nosiif, /0x|sandCheck/)
 vidsrc.*##+js(nowoif)
 vidsrc.*##+js(aopr, __Y)
 vidsrc.*##+js(aopr, AaDetector)
-vidsrc.*##+js(aost, String.prototype.charCodeAt, inlineScript)
 vidsrc.*###pop_asdf
 ||katebugs.com^
 ||vidsrc.pro/uwu-js^$script
@@ -9711,7 +9712,7 @@ web.businessuniqueidea.com##+js(aopr, b2a)
 bgmateriali.com##+js(no-fetch-if, googlesyndication)
 ||bgmateriali.com/js/detector.js$script,1p
 ncaa.com##+js(no-fetch-if, googlesyndication)
-olx.in##[id^="baxter-ads"]:upward([class])
+olx.in###main_content div[class]:has(> .baxter-style-dfp-default-default)
 94.103.83.138##+js(nowoif)
 94.103.83.138###clickfakeplayer:remove-attr(href)
 !#if cap_html_filtering
@@ -10286,9 +10287,7 @@ clifnewz.online##+js(nowoif)
 clifnewz.online##+js(aost, document.createElement, inlineScript)
 ||updservice.site^
 ! pirate sites asg
-armoniscans.top,bentomanga.top,bigcomics.win,brmangas.top,cmoa.pro,hachiraw.top,j8jp.com,janime.top,jpraw.xyz,kakuyomu.in,kkraw.com,komiku.win,lectormanga.top,lermanga.top,manga1000.top,manga1001.xyz,manga1001.win,mangajp.top,mangakl.su,mangaraw.bid,mangavy.com,mangaz.win,scanita.top,shinigami-id.top,sushiscan.top,syosetu.gs##+js(no-fetch-if, url)
-armoniscans.top,bentomanga.top,bigcomics.win,brmangas.top,cmoa.pro,hachiraw.top,j8jp.com,janime.top,jpraw.xyz,kakuyomu.in,kkraw.com,komiku.win,lectormanga.top,lermanga.top,manga1000.top,manga1001.xyz,manga1001.win,mangajp.top,mangakl.su,mangaraw.bid,mangavy.com,mangaz.win,scanita.top,shinigami-id.top,sushiscan.top,syosetu.gs##+js(rmnt, script, UrlLink)
-*$xhr,3p,denyallow=cloudflare.net|fontawesome.com,domain=armoniscans.top|bentomanga.top|bigcomics.win|brmangas.top|cmoa.pro|hachiraw.top|j8jp.com|janime.top|jpraw.xyz|kakuyomu.in|kkraw.com|komiku.win|lectormanga.top|lermanga.top|manga1000.top|manga1001.win|manga1001.xyz|mangajp.top|mangakl.su|mangaraw.bid|mangavy.com|mangaz.win|scanita.top|shinigami-id.top|sushiscan.top|syosetu.gs
+*$script,xhr,3p,denyallow=bootstrapcdn.com|cloudflare.com|cloudflare.net|fontawesome.com|jquery.com|jsdelivr.net|rawgit.com,domain=armoniscans.top|bentomanga.top|bigcomics.bid|brmangas.top|cmoa.pro|hachiraw.top|j8jp.com|janime.top|jpraw.xyz|kakuyomu.in|kkraw.com|komiku.win|lectormanga.top|lermanga.top|manga1000.top|manga1001.win|manga1001.xyz|mangajp.top|mangakl.su|mangaraw.bid|mangavy.com|mangaz.win|scanita.top|shinigami-id.top|sushiscan.top|syosetu.gs
 ||tubator.com/lookout/wantfood.js
 tubator.com##+js(aeld, getexoloader)
 ||wochenblitz.com^$xhr,1p,redirect-rule=nooptext
@@ -11110,6 +11109,7 @@ cybercityhelp.in##+js(rmnt, script, adsbygoogle)
 cybercityhelp.in###username[required]:remove-attr(required)
 akcartoons.in,cybercityhelp.in###tp982, #btn6:style(display: block !important;)
 akcartoons.in,cybercityhelp.in###tp982, #btn6:others()
+cybercityhelp.in##+js(set, validateForm, trueFunc)
 iconicblogger.com##+js(rmnt, script, catch)
 iconicblogger.com###wpsafe-link:style(display: block !important;)
 iconicblogger.com###wpsafe-link:others()
@@ -11385,6 +11385,10 @@ universitiesonline.xyz##.overlay
 universitiesonline.xyz###tp-generate, #tp-snp2:style(display: block !important;)
 indiamaja.com,newshuta.in###tp98, #btn6:style(display: block !important;)
 indiamaja.com,newshuta.in##+js(set, blurred, false)
+filesupload.in##+js(no-fetch-if, adsbygoogle.js)
+filesupload.in###wpsafe-link:style(display: block !important;)
+indianshortner.com##.banner
+indianshortner.com##a[href^="https://t.me/"]
 !#if env_mobile
 ! *** filters/filters-mobile.txt ***
 !----- 2020 -----
@@ -20263,19 +20267,21 @@ bowfile.com,cloudvideo.tv,cloudvideotv.*,coloredmanga.com,cracksports.me,embedst
 soap2day.*##+js(rmnt, script, Reflect)
 !#endif
 ! FingerprintJS servers
-/^https?:\/\/[a-z]{7,}\.buzz\/[+\/0-9a-zA-Z]{140,1000}$/$image,3p,match-case
+/^https?:\/\/[a-z]{7,}\.buzz\/[+\/0-9a-zA-Z]{140,400}$/$image,3p,match-case
 /^https?:\/\/[a-z]{7,}\.buzz\/[+\/0-9a-zA-Z]{400,1000}$/$frame,3p,match-case
-/^https?:\/\/[a-z]{7,}\.com?\/(?=[\/a-zA-Z]*[+0-9])(?=[+\/0-9a-z]*[A-Z])[+\/0-9a-zA-Z]{140,1000}$/$image,3p,match-case,from=~edu|~gov,to=co|com
-/^https?:\/\/[a-z]{7,}\.com?\/(?=[\/a-zA-Z]*[+0-9])(?=[+\/0-9a-z]*[A-Z])[+\/0-9a-zA-Z]{400,1000}$/$frame,3p,match-case,from=~edu|~gov,to=co|com
-/^https?:\/\/[a-z]{7,}\.info\/[+\/0-9a-zA-Z]{140,1000}$/$image,3p,match-case
+/^https?:\/\/[a-z]{7,}\.co\/(?=[\/a-zA-Z]*[+0-9])(?=[+\/0-9a-z]*[A-Z])[+\/0-9a-zA-Z]{140,400}$/$image,3p,match-case,from=~edu|~gov,to=co
+/^https?:\/\/[a-z]{7,}\.co\/(?=[\/a-zA-Z]*[+0-9])(?=[+\/0-9a-z]*[A-Z])[+\/0-9a-zA-Z]{400,1000}$/$frame,3p,match-case,from=~edu|~gov,to=co,header=x-amz-cf-pop
+/^https?:\/\/[a-z]{7,}\.com\/(?=[\/a-zA-Z]*[+0-9])(?=[+\/0-9a-z]*[A-Z])[+\/0-9a-zA-Z]{140,400}$/$image,3p,match-case,from=~edu|~gov,to=com
+/^https?:\/\/[a-z]{7,}\.com\/(?=[\/a-zA-Z]*[+0-9])(?=[+\/0-9a-z]*[A-Z])[+\/0-9a-zA-Z]{400,1000}$/$frame,3p,match-case,from=~edu|~gov,to=com,header=x-amz-cf-pop
+/^https?:\/\/[a-z]{7,}\.info\/[+\/0-9a-zA-Z]{140,400}$/$image,3p,match-case
 /^https?:\/\/[a-z]{7,}\.info\/[+\/0-9a-zA-Z]{400,1000}$/$frame,3p,match-case
-/^https?:\/\/[a-z]{7,}\.lol\/[+\/0-9a-zA-Z]{140,1000}$/$image,3p,match-case
+/^https?:\/\/[a-z]{7,}\.lol\/[+\/0-9a-zA-Z]{140,400}$/$image,3p,match-case
 /^https?:\/\/[a-z]{7,}\.lol\/[+\/0-9a-zA-Z]{400,1000}$/$frame,3p,match-case
-/^https?:\/\/[a-z]{7,}\.one\/[+\/0-9a-zA-Z]{140,1000}$/$image,3p,match-case
+/^https?:\/\/[a-z]{7,}\.one\/[+\/0-9a-zA-Z]{140,400}$/$image,3p,match-case
 /^https?:\/\/[a-z]{7,}\.one\/[+\/0-9a-zA-Z]{400,1000}$/$frame,3p,match-case
-/^https?:\/\/[a-z]{7,}\.org\/(?=[\/a-zA-Z]*[+0-9])(?=[+\/0-9a-z]*[A-Z])[+\/0-9a-zA-Z]{140,1000}$/$image,3p,match-case,domain=~edu|~gov
+/^https?:\/\/[a-z]{7,}\.org\/(?=[\/a-zA-Z]*[+0-9])(?=[+\/0-9a-z]*[A-Z])[+\/0-9a-zA-Z]{140,400}$/$image,3p,match-case,domain=~edu|~gov
 /^https?:\/\/[a-z]{7,}\.org\/(?=[\/a-zA-Z]*[+0-9])(?=[+\/0-9a-z]*[A-Z])[+\/0-9a-zA-Z]{400,1000}$/$frame,3p,match-case,domain=~edu|~gov
-/^https?:\/\/[a-z]{7,}\.xyz\/[+\/0-9a-zA-Z]{140,1000}$/$image,3p,match-case
+/^https?:\/\/[a-z]{7,}\.xyz\/[+\/0-9a-zA-Z]{140,400}$/$image,3p,match-case
 /^https?:\/\/[a-z]{7,}\.xyz\/[+\/0-9a-zA-Z]{400,1000}$/$frame,3p,match-case
 ##body > div[style$="z-index: 2147483647; top: 0px; left: 0px; position: fixed; display: block;"]
 @@||nbk.io^$ghide
@@ -20668,6 +20674,7 @@ tousatu-club.com###text-9
 erostopics.net###custom_html-81
 erostopics.net###custom_html-137
 erostopics.net###related-box
+idle-girl.com###custom_html-74
 ! Outbrain
 nekochan.jp###main > aside:has(> div.OUTBRAIN)
 ! aspservice.jp
