@@ -1,5 +1,5 @@
 ! Title: uBlock₀ filters – Quick fixes
-! Last modified: Tue, 13 Aug 2024 04:54:57 +0000
+! Last modified: Tue, 13 Aug 2024 12:32:58 +0000
 ! Expires: 8 hours
 ! Description: Immediate, temporary filters to fix websites
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -109,22 +109,19 @@ client.falixnodes.net##+js(rpnt, script, (window.loadscript, (window.loadscript 
 @@||freemcserver.net^$script,1p
 @@||freemcserver.net^$ghide
 @@||cdn.jsdelivr.net/gh/Levii22/$domain=freemcserver.net
+@@||pagead2.googlesyndication.com/getconfig/sodar?$xhr,domain=freemcserver.net
 @@||stpd.cloud/saas/$script,domain=panel.freemcserver.net
-||securepubads.g.doubleclick.net/tag/js/gpt.js$script,redirect=noopjs:10,domain=panel.freemcserver.net
+@@||securepubads.g.doubleclick.net/tag/js/gpt.js$script,domain=panel.freemcserver.net
 @@||googletagmanager.com/gtag/js?$script,domain=panel.freemcserver.net
-@@*$xhr,domain=freemcserver.net
+@@||securepubads.g.doubleclick.net/pagead/managed/js/gpt/$script,domain=panel.freemcserver.net
 *$script,redirect-rule=noopjs,domain=panel.freemcserver.net
 !#if env_firefox
-||gum.criteo.com/sid/json?origin=prebid&topUrl=https*&domain=panel.freemcserver.net&*&gdpr=1|$xhr,important,domain=freemcserver.net
-||id5-sync.com/g/v2/481.json|$xhr,important,domain=freemcserver.net
-||id5-sync.com/api/config/prebid|$xhr,important,domain=freemcserver.net
-||lb.eu-1-id5-sync.com/lb/v1|$xhr,important,domain=freemcserver.net
-||google-analytics.com^$xhr,important,domain=freemcserver.net
 *$xhr,redirect-rule=nooptext,domain=panel.freemcserver.net
 !#else
-||region1.google-analytics.com/g/collect?$xhr,important,domain=freemcserver.net
+@@||www.google-analytics.com/*_gid=123456789$xhr,domain=panel.freemcserver.net
+@@||tagan.adlightning.com/setupad-hai/op.js|$xhr,domain=panel.freemcserver.net
+@@||lb.eu-1-id5-sync.com/lb/v1|$xhr,domain=panel.freemcserver.net
 !#endif
-panel.freemcserver.net##+js(set, googletag.pubads, trueFunc)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/24217
 ! kimcartoon.*,kisscartoon.se,kc.linksgen.com##+js(aost, jQuery.fn.html, /^(?!.*jquery).*(Scripts|inlineScript)/i)
@@ -182,3 +179,6 @@ www.google.*#@#+js(trusted-set-cookie, SOCS, CAISNQgQEitib3FfaWRlbnRpdHlmcm9udGV
 /^https?:\/\/[a-z]{7,}\.co\/(?=[\/a-zA-Z]*[+0-9])(?=[+\/0-9a-z]*[A-Z])[+\/0-9a-zA-Z]{400,1000}$/$frame,3p,match-case,from=~edu|~gov,to=co,header=x-amz-cf-pop
 /^https?:\/\/[a-z]{7,}\.com\/(?=[\/a-zA-Z]*[+0-9])(?=[+\/0-9a-z]*[A-Z])[+\/0-9a-zA-Z]{140,400}$/$image,3p,match-case,from=~edu|~gov,to=com
 /^https?:\/\/[a-z]{7,}\.com\/(?=[\/a-zA-Z]*[+0-9])(?=[+\/0-9a-z]*[A-Z])[+\/0-9a-zA-Z]{400,1000}$/$frame,3p,match-case,from=~edu|~gov,to=com,header=x-amz-cf-pop
+
+! https://github.com/AdguardTeam/AdguardFilters/issues/186199
+news.yahoo.co.jp#@#main#contents > div[class^="sc-"]:has(> div[class*=" "]:not([style]) > div[id^="yads_"])
