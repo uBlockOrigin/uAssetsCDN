@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Quick fixes
 ! Expires: 12 hours
-! Last modified: Mon, 19 Aug 2024 03:39:04 +0000
-! Diff-Path: ../patches/2024.8.19.565.patch#ublock-quick-fixes
+! Last modified: Mon, 19 Aug 2024 13:44:00 +0000
+! Diff-Path: ../patches/2024.8.19.866.patch#ublock-quick-fixes
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/quick-fixes.txt ***
@@ -111,7 +111,7 @@ panel.freemcserver.net##div[style^="min-height:"]:has(> div[id^="stpd-"])
 ||prebid-stag.setupad.net/cookie_sync|$xhr,important,domain=panel.freemcserver.net
 ||prebid-stag.setupad.net/openrtb2/auction|$xhr,important,domain=panel.freemcserver.net
 ||fastlane.rubiconproject.com/a/api/fastlane.json?$xhr,important,domain=panel.freemcserver.net
-||tlx.3lift.com/header/auction?$xhr,important,domain=panel.freemcserver.net
+||tlx.3lift.com/header/auction?$xhr,important,method=post,domain=panel.freemcserver.net
 ||rtb.openx.net/openrtbb/prebidjs|$xhr,important,domain=panel.freemcserver.net
 ||hbopenbid.pubmatic.com/translator?source=prebid-client|$xhr,important,domain=panel.freemcserver.net
 ||adx.adform.net/adx/openrtb|$xhr,important,domain=panel.freemcserver.net
@@ -142,9 +142,13 @@ kimcartoon.li,kc.linksgen.com,kisscartoon.se#@##hideAds
 @@||platform.bidgear.com/pubbidgear-ad.js$xhr,domain=kimcartoon.li|kisscartoon.se|kc.linksgen.com
 @@||whatsnew247.net^$script,xhr,domain=kimcartoon.li|kisscartoon.se|kc.linksgen.com
 !veev.to##+js(trusted-set, __abburi, {"value": "https://veev.to/assets/videoplayer/df8fdb9.js"})
+!#if cap_html_filtering
+||static.veevcdn.co/assets/videoplayer/$script,replace=/\)\{\!0x1\=\=\=/){true===/g
+!#else
 @@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$xhr,domain=veev.to
+@@||a.pemsrv.com/ad-provider.js|$xhr,domain=veev.to
 veev.to##+js(trusted-suppress-native-method, XMLHttpRequest.prototype.open, | "adsbygoogle", prevent)
-veev.to##+js(trusted-suppress-native-method, XMLHttpRequest.prototype.open, |"ad-provider.js", prevent)
+!#endif
 ! Better to counter the old filter for a while... https://github.com/uBlockOrigin/uAssets/commit/f44ac328b718bab3118f759880128fe420afb906
 www.google.*#@#+js(trusted-set-cookie, SOCS, CAISNQgQEitib3FfaWRlbnRpdHlmcm9udGVuZHVpc2VydmVyXzIwMjQwNTE0LjA2X3AwGgJmaSADGgYIgOu0sgY, 1year)
 news.yahoo.co.jp#@#main#contents > div[class^="sc-"]:has(> div[class*=" "]:not([style]) > div[id^="yads_"])

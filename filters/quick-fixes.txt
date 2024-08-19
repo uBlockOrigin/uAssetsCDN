@@ -1,5 +1,5 @@
 ! Title: uBlock₀ filters – Quick fixes
-! Last modified: Mon, 19 Aug 2024 03:39:04 +0000
+! Last modified: Mon, 19 Aug 2024 13:44:00 +0000
 ! Expires: 8 hours
 ! Description: Immediate, temporary filters to fix websites
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -134,7 +134,7 @@ panel.freemcserver.net##div[style^="min-height:"]:has(> div[id^="stpd-"])
 ||prebid-stag.setupad.net/cookie_sync|$xhr,important,domain=panel.freemcserver.net
 ||prebid-stag.setupad.net/openrtb2/auction|$xhr,important,domain=panel.freemcserver.net
 ||fastlane.rubiconproject.com/a/api/fastlane.json?$xhr,important,domain=panel.freemcserver.net
-||tlx.3lift.com/header/auction?$xhr,important,domain=panel.freemcserver.net
+||tlx.3lift.com/header/auction?$xhr,important,method=post,domain=panel.freemcserver.net
 ||rtb.openx.net/openrtbb/prebidjs|$xhr,important,domain=panel.freemcserver.net
 ||hbopenbid.pubmatic.com/translator?source=prebid-client|$xhr,important,domain=panel.freemcserver.net
 ||adx.adform.net/adx/openrtb|$xhr,important,domain=panel.freemcserver.net
@@ -169,9 +169,13 @@ kimcartoon.li,kc.linksgen.com,kisscartoon.se#@##hideAds
 
 ! https://github.com/uBlockOrigin/uAssets/issues/24220
 !veev.to##+js(trusted-set, __abburi, {"value": "https://veev.to/assets/videoplayer/df8fdb9.js"})
+!#if cap_html_filtering
+||static.veevcdn.co/assets/videoplayer/$script,replace=/\)\{\!0x1\=\=\=/){true===/g
+!#else
 @@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$xhr,domain=veev.to
+@@||a.pemsrv.com/ad-provider.js|$xhr,domain=veev.to
 veev.to##+js(trusted-suppress-native-method, XMLHttpRequest.prototype.open, | "adsbygoogle", prevent)
-veev.to##+js(trusted-suppress-native-method, XMLHttpRequest.prototype.open, |"ad-provider.js", prevent)
+!#endif
 
 ! Better to counter the old filter for a while... https://github.com/uBlockOrigin/uAssets/commit/f44ac328b718bab3118f759880128fe420afb906
 ! https://www.reddit.com/r/uBlockOrigin/comments/1ekkkp1/google_constantly_reverting_to_light_mode_and/
