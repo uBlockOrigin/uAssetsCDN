@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Sun, 25 Aug 2024 15:15:39 +0000
-! Diff-Path: ../patches/2024.8.25.923.patch#ublock-filters
+! Last modified: Sun, 25 Aug 2024 15:47:24 +0000
+! Diff-Path: ../patches/2024.8.25.1226.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -3470,11 +3470,6 @@ tornadomovies.*##+js(set, atob, noopFunc)
 tornadomovies.*##[href="/user/premiumregistration"]
 javher.com###popunderLink
 javher.com##.affiliate-card-container
-sexwebvideo.*##+js(aeld, , _blank)
-sexwebvideo.*##+js(set, flashvars.popunder_url, '')
-@@||sexwebvideo.*^$ghide
-sexwebvideo.*##.spot-vertical-wrap
-*banner$domain=sexwebvideo.*,frame
 novelasesp.*##+js(aeld, load, 2000)
 playrust.io##+js(aeld, , Date)
 supforums.com##+js(set, adsBlocked, false)
@@ -10445,6 +10440,12 @@ help.sakarnewz.com##+js(rmnt, script, googlesyndication)
 btv.bg###leading_video_player_autoplay_wrapper:remove()
 btv.bg###leading_video_player_autoplay_main_wrapper:style(display: block !important;)
 btv.bg##.vjs-continue-watching-bar
+!#if cap_html_filtering
+sexwebvideo.com,sexwebvideo.net##^script:has-text(detectAdBlock)
+!#elseif
+sexwebvideo.com,sexwebvideo.net##+js(rmnt, script, detectAdBlock)
+!#endif
+sexwebvideo.com,sexwebvideo.net##+js(set, flashvars.popunder_url, '')
 ! Link shortener filters go into their own dedicated list
 ! *** filters/ubo-link-shorteners.txt ***
 ! gplinks all domains (gplinks.co/EWu8)
@@ -20613,6 +20614,7 @@ sportfacts.net,sportshub.to,sportnews.to##+js(no-xhr-if, googlesyndication)
 ||sportshub.to/fox/plugins/block/js/$script
 ||sportnews.to/fox/plugins/block/js/$script
 sportfacts.net,sportnews.to##+js(aopr, antiAdBlockerHandler)
+topsporter.net##+js(no-fetch-if, /^/)
 seznam.cz##.banner-wrapper:upward(2):remove()
 seznam.cz##[data-draggable-target]:has-text(Rekl):not(*:has([href*="radio"]))
 seznam.cz##.sticky-content:has-text(Reklama)
@@ -21325,7 +21327,7 @@ telesrbija.com##+js(acs, Promise, Adb)
 ! javgg.net anti-adb on DL
 javgg.co,javgg.net#@##AD_160
 *$script,3p,redirect-rule=noopjs,domain=javguard.xyz
-*$script,3p,denyallow=cloudflare.com|fluidplayer.com|googleapis.com,domain=javgg.co|javgg.net
+*$script,3p,denyallow=cloudflare.com|fluidplayer.com|googleapis.com|strpst.com,domain=javgg.co|javgg.net
 javmoon.me##+js(nostif, /debugger|UserCustomPop/)
 javmoon.me##+js(acs, JSON.parse, showTrkURL)
 javmoon.me##+js(noeval-if, Popunder)
