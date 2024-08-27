@@ -1,12 +1,12 @@
-diff name:ublock-annoyances lines:3 checksum:36aa54f0d5
+diff name:ublock-annoyances lines:3 checksum:64e06f6fc2
 d4 1
 a4 1
-! Diff-Path: ../patches/2024.8.27.441.patch#ublock-annoyances
-diff name:ublock-badware lines:78 checksum:973b1f993e
+! Diff-Path: ../patches/2024.8.27.764.patch#ublock-annoyances
+diff name:ublock-badware lines:83 checksum:7580ee8292
 d3 2
 a4 2
-! Last modified: Tue, 27 Aug 2024 07:03:17 +0000
-! Diff-Path: ../patches/2024.8.27.441.patch#ublock-badware
+! Last modified: Tue, 27 Aug 2024 08:02:53 +0000
+! Diff-Path: ../patches/2024.8.27.764.patch#ublock-badware
 a3037 4
 ! yahoo
 ||pages.dev/account/js-reporting^$doc,to=~yahoo.com
@@ -22,6 +22,8 @@ a3175 1
 ||mytemp.website/amazon-prime-video-com-br/$doc
 a3187 1
 ||ebayonstores.com^$all
+a3238 1
+||casadosvidrosmt.com.br/wp-admin/csii/$all,to=~gov.uk
 a3241 1
 ||isz.bqv.mybluehost.me^$doc,to=~impots.gouv.fr
 a3249 4
@@ -32,6 +34,8 @@ a3249 4
 a3268 2
 ||moonlightproshop.com^$all,to=~volksbank.at
 ||bbvaar.zeabur.app^$all,to=~bbva.com
+a3322 1
+/tracking/fV5EjH/*.php^$doc,to=~dhl.com
 a3530 3
 ||backblazeb2.com/securescriptindustriusfinanceprivate99.HTML^$doc
 /landingpages/daec0dfa-de7a-4f73-9b8e-44fde686ce12^$doc
@@ -54,8 +58,9 @@ d3635 1
 d3637 1
 d3641 1
 d3647 2
-a3746 1
+a3746 2
 ||mybluehost.me/wise/number-account-$doc,to=~wise.com
+||smrturl.co/o/*/53458494^$doc
 a3867 3
 ||endrowl.com^$all
 ||xceteu.com^$all
@@ -81,11 +86,13 @@ a4066 20
 ||chrome-web.com^$all
 ||iqpoll.cn^$document
 ||zhandouxian.com^$all
-diff name:ublock-filters lines:70 checksum:5ad4d4b4cc
+diff name:ublock-filters lines:110 checksum:71f85e1dfb
 d3 2
 a4 2
-! Last modified: Tue, 27 Aug 2024 06:43:17 +0000
-! Diff-Path: ../patches/2024.8.27.441.patch#ublock-filters
+! Last modified: Tue, 27 Aug 2024 11:56:35 +0000
+! Diff-Path: ../patches/2024.8.27.764.patch#ublock-filters
+d3044 7
+d3930 5
 d4026 3
 a4028 1
 apritos.com,bsierad.com,diminimalis.com,eksporimpor.com,jadijuara.com,kicaunews.com,palapanews.com,ridvanmau.com##+js(aopw, adBlockDetected)
@@ -101,15 +108,35 @@ babygames.com###RightAdMiddleDiv
 babygames.com###RightAdTopDiv
 d7582 4
 d7726 7
+a9238 9
+@@||api.production.k8s.y3o.tv/*/video-ads$xhr,domain=yallo.tv
+@@||imasdk.googleapis.com/js/sdkloader/ima3.js$script,domain=yallo.tv
+||adservice.google.com^$script,redirect-rule=noopjs,domain=yallo.tv
+!#if ext_devbuild
+imasdk.googleapis.com##+js(no-fetch-if, secure.adnxs.com/ptv, war:noop-vast4.xml)
+!#else
+@@||secure.adnxs.com/ptv$xhr,domain=imasdk.googleapis.com
+imasdk.googleapis.com##+js(xml-prune, VAST, , adnxs)
+!#endif
+d9844 1
+a9844 1
+||cdn.pranmcpkx.com^$script,3p,redirect=noopjs
 d9890 1
 a9890 1
 ###player div[style$="cursor: pointer; position: absolute; width: 100%; height: 100%; padding: 1rem; z-index: 2147483647;"]
 d9965 1
 a9965 1
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$script,domain=tv.okezone.com,redirect=google-ima.js
+a10056 1
+@@||tao.barstoolsports.com/v2/i^$xhr,1p
+d10258 1
+a10258 1
+*$script,xhr,3p,denyallow=bootstrapcdn.com|cloudflare.com|cloudflare.net|fastly.net|fontawesome.com|googleapis.com|htstreaming.com|jquery.com|jsdelivr.net|jwpcdn.com|rawgit.com|unpkg.com,domain=armoniscans.top|bentomanga.top|bigcomics.bid|brmangas.top|cmoa.pro|hachiraw.top|j8jp.com|janime.top|jpraw.xyz|kakuyomu.in|kkraw.com|komiku.win|lectormanga.top|lermanga.top|manga1000.top|manga1001.win|manga1001.xyz|mangajp.top|mangakl.su|mangaraw.bid|mangavy.com|mangaz.win|scanita.top|shinigami-id.top|sushiscan.top|syosetu.gs
+a10325 1
+therealdeal.com##body[data-pushdown-enabled="true"]:style(margin-top: 0px !important;)
 a10442 1
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$script,redirect=google-ima.js,domain=btv.bg
-a10448 9
+a10448 23
 javsek.net##+js(nosiif, pop)
 $script,3p,denyallow=facebook.net|fbcdn.net,domain=javsek.net
 melaniezettofrais.online##+js(nostif, sandbox)
@@ -119,19 +146,31 @@ jokersportshd.org,tennis.stream##+js(nowoif, /aff|jump/)
 101soundboards.com##[id^="rewarded_ad_"]:not(#rewarded_ad_blocker):style(display: block !important; visibility: visible !important;)
 101soundboards.com##+js(no-fetch-if, googlesyndication)
 101soundboards.com##+js(nano-stb, , 10000, 0.001)
+! myhindigk. com detection
+myhindigk.com##+js(noeval-if, ads)
+||cdn.adsninja.ca/biddertypelibrary/$script,domain=xda-developers.com,important
+||imasdk.googleapis.com/js/sdkloader/ima3.js^$script,redirect=google-ima.js,domain=androidpolice.com|cbr.com|collider.com|dualshockers.com|gamerant.com|howtogeek.com|makeuseof.com|movieweb.com|screenrant.com|thegamer.com|xda-developers.com,important
+@@||cdn.adsninja.ca/adsninja_worker_caller.js$script,domain=androidpolice.com|cbr.com|collider.com|dualshockers.com|gamerant.com|howtogeek.com|makeuseof.com|movieweb.com|screenrant.com|thegamer.com|xda-developers.com
+@@||cdn.adsninja.ca/adsninja_client$script,css,domain=androidpolice.com|cbr.com|collider.com|dualshockers.com|gamerant.com|howtogeek.com|movieweb.com|makeuseof.com|screenrant.com|thegamer.com|xda-developers.com
+@@*$ghide,domain=androidpolice.com|cbr.com|collider.com|dualshockers.com|gamerant.com|howtogeek.com|movieweb.com|makeuseof.com|screenrant.com|thegamer.com|xda-developers.com
+androidpolice.com,cbr.com,collider.com,dualshockers.com,gamerant.com,howtogeek.com,makeuseof.com,movieweb.com,screenrant.com,thegamer.com,xda-developers.com##+js(set, Object.prototype.ads.nopreroll_, true)
+androidpolice.com,cbr.com,collider.com,dualshockers.com,gamerant.com,howtogeek.com,makeuseof.com,movieweb.com,screenrant.com,thegamer.com,xda-developers.com##[id^="adsninja-ad-zone-div-gpt-ad"]
+androidpolice.com,cbr.com,collider.com,dualshockers.com,gamerant.com,howtogeek.com,makeuseof.com,movieweb.com,screenrant.com,thegamer.com,xda-developers.com##[id^="adsninja-ad-zone-adsninja-ad-unit-footer"]
+androidpolice.com,cbr.com,collider.com,dualshockers.com,gamerant.com,howtogeek.com,makeuseof.com,movieweb.com,screenrant.com,thegamer.com,xda-developers.com##[class*="ad-zone-container-content-character-count-repeatable"]
+androidpolice.com,cbr.com,collider.com,dualshockers.com,gamerant.com,howtogeek.com,makeuseof.com,movieweb.com,screenrant.com,thegamer.com,xda-developers.com##.adzone-above-latest
+androidpolice.com,cbr.com,collider.com,dualshockers.com,gamerant.com,howtogeek.com,makeuseof.com,movieweb.com,screenrant.com,thegamer.com,xda-developers.com##.adsninja-ad-zone-container-with-set-height
+movieweb.com,screenrant.com,thegamer.com#@#.video
 d10452 8
 a10459 8
-@@*$ghide,domain=gplinks.*|edulearnzone.com|mahayojna24.com|tallent.in|kakebale.com|mbjclub.in
-@@*$script,xhr,to=googlesyndication.com|doubleclick.net,from=edulearnzone.com|mahayojna24.com|tallent.in|kakebale.com|mbjclub.in
-@@||gplinks.in/track/$script,xhr,domain=gplinks.*|edulearnzone.com|mahayojna24.com|tallent.in|kakebale.com|mbjclub.in
-mbjclub.in,kakebale.com,tallent.in,mahayojna24.com,edulearnzone.com##center:others()
-mbjclub.in,kakebale.com,tallent.in,mahayojna24.com,edulearnzone.com###SmileyBanner:remove()
-mbjclub.in,kakebale.com,tallent.in,mahayojna24.com,edulearnzone.com##+js(aopw, AdBDetected)
-mbjclub.in,kakebale.com,tallent.in,mahayojna24.com,edulearnzone.com##+js(set, count, 0)
-mbjclub.in,kakebale.com,tallent.in,mahayojna24.com,edulearnzone.com##[id*="iframe"], [id*="gpt_unit"], [id*="div-gpt-"]:style(height:0.0001px !important;)
+@@*$ghide,domain=gplinks.*|mahayojna24.com|tallent.in|kakebale.com|mbjclub.in|naibahali.com
+@@*$script,xhr,to=googlesyndication.com|doubleclick.net,from=mahayojna24.com|tallent.in|kakebale.com|mbjclub.in|naibahali.com
+@@||gplinks.in/track/$script,xhr,domain=gplinks.*|mahayojna24.com|tallent.in|kakebale.com|mbjclub.in|naibahali.com
+naibahali.com,mbjclub.in,kakebale.com,tallent.in,mahayojna24.com##center:others()
+naibahali.com,mbjclub.in,kakebale.com,tallent.in,mahayojna24.com###SmileyBanner:remove()
+naibahali.com,mbjclub.in,kakebale.com,tallent.in,mahayojna24.com##+js(aopw, AdBDetected)
+naibahali.com,mbjclub.in,kakebale.com,tallent.in,mahayojna24.com##+js(set, count, 0)
+naibahali.com,mbjclub.in,kakebale.com,tallent.in,mahayojna24.com##[id*="iframe"], [id*="gpt_unit"], [id*="div-gpt-"]:style(height:0.0001px !important;)
 d11471 1
-a11471 1
-androidpolice.com,howtogeek.com,makeuseof.com,screenrant.com##.adsninja-ad-zone
 d19376 7
 a19382 7
 ||07c225f3.online^$~css,domain=etoday.co.kr|genshinlab.com|dogdrip.net|thestar.co.uk|yorkshirepost.co.uk
@@ -146,21 +185,27 @@ a19431 3
 ||html-load.com^$redirect=noopjs,domain=raenonx.cc|indiatimes.com
 raenonx.cc,indiatimes.com##+js(nostif, error-report.com)
 indiatimes.com##+js(set, objAd.loadAdShield, noopFunc)
+d22904 1
+a22904 1
+abc17news.com,agrodigital.com,aliontherunblog.com,allaboutthetea.com,allmovie.com,allmusic.com,allthingsthrifty.com,amessagewithabottle.com,androidpolice.com,antyradio.pl,artforum.com,artnews.com,awkward.com,awkwardmom.com##^script:has-text('"v4ac1eiZr0"')
 d22923 1
 a22923 1
-247sports.com,al.com,cbsnews.com,cbssports.com,cleveland.com,indiewire.com,masslive.com,mlive.com,nj.com,nypost.com,oregonlive.com,pagesix.com,pennlive.com,rollingstone.com,syracuse.com##^script:has-text('"data-adm-url"')
+247sports.com,agrodigital.com,al.com,cbsnews.com,cbssports.com,cleveland.com,indiewire.com,masslive.com,mlive.com,news.com.au,nj.com,nypost.com,oregonlive.com,pagesix.com,pennlive.com,rollingstone.com,syracuse.com##^script:has-text('"").split(",")[4]')
+d22925 1
+a22925 1
+abc17news.com,aliontherunblog.com,allaboutthetea.com,allmovie.com,allmusic.com,allthingsthrifty.com,amessagewithabottle.com,androidpolice.com,antyradio.pl,artforum.com,artnews.com,awkward.com,awkwardmom.com##+js(rmnt, script, '"v4ac1eiZr0"')
 d22944 1
 a22944 1
-247sports.com,al.com,cbsnews.com,cbssports.com,cleveland.com,indiewire.com,masslive.com,mlive.com,nj.com,nypost.com,oregonlive.com,pagesix.com,pennlive.com,rollingstone.com,syracuse.com##+js(rmnt, script, '"data-adm-url"')
-diff name:ublock-privacy lines:3 checksum:046df1eb24
+247sports.com,agrodigital.com,al.com,cbsnews.com,cbssports.com,cleveland.com,indiewire.com,masslive.com,mlive.com,news.com.au,nj.com,nypost.com,oregonlive.com,pagesix.com,pennlive.com,rollingstone.com,syracuse.com##+js(rmnt, script, '"").split(",")[4]')
+diff name:ublock-privacy lines:3 checksum:30554e16c6
 d4 1
 a4 1
-! Diff-Path: ../patches/2024.8.27.441.patch#ublock-privacy
-diff name:ublock-quick-fixes lines:13 checksum:461d55d445
+! Diff-Path: ../patches/2024.8.27.764.patch#ublock-privacy
+diff name:ublock-quick-fixes lines:16 checksum:f6bd21b791
 d3 2
 a4 2
-! Last modified: Mon, 26 Aug 2024 12:35:25 +0000
-! Diff-Path: ../patches/2024.8.27.441.patch#ublock-quick-fixes
+! Last modified: Tue, 27 Aug 2024 12:43:20 +0000
+! Diff-Path: ../patches/2024.8.27.764.patch#ublock-quick-fixes
 a45 1
 ||facebook.com/api/graphql/$xhr,replace=/\{"brs_c[^\n]+?"SponsoredData","ad_id"[^\n]+"cursor":"[^"]+"\}/{}/g,domain=web.facebook.com|www.facebook.com
 a47 1
@@ -168,13 +213,16 @@ web.facebook.com,www.facebook.com##+js(trusted-replace-xhr-response, '/\{"brs_c[
 d96 1
 a96 1
 japscan.lol#@#body > .container.text-center > div.mt-3 > a.Aikoi.donate[href^="http"][href*="/?utm_"] > img.img-fluid[src^="/imgs/onc/"]
+d184 1
+a184 1
+@@*$script,3p,from=sonixgvn.net,to=flashvps.xyz|nya.pub
 a191 1
 androidpolice.com,billboard.com,brobible.com,cbr.com,collider.com,destructoid.com,dualshockers.com,gamerant.com,givemesport.com,lehighvalleylive.com,lonestarlive.com,mensjournal.com,nypost.com,qtoptens.com,screenrant.com,si.com,thegamer.com,thenerdstash.com,thestreet.com,simpleflying.com,stealthoptional.com,variety.com#@#+js(abort-on-property-read, googletag)
-diff name:ublock-unbreak lines:38 checksum:28faf8909c
+diff name:ublock-unbreak lines:18 checksum:0d86466b85
 d3 2
 a4 2
-! Last modified: Tue, 27 Aug 2024 03:15:32 +0000
-! Diff-Path: ../patches/2024.8.27.441.patch#ublock-unbreak
+! Last modified: Tue, 27 Aug 2024 08:23:17 +0000
+! Diff-Path: ../patches/2024.8.27.764.patch#ublock-unbreak
 d438 2
 d2515 1
 a2515 1
@@ -185,35 +233,15 @@ a2682 2
 @@||v.fwmrm.net/ad/*html5_live^$script,domain=channel4.com
 ||v.fwmrm.net/ad/*html5_live^$script,removeparam=caid,domain=channel4.com
 d2688 9
-a2696 19
-howtogeek.com,makeuseof.com#@#+js(aopr, googletag)
-howtogeek.com,makeuseof.com#@#.adsninja-ad-zone
-howtogeek.com,makeuseof.com#@#.ad-current
-howtogeek.com,makeuseof.com#@#.ad-zone-container
-@@||cdn.adsninja.ca^$script,css,domain=howtogeek.com|makeuseof.com
-||imasdk.googleapis.com/js/sdkloader/ima3.js$script,3p,redirect=google-ima.js,domain=howtogeek.com|makeuseof.com,important
-||googletagservices.com/tag/js/gpt.js$domain=howtogeek.com|makeuseof.com,important
-||g.doubleclick.net/pagead/managed/js/gpt/$script,domain=howtogeek.com|makeuseof.com,important
-||cdn.adsninja.ca/biddertypelibrary/$script,domain=xda-developers.com,important
-||imasdk.googleapis.com/js/sdkloader/ima3.js^$script,redirect=google-ima.js,domain=dualshockers.com|gamerant.com|xda-developers.com,important
-@@||cdn.adsninja.ca/adsninja_worker_caller.js$script,domain=dualshockers.com|gamerant.com|xda-developers.com
-@@||cdn.adsninja.ca/adsninja_client$script,css,domain=dualshockers.com|gamerant.com|xda-developers.com
-@@*$ghide,domain=dualshockers.com|gamerant.com|xda-developers.com
-dualshockers.com,gamerant.com,xda-developers.com##+js(set, Object.prototype.ads.nopreroll_, true)
-dualshockers.com,gamerant.com,xda-developers.com##[id^="adsninja-ad-zone-div-gpt-ad"]
-dualshockers.com,gamerant.com,xda-developers.com##[id^="adsninja-ad-zone-adsninja-ad-unit-footer"]
-dualshockers.com,gamerant.com,xda-developers.com##[class*="ad-zone-container-content-character-count-repeatable"]
-dualshockers.com,gamerant.com,xda-developers.com##.adzone-above-latest
-dualshockers.com,gamerant.com,xda-developers.com##.adsninja-ad-zone-container-with-set-height
 a2705 3
 eservice.directauto.com##+js(set, gtm, {})
 eservice.directauto.com##+js(set, gtm.trackEvent, noopFunc)
 ||imasdk.googleapis.com/js/sdkloader/ima3_debug.js$script,redirect=google-ima.js,domain=mais.sbt.com.br,important
-diff name:easylist lines:133 checksum:8de06c87c6
+diff name:easylist lines:133 checksum:fe8a602bfe
 d4 2
 a5 2
 ! Last modified: Tue, 27 Aug 2024 07:03:17 +0000
-! Diff-Path: ../patches/2024.8.27.441.patch#easylist
+! Diff-Path: ../patches/2024.8.27.764.patch#easylist
 a1188 2
 /Ads/bid300a.aspx
 /Ads/bid300b.aspx
@@ -343,11 +371,11 @@ pricespy.*##.StyledAdWrapper-sc-0-1
 a69861 2
 qz.com#?#div[class^="sc-"]:-abp-has(> div[is="bulbs-dfp"])
 qz.com#?#div[class^="sc-"]:-abp-has(> div[class="ad-unit"])
-diff name:easyprivacy lines:22 checksum:68647076de
+diff name:easyprivacy lines:22 checksum:0e2847f437
 d4 2
 a5 2
 ! Last modified: Tue, 27 Aug 2024 02:25:13 +0000
-! Diff-Path: ../patches/2024.8.27.441.patch#easyprivacy
+! Diff-Path: ../patches/2024.8.27.764.patch#easyprivacy
 a9273 1
 ||targetads.io^$third-party
 a9467 1

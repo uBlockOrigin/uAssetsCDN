@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Tue, 27 Aug 2024 06:43:17 +0000
-! Diff-Path: ../patches/2024.8.27.441.patch#ublock-filters
+! Last modified: Tue, 27 Aug 2024 11:56:35 +0000
+! Diff-Path: ../patches/2024.8.27.764.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -3041,13 +3041,6 @@ douploads.*##[href^="https://href.li/"]
 ||douploads.*/*sw$script,1p
 @@||douploads.*^$ghide
 douploads.*##a[rel="nofollow"]
-@@||v.fwmrm.net/ad/*$script,domain=funimation.com
-||mediausamns-a.akamaihd.net^$media,domain=funimation.com
-funimation.com##+js(json-prune, adRenderers)
-*$media,redirect=noopmp3-0.1s,domain=funimation.com
-@@||media.truex.com/integration/vpaid/com.truex.TrueXRenderer.js$script,domain=funimation.com
-@@||imasdk.googleapis.com/js/sdkloader/ima3.js$script,domain=funimation.com
-@@||pubads.g.doubleclick.net/gampad/ads*.funimation.com*player$xhr,domain=imasdk.googleapis.com
 autobild.de##+js(aopr, adSSetup)
 alimaniac.com##+js(aopr, document.cookie)
 hulkshare.com##+js(nosiif, adblockerModal, 1000)
@@ -3927,11 +3920,6 @@ worldsex.com##+js(aopr, document.dispatchEvent)
 worldsex.com###video_banner
 worldsex.com##div.da-by
 worldsex.com##.overlay
-@@||api.production.k8s.y3o.tv/*/video-ads$xhr,domain=yallo.tv
-@@||imasdk.googleapis.com/js/sdkloader/ima3.js$script,domain=yallo.tv
-||adservice.google.com^$script,redirect-rule=noopjs,domain=yallo.tv
-@@||secure.adnxs.com/ptv$xhr,domain=imasdk.googleapis.com
-imasdk.googleapis.com##+js(xml-prune, VAST, , adnxs)
 babesxworld.com,cocogals.com##+js(aopr, loadTool)
 babesxworld.com##+js(aopr, open)
 babesxworld.com##+js(aopr, document.dispatchEvent)
@@ -9205,6 +9193,15 @@ mkvcinemas.*##+js(rmnt, script, shown_at)
 mkvcinemas.*##+js(nowoif)
 *$script,3p,denyallow=googleapis.com,domain=mkvcinemas.*
 erogen.su##+js(aopr, document.dispatchEvent)
+@@||api.production.k8s.y3o.tv/*/video-ads$xhr,domain=yallo.tv
+@@||imasdk.googleapis.com/js/sdkloader/ima3.js$script,domain=yallo.tv
+||adservice.google.com^$script,redirect-rule=noopjs,domain=yallo.tv
+!#if ext_devbuild
+imasdk.googleapis.com##+js(no-fetch-if, secure.adnxs.com/ptv, war:noop-vast4.xml)
+!#else
+@@||secure.adnxs.com/ptv$xhr,domain=imasdk.googleapis.com
+imasdk.googleapis.com##+js(xml-prune, VAST, , adnxs)
+!#endif
 ! END: Rules from filters.txt
 ! START: Regional lists
 ! <<<<< czech slovak filters >>>>>
@@ -9810,7 +9807,7 @@ salidzini.lv##div[id][style^="width"]:has([id^="media_place_"])
 matrixserver.in##+js(acs, $, samNotice)
 vinstartheme.com##+js(no-fetch-if, googlesyndication)
 free-sms-receive.com,sms-receive-online.com##+js(nostif, adb)
-||cdn.pranmcpkx.com^$script,3p,redirect-rule=noopjs
+||cdn.pranmcpkx.com^$script,3p,redirect=noopjs
 fansubseries.com.br##+js(aopr, popUrl)
 pandadevelopment.net##+js(no-fetch-if, adsbygoogle)
 ||go.aff.7k-partners.com^$popup
@@ -10023,6 +10020,7 @@ vods.tv##+js(nostif, _ET)
 hdfilmcehennemi2.cx##+js(set-local-storage-item, adDisplayed, $remove$)
 jadoo.lol##+js(aopr, Promise.all)
 kfc.com##+js(no-fetch-if, jssdks.mparticle.com)
+@@||tao.barstoolsports.com/v2/i^$xhr,1p
 @@||htlbid.com/*/htlbid.js^$script,3p,domain=barstoolsports.com
 @@||imasdk.googleapis.com/js/sdkloader/ima3.js^$script,3p,domain=barstoolsports.com
 @@||pubads.g.doubleclick.net/gampad/ads?*barstoolsports.com$xhr,domain=imasdk.googleapis.com
@@ -10224,7 +10222,7 @@ safestream.cc##+js(acs, atob, /popundersPerIP[\s\S]*?Date[\s\S]*?getElementsByTa
 clifnewz.online##+js(nowoif)
 clifnewz.online##+js(aost, document.createElement, inlineScript)
 ! pirate sites asg
-*$script,xhr,3p,denyallow=bootstrapcdn.com|cloudflare.com|cloudflare.net|fontawesome.com|jquery.com|jsdelivr.net|rawgit.com,domain=armoniscans.top|bentomanga.top|bigcomics.bid|brmangas.top|cmoa.pro|hachiraw.top|j8jp.com|janime.top|jpraw.xyz|kakuyomu.in|kkraw.com|komiku.win|lectormanga.top|lermanga.top|manga1000.top|manga1001.win|manga1001.xyz|mangajp.top|mangakl.su|mangaraw.bid|mangavy.com|mangaz.win|scanita.top|shinigami-id.top|sushiscan.top|syosetu.gs
+*$script,xhr,3p,denyallow=bootstrapcdn.com|cloudflare.com|cloudflare.net|fastly.net|fontawesome.com|googleapis.com|htstreaming.com|jquery.com|jsdelivr.net|jwpcdn.com|rawgit.com|unpkg.com,domain=armoniscans.top|bentomanga.top|bigcomics.bid|brmangas.top|cmoa.pro|hachiraw.top|j8jp.com|janime.top|jpraw.xyz|kakuyomu.in|kkraw.com|komiku.win|lectormanga.top|lermanga.top|manga1000.top|manga1001.win|manga1001.xyz|mangajp.top|mangakl.su|mangaraw.bid|mangavy.com|mangaz.win|scanita.top|shinigami-id.top|sushiscan.top|syosetu.gs
 *$script,1p,strict3p,domain=armoniscans.top|bentomanga.top|bigcomics.bid|brmangas.top|cmoa.pro|hachiraw.top|j8jp.com|janime.top|jpraw.xyz|kakuyomu.in|kkraw.com|komiku.win|lectormanga.top|lermanga.top|manga1000.top|manga1001.win|manga1001.xyz|mangajp.top|mangakl.su|mangaraw.bid|mangavy.com|mangaz.win|scanita.top|shinigami-id.top|sushiscan.top|syosetu.gs
 ||tubator.com/lookout/wantfood.js
 tubator.com##+js(aeld, getexoloader)
@@ -10292,6 +10290,7 @@ thumpertalk.com##.ipsResponsive_block
 ##.fp-ui > a[href][target="_blank"][style^="position: absolute; inset: 0px;"]
 mitaku.net##+js(set, globalThis, null)
 therealdeal.com###trd-header:style(top: 0 !important;)
+therealdeal.com##body[data-pushdown-enabled="true"]:style(margin-top: 0px !important;)
 olympics.com###header-adv-banner:remove()
 *$xhr,redirect-rule=nooptext:-1,to=~fundingchoicesmessages.google.com|~sentry.io,domain=hackerrank.com
 watchdirty.to##+js(set, flashvars.protect_block, '')
@@ -10425,17 +10424,31 @@ jokersportshd.org,tennis.stream##+js(nowoif, /aff|jump/)
 101soundboards.com##[id^="rewarded_ad_"]:not(#rewarded_ad_blocker):style(display: block !important; visibility: visible !important;)
 101soundboards.com##+js(no-fetch-if, googlesyndication)
 101soundboards.com##+js(nano-stb, , 10000, 0.001)
+! myhindigk. com detection
+myhindigk.com##+js(noeval-if, ads)
+||cdn.adsninja.ca/biddertypelibrary/$script,domain=xda-developers.com,important
+||imasdk.googleapis.com/js/sdkloader/ima3.js^$script,redirect=google-ima.js,domain=androidpolice.com|cbr.com|collider.com|dualshockers.com|gamerant.com|howtogeek.com|makeuseof.com|movieweb.com|screenrant.com|thegamer.com|xda-developers.com,important
+@@||cdn.adsninja.ca/adsninja_worker_caller.js$script,domain=androidpolice.com|cbr.com|collider.com|dualshockers.com|gamerant.com|howtogeek.com|makeuseof.com|movieweb.com|screenrant.com|thegamer.com|xda-developers.com
+@@||cdn.adsninja.ca/adsninja_client$script,css,domain=androidpolice.com|cbr.com|collider.com|dualshockers.com|gamerant.com|howtogeek.com|movieweb.com|makeuseof.com|screenrant.com|thegamer.com|xda-developers.com
+@@*$ghide,domain=androidpolice.com|cbr.com|collider.com|dualshockers.com|gamerant.com|howtogeek.com|movieweb.com|makeuseof.com|screenrant.com|thegamer.com|xda-developers.com
+androidpolice.com,cbr.com,collider.com,dualshockers.com,gamerant.com,howtogeek.com,makeuseof.com,movieweb.com,screenrant.com,thegamer.com,xda-developers.com##+js(set, Object.prototype.ads.nopreroll_, true)
+androidpolice.com,cbr.com,collider.com,dualshockers.com,gamerant.com,howtogeek.com,makeuseof.com,movieweb.com,screenrant.com,thegamer.com,xda-developers.com##[id^="adsninja-ad-zone-div-gpt-ad"]
+androidpolice.com,cbr.com,collider.com,dualshockers.com,gamerant.com,howtogeek.com,makeuseof.com,movieweb.com,screenrant.com,thegamer.com,xda-developers.com##[id^="adsninja-ad-zone-adsninja-ad-unit-footer"]
+androidpolice.com,cbr.com,collider.com,dualshockers.com,gamerant.com,howtogeek.com,makeuseof.com,movieweb.com,screenrant.com,thegamer.com,xda-developers.com##[class*="ad-zone-container-content-character-count-repeatable"]
+androidpolice.com,cbr.com,collider.com,dualshockers.com,gamerant.com,howtogeek.com,makeuseof.com,movieweb.com,screenrant.com,thegamer.com,xda-developers.com##.adzone-above-latest
+androidpolice.com,cbr.com,collider.com,dualshockers.com,gamerant.com,howtogeek.com,makeuseof.com,movieweb.com,screenrant.com,thegamer.com,xda-developers.com##.adsninja-ad-zone-container-with-set-height
+movieweb.com,screenrant.com,thegamer.com#@#.video
 ! Link shortener filters go into their own dedicated list
 ! *** filters/ubo-link-shorteners.txt ***
 ! gplinks all domains (gplinks.co/EWu8)
-@@*$ghide,domain=gplinks.*|edulearnzone.com|mahayojna24.com|tallent.in|kakebale.com|mbjclub.in
-@@*$script,xhr,to=googlesyndication.com|doubleclick.net,from=edulearnzone.com|mahayojna24.com|tallent.in|kakebale.com|mbjclub.in
-@@||gplinks.in/track/$script,xhr,domain=gplinks.*|edulearnzone.com|mahayojna24.com|tallent.in|kakebale.com|mbjclub.in
-mbjclub.in,kakebale.com,tallent.in,mahayojna24.com,edulearnzone.com##center:others()
-mbjclub.in,kakebale.com,tallent.in,mahayojna24.com,edulearnzone.com###SmileyBanner:remove()
-mbjclub.in,kakebale.com,tallent.in,mahayojna24.com,edulearnzone.com##+js(aopw, AdBDetected)
-mbjclub.in,kakebale.com,tallent.in,mahayojna24.com,edulearnzone.com##+js(set, count, 0)
-mbjclub.in,kakebale.com,tallent.in,mahayojna24.com,edulearnzone.com##[id*="iframe"], [id*="gpt_unit"], [id*="div-gpt-"]:style(height:0.0001px !important;)
+@@*$ghide,domain=gplinks.*|mahayojna24.com|tallent.in|kakebale.com|mbjclub.in|naibahali.com
+@@*$script,xhr,to=googlesyndication.com|doubleclick.net,from=mahayojna24.com|tallent.in|kakebale.com|mbjclub.in|naibahali.com
+@@||gplinks.in/track/$script,xhr,domain=gplinks.*|mahayojna24.com|tallent.in|kakebale.com|mbjclub.in|naibahali.com
+naibahali.com,mbjclub.in,kakebale.com,tallent.in,mahayojna24.com##center:others()
+naibahali.com,mbjclub.in,kakebale.com,tallent.in,mahayojna24.com###SmileyBanner:remove()
+naibahali.com,mbjclub.in,kakebale.com,tallent.in,mahayojna24.com##+js(aopw, AdBDetected)
+naibahali.com,mbjclub.in,kakebale.com,tallent.in,mahayojna24.com##+js(set, count, 0)
+naibahali.com,mbjclub.in,kakebale.com,tallent.in,mahayojna24.com##[id*="iframe"], [id*="gpt_unit"], [id*="div-gpt-"]:style(height:0.0001px !important;)
 gplinks.*##a.exclude-pop.smartlink, .exclude-pop.quiz-container, #PlayQuiz, #quiz-frame, .exclude-popad
 ||gamezop.com^$domain=gplinks.*
 gplinks.*##+js(set, blurred, false)
@@ -11447,7 +11460,6 @@ gamereactor.asia,gamereactor.cn,gamereactor.cz,gamereactor.de,gamereactor.dk,gam
 ! player on clipx.tv
 xxxporns.org##.adBlock
 a-eroland.net,hhmanga.com,nyahentai.re##.__isboostReturnAd
-androidpolice.com,howtogeek.com,makeuseof.com,screenrant.com##.adsninja-ad-zone
 !----- 2023 -----
 facebook.com#?#div[data-status-bar-color] > div[data-mcomponent="MContainer"] > div[data-mcomponent="MContainer"]:has(> div[data-mcomponent="MContainer"] > div[data-mcomponent="MContainer"] div[data-mcomponent="TextArea"] .native-text > span:contains(/(Sponsored|Gesponsert|Sponsorlu|Sponsorowane|Ispoonsara godhameera|Geborg|Bersponsor|Ditaja|Disponsori|Giisponsoran|Sponzorováno|Sponsoreret|Publicidad|May Sponsor|Sponsorisée|Oipytyvôva|Ɗaukar Nayin|Sponzorirano|Uterwa inkunga|Sponsorizzato|Imedhaminiwa|Hirdetés|Misy Mpiantoka|Gesponsord|Sponset|Patrocinado|Patrocinado|Sponsorizat|Sponzorované|Sponsoroitu|Sponsrat|Được tài trợ|Χορηγούμενη|Спонсорирано|Спонзорирано|Ивээн тэтгэсэн|Реклама|Спонзорисано|במימון|سپانسرڈ|دارای پشتیبانی مالی|ስፖንሰር የተደረገ|प्रायोजित|ተደረገ|प|प्रायोजित|স্পনসর্ড|ਪ੍ਰਯੋਜਿਤ|પ્રાયોજિત|ପ୍ରାୟୋଜିତ|செய்யப்பட்ட செய்யப்பட்ட|చేయబడినది చేయబడినది|ಪ್ರಾಯೋಜಿಸಲಾಗಿದೆ|ചെയ്‌തത് ചെയ്‌തത്|ලද ලද ලද|สนับสนุน สนับสนุน รับ สนับสนุน สนับสนุน|ကြော်ငြာ ကြော်ငြာ|ឧបត្ថម្ភ ឧបត្ថម្ភ ឧបត្ថម្ភ|광고|贊助|赞助内容|広告|സ്‌പോൺസർ ചെയ്‌തത്)/)):not(:has([data-tracking-duration-id]))
 facebook.com#?#div[data-status-bar-color] > div[data-mcomponent="MContainer"] > div[data-mcomponent="MContainer"]:has(> div[data-mcomponent="MContainer"] > div[data-mcomponent="MContainer"] div[data-mcomponent="TextArea"] .native-text > span:contains(/(Sponsored|Gesponsert|Sponsorlu|Sponsorowane|Ispoonsara godhameera|Geborg|Bersponsor|Ditaja|Disponsori|Giisponsoran|Sponzorováno|Sponsoreret|Publicidad|May Sponsor|Sponsorisée|Oipytyvôva|Ɗaukar Nayin|Sponzorirano|Uterwa inkunga|Sponsorizzato|Imedhaminiwa|Hirdetés|Misy Mpiantoka|Gesponsord|Sponset|Patrocinado|Patrocinado|Sponsorizat|Sponzorované|Sponsoroitu|Sponsrat|Được tài trợ|Χορηγούμενη|Спонсорирано|Спонзорирано|Ивээн тэтгэсэн|Реклама|Спонзорисано|במימון|سپانسرڈ|دارای پشتیبانی مالی|ስፖንሰር የተደረገ|प्रायोजित|ተደረገ|प|प्रायोजित|স্পনসর্ড|ਪ੍ਰਯੋਜਿਤ|પ્રાયોજિત|ପ୍ରାୟୋଜିତ|செய்யப்பட்ட செய்யப்பட்ட|చేయబడినది చేయబడినది|ಪ್ರಾಯೋಜಿಸಲಾಗಿದೆ|ചെയ്‌തത് ചെയ്‌തത്|ලද ලද ලද|สนับสนุน สนับสนุน รับ สนับสนุน สนับสนุน|ကြော်ငြာ ကြော်ငြာ|ឧបត្ថម្ភ ឧបត្ថម្ភ ឧបត្ថម្ភ|광고|贊助|赞助内容|広告|സ്‌പോൺസർ ചെയ്‌തത്)/)):not(:has([data-tracking-duration-id])) + .m:is(.bg-s2, .bg-s3, .bg-s4):has(+ .m:is(.bg-s2, .bg-s3, .bg-s4) + .m:not(:has(.m:empty)))
@@ -22881,7 +22893,7 @@ audiotools.pro,audizine.com,blackenterprise.com,cheatsheet.com,cwtv.com,esportst
 familyminded.com,foxvalleyfoodie.com,merriam-webster.com,news.com.au,playstationlifestyle.net,sportsnaut.com,tempumail.com,toledoblade.com##+js(aopr, __cmpGdprAppliesGlobally)
 pc-builds.com,qtoptens.com,reuters.com,today.com,videogamer.com,wrestlinginc.com##+js(set, admiral, noopFunc)
 !#if cap_html_filtering
-abc17news.com,adoredbyalex.com,agrodigital.com,aliontherunblog.com,allaboutthetea.com,allmovie.com,allmusic.com,allthingsthrifty.com,amessagewithabottle.com,androidpolice.com,antyradio.pl,artforum.com,artnews.com,awkward.com,awkwardmom.com##^script:has-text('"v4ac1eiZr0"')
+abc17news.com,agrodigital.com,aliontherunblog.com,allaboutthetea.com,allmovie.com,allmusic.com,allthingsthrifty.com,amessagewithabottle.com,androidpolice.com,antyradio.pl,artforum.com,artnews.com,awkward.com,awkwardmom.com##^script:has-text('"v4ac1eiZr0"')
 bailiwickexpress.com,barnsleychronicle.com,becomingpeculiar.com,bethcakes.com,betweenenglandandiowa.com,blogher.com,bluegraygal.com,briefeguru.de##^script:has-text('"v4ac1eiZr0"')
 carmagazine.co.uk,cattime.com,cbr.com,celiacandthebeast.com,chaptercheats.com,collider.com,comingsoon.net,commercialobserver.com,competentedigitale.ro,crafty.house##^script:has-text('"v4ac1eiZr0"')
 dailyvoice.com,decider.com,didyouknowfacts.com,dogtime.com,dustyoldthing.com##^script:has-text('"v4ac1eiZr0"')
@@ -22900,9 +22912,9 @@ tablelifeblog.com,thebeautysection.com,thecelticblog.com,thecurvyfashionista.com
 viralviralvideos.com##^script:has-text('"v4ac1eiZr0"')
 wannacomewith.com,wimp.com,windsorexpress.co.uk,woojr.com,worldoftravelswithkids.com,worldsurfleague.com,xda-developers.com##^script:has-text('"v4ac1eiZr0"')
 cheatsheet.com,pwinsider.com##^script:has-text(admiral)
-247sports.com,al.com,cbsnews.com,cbssports.com,cleveland.com,indiewire.com,masslive.com,mlive.com,nj.com,nypost.com,oregonlive.com,pagesix.com,pennlive.com,rollingstone.com,syracuse.com##^script:has-text('"data-adm-url"')
+247sports.com,agrodigital.com,al.com,cbsnews.com,cbssports.com,cleveland.com,indiewire.com,masslive.com,mlive.com,news.com.au,nj.com,nypost.com,oregonlive.com,pagesix.com,pennlive.com,rollingstone.com,syracuse.com##^script:has-text('"").split(",")[4]')
 !#else
-abc17news.com,adoredbyalex.com,agrodigital.com,aliontherunblog.com,allaboutthetea.com,allmovie.com,allmusic.com,allthingsthrifty.com,amessagewithabottle.com,androidpolice.com,antyradio.pl,artforum.com,artnews.com,awkward.com,awkwardmom.com##+js(rmnt, script, '"v4ac1eiZr0"')
+abc17news.com,aliontherunblog.com,allaboutthetea.com,allmovie.com,allmusic.com,allthingsthrifty.com,amessagewithabottle.com,androidpolice.com,antyradio.pl,artforum.com,artnews.com,awkward.com,awkwardmom.com##+js(rmnt, script, '"v4ac1eiZr0"')
 bailiwickexpress.com,barnsleychronicle.com,becomingpeculiar.com,bethcakes.com,betweenenglandandiowa.com,blogher.com,bluegraygal.com,briefeguru.de##+js(rmnt, script, '"v4ac1eiZr0"')
 carmagazine.co.uk,cattime.com,cbr.com,celiacandthebeast.com,chaptercheats.com,collider.com,comingsoon.net,commercialobserver.com,competentedigitale.ro,crafty.house##+js(rmnt, script, '"v4ac1eiZr0"')
 dailyvoice.com,decider.com,didyouknowfacts.com,dogtime.com,dustyoldthing.com##+js(rmnt, script, '"v4ac1eiZr0"')
@@ -22921,7 +22933,7 @@ tablelifeblog.com,thebeautysection.com,thecelticblog.com,thecurvyfashionista.com
 viralviralvideos.com##+js(rmnt, script, '"v4ac1eiZr0"')
 wannacomewith.com,wimp.com,windsorexpress.co.uk,woojr.com,worldoftravelswithkids.com,worldsurfleague.com,xda-developers.com##+js(rmnt, script, '"v4ac1eiZr0"')
 cheatsheet.com,pwinsider.com##+js(rmnt, script, admiral)
-247sports.com,al.com,cbsnews.com,cbssports.com,cleveland.com,indiewire.com,masslive.com,mlive.com,nj.com,nypost.com,oregonlive.com,pagesix.com,pennlive.com,rollingstone.com,syracuse.com##+js(rmnt, script, '"data-adm-url"')
+247sports.com,agrodigital.com,al.com,cbsnews.com,cbssports.com,cleveland.com,indiewire.com,masslive.com,mlive.com,news.com.au,nj.com,nypost.com,oregonlive.com,pagesix.com,pennlive.com,rollingstone.com,syracuse.com##+js(rmnt, script, '"").split(",")[4]')
 !#endif
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$domain=givemesport.com,important
 superherohype.com##a.wp-block-button__link:is([href^="https://amzn.to/"], [href^="https://www.amazon.com/"])

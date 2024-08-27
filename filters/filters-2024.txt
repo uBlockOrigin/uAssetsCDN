@@ -1,5 +1,5 @@
 ! Title: uBlock filters (2024)
-! Last modified: Tue, 27 Aug 2024 04:00:16 +0000
+! Last modified: Tue, 27 Aug 2024 11:56:35 +0000
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -653,6 +653,18 @@ mkvcinemas.*##+js(nowoif)
 ! https://github.com/uBlockOrigin/uAssets/issues/6114
 ! https://github.com/uBlockOrigin/uAssets/issues/25026
 erogen.su##+js(aopr, document.dispatchEvent)
+
+! https://github.com/NanoMeow/QuickReports/issues/155
+! https://github.com/uBlockOrigin/uAssets/issues/16014
+@@||api.production.k8s.y3o.tv/*/video-ads$xhr,domain=yallo.tv
+@@||imasdk.googleapis.com/js/sdkloader/ima3.js$script,domain=yallo.tv
+||adservice.google.com^$script,redirect-rule=noopjs,domain=yallo.tv
+!#if ext_devbuild
+imasdk.googleapis.com##+js(no-fetch-if, secure.adnxs.com/ptv, war:noop-vast4.xml)
+!#else
+@@||secure.adnxs.com/ptv$xhr,domain=imasdk.googleapis.com
+imasdk.googleapis.com##+js(xml-prune, VAST, , adnxs)
+!#endif
 
 ! END: Rules from filters.txt
 
@@ -1823,7 +1835,7 @@ free-sms-receive.com,sms-receive-online.com##+js(nostif, adb)
 
 ! https://www.reddit.com/r/uBlockOrigin/comments/1c9d6mo/can_anyone_help_with_this_site/
 ! https://www.reddit.com/r/uBlockOrigin/comments/1cabylu/httpswwwpressdemocratcom/
-||cdn.pranmcpkx.com^$script,3p,redirect-rule=noopjs
+||cdn.pranmcpkx.com^$script,3p,redirect=noopjs
 
 ! https://github.com/AdguardTeam/AdguardFilters/issues/177528
 fansubseries.com.br##+js(aopr, popUrl)
@@ -2210,6 +2222,7 @@ kfc.com##+js(no-fetch-if, jssdks.mparticle.com)
 
 ! https://www.reddit.com/r/uBlockOrigin/comments/1d6he06/video_wont_play_on_barstool_sports/
 ! https://www.reddit.com/r/uBlockOrigin/comments/1d8wqdn/why_is_the_gvt1com_domain_blocked/
+@@||tao.barstoolsports.com/v2/i^$xhr,1p
 @@||htlbid.com/*/htlbid.js^$script,3p,domain=barstoolsports.com
 @@||imasdk.googleapis.com/js/sdkloader/ima3.js^$script,3p,domain=barstoolsports.com
 @@||pubads.g.doubleclick.net/gampad/ads?*barstoolsports.com$xhr,domain=imasdk.googleapis.com
@@ -2580,7 +2593,8 @@ clifnewz.online##+js(nowoif)
 clifnewz.online##+js(aost, document.createElement, inlineScript)
 
 ! pirate sites asg
-*$script,xhr,3p,denyallow=bootstrapcdn.com|cloudflare.com|cloudflare.net|fontawesome.com|jquery.com|jsdelivr.net|rawgit.com,domain=armoniscans.top|bentomanga.top|bigcomics.bid|brmangas.top|cmoa.pro|hachiraw.top|j8jp.com|janime.top|jpraw.xyz|kakuyomu.in|kkraw.com|komiku.win|lectormanga.top|lermanga.top|manga1000.top|manga1001.win|manga1001.xyz|mangajp.top|mangakl.su|mangaraw.bid|mangavy.com|mangaz.win|scanita.top|shinigami-id.top|sushiscan.top|syosetu.gs
+! https://github.com/uBlockOrigin/uAssets/issues/25065
+*$script,xhr,3p,denyallow=bootstrapcdn.com|cloudflare.com|cloudflare.net|fastly.net|fontawesome.com|googleapis.com|htstreaming.com|jquery.com|jsdelivr.net|jwpcdn.com|rawgit.com|unpkg.com,domain=armoniscans.top|bentomanga.top|bigcomics.bid|brmangas.top|cmoa.pro|hachiraw.top|j8jp.com|janime.top|jpraw.xyz|kakuyomu.in|kkraw.com|komiku.win|lectormanga.top|lermanga.top|manga1000.top|manga1001.win|manga1001.xyz|mangajp.top|mangakl.su|mangaraw.bid|mangavy.com|mangaz.win|scanita.top|shinigami-id.top|sushiscan.top|syosetu.gs
 *$script,1p,strict3p,domain=armoniscans.top|bentomanga.top|bigcomics.bid|brmangas.top|cmoa.pro|hachiraw.top|j8jp.com|janime.top|jpraw.xyz|kakuyomu.in|kkraw.com|komiku.win|lectormanga.top|lermanga.top|manga1000.top|manga1001.win|manga1001.xyz|mangajp.top|mangakl.su|mangaraw.bid|mangavy.com|mangaz.win|scanita.top|shinigami-id.top|sushiscan.top|syosetu.gs
 
 ! https://tubator.com/ (NSFW) ads
@@ -2711,6 +2725,7 @@ mitaku.net##+js(set, globalThis, null)
 
 ! https://therealdeal.com/ - placeholder
 therealdeal.com###trd-header:style(top: 0 !important;)
+therealdeal.com##body[data-pushdown-enabled="true"]:style(margin-top: 0px !important;)
 
 ! https://github.com/AdguardTeam/AdguardFilters/issues/184530
 olympics.com###header-adv-banner:remove()
@@ -2969,3 +2984,29 @@ jokersportshd.org,tennis.stream##+js(nowoif, /aff|jump/)
 101soundboards.com##[id^="rewarded_ad_"]:not(#rewarded_ad_blocker):style(display: block !important; visibility: visible !important;)
 101soundboards.com##+js(no-fetch-if, googlesyndication)
 101soundboards.com##+js(nano-stb, , 10000, 0.001)
+
+! myhindigk. com detection
+myhindigk.com##+js(noeval-if, ads)
+
+! https://github.com/uBlockOrigin/uAssets/issues/23937
+! https://github.com/uBlockOrigin/uAssets/issues/24930
+! https://github.com/uBlockOrigin/uAssets/issues/24985
+! https://www.xda-developers.com/youtube-as-storage-data-to-video/
+! https://www.androidpolice.com/video/is-the-htc-one-m8-the-best-phone-ever-made/
+! https://screenrant.com/video/jennifer-lawrence-cast-why-dont-you-love-me-movie-update/
+! https://www.cbr.com/video/marvel-comics-agatha-harkness-facts-trivia/
+! https://collider.com/video/lord-of-the-rings-most-important-battles/
+! https://movieweb.com/video/the-line-trailer-2024-movie/
+! https://www.thegamer.com/video/our-favorite-moments-from-gamescom-2024/
+||cdn.adsninja.ca/biddertypelibrary/$script,domain=xda-developers.com,important
+||imasdk.googleapis.com/js/sdkloader/ima3.js^$script,redirect=google-ima.js,domain=androidpolice.com|cbr.com|collider.com|dualshockers.com|gamerant.com|howtogeek.com|makeuseof.com|movieweb.com|screenrant.com|thegamer.com|xda-developers.com,important
+@@||cdn.adsninja.ca/adsninja_worker_caller.js$script,domain=androidpolice.com|cbr.com|collider.com|dualshockers.com|gamerant.com|howtogeek.com|makeuseof.com|movieweb.com|screenrant.com|thegamer.com|xda-developers.com
+@@||cdn.adsninja.ca/adsninja_client$script,css,domain=androidpolice.com|cbr.com|collider.com|dualshockers.com|gamerant.com|howtogeek.com|movieweb.com|makeuseof.com|screenrant.com|thegamer.com|xda-developers.com
+@@*$ghide,domain=androidpolice.com|cbr.com|collider.com|dualshockers.com|gamerant.com|howtogeek.com|movieweb.com|makeuseof.com|screenrant.com|thegamer.com|xda-developers.com
+androidpolice.com,cbr.com,collider.com,dualshockers.com,gamerant.com,howtogeek.com,makeuseof.com,movieweb.com,screenrant.com,thegamer.com,xda-developers.com##+js(set, Object.prototype.ads.nopreroll_, true)
+androidpolice.com,cbr.com,collider.com,dualshockers.com,gamerant.com,howtogeek.com,makeuseof.com,movieweb.com,screenrant.com,thegamer.com,xda-developers.com##[id^="adsninja-ad-zone-div-gpt-ad"]
+androidpolice.com,cbr.com,collider.com,dualshockers.com,gamerant.com,howtogeek.com,makeuseof.com,movieweb.com,screenrant.com,thegamer.com,xda-developers.com##[id^="adsninja-ad-zone-adsninja-ad-unit-footer"]
+androidpolice.com,cbr.com,collider.com,dualshockers.com,gamerant.com,howtogeek.com,makeuseof.com,movieweb.com,screenrant.com,thegamer.com,xda-developers.com##[class*="ad-zone-container-content-character-count-repeatable"]
+androidpolice.com,cbr.com,collider.com,dualshockers.com,gamerant.com,howtogeek.com,makeuseof.com,movieweb.com,screenrant.com,thegamer.com,xda-developers.com##.adzone-above-latest
+androidpolice.com,cbr.com,collider.com,dualshockers.com,gamerant.com,howtogeek.com,makeuseof.com,movieweb.com,screenrant.com,thegamer.com,xda-developers.com##.adsninja-ad-zone-container-with-set-height
+movieweb.com,screenrant.com,thegamer.com#@#.video
