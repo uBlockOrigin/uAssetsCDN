@@ -1,5 +1,5 @@
 ! Title: uBlock filters (2024)
-! Last modified: Thu, 29 Aug 2024 18:13:14 +0000
+! Last modified: Fri, 30 Aug 2024 00:59:58 +0000
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -666,6 +666,22 @@ imasdk.googleapis.com##+js(no-fetch-if, secure.adnxs.com/ptv, war:noop-vast4.xml
 imasdk.googleapis.com##+js(xml-prune, VAST, , adnxs)
 !#endif
 
+! https://github.com/uBlockOrigin/uAssets/issues/2449
+! https://github.com/AdguardTeam/AdguardFilters/issues/147765
+! https://github.com/uBlockOrigin/uAssets/issues/13169
+a2zapk.*##+js(acs, atob, decodeURIComponent)
+a2zapk.*##+js(aopr, AaDetector)
+a2zapk.*##+js(set, notifyMe, noopFunc)
+||a2zapk.*/js/notification.js
+@@||a2zupload.com^$ghide
+@@||googlesyndication.com/pagead/$script,domain=a2zupload.com
+@@*$image,domain=a2zupload.com
+a2zapk.*,a2zupload.com##ins.adsbygoogle
+a2zapk.*,educatiocenter.online##+js(acs, $, alertmsg)
+@@||dl.a2zapk.*/getred.php$xhr,domain=a2zapk.*|educatiocenter.online
+@@||tmp.a2zapk.*/js/advertisement/$frame,domain=a2zapk.*|educatiocenter.online
+||googlesyndication.com^$image,redirect-rule=1x1.gif,domain=a2zapk.*|educatiocenter.online
+
 ! END: Rules from filters.txt
 
 ! START: Regional lists
@@ -689,6 +705,7 @@ bydleni.cz###clickLeft
 
 ! https://github.com/uBlockOrigin/uAssets/issues/24614
 wiflix-catalogue.pro#@#a[href*=".php"]
+wiflix-catalogue.*##.btnnew
 
 ! <<<<< Oficjalne polskie filtry przeciwko alertom o Adblocku >>>>>
 ! https://www.reddit.com/r/uBlockOrigin/comments/1e6cknh/website_slow_my_down/
@@ -3049,3 +3066,12 @@ paste.fo##style:has-text(/background\: url\(https/):remove()
 
 ! https://www.reddit.com/r/uBlockOrigin/comments/1f3ui8r/adblock_detected/
 serviceemmc.com##+js(aopr, checkAdsStatus)
+
+! https://github.com/uBlockOrigin/uAssets/issues/25118
+! https://github.com/uBlockOrigin/uAssets/issues/25119
+cineplateforme.*,cpasfo.*##.g-buttons
+cineplateforme.*,cpasfo.*###cn-content
+
+! https://github.com/uBlockOrigin/uAssets/issues/22145
+.gif$image,domain=sadisflix.*
+sadisflix.*##a[href^="https://shorturl.at/"]
