@@ -1,16 +1,15 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Fri, 30 Aug 2024 15:23:48 +0000
-! Diff-Path: ../patches/2024.8.30.924.patch#ublock-filters
+! Last modified: Fri, 30 Aug 2024 19:43:10 +0000
+! Diff-Path: ../patches/2024.8.30.1225.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
 *_ad_$media,domain=youtube.com,3p
 ! @@||youtube.com/get_video_info?*timedtext_editor$xhr,1p
-tv.youtube.com##+js(trusted-replace-xhr-response, '"adPlacements"', '"no_ads"', /playlist\?list=|player(?:\?.+)?$|watch\?[tv]=/)
+tv.youtube.com##+js(trusted-replace-xhr-response, '"adPlacements"', '"no_ads"', /playlist\?list=|\/player(?:\?.+)?$|watch\?[tv]=/)
 !#if !cap_html_filtering
-www.youtube.com##+js(trusted-replace-xhr-response, /"adPlacements.*?([A-Z]"\}|"\}{2\,4})\}\]\,/, , /playlist\?list=|player(?:\?.+)?$|watch\?[tv]=/)
-www.youtube.com##+js(trusted-replace-xhr-response, /"adPlacements.*?("adSlots"|"adBreakHeartbeatParams")/gms, $1, /\/player(?:\?.+)?$/)
+www.youtube.com##+js(trusted-replace-xhr-response, /"adPlacements.*?([A-Z]"\}|"\}{2\,4})\}\]\,/, , /playlist\?list=|\/player(?:\?.+)?$|watch\?[tv]=/)
 www.youtube.com##+js(trusted-replace-xhr-response, /"adPlacements.*?("adSlots"|"adBreakHeartbeatParams")/gms, $1, /\/player(?:\?.+)?$/)
 www.youtube.com##+js(trusted-replace-fetch-response, /"adPlacements.*?([A-Z]"\}|"\}{2\,4})\}\]\,/, , player?)
 www.youtube.com##+js(trusted-replace-fetch-response, /"adSlots.*?\}\}\]\,"adBreakHeartbeatParams/, "adBreakHeartbeatParams, player?)
@@ -4812,6 +4811,11 @@ hdfriday.*##+js(aopr, open)
 extramovies.*##.textwidget > a[target="_blank"] > img
 extramovies.*##.stickyzone
 extramovies.*##.gridshow-header-img
+extramovies.*##a.ad_butn1
+hubcloud.*##.ads-btns
+hubcloud.*##.img-fluid
+||r2.dev^$image,domain=hubcloud.*
+||criticismdramavein.com^
 @@||googletagmanager.com/gtm.js$script,domain=ciudad.com.ar
 @@||imasdk.googleapis.com/js/sdkloader/ima3.js$script,domain=gameswf.com
 mangasail.*##+js(set, adblock, 1)
@@ -8770,6 +8774,8 @@ vidsrc.*##+js(nosiif, /0x|sandCheck/)
 vidsrc.*##+js(nowoif)
 vidsrc.*##+js(aopr, __Y)
 vidsrc.*##+js(aopr, AaDetector)
+vidsrc.*##+js(rmnt, script, adserverDomain)
+vidsrc.*##^script:has-text(/\{delete window\[/)
 vidsrc.*###pop_asdf
 ||vidsrc.pro/uwu-js^$script
 embed.smashystream.com###addiv
@@ -10342,7 +10348,8 @@ pawastreams.info##.adsbyadful
 pawastreams.info###adcash
 pawastreams.info###dismiss-btn
 autoembed.cc,whisperingauroras.com##+js(aopr, AaDetector)
-oaaxpgp3.xyz##+js(nowoif)
+autoembed.cc,oaaxpgp3.xyz##+js(nowoif)
+nontongo.win##+js(rmnt, script, popundersPerIP)
 oaaxpgp3.xyz##+js(acs, Math, localStorage['\x)
 ||lashahib.net^
 ||s0-greate.net^$3p
@@ -14095,7 +14102,7 @@ songspk.*##+js(aost, Object, /(?=^(?!.*(https)))/)
 ! ##+js(acs, document.createElement, ;}}};break;case $.)
 moviesnation.*##+js(acs, document.createElement, ;}}};break;case $.)
 ! ##+js(acs, EventTarget.prototype.addEventListener, delete window)
-advertisertape.com,animeyabu.org,lulustream.com,putlocker.*,sflix.*,streamtape.*,swiftload.io,subtitlecat.com,vidsrc.net,vidsrc.pm,ythd.org##+js(acs, EventTarget.prototype.addEventListener, delete window)
+9animetv.to,advertisertape.com,animeyabu.org,lulustream.com,movieshubweb.com,player.smashy.stream,putlocker.*,sflix.*,streamtape.*,swiftload.io,subtitlecat.com,vidsrc.*,ythd.org##+js(acs, EventTarget.prototype.addEventListener, delete window)
 atlaq.com,bolly4umovies.*,douploads.net,moalm-qudwa.blogspot.com,shurt.pw##+js(aopr, zfgformats)
 123movieshub.*,animeunity.*,bflix.*,cima-club.*,flixhq.*,hindilinks4u.*,mcloud.bz,t7meel.*,theflixer.tv,vidstream.pro##+js(aopr, zfgstorage)
 01fmovies.com,123moviesfun.is,bmovies.*,bolly4umovies.*,putlocker.*##+js(acs, Math, XMLHttpRequest)
@@ -14890,9 +14897,9 @@ cine-calidad.*##+js(aopw, adcashMacros)
 cine-calidad.*##+js(ra, href, #opfk)
 cine-calidad.*##.links
 cambb.xxx##.thumb div.ad:upward(.thumb)
-cambb.xxx##+js(no-xhr-if, googlesyndication)
-cambb.xxx##+js(set, adbPopup, noopFunc)
-cambb.xxx###adb
+cambb.xxx,nudecams.xxx##+js(no-xhr-if, googlesyndication)
+cambb.xxx,nudecams.xxx##+js(set, adbPopup, noopFunc)
+cambb.xxx,nudecams.xxx###adb
 embed.indavideo.hu##+js(set, AdHandler.adblocked, 0)
 sexgames.xxx##+js(aopr, loadTool)
 coinurl.net##+js(aopr, app_vars.force_disable_adblock)
@@ -17770,7 +17777,7 @@ myflixertv.to##.modal
 myflixertv.to##.modal-backdrop
 etsy.com##body.no-touch li.wt-list-unstyled div.v2-listing-card__info > div.wt-text-caption.wt-text-grey > span:not(.wt-icon):not([aria-role]):matches-css(display:inline-block):has-text(/^Ad/i):upward(li):remove()
 etsy.com##li:not(#ad-ubo) .listing-link[href*="ref=sc_gallery"]:upward(li)
-www.etsy.com##ol[data-results-grid-container] > li > div:not([data-appears-event-data*="listing_ids"]):not([data-appears-component-name="search2_organic_listings_group"])
+www.etsy.com##[data-results-grid-container] > li > div:not([data-appears-event-data*="listing_ids"]):not([data-appears-component-name="search2_organic_listings_group"])
 techhelpbd.com##+js(nano-sib, counter--)
 techhelpbd.com##.THBD-Ads
 techhelpbd.com##.pum-overlay
@@ -21999,7 +22006,7 @@ androidadult.com##+js(set, chp_adblock_browser, noopFunc)
 adultcomixxx.com##+js(noeval-if, chp_ad)
 adultcomixxx.com##.adsnative
 ! ||bytro.com^$image,domain=supremacy1914.*
-oneupload.to##+js(set, cRAds, false)
+oneupload.to,oneupload.online##+js(set, cRAds, false)
 *$script,3p,denyallow=cloudflare.com|fastly.net|gstatic.com|jwpcdn.com,domain=oneupload.to
 streamvid.net##+js(nowoif)
 streamvid.net##+js(nano-stb, , , 0.02)
@@ -22406,10 +22413,12 @@ empire-anime.*,empire-stream.*,empire-streaming.*,empire-streamz.*##+js(set, emp
 empire-anime.*,empire-stream.*,empire-streaming.*,empire-streamz.*##+js(set, empire.directHideAds, undefined)
 empire-anime.*,empire-stream.*,empire-streaming.*,empire-streamz.*##+js(rpnt, script, /data: \[.*\]\,/, data: []\,, condition, ads_num)
 empire-anime.*,empire-stream.*,empire-streaming.*,empire-streamz.*##+js(nano-stb, (!1), *)
+!#if !ext_ubol
 empire-anime.*,empire-stream.*,empire-streaming.*,empire-streamz.*##+js(nowoif)
+!#endif
 empire-anime.*,empire-stream.*,empire-streaming.*,empire-streamz.*##+js(no-xhr-if, pagead2.googlesyndication.com)
 /iframe_ad$csp=sandbox allow-forms allow-same-origin allow-scripts allow-modals allow-orientation-lock allow-pointer-lock allow-presentation allow-top-navigation,1p,domain=empire-anime.*|empire-stream.*|empire-streaming.*|empire-streamz.*
-empire-anime.*##+js(set, empire.mediaData.advisorMovie, 0)
+empire-anime.*##+js(set, empire.mediaData.advisorMovie, 1)
 empire-anime.*##+js(set, empire.mediaData.advisorSerie, 1)
 steamcrackedgames.com##[href^="https://startgaming.net/"]
 steamcrackedgames.com##.blink
