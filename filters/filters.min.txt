@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Sat, 31 Aug 2024 06:43:20 +0000
-! Diff-Path: ../patches/2024.8.31.680.patch#ublock-filters
+! Last modified: Sat, 31 Aug 2024 15:17:49 +0000
+! Diff-Path: ../patches/2024.8.31.990.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -9907,9 +9907,9 @@ zee5.com##+js(json-prune-fetch-response, adDetails, , propsToMatch, /secure?)
 zee5.com##.vjs-control-bar:style(display: flex !important;)
 thejakartapost.com##.tjp-single__content-ads:remove()
 ||adconfig.ster.nl/adurl$xhr,3p,domain=nos.nl
-$frame,csp=sandbox allow-downloads allow-forms allow-same-origin allow-scripts,to=~buymeacoffee.com|~chatango.com|~cloudflare.com|~dailymotion.com|~discord.com|~disqus.com|~edgecastcdn.net|~emturbovid.com|~facebook.com|~frembed.*|~google.*|~hcaptcha.com|~mixdrop.*|~ok.ru|~recaptcha.net|~twitter.com|~vidmoly.*|~vixcloud.co|~youtu.be|~youtube.com|~x.com,from=1jour1film.*|animefever.cc|animeunity.to|bluphim.*|detodopeliculas.nu|hianime.to|kaas.ro|kickassanime.*|kipflix.vercel.app|kissanime.*|phimmoifhd.com|seriescultes.store|soccerinhd.com|xsportbox.com
+$frame,csp=sandbox allow-downloads allow-forms allow-same-origin allow-scripts,to=~buymeacoffee.com|~cbox.ws|~chatango.com|~cloudflare.com|~dailymotion.com|~discord.com|~disqus.com|~edgecastcdn.net|~emturbovid.com|~facebook.com|~frembed.*|~google.*|~hcaptcha.com|~mixdrop.*|~ok.ru|~recaptcha.net|~twitter.com|~vidmoly.*|~vixcloud.co|~youtu.be|~youtube.com|~x.com,from=1jour1film.*|animefever.cc|animeunity.to|bluphim.*|dailypudding.com|detodopeliculas.nu|hianime.to|kaas.ro|kickassanime.*|kipflix.vercel.app|kissanime.*|phimmoifhd.com|seriescultes.store|soccerinhd.com|visualnewshub.com|xsportbox.com
 !#if env_firefox
-$frame,csp=sandbox allow-downloads allow-forms allow-same-origin allow-scripts,to=~buymeacoffee.com|~chatango.com|~cloudflare.com|~dailymotion.com|~discord.com|~disqus.com|~edgecastcdn.net|~emturbovid.com|~facebook.com|~frembed.*|~google.*|~hcaptcha.com|~mixdrop.*|~ok.ru|~recaptcha.net|~twitter.com|~vidmoly.*|~vixcloud.co|~youtu.be|~youtube.com|~x.com,from=antennasports.ru|dlhd.so|euro2024direct.ru
+$frame,csp=sandbox allow-downloads allow-forms allow-same-origin allow-scripts,to=~buymeacoffee.com|~cbox.ws|~chatango.com|~cloudflare.com|~dailymotion.com|~discord.com|~disqus.com|~edgecastcdn.net|~emturbovid.com|~facebook.com|~frembed.*|~google.*|~hcaptcha.com|~mixdrop.*|~ok.ru|~recaptcha.net|~twitter.com|~vidmoly.*|~vixcloud.co|~youtu.be|~youtube.com|~x.com,from=antennasports.ru|dlhd.so|euro2024direct.ru
 !#endif
 euro2024direct.ru##+js(acs, document.createElement, break;case)
 ###video_player ~ div[id] div[style^="position:fixed;inset:0px;z-index:"]
@@ -10400,10 +10400,10 @@ hancinema.net##.ad_300x600_300x250
 webnovelworld.org##:is(#chapter-container, .comment-list, .container, .rank-novels) > div[class]:has(> [id^="pf-"])
 ! help.sakarnewz. com detection
 help.sakarnewz.com##+js(rmnt, script, googlesyndication)
-btv.bg###leading_video_player_autoplay_wrapper:remove()
-btv.bg###leading_video_player_autoplay_main_wrapper:style(display: block !important;)
-btv.bg##.vjs-continue-watching-bar
-||imasdk.googleapis.com/js/sdkloader/ima3.js$script,redirect=google-ima.js,domain=btv.bg
+btv.bg,btvnovinite.bg,btvsport.bg###leading_video_player_autoplay_wrapper:remove()
+btv.bg,btvnovinite.bg,btvsport.bg###leading_video_player_autoplay_main_wrapper:style(display: block !important;)
+btv.bg,btvnovinite.bg,btvsport.bg##.vjs-continue-watching-bar
+||imasdk.googleapis.com/js/sdkloader/ima3.js$script,redirect=google-ima.js,domain=btv.bg|btvnovinite.bg|btvsport.bg
 !#if cap_html_filtering
 sexwebvideo.com,sexwebvideo.net##^script:has-text(detectAdBlock)
 !#else
@@ -10482,6 +10482,9 @@ interactivemap.app##.sidebar-tabs-panels:style(max-height: 700px !important;)
 ||adobedtm.com^*-source.min.js$script,domain=plasticsnews.com,important
 plasticsnews.com##[class*="has-interstitial-ads"]:remove-class(/^has-interstitial-ads/)
 plasticsnews.com##body.has-interstitial-ads .has-interstitial-ads-page, body.has-interstitial-ads .has-interstitial-ads-page *:style(visibility: visible !important;)
+! watchwrestlingup. org ads
+educ4m.com,fromwatch.com,visualnewshub.com##+js(rmnt, script, popundersPerIP)
+pak-mcqs.net##+js(aopw, _pop)
 ! Link shortener filters go into their own dedicated list
 ! *** filters/ubo-link-shorteners.txt ***
 ! gplinks all domains (gplinks.co/EWu8)
@@ -17683,7 +17686,6 @@ rabbitstream.net##+js(set, console.clear, undefined)
 himovies.*##+js(nowoif)
 ||ezzmmvzleavnj.top^
 ||i.imgur.com/*.gif$image,domain=rabbitstream.net
-rockmods.net##+js(acs, String.prototype.charCodeAt, protected_links)
 ! pastemytxt.com popup, ad
 ||pastemytxt.com/downloadad.jpg
 ||imgbox.com^$domain=pastemytxt.com
