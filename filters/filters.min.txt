@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Sun, 01 Sep 2024 07:01:37 +0000
-! Diff-Path: ../patches/2024.9.1.440.patch#ublock-filters
+! Last modified: Sun, 01 Sep 2024 09:48:23 +0000
+! Diff-Path: ../patches/2024.9.1.761.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -8908,10 +8908,10 @@ jav.guru###text-92
 jav.guru###text-93
 /cdn-cgi/trace$xhr,1p,domain=abysscdn.com|playhydrax.com
 abysscdn.com##div[style*="z-index:100000"]
-abysscdn.com##+js(aopr, document.onclick)
-abysscdn.com##+js(aopr, document.ontouchend)
 abysscdn.com##.playover
-abysscdn.com###overlay
+abysscdn.com,playhydrax.com##+js(set, document.ontouchend, null)
+abysscdn.com,playhydrax.com##+js(set, document.onclick, null)
+abysscdn.com,playhydrax.com###overlay
 playhydrax.com##+js(rpnt, script, (isNoAds), (true))
 @@*$ghide,domain=kimcartoon.*|kisscartoon.se|kc.linksgen.com
 kimcartoon.*###disAdb1
@@ -9261,7 +9261,7 @@ tubereader.me##+js(nostif, /adblock/i)
 counterstrike-hack.leforum.eu,ajt.xooit.org##+js(aopr, document.body.style.backgroundPosition)
 ! ludwig-van .com anti-adb
 ludwig-van.com##+js(aopr, canRunAds)
-||imasdk.googleapis.com/js/sdkloader/ima3.js$script,redirect-rule=google-ima.js,domain=broncos.com.au|bulldogs.com.au|cowboys.com.au|dolphinsnrl.com.au|dragons.com.au|melbournestorm.com.au|newcastleknights.com.au|nswrl.com.au|parraeels.com.au|penrithpanthers.com.au|qrl.com.au|raiders.com.au|roosters.com.au|seaeagles.com.au|sharks.com.au|titans.com.au|warriors.kiwi|weststigers.com.au
+||imasdk.googleapis.com/js/sdkloader/ima3.js$script,redirect=google-ima.js,domain=broncos.com.au|bulldogs.com.au|cowboys.com.au|dolphinsnrl.com.au|dragons.com.au|melbournestorm.com.au|newcastleknights.com.au|nswrl.com.au|parraeels.com.au|penrithpanthers.com.au|qrl.com.au|raiders.com.au|roosters.com.au|seaeagles.com.au|sharks.com.au|titans.com.au|warriors.kiwi|weststigers.com.au
 @@*$ghide,domain=broncos.com.au|bulldogs.com.au|cowboys.com.au|dolphinsnrl.com.au|dragons.com.au|melbournestorm.com.au|newcastleknights.com.au|nswrl.com.au|parraeels.com.au|penrithpanthers.com.au|qrl.com.au|raiders.com.au|roosters.com.au|seaeagles.com.au|sharks.com.au|titans.com.au|warriors.kiwi|weststigers.com.au
 ! zxi.mytechroad .com anti-adb
 zxi.mytechroad.com##+js(aost, document.getElementsByTagName, adsBlocked)
@@ -9283,7 +9283,7 @@ restegourmet.de##ion-col:has(> app-content-ad-grid)
 restegourmet.de##+js(nano-sib, invoke, 1000)
 plex-guide.de##+js(nostif, nextFunction, 2000)
 @@||yad.com^$ghide
-||imasdk.googleapis.com/js/sdkloader/ima3.js$script,redirect-rule=google-ima.js,domain=yad.com
+||imasdk.googleapis.com/js/sdkloader/ima3.js$script,redirect=google-ima.js,domain=yad.com
 pressplay.top##.btn-custom[target="_blank"]
 ! an1.com
 an1.com##+js(nano-stb, countdown, *)
@@ -9422,7 +9422,7 @@ fullboys.com##+js(nowoif, ?key=)
 madaradex.org##+js(rmnt, script, deblocker)
 vanillatweaks.net##.banner-spot
 vanillatweaks.net##+js(nano-sib, downloadTimer)
-infinityscans.xyz,infinityscans.net##+js(rpnt, script, /^.*window\['stop'\]\(\)\);}\(\)\);$/m)
+infinityscans.xyz,infinityscans.net##+js(rpnt, script, /\(function\(\)\{var.*?\)\(\)\}\)\(\)/, , condition, throw)
 infinityscans.xyz,infinityscans.net##+js(nowoif)
 ! linkos. info/photogen. hair/sharedrive. yachts popups
 linkos.info,photogen.hair,sharedrive.*##+js(nowoif)
@@ -17753,7 +17753,7 @@ seopolarity.com##.sidebar_adds
 mmorpg.org.pl##+js(no-fetch-if, wtg-ads)
 mmorpg.org.pl##div.bABcMb.sc-5odcub-0
 hostmath.com##+js(set, canRunAds, true)
-hdmovie20.com##+js(ra, href, #clickfakeplayer)
+hdmovie2.*,hdmovie20.com,hdmovie22.com###clickfakeplayer[href]:remove-attr(href)
 playmyopinion.com##+js(acs, $, modal)
 ! xvideos.wptri.com popup
 xvideos.wptri.com##+js(nowoif)
@@ -19068,7 +19068,6 @@ veryfreeporn.com##^script:has-text(popMagic)
 veryfreeporn.com##.js-mob-popup
 uporn.icu##+js(acs, decodeURI, decodeURIComponent)
 @@||imasdk.googleapis.com/js/sdkloader/ima3.js$script,domain=goodstream.*
-hdmovie2.*##+js(ra, href, #clickfakeplayer)
 ! moviewatch .com.pk ads
 moviewatch.com.pk##+js(aopw, atOptions)
 moviewatch.com.pk##+js(acs, document.createElement, appendChild)
@@ -22980,7 +22979,7 @@ audiotools.pro,audizine.com,blackenterprise.com,cheatsheet.com,cwtv.com,esportst
 familyminded.com,foxvalleyfoodie.com,merriam-webster.com,news.com.au,playstationlifestyle.net,sportsnaut.com,tempumail.com,toledoblade.com##+js(aopr, __cmpGdprAppliesGlobally)
 pc-builds.com,qtoptens.com,reuters.com,today.com,videogamer.com,wrestlinginc.com##+js(set, admiral, noopFunc)
 !#if cap_html_filtering
-abc17news.com,allmusic.com,allthingsthrifty.com,amessagewithabottle.com,androidpolice.com,antyradio.pl,artforum.com,artnews.com,awkward.com,awkwardmom.com##^script:has-text('"v4ac1eiZr0"')
+abc17news.com,allthingsthrifty.com,amessagewithabottle.com,androidpolice.com,antyradio.pl,artforum.com,artnews.com,awkward.com,awkwardmom.com##^script:has-text('"v4ac1eiZr0"')
 bailiwickexpress.com,barnsleychronicle.com,becomingpeculiar.com,bethcakes.com,betweenenglandandiowa.com,blogher.com,bluegraygal.com,briefeguru.de##^script:has-text('"v4ac1eiZr0"')
 carmagazine.co.uk,cattime.com,cbr.com,celiacandthebeast.com,chaptercheats.com,collider.com,comingsoon.net,commercialobserver.com,competentedigitale.ro,crafty.house##^script:has-text('"v4ac1eiZr0"')
 dailyvoice.com,decider.com,didyouknowfacts.com,dogtime.com,dustyoldthing.com##^script:has-text('"v4ac1eiZr0"')
@@ -22999,9 +22998,9 @@ tablelifeblog.com,thebeautysection.com,thecelticblog.com,thecurvyfashionista.com
 viralviralvideos.com##^script:has-text('"v4ac1eiZr0"')
 wannacomewith.com,wimp.com,windsorexpress.co.uk,woojr.com,worldoftravelswithkids.com,worldsurfleague.com,xda-developers.com##^script:has-text('"v4ac1eiZr0"')
 cheatsheet.com,pwinsider.com##^script:has-text(admiral)
-247sports.com,agrodigital.com,al.com,aliontherunblog.com,allaboutthetea.com,allmovie.com,cbsnews.com,cbssports.com,cleveland.com,indiewire.com,knowyourmeme.com,masslive.com,mlive.com,nbcsports.com,news.com.au,nj.com,nypost.com,oregonlive.com,pagesix.com,pennlive.com,rollingstone.com,sbnation.com,syracuse.com##^script:has-text('"").split(",")[4]')
+247sports.com,agrodigital.com,al.com,aliontherunblog.com,allaboutthetea.com,allmovie.com,allmusic.com,cbsnews.com,cbssports.com,cleveland.com,eater.com,indiewire.com,knowyourmeme.com,masslive.com,mlive.com,nbcsports.com,news.com.au,nj.com,nypost.com,oregonlive.com,pagesix.com,pennlive.com,rollingstone.com,sbnation.com,syracuse.com##^script:has-text('"").split(",")[4]')
 !#else
-abc17news.com,allmusic.com,allthingsthrifty.com,amessagewithabottle.com,androidpolice.com,antyradio.pl,artforum.com,artnews.com,awkward.com,awkwardmom.com##+js(rmnt, script, '"v4ac1eiZr0"')
+abc17news.com,allthingsthrifty.com,amessagewithabottle.com,androidpolice.com,antyradio.pl,artforum.com,artnews.com,awkward.com,awkwardmom.com##+js(rmnt, script, '"v4ac1eiZr0"')
 bailiwickexpress.com,barnsleychronicle.com,becomingpeculiar.com,bethcakes.com,betweenenglandandiowa.com,blogher.com,bluegraygal.com,briefeguru.de##+js(rmnt, script, '"v4ac1eiZr0"')
 carmagazine.co.uk,cattime.com,cbr.com,celiacandthebeast.com,chaptercheats.com,collider.com,comingsoon.net,commercialobserver.com,competentedigitale.ro,crafty.house##+js(rmnt, script, '"v4ac1eiZr0"')
 dailyvoice.com,decider.com,didyouknowfacts.com,dogtime.com,dustyoldthing.com##+js(rmnt, script, '"v4ac1eiZr0"')
@@ -23020,7 +23019,7 @@ tablelifeblog.com,thebeautysection.com,thecelticblog.com,thecurvyfashionista.com
 viralviralvideos.com##+js(rmnt, script, '"v4ac1eiZr0"')
 wannacomewith.com,wimp.com,windsorexpress.co.uk,woojr.com,worldoftravelswithkids.com,worldsurfleague.com,xda-developers.com##+js(rmnt, script, '"v4ac1eiZr0"')
 cheatsheet.com,pwinsider.com##+js(rmnt, script, admiral)
-247sports.com,agrodigital.com,al.com,aliontherunblog.com,allaboutthetea.com,allmovie.com,cbsnews.com,cbssports.com,cleveland.com,indiewire.com,knowyourmeme.com,masslive.com,mlive.com,nbcsports.com,news.com.au,nj.com,nypost.com,oregonlive.com,pagesix.com,pennlive.com,rollingstone.com,sbnation.com,syracuse.com##+js(rmnt, script, '"").split(",")[4]')
+247sports.com,agrodigital.com,al.com,aliontherunblog.com,allaboutthetea.com,allmovie.com,allmusic.com,cbsnews.com,cbssports.com,cleveland.com,eater.com,indiewire.com,knowyourmeme.com,masslive.com,mlive.com,nbcsports.com,news.com.au,nj.com,nypost.com,oregonlive.com,pagesix.com,pennlive.com,rollingstone.com,sbnation.com,syracuse.com##+js(rmnt, script, '"").split(",")[4]')
 !#endif
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$domain=givemesport.com,important
 superherohype.com##a.wp-block-button__link:is([href^="https://amzn.to/"], [href^="https://www.amazon.com/"])
@@ -23699,6 +23698,7 @@ sonixgvn.net##+js(aeld, DOMContentLoaded, overlays)
 ||sonixgvn.net/cdn-cgi/zaraz/s.js^$script,1p,important
 ||sonixgvn.net/wp-content/plugins/adrotate/$script,1p,important
 ||sonixgvn.net/cdn-cgi/apps/head/$script,1p,important
+||cdn.vlitag.com^$script,domain=sonixgvn.net,redirect=noopjs
 ! basketballbuzz .ca anti-adb
 basketballbuzz.ca##+js(rmnt, script, deblocker)
 ! dribbblegraphics .com anti-adb
