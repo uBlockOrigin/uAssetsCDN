@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Wed, 04 Sep 2024 10:05:53 +0000
-! Diff-Path: ../patches/2024.9.4.627.patch#ublock-filters
+! Last modified: Wed, 04 Sep 2024 14:53:51 +0000
+! Diff-Path: ../patches/2024.9.4.925.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -5018,6 +5018,7 @@ cambro.tv##[href^="https://t.grtya.com/"]
 ||widgets.skyprivate.com/promo/$frame
 cambro.tv##+js(set, flashvars.logo_url, '')
 cambro.tv##+js(set, flashvars.logo_text, '')
+cambro.tv##+js(acs, document.querySelectorAll, popMagic)
 nibelungen-kurier.de##+js(set, nlf.custom.userCapabilities, false)
 coolsoft.altervista.org##+js(nostif, _0x)
 coolsoft.altervista.org###block-block-30
@@ -6538,7 +6539,6 @@ hentaihere.com##.js-adzone
 secretsdujeu.com##+js(acs, document.getElementById, adsrefresh)
 ||googlesyndication.com/pagead/$script,redirect=noopjs,domain=iptvdroid1.blogspot.com
 cruisingearth.com##+js(nostif, show)
-@@/wutime$script,1p
 @@||roanoke.com^$ghide
 roanoke.com##.dfp-ad
 afilmywap.*,okhatrimaza.*##+js(popads-dummy)
@@ -9184,7 +9184,13 @@ a2zapk.*,educatiocenter.online##+js(acs, $, alertmsg)
 ||googlesyndication.com^$image,redirect-rule=1x1.gif,domain=a2zapk.*|educatiocenter.online
 @@||virginmediatelevision.ie/player/$xhr,1p
 @@||virginmediatelevision.ie/includes/js/cookienotice.js.pagespeed.$script,1p
+!#if ext_devbuild
+!#if cap_html_filtering
 play.virginmediatelevision.ie##+js(json-prune, avails)
+||amazonaws.com/v1/dash/$replace=/<Period[^\n]+\n[^<]+<BaseURL>https:\/\/vod-virginmedia-ssai.+?<\/Period>//gms,domain=play.virginmediatelevision.ie
+||amazonaws.com/v1/dash/$replace=/(?:mediaPresentationDuration|start)="[^"]+"//g,domain=play.virginmediatelevision.ie
+!#endif
+!#endif
 ! END: Rules from filters.txt
 ! START: Regional lists
 ! <<<<< czech slovak filters >>>>>
