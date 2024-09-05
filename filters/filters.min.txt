@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Thu, 05 Sep 2024 15:59:26 +0000
-! Diff-Path: ../patches/2024.9.5.990.patch#ublock-filters
+! Last modified: Thu, 05 Sep 2024 19:51:00 +0000
+! Diff-Path: ../patches/2024.9.5.1282.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -7073,12 +7073,13 @@ desired.de##+js(ra, data-ivad-preroll-adtag, video, stay)
 ||stern.de/__assets/homad
 ||static.kicker.de/content/js/vendor/homad
 spiegel.de##^script:has-text(homad)
-welt.de,~dutyfarm.welt.de##+js(json-prune, vastUrl)
-welt.de,~dutyfarm.welt.de##div[id][style^="z-index: 2"][style*="margin"][style*="auto"][style*="top"][style$="px; position: absolute;"]:remove()
 giga.de,kino.de,spieletipps.de##+js(rpnt, script, /\"homad\"\,/)
 t-online.de##+js(rpnt, script, /\"homad\":\{\"state\":\"enabled\"\}/, "homad":{"state":"disabled"})
 !#if !cap_html_filtering
+welt.de,~dutyfarm.welt.de##div[id][style^="z-index: 2"][style*="margin"][style*="auto"][style*="top"][style$="px; position: absolute;"]:remove()
 spiegel.de##+js(rmnt, script, homad)
+!#else
+||welt.de/homadConfigEnabled.json$xhr,replace=/"enabled":true/"enabled":false/
 !#endif
 plus.rtl.de##+js(json-prune, adReinsertion)
 tvspielfilm.de,tvtoday.de,chip.de,focus.de##+js(set, DL8_GLOBALS.enableAdSupport, false)
@@ -10487,6 +10488,7 @@ boundingintocomics.com,themix.net##h1:style(margin-top:20px !important;)
 boundingintocomics.com,themix.net##main[role="main"]:style(margin-top:30px !important;)
 zeemoontv-24.blogspot.com##+js(rmnt, script, antiAdBlockerHandler)
 zeeplayer.pages.dev##+js(aopr, antiAdBlockerHandler)
+drakecomic.com##+js(set, checkAdBlocker, noopFunc)
 ! Link shortener filters go into their own dedicated list
 ! *** filters/ubo-link-shorteners.txt ***
 ! gplinks all domains (gplinks.co/EWu8)
@@ -22761,6 +22763,7 @@ sotwe.com##.tweet-card .v-responsive.media-carousel-image .v-responsive__content
 *$frame,redirect-rule=noopframe,domain=megaup.net
 download.megaup.net##a img:not([src="images/main_logo_inverted.png"]):matches-css(height: /^([2-4]{1}[0-9]{2}(\.[0-9]+)?px|0px)$/):style(visibility: hidden !important;)
 download.megaup.net##+js(spoof-css, a img:not([src="images/main_logo_inverted.png"]), visibility, visible)
+download.megaup.net##+js(rpnt, script, /for\s*\(\s*(const|let|var).*?;return;\}\}.*?;return;.*?;return;\}/g, , condition, attribute)
 @@||megaup.net/imageads/$image,1p
 @@||download.megaup.net^$script,1p
 player.theplatform.com##+js(disable-newtab-links)
