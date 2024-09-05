@@ -1,5 +1,5 @@
 ! Title: uBlock filters – Link shorteners
-! Last modified: Tue, 03 Sep 2024 16:56:23 +0000
+! Last modified: Thu, 05 Sep 2024 15:59:26 +0000
 ! Expires: 5 days
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Homepage: https://github.com/uBlockOrigin/uAssets
@@ -280,16 +280,24 @@ gadgetsreview27.com,newsbawa.com##center:others()
 gadgetsreview27.com,newsbawa.com##+js(nano-sib, /.?/, *, 0.02)
 
 ! https://github.com/uBlockOrigin/uAssets/pull/20826 (fc-lc.com/82YkvH)
-/js/nt.js$domain=fc-lc.xyz|tmail.io
+! https://github.com/uBlockOrigin/uAssets/issues/25210
+/nt.js$domain=fc-lc.xyz|tmail.io|fitdynamos.com
 fc-lc.*##+js(aeld, , /_blank/i)
-tmail.io##+js(aopw, detectAdblock)
+tmail.io,fitdynamos.com##+js(aopw, detectAdblock)
+fitdynamos.com##+js(set, document.hidden, false)
+fitdynamos.com##+js(set, document.hasFocus, trueFunc)
+fitdynamos.com##+js(aeld, blur, stopCountdown)
+fitdynamos.com##iframe[src="about:blank"]
+fitdynamos.com##.d-md-block:has(> div[style] > [data-placement-id])
+fitdynamos.com##.col-auto:has(> div[style] > [data-placement-id])
+fitdynamos.com###overlay
 tmail.io,fc-lc.*##+js(no-fetch-if, adsbygoogle)
 tmail.io,fc-lc.*##+js(noeval-if, ppuQnty)
 tmail.io,fc-lc.*##+js(nowoif)
 @@||tmail.io^$ghide
 tmail.io###glink:style(display: block !important;)
-||curryfielddistribution.com^
-||turbiditedeklehexoses.monster^
+||curryfielddistribution.com^$all
+||antonellapouncedcrewels.com^$all
 ||whitepark9.com^
 ||tophostingapp.com/dwn-$image
 
@@ -1225,13 +1233,11 @@ megaurl.in,megafly.in##+js(set, blurred, false)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/24199
 !#if cap_html_filtering
-simana.online,fooak.com##^script:has-text(openPopup)
+simana.online,fooak.com,joktop.com,evernia.site##^script:has-text(/FingerprintJS|openPopup/)
 !#else
-simana.online,fooak.com##+js(rmnt, script, openPopup)
+simana.online,fooak.com,joktop.com,evernia.site##+js(rmnt, script, /FingerprintJS|openPopup/)
 !#endif
-simana.online,fooak.com##+js(set, blurred, false)
-simana.online,fooak.com#@#.ad-inner
-simana.online,fooak.com#@#.ad-element
+simana.online,fooak.com,joktop.com,evernia.site##+js(set, blurred, false)
 
 ! https://github.com/uBlockOrigin/uAssets/discussions/17361#discussioncomment-9845073
 zeroupload.com##+js(nano-sib, display)
@@ -1365,3 +1371,7 @@ advicefunda.com,bestloanoffer.net,computerpedia.in,techconnection.in##+js(noeval
 advicefunda.com,bestloanoffer.net,techconnection.in##+js(nano-sib, count, *, 0.001)
 advicefunda.com,bestloanoffer.net,computerpedia.in,techconnection.in##.overlay
 advicefunda.com,bestloanoffer.net,computerpedia.in,techconnection.inn##.popup
+
+! https://github.com/uBlockOrigin/uAssets/discussions/17361#discussioncomment-10555878
+dailytech-news.eu##+js(nostif, _0x)
+oii.la##+js(noeval-if, 0x)

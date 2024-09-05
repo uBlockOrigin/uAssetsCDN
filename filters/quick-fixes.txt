@@ -1,5 +1,5 @@
 ! Title: uBlock₀ filters – Quick fixes
-! Last modified: Thu, 05 Sep 2024 10:24:08 +0000
+! Last modified: Thu, 05 Sep 2024 15:05:29 +0000
 ! Expires: 8 hours
 ! Description: Immediate, temporary filters to fix websites
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -23,7 +23,7 @@ youtube.com##+js(json-prune, playerResponse.adPlacements playerResponse.playerAd
 !#endif
 !#endif
 ||googlevideo.com/videoplayback*&ctier=L&*%2Cctier%2C$xhr,3p,domain=m.youtube.com|music.youtube.com|www.youtube.com
-www.youtube.com##+js(trusted-rpnt, script, (function serverContract(), (()=>{let e="";document.addEventListener("DOMContentLoaded"\,(function(){if(!window.yt?.config_?.EXPERIMENT_FLAGS?.html5_enable_ssap_entity_id)return;const t=()=>{const t=document.getElementById("movie_player");if(!t)return;const n=t.querySelector("video");if(!n)return;const o=t.getVideoStats()?.ssap;if(n.duration&&o&&o.includes("vid.nvd")){const i=parseInt(o.split("st.").at(-1).split(";")[0])/1e3;let r=[];for(const e of o.matchAll(/\bcpn\.([-\w]+)/g))r.push(e[1]);const s=r.join("\,");(!1===n.loop&&e!==s&&n.currentTime<i||!0===n.loop&&n.currentTime<i||.001===n.currentTime&&n.currentTime<i)&&(t.seekTo(i)\,e=s)}};t();new MutationObserver((()=>{t()})).observe(document\,{childList:!0\,subtree:!0})}))})();(function serverContract(), sedCount, 1)
+www.youtube.com##+js(trusted-rpnt, script, (function serverContract(), (()=>{let e="";document.addEventListener("DOMContentLoaded"\,(function(){if(!window.yt?.config_?.EXPERIMENT_FLAGS?.html5_enable_ssap_entity_id)return;const t=()=>{const t=document.getElementById("movie_player");if(!t)return;const n=t.querySelector("video");if(!n)return;const o=t.getVideoStats?.()?.ssap;if(n.duration&&o&&o.includes("vid.nvd")){const i=parseInt(o.split("st.").at(-1).split(";")[0])/1e3;let r=[];for(const e of o.matchAll(/\bcpn\.([-\w]+)/g))r.push(e[1]);const s=r.join("\,");(!1===n.loop&&e!==s&&n.currentTime<i||!0===n.loop&&n.currentTime<i||.001===n.currentTime&&n.currentTime<i)&&(t.seekTo(i)\,e=s)}};t();new MutationObserver((()=>{t()})).observe(document\,{childList:!0\,subtree:!0})}))})();(function serverContract(), sedCount, 1)
 www.youtube.com##+js(nano-stb, [native code], 17000, 0.001)
 !#if cap_html_filtering
 ||www.youtube.com/s/player/*/base.js$script,xhr,replace=/if\(e===""\)/if(0)/
@@ -101,13 +101,12 @@ japscan.lol#@#body > .container > .row > #main + #sidebar.col-md-3 > .card.mt-1 
 japscan.lol#@#body > .container > .row > #main + #sidebar.col-md-3 > .card.mt-1 > .card[style="margin: 0px auto; display: block;"] > a.aikoi.donate[href^="http"][href*="/?utm_source=index&utm_"][target="_blank"][rel="noopener noreferrer nofollow"]:not([href^="http://japscan.lol"]) > img
 japscan.lol#@#+js(spoof-css, body > .container > .row > #main + #sidebar.col-md-3 > .card.mt-1 > .card[style="margin: 0px auto; display: block;"] > a.aikoi.donate[href^="http"][href*="/?utm_source=index&utm_"][target="_blank"][rel="noopener noreferrer nofollow"]:not([href^="http://japscan.lol"]) > img, display, inline)
 japscan.lol#@#.card.copines
-japscan.lol##+js(no-fetch-if, method:/HEAD|GET/)
+japscan.lol#@#+js(no-fetch-if, method:/HEAD|GET/)
 japscan.lol##:matches-path(/^\/$/)body > style + .container:first-of-type > .row > #main + #sidebar.col-md-3 > .card.mt-1 > .card[style="margin: 0px auto; display: block;"] > a.aikoi.donate[href^="http"][href*="/?utm_source=index&utm_medium=extra_large&"][target="_blank"][rel="noopener noreferrer nofollow"]:not([href^="http://japscan.lol"]) > img
 !japscan.lol##+js(prevent-fetch, /\/\d{3}[-x]\d{2}/)
 @@*$xhr,domain=japscan.lol
 /^https?:\/\/[a-z]{8,15}\.com\/$/$xhr,3p,to=com,method=head,header=x-traceid,important,domain=japscan.lol
 ! ads
-japscan.lol##+js(no-fetch-if, www.japscan.lol/imgs/)
 ||japscan.lol^$csp=sandbox allow-forms allow-same-origin allow-scripts allow-modals allow-orientation-lock allow-pointer-lock allow-presentation allow-top-navigation
 
 ! https://github.com/uBlockOrigin/uAssets/issues/2320
@@ -138,33 +137,6 @@ panel.freemcserver.net##div[style^="min-height:"]:has(> div[id^="stpd-"])
 ||adx.adform.net/adx/openrtb|$xhr,important,domain=panel.freemcserver.net
 !#endif
 
-! https://github.com/uBlockOrigin/uAssets/issues/24217
-! kimcartoon.*,kisscartoon.se,kc.linksgen.com##+js(aost, jQuery.fn.html, /^(?!.*jquery).*(Scripts|inlineScript)/i)
-@@*$xhr,1p,domain=kimcartoon.*|kisscartoon.se|kc.linksgen.com
-! kimcartoon.*##+js(nostif, /tryHard|leHz|Adb/)
-!#if ext_devbuild
-!kimcartoon.li,kc.linksgen.com,kisscartoon.se##+js(trusted-suppress-native-method, RegExp.prototype.test, '"<img src="', abort)
-!#else
-!kimcartoon.*##+js(rpnt, script, /^\(function/, '/*start*/(function(){const e={apply:(e,t,o)=>{if(o[0]?.includes("<img src=")){throw new ReferenceError();};return Reflect.apply(e,t,o)}};window.RegExp.prototype.test=new Proxy(window.RegExp.prototype.test,e)})();document.currentScript.textContent=document.currentScript.textContent.replace(/\/\*start\*\/(.*)\/\*end\*\//g,"");/*end*/(function', sedCount, 1)
-!#endif
-!kimcartoon.li,kc.linksgen.com,kisscartoon.se##+js(acs, setTimeout, /navigator\.userAgent;\n\s+if \(\w|i.*\..*i.*m.*g.*u.*r.*\..*c.*o.*m/)
-kimcartoon.li,kc.linksgen.com,kisscartoon.se##+js(no-fetch-if, bidgear)
-kimcartoon.li,kc.linksgen.com,kisscartoon.se##+js(no-xhr-if, method:/head/)
-kimcartoon.li,kc.linksgen.com,kisscartoon.se##+js(set, _btcCheck, false)
-kimcartoon.li,kc.linksgen.com,kisscartoon.se##+js(rmnt, script, /divCParent\.html\([\S\s\n]+?document\.getElementById\(\'divContentVideo\'\)\.innerHTML =|var cpe = true;[\S\s\n]+?Func\(\)[\S\s\n]+?cpe = false;|function dcmarvel\(prm\)[\S\s\n]+?_btcCheck = false;[\S\s\n]+?function postback\(\)/)
-kimcartoon.li,kc.linksgen.com,kisscartoon.se##+js(set, isAdb, false)
-kimcartoon.li,kc.linksgen.com,kisscartoon.se###divContentVideo:style(display: block !important;)
-kimcartoon.li,kc.linksgen.com,kisscartoon.se###centerDivVideo > div[id]:has(> img[src^="https://i.imgur.com"])
-kimcartoon.li,kc.linksgen.com,kisscartoon.se#@##hideAds
-@@||kc.linksgen.com^$frame,1p,strict1p
-@@||kimcartoon.li^$frame,1p,strict1p
-@@||kisscartoon.se^$frame,1p,strict1p
-! ||kc.linksgen.com/Ads/bid300a.aspx$frame,1p,important
-! ||kimcartoon.li/Ads/bid300a.aspx$frame,1p,important
-! ||kisscartoon.se/Ads/bid300a.aspx$frame,1p,important
-@@||platform.bidgear.com/pubbidgear-ad.js$xhr,domain=kimcartoon.li|kisscartoon.se|kc.linksgen.com
-@@||whatsnew247.net^$script,xhr,domain=kimcartoon.li|kisscartoon.se|kc.linksgen.com
-
 ! https://github.com/uBlockOrigin/uAssets/issues/24575
 @@||ads.anitube.vip^$xhr,domain=animefire.info|animesonlinecc.us|animesup.info|animeyabu.net|animeyabu.org|anitube.us|anitube.vip|dattebayo-br.com|drstonebr.com|flyanimes.cloud|goanimes.vip|goyabu.us|hinatasoul.com|isekaibrasil.com|meuanime.info|otakuanimess.net
 @@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$xhr,domain=animefire.info|animesonlinecc.us|animesup.info|animeyabu.net|animeyabu.org|anitube.us|anitube.vip|dattebayo-br.com|drstonebr.com|flyanimes.cloud|goanimes.vip|goyabu.us|hinatasoul.com|isekaibrasil.com|meuanime.info|otakuanimess.net
@@ -185,3 +157,10 @@ anitube.us,anitube.vip##+js(no-fetch-if, mode:no-cors)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/20401
 infinityscans.xyz,infinityscans.net##+js(rpnt, script, /\(async function\(\)\{const.*?\;\}\;return [a-z]\(\)\;\}/, , condition, throw)
+
+! https://github.com/easylist/easylist/commit/de9f2496abde1eddca06f3f80a25dc57b22b67ca
+@@||d.socdm.com/adsv/*/tver_splive$xhr,domain=imasdk.googleapis.com
+||i.socdm.com^$media,redirect=noop-1s.mp4
+
+! bait in uBf
+/ads/bid300*.aspx$badfilter
