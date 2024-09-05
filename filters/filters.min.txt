@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Thu, 05 Sep 2024 00:33:14 +0000
-! Diff-Path: ../patches/2024.9.5.105.patch#ublock-filters
+! Last modified: Thu, 05 Sep 2024 06:10:37 +0000
+! Diff-Path: ../patches/2024.9.5.392.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -9107,7 +9107,7 @@ acortalo.*,acortar.*,megadescarga.net,megadescargas.net##+js(set, sync, true)
 @@*$css,1p,domain=acortalo.*|acortar.*|megadescarga.net
 @@*$ghide,domain=acortalo.*|acortar.*|megadescarga.net
 *$popunder,domain=acortalo.*|acortar.*|megadescarga.net|megadescargas.net
-||imasdk.googleapis.com/js/sdkloader/ima3.js^$script,3p,redirect-rule=google-ima.js,domain=acortalink.*
+||imasdk.googleapis.com/js/sdkloader/ima3.js^$script,3p,redirect=google-ima.js,domain=acortalink.*
 hentaihaven.xxx##+js(noeval-if, debugger)
 *$xhr,redirect-rule=nooptext,domain=hentaihaven.xxx
 hentaihaven.xxx##+js(nowoif)
@@ -9184,17 +9184,11 @@ a2zapk.*,educatiocenter.online##+js(acs, $, alertmsg)
 ||googlesyndication.com^$image,redirect-rule=1x1.gif,domain=a2zapk.*|educatiocenter.online
 @@||virginmediatelevision.ie/player/$xhr,1p
 @@||virginmediatelevision.ie/includes/js/cookienotice.js.pagespeed.$script,1p
-!#if ext_devbuild
-!#if cap_html_filtering
 play.virginmediatelevision.ie##+js(json-prune, avails)
-||amazonaws.com/v1/dash/$replace=/<Period[^\n]+\n[^<]+<BaseURL>https:\/\/vod-virginmedia-ssai.+?<\/Period>//gms,domain=play.virginmediatelevision.ie
-||amazonaws.com/v1/dash/$replace=/(?:mediaPresentationDuration|start)="[^"]+"//g,domain=play.virginmediatelevision.ie
-!#endif
-!#endif
+play.virginmediatelevision.ie##+js(json-prune-fetch-response, response.ads, , propsToMatch, /streams)
 ! END: Rules from filters.txt
 ! START: Regional lists
 ! <<<<< czech slovak filters >>>>>
-||ads-twitter.com^$frame,redirect-rule=noopframe,domain=media.cms.markiza.sk
 ||img.kurzy.cz/block/$frame,1p
 ||bydleni.com/dm/banner/$domain=bydleni.cz
 bydleni.cz###rightClick
@@ -23003,7 +22997,7 @@ audiotools.pro,audizine.com,blackenterprise.com,cheatsheet.com,cwtv.com,esportst
 familyminded.com,foxvalleyfoodie.com,merriam-webster.com,news.com.au,playstationlifestyle.net,sportsnaut.com,tempumail.com,toledoblade.com##+js(aopr, __cmpGdprAppliesGlobally)
 pc-builds.com,qtoptens.com,reuters.com,today.com,videogamer.com,wrestlinginc.com##+js(set, admiral, noopFunc)
 !#if cap_html_filtering
-abc17news.com,allthingsthrifty.com,amessagewithabottle.com,androidpolice.com,antyradio.pl,artforum.com,artnews.com,awkward.com,awkwardmom.com##^script:has-text('"v4ac1eiZr0"')
+abc17news.com,amessagewithabottle.com,androidpolice.com,antyradio.pl,artforum.com,artnews.com,awkward.com,awkwardmom.com##^script:has-text('"v4ac1eiZr0"')
 bailiwickexpress.com,barnsleychronicle.com,becomingpeculiar.com,bethcakes.com,betweenenglandandiowa.com,blogher.com,bluegraygal.com,briefeguru.de##^script:has-text('"v4ac1eiZr0"')
 carmagazine.co.uk,cattime.com,cbr.com,celiacandthebeast.com,chaptercheats.com,collider.com,comingsoon.net,commercialobserver.com,competentedigitale.ro,crafty.house##^script:has-text('"v4ac1eiZr0"')
 dailyvoice.com,decider.com,didyouknowfacts.com,dogtime.com,dustyoldthing.com##^script:has-text('"v4ac1eiZr0"')
@@ -23022,9 +23016,9 @@ tablelifeblog.com,thebeautysection.com,thecelticblog.com,thecurvyfashionista.com
 viralviralvideos.com##^script:has-text('"v4ac1eiZr0"')
 wannacomewith.com,wimp.com,windsorexpress.co.uk,woojr.com,worldoftravelswithkids.com,worldsurfleague.com,xda-developers.com##^script:has-text('"v4ac1eiZr0"')
 cheatsheet.com,pwinsider.com##^script:has-text(admiral)
-247sports.com,agrodigital.com,al.com,aliontherunblog.com,allaboutthetea.com,allmovie.com,allmusic.com,cbsnews.com,cbssports.com,cleveland.com,eater.com,indiewire.com,knowyourmeme.com,masslive.com,mlive.com,nbcsports.com,news.com.au,nj.com,nypost.com,oregonlive.com,pagesix.com,pennlive.com,rollingstone.com,sbnation.com,syracuse.com##^script:has-text('"").split(",")[4]')
+247sports.com,agrodigital.com,al.com,aliontherunblog.com,allaboutthetea.com,allmovie.com,allmusic.com,allthingsthrifty.com,cbsnews.com,cbssports.com,cleveland.com,eater.com,eldiariony.com,indiewire.com,knowyourmeme.com,masslive.com,mlive.com,nbcsports.com,news.com.au,nj.com,nypost.com,oregonlive.com,pagesix.com,pennlive.com,rollingstone.com,sbnation.com,syracuse.com##^script:has-text('"").split(",")[4]')
 !#else
-abc17news.com,allthingsthrifty.com,amessagewithabottle.com,androidpolice.com,antyradio.pl,artforum.com,artnews.com,awkward.com,awkwardmom.com##+js(rmnt, script, '"v4ac1eiZr0"')
+abc17news.com,amessagewithabottle.com,androidpolice.com,antyradio.pl,artforum.com,artnews.com,awkward.com,awkwardmom.com##+js(rmnt, script, '"v4ac1eiZr0"')
 bailiwickexpress.com,barnsleychronicle.com,becomingpeculiar.com,bethcakes.com,betweenenglandandiowa.com,blogher.com,bluegraygal.com,briefeguru.de##+js(rmnt, script, '"v4ac1eiZr0"')
 carmagazine.co.uk,cattime.com,cbr.com,celiacandthebeast.com,chaptercheats.com,collider.com,comingsoon.net,commercialobserver.com,competentedigitale.ro,crafty.house##+js(rmnt, script, '"v4ac1eiZr0"')
 dailyvoice.com,decider.com,didyouknowfacts.com,dogtime.com,dustyoldthing.com##+js(rmnt, script, '"v4ac1eiZr0"')
@@ -23043,7 +23037,7 @@ tablelifeblog.com,thebeautysection.com,thecelticblog.com,thecurvyfashionista.com
 viralviralvideos.com##+js(rmnt, script, '"v4ac1eiZr0"')
 wannacomewith.com,wimp.com,windsorexpress.co.uk,woojr.com,worldoftravelswithkids.com,worldsurfleague.com,xda-developers.com##+js(rmnt, script, '"v4ac1eiZr0"')
 cheatsheet.com,pwinsider.com##+js(rmnt, script, admiral)
-247sports.com,agrodigital.com,al.com,aliontherunblog.com,allaboutthetea.com,allmovie.com,allmusic.com,cbsnews.com,cbssports.com,cleveland.com,eater.com,indiewire.com,knowyourmeme.com,masslive.com,mlive.com,nbcsports.com,news.com.au,nj.com,nypost.com,oregonlive.com,pagesix.com,pennlive.com,rollingstone.com,sbnation.com,syracuse.com##+js(rmnt, script, '"").split(",")[4]')
+247sports.com,agrodigital.com,al.com,aliontherunblog.com,allaboutthetea.com,allmovie.com,allmusic.com,allthingsthrifty.com,cbsnews.com,cbssports.com,cleveland.com,eater.com,eldiariony.com,indiewire.com,knowyourmeme.com,masslive.com,mlive.com,nbcsports.com,news.com.au,nj.com,nypost.com,oregonlive.com,pagesix.com,pennlive.com,rollingstone.com,sbnation.com,syracuse.com##+js(rmnt, script, '"").split(",")[4]')
 !#endif
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$domain=givemesport.com,important
 superherohype.com##a.wp-block-button__link:is([href^="https://amzn.to/"], [href^="https://www.amazon.com/"])
