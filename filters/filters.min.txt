@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Wed, 11 Sep 2024 12:00:18 +0000
-! Diff-Path: ../patches/2024.9.11.766.patch#ublock-filters
+! Last modified: Wed, 11 Sep 2024 17:19:09 +0000
+! Diff-Path: ../patches/2024.9.11.1043.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -904,6 +904,7 @@ sankakucomplex.com##.vce-ad-container
 sankakucomplex.com#@#.scad
 sankaku.app##+js(no-xhr-if, googlesyndication)
 chan.sankakucomplex.com##body.no-scroll:style(overflow: auto !important; position: static !important; width: unset !important;)
+sankakucomplex.com##+js(set, Object.prototype.hideAds, true)
 @@||anghami.com^$ghide
 @@||anghamiwebcdn.akamaized.net/ads.$script,domain=play.anghami.com
 @@||d24n15hnbwhuhn.cloudfront.net/libs/amplitude-$script,domain=play.anghami.com
@@ -9736,14 +9737,6 @@ buffsports.me##^script:has-text(FingerprintJS)
 buffsports.me##.position-absolute
 kimdesene.org##+js(nowoif)
 ! pp server
-/^https?:\/\/[a-z]{8,15}\.xyz\/$/$xhr,3p,to=xyz,method=head,header=x-trace-id
-/^https?:\/\/[a-z]{8,15}\.com\/$/$xhr,3p,to=com,method=head,header=x-trace-id
-/^https?:\/\/[a-z]{8,15}\.xyz\/$/$xhr,3p,to=xyz,method=head,header=x-trace2-id
-/^https?:\/\/[a-z]{8,15}\.com\/$/$xhr,3p,to=com,method=head,header=x-trace2-id
-/^https?:\/\/[a-z]{8,15}\.xyz\/$/$xhr,3p,to=xyz,method=head,header=x-trace3-id
-/^https?:\/\/[a-z]{8,15}\.com\/$/$xhr,3p,to=com,method=head,header=x-trace3-id
-/^https?:\/\/[a-z]{8,15}\.xyz\/$/$xhr,3p,to=xyz,method=head,header=x-traceid
-/^https?:\/\/[a-z]{8,15}\.com\/$/$xhr,3p,to=com,method=head,header=x-traceid
 /^https?:\/\/[a-z]{8,15}\.xyz\/$/$xhr,3p,to=xyz,method=head,header=x-traceid2
 /^https?:\/\/[a-z]{8,15}\.com\/$/$xhr,3p,to=com,method=head,header=x-traceid2
 ! kumapoi. info detection
@@ -10483,8 +10476,8 @@ boundingintocomics.com,themix.net##h1:style(margin-top:20px !important;)
 boundingintocomics.com,themix.net##main[role="main"]:style(margin-top:30px !important;)
 zeemoontv-24.blogspot.com##+js(rmnt, script, antiAdBlockerHandler)
 zeeplayer.pages.dev##+js(aopr, antiAdBlockerHandler)
-drakecomic.com##+js(set, checkAdBlocker, noopFunc)
-||drakecomic.com/wp-content/themes/mangareader/script.js
+drakecomic.*##+js(set, checkAdBlocker, noopFunc)
+||drakecomic.*/wp-content/themes/mangareader/script.js
 freedrivemovie.com##+js(no-fetch-if, googlesyndication)
 ||freedrivemovie.com/wp-content/themes/dooplay/js/anti-adblock.js
 lovetofu.cyou##+js(nowoif)
@@ -11232,20 +11225,21 @@ ikramlar.online##+js(no-fetch-if, googlesyndication)
 cookad.net,pmkisanlists.in,shramikcard.in,shareus.io##+js(aopr, antiAdBlockerHandler)
 cookad.net,pmkisanlists.in,shramikcard.in###bottomNewButton, #bottomButton:remove-attr(disabled)
 cookad.net,pmkisanlists.in,shramikcard.in##.timer, .shrs_btn, .tag, .link-open-modal:others()
-@@*$ghide,domain=tii.la|oko.sh|ckk.ai|oei.la|lnbz.la|iir.la|tvi.la
-tvi.la,iir.la,tii.la,oko.sh,ckk.ai,oei.la,lnbz.la##+js(no-fetch-if, /googlesyndication|inklinkor/)
-tvi.la,iir.la,tii.la,oko.sh,ckk.ai,oei.la,lnbz.la##+js(no-xhr-if, /pagead2\.googlesyndication\.com|inklinkor\.com/)
+/webroot/modern_theme/img/freeHostinglist.jpg$image,1p
+@@*$ghide,domain=tii.la|oko.sh|ckk.ai|oei.la|lnbz.la|iir.la|tvi.la|oii.la|tpi.li
+tvi.la,iir.la,tii.la,oko.sh,ckk.ai,oei.la,lnbz.la,oii.la,tpi.li##+js(no-fetch-if, /googlesyndication|inklinkor/)
+tvi.la,iir.la,tii.la,oko.sh,ckk.ai,oei.la,lnbz.la,oii.la,tpi.li##+js(no-xhr-if, /pagead2\.googlesyndication\.com|inklinkor\.com/)
 !#if cap_html_filtering
-tvi.la,iir.la,tii.la,oko.sh,ckk.ai,oei.la,lnbz.la##^script:has-text(;break;case $.)
-tvi.la,iir.la,tii.la,oko.sh,ckk.ai,oei.la,lnbz.la##^script:has-text(adb_detected)
+tvi.la,iir.la,tii.la,oko.sh,ckk.ai,oei.la,lnbz.la,oii.la,tpi.li##^script:has-text(;break;case $.)
+tvi.la,iir.la,tii.la,oko.sh,ckk.ai,oei.la,lnbz.la,oii.la,tpi.li##^script:has-text(adb_detected)
 !#else
-tvi.la,iir.la,tii.la,oko.sh,ckk.ai,oei.la,lnbz.la##+js(rmnt, script, ;break;case $.)
-tvi.la,iir.la,tii.la,oko.sh,ckk.ai,oei.la,lnbz.la##+js(rmnt, script, adb_detected)
+tvi.la,iir.la,tii.la,oko.sh,ckk.ai,oei.la,lnbz.la,oii.la,tpi.li##+js(rmnt, script, ;break;case $.)
+tvi.la,iir.la,tii.la,oko.sh,ckk.ai,oei.la,lnbz.la,oii.la,tpi.li##+js(rmnt, script, adb_detected)
 !#endif
-tvi.la,iir.la,tii.la,oko.sh,ckk.ai,oei.la,lnbz.la##+js(set, blurred, false)
-tvi.la,iir.la,tii.la,oko.sh,ckk.ai,oei.la,lnbz.la##a[href][target="_blank"]
-tvi.la,iir.la,tii.la,oko.sh,ckk.ai,oei.la,lnbz.la##.banner-inner
-tvi.la,iir.la,tii.la,oko.sh,ckk.ai,oei.la,lnbz.la##.td-post-template-default.td-container
+tvi.la,iir.la,tii.la,oko.sh,ckk.ai,oei.la,lnbz.la,oii.la,tpi.li##+js(set, blurred, false)
+tvi.la,iir.la,tii.la,oko.sh,ckk.ai,oei.la,lnbz.la,oii.la,tpi.li##a[href][target="_blank"]
+tvi.la,iir.la,tii.la,oko.sh,ckk.ai,oei.la,lnbz.la,oii.la,tpi.li##.banner-inner
+tvi.la,iir.la,tii.la,oko.sh,ckk.ai,oei.la,lnbz.la,oii.la,tpi.li##.td-post-template-default.td-container
 tvi.la,iir.la,tii.la,oko.sh,ckk.ai,oei.la,blogtechh.com,lnbz.la,techbixby.com,blogmyst.com,wp2host.com,insmyst.com,host-buzz.com##+js(nowoif)
 host-buzz.com,insmyst.com,wp2host.com,blogtechh.com,lnbz.la,techbixby.com,blogmyst.com##+js(ra, onclick, button[onclick^="window.open"])
 host-buzz.com,insmyst.com,wp2host.com,blogtechh.com,lnbz.la,techbixby.com,blogmyst.com##+js(set, timeSec, 0)
@@ -11546,9 +11540,6 @@ advicefunda.com,bestloanoffer.net,computerpedia.in,techconnection.in##.overlay
 advicefunda.com,bestloanoffer.net,computerpedia.in,techconnection.inn##.popup
 dailytech-news.eu##+js(nostif, _0x)
 dailytech-news.eu##+js(rpnt, script, /element\.contains\(document\.activeElement\)|document\.hidden && !timeCounted/g, true)
-oii.la##+js(noeval-if, 0x)
-/webroot/modern_theme/img/freeHostinglist.jpg$image,1p
-tpi.li##+js(no-xhr-if, googlesyndication)
 worldmak.com##+js(no-fetch-if, googlesyndication)
 technoinformations.com,worldmak.com###wpsafe-link:style(display: block !important;)
 !#if env_mobile
@@ -14171,8 +14162,8 @@ shahiid-anime.net##+js(aost, Object,  /(?=^(?!.*(https)))/)
 ! pp server
 /^https?:\/\/[a-z]{8,15}\.[a-z]{2,3}\/5\/\d{6,7}(?:\?_=\d+)?$/$script,xhr,3p
 /^https?:\/\/[a-z]{8,15}\.[a-z]{3}\/5\/\d{7}\/\?/$xhr,3p
-/^https?:\/\/[-a-z]{8,15}\.(?:com|net)\/400\/\d{7}$/$script,3p
-/^https?:\/\/[-a-z]{8,15}\.(?:com|net)\/401\/\d{7}$/$script,3p
+/^https?:\/\/[-a-z]{8,15}\.(?:com|net)\/400\/\d{7}(?:\?v=\d+)?$/$script,3p
+/^https?:\/\/[-a-z]{8,15}\.(?:com|net)\/401\/\d{7}(?:\?v=\d+)?$/$script,3p
 /^https?:\/\/[-a-z]{8,15}\.(?:com|net)\/500\/\d{7}\?/$xhr,3p
 /^https?:\/\/[a-z]{8,15}\.(?:com|net)\/tag\.min\.js$/$script,3p
 ||go.bundlebyte.net^
@@ -23013,10 +23004,7 @@ amateurporn.co##+js(set, flashvars.popunder_url, '')
 */wp-content/plugins/uncopy/
 filmisub.cc##+js(no-xhr-if, ads)
 filmisub.cc##+js(aost, setTimeout, adsBlocked)
-classicalradio.com,di.fm,jazzradio.com,radiotunes.com,rockradio.com,zenradio.com##+js(set, di.VAST.XHRURLHandler, noopFunc)
-classicalradio.com,di.fm,jazzradio.com,radiotunes.com,rockradio.com,zenradio.com##+js(no-xhr-if, googlesyndication)
-classicalradio.com,di.fm,jazzradio.com,radiotunes.com,rockradio.com,zenradio.com##+js(set, di.app.WebplayerApp.Ads.Supervisor.eligibleForPreroll, trueFunc)
-classicalradio.com,di.fm,jazzradio.com,radiotunes.com,rockradio.com,zenradio.com##+js(set, di.app.WebplayerApp.Ads.Supervisor.eligibleForMidroll, trueFunc)
+classicalradio.com,di.fm,jazzradio.com,radiotunes.com,rockradio.com,zenradio.com##+js(set, di.app.WebplayerApp.Ads.Adblocks.app.AdBlockDetectApp.startWithParent, false)
 ||cdn77.org^$3p,domain=pricebefore.com
 ! admiral
 advocate.com,alternet.org,androidcure.com,arobasenet.com,attackofthefanboy.com,bodytr.com,clutchpoints.com,cultofmac.com,currentaffairs.gktoday.in,dailycaller.com,digitalmusicnews.com,dogtime.com,dotesports.com,epicstream.com,fallbrook247.com,feral-heart.com,gamesgames.com,gamerevolution.com,gazettenet.com,girlsgogames.co.uk,insidenova.com,jetztspielen.de,kasvekuvvet.net,leitesculinaria.com,nbcnews.com,notevibes.com,practicalpainmanagement.com,prad.de,progameguides.com,pwinsider.com,ranker.com,realityblurb.com,ruinmyweek.com,sanangelolive.com,sanfoundry.com,selfhacked.com,siliconera.com,simpleflying.com,son.co.za,sporcle.com,stealthoptional.com,stylecaster.com,thesportster.com,upi.com,viraliq.com,visualcapitalist.com,wegotthiscovered.com,primagames.com##+js(aopr, googletag)
@@ -23692,9 +23680,10 @@ mirroshu.top##[id^="div-gpt-ad-"]
 poophq.com,veev.to##+js(aopr, VEEVPop)
 poophq.com,veev.to##+js(nowoif)
 poophq.com,veev.to##+js(set, fapit.check, noopFunc)
-poophq.com,veev.to##+js(rpnt, script, window.__VEEVPLAYER__, '/*start*/ !function(){"use strict";let t=Object.keys;Object.keys=function(n){return n&&n.html&&n.html.instance&&n.html.instance.start&&n.env&&n.env.instance&&n.env.instance.start&&n.http&&n.http.instance&&n.http.instance.start&&(n.html.instance.start=function(){},n.env.instance.start=function(){},n.http.instance.start=function(){}),t(n)}}();/*end*/window.__VEEVPLAYER__')
+!poophq.com,veev.to##+js(rpnt, script, window.__VEEVPLAYER__, '/*start*/ !function(){"use strict";let t=Object.keys;Object.keys=function(n){return n&&n.html&&n.html.instance&&n.html.instance.start&&n.env&&n.env.instance&&n.env.instance.start&&n.http&&n.http.instance&&n.http.instance.start&&(n.html.instance.start=function(){},n.env.instance.start=function(){},n.http.instance.start=function(){}),t(n)}}();/*end*/window.__VEEVPLAYER__')
 *$script,3p,domain=poophq.com|veev.to,redirect-rule=noopjs
 @@*$ghide,domain=poophq.com|veev.to
+@@*.js|$xhr,domain=veev.to|poophq.com
 veev.to#@#.avb-active
 ! filmydown .site/fast-dl .co popups
 fast-dl.co,filmydown.*##+js(nowoif)
