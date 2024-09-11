@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Wed, 11 Sep 2024 06:43:30 +0000
-! Diff-Path: ../patches/2024.9.11.441.patch#ublock-filters
+! Last modified: Wed, 11 Sep 2024 12:00:18 +0000
+! Diff-Path: ../patches/2024.9.11.766.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -10207,9 +10207,8 @@ javball.com##+js(no-fetch-if, adsbygoogle)
 javball.com##+js(aopr, popns)
 eurostreaming.casino##+js(acs, document.documentElement, break;case $.)
 bakashi.tv##+js(acs, document.documentElement, break;case $.)
-lowfuelmotorsport.com##[href^="https://api2.lowfuelmotorsport.com/api/l/"]
-lowfuelmotorsport.com##.mat-card:has(a[href^="https://api2.lowfuelmotorsport.com/"])
-lowfuelmotorsport.com##a[href^="https://api.lowfuelmotorsport.de/"]
+lowfuelmotorsport.com##:is(elastic-toolbar-navigation, mat-card-content) div[style] > a[target="_blank"][href] > img
+lowfuelmotorsport.com##.mat-card[style] a[target="_blank"][href] > img
 smithsonianmag.com##+js(aeld, DOMContentLoaded, leaderboardAd)
 smithsonianmag.com##+js(acs, document.addEventListener, #leaderboardAd)
 ! usersdrive .com popups
@@ -10497,13 +10496,19 @@ crichd-player.top,crichdplays.ru,lolcalhost.ru##+js(acs, EventTarget.prototype.a
 stitichsports.com##+js(rmnt, script, antiAdBlockerHandler)
 @@||api.adinplay.com/libs/aiptag/pub/LBS/littlebigsnake.com/tag.min.js$script,domain=littlebigsnake.com
 @@||metin2lobby.com^$ghide
-@@||metin2lobby.com/js/*/apw-$script,1p
+@@||knightlobby.com^$ghide
+@@||metin2lobby.com/js/$script,1p
+@@||knightlobby.com/js/$script,1p
 multi.xxx##+js(set, flashvars.video_click_url, '')
 animesaturn.cx##+js(acs, globalThis, break;case)
 streamtape.*##.play-overlay
 streamtape.*##+js(rpnt, script, /\$\(['"]\.play-overlay['"]\)\.click.+/s, document.getElementById("mainvideo").src=srclink;player.currentTrack=0;})}), condition, srclink)
 ilforumdeibrutti.is##+js(nostif, AdBlock)
 ttsfree.com##+js(acs, document.getElementById, adblock)
+!#if cap_html_filtering
+||soft98.ir/templates/*/js/application.min.packed.js$script,1p,replace=/visibility/backfaceVisibility/
+soft98.ir,~forum.soft98.ir###abddh > *, div:has(> header + div > [data-href="https://cdn.hostdl.com/goto/soft98"]), section:has(> header + div > div > div > a[href*="utm_"]), [data-href^="https://padvish.com/"]:style(visibility: hidden !important;)
+!#endif
 ! Link shortener filters go into their own dedicated list
 ! *** filters/ubo-link-shorteners.txt ***
 ! gplinks all domains (gplinks.co/EWu8)
@@ -22784,7 +22789,6 @@ sotwe.com##.tweet-card .v-responsive.media-carousel-image .v-responsive__content
 *$frame,redirect-rule=noopframe,domain=megaup.net
 download.megaup.net##a img:not([src="images/main_logo_inverted.png"]):matches-css(height: /^([2-4]{1}[0-9]{2}(\.[0-9]+)?px|0px)$/):style(visibility: hidden !important;)
 download.megaup.net##+js(spoof-css, a img:not([src="images/main_logo_inverted.png"]), visibility, visible)
-download.megaup.net##+js(rpnt, script, /for\s*\(\s*(const|let|var).*?;return;\}\}.*?;return;.*?;return;\}/g, , condition, attribute)
 @@||megaup.net/imageads/$image,1p
 @@||download.megaup.net^$script,1p
 player.theplatform.com##+js(disable-newtab-links)
