@@ -1,5 +1,5 @@
 ! Title: uBlock filters (2024)
-! Last modified: Thu, 12 Sep 2024 18:54:37 +0000
+! Last modified: Fri, 13 Sep 2024 08:40:34 +0000
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -734,6 +734,16 @@ okiemrolnika.pl##+js(no-fetch-if, adsbygoogle)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/25185
 megane.com.pl##+js(no-fetch-if, googlesyndication)
+
+! <<<<< RU AdList >>>>>
+! https://github.com/uBlockOrigin/uAssets/issues/25014#issuecomment-2346541996
+!#if cap_html_filtering
+@@||plrjs.org/*.xml^$3p,xhr
+||plrjs.org/*.xml^$3p,xhr,replace=/^.+$/<VAST version="3.0"><\/VAST>/s
+||cdn.plrjs.com/player/*.js^$3p,script,replace=/preroll/nopreroll/g
+!#else
+||plrjs.org/*.xml^$3p,xhr,redirect=noopvast-3.0
+!#endif
 
 ! END: Regional lists
 
@@ -3204,6 +3214,13 @@ soft98.ir,~forum.soft98.ir###abddh > *, div:has(> header + div > [data-href="htt
 ! https://github.com/uBlockOrigin/uAssets/issues/25302
 swiftuploads.com##+js(ra, onclick, button[onclick*="open"])
 swiftuploads.com##+js(nowoif)
+||ajrkm3.com^
+||hrmdw8da.net^
+||yyceztc8.click^
 
 ! https://en-thunderscans.com/ detection
 en-thunderscans.com##+js(nostif, getComputedStyle(testAd))
+
+! https://github.com/uBlockOrigin/uAssets/issues/25297
+onlinesoccermanager.com##+js(set, adBlockerDetected, false)
+onlinesoccermanager.com###advertisement-leaderboard-container

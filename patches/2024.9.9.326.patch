@@ -1,8 +1,14 @@
-diff name:ublock-annoyances lines:26 checksum:8625321410
+diff name:ublock-annoyances lines:32 checksum:9d1fd1da05
 d3 2
 a4 2
-! Last modified: Wed, 11 Sep 2024 13:16:57 +0000
-! Diff-Path: ../patches/2024.9.13.267.patch#ublock-annoyances
+! Last modified: Fri, 13 Sep 2024 07:07:33 +0000
+! Diff-Path: ../patches/2024.9.13.565.patch#ublock-annoyances
+d187 1
+a187 1
+||facebook.com/api/graphql/$xhr,replace=/\{"brs_content_label":[^\n]+?"follow_button":\{"__typename":"CometFeedStoryFollowButtonStrategy"[^\n]+"cursor":"[^"]+"\}/{}/g,domain=web.facebook.com|www.facebook.com
+d189 1
+a189 1
+web.facebook.com,www.facebook.com##+js(trusted-replace-xhr-response, '/\{"brs_content_label":[^\n]+?"follow_button":\{"__typename":"CometFeedStoryFollowButtonStrategy"[^\n]+"cursor":"[^"]+"\}/g', {}, /api/graphql)
 d3035 2
 a3036 2
 sertracen.com.pa,pitesti24.ro,samsungtechwin.com,cours-de-droit.net,iptv4best.com,blogvisaodemercado.pt,kapitalis.com,tiempo.hn,winmeen.com,ibps.in,visse.com.br,javsubtitle.co,learninsta.com,licensekeys.org,mediahiburan.my,tipssehatcantik.com,anime-drama.jp,jbjbgame.com,viatasisanatate.com,ziarulargesul.ro,globaldefensecorp.com,gossipnextdoor.com,coffeeapps.ir,media.framu.world,immobiliaremia.com,colegiosconcertados.info,bigdatauni.com,riwyat.com,rukim.id,visefierbinti.ro,cyberkrafttraining.com,theaircurrent.com,ncert-solutions.com,ncertsolutions.guru,nocturnetls.net,clockks.com,ananda-yoga.ro,poolpiscina.com,infodifesa.it,getective.com,flashdumpfiles.com,formatatmak.com,drkrok.com,alphagirlreviews.com,kitchennovel.com,voxvalachorum.ro,cracksone.com,day-hoc.org,onlineonderdelenshop.nl,primicia.com.ve,tech-recipes.com,postcourier.com.pg,afrikmag.com,maduras.vip,aprendeinglessila.com,kicknews.today,koalasplayground.com,hellokpop.com,hayatbilgileri.com,moneyexcel.com,placementstore.com,neuroteam-metz.de,codedosa.com,liveyourmaths.com,newspao.gr,ieltsliz.com,programasvirtualespc.net,tempatwisataseru.com,wikiofcelebs.com,jornaljoca.com.br,arcanescans.com,filmzone.com,hiraethtranslation.com,kaystls.site,home.novel-gate.com,plural.jor.br,evreporter.com##^script[id^="wpcp_"]
@@ -25,11 +31,11 @@ curseforge.com##+js(no-fetch-if, googlesyndication)
 !#if !env_mv3
 lowfuelmotorsport.com##+js(set, Object.prototype.auth.redirectToLogin, noopFunc)
 !#endif
-diff name:ublock-badware lines:126 checksum:476fedf089
+diff name:ublock-badware lines:126 checksum:f818b8e975
 d3 2
 a4 2
 ! Last modified: Fri, 13 Sep 2024 03:16:01 +0000
-! Diff-Path: ../patches/2024.9.13.267.patch#ublock-badware
+! Diff-Path: ../patches/2024.9.13.565.patch#ublock-badware
 d306 1
 d308 1
 d316 1
@@ -152,11 +158,11 @@ d4151 1
 d4158 1
 d4180 1
 d4183 1
-diff name:ublock-filters lines:271 checksum:e3e5167e30
+diff name:ublock-filters lines:286 checksum:f4b0f0cbd5
 d3 2
 a4 2
-! Last modified: Fri, 13 Sep 2024 02:45:09 +0000
-! Diff-Path: ../patches/2024.9.13.267.patch#ublock-filters
+! Last modified: Fri, 13 Sep 2024 08:40:34 +0000
+! Diff-Path: ../patches/2024.9.13.565.patch#ublock-filters
 a906 1
 sankakucomplex.com##+js(set, Object.prototype.hideAds, true)
 d1203 2
@@ -219,6 +225,15 @@ a9162 4
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$script,redirect=google-ima.js,domain=rtl.hr
 @@||cdn.jsdelivr.net/npm/videojs-contrib-ads$script,domain=rtl.hr
 *$object,redirect-rule=noopframe,domain=rtl.hr
+a9182 8
+! <<<<< RU AdList >>>>>
+!#if cap_html_filtering
+@@||plrjs.org/*.xml^$3p,xhr
+||plrjs.org/*.xml^$3p,xhr,replace=/^.+$/<VAST version="3.0"><\/VAST>/s
+||cdn.plrjs.com/player/*.js^$3p,script,replace=/preroll/nopreroll/g
+!#else
+||plrjs.org/*.xml^$3p,xhr,redirect=noopvast-3.0
+!#endif
 d9354 1
 a9354 1
 civitai.com##div:is(.shadow, .flex.w-full.justify-center[style=""]):has(a[href="/pricing"] img[alt="Please support civitai and creators by disabling adblock"]):remove()
@@ -247,7 +262,7 @@ a10491 3
 @@||knightlobby.com^$ghide
 @@||metin2lobby.com/js/$script,1p
 @@||knightlobby.com/js/$script,1p
-a10492 12
+a10492 17
 animesaturn.cx##+js(acs, globalThis, break;case)
 streamtape.*##.play-overlay
 streamtape.*##+js(rpnt, script, /\$\(['"]\.play-overlay['"]\)\.click.+/s, document.getElementById("mainvideo").src=srclink;player.currentTrack=0;})}), condition, srclink)
@@ -259,7 +274,12 @@ soft98.ir,~forum.soft98.ir###abddh > *, div:has(> header + div > [data-href="htt
 !#endif
 swiftuploads.com##+js(ra, onclick, button[onclick*="open"])
 swiftuploads.com##+js(nowoif)
+||ajrkm3.com^
+||hrmdw8da.net^
+||yyceztc8.click^
 en-thunderscans.com##+js(nostif, getComputedStyle(testAd))
+onlinesoccermanager.com##+js(set, adBlockerDetected, false)
+onlinesoccermanager.com###advertisement-leaderboard-container
 d11216 3
 a11218 4
 /webroot/modern_theme/img/freeHostinglist.jpg$image,1p
@@ -406,7 +426,7 @@ d23539 1
 a23539 1
 ||teads.tv^$3p,script,redirect=noop.js,from=tf1info.fr
 a23573 2
-/ads.js?api_key=
+/ads.js?api_key=*&header=$all
 qiwi.gg##+js(aeld, click, form.submit)
 d23629 1
 a23629 1
@@ -414,6 +434,7 @@ a23629 1
 d23663 1
 a23663 1
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$script,domain=trojmiasto.pl,redirect=google-ima.js
+d23673 1
 d23676 1
 a23679 5
 !#if ext_devbuild
@@ -424,11 +445,11 @@ poophq.com,veev.to##+js(no-xhr-if, /\/ad-provider\.js$/, length:35000)
 d23734 1
 a23734 1
 ||vlitag.com^$script,xhr,domain=sonixgvn.net,redirect=noopjs
-diff name:ublock-privacy lines:20 checksum:20ee2d81b6
+diff name:ublock-privacy lines:20 checksum:22e24c0541
 d3 2
 a4 2
 ! Last modified: Fri, 13 Sep 2024 02:49:08 +0000
-! Diff-Path: ../patches/2024.9.13.267.patch#ublock-privacy
+! Diff-Path: ../patches/2024.9.13.565.patch#ublock-privacy
 d122 5
 a126 5
 loawa.com,ygosu.com,sportalkorea.com,edaily.co.kr,economist.co.kr,etoday.co.kr,isplus.com,hometownstation.com,honkailab.com,thestockmarketwatch.com,issuya.com,worldhistory.org,etnews.com,iusm.co.kr,dogdrip.net,etoland.co.kr,picrew.me,text-compare.com,fntimes.com,javatpoint.com,lamire.jp,bamgosu.site,allthekingz.com,automobile-catalog.com,maketecheasier.com,thesaurus.net,wfmz.com,thestar.co.uk,yorkshirepost.co.uk,mydaily.co.kr,raenonx.cc,ndtvprofit.com,badmouth1.com,logicieleducatif.fr,taxguru.in,islamicfinder.org,aikatu.jp,secure-signup.net,globalrph.com,sportsrec.com,reportera.co.kr,flatpanelshd.com,videogamemods.com,adintrend.tv,ark-unity.com,cool-style.com.tw,dziennik.pl,eurointegration.com.ua,winfuture.de,freemcserver.net,pravda.com.ua,infinityfree.com,wort-suchen.de,word-grabber.com,palabr.as,motscroises.fr,cruciverba.it,dramabeans.com,mynet.com,sportsseoul.com,smsonline.cloud,meeco.kr##+js(set-local-storage-item, adshield-analytics-uuid, $remove$)
@@ -445,11 +466,11 @@ a134 3
 topstarnews.net,islamicfinder.org,secure-signup.net,dramabeans.com##+js(rmnt, script, error-report.com)
 ||html-load.com^$redirect=noopjs,domain=aikatu.jp|adintrend.tv|ark-unity.com|cool-style.com.tw|mynet.com
 aikatu.jp,adintrend.tv,ark-unity.com,cool-style.com.tw,mynet.com##+js(nostif, error-report.com)
-diff name:ublock-quick-fixes lines:32 checksum:f73abe3f67
+diff name:ublock-quick-fixes lines:32 checksum:81d4feb05e
 d3 2
 a4 2
 ! Last modified: Thu, 12 Sep 2024 14:27:12 +0000
-! Diff-Path: ../patches/2024.9.13.267.patch#ublock-quick-fixes
+! Diff-Path: ../patches/2024.9.13.565.patch#ublock-quick-fixes
 d64 8
 a71 1
 japscan.lol#@#.navbar-nav > li.nav-item > a[href^="https://www.origoclick.com"]:remove()
@@ -478,19 +499,19 @@ download.megaup.net##+js(rpnt, script, /for\s*\(\s*(const|let|var).*?\)\;return\
 download.megaup.net##a:has(img[src*="/download"]):style(width: 300px !important; height: 300px !important; display: block !important;)
 d116 2
 d124 2
-diff name:ublock-unbreak lines:7 checksum:1745b3405b
+diff name:ublock-unbreak lines:7 checksum:67a066aa85
 d3 2
 a4 2
 ! Last modified: Wed, 11 Sep 2024 04:58:03 +0000
-! Diff-Path: ../patches/2024.9.13.267.patch#ublock-unbreak
+! Diff-Path: ../patches/2024.9.13.565.patch#ublock-unbreak
 d129 2
 d948 1
 d2674 1
-diff name:easylist lines:641 checksum:60d8cb5394
+diff name:easylist lines:641 checksum:d86a4d5850
 d4 2
 a5 2
 ! Last modified: Fri, 13 Sep 2024 03:50:25 +0000
-! Diff-Path: ../patches/2024.9.13.267.patch#easylist
+! Diff-Path: ../patches/2024.9.13.565.patch#easylist
 d25 1
 d134 1
 a134 1
@@ -1128,11 +1149,11 @@ vagina.nl##.list-item:has([data-idzone])
 d71941 1
 a71941 1
 @@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$domain=allb.game-db.tw|battlecats-db.com|cpu-world.com|game.anymanager.io|games.wkb.jp|html5.gamedistribution.com|knowfacts.info|lacoste.com|megagames.com|megaleech.us|newson.us|real-sports.jp|slideplayer.com|sudokugame.org|tampermonkey.net|teemo.gg|thefreedictionary.com
-diff name:easyprivacy lines:34 checksum:f1939fef24
+diff name:easyprivacy lines:34 checksum:ac5b4c2839
 d4 2
 a5 2
 ! Last modified: Fri, 13 Sep 2024 03:50:25 +0000
-! Diff-Path: ../patches/2024.9.13.267.patch#easyprivacy
+! Diff-Path: ../patches/2024.9.13.565.patch#easyprivacy
 a2760 2
 ! https://www.mcclatchy.com/our-impact/markets
 /ng.gif?

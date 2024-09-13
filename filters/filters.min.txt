@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Fri, 13 Sep 2024 02:45:09 +0000
-! Diff-Path: ../patches/2024.9.13.267.patch#ublock-filters
+! Last modified: Fri, 13 Sep 2024 08:40:34 +0000
+! Diff-Path: ../patches/2024.9.13.565.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -9192,6 +9192,14 @@ fxmag.pl##[class^="Ad_text"]
 fxmag.pl##[class*="Container_header_ad"] > div[style^="min-height:90px"]
 okiemrolnika.pl##+js(no-fetch-if, adsbygoogle)
 megane.com.pl##+js(no-fetch-if, googlesyndication)
+! <<<<< RU AdList >>>>>
+!#if cap_html_filtering
+@@||plrjs.org/*.xml^$3p,xhr
+||plrjs.org/*.xml^$3p,xhr,replace=/^.+$/<VAST version="3.0"><\/VAST>/s
+||cdn.plrjs.com/player/*.js^$3p,script,replace=/preroll/nopreroll/g
+!#else
+||plrjs.org/*.xml^$3p,xhr,redirect=noopvast-3.0
+!#endif
 ! END: Regional lists
 flixscans.org##+js(no-fetch-if, googlesyndication)
 mhn.quest##+js(nostif, adblock)
@@ -10504,7 +10512,12 @@ soft98.ir,~forum.soft98.ir###abddh > *, div:has(> header + div > [data-href="htt
 !#endif
 swiftuploads.com##+js(ra, onclick, button[onclick*="open"])
 swiftuploads.com##+js(nowoif)
+||ajrkm3.com^
+||hrmdw8da.net^
+||yyceztc8.click^
 en-thunderscans.com##+js(nostif, getComputedStyle(testAd))
+onlinesoccermanager.com##+js(set, adBlockerDetected, false)
+onlinesoccermanager.com###advertisement-leaderboard-container
 ! Link shortener filters go into their own dedicated list
 ! *** filters/ubo-link-shorteners.txt ***
 ! gplinks all domains (gplinks.co/EWu8)
@@ -23581,7 +23594,7 @@ qiwi.gg##+js(aost, document.createElement, createDecoy)
 ||rentry.co^frame,3p
 qiwi.gg##+js(rmnt, script, NEXT_REDIRECT)
 .pro/?u=*&m=$doc
-/ads.js?api_key=
+/ads.js?api_key=*&header=$all
 qiwi.gg##+js(aeld, click, form.submit)
 javturbo.xyz##+js(nowoif)
 @@||wavse.com^$ghide
@@ -23682,7 +23695,6 @@ easybib.com##+js(nano-sib)
 realmadryt.pl##+js(no-fetch-if, method:GET)
 @@||mirroshu.top^$script,other,ghide,1p
 mirroshu.top##[id^="div-gpt-ad-"]
-poophq.com,veev.to##+js(aopr, VEEVPop)
 poophq.com,veev.to##+js(nowoif)
 poophq.com,veev.to##+js(set, fapit.check, noopFunc)
 *$script,3p,domain=poophq.com|veev.to,redirect-rule=noopjs
