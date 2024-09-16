@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Sun, 15 Sep 2024 16:58:13 +0000
-! Diff-Path: ../patches/2024.9.15.1282.patch#ublock-filters
+! Last modified: Mon, 16 Sep 2024 02:51:10 +0000
+! Diff-Path: ../patches/2024.9.16.177.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -10538,6 +10538,8 @@ metoffice.gov.uk##.maps-header-advert
 metoffice.gov.uk##.header, .leaflet-top.leaflet-left:style(top: 0 !important;)
 metoffice.gov.uk##.map:style(top: 52px !important;)
 !#endif
+||ticketmaster.sg/js/adblock.js$script,1p
+ticketmaster.sg##+js(nosiif, detector)
 ! Link shortener filters go into their own dedicated list
 ! *** filters/ubo-link-shorteners.txt ***
 ! gplinks all domains (gplinks.co/EWu8)
@@ -14197,8 +14199,8 @@ file4go.net##+js(no-xhr-if, outbrain)
 ||serijefilmovi.com^$csp=script-src * 'unsafe-inline'
 ! pp server
 !#if ext_devbuild
-||xyz^$xhr,3p,to=xyz,ipaddress=/^139\.45\.19[5-7]\.\d{1,3}/
-||com^$xhr,3p,to=com,ipaddress=/^139\.45\.19[5-7]\.\d{1,3}/
+||xyz/|$xhr,3p,method=head,ipaddress=/^139\.45\.19[5-7]\.\d{1,3}/
+||com/|$xhr,3p,method=head,ipaddress=/^139\.45\.19[5-7]\.\d{1,3}/
 !#endif
 /^https?:\/\/[a-z]{8,15}\.xyz\/$/$xhr,3p,to=xyz,method=head,header=x-traceid2
 /^https?:\/\/[a-z]{8,15}\.com\/$/$xhr,3p,to=com,method=head,header=x-traceid2
@@ -19559,7 +19561,7 @@ ygosu.com,bamgosu.site##div[style="text-align:center"]:has(> iframe[src])
 ||html-load.com/report?$xhr
 ||html-load.cc^$font,ping,media
 ||html-load.cc/report?$xhr
-||html-load.com/loader.min.js$domain=ndtvprofit.com|javatpoint.com|meeco.kr
+||html-load.com/loader.min.js$domain=ndtvprofit.com|heureka.cz|javatpoint.com|meeco.kr
 .live/fl1hrrg/$doc,popup,domain=live
 .xyz/fl1hrrg/$doc,popup,domain=xyz
 .site/fl1hrrg/$doc,popup,domain=site
@@ -19583,11 +19585,11 @@ a-ha.io,cboard.net,joongdo.co.kr,viva100.com,gamingdeputy.com,alle-tests.nl##+js
 !#if cap_html_filtering
 interfootball.co.kr,a-ha.io,cboard.net,jjang0u.com,joongdo.co.kr,viva100.com,gamingdeputy.com,thesaurus.net,alle-tests.nl,maketecheasier.com,automobile-catalog.com,allthekingz.com,motorbikecatalog.com,tweaksforgeeks.com,m.inven.co.kr##^script:has-text(KCgpPT57bGV0IGU)
 badmouth1.com,blog.esuteru.com,blog.livedoor.jp,dziennik.pl,etnews.com,eurointegration.com.ua,flatpanelshd.com,fourfourtwo.co.kr,gadgets360.com,hoyme.jp,itainews.com,iusm.co.kr,jin115.com,lamire.jp,logicieleducatif.fr,missyusa.com,mydaily.co.kr,ndtvprofit.com,picrew.me,taxguru.in,text-compare.com,tweaksforgeeks.com,reportera.co.kr,sportsrec.com,sportsseoul.com,videogamemods.com,wfmz.com,worldhistory.org,onlinegdb.com,winfuture.de,issuya.com,pravda.com.ua,wort-suchen.de,word-grabber.com,palabr.as,motscroises.fr,cruciverba.it,freemcserver.net##^script[onload*="error-report.com"]
-allthetests.com,javatpoint.com,globalrph.com,carscoops.com,indiatimes.com,meeco.kr,freemcserver.net##^script:has-text(error-report.com)
+allthetests.com,javatpoint.com,globalrph.com,carscoops.com,heureka.cz,indiatimes.com,meeco.kr,freemcserver.net##^script:has-text(error-report.com)
 worldhistory.org##^script:has-text(adShield)
 !#else
 interfootball.co.kr,a-ha.io,cboard.net,jjang0u.com,joongdo.co.kr,viva100.com,gamingdeputy.com,thesaurus.net,alle-tests.nl,maketecheasier.com,automobile-catalog.com,allthekingz.com,motorbikecatalog.com,tweaksforgeeks.com,m.inven.co.kr##+js(rmnt, script, KCgpPT57bGV0IGU)
-allthetests.com,javatpoint.com,globalrph.com,carscoops.com,indiatimes.com,meeco.kr,freemcserver.net##+js(rmnt, script, error-report.com)
+allthetests.com,javatpoint.com,globalrph.com,carscoops.com,heureka.cz,indiatimes.com,meeco.kr,freemcserver.net##+js(rmnt, script, error-report.com)
 worldhistory.org##+js(rmnt, script, adShield)
 !#endif
 !##a[href*="/fl1hrrg/"] > div[class^="jizsl_"]
@@ -23560,7 +23562,6 @@ tomarnarede.pt##+js(rmnt, script, deblocker)
 minecraft.buzz##+js(aeld, np.detect)
 terrylove.com##+js(nostif, prompt, 1000)
 yourlifeupdated.net##+js(noeval-if, ads)
-ticketmaster.sg##+js(set, detectAdblock, noopFunc)
 app.hellovaia.com,app.studysmarter.de,app.vaia.com##+js(trusted-replace-xhr-response, "ads_disabled":false, "ads_disabled":true, payments)
 app.hellovaia.com,app.studysmarter.de,app.vaia.com##aside > .ng-star-inserted
 111.90.141.252##+js(acs, $, noConflict)
