@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Quick fixes
 ! Expires: 12 hours
-! Last modified: Wed, 18 Sep 2024 01:57:24 +0000
-! Diff-Path: ../patches/2024.9.18.269.patch#ublock-quick-fixes
+! Last modified: Wed, 18 Sep 2024 09:20:02 +0000
+! Diff-Path: ../patches/2024.9.18.566.patch#ublock-quick-fixes
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/quick-fixes.txt ***
@@ -42,9 +42,11 @@ www.youtube.com##+js(trusted-replace-xhr-response, /"adPlacements.*?("adSlots"|"
 !#if cap_html_filtering
 ||facebook.com/api/graphql/$xhr,replace=/\{"brs_c[^\n]+?"SponsoredData","ad_id"[^\n]+"cursor":"[^"]+"\}/{}/g,domain=web.facebook.com|www.facebook.com
 ||facebook.com/api/graphql/$xhr,replace=/\{"cnt_lbl_brs"[^\n]+?"SponsoredData","ad_id"[^\n]+"cursor":"[^"]+"\}/{}/g,domain=web.facebook.com|www.facebook.com
+||facebook.com/api/graphql/$xhr,replace=/\{"label_field_for_brs":[^\n]+?"SponsoredData","ad_id"[^\n]+"cursor":"[^"]+"\}/{}/g,domain=web.facebook.com|www.facebook.com
 !#else
 web.facebook.com,www.facebook.com##+js(trusted-replace-xhr-response, '/\{"brs_c[^\n]+?"SponsoredData","ad_id"[^\n]+"cursor":"[^"]+"\}/g', {}, /api/graphql)
 web.facebook.com,www.facebook.com##+js(trusted-replace-xhr-response, '/\{"cnt_lbl_brs"[^\n]+?"SponsoredData","ad_id"[^\n]+"cursor":"[^"]+"\}/g', {}, /api/graphql)
+web.facebook.com,www.facebook.com##+js(trusted-replace-xhr-response, '/\{"label_field_for_brs":[^\n]+?"SponsoredData","ad_id"[^\n]+"cursor":"[^"]+"\}/g', {}, /api/graphql)
 !#endif
 ! VOE sites
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$script,3p,redirect=google-ima.js,domain=evelynthankregion.com|jessicaglassauthor.com,important
@@ -77,7 +79,8 @@ japscan.lol#@#+js(rmnt, script, imgGood)
 japscan.lol#@#+js(rmnt, script, imgHola)
 japscan.lol##+js(aeld, DOMContentLoaded, /^_.+\+'\);'\)\( ?\);\}catch/)
 japscan.lol#@#+js(rmnt, script, /holaImg|jso\$|spliteraf|[A-z]+;\(function\(\)\{function |window\[\'document\'\]|return doc;|"innerHTML"|\._\[|return eval/)
-japscan.lol##.navbar-nav > li#navpromo2.nav-item > a[href^="https://www.origoclick.com"]
+japscan.lol#@#.navbar-nav > li#navpromo2.nav-item > a[href^="https://www.origoclick.com"]
+japscan.lol##.navbar-nav > li#navpromo2.nav-item > a[href^="https://www.origoclick.com"]:remove-attr(href)
 /^https?:\/\/[-a-z]{8,15}\.(?:com|net)\/401\/\d{7}(?:\?v=\d+)?$/$script,3p,domain=japscan.lol,important
 /^https?:\/\/[a-z]{8,15}\.xyz\/$/$xhr,3p,to=xyz,method=head,header=x-traceid2,domain=japscan.lol,important
 /^https?:\/\/[a-z]{8,15}\.com\/$/$xhr,3p,to=com,method=head,header=x-traceid2,domain=japscan.lol,important
@@ -134,8 +137,7 @@ poophq.com,veev.to##+js(set, fapit.check, noopFunc)
 veev.to#@#.avb-active
 !#if ext_devbuild
 poophq.com,veev.to##+js(no-xhr-if, /\/ad-provider\.js$/, length:35000)
-poophq.com,veev.to##+js(no-xhr-if, twinrdsyn.com)
-poophq.com,veev.to##+js(no-xhr-if, twinrdsrv.com)
+poophq.com,veev.to##+js(no-xhr-if, /twinrdsyn\.com|twinrdsyte\.com|twinrdsrv\.com/)
 !#else
 !#if cap_html_filtering
 ||static.veevcdn.co/assets/videoplayer/$script,replace=/'cdv'/'cu'/
@@ -143,6 +145,7 @@ poophq.com,veev.to##+js(no-xhr-if, twinrdsrv.com)
 @@.js|$xhr,domain=veev.to|poophq.com
 @@||twinrdsyn.com^$xhr,other,domain=poophq.com|veev.to
 @@||twinrdsrv.com^$xhr,domain=poophq.com|veev.to
+@@||twinrdsyte.com^$xhr,domain=poophq.com|veev.to
 ||c.adsco.re/|$script,redirect=none:5,domain=poophq.com|veev.to
 !#endif
 !#endif
