@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Quick fixes
 ! Expires: 12 hours
-! Last modified: Fri, 20 Sep 2024 08:39:12 +0000
-! Diff-Path: ../patches/2024.9.20.680.patch#ublock-quick-fixes
+! Last modified: Fri, 20 Sep 2024 16:11:23 +0000
+! Diff-Path: ../patches/2024.9.20.991.patch#ublock-quick-fixes
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/quick-fixes.txt ***
@@ -80,11 +80,11 @@ japscan.lol##+js(aeld, DOMContentLoaded, /^_.+\+'\);'\)\( ?\);\}catch/)
 japscan.lol#@#+js(rmnt, script, /holaImg|jso\$|spliteraf|[A-z]+;\(function\(\)\{function |window\[\'document\'\]|return doc;|"innerHTML"|\._\[|return eval/)
 japscan.lol#@#.navbar-nav > li#navpromo2.nav-item > a[href^="https://www.origoclick.com"]
 japscan.lol#@#+js(ra, href, .navbar-nav > li#navpromo2.nav-item > a[href^="https://www.origoclick.com"])
-japscan.lol#@#+js(ra, href, .navbar-nav > li#navpromo2.nav-item > a[href^="https://www.origoclick.com"], complete)
+japscan.lol##+js(ra, href, .navbar-nav > li#navpromo2.nav-item > a[href^="https://www.origoclick.com"], complete)
 japscan.lol##body > style + .container:first-of-type > .row > #main + #sidebar.col-md-3 > .card.mt-1 > .card[style="margin: 0px auto; display: block;"] > a.aikoi.donate[href^="http"][target="_blank"][rel="noopener noreferrer nofollow"]:not([href^="http://japscan.lol"]) > img
 japscan.lol##body > style + .container:first-of-type > .row > #main.col-md-9 > .card > #chapters.tab-content > .row.justify-content-center.align-items-center > a.image-box.donate[href^="http"][target="_blank"][rel="noopener noreferrer nofollow"]:not([href^="http://japscan.lol"]) > img
 japscan.lol#@#.navbar-nav > li#navpromo2.nav-item > a[href^="https://www.origoclick.com"]:style(pointer-events: none !important;)
-japscan.lol##.navbar-nav > li#navpromo2.nav-item > a[href^="https://www.origoclick.com"]:style(margin-left: -5000px !important;)
+japscan.lol#@#.navbar-nav > li#navpromo2.nav-item > a[href^="https://www.origoclick.com"]:style(margin-left: -5000px !important;)
 japscan.lol##body > .sticky-top + .container.text-center > .mb-2.mt-2[style="margin: 0px auto; display: block;"] > .text-center > a.donate[href^="http"][target="_blank"][rel="noopener noreferrer nofollow"]:not([href^="http://japscan.lol"]) > img
 /^https?:\/\/[-a-z]{8,15}\.(?:com|net)\/401\/\d{7}(?:\?v=\d+)?$/$script,3p,domain=japscan.lol,important
 /^https?:\/\/[a-z]{8,15}\.xyz\/$/$xhr,3p,to=xyz,method=head,header=x-traceid2,domain=japscan.lol,important
@@ -144,11 +144,12 @@ veev.to#@#.avb-active
 !#if ext_devbuild
 poophq.com,veev.to##+js(no-xhr-if, /\/ad-provider\.js$/, length:35000)
 poophq.com,veev.to##+js(no-xhr-if, /\/preroll\.engine$/)
+poophq.com,veev.to##+js(no-xhr-if, url:!/cdn\.plyr\.io|veev\.to|\/dl\?op=player_api/ method:GET)
 !#else
 !#if cap_html_filtering
 ||static.veevcdn.co/assets/videoplayer/$script,replace=/'cdv'/'cu'/
 !#else
-@@.com/preroll.engine|$xhr,3p,domain=poophq.com|veev.to
+@@||magsrv.com^$xhr,domain=poophq.com|veev.to
 ||c.adsco.re/|$script,redirect=none:5,domain=poophq.com|veev.to
 !#endif
 !#endif
@@ -160,14 +161,14 @@ anitube.us,anitube.vip,caroloportunidades.com.br##+js(no-fetch-if, mode:no-cors)
 @@*$script,3p,from=sonixgvn.net,to=flashvps.xyz|nya.pub
 /wp-content/uploads/pum/pum-site-scripts.js^$badfilter
 ||honghotduongpho.com/*/pum/pum-site-scripts.js$script
-infinityscans.xyz,infinityscans.net##+js(rpnt, script, /^\s.*?\$\.ajax\(\{/s, $.ajax({ , condition, throw)
+infinityscans.xyz,infinityscans.net##+js(rpnt, script, / \(?function\(.*catch.* \$\.ajax\(\{/s, $.ajax({ , condition, throw)
 @@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js|$xhr,domain=infinityscans.xyz|infinityscans.net
 *$script,redirect-rule=noopjs,domain=infinityscans.xyz|infinityscans.net
 infinityscans.xyz,infinityscans.net##+js(no-fetch-if, api/collect)
 infinityscans.xyz,infinityscans.net#@#+js(nowoif)
-infinityscans.xyz,infinityscans.net##+js(rpnt, script, _0x327ad7('\x30\x78\x64\x36'), false)
+infinityscans.xyz,infinityscans.net##+js(rpnt, script, /"\\x68\\x74\\x74\\x70.*?"/, false)
 infinityscans.xyz,infinityscans.net##+js(rpnt, script, ==0xc8, ==0, condition, throw)
-||quackupsilon.com^$all
+||enigmaswhereas.com^$all
 @@||d.socdm.com/adsv/*/tver_splive$xhr,domain=imasdk.googleapis.com
 ||i.socdm.com^$media,redirect=noop-1s.mp4
 poipiku.com#@##DetailOverlay
@@ -178,3 +179,6 @@ youtube.com#@#+js(trusted-set-cookie, SOCS, CAISNQgDEitib3FfaWRlbnRpdHlmcm9udGVu
 sportnews.to##+js(aeld, DOMContentLoaded, adsSrc)
 @@||static.adsafeprotected.com/vans-adapter-google-ima.js^$script,domain=wsj.com
 @@||static.adsafeprotected.com/iasPET.1.js^$script,domain=wsj.com
+exploader.net#@#article > div[style="margin-left: -63px;width: 1120px;height: 450px;margin-bottom: 5px;display: flex;align-items: center;"]:style(position: absolute !important; left: -3000px !important;)
+exploader.net#@#+js(spoof-css, article > div[style="margin-left: -63px;width: 1120px;height: 450px;margin-bottom: 5px;display: flex;align-items: center;"] > div, left, auto)
+exploader.net##article > div[style="margin-left: -63px;width: 1120px;height: 450px;margin-bottom: 5px;display: flex;align-items: center;"]:remove()
