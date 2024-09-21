@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Quick fixes
 ! Expires: 12 hours
-! Last modified: Sat, 21 Sep 2024 11:21:58 +0000
-! Diff-Path: ../patches/2024.9.21.762.patch#ublock-quick-fixes
+! Last modified: Sat, 21 Sep 2024 15:22:27 +0000
+! Diff-Path: ../patches/2024.9.21.1045.patch#ublock-quick-fixes
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/quick-fixes.txt ***
@@ -40,15 +40,11 @@ www.youtube.com##+js(trusted-replace-xhr-response, /"adPlacements.*?("adSlots"|"
 ||www.youtube-nocookie.com/youtubei/v1/player?$xhr,1p,replace=/"adPlacements.*?([A-Z]"\}|"\}{2\,4})\}\]\,//
 ||www.youtube-nocookie.com/youtubei/v1/player?$xhr,1p,replace=/"adSlots.*?\}\}\]\,"adBreakHeartbeatParams/"adBreakHeartbeatParams/
 !#if cap_html_filtering
-||facebook.com/api/graphql/$xhr,replace=/\{"brs_c[^\n]+?"SponsoredData","ad_id"[^\n]+"cursor":"[^"]+"\}/{}/g,domain=web.facebook.com|www.facebook.com
-||facebook.com/api/graphql/$xhr,replace=/\{"cnt_lbl_brs"[^\n]+?"SponsoredData","ad_id"[^\n]+"cursor":"[^"]+"\}/{}/g,domain=web.facebook.com|www.facebook.com
-||facebook.com/api/graphql/$xhr,replace=/\{"label_field_for_brs":[^\n]+?"SponsoredData","ad_id"[^\n]+"cursor":"[^"]+"\}/{}/g,domain=web.facebook.com|www.facebook.com
-||facebook.com/api/graphql/$xhr,replace=/\{"the_cnt_lbl_for_brs":[^\n]+?"SponsoredData","ad_id"[^\n]+"cursor":"[^"]+"\}/{}/g,domain=web.facebook.com|www.facebook.com
+||facebook.com/api/graphql/$xhr,replace=/\{"newest_lbl_for_brs"[^\n]+?"SponsoredData","ad_id"[^\n]+"cursor":"[^"]+"\}/{}/g,domain=web.facebook.com|www.facebook.com
+||facebook.com/api/graphql/$xhr,replace=/null,"category_sensitive"[^\n]+?"SponsoredData","ad_id"[^\n]+"cursor":"[^"]+"\}/null}/g,domain=web.facebook.com|www.facebook.com
 !#else
-web.facebook.com,www.facebook.com##+js(trusted-replace-xhr-response, '/\{"brs_c[^\n]+?"SponsoredData","ad_id"[^\n]+"cursor":"[^"]+"\}/g', {}, /api/graphql)
-web.facebook.com,www.facebook.com##+js(trusted-replace-xhr-response, '/\{"cnt_lbl_brs"[^\n]+?"SponsoredData","ad_id"[^\n]+"cursor":"[^"]+"\}/g', {}, /api/graphql)
-web.facebook.com,www.facebook.com##+js(trusted-replace-xhr-response, '/\{"label_field_for_brs":[^\n]+?"SponsoredData","ad_id"[^\n]+"cursor":"[^"]+"\}/g', {}, /api/graphql)
-web.facebook.com,www.facebook.com##+js(trusted-replace-xhr-response, '/\{"the_cnt_lbl_for_brs":[^\n]+?"SponsoredData","ad_id"[^\n]+"cursor":"[^"]+"\}/g', {}, /api/graphql)
+web.facebook.com,www.facebook.com##+js(trusted-replace-xhr-response, /\{"newest_lbl_for_brs"[^\n]+?"SponsoredData","ad_id"[^\n]+"cursor":"[^"]+"\}/g, {}, /api/graphql)
+web.facebook.com,www.facebook.com##+js(trusted-replace-xhr-response, '/null,"category_sensitive"[^\n]+?"SponsoredData","ad_id"[^\n]+"cursor":"[^"]+"\}/g', null}, /api/graphql)
 !#endif
 ! VOE sites
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$script,3p,redirect=google-ima.js,domain=evelynthankregion.com|jessicaglassauthor.com|lorimuchbenefit.com,important
@@ -82,9 +78,10 @@ japscan.lol##body > style + .container:first-of-type > .row > #main.col-md-9 > .
 japscan.lol#@#.navbar-nav > li#navpromo2.nav-item > a[href^="https://www.origoclick.com"]:style(pointer-events: none !important;)
 japscan.lol#@#.navbar-nav > li#navpromo2.nav-item > a[href^="https://www.origoclick.com"]:style(margin-left: -5000px !important;)
 japscan.lol##body > .sticky-top + .container.text-center > .mb-2.mt-2[style="margin: 0px auto; display: block;"] > .text-center > a.donate[href^="http"][target="_blank"][rel="noopener noreferrer nofollow"]:not([href^="http://japscan.lol"]) > img
-japscan.lol##+js(ra, id, .navbar-nav > li#navpromo2.nav-item > a[href^="https://www.origoclick.com"], complete)
+japscan.lol#@#+js(ra, id, .navbar-nav > li#navpromo2.nav-item > a[href^="https://www.origoclick.com"], complete)
 japscan.lol#@#.navbar-nav > li#navpromo2.nav-item > a[href^="https://www.origoclick.com"]:not([id])
-japscan.lol##+js(set-attr, .navbar-nav > li#navpromo2.nav-item > a[href^="https://www.origoclick.com"]:not([id]), href, false)
+japscan.lol#@#+js(set-attr, .navbar-nav > li#navpromo2.nav-item > a[href^="https://www.origoclick.com"]:not([id]), href, false)
+japscan.lol##.navbar-nav > li#navpromo2.nav-item > a[href^="https://www.origoclick.com"]:style(font-size: 0 !important;)
 /^https?:\/\/[-a-z]{8,15}\.(?:com|net)\/401\/\d{7}(?:\?v=\d+)?$/$script,3p,domain=japscan.lol,important
 /^https?:\/\/[a-z]{8,15}\.xyz\/$/$xhr,3p,to=xyz,method=head,header=x-traceid2,domain=japscan.lol,important
 /^https?:\/\/[a-z]{8,15}\.com\/$/$xhr,3p,to=com,method=head,header=x-traceid2,domain=japscan.lol,important
@@ -182,3 +179,4 @@ sportnews.to##+js(aeld, DOMContentLoaded, adsSrc)
 exploader.net#@#article > div[style="margin-left: -63px;width: 1120px;height: 450px;margin-bottom: 5px;display: flex;align-items: center;"]:style(position: absolute !important; left: -3000px !important;)
 exploader.net#@#+js(spoof-css, article > div[style="margin-left: -63px;width: 1120px;height: 450px;margin-bottom: 5px;display: flex;align-items: center;"] > div, left, auto)
 exploader.net##article > div[style="margin-left: -63px;width: 1120px;height: 450px;margin-bottom: 5px;display: flex;align-items: center;"]:remove()
+0115765.com##+js(set, use, false)
