@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Quick fixes
 ! Expires: 12 hours
-! Last modified: Sun, 22 Sep 2024 20:00:39 +0000
-! Diff-Path: ../patches/2024.9.23.569.patch#ublock-quick-fixes
+! Last modified: Mon, 23 Sep 2024 13:18:55 +0000
+! Diff-Path: ../patches/2024.9.23.866.patch#ublock-quick-fixes
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/quick-fixes.txt ***
@@ -84,6 +84,7 @@ japscan.lol#@#+js(set-attr, .navbar-nav > li#navpromo2.nav-item > a[href^="https
 japscan.lol##.navbar-nav > li#navpromo2.nav-item > a[href^="https://www.origoclick.com"]:style(font-size: 0 !important;)
 japscan.lol##+js(aost, eval, stackDepth:4)
 japscan.lol##+js(aost, eval, stackDepth:2)
+japscan.lol##+js(acs, RegExp, japscan)
 /^https?:\/\/[-a-z]{8,15}\.(?:com|net)\/401\/\d{7}(?:\?v=\d+)?$/$script,3p,domain=japscan.lol,important
 /^https?:\/\/[a-z]{8,15}\.xyz\/$/$xhr,3p,to=xyz,method=head,header=x-traceid2,domain=japscan.lol,important
 /^https?:\/\/[a-z]{8,15}\.com\/$/$xhr,3p,to=com,method=head,header=x-traceid2,domain=japscan.lol,important
@@ -125,9 +126,9 @@ poophq.com,veev.to##+js(no-xhr-if, /\/preroll\.engine$/)
 poophq.com,veev.to##+js(no-xhr-if, url:!/cdn\.plyr\.io|veev\.to|\/dl\?op=player_api/ method:GET)
 !#else
 !#if cap_html_filtering
-||static.veevcdn.co/assets/videoplayer/$script,replace=/'cdv'/'cu'/
+||static.veevcdn.co/assets/videoplayer/$script,replace=/return void _0x[a-z0-9]+\(\!0x0\)//g
 !#else
-@@||magsrv.com^$xhr,domain=poophq.com|veev.to
+@@||pemsrv.com^$xhr,domain=poophq.com|veev.to
 ||c.adsco.re/|$script,redirect=none:5,domain=poophq.com|veev.to
 !#endif
 !#endif
