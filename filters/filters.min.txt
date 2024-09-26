@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Thu, 26 Sep 2024 06:08:58 +0000
-! Diff-Path: ../patches/2024.9.26.443.patch#ublock-filters
+! Last modified: Thu, 26 Sep 2024 10:16:15 +0000
+! Diff-Path: ../patches/2024.9.26.769.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -10563,6 +10563,7 @@ uploadmall.com#@#.AdSense
 uploadmall.com##+js(set, navigator.brave, undefined)
 app.involve.asia#@#.ads-banner
 redgifs.com##+js(json-prune, gifs.[-].cta)
+smailpro.com##+js(set, adsbygoogle_ama_fc_has_run, true)
 ! Link shortener filters go into their own dedicated list
 ! *** filters/ubo-link-shorteners.txt ***
 ! gplinks all domains (gplinks.co/EWu8)
@@ -14214,7 +14215,6 @@ filmywap.*##+js(acs, Object, XMLHttpRequest)
 coinfaucet.io##+js(acs, decodeURI, zfgloadedpopup)
 bitfly.io,pelisplus.*,pelisplus2.*##+js(aost, Math.random, /\st\.[a-zA-Z]*\sinlineScript/)
 shahiid-anime.net##+js(aost, Object,  /(?=^(?!.*(https)))/)
-nsw2u.*##+js(trusted-replace-argument, document.createElement, 0, "''", condition, iframe)
 ||flixhq.*/loadme/
 file4go.net##+js(no-xhr-if, outbrain)
 ! pp_blob
@@ -19696,7 +19696,7 @@ flipkart.com##span:has-text(/^Ad$/):upward(div[style])
 flipkart.com##div[data-id] > div[data-tkid] > div[class]:has-text(Sponsored):upward(div[data-id])
 flipkart.com##div[data-id]:has(rect[width="62"][height="18"][fill="white"] + path[d^="M5.82955"][fill="#9E9E9E"])
 !#if env_mobile
-flipkart.com##div[dir]:has-text(/^(?:Sponsored|AD)$/):upward(div[style])
+flipkart.com##div[dir]:has-text(/^(?:Sponsored|AD)$/):upward(div[id^="_parentCtr_"] > div[style^="transform: translate"])
 flipkart.com##div[style*="width:24px;height:20px;"]:has(img[src*="/promos/"]):upward(div[style])
 !#endif
 tamarindoyam.com##+js(nostif, show)
