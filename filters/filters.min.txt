@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Sat, 28 Sep 2024 12:25:43 +0000
-! Diff-Path: ../patches/2024.9.28.863.patch#ublock-filters
+! Last modified: Sat, 28 Sep 2024 19:02:05 +0000
+! Diff-Path: ../patches/2024.9.28.1159.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -3450,7 +3450,7 @@ suedkurier.de##+js(set, _ti_update_user, noopFunc)
 gounlimited.to##+js(acs, $, adb)
 gounlimited.to##+js(nowoif)
 gounlimited.to##+js(nowebrtc)
-animeheaven.*##+js(set, check_adblock, true)
+animeheaven.*##+js(no-xhr-if, method:HEAD)
 ||animeheaven.*/api/pop.php$xhr,1p
 payskip.org##+js(aeld, DOMContentLoaded, &nbsp)
 payskip.org##+js(aopw, atOptions)
@@ -10546,6 +10546,7 @@ app.involve.asia#@#.ads-banner
 redgifs.com##+js(json-prune, gifs.[-].cta)
 smailpro.com##+js(set, adsbygoogle_ama_fc_has_run, true)
 autopareri.com##+js(acs, jQuery, adblock)
+@@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$xhr,domain=koramaup.com
 ! Link shortener filters go into their own dedicated list
 ! *** filters/ubo-link-shorteners.txt ***
 ! gplinks all domains (gplinks.co/EWu8)
@@ -20979,18 +20980,17 @@ techclips.net##+js(nostif, sadbl)
 ||techclips.net/jqueri.php
 ! AdSpyglass 0i0i0i0.com CNAME adserver
 /^https?:\/\/a\.[-0-9a-z]{4,21}\.[a-z]{2,5}\/(?=[a-z]*[0-9A-Z])[0-9a-zA-Z]{5,7}\.js$/$script,match-case
+/^https?:\/\/aa\.[-0-9a-z]{4,21}\.[a-z]{2,5}\/(?=[a-z]*[0-9A-Z])[0-9a-zA-Z]{5,7}\.js$/$script,match-case
 /^https?:\/\/asg\.[-0-9a-z]{4,21}\.[a-z]{2,5}\/(?=[a-z]*[0-9A-Z])[0-9a-zA-Z]{5,7}\.js$/$script,match-case
-/^https?:\/\/pre\.[0-9a-z]{6,12}\.[a-z]{3,4}\/(?=[a-z]{0,6}[0-9A-Z])[0-9a-zA-Z]{7}\.js$/$script,match-case
-/^https?:\/\/oi\.[0-9a-z]{6,12}\.[a-z]{3,4}\/(?=[a-z]{0,6}[0-9A-Z])[0-9a-zA-Z]{7}\.js$/$script,match-case
-/^https?:\/\/dl\.[0-9a-z]{6,12}\.[a-z]{3,4}\/(?=[a-z]{0,6}[0-9A-Z])[0-9a-zA-Z]{7}\.js$/$script,match-case
-/^https?:\/\/[0-9a-z]{4,8}\.autos\/(?=[a-z]{0,6}[0-9A-Z])[0-9a-zA-Z]{7}\.js$/$script,3p,match-case
-/^https?:\/\/[0-9a-z]{4,8}\.beauty\/(?=[a-z]{0,6}[0-9A-Z])[0-9a-zA-Z]{7}\.js$/$script,3p,match-case
-/^https?:\/\/[0-9a-z]{4,8}\.lol\/(?=[a-z]{0,6}[0-9A-Z])[0-9a-zA-Z]{7}\.js$/$script,3p,match-case
-/^https?:\/\/[0-9a-z]{4,8}\.mom\/(?=[a-z]{0,6}[0-9A-Z])[0-9a-zA-Z]{7}\.js$/$script,3p,match-case
-/^https?:\/\/[0-9a-z]{4,8}\.name\/(?=[a-z]{0,6}[0-9A-Z])[0-9a-zA-Z]{7}\.js$/$script,3p,match-case
-/^https?:\/\/[0-9a-z]{4,8}\.pro\/(?=[a-z]{0,6}[0-9A-Z])[0-9a-zA-Z]{7}\.js$/$script,3p,match-case
-/^https?:\/\/(?:q\.)?[0-9a-z]{4,8}\.xyz\/(?=[a-z]{0,6}[0-9A-Z])[0-9a-zA-Z]{7}\.js$/$script,3p,match-case
-/^https?:\/\/(?=[a-z]{0,10}\d)[0-9a-z]{11}\.[-0-9a-z]{6,}\.com\/(?=[a-z]{0,6}[0-9A-Z])[0-9a-zA-Z]{7}\.js$/$script,1p,strict3p,match-case,to=com
+/^https?:\/\/pre\.[0-9a-z]{6,12}\.[a-z]{3,4}\/(?=[a-z]*[0-9A-Z])[0-9a-zA-Z]{5,7}\.js$/$script,match-case
+/^https?:\/\/oi\.[0-9a-z]{6,12}\.[a-z]{3,4}\/(?=[a-z]*[0-9A-Z])[0-9a-zA-Z]{5,7}\.js$/$script,match-case
+/^https?:\/\/dl\.[0-9a-z]{6,12}\.[a-z]{3,4}\/(?=[a-z]*[0-9A-Z])[0-9a-zA-Z]{5,7}\.js$/$script,match-case
+/^https?:\/\/[0-9a-z]{4,8}\.fun\/(?=[a-z]*[0-9A-Z])[0-9a-zA-Z]{5,7}\.js$/$script,3p,match-case
+/^https?:\/\/[0-9a-z]{4,8}\.lol\/(?=[a-z]*[0-9A-Z])[0-9a-zA-Z]{5,7}\.js$/$script,3p,match-case
+/^https?:\/\/[0-9a-z]{4,8}\.name\/(?=[a-z]*[0-9A-Z])[0-9a-zA-Z]{5,7}\.js$/$script,3p,match-case
+/^https?:\/\/[0-9a-z]{4,8}\.pro\/(?=[a-z]*[0-9A-Z])[0-9a-zA-Z]{5,7}\.js$/$script,3p,match-case
+/^https?:\/\/(?:q\.)?[0-9a-z]{4,8}\.xyz\/(?=[a-z]*[0-9A-Z])[0-9a-zA-Z]{5,7}\.js$/$script,3p,match-case
+/^https?:\/\/(?=[a-z]{0,10}\d)[0-9a-z]{11}\.[-0-9a-z]{6,}\.com\/(?=[a-z]*[0-9A-Z])[0-9a-zA-Z]{5,7}\.js$/$script,1p,strict3p,match-case,to=com
 /asg_embed.js
 /vast-im.js$script
 ://a.*/click/$image
