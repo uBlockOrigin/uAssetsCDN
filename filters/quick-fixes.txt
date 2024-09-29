@@ -1,5 +1,5 @@
 ! Title: uBlock₀ filters – Quick fixes
-! Last modified: Sun, 29 Sep 2024 03:30:32 +0000
+! Last modified: Sun, 29 Sep 2024 14:20:45 +0000
 ! Expires: 8 hours
 ! Description: Immediate, temporary filters to fix websites
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -105,7 +105,8 @@ japscan.lol#@#.navbar-nav > li#navpromo2.nav-item > a[href^="https://www.origocl
 japscan.lol##.navbar-nav > li#navpromo2.nav-item > a[href^="https://www.origoclick.com"]:style(clip-path: polygon(1px 1px, 1px 1px, 1px 1px ,1px 1px) !important;)
 japscan.lol#@#+js(rmnt, script, /statically\.|cdn\.stati/)
 japscan.lol#@#+js(rmnt, script, https://cdn.)
-japscan.lol##+js(rmnt, script, Japscan/Test)
+japscan.lol#@#+js(rmnt, script, Japscan/Test)
+japscan.lol##+js(rmnt, script, /2050Rhjynm|Test\/main|^function .{7000\,7500}eval\(.{10\,20}$|\,setTimeout\(function\(\)\{/)
 /^https?:\/\/[-a-z]{8,15}\.(?:com|net)\/401\/\d{7}(?:\?v=\d+)?$/$script,3p,domain=japscan.lol,important
 /^https?:\/\/[a-z]{8,15}\.xyz\/$/$xhr,3p,to=xyz,method=head,header=x-traceid2,domain=japscan.lol,important
 /^https?:\/\/[a-z]{8,15}\.com\/$/$xhr,3p,to=com,method=head,header=x-traceid2,domain=japscan.lol,important
@@ -172,10 +173,6 @@ anitube.us,anitube.vip,caroloportunidades.com.br##+js(no-fetch-if, mode:no-cors)
 ! https://github.com/uBlockOrigin/uAssets/issues/22648
 @@*$script,3p,from=sonixgvn.net,to=flashvps.xyz|nya.pub
 
-! https://github.com/uBlockOrigin/uAssets/issues/25088
-/wp-content/uploads/pum/pum-site-scripts.js^$badfilter
-||honghotduongpho.com/*/pum/pum-site-scripts.js$script
-
 ! https://github.com/uBlockOrigin/uAssets/issues/20401
 infinityscans.xyz,infinityscans.net##+js(rpnt, script, / \(?function\(.*catch.* \$\.ajax\(\{/s, $.ajax({ , condition, throw)
 @@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js|$xhr,domain=infinityscans.xyz|infinityscans.net
@@ -191,10 +188,6 @@ youtube.com#@#+js(trusted-set-cookie, SOCS, CAISNQgDEitib3FfaWRlbnRpdHlmcm9udGVu
 
 ! https://github.com/uBlockOrigin/uAssets/issues/19935
 sportnews.to##+js(aeld, DOMContentLoaded, adsSrc)
-
-! https://github.com/AdguardTeam/AdguardFilters/issues/189208
-0115765.com##+js(set, use, false)
-@@||0115765.com/assets/ads/main.js
 
 ! https://github.com/uBlockOrigin/uAssets/issues/8719
 1001tracklists.com##+js(rmnt, script, .className.indexOf)
@@ -216,4 +209,7 @@ tters.jp###check-ad:style(height: 10px !important; position: absolute !important
 @@||google-analytics.com/mp/collect?$xhr,domain=startse.com
 
 ! https://github.com/AdguardTeam/AdguardFilters/commit/1a783762b08b18066cc401325f8cb9161e0f902e
+tver.jp##+js(json-prune, ads)
+tver.jp##+js(json-prune, data.adData)
+tver.jp##+js(nano-stb, /nrWrapper\(\)|n\.setTimeoutIds_\.has\(i\)/, 10000)
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$script,redirect=google-ima.js,domain=tver.jp,important
