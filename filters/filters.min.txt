@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Thu, 03 Oct 2024 12:10:36 +0000
-! Diff-Path: ../patches/2024.10.3.867.patch#ublock-filters
+! Last modified: Thu, 03 Oct 2024 18:46:19 +0000
+! Diff-Path: ../patches/2024.10.3.1159.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -10548,12 +10548,17 @@ app.involve.asia#@#.ads-banner
 redgifs.com##+js(json-prune, gifs.[-].cta)
 smailpro.com##+js(set, adsbygoogle_ama_fc_has_run, true)
 autopareri.com##+js(acs, jQuery, adblock)
-@@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$xhr,domain=koramaup.com
+koramaup.com##+js(no-xhr-if, pagead2.googlesyndication.com)
+koramaup.com##+js(rpnt, script, 200===r.status, 0===r.status, condition, getNextDownloadPageLink)
+koramaup.com##+js(rpnt, script, return r.responseText, return `a.getAttribute("data-ad-client")||""`, condition, getNextDownloadPageLink)
 callofwar.com##+js(rmnt, script, Anzeige)
 4edtcixl.xyz##+js(nowoif)
 picrew.me##.play-Imagemaker:style(height: 100% !important;)
 deadline.com##+js(rmnt, script, admbenefits)
 ||cdn.pubfuture-ad.com/v2/unit/pt.js$script,redirect-rule=noopjs,domain=webdexscans.com
+||imasdk.googleapis.com/js/sdkloader/ima3.js$script,3p,redirect=google-ima.js,domain=animationdigitalnetwork.com
+! yonder. fr detection
+@@||yonder.fr^$script,1p
 ! Link shortener filters go into their own dedicated list
 ! *** filters/ubo-link-shorteners.txt ***
 ! gplinks all domains (gplinks.co/EWu8)
@@ -11586,6 +11591,7 @@ worldmak.com##+js(no-fetch-if, googlesyndication)
 technoinformations.com,worldmak.com###wpsafe-link:style(display: block !important;)
 bollywoodchamp.in##+js(noeval-if, /chp_?ad/)
 texw.online##+js(noeval-if, /chp_?ad/)
+ikingfile.mooo.com##+js(nowoif)
 !#if env_mobile
 ! *** filters/filters-mobile.txt ***
 !----- 2020 -----
@@ -16618,15 +16624,16 @@ eplayer.click##+js(aopr, AaDetector)
 ustream.click##+js(acs, RegExp, 'shift')
 ustream.click##^script:has-text('shift')
 ustream.click##^script:has-text(\'shift\')
-! performance slowndown by site's antiadb code
+1cloudfile.com##+js(no-xhr-if, pagead2.googlesyndication.com)
+1cloudfile.com##+js(rpnt, script, 200===r.status, 0===r.status, condition, getNextDownloadPageLink)
+1cloudfile.com##+js(rpnt, script, return r.responseText, return `a.getAttribute("data-ad-client")||""`, condition, getNextDownloadPageLink)
 1cloudfile.com##+js(nosiif, !display)
 1cloudfile.com##+js(nowoif)
-1cloudfile.com##+js(no-fetch-if, /googlesyndication|nerveheels/)
+1cloudfile.com##+js(no-fetch-if, /nerveheels/)
 1cloudfile.com##+js(acs, navigator, FingerprintJS)
 ||1cloudfile.com/sw.js$script
 1cloudfile.com#@#.advert-wrapper
 1cloudfile.com##.advert-wrapper:style(clip-path: circle(0) !important;)
-1cloudfile.com##.uk-text-center
 1cloudfile.com##.preview-download-wrapper
 1cloudfile.com##.content-preview-wrapper
 ||browsingcontredir.com^
@@ -19230,8 +19237,9 @@ filemoon.*##+js(aopr, FMPoopS)
 filemooon.top##+js(noeval-if, popunder)
 embedmoon.*,filemoon.*,kerapoxy.*##+js(acs, document.querySelectorAll, popMagic)
 embedmoon.*,filemoon.*,kerapoxy.*##+js(acs, Math, /window\['(?:\\x[0-9a-f]{2}){2}/)
-filemoon-59t9ep5j.xyz,filemoon-nv2xl8an.xyz,filemoon-qm3chdkh.xyz##+js(acs, Math, localStorage['\x)
-filemoon-59t9ep5j.xyz,filemoon-nv2xl8an.xyz,filemoon-qm3chdkh.xyz##+js(nowoif)
+/^filemoon-.*\.xyz$/##+js(nowoif)
+/^filemoon-.*\.xyz$/##+js(acs, Math, localStorage['\x)
+*$xhr,1p,redirect-rule=nooptext,domain=/^filemoon-.*\.xyz$/
 filemoon-59t9ep5j.xyz,filemoon-nv2xl8an.xyz##+js(acs, Math.floor, urls.length)
 *$script,3p,denyallow=gstatic.com,domain=filemoon-59t9ep5j.xyz|filemoon-nv2xl8an.xyz 
 ||filemoon.nl/ad/imp?$xhr,redirect-rule=nooptext
