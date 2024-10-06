@@ -1,8 +1,17 @@
-diff name:ublock-annoyances lines:14 checksum:497330a385
+diff name:ublock-annoyances lines:23 checksum:6ae35c2701
 d3 2
 a4 2
-! Last modified: Sun, 06 Oct 2024 11:01:58 +0000
-! Diff-Path: ../patches/2024.10.6.764.patch#ublock-annoyances
+! Last modified: Sun, 06 Oct 2024 12:51:05 +0000
+! Diff-Path: ../patches/2024.10.6.1044.patch#ublock-annoyances
+a8 1
+! START: Anti copy, right-click etc.
+a16 3
+s0urce.io##+js(aeld, /^(contextmenu|copy)$/)
+! END: Anti copy, right-click etc.
+! START: Anti-adblock
+d28 1
+a28 1
+! END: Anti-adblock
 d3241 1
 a3241 1
 regex101.com##.yOGxa
@@ -13,11 +22,11 @@ hansa-online.de##+js(ra, oncontextmenu, body, complete)
 zonatmo.com##+js(nostif, adb-enabled)
 ! anicrush.to anti-devtools
 southcloud.tv##+js(set, console.clear, undefined)
-diff name:ublock-badware lines:82 checksum:65e91caef3
+diff name:ublock-badware lines:82 checksum:4203f9fb3f
 d3 2
 a4 2
 ! Last modified: Fri, 04 Oct 2024 12:46:39 +0000
-! Diff-Path: ../patches/2024.10.6.764.patch#ublock-badware
+! Diff-Path: ../patches/2024.10.6.1044.patch#ublock-badware
 a2895 2
 ||foundations-x2024.cloud^$doc
 ||foundations-x2024.sbs^$doc
@@ -96,11 +105,11 @@ adrissa.com.co,americansoda.co.uk,casteloforte.com.br,centerfabril.com.br,forque
 ||whyareyouherewho.ru^
 ||last-blink.com^
 ||orcaslicer.net^$doc
-diff name:ublock-filters lines:130 checksum:4cb8b88da4
+diff name:ublock-filters lines:139 checksum:c1b0739e85
 d3 2
 a4 2
-! Last modified: Sun, 06 Oct 2024 11:48:06 +0000
-! Diff-Path: ../patches/2024.10.6.764.patch#ublock-filters
+! Last modified: Sun, 06 Oct 2024 16:54:41 +0000
+! Diff-Path: ../patches/2024.10.6.1044.patch#ublock-filters
 d8432 11
 d8984 1
 a9006 1
@@ -140,7 +149,7 @@ $frame,csp=sandbox allow-downloads allow-forms allow-modals allow-same-origin al
 d10550 1
 a10550 5
 koramaup.com##+js(no-xhr-if, pagead2.googlesyndication.com)
-!#if !env_devbuild
+!#if !ext_devbuild
 koramaup.com##+js(rpnt, script, 200===r.status, 0===r.status, condition, getNextDownloadPageLink)
 !#endif
 koramaup.com##+js(rpnt, script, return r.responseText, return `a.getAttribute("data-ad-client")||""`, condition, getNextDownloadPageLink)
@@ -186,7 +195,7 @@ imasdk.googleapis.com##+js(no-xhr-if, vod.provider.plex.tv/ad?, war:noop-vast3.x
 d16618 1
 a16618 5
 1cloudfile.com##+js(no-xhr-if, pagead2.googlesyndication.com)
-!#if !env_devbuild
+!#if !ext_devbuild
 1cloudfile.com##+js(rpnt, script, 200===r.status, 0===r.status, condition, getNextDownloadPageLink)
 !#endif
 1cloudfile.com##+js(rpnt, script, return r.responseText, return `a.getAttribute("data-ad-client")||""`, condition, getNextDownloadPageLink)
@@ -194,6 +203,8 @@ d16621 1
 a16621 1
 1cloudfile.com##+js(no-fetch-if, /nerveheels/)
 d16626 1
+a19113 1
+streamingcommunity.*##+js(set, adBlockDetected, noopFunc)
 d19230 2
 a20453 1
 ipalibrary.me##+js(aost, fetch, checkDomain)
@@ -207,8 +218,7 @@ a21850 1
 wp.pl,money.pl,o2.pl,parenting.pl,pudelek.pl,autokult.pl,gadzetomania.pl,fotoblogia.pl,komorkomania.pl,polygamia.pl,abczdrowie.pl,benchmark.pl,kafeteria.pl,pysznosci.pl,dobreprogramy.pl,genialne.pl,autocentrum.pl,jastrzabpost.pl,deliciousmagazine.pl,forum.kardiolo.pl##body > div[class]:has(> div:first-child:empty + div:last-child > svg[width="95"][height="95"]:only-child > path)
 a21853 1
 wp.pl,~www.wp.pl,money.pl,o2.pl,parenting.pl,pudelek.pl,autokult.pl,gadzetomania.pl,fotoblogia.pl,komorkomania.pl,polygamia.pl,abczdrowie.pl,open.fm,benchmark.pl,kafeteria.pl,pysznosci.pl,dobreprogramy.pl,genialne.pl,jastrzabpost.pl,forum.kardiolo.pl##div:has(> div > iframe[src^="https://v.wpimg.pl/"][frameborder="0"][scrolling="no"]:first-child)
-a21858 1
-kobieta.wp.pl,abczdrowie.pl,money.pl##div:has(> div:only-child > div:only-child > a:first-child + div:empty:last-child)
+d21858 1
 d21860 1
 a21860 1
 pogoda.wp.pl,sportowefakty.wp.pl,kafeteria.pl,fitness.wp.pl,smaczneblogi.pl,o2.pl,forum.kardiolo.pl##div[class*=" "]:has(> div:empty):matches-css(z-index: 0):matches-css(position: relative)
@@ -216,22 +226,30 @@ d21892 1
 a21892 1
 money.pl##div:has(> style:first-child:has-text(flex: 0 0 100%) + div)
 d21906 1
+a21906 1
+money.pl###app > div:first-child > div:has(> div:only-child:empty)
+d21910 2
+a21911 1
+parenting.pl##div[data-element="wide-placeholder"][style]
 d21914 1
 a21914 1
 abczdrowie.pl,domodi.pl,forum.kardiolo.pl##*:has(> div:first-child:has(> div:first-child > a > img[src^="https://v.wpimg.pl/"]):not([alt], [id], [width], [data-src]) + div:empty)
-a21919 1
+a21918 1
+turystyka.wp.pl##div[style="min-height: 400px; height: auto;"]:has(> div > div > div > .border > .container > .labelCopy:has-text(REKLAMA))
+a21919 2
 wp.pl###comments > div > div > div:has(> div:first-child > div:only-child > div:only-child > div:last-child > div:first-child > div > a > img[src^="https://v.wpimg.pl/"][alt="null"])
-d21922 1
+abczdrowie.pl##
+d21921 2
 a21922 4
 ~www.wp.pl,wp.pl#@#div:matches-css-after(content:/R.*E.*K.*L.*A.*M.*A/):upward(1)
-~www.wp.pl,wp.pl##div:has(> a:first-child:has(> div:empty:only-child) + div:empty:last-child):remove()
+~www.wp.pl,wp.pl,money.pl##div:has(> a:first-child:has(> div:empty:only-child) + div:empty:last-child):remove()
 ~www.wp.pl,wp.pl##div:has(> div:first-child:has(> div:only-child > a > div:empty:only-child) + div:last-child:empty)
-~www.wp.pl,wp.pl##div:has(> div:first-child:has(> a:only-child > img[src^="https://v.wpimg.pl/"]) + div:empty:last-child)
-diff name:ublock-privacy lines:22 checksum:239c83299c
+~www.wp.pl,wp.pl,abczdrowie.pl,parenting.pl##div:has(> div:first-child:has(> a:first-child > img[src^="https://v.wpimg.pl/"]) + div:empty:last-child)
+diff name:ublock-privacy lines:22 checksum:a9407ad20f
 d3 2
 a4 2
 ! Last modified: Sat, 05 Oct 2024 04:10:31 +0000
-! Diff-Path: ../patches/2024.10.6.764.patch#ublock-privacy
+! Diff-Path: ../patches/2024.10.6.1044.patch#ublock-privacy
 d122 5
 a126 5
 loawa.com,ygosu.com,sportalkorea.com,edaily.co.kr,economist.co.kr,etoday.co.kr,isplus.com,hometownstation.com,honkailab.com,thestockmarketwatch.com,issuya.com,worldhistory.org,etnews.com,iusm.co.kr,dogdrip.net,etoland.co.kr,picrew.me,text-compare.com,fntimes.com,javatpoint.com,lamire.jp,bamgosu.site,allthekingz.com,automobile-catalog.com,maketecheasier.com,thesaurus.net,wfmz.com,thestar.co.uk,yorkshirepost.co.uk,mydaily.co.kr,raenonx.cc,ndtvprofit.com,badmouth1.com,logicieleducatif.fr,taxguru.in,islamicfinder.org,aikatu.jp,secure-signup.net,globalrph.com,sportsrec.com,reportera.co.kr,flatpanelshd.com,videogamemods.com,adintrend.tv,ark-unity.com,cool-style.com.tw,dziennik.pl,eurointegration.com.ua,winfuture.de,freemcserver.net,pravda.com.ua,infinityfree.com,wort-suchen.de,word-grabber.com,palabr.as,motscroises.fr,cruciverba.it,dramabeans.com,mynet.com,sportsseoul.com,smsonline.cloud,meeco.kr,heureka.cz,slobodnadalmacija.hr,crosswordsolver.com,cruciverba.it,economictimes.com,gloria.hr,laleggepertutti.it,manta.com,missyusa.com,mlbpark.donga.com,motscroises.fr,oeffnungszeitenbuch.de,ondemandkorea.com,oradesibiu.ro,oraridiapertura24.it,palabr.as,suzusoku.blog.jp,the-crossword-solver.com,tportal.hr,wort-suchen.de,wouldurather.io,woxikon.*,golf-live.at,motherlyvisions.com,w.grapps.me,gazetaprawna.pl,pressian.com,kreuzwortraetsel.de,verkaufsoffener-sonntag.com,raetsel-hilfe.de,horairesdouverture24.fr,nyitvatartas24.hu##+js(set-local-storage-item, adshield-analytics-uuid, $remove$)
@@ -250,11 +268,11 @@ a135 1
 topstarnews.net,islamicfinder.org,secure-signup.net,dramabeans.com,manta.com,tportal.hr,tvtropes.org,wouldurather.io##+js(rmnt, script, error-report.com)
 a616 1
 ||s.yimg.com/ss/analytics
-diff name:ublock-quick-fixes lines:52 checksum:1b611e5d85
+diff name:ublock-quick-fixes lines:52 checksum:2a2b0ad19e
 d3 2
 a4 2
-! Last modified: Sun, 06 Oct 2024 08:59:55 +0000
-! Diff-Path: ../patches/2024.10.6.764.patch#ublock-quick-fixes
+! Last modified: Sun, 06 Oct 2024 13:00:02 +0000
+! Diff-Path: ../patches/2024.10.6.1044.patch#ublock-quick-fixes
 d49 3
 a51 3
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$script,3p,redirect=google-ima.js,domain=evelynthankregion.com|lorimuchbenefit.com|susanhavekeep.com|thomasalthoughhear.com,important
@@ -287,8 +305,8 @@ animefire.info,animesonlinecc.us,animesup.info,animeyabu.net,animeyabu.org,anitu
 d148 2
 d157 4
 a160 16
-/^file-.*-moon\.com$/##+js(nowoif)
-/^file-.*-moon\.com$/##+js(acs, Math, localStorage['\x)
+file-1bl9ruic-moon.com##+js(nowoif)
+file-1bl9ruic-moon.com##+js(acs, Math, localStorage['\x)
 jmzkzesy.xyz##+js(nowoif)
 jmzkzesy.xyz##+js(acs, Math, localStorage['\x)
 !#if env_firefox
@@ -303,11 +321,11 @@ wiki.yjsnpi.nu##.ad:style(height: 0 !important;)
 adacomi.com#@#body > div[style^="text-align:center;"]
 ibarakinews.jp#@#.l-grid-banner
 ibarakinews.jp#@#div[class^="l-ad"]
-diff name:ublock-unbreak lines:21 checksum:e29830f110
+diff name:ublock-unbreak lines:21 checksum:09c6c2040b
 d3 2
 a4 2
 ! Last modified: Sun, 06 Oct 2024 06:20:08 +0000
-! Diff-Path: ../patches/2024.10.6.764.patch#ublock-unbreak
+! Diff-Path: ../patches/2024.10.6.1044.patch#ublock-unbreak
 d2247 6
 d2385 1
 d2387 9
@@ -325,11 +343,11 @@ a2695 4
 nbcsports.com##+js(set, mParticle.Identity.getCurrentUser, noopFunc)
 ||api.omappapi.com/v3/geolocate/json$domain=seclore.com,important
 seclore.com##+js(trusted-set, _omapp.scripts.geolocation, '{"value": {"status":"loaded","object":null,"data":{"country":{"shortName":"","longName":""},"administrative_area_level_1":{"shortName":"","longName":""},"administrative_area_level_2":{"shortName":"","longName":""},"locality":{"shortName":"","longName":""},"original":{"ip":"","ip_decimal":null,"country":"","country_eu":false,"country_iso":"","city":"","latitude":null,"longitude":null,"user_agent":{"product":"","version":"","comment":"","raw_value":""},"zip_code":"","time_zone":""}},"error":""}}')
-diff name:easylist lines:262 checksum:ef4bfaa5be
+diff name:easylist lines:267 checksum:f0081b46cf
 d4 2
 a5 2
-! Last modified: Sun, 06 Oct 2024 06:50:20 +0000
-! Diff-Path: ../patches/2024.10.6.764.patch#easylist
+! Last modified: Sun, 06 Oct 2024 13:01:45 +0000
+! Diff-Path: ../patches/2024.10.6.1044.patch#easylist
 a15694 1
 letroso.com#@#.ad-padding
 a15792 1
@@ -544,6 +562,7 @@ a64187 1
 hbr.org##.PartnerCenter-module_container__w6Ige
 a64189 1
 hbr.org##.PrimaryAd_ad-container__YHDwJ
+d64240 3
 d64642 1
 a64642 1
 aan.com,aarp.org,additudemag.com,animax-asia.com,apkforpc.com,audioxpress.com,axn-asia.com,bravotv.com,citiblog.co.uk,cnbctv18.com,cnn59.com,controleng.com,curiosmos.com,downzen.com,dw.com,dwturkce.com,escapeatx.com,foodsforbetterhealth.com,gemtvasia.com,hcn.org,huffingtonpost.co.uk,huffpost.com,inqld.com.au,inspiredminds.de,investmentnews.com,jewishworldreview.com,legion.org,lifezette.com,livestly.com,magtheweekly.com,moneyland.ch,offshore-energy.biz,onetvasia.com,oxygen.com,pch.com,philosophynow.org,prospectmagazine.co.uk,readamericanfootball.com,readarsenal.com,readastonvilla.com,readbasketball.com,readbetting.com,readbournemouth.com,readboxing.com,readbrighton.com,readbundesliga.com,readburnley.com,readcars.co,readceltic.com,readchampionship.com,readchelsea.com,readcricket.com,readcrystalpalace.com,readeverton.com,readeverything.co,readfashion.co,readfilm.co,readfood.co,readfootball.co,readgaming.co,readgolf.com,readhorseracing.com,readhuddersfield.com,readhull.com,readinternationalfootball.com,readlaliga.com,readleicester.com,readliverpoolfc.com,readmancity.com,readmanutd.com,readmiddlesbrough.com,readmma.com,readmotorsport.com,readmusic.co,readnewcastle.com,readnorwich.com,readnottinghamforest.com,readolympics.com,readpl.com,readrangers.com,readrugbyunion.com,readseriea.com,readshowbiz.co,readsouthampton.com,readsport.co,readstoke.com,readsunderland.com,readswansea.com,readtech.co,readtennis.co,readtottenham.com,readtv.co,readussoccer.com,readwatford.com,readwestbrom.com,readwestham.com,readwsl.com,reason.com,redvoicemedia.com,revolver.news,rogerebert.com,smithsonianmag.com,streamingmedia.com,the-scientist.com,thecatholicthing.org,therighthairstyles.com,topsmerch.com,weatherwatch.co.nz,wheels.ca,whichcar.com.au,woot.com,worldofbitco.in##.advertisement
@@ -553,6 +572,9 @@ newmobility.com##.article-sidebar--sponsored
 d64834 1
 a64834 1
 bnnbloomberg.ca,cp24.com##.b-ads-custom
+a65230 2
+androidauthority.com##.c_Sb
+androidauthority.com##.c_kh
 d65578 1
 d65926 1
 d66181 1
@@ -574,6 +596,7 @@ a68888 1
 distractify.com,greenmatters.com,inquisitr.com,okmagazine.com,qthemusic.com,radaronline.com##div[style="font-size:x-small;text-align:center;padding-top:10px"]
 a69092 1
 historic-uk.com##.article-sidebar:has-text(Advertisement)
+d69252 1
 a69586 1
 mail.yahoo.com##[data-test-id^="taboola-ad-"]
 d69782 1
@@ -588,11 +611,13 @@ a71479 1
 d71490 1
 a71695 1
 @@||kabumap.com/servlets/kabumap/html/common/img/ad/$~third-party
-diff name:easyprivacy lines:56 checksum:88abfc96a8
+diff name:easyprivacy lines:62 checksum:d6e531a1fd
 d4 2
 a5 2
-! Last modified: Sun, 06 Oct 2024 02:13:29 +0000
-! Diff-Path: ../patches/2024.10.6.764.patch#easyprivacy
+! Last modified: Sun, 06 Oct 2024 15:50:00 +0000
+! Diff-Path: ../patches/2024.10.6.1044.patch#easyprivacy
+a294 1
+/analytics_cookie.js
 a322 1
 /api/front/v2/observability$ping
 a752 1
@@ -617,6 +642,10 @@ a12221 1
 ||liberty.schip.io/liberty-metrics/
 a12225 1
 ||m.mobile.de/svc/track/
+a12733 1
+||actagtracker.jp/tag
+a12836 1
+||site24x7rum.jp/beacon/
 a13230 3
 ||6pm.com/err.cgi?
 ||6pm.com/onload.cgi?
