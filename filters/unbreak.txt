@@ -1,5 +1,5 @@
 ! Title: uBlock filters – Unbreak
-! Last modified: Sat, 05 Oct 2024 04:56:01 +0000
+! Last modified: Sun, 06 Oct 2024 06:20:08 +0000
 ! Expires: 5 days
 ! Description: Filters optimized for uBlock Origin, to unbreak sites broken as a result of 3rd-party filter lists enabled by default.
 ! Homepage: https://github.com/uBlockOrigin/uAssets
@@ -4730,14 +4730,6 @@ wionews.com##^link[rel="canonical"]:not([href^="https://www.wionews.com/videos/"
 ! https://github.com/uBlockOrigin/uAssets/issues/14619#issuecomment-1640036726
 @@||securepubads.g.doubleclick.net/pagead/managed/js/gpt/*$script,domain=moviepilot.de
 
-! https://github.com/uBlockOrigin/uAssets/issues/19067
-@@||securepubads.g.doubleclick.net/tag/js/gpt.js$script,domain=filmstarts.de
-@@||securepubads.g.doubleclick.net/pagead/managed/js/gpt/*/pubads_impl.js$script,domain=filmstarts.de
-@@||securepubads.g.doubleclick.net/gampad/ads$xhr,domain=filmstarts.de
-@@||cdn.lib.getjad.io/library/*$script,domain=filmstarts.de
-@@||cdn.lib.getjad.io/prebid/*$script,domain=filmstarts.de
-@@||amazon-adsystem.com/*/apstag.js$script,redirect-rule=amazon_apstag.js:5,domain=filmstarts.de
-
 ! https://github.com/AdguardTeam/AdguardFilters/issues/156669
 @@||hs.eloqua.com^$frame,domain=anthology.com
 
@@ -5076,7 +5068,8 @@ lumens.com##+js(set, _satellite.track, noopFunc)
 @@||twinkie.xyz/cdn-cgi/apps/$script,1p
 
 ! Override EasyList Germany exceptions
-||imasdk.googleapis.com/js/sdkloader/ima3.js$script,important,redirect=google-ima.js,domain=atv.at|autobild.de|chip.de|computerbild.de|gentside.de|oe24.at|ohmymag.de|phonostar.de|schwaebische.de|spielaffe.de|sport.sky.de|wetteronline.de
+! https://github.com/uBlockOrigin/uAssets/issues/25543
+||imasdk.googleapis.com/js/sdkloader/ima3.js$script,important,redirect=google-ima.js,domain=atv.at|autobild.de|chip.de|computerbild.de|gentside.de|kibagames.com|oe24.at|ohmymag.de|phonostar.de|schwaebische.de|spielaffe.de|sport.sky.de|wetteronline.de
 
 ! https://github.com/uBlockOrigin/uAssets/issues/21286
 ||jsrdn.com^$badfilter
@@ -5689,3 +5682,12 @@ eservice.directauto.com##+js(set, gtm.trackEvent, noopFunc)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/25402
 gazzetta.gr###comment-section:style(display: block !important;)
+
+! https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/browns-are-only-team-without-300-yards-of-offense-in-a-game-this-season
+! https://github.com/easylist/easylist/commit/857d88d10657ba8b8e1ef2d2a406c8d799382d1c
+||mparticle.com/js/v2/*/mparticle.js$script,domain=nbcsports.com,important
+nbcsports.com##+js(set, mParticle.Identity.getCurrentUser, noopFunc)
+
+! https://github.com/uBlockOrigin/uAssets/issues/25504
+||api.omappapi.com/v3/geolocate/json$domain=seclore.com,important
+seclore.com##+js(trusted-set, _omapp.scripts.geolocation, '{"value": {"status":"loaded","object":null,"data":{"country":{"shortName":"","longName":""},"administrative_area_level_1":{"shortName":"","longName":""},"administrative_area_level_2":{"shortName":"","longName":""},"locality":{"shortName":"","longName":""},"original":{"ip":"","ip_decimal":null,"country":"","country_eu":false,"country_iso":"","city":"","latitude":null,"longitude":null,"user_agent":{"product":"","version":"","comment":"","raw_value":""},"zip_code":"","time_zone":""}},"error":""}}')
