@@ -1,16 +1,18 @@
 ! Title: uBlock filters – Unbreak
 ! Expires: 5 days
-! Last modified: Sun, 06 Oct 2024 06:20:08 +0000
-! Diff-Path: ../patches/2024.10.7.212.patch#ublock-unbreak
+! Last modified: Mon, 07 Oct 2024 05:08:49 +0000
+! Diff-Path: ../patches/2024.10.7.512.patch#ublock-unbreak
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/unbreak.txt ***
-! START: Email trackings
+! START: Click trackings
 ! password reset link broken on coindesk.com
 @@||awstrack.me/*auth.coindesk.com$doc,popup
 ! swagbucks.com - restore inactive
 @@||awstrack.me/*cmd=ac-inactive-restore$doc,popup
-! END: Email trackings
+@@||track.adtraction.com/*&url=https://www.gog.com/$popup,domain=gamingonlinux.com|isthereanydeal.com|rpgcodex.net
+||track.adtraction.com/*&url=https://www.gog.com/$urlskip=?url
+! END: Click trackings
 ||2mdn.net/instream/video/client.js$script,redirect=noopjs,domain=video.foxnews.com
 ||cdn.krxd.net^$script,redirect=noopjs,domain=video.foxnews.com
 @@||akamaihd.net/player/*/akamai/amp/prebid/*$script,domain=static.foxnews.com
@@ -2571,7 +2573,6 @@ optimum.net##+js(set, s.tl, noopFunc)
 ! Page issue, but annoying so fixing it here
 emailnator.com##[style^="width: 15px; height: 15px; overflow: scroll; visibility: hidden; color: rgb(calc(var(--x2)"]
 mediaite.com##+js(set-cookie, am-sub, 1)
-@@||track.adtraction.com/*www.gog.com$popup,3p,domain=isthereanydeal.com
 @@||netshoes.com.br/webanalytics/*$xhr,1p
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$script,domain=tabii.com,redirect=google-ima.js
 ||imasdk.googleapis.com/js/sdkloader/ima3_dai.js$script,domain=tabii.com,redirect=noopjs
@@ -2604,8 +2605,8 @@ user.guancha.cn##+js(set, sensors.init, noopFunc)
 ||imasdk.googleapis.com/pal/sdkloader/pal.js^$script,3p,redirect=noopjs,domain=fox5sandiego.com
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$script,3p,redirect=google-ima.js,domain=kraloyun.com
 flygbussarna.se##+js(no-fetch-if, /piwik-)
-@@||www.*/esm/assets/js/analytics/gaAnalytics.js?v=$xhr,1p,strict1p,method=get,domain=com|org
-@@||www.*/esm/assets/js/analytics/chartbeat.js?v=$xhr,1p,strict1p,method=get,domain=com|org
+@@||www.realclear*/esm/assets/js/analytics/gaAnalytics.js?v=$xhr,1p,strict1p,method=get,domain=com|org
+@@||www.realclear*/esm/assets/js/analytics/chartbeat.js?v=$xhr,1p,strict1p,method=get,domain=com|org
 ||maps.arcgis.com/apps/instant/lookup/app/utilites/telemetry/appmeasurement.js$1p,redirect=noopjs,important
 jprime.jp##+js(trusted-rpnt, script, var ISMLIB, !function(){const o={apply:(o\,n\,r)=>(new Error).stack.includes("refreshad")?0:Reflect.apply(o\,n\,r)};window.Math.floor=new Proxy(window.Math.floor\,o)}();var ISMLIB)
 @@||js.datadome.co/tags.js$script,domain=account.samsung.com
@@ -2673,14 +2674,16 @@ topgear.com##+js(set, _sp_.config.events.onSPPMObjectReady, noopFunc)
 @@||worldsurfleague.com/js/videojs8/nuevo/plugins/videojs-contrib-ads.min.js^$script,1p
 @@||micro.rubiconproject.com/prebid/dynamic/$script,domain=worldsurfleague.com
 @@||securepubads.g.doubleclick.net/pagead/ima_ppub_config$xhr,domain=worldsurfleague.com
+!#if env_firefox
+imasdk.googleapis.com##+js(no-xhr-if, worldsurfleague.com, war:noop-vmap1.0.xml)
+!#else
 ||pubads.g.doubleclick.net/gampad/ads?*www.worldsurfleague.com$xhr,redirect=noop-vmap1.0.xml:5,domain=imasdk.googleapis.com
+!#endif
 eservice.directauto.com##+js(set, gtm, {})
 eservice.directauto.com##+js(set, gtm.trackEvent, noopFunc)
 ||imasdk.googleapis.com/js/sdkloader/ima3_debug.js$script,redirect=google-ima.js,domain=mais.sbt.com.br,important
 ||wpfc.ml^$image,redirect=1x1.gif,domain=ht-instruments.de
 ||trycloudflare.com^$badfilter
-@@||track.adtraction.com/*&url=https://www.gog.com/$popup,domain=gamingonlinux.com|rpgcodex.net
-||track.adtraction.com/*&url=https://www.gog.com/$urlskip=?url
 gazzetta.gr###comment-section:style(display: block !important;)
 ||mparticle.com/js/v2/*/mparticle.js$script,domain=nbcsports.com,important
 nbcsports.com##+js(set, mParticle.Identity.getCurrentUser, noopFunc)

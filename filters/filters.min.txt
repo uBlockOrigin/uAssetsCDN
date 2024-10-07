@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Mon, 07 Oct 2024 02:54:59 +0000
-! Diff-Path: ../patches/2024.10.7.212.patch#ublock-filters
+! Last modified: Mon, 07 Oct 2024 04:11:53 +0000
+! Diff-Path: ../patches/2024.10.7.512.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -2491,9 +2491,6 @@ guidedhacking.com##[href="https://guidedhacking.com/advertise"]
 ||guidedhacking.com/*.gif$image
 theralphretort.com##+js(aopw, adBlockDetected)
 ||ads.puhutv.com/i.jpg$image,redirect=2x2.png
-winfuture.de##+js(json-prune, adtagparameter, enabled)
-@@||imasdk.googleapis.com/js/sdkloader/ima3.js$script,domain=winfuture.de
-@@||widget.spoods.io/loader.js$script,domain=winfuture.de
 @@||hdblog.it^$ghide
 hdblog.it#@#.item_compra
 hdblog.it#@#.box_flame
@@ -9080,12 +9077,7 @@ erogen.su##+js(aopr, document.dispatchEvent)
 @@||api.production.k8s.y3o.tv/*/video-ads$xhr,domain=yallo.tv
 @@||imasdk.googleapis.com/js/sdkloader/ima3.js$script,domain=yallo.tv
 ||adservice.google.com^$script,redirect-rule=noopjs,domain=yallo.tv
-!#if ext_devbuild
 imasdk.googleapis.com##+js(no-fetch-if, secure.adnxs.com/ptv, war:noop-vast4.xml)
-!#else
-@@||secure.adnxs.com/ptv$xhr,domain=imasdk.googleapis.com
-imasdk.googleapis.com##+js(xml-prune, VAST, , adnxs)
-!#endif
 a2zapk.*##+js(acs, atob, decodeURIComponent)
 a2zapk.*##+js(aopr, AaDetector)
 a2zapk.*##+js(set, notifyMe, noopFunc)
@@ -9152,6 +9144,10 @@ hianime.to##[href="https://1flix.to/"]
 ||iili.io/JvfIu1a.gif$image
 ||i.ibb.co/wyDmK31/Banner.png^$image,3p
 ||psausoay.net^
+winfuture.de##+js(json-prune, adtagparameter, enabled)
+winfuture.de##[id$="_adContainer"]
+||imasdk.googleapis.com/js/sdkloader/ima3.js$script,redirect=google-ima.js,from=winfuture.de
+@@||widget.spoods.io/loader.js$script,domain=winfuture.de
 ! END: Rules from filters.txt
 ! START: Regional lists
 ! <<<<< czech slovak filters >>>>>
@@ -10647,7 +10643,7 @@ odisha-remix.com,themoviesradar.in,forexsalary.com,dailywebsite.in,mamatamusicba
 odisha-remix.com,themoviesradar.in,forexsalary.com,dailywebsite.in,mamatamusicbanaras.com,missionupsc.com###wpsafe-link, .wpsafelink-multiple-pages:others()
 @@*$ghide,domain=tea-coffee.net|spatsify.com|newedutopics.com|getviralreach.in|edukaroo.com|funkeypagali.com|careersides.com|nayisahara.com|wikifilmia.com|infinityskull.com|viewmyknowledge.com|iisfvirtual.in|starxinvestor.com|jkssbalerts.com
 ||cdn.jsdelivr.net/gh/itspro-dev/*/js/main.js$script
-!#if env_firefox
+!#if !cap_html_filtering
 tea-coffee.net,spatsify.com,newedutopics.com,getviralreach.in,edukaroo.com,funkeypagali.com,careersides.com,nayisahara.com,wikifilmia.com,infinityskull.com,viewmyknowledge.com,iisfvirtual.in,starxinvestor.com,jkssbalerts.com##+js(rmnt, script, /ABDetected|navigator.brave|fetch/)
 !#else
 tea-coffee.net,spatsify.com,newedutopics.com,getviralreach.in,edukaroo.com,funkeypagali.com,careersides.com,nayisahara.com,wikifilmia.com,infinityskull.com,viewmyknowledge.com,iisfvirtual.in,starxinvestor.com,jkssbalerts.com##^script:has-text(/ABDetected|navigator.brave|fetch/)
