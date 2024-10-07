@@ -1,5 +1,5 @@
 ! Title: uBlock filters (2023)
-! Last modified: Mon, 07 Oct 2024 12:26:47 +0000
+! Last modified: Mon, 07 Oct 2024 17:22:16 +0000
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -1913,15 +1913,16 @@ wiadomosci.wp.pl##div:has(> div:first-child > img[src^="https://v.wpimg.pl/"][he
 pysznosci.pl###bottom-sticky-container > div:matches-attr(class=/^[a-zA-Z]{2}$/):not([id])
 parenting.pl##div[data-element="wide-placeholder"][style]
 deliciousmagazine.pl##div[style="min-height: 400px; height: auto;"]:has([class^="cdc-products"])
-turystyka.wp.pl##[data-reactid]:has(> div > div > span > div > .border > .container > .w_boxContent > a.w_contentLink[target="_blank"][rel="noreferrer noopener"] > img[width="100%"])
 abczdrowie.pl,domodi.pl,forum.kardiolo.pl##*:has(> div:first-child:has(> div:first-child > a > img[src^="https://v.wpimg.pl/"]):not([alt], [id], [width], [data-src]) + div:empty)
 ~www.wp.pl,wp.pl,komorkomania.pl,fotoblogia.pl,gadzetomania.pl##div:has(> div:not([class], [id]) > div > a[href*="utm_"])
 sportowefakty.wp.pl##.article > .article__top + div:has(> div:last-child > div > div > div[id^="div-gpt-ad-"])
 sportowefakty.wp.pl##.article-footer + div:has(> div:last-child > div > div > div > div[id^="div-gpt-ad-"])
 abczdrowie.pl##div[data-element="s3-placeholder"]
-turystyka.wp.pl##div[style="min-height: 400px; height: auto;"]:has(> div > div > div > .border > .container > .labelCopy:has-text(REKLAMA))
+turystyka.wp.pl##div:has(> div:only-child > * > div > .border > .container > .labelCopy:has-text(REKLAMA))
+turystyka.wp.pl##div[class]:has(> div > div > span > div > .border > .container > [class] > a.w_contentLink[target="_blank"][rel="noreferrer noopener"] > img[width="100%"])
 wp.pl##body > [data-container] > div[class]:empty
 wp.pl###comments > div > div > div:has(> div:first-child > div:only-child > div:only-child > div:last-child > div:first-child > div > a > img[src^="https://v.wpimg.pl/"][alt="null"])
+forum.parenting.pl##aside > div:has(> div:first-child + div:empty + script:last-child)
 abczdrowie.pl##
 ! against blinking ads
 ~www.wp.pl,wp.pl#@#div:matches-css-after(content:/R.*E.*K.*L.*A.*M.*A/):upward(1)
@@ -3045,8 +3046,10 @@ empire-anime.*,empire-stream.*,empire-streaming.*,empire-streamz.*##+js(set, emp
 empire-anime.*,empire-stream.*,empire-streaming.*,empire-streamz.*##+js(set, empire.directHideAds, undefined)
 empire-anime.*,empire-stream.*,empire-streaming.*,empire-streamz.*##+js(rpnt, script, /data: \[.*\]\,/, data: []\,, condition, ads_num)
 empire-anime.*,empire-stream.*,empire-streaming.*,empire-streamz.*##+js(nano-stb, (!1), *)
-!#if !ext_ubol
-empire-anime.*,empire-stream.*,empire-streaming.*,empire-streamz.*##+js(nowoif)
+!#if env_firefox
+empire-anime.*,empire-stream.*,empire-streaming.*,empire-streamz.*##+js(nowoif, , 300, blank)
+!#else
+empire-anime.*,empire-stream.*,empire-streaming.*,empire-streamz.*##+js(nowoif, , 0, blank)
 !#endif
 empire-anime.*,empire-stream.*,empire-streaming.*,empire-streamz.*##+js(no-xhr-if, pagead2.googlesyndication.com)
 /iframe_ad$csp=sandbox allow-forms allow-same-origin allow-scripts allow-modals allow-orientation-lock allow-pointer-lock allow-presentation allow-top-navigation,1p,domain=empire-anime.*|empire-stream.*|empire-streaming.*|empire-streamz.*
@@ -5063,6 +5066,7 @@ app.hellovaia.com,app.studysmarter.de,app.vaia.com##aside > .ng-star-inserted
 ! https://www.reddit.com/r/uBlockOrigin/comments/17rxlfr/block_randomlygenerated_class_with_specific/
 ||cloudfront.net/o?*fqdn=$xhr,3p,domain=marketwatch.com|wsj.com
 /\.cloudfront\.net\/[a-z]{9,12}\.js$/$script,3p,match-case,domain=marketwatch.com|wsj.com
+||cdn.privacy-mgmt.com/unified/wrapperMessagingWithoutDetection.js^$script,domain=marketwatch.com|wsj.com
 
 ! https://github.com/uBlockOrigin/uAssets/issues/20582
 ! https://github.com/uBlockOrigin/uAssets/issues/23171
