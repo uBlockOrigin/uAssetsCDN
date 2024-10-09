@@ -1,12 +1,14 @@
-diff name:ublock-annoyances lines:3 checksum:a83e849445
-d4 1
-a4 1
-! Diff-Path: ../patches/2024.10.9.630.patch#ublock-annoyances
-diff name:ublock-badware lines:15 checksum:ec1b30db58
+diff name:ublock-annoyances lines:5 checksum:36e71c48e6
 d3 2
 a4 2
-! Last modified: Wed, 09 Oct 2024 04:14:57 +0000
-! Diff-Path: ../patches/2024.10.9.630.patch#ublock-badware
+! Last modified: Wed, 09 Oct 2024 12:09:47 +0000
+! Diff-Path: ../patches/2024.10.9.926.patch#ublock-annoyances
+d3877 10
+diff name:ublock-badware lines:20 checksum:bccc723dc3
+d3 2
+a4 2
+! Last modified: Wed, 09 Oct 2024 12:25:34 +0000
+! Diff-Path: ../patches/2024.10.9.926.patch#ublock-badware
 a4084 2
 ||hocklahro.ru^$all
 ||tinjudish.ru^$all
@@ -14,18 +16,27 @@ a4086 7
 /^https:\/\/[a-z0-9]{50,}\.[a-z0-9]{4,11}\.com\/[a-zA-Z0-9]{50,}$/$xhr,3p,method=get,to=com|~google.com|~microsoft.com,from=com|ru|su
 /^https:\/\/[a-z0-9]{50,}\.[a-z0-9]{4,11}\.ru\/[a-zA-Z0-9]{50,}$/$xhr,3p,method=get,to=ru,from=com|ru|su
 /^https:\/\/[a-z0-9]{50,}\.[a-z0-9]{4,11}\.su\/[a-zA-Z0-9]{50,}$/$xhr,3p,method=get,to=su,from=com|ru|su
-/^https:\/\/[^.]+\.favoripirlanta\.com\//$doc,to=favoripirlanta.com
+|https://*.favoripirlanta.com^$doc
 ||amernamproa.com^$all
 ||tivorica.su^$all
 ||xylentura.su^$all
-diff name:ublock-filters lines:15 checksum:d076b5b87d
+a4365 4
+##html#html[sti][vic][lang] > body#allbody
+/\/m\/js(?:drive|nom|sp|v)\.js\b/$script,1p,strict1p
+/\/n\/js(?:drive|nom|sp|v)\.js\b/$script,1p,strict1p
+/\/o\/js(?:drive|nom|sp|v)\.js\b/$script,1p,strict1p
+diff name:ublock-filters lines:20 checksum:fdfa63de52
 d3 2
 a4 2
-! Last modified: Wed, 09 Oct 2024 07:46:46 +0000
-! Diff-Path: ../patches/2024.10.9.630.patch#ublock-filters
+! Last modified: Wed, 09 Oct 2024 12:09:47 +0000
+! Diff-Path: ../patches/2024.10.9.926.patch#ublock-filters
 d489 1
 a489 1
 autobytel.com,cesoirtv.com,huffingtonpost.co.uk,huffingtonpost.com,moviefone.com,playboy.de##+js(aopw, _sp_)
+d9692 1
+a9692 2
+raenonx.cc##div[class="flex flex-col place-content-center place-items-center items-center text-center w-full h-[100px]"]:has(> div[id^="nitro-"])
+raenonx.cc##+js(nostif, Ads)
 a10600 1
 ||hentalk.pw/public/hentalk-loader.js
 a18780 1
@@ -34,11 +45,12 @@ a18781 3
 !#else
 photopea.com##+js(rpnt, script, added=false;, "added=false;Object.defineProperty(window, 'innerWidth', {get() { return document.documentElement.offsetWidth + 320 },})")
 !#endif
-diff name:ublock-privacy lines:13 checksum:7d106a302a
+d19620 1
+diff name:ublock-privacy lines:13 checksum:e465a98031
 d3 2
 a4 2
-! Last modified: Wed, 09 Oct 2024 06:36:04 +0000
-! Diff-Path: ../patches/2024.10.9.630.patch#ublock-privacy
+! Last modified: Wed, 09 Oct 2024 11:53:14 +0000
+! Diff-Path: ../patches/2024.10.9.926.patch#ublock-privacy
 d615 12
 a626 4
 ! cloudflare.com tracking
@@ -46,25 +58,39 @@ blog.cloudflare.com,www.cloudflare.com##+js(no-fetch-if, method:POST body:zaraz)
 ||radar.cloudflare.com/api/analytics
 ||udc.yahoo.com^
 a697 2
-wayfair.com##+js(no-xhr-if, t.wayfair.com)
+wayfair.com##+js(no-xhr-if, t.wayfair.com/b.php?)
 wayfair.com##+js(set, navigator.sendBeacon, noopFunc)
-diff name:ublock-quick-fixes lines:3 checksum:8b438e41df
-d4 1
-a4 1
-! Diff-Path: ../patches/2024.10.9.630.patch#ublock-quick-fixes
-diff name:ublock-unbreak lines:7 checksum:6568129edd
+diff name:ublock-quick-fixes lines:13 checksum:e91dca0fe5
 d3 2
 a4 2
-! Last modified: Wed, 09 Oct 2024 10:12:57 +0000
-! Diff-Path: ../patches/2024.10.9.630.patch#ublock-unbreak
-a2698 2
+! Last modified: Wed, 09 Oct 2024 14:33:12 +0000
+! Diff-Path: ../patches/2024.10.9.926.patch#ublock-quick-fixes
+a42 1
+web.facebook.com,www.facebook.com##+js(json-prune, require.0.3.0.__bbox.require.[].3.1.__bbox.result.data, require.0.3.0.__bbox.require.[].3.1.__bbox.result.data.node.sponsored_data.id_for_advertisement)
+a44 1
+||facebook.com^$doc,replace=/null,"category_sensitive"[^\n]+?,"__typename":"SponsoredData"[^\n]+"cursor":"[^"]+"\}/null}/g,to=web.facebook.com|www.facebook.com
+a46 1
+web.facebook.com,www.facebook.com##+js(rpnt, script, '/null,"category_sensitive"[^\n]+?,"__typename":"SponsoredData"[^\n]+"cursor":"[^"]+"\}/g', null})
+d119 1
+a119 1
+poophq.com,veev.to##+js(no-xhr-if, /\/ad-provider\.js$/, length:35000-200000)
+diff name:ublock-unbreak lines:8 checksum:87ed0419b4
+d3 2
+a4 2
+! Last modified: Wed, 09 Oct 2024 11:31:34 +0000
+! Diff-Path: ../patches/2024.10.9.926.patch#ublock-unbreak
+a2698 3
+||pruefernavi.de/vendor/elasticsearch/elastic-apm-rum.umd.min.js$1p,important
 pruefernavi.de##+js(set, elasticApm, {})
 pruefernavi.de##+js(set, elasticApm.init, noopFunc)
-diff name:easylist lines:3 checksum:622a817d6a
+diff name:easylist lines:3 checksum:87da0b7024
 d5 1
 a5 1
-! Diff-Path: ../patches/2024.10.9.630.patch#easylist
-diff name:easyprivacy lines:3 checksum:95c6d8b9ca
-d5 1
-a5 1
-! Diff-Path: ../patches/2024.10.9.630.patch#easyprivacy
+! Diff-Path: ../patches/2024.10.9.926.patch#easylist
+diff name:easyprivacy lines:6 checksum:9827868313
+d4 2
+a5 2
+! Last modified: Wed, 09 Oct 2024 13:05:01 +0000
+! Diff-Path: ../patches/2024.10.9.926.patch#easyprivacy
+a52973 1
+@@||pruefernavi.de/vendor/elasticsearch/elastic-apm-rum.umd.min.js$~third-party
