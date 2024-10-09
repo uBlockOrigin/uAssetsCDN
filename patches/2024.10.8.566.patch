@@ -1,14 +1,14 @@
-diff name:ublock-annoyances lines:5 checksum:36e71c48e6
+diff name:ublock-annoyances lines:5 checksum:9dc2b9d4b0
 d3 2
 a4 2
 ! Last modified: Wed, 09 Oct 2024 12:09:47 +0000
-! Diff-Path: ../patches/2024.10.9.926.patch#ublock-annoyances
+! Diff-Path: ../patches/2024.10.9.1226.patch#ublock-annoyances
 d3877 10
-diff name:ublock-badware lines:23 checksum:bccc723dc3
+diff name:ublock-badware lines:23 checksum:7e886fb202
 d3 2
 a4 2
 ! Last modified: Wed, 09 Oct 2024 12:25:34 +0000
-! Diff-Path: ../patches/2024.10.9.926.patch#ublock-badware
+! Diff-Path: ../patches/2024.10.9.1226.patch#ublock-badware
 a4084 2
 ||hocklahro.ru^$all
 ||tinjudish.ru^$all
@@ -28,16 +28,15 @@ a4362 7
 /\/m\/js(?:drive|nom|sp|v)\.js\b/$script,1p,strict1p
 /\/n\/js(?:drive|nom|sp|v)\.js\b/$script,1p,strict1p
 /\/o\/js(?:drive|nom|sp|v)\.js\b/$script,1p,strict1p
-diff name:ublock-filters lines:54 checksum:fdfa63de52
+diff name:ublock-filters lines:72 checksum:b6d7f22e52
 d3 2
 a4 2
-! Last modified: Wed, 09 Oct 2024 12:09:47 +0000
-! Diff-Path: ../patches/2024.10.9.926.patch#ublock-filters
+! Last modified: Wed, 09 Oct 2024 20:25:36 +0000
+! Diff-Path: ../patches/2024.10.9.1226.patch#ublock-filters
 d489 1
 a489 1
 autobytel.com,cesoirtv.com,huffingtonpost.co.uk,huffingtonpost.com,moviefone.com,playboy.de##+js(aopw, _sp_)
-a9189 11
-sinhasannews.com##+js(rmnt, script, /Clipboard|oncontextmenu|wpcp|keyCode/)
+a9189 10
 sinhasannews.com##.entry-content > figure.wp-block-image:has(> img[class^="wp-image-"][src^="https://www.sinhasannews.com/"]:is([alt^="Img "], [alt^="Fb img "]):not([width="1024"]))
 sinhasannews.com##.entry-content > figure.wp-block-image:has(> img[class^="wp-image-"][src^="https://www.sinhasannews.com/"][width="1024"][height="1024"]:is([alt^="Img "], [alt^="Fb img "]))
 sinhasannews.com##.entry-content > figure.wp-block-image:has(> img[class^="wp-image-"][src^="https://www.sinhasannews.com/"][width="1024"][height="682"]:not([alt^="Cm"]))
@@ -54,11 +53,12 @@ raenonx.cc##div[class="flex flex-col place-content-center place-items-center ite
 raenonx.cc##+js(nostif, Ads)
 a10370 1
 ||cdn.adsninja.ca/adsninja_worker.js^$domain=xda-developers.com,important
-a10585 4
+a10585 5
 playtube.tv##+js(acs, EventTarget.prototype.addEventListener, delete window)
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$script,redirect=google-ima.js,domain=playtube.tv|upns.live
 ||boostaubeehy.net^
 ||hentalk.pw/public/hentalk-loader.js
+||85po.com/player/stats.php?$1p,image,redirect=1x1.gif
 a14491 1
 jetpunk.com##+js(set, google_tag_manager.G-Z8CH48V654, {})
 a18764 1
@@ -74,6 +74,18 @@ d19602 1
 d21678 1
 a21678 1
 hiraethtranslation.com##+js(aeld, DOMContentLoaded, document.documentElement.lang)
+a21871 1
+~przegladsportowy.pl,~fakt.pl,~forbes.pl,~auto-swiat.pl,~noizz.pl,~plejada.pl,~businessinsider.com.pl,~komputerswiat.pl,~onet.pl,pl#@#[id^="crt-"]
+d21911 1
+a21911 1
+www.wp.pl##.max-w-mobile > div:has(> div:first-child > div:only-child > div > span:has-text(Przewijaj w dół, by kontynuować))
+d21946 1
+d21948 4
+a21951 4
+wp.pl#@#div:matches-css-after(content:/R.*E.*K.*L.*A.*M.*A/):upward(1)
+wp.pl,money.pl##div:has(> a:first-child:has(> div:empty:only-child) + div:empty:last-child):remove()
+wp.pl##div:has(> div:first-child:has(> div:only-child > a > div:empty:only-child) + div:last-child:empty)
+wp.pl,abczdrowie.pl,parenting.pl##div:has(> div:first-child:has(> a:first-child > img[src^="https://v.wpimg.pl/"]) + div:empty:last-child)
 d22520 2
 d23691 5
 a23695 6
@@ -83,11 +95,17 @@ twitter.com,x.com,~platform.twitter.com##+js(json-prune-xhr-response, data.searc
 twitter.com,x.com,~platform.twitter.com##+js(json-prune-xhr-response, data.threaded_conversation_with_injections_v2.instructions.[].entries.[-].content.items.[].item.itemContent.promotedMetadata, , propsToMatch, url:/TweetDetail)
 twitter.com,x.com,~platform.twitter.com##+js(json-prune-xhr-response, data.user.result.timeline_v2.timeline.instructions.[].entries.[-].content.itemContent.promotedMetadata, , propsToMatch, url:/UserTweets)
 twitter.com,x.com,~platform.twitter.com##+js(json-prune-xhr-response, data.immersiveMedia.timeline.instructions.[].entries.[-].content.itemContent.promotedMetadata, , propsToMatch, url:/ImmersiveMedia)
-diff name:ublock-privacy lines:19 checksum:e465a98031
+d23828 1
+a23828 1
+sonixgvn.net##+js(no-fetch-if, /doubleclick|googlesyndication|vlitag/, length:10, {"type": "cors"})
+d23831 1
+a23831 1
+!sonixgvn.net##+js(acs, setTimeout)
+diff name:ublock-privacy lines:19 checksum:9b5418f133
 d3 2
 a4 2
 ! Last modified: Wed, 09 Oct 2024 11:53:14 +0000
-! Diff-Path: ../patches/2024.10.9.926.patch#ublock-privacy
+! Diff-Path: ../patches/2024.10.9.1226.patch#ublock-privacy
 d615 10
 a624 4
 ! cloudflare.com tracking
@@ -103,11 +121,11 @@ forum.blu-ray.com##+js(ra, onclick|oncontextmenu|onmouseover, a[href][onclick*="
 a690 2
 wayfair.com##+js(no-xhr-if, t.wayfair.com/b.php?)
 wayfair.com##+js(set, navigator.sendBeacon, noopFunc)
-diff name:ublock-quick-fixes lines:36 checksum:e91dca0fe5
+diff name:ublock-quick-fixes lines:36 checksum:ad286d15ae
 d3 2
 a4 2
 ! Last modified: Wed, 09 Oct 2024 14:33:12 +0000
-! Diff-Path: ../patches/2024.10.9.926.patch#ublock-quick-fixes
+! Diff-Path: ../patches/2024.10.9.1226.patch#ublock-quick-fixes
 a42 1
 web.facebook.com,www.facebook.com##+js(json-prune, require.0.3.0.__bbox.require.[].3.1.__bbox.result.data, require.0.3.0.__bbox.require.[].3.1.__bbox.result.data.node.sponsored_data.id_for_advertisement)
 a44 1
@@ -140,11 +158,11 @@ kahoku.news#@#.vr2_pickup-main
 yahoo.com#@#+js(set, rapidInstance, {})
 yahoo.com#@#+js(set, rapidInstance.beaconLinkViews, noopFunc)
 yahoo.com#@#+js(set, rapidInstance.beaconClick, noopFunc)
-diff name:ublock-unbreak lines:13 checksum:87ed0419b4
+diff name:ublock-unbreak lines:13 checksum:b52de676f3
 d3 2
 a4 2
 ! Last modified: Wed, 09 Oct 2024 11:31:34 +0000
-! Diff-Path: ../patches/2024.10.9.926.patch#ublock-unbreak
+! Diff-Path: ../patches/2024.10.9.1226.patch#ublock-unbreak
 a2693 8
 standard.co.uk##+js(set, JSGlobals.prebidEnabled, false)
 standard.co.uk##+js(nano-stb, [native code], 3000, 0.001)
@@ -154,11 +172,11 @@ standard.co.uk##+js(nano-stb, 'i||(e(),i=!0)', 2500, 0.001)
 ||pruefernavi.de/vendor/elasticsearch/elastic-apm-rum.umd.min.js$1p,important
 pruefernavi.de##+js(set, elasticApm, {})
 pruefernavi.de##+js(set, elasticApm.init, noopFunc)
-diff name:easylist lines:56 checksum:87da0b7024
+diff name:easylist lines:56 checksum:fb0f077fde
 d4 2
 a5 2
 ! Last modified: Tue, 08 Oct 2024 21:50:13 +0000
-! Diff-Path: ../patches/2024.10.9.926.patch#easylist
+! Diff-Path: ../patches/2024.10.9.1226.patch#easylist
 a1570 1
 ###Ads_BA_VID
 a9023 1
@@ -211,11 +229,11 @@ a66654 1
 earth911.com##.mg-sidebar
 a67141 1
 steamladder.com##.pt-large
-diff name:easyprivacy lines:24 checksum:9827868313
+diff name:easyprivacy lines:24 checksum:beddd20438
 d4 2
 a5 2
 ! Last modified: Wed, 09 Oct 2024 13:05:01 +0000
-! Diff-Path: ../patches/2024.10.9.926.patch#easyprivacy
+! Diff-Path: ../patches/2024.10.9.1226.patch#easyprivacy
 a8701 1
 ||pa-cd.com^$third-party
 a13853 1
