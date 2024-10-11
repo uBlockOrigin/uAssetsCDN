@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Fri, 11 Oct 2024 17:22:23 +0000
-! Diff-Path: ../patches/2024.10.11.1044.patch#ublock-filters
+! Last modified: Fri, 11 Oct 2024 18:22:58 +0000
+! Diff-Path: ../patches/2024.10.11.1345.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -144,7 +144,6 @@ aupetitparieur.com,allthingsvegas.com,100percentfedup.com,beforeitsnews.com,conc
 !#endif
 appteka.store##+js(aost, Math.random, /injectedScript|blob/)
 whatfinger.com##+js(set, oeo, noopFunc)
-@@*$ghide,domain=themattwalshblog.com
 ||rddywd.com^$image,redirect-rule=1x1.gif
 @@||rddywd.com/advertising.js$script
 @@||thegatewaypundit.com^$image,1p
@@ -795,24 +794,15 @@ msn.com##msft-article-card:not(.contentCard)
 www.msn.com##+js(json-prune-fetch-response, properties.componentConfigs.slideshowConfigs.slideshowSettings.interstitialNativeAds, , propsToMatch, url:consumptionpage/gallery_windows/config.json)
 www.msn.com##+js(json-prune-fetch-response, *, list.*.link.ad list.*.link.kicker, propsToMatch, url:content/v1/cms/api/amp)
 msn.com##.vd-ad
-mcloud.bz##+js(acs, Math, XMLHttpRequest)
-mcloud.bz##+js(nosiif, break)
-mcloud.bz##+js(aopr, open)
-@@||mcloud.bz^$ghide
-mcloud.bz,vidstream.pro,vid2faf.*##+js(nowoif)
-vidstream.pro##+js(aopr, mm)
-mcloud.bz##+js(aopr, __Y)
-vidstream.pro##+js(nosiif, break)
-vidstream.pro##div[id][style^="position: fixed; inset: 0px; z-index: 2147483647;"]
+vid2faf.*##+js(nowoif)
 bflix.*,mcloud.*,vizcloud.*,vizcloud2.*##+js(aopr, AaDetector)
 bflix.*##+js(aopr, mm)
 vizcloud.*,vizcloud2.*##.xad-wrapper
-mcloud.bz,vidplay.*,vidstream.pro,vizcloud.*##+js(ra, data-id|data-p, '[data-id],[data-p]', stay)
-mcloud.bz,vid2faf.*,vidplay.*##[src^="assets/bn"]:upward([style])
+vidplay.*,vizcloud.*##+js(ra, data-id|data-p, '[data-id],[data-p]', stay)
+vid2faf.*,vidplay.*##[src^="assets/bn"]:upward([style])
 ||i.imgur.com^$image,domain=vizcloud.*|vizcloud2.*
 /mellowpresence.com^$script
 /\/[A-Z]{1,2}\/[-0-9a-z]{5,}\.com\/(?:[0-9a-f]{2}\/){3}[0-9a-f]{32}\.js$/$script,1p,match-case
-vidstream.pro##.aslot
 /lazymolecule/*.js$script
 youtubedownloader.*##+js(nowoif)
 liferayiseasy.*##+js(aeld, load, getComputedStyle)
@@ -8312,18 +8302,15 @@ manpeace.org##+js(aopr, document.write)
 boardgamesonline.net##ins.adsbygoogle
 ! anti adb games.newsobserver .com
 newsobserver.com##+js(set, Adv_ab, false)
-findandfound.ga,png.is##+js(aopr, adb_checker)
+png.is##+js(aopr, adb_checker)
 nohat.cc,png.is##+js(aopr, ignore_adblock)
 png.is,nohat.cc##+js(aopr, $.prototype.offset)
 png.is,nohat.cc##+js(no-fetch-if, adsbygoogle)
-findandfound.ga##+js(aopr, $.prototype.html)
-findandfound.ga##+js(aopr, onload)
-findandfound.ga##+js(ra, oncontextmenu, body)
 ||nohat.me^$3p
 @@||nohat.me/s?*k=$xhr,domain=png.is|nohat.cc
 ! line25 .com popunder
 line25.com##+js(aopr, decodeURI)
-hmc-id.blogspot.com,jemerik.com##+js(nostif, AdBlock)
+hmc-id.blogspot.com##+js(nostif, AdBlock)
 noxx.to##+js(aopr, AaDetector)
 thelayoff.com##+js(nostif, alert)
 thelayoff.com##.epp-bf
@@ -8449,9 +8436,6 @@ javcl.com##+js(nosiif, 0x)
 javcl.com###wrapfabtest:style(height:1px !important;width:1px !important)
 c1ne.co##+js(aopr, mdpDeBlocker)
 thesukan.net##+js(aost, String.prototype.charCodeAt, ai_)
-@@||suj.nu^$ghide
-suj.nu##.ads
-ru-xvideos.me##+js(nostif, innerText, 2000)
 *$script,redirect-rule=noopjs,domain=apps2app.com
 apps2app.com##.adsbygoogle:style(width:1px!important;height:1px!important;min-width:1px!important;min-height:1px)
 apps2app.com##+js(aeld, load, removeChild)
@@ -8469,10 +8453,6 @@ toolss.net##ins.adsbygoogle
 ||toolss.net^$3p
 toolss.net###wpsafe-generate, #wpsafe-link:style(display: block !important;)
 toolss.net##div[id^="wpsafe-wait"]
-jav.sh##+js(aopr, AaDetector)
-jav.sh##+js(aopr, document.regexpSrcDomainPlaceholder)
-jav.sh##center > div
-*$script,3p,denyallow=cloudflare.com,domain=jav.fm|jav.sh|jav.vin
 ! scrubson. blogspot.com anti adb + popups
 scrubson.blogspot.com##+js(aopr, adcashMacros)
 ! nsfw aquariumgays .com anti adb + popups
@@ -20877,6 +20857,7 @@ daemonanime.net##+js(acs, eval, replace)
 daemonanime.net##+js(acs, document.addEventListener, google_ad_client)
 daemon-hentai.com##+js(aopr, b2a)
 daemonanime.net,daemon-hentai.com##+js(nostif, adbl)
+daemon-hentai.com##+js(nostif, nextFunction)
 daemonanime.net,daemon-hentai.com##+js(acs, document.querySelectorAll, popMagic)
 daemonanime.net#@#div[id^="div-gpt-"]:not([style^="width: 1px; height: 1px; position: absolute; left: -10000px; top: -"])
 daemonanime.net#@#[id^="div-gpt-ad"]:not([style^="width: 1px; height: 1px; position: absolute; left: -10000px; top: -"])
