@@ -1,12 +1,12 @@
-diff name:ublock-annoyances lines:3 checksum:1fecc6fa37
+diff name:ublock-annoyances lines:3 checksum:bba079fe93
 d4 1
 a4 1
-! Diff-Path: ../patches/2024.10.11.1345.patch#ublock-annoyances
-diff name:ublock-badware lines:24 checksum:aee2a78db3
+! Diff-Path: ../patches/2024.10.12.208.patch#ublock-annoyances
+diff name:ublock-badware lines:24 checksum:62c9e30763
 d3 2
 a4 2
 ! Last modified: Thu, 10 Oct 2024 19:27:03 +0000
-! Diff-Path: ../patches/2024.10.11.1345.patch#ublock-badware
+! Diff-Path: ../patches/2024.10.12.208.patch#ublock-badware
 d690 2
 d693 1
 d700 1
@@ -27,11 +27,11 @@ a3381 1
 ||myjobdhl.earcu.com^$all,to=~dhl.com
 a3835 1
 ||carrefour-enbacktoschool4.pages.dev^$all,to=~carrefour.com
-diff name:ublock-filters lines:96 checksum:a230bb191e
+diff name:ublock-filters lines:101 checksum:fe243986b2
 d3 2
 a4 2
-! Last modified: Fri, 11 Oct 2024 18:22:58 +0000
-! Diff-Path: ../patches/2024.10.11.1345.patch#ublock-filters
+! Last modified: Sat, 12 Oct 2024 02:05:04 +0000
+! Diff-Path: ../patches/2024.10.12.208.patch#ublock-filters
 d147 1
 d798 9
 a806 1
@@ -62,7 +62,7 @@ a9865 1
 $frame,csp=sandbox allow-downloads allow-forms allow-modals allow-same-origin allow-scripts,to=~buymeacoffee.com|~cbox.ws|~chatango.com|~cloudflare.com|~dailymotion.com|~discord.com|~disqus.com|~edgecastcdn.net|~emturbovid.com|~facebook.com|~frembed.*|~google.*|~hcaptcha.com|~mixdrop.*|~ok.ru|~recaptcha.net|~strcdn.org|~twitter.com|~vidmoly.*|~vixcloud.co|~youtu.be|~youtube.com|~x.com,from=antennasports.ru|dlhd.so|euro2024direct.ru|hurawatch.art|movie3k.net|popcornmovies.to|putlockers.*|roselife.site|roshy.tv|vidsrc.*
 a10557 1
 uploadmall.com#@#.advblock
-a10604 7
+a10604 12
 ||vidlink.pro/api/adcash
 vidlink.pro##+js(aost, atob, /\b[a-z]\.onload(?:@http| injectedScript)/)
 vidlink.pro##+js(aopr, aclib)
@@ -70,6 +70,11 @@ vidlink.pro##+js(aopr, aclib)
 ^clickid=*&sourceid=$doc
 *$script,3p,domain=vidlink.pro
 ilgazzettino.it##+js(set, jwDefaults.advertising, {})
+!#if cap_html_filtering
+secondhandsongs.com##^script:has-text(ad_block)
+!#else
+secondhandsongs.com##+js(trusted-replace-argument, String.prototype.startsWith, 0, 0, condition, /^\/(?:performance|work|artist|release|label|explore|statistics)$/)
+!#endif
 d12257 2
 d12370 5
 d12962 4
@@ -124,21 +129,28 @@ a23083 3
 client.falixnodes.net##+js(rpnt, script, typeof window.loadtwo, typeof window.loadtwo === true)
 client.falixnodes.net##+js(rpnt, script, (window.loadtwo, (window.loadtwo === undefined || true || window.googlescriptloaded)
 client.falixnodes.net##+js(set, window.adngin, {})
-diff name:ublock-privacy lines:9 checksum:0a9ca8519a
+diff name:ublock-privacy lines:9 checksum:6cbc401620
 d3 2
 a4 2
 ! Last modified: Fri, 11 Oct 2024 19:47:36 +0000
-! Diff-Path: ../patches/2024.10.11.1345.patch#ublock-privacy
+! Diff-Path: ../patches/2024.10.12.208.patch#ublock-privacy
 a42 1
 ||click.redditmail.com/CL0/$urlskip=/CL0\/.*?(www\.reddit\.com.+?)(?:\?|%3F)/ -uricomponent +https
 a624 2
 ||podtrac.com^*redirect.mp3/$urlskip=/\/redirect\.mp3\/(.*?\.mp3\b)/ +https
 ||gog.com/productcard/users/activity/log
-diff name:ublock-quick-fixes lines:17 checksum:a9b3d6229e
+diff name:ublock-quick-fixes lines:28 checksum:6b77bd1d8a
 d3 2
 a4 2
-! Last modified: Fri, 11 Oct 2024 15:58:32 +0000
-! Diff-Path: ../patches/2024.10.11.1345.patch#ublock-quick-fixes
+! Last modified: Sat, 12 Oct 2024 03:18:14 +0000
+! Diff-Path: ../patches/2024.10.12.208.patch#ublock-quick-fixes
+d63 1
+d65 16
+d88 1
+a88 2
+japscan.lol#@#+js(rmnt, script, ;}else{if(typeof )
+japscan.lol##+js(rmnt, script, 'fined)
+d101 2
 d123 1
 a123 1
 poophq.com,veev.to##+js(rpnt, script, window.__abburi, /\(function\(\)\{\s*'use strict';\s*const handler=\{\s*apply:function\(target\,thisArg\,argumentsList\)\{\s*if\(argumentsList\[0\]&&argumentsList\[0\]\.html\?\.\detected===null&&typeof argumentsList\[0\]\.html\?\.\instance\?\.\start==='function'&&typeof argumentsList\[0\]\.env\?\.\instance\?\.\start==='function'&&typeof argumentsList\[0\]\.http\?\.\instance\?\.\start==='function'\)\{\s*const customStartFunction=function\(\)\{\s*if\(typeof this\._hsz==='boolean'\)\{\s*this\._hsz=false;\s*\}\};\s*\['html'\,'env'\,'http'\]\.forEach\(\(key\)=>\{\s*argumentsList\[0\]\[key\]\.instance\.start=customStartFunction;\s*if\(typeof argumentsList\[0\]\[key\]\.instance\._hsz==='boolean'\)\{\s*argumentsList\[0\]\[key\]\.instance\._hsz=true;\s*\}\};\s*\}\s*return Reflect\.apply\(target\,thisArg\,argumentsList\);\s*\}\};\s*window\.Object\.keys=new Proxy\(window\.Object\.keys\,handler\);\s*\}\)\(\);/)
@@ -147,16 +159,20 @@ a130 2
 @@||widgets.outbrain.com/outbrain.js$xhr,domain=animefire.info|animesonlinecc.us|animesonliner4.com|animesup.info|animeyabu.net|animeyabu.org|anitube.us|anitube.vip|caroloportunidades.com.br|dattebayo-br.com|drstonebr.com|flyanimes.cloud|goanimes.vip|goyabu.us|hinatasoul.com|isekaibrasil.com|meuanime.info|otakuanimess.net|superanimes.in
 animefire.info,animesonlinecc.us,animesonliner4.com,animesup.info,animeyabu.net,animeyabu.org,anitube.us,anitube.vip,caroloportunidades.com.br,dattebayo-br.com,drstonebr.com,flyanimes.cloud,goanimes.vip,goyabu.us,hinatasoul.com,isekaibrasil.com,meuanime.info,otakuanimess.net,superanimes.in##+js(trusted-prevent-xhr, outbrain.com, outbrain)
 d132 1
-a159 1
-wiki.yjsnpi.nu##.mw-file-element, .lazy-image-placeholder:style(visibility: visible !important;)
+d142 1
+d155 2
+d160 3
+a162 2
+wiki.yjsnpi.nu##.mw-file-element:remove-class(mw-file-element)
+wiki.yjsnpi.nu##.lazy-image-placeholder:remove-class(lazy-image-placeholder)
 a167 2
 iwb.jp##+js(nostif, getComputedStyle(a).height)
 pinterest.*#@#div[data-test-id="pin"]:has(div[title^="Promoted"])
-diff name:ublock-unbreak lines:16 checksum:5592bfc0c4
+diff name:ublock-unbreak lines:16 checksum:bc556b2903
 d3 2
 a4 2
 ! Last modified: Fri, 11 Oct 2024 19:58:50 +0000
-! Diff-Path: ../patches/2024.10.11.1345.patch#ublock-unbreak
+! Diff-Path: ../patches/2024.10.12.208.patch#ublock-unbreak
 d13 1
 a13 1
 @@||track.adtraction.com/*&url=https://www.gog.com/$popup
@@ -169,11 +185,11 @@ a2701 3
 /analytics/analytics.js^$1p,script,redirect=noop.js
 ||assets.fyers.in/Lib/analytics/Analytics.js$1p,important
 ||lamycosphere.com/cdn/shop/*/assets/pixel.gif$image,1p,redirect=1x1.gif,important
-diff name:easylist lines:2346 checksum:2d5fab36d5
+diff name:easylist lines:3404 checksum:3db99af608
 d4 2
 a5 2
-! Last modified: Fri, 11 Oct 2024 21:50:57 +0000
-! Diff-Path: ../patches/2024.10.11.1345.patch#easylist
+! Last modified: Sat, 12 Oct 2024 02:04:35 +0000
+! Diff-Path: ../patches/2024.10.12.208.patch#easylist
 a15053 1
 ##a[href^="https://osfultrbriolenai.info/"]
 d15938 1
@@ -203,10 +219,11 @@ a16349 1
 ||350c2478fb.com^
 d16360 1
 d16362 1
-d16373 1
+d16372 2
 d16378 1
 d16395 1
 d16405 1
+d16407 1
 d16420 1
 d16443 1
 d16447 1
@@ -233,6 +250,7 @@ d16653 1
 d16688 1
 d16690 1
 d16694 1
+d16704 1
 d16716 1
 a16721 1
 ||8exx9qtuojv1.shop^
@@ -244,33 +262,51 @@ a16759 1
 ||990828ab3d.com^
 d16772 1
 d16777 1
-d16893 1
+d16854 1
+d16885 1
+d16892 2
 a16909 1
 ||abdedenneer.com^
 d16913 1
+d16921 1
+d16924 1
 d16929 1
+d16938 2
+d16976 1
+d16981 2
 d17003 1
 d17040 1
+d17044 1
 d17051 1
 d17053 1
 d17065 1
 d17068 2
 d17071 1
 d17075 1
+a17077 1
+||acceleratetomb.com^
 a17096 1
 ||accompanynovemberexclusion.com^
 d17106 1
 d17110 1
+d17126 1
 d17133 1
 d17142 1
 d17147 1
 d17171 1
 d17183 1
+d17196 1
+d17210 1
+d17215 1
 a17220 1
 ||ad-block-offer.com^
+a17322 1
+||additionmagical.com^
 d17334 1
 d17353 1
 d17359 1
+a17388 1
+||adjmntesdsoi.love^
 d17456 1
 d17498 1
 d17507 1
@@ -281,13 +317,18 @@ d17806 1
 a17807 1
 ||aeelookithdifyf.com^
 d17816 1
+d17819 1
+d17860 1
 d17890 1
 d17949 1
+d17995 1
 d17998 1
 d18001 1
 d18025 1
 d18047 1
 d18056 1
+d18076 1
+d18080 1
 d18101 1
 a18101 1
 ||aipoufoomsaz.xyz^
@@ -296,184 +337,316 @@ d18179 1
 d18188 1
 d18191 1
 d18195 1
+d18199 1
 a18199 1
 ||aklmjylwvkqqv.top^
 d18205 1
 d18210 1
+d18218 1
+d18225 1
+d18232 1
+d18265 1
+a18268 1
+||algomanjuly.shop^
 d18286 1
 d18351 1
+d18404 1
 d18416 1
+d18425 1
+d18437 1
+a18456 1
+||ambeapres.shop^
 d18471 1
 d18478 1
+d18491 1
 d18501 1
 a18502 1
 ||amnioteunteem.click^
 d18504 1
 d18511 1
 d18525 1
+d18537 2
 d18543 1
+d18548 2
 d18558 1
+d18561 1
+d18595 1
+d18603 1
 d18622 1
 d18629 1
 d18634 1
 d18638 1
 d18642 1
+d18668 1
 d18688 1
 d18696 1
 d18698 1
 d18706 1
+d18710 1
 d18724 1
 d18727 1
+d18736 1
+d18749 1
 d18753 1
+d18761 1
+d18772 1
 d18776 1
+d18778 1
 d18796 1
 d18808 1
 d18812 1
+d18869 1
+d18872 1
 d18885 1
 d18892 1
+d18897 1
 d18901 1
 d18905 1
-d18915 1
+d18912 1
+d18914 2
 d18925 2
 d18940 1
+d18943 1
+d18955 1
 d18959 1
-d18993 1
+d18965 1
+d18976 1
+d18979 1
+d18993 2
 d19009 1
 d19018 1
+d19028 1
 d19037 1
 d19041 1
+d19078 1
 d19087 1
 a19123 1
 ||ashrivetgulped.com^
+d19130 1
 a19130 1
 ||askewusurp.shop^
+d19180 1
+d19182 1
+d19245 1
 a19245 1
 ||ataiyalstrays.com^
 d19263 1
 d19265 1
 d19285 1
+d19311 1
 d19332 1
 d19337 1
 d19370 1
 d19372 1
+a19381 1
+||auckodsailtoas.net^
 d19395 1
+d19408 1
 d19418 1
+d19422 2
 d19425 1
 d19460 1
 d19468 1
 d19475 1
+a19476 1
+||auto-deploy.pages.dev^
+d19498 2
 d19508 1
 d19522 1
-d19531 1
+d19529 3
 d19536 1
+d19553 2
 d19558 1
+d19563 3
+d19575 1
+d19582 1
+d19594 1
+d19613 1
 d19615 1
 d19617 1
+d19619 1
+d19634 1
 d19644 1
-d19649 2
+d19649 3
 d19653 1
+d19660 1
 d19671 1
 d19681 2
+d19691 1
 d19694 1
+d19699 1
 d19701 1
+d19713 1
+d19715 1
 d19717 1
-a19747 1
+d19725 1
+d19738 2
+d19743 3
+d19748 1
+a19748 1
 ||azygotesonless.com^
 d19765 1
+d19778 1
 d19788 2
 d19792 2
 d19796 1
+d19799 1
+d19801 1
 a19812 1
 ||backedliar.com^
 d19837 2
 d19850 1
+d19856 1
 a19866 1
 ||baipahanoop.net^
 d19873 1
 d19880 1
+d19896 2
 d19922 1
 d19938 1
 a19938 1
 ||bantengdisgown.shop^
+d19940 1
+d19942 1
 d19959 2
+d19964 1
+d19966 1
 d19977 1
+d19988 1
+d20004 1
+d20012 2
 d20015 1
 d20020 1
 a20027 1
 ||bathcuddle.com^
+d20036 2
 d20050 1
 d20064 1
 d20069 1
-d20074 1
+d20071 1
+d20074 2
 d20081 2
 d20111 1
 d20142 1
+d20149 2
 d20167 1
+d20178 1
 d20186 1
 d20202 1
 d20217 1
 d20246 1
 d20296 1
+d20303 1
 d20311 1
 d20324 1
+d20326 1
+d20331 1
 d20339 1
 d20347 1
 a20382 1
 ||bestreceived.com^
+d20391 1
+d20394 1
+d20411 1
 d20434 1
 d20473 1
 d20486 1
+d20500 2
+d20519 1
+d20521 1
+d20559 1
 d20563 1
+d20578 1
 d20600 1
 d20635 1
-d20671 1
+d20671 3
 d20680 1
 d20695 1
+d20708 1
+d20712 1
 d20732 1
+d20737 1
+d20751 1
 d20773 1
 d20783 1
 d20797 1
+d20800 1
+d20820 1
 d20832 1
 d20867 1
 d20903 1
-d20916 1
+d20915 2
 d20923 1
 d20932 1
 d20948 1
+d20958 1
+d20968 1
+d20993 1
+d20997 1
 d21010 1
 d21019 1
 d21026 1
+d21041 1
+d21099 1
 d21104 1
+d21133 1
+d21152 1
 d21157 1
 d21196 1
+d21200 1
+d21209 1
+d21216 1
+a21217 1
+||brickelpeixere.com^
 a21229 1
 ||briefredos.click^
 a21235 1
 ||briguegraine.com^
+d21257 1
+d21270 1
+d21288 1
 a21291 1
 ||bromoneg.shop^
+d21295 1
+d21302 1
 a21305 1
 ||brottpyric.com^
+d21331 1
 d21339 1
 d21341 1
+d21344 1
+d21346 1
+d21349 1
 d21363 1
+d21367 1
+d21392 1
+d21402 1
 d21408 1
 d21428 1
 d21465 1
 d21483 1
 d21488 1
 d21502 1
-d21509 2
+d21509 3
 d21513 1
+d21523 1
 d21528 1
 d21534 1
-a21538 1
+d21538 1
+a21538 2
+||butylhoggish.com^
 ||buuftxcii.com^
+d21541 1
 d21561 1
-a21572 1
+d21573 1
+a21573 1
 ||bwvofgqhmab.com^
 d21576 1
 d21590 1
+d21593 1
+a21599 1
+||bygoneskalpas.shop^
+d21611 1
 a21619 1
 ||bywqbspxjldsyl.com^
 d21645 1
@@ -481,11 +654,16 @@ d21648 1
 d21651 1
 d21653 1
 d21657 1
+d21666 1
+d21673 2
 d21678 1
 d21688 1
 d21698 1
+d21708 1
 d21711 2
 d21714 1
+d21718 1
+d21725 1
 a21738 1
 ||calvaryfiliety.top^
 d21742 1
@@ -495,10 +673,14 @@ d21769 1
 a21771 1
 ||candyai.love^
 d21786 1
-d21809 1
+d21809 2
 d21827 1
+d21832 1
 a21838 1
 ||careycholate.click^
+a21861 1
+||cartinglackers.click^
+d21867 1
 d21872 1
 a21878 1
 ||caseygalere.com^
@@ -507,27 +689,40 @@ d21924 1
 d21935 1
 d21941 1
 d21961 1
-d21965 2
+d21965 3
 d21988 1
 d22016 1
 d22078 1
 d22085 1
+d22103 1
+d22109 1
 d22111 1
 d22114 1
 d22136 1
 d22145 1
+d22190 1
 d22211 1
+d22218 1
+d22228 1
+d22239 2
 d22248 1
-d22286 1
+d22264 1
+d22282 1
+d22286 2
 d22318 1
 a22320 1
 ||cheebilaix.com^
 d22327 1
 d22351 1
+d22361 1
+d22364 1
+d22390 1
+d22408 1
 d22421 1
 d22427 1
-d22445 1
+d22445 2
 d22451 1
+d22493 1
 d22530 1
 d22544 1
 d22563 1
@@ -535,48 +730,71 @@ d22580 1
 d22583 1
 d22596 2
 d22667 1
-d22740 1
+a22736 1
+||climatedetaindes.com^
+d22738 3
+d22742 1
+d22758 1
 d22775 1
 d22786 1
 d22794 1
-d22832 1
+d22831 2
 d22849 1
 d22866 1
 d22877 1
 d22881 1
+d22884 1
+d22886 1
 d22889 1
 d22894 2
 d22920 1
 d22927 1
 d22931 1
-d22975 1
+d22934 1
+d22946 1
+d22974 2
 d22982 1
 d22991 1
 d23016 1
 d23030 1
+d23036 1
 d23073 1
 d23078 1
 d23119 1
-d23164 1
+d23122 1
+d23143 1
+d23163 2
 d23166 1
 d23173 1
 d23184 1
+d23218 1
 d23221 1
 d23231 1
+a23254 1
+||contagiousbookcasepants.com^
+d23262 1
 d23269 1
 d23293 1
 d23297 1
 d23303 1
+a23307 1
+||convellparcels.click^
 d23328 1
 d23340 1
-d23351 1
+d23351 3
+d23358 1
+d23374 1
 d23385 1
+d23388 1
 d23399 1
 d23404 1
-d23412 1
+d23411 2
+d23423 1
 d23435 1
 d23440 1
 d23452 1
+d23480 1
+d23483 1
 d23526 1
 d23556 1
 d23559 1
@@ -585,7 +803,11 @@ d23580 1
 d23609 1
 d23611 1
 d23615 1
+d23621 1
 d23633 1
+d23651 1
+d23686 2
+d23709 1
 d23721 1
 d23734 1
 d23736 1
@@ -597,37 +819,53 @@ d23779 1
 d23785 1
 d23787 1
 d23793 1
+d23798 1
+d23820 1
+d23824 1
+a23830 1
+||customernormallyseventh.com^
 d23834 1
 d23876 1
+d23898 1
 a23918 1
 ||czuvzixm.com^
 d23933 1
 d23953 1
 d23964 1
+d23982 1
 d24018 1
+d24036 1
 d24041 1
+d24049 1
 a24050 1
 ||dannyuncoach.com^
 d24074 1
-d24077 1
+d24076 2
 d24089 1
 d24092 1
+d24125 1
 a24125 1
 ||datqagdkurce.com^
 d24143 1
+d24145 1
 d24164 1
+d24172 1
 d24176 1
 d24186 1
+d24193 1
 d24207 1
 d24216 1
 d24219 2
 d24235 1
 d24246 1
 d24266 1
+d24279 1
 d24283 1
 d24288 1
 d24290 1
 d24293 1
+d24298 1
+d24315 1
 d24341 1
 a24395 1
 ||deluxe-download.com^
@@ -635,14 +873,20 @@ d24401 1
 a24427 1
 ||densigissy.net^
 d24434 1
+d24451 1
 d24455 1
 d24466 1
 d24468 1
+d24478 1
+d24480 1
 d24496 1
+d24512 1
+d24526 1
 d24558 1
 d24560 1
 d24564 1
 d24567 1
+d24575 1
 d24585 1
 d24592 1
 d24596 2
@@ -650,44 +894,76 @@ d24620 1
 d24623 1
 d24625 1
 d24629 1
+d24632 1
+d24637 1
+d24644 1
+d24652 1
 d24659 1
+d24662 1
+d24672 1
 a24692 1
 ||diffhobbet.click^
+d24704 1
+d24725 1
+d24728 1
 a24728 1
 ||diluterocciput.click^
 d24737 1
 d24743 1
 d24752 1
+d24758 1
+d24782 1
 d24801 1
+d24803 1
 d24811 1
 d24848 1
+d24863 1
 d24879 1
 a24960 1
 ||distinctpiece.pro^
 d24963 1
 d24981 2
+d24984 1
 d24993 1
+d25007 1
+d25009 1
 d25031 1
 d25044 1
+d25062 1
 d25091 1
 d25110 1
 a25125 1
 ||dolehum.com^
 d25128 1
+d25132 1
+d25153 1
+d25158 1
 d25170 1
+d25176 1
 d25179 1
 d25195 1
-d25198 1
+d25197 2
+d25210 1
+d25233 1
 d25255 1
 d25292 1
 d25305 1
 d25312 1
+d25331 1
 d25342 1
+d25347 1
+d25354 1
 d25357 1
+d25362 1
 d25373 1
 d25382 1
 d25405 1
+d25410 1
+d25433 1
 d25442 1
+d25456 1
+a25466 1
+||dsrpotpbzgwp.com^
 d25499 1
 d25527 1
 d25535 1
@@ -697,8 +973,9 @@ d25546 2
 d25569 1
 a25572 1
 ||dunsathelia.click^
+d25580 1
 d25597 1
-d25606 1
+d25606 2
 a25609 1
 ||dvvyyakgkzbbg.com^
 d25621 1
@@ -713,17 +990,27 @@ d25692 1
 d25696 1
 d25700 1
 d25712 1
+d25727 1
+d25733 1
 d25736 1
+d25787 1
 d25789 1
-d25794 1
+d25794 2
 d25798 1
 d25813 1
 d25820 1
-d25822 1
+d25822 2
+d25875 1
+d25879 1
+d25911 1
 d25916 1
 d25940 1
+d25947 1
+d25950 1
+d25978 2
 a25985 1
 ||efef322148.com^
+d26004 1
 d26006 1
 d26013 1
 a26017 1
@@ -738,36 +1025,55 @@ d26127 1
 d26134 1
 d26140 1
 d26147 1
+d26149 1
 d26158 1
 d26171 1
 d26186 1
+d26194 1
 d26201 1
 a26208 1
 ||emjrwypl.xyz^
+d26212 1
 d26218 1
-d26246 1
+d26223 1
+d26239 1
+d26246 2
 d26267 1
+d26272 1
 d26274 1
 a26285 1
 ||endlessgoes.com^
 a26287 1
 ||endod.site^
 d26322 1
+d26333 1
+d26339 1
+d26353 1
+d26370 1
+d26374 1
 d26377 2
 d26402 1
 d26414 1
+d26447 1
+d26453 1
 a26454 1
 ||epsashoofil.net^
+d26466 1
+d26484 1
 d26494 1
 d26527 2
 d26532 2
-d26553 1
+d26537 1
+d26552 2
+d26557 1
 d26572 1
 d26574 1
-d26579 1
+d26578 2
 d26596 1
 d26602 1
+d26644 1
 d26650 1
+d26655 1
 a26656 1
 ||eumarkdepot.com^
 d26678 1
@@ -775,9 +1081,11 @@ d26680 1
 d26694 1
 d26698 1
 d26709 1
+d26716 1
 d26718 1
 d26753 1
 d26761 1
+d26765 1
 d26773 1
 d26776 1
 d26785 1
@@ -786,31 +1094,48 @@ a26787 1
 d26807 1
 d26812 1
 d26820 1
+d26839 1
 d26861 1
 d26868 1
+a26890 1
+||exptlgooney.com^
 d26906 1
 d26912 1
 d26924 1
 d26929 1
 d26966 1
+d26973 1
 d26993 1
 d26999 1
+d27045 1
 d27052 1
 d27066 1
 d27088 1
 d27090 1
 d27128 1
+d27139 1
 d27160 1
 d27168 1
+d27175 1
+d27185 1
+d27189 1
+d27196 2
 d27200 1
 d27212 1
 d27225 1
 d27229 1
+a27263 1
+||fedot.site^
+d27268 1
+d27272 1
 d27280 1
 d27304 1
+d27306 1
+d27311 1
 d27337 1
 d27342 1
 d27349 1
+d27368 1
 d27376 1
 d27404 1
 d27411 1
@@ -821,17 +1146,34 @@ d27443 1
 d27449 1
 d27473 1
 d27478 1
+a27481 1
+||filthnair.click^
 d27490 1
 a27499 1
 ||findsrecollection.com^
+d27521 1
+a27555 1
+||fishermanplacingthrough.com^
+a27567 1
+||fistulewiretap.shop^
 d27590 1
 d27600 2
 d27606 1
 d27623 1
+d27634 1
+d27647 1
 d27674 1
 d27678 1
+d27680 1
+d27683 1
 d27691 1
+d27693 1
 d27720 1
+d27737 1
+d27761 1
+a27770 1
+||flyerseafood.com^
+d27783 1
 d27788 1
 a27807 1
 ||fnvmtqorflqcqg.com^
@@ -839,16 +1181,24 @@ d27813 1
 d27816 1
 d27821 1
 d27828 1
+d27831 1
 d27858 1
 d27887 1
 d27904 1
+d27928 1
 d27931 1
 d27942 2
 d27977 1
+d28001 1
 d28003 1
 d28007 1
+d28014 1
 d28037 1
 d28051 1
+d28057 1
+d28059 1
+d28061 1
+d28075 1
 d28081 1
 a28082 1
 ||frayforms.com^
@@ -856,11 +1206,17 @@ d28105 1
 d28143 1
 d28149 1
 d28170 1
+d28173 2
 d28193 1
 a28224 1
 ||fstsrv16.com^
+d28239 1
+d28241 1
 d28244 1
+d28251 1
 d28253 1
+d28261 1
+d28264 1
 a28269 1
 ||fuksaighetchy.net^
 d28306 1
@@ -878,19 +1234,28 @@ d28445 1
 a28457 1
 ||gaitcubicle.com^
 d28474 1
+d28476 1
 d28479 1
 d28491 1
 d28498 1
 d28502 1
+d28509 1
 d28517 1
+d28520 1
+d28525 1
 d28535 1
 d28537 2
-d28553 1
+d28552 2
 d28567 1
+a28568 1
+||gaudoaphuh.net^
 d28585 1
 d28594 1
 a28600 1
 ||gbengene.com^
+d28633 1
+d28650 1
+d28656 1
 a28683 1
 ||gensonal.com^
 d28692 1
@@ -900,6 +1265,7 @@ d28777 1
 d28787 1
 d28790 1
 d28793 1
+d28796 1
 d28806 1
 d28818 1
 d28820 2
@@ -909,8 +1275,9 @@ a28836 1
 d28843 1
 a28849 1
 ||gingagonkc.com^
+d28852 1
 d28855 1
-d28858 1
+d28857 2
 d28867 1
 a28883 1
 ||gitsurtithauth.net^
@@ -918,21 +1285,35 @@ d28906 1
 d28917 1
 d28925 1
 d28960 1
+d28981 1
 d28997 1
 d29006 1
 d29044 1
+d29057 1
 d29062 1
+d29092 1
+d29123 1
 d29127 1
 d29136 1
 d29146 1
 d29191 1
+d29216 1
+d29218 1
+d29226 1
 d29233 1
+d29235 1
+d29245 1
 d29247 1
+d29255 1
+d29257 1
 d29266 1
 d29274 1
 a29300 1
 ||goschenelect.com^
-d29335 2
+d29304 1
+d29323 1
+d29330 1
+d29335 3
 d29351 1
 d29353 1
 d29358 1
@@ -941,27 +1322,42 @@ d29370 1
 d29377 1
 a29383 1
 ||graigloapikraft.net^
+d29404 1
 d29406 1
 d29409 1
 d29459 1
 d29484 1
 d29486 1
 d29503 1
-d29532 1
+d29528 1
+d29531 2
+d29539 1
+a29566 1
+||grobuveexeb.net^
+d29578 1
 a29589 1
 ||grotchaijoo.net^
 d29600 1
+d29602 1
 d29613 1
 d29633 1
 d29641 1
 d29646 1
+d29668 1
 d29671 1
+d29674 1
+d29677 1
 d29691 1
+d29695 1
 d29698 1
 a29699 1
 ||gullahbaraca.com^
+d29707 1
+d29709 1
 a29710 1
 ||gunnedstudier.com^
+d29717 1
+d29722 1
 d29747 1
 d29758 1
 d29765 1
@@ -976,28 +1372,48 @@ d29826 1
 a29834 1
 ||hackeestrict.click^
 d29844 1
+d29861 1
 d29890 1
 d29906 1
 d29910 1
+d29916 1
+d29923 1
 d29927 1
+d29930 1
+a29931 1
+||handymanlipsballast.com^
+d29934 1
 d29945 1
 d29969 1
+d29979 1
 d29984 1
 d29989 1
 d29995 1
 d29997 1
+d30011 1
+d30024 1
 d30027 1
+d30036 1
 d30055 1
 d30080 1
 d30086 1
+d30100 1
 d30104 1
+a30105 1
+||hdywrwnvf-h.one^
 d30112 1
 d30135 1
+d30139 1
 d30157 2
+d30186 1
 d30214 1
 d30216 1
+d30250 1
+a30255 1
+||heromainland.com^
 d30277 1
 d30284 1
+d30292 1
 d30303 1
 d30309 1
 d30313 1
@@ -1006,14 +1422,17 @@ d30326 1
 d30339 1
 d30347 1
 d30349 1
+d30356 1
 d30428 1
 d30443 1
 d30453 1
 d30467 1
+d30471 1
 d30474 1
 d30488 1
 d30499 1
 d30510 1
+d30517 1
 d30523 1
 d30526 1
 d30530 1
@@ -1021,12 +1440,22 @@ d30535 1
 d30546 1
 a30549 1
 ||hoadaphagoar.net^
+d30565 1
+d30567 1
+d30572 1
+d30578 1
 d30599 1
+d30609 1
+d30614 2
 d30632 1
+d30639 1
+d30641 1
+d30647 1
 d30677 1
 d30696 1
 d30708 1
 d30741 2
+d30765 2
 a30771 1
 ||hoyaga.xyz^
 d30776 1
@@ -1046,21 +1475,27 @@ d30855 1
 d30871 2
 d30877 1
 d30880 1
+d30886 1
 d30895 1
 d30907 2
 d30932 1
 d30937 1
 d30944 1
 d30973 1
+d30985 2
 d30989 1
 d31021 1
+d31024 1
 d31036 1
 a31043 1
 ||iagtnnpp.com^
 d31051 1
+d31059 1
+d31063 1
 d31076 1
 a31080 1
 ||icetechus.com^
+d31104 1
 d31111 1
 d31133 1
 d31155 1
@@ -1070,19 +1505,26 @@ d31198 1
 a31226 1
 ||iionads.com^
 d31235 1
+d31254 1
 d31270 2
+a31278 1
+||illegallyrailroad.com^
 d31309 1
 d31325 1
-d31330 1
+d31330 2
 a31343 1
 ||imidesestreat.com^
 d31348 1
 d31357 1
 d31373 1
 d31394 1
+a31394 1
+||impedergusher.shop^
 d31420 1
+d31428 1
 d31442 1
 d31471 1
+d31476 2
 d31489 1
 d31530 1
 d31533 1
@@ -1095,28 +1537,40 @@ d31623 1
 d31645 1
 d31647 1
 d31654 1
+d31668 1
+d31674 1
 d31709 1
 d31716 1
 d31742 1
 d31770 1
 d31773 1
 d31793 1
+d31811 1
 d31838 1
 d31841 1
-d31866 1
+d31865 2
+d31897 1
 d31906 3
+d31913 1
+d31918 1
+d31928 1
 a31961 1
 ||ipwsjdcgbmzgg.com^
 d31968 1
-a31972 1
+d31973 1
+a31973 1
 ||iqzlvcnxmwvyt.com^
 d31979 1
+d31986 1
 d32005 1
 d32009 1
 d32015 1
 d32017 1
 d32020 1
-d32073 1
+d32022 1
+d32036 1
+d32071 3
+d32095 1
 d32114 1
 d32122 1
 d32127 1
@@ -1131,32 +1585,55 @@ d32221 1
 d32225 1
 d32234 1
 d32247 1
+d32262 1
 d32266 1
 d32268 1
 d32276 2
+d32281 1
 d32286 1
 d32294 1
 d32298 1
-d32303 1
+d32302 2
 d32325 1
+d32328 1
+d32330 1
 a32330 1
 ||jbib-hxyf.icu^
 d32333 1
+d32335 1
 d32337 1
+d32340 2
+d32343 4
 d32361 1
+d32409 2
+d32414 1
+d32419 1
+d32427 1
+d32429 1
+d32431 1
 d32447 1
+d32453 1
+d32464 1
 d32472 1
 d32475 1
 d32480 1
 d32482 1
 d32488 1
+d32525 1
+d32529 1
+d32533 1
 d32561 1
+d32565 1
 d32571 1
+d32575 1
 d32578 1
 d32580 1
 d32584 1
 d32596 1
+d32638 1
 d32653 1
+a32678 1
+||joomisomushisuw.net^
 a32702 1
 ||jouwhoanepoob.xyz^
 a32704 1
@@ -1164,27 +1641,47 @@ a32704 1
 d32712 1
 d32722 1
 d32735 1
-d32756 1
+d32738 1
+d32747 2
+d32756 2
+d32764 3
 d32784 1
 d32809 1
 d32821 1
 d32849 1
+d32863 1
 d32874 1
 d32882 1
+d32899 1
 d32901 1
 d32919 3
 d32941 1
-d32944 1
+d32943 2
+d32946 1
+d32949 1
+d32957 1
+d32959 2
+d32966 1
 d32968 1
+d32971 2
 d32976 2
 d32986 2
 d33000 1
+d33010 1
+d33013 1
+d33036 1
 d33049 1
+a33059 1
+||kavajwwdeultfm.com^
 d33072 1
+d33098 1
 d33128 1
+d33131 1
+d33135 1
+d33142 1
 a33142 1
 ||kerriereknit.shop^
-d33155 1
+d33154 2
 d33159 1
 d33176 1
 d33188 1
@@ -1192,6 +1689,12 @@ d33191 1
 d33193 1
 a33193 1
 ||khangalenten.click^
+d33208 1
+d33248 1
+d33257 1
+d33259 1
+d33268 1
+d33273 1
 d33276 1
 d33279 1
 d33286 1
@@ -1201,12 +1704,16 @@ d33319 1
 d33324 2
 d33336 1
 d33358 1
+d33370 1
 d33378 1
 d33386 2
 d33401 1
+d33404 1
 d33406 1
+d33428 1
 a33429 1
 ||koleyo.xyz^
+d33433 2
 d33444 1
 d33457 1
 d33461 1
@@ -1214,8 +1721,12 @@ d33472 2
 d33491 2
 d33494 1
 d33497 1
+d33510 1
 d33536 1
+d33551 1
 d33559 1
+d33576 1
+d33588 1
 d33619 1
 d33625 1
 d33632 1
@@ -1226,85 +1737,136 @@ d33665 2
 d33672 1
 d33727 1
 d33733 1
+d33757 1
 d33761 1
+a33761 1
+||lanknewcomer.com^
 d33766 1
+d33778 1
+d33782 1
 d33784 1
+d33794 1
 d33796 1
-d33810 1
+d33803 1
+d33806 1
+d33810 2
+d33816 1
 d33821 1
+d33829 1
 d33838 1
 d33851 1
-d33854 1
-d33866 1
+d33854 2
+d33866 2
+d33870 1
 d33874 1
-d33880 1
+d33879 2
+d33885 1
 d33900 1
 d33903 1
 d33906 1
 a33924 1
 ||leadshurriedlysoak.com^
+d33935 1
 d33938 1
+d33949 1
 d33961 1
 d33966 1
 a34011 1
 ||lekaleregoldfor.com^
+d34040 1
 d34122 1
 d34127 1
-d34134 1
+d34134 2
 d34138 1
-d34145 1
+d34144 2
 d34156 1
 d34158 1
+d34187 1
 d34194 1
 d34200 1
 d34203 1
 d34212 1
+d34216 2
+d34220 1
+d34251 1
 d34255 1
 d34260 1
-d34265 1
+d34264 2
 d34297 2
 d34307 1
 d34311 1
+d34319 1
 d34322 1
 d34332 1
-d34358 1
+d34353 1
+d34357 2
 d34362 1
+d34366 2
 d34387 1
 d34396 1
 d34404 1
+d34414 1
+d34417 1
 d34425 1
+a34443 1
+||locketcattishson.com^
+d34453 1
 d34456 1
 d34461 1
+d34463 1
 d34472 1
+a34472 1
+||logresempales.shop^
 a34490 1
 ||lonerprevailed.com^
 d34495 1
 d34512 1
 d34518 1
+d34528 1
+d34537 1
+d34542 1
+d34547 1
 d34555 1
+d34573 1
 d34596 1
 d34629 1
 d34647 1
 d34649 2
 a34654 1
 ||lptyuosfcv.com^
-d34707 1
+d34656 1
+d34666 1
+d34690 1
+d34706 2
 d34726 1
+d34746 1
 d34748 1
 d34758 1
 d34773 1
+d34800 2
+d34813 1
+d34823 1
 d34852 1
 d34885 1
 a34893 1
 ||mabolocorrive.com^
+d34896 1
+d34900 1
+a34923 1
+||madnessnumbersantiquity.com^
 d34987 1
+d35004 1
 a35025 1
 ||making.party^
 a35028 1
 ||malduckcompile.com^
 d35031 1
 d35048 1
-a35071 1
+d35050 1
+d35059 1
+d35069 1
+d35072 1
+a35072 1
 ||mandjasgrozde.com^
 d35095 1
 d35102 1
@@ -1315,48 +1877,78 @@ a35128 1
 d35131 1
 d35141 1
 d35156 1
+d35159 1
 d35161 1
 d35165 1
 d35170 1
 d35174 1
+d35181 1
+d35186 1
 d35219 1
+a35219 1
+||matricehardim.com^
 d35246 1
 d35255 1
 d35269 1
 d35286 1
-d35298 1
+d35297 2
 d35318 1
 a35329 1
 ||mdygnuaadirhz.com^
 a35332 1
 ||meableabede.click^
 d35388 1
+d35399 1
+d35441 1
+d35444 1
+d35456 1
 d35467 1
 a35469 1
 ||menews.org^
 a35484 1
 ||mepuyu.xyz^
 d35520 1
+d35529 1
 d35537 1
+d35545 1
+d35549 1
 d35571 1
 d35581 1
 d35586 1
 d35613 1
 d35655 1
-d35716 1
+a35655 1
+||mileesidesukbein.com^
+d35657 1
+d35676 1
+d35704 1
+d35716 2
 d35731 1
 d35754 1
 d35765 1
+d35778 1
 d35802 1
 d35815 1
 d35830 1
 d35850 1
 d35887 1
+d35894 1
 d35896 1
+d35975 1
+d35978 1
+d35983 1
+a36009 1
+||mongailrids.net^
+d36016 1
 d36056 2
+d36068 1
 d36072 1
 d36081 1
+d36089 1
 d36105 1
+d36117 1
+d36119 1
+d36141 1
 d36147 1
 d36155 1
 d36176 1
@@ -1370,10 +1962,16 @@ d36244 1
 d36260 1
 d36266 1
 d36268 1
+d36277 1
 d36288 1
+d36293 2
 d36308 1
+d36317 1
 d36323 1
-d36339 1
+d36338 2
+d36343 1
+a36361 1
+||muthfourre.com^
 d36372 1
 d36378 1
 d36386 1
@@ -1382,18 +1980,25 @@ d36403 2
 d36409 1
 d36419 1
 d36425 1
+d36436 1
 a36450 1
 ||mycloudreference.com^
 d36472 1
+d36476 1
 d36478 1
 d36504 1
 d36519 1
 d36522 1
+d36527 1
 d36534 1
+d36536 1
 d36538 1
+d36551 1
+d36560 1
 d36567 1
-d36596 1
+d36596 2
 d36600 1
+d36604 1
 d36612 1
 d36616 1
 a36632 1
@@ -1405,6 +2010,7 @@ d36686 1
 d36689 2
 d36710 1
 d36720 1
+d36735 1
 d36745 1
 d36783 1
 d36797 1
@@ -1419,24 +2025,33 @@ d36932 1
 d36941 2
 d36952 1
 d36965 1
+d36967 1
+d36984 1
 d36986 1
+d36988 1
 d37000 1
 d37003 2
+d37034 1
 d37046 1
 d37064 1
 d37068 1
 d37077 1
 d37089 1
 d37092 1
+d37121 1
 d37145 1
+d37151 1
 d37153 1
 d37183 1
+d37214 1
+d37218 1
 d37225 1
 a37251 1
 ||notoings.com^
 d37338 1
 d37359 1
 d37383 1
+d37387 1
 d37391 1
 a37398 1
 ||ntrftrksec.com^
@@ -1445,6 +2060,7 @@ d37418 1
 d37428 1
 a37428 1
 ||nuggetymikir.com^
+d37437 1
 d37447 1
 d37449 1
 d37454 1
@@ -1476,9 +2092,10 @@ a37729 1
 ||ochoovoajaw.xyz^
 a37732 1
 ||ockqabndg.com^
-d37746 1
+d37745 2
+d37752 1
 d37757 1
-d37765 1
+d37763 3
 d37770 1
 a37773 1
 ||odylismcpl.com^
@@ -1486,30 +2103,42 @@ a37778 1
 ||oehgk.com^
 d37785 1
 d37788 1
+d37823 1
 d37829 1
 d37842 1
 d37877 1
 a37877 1
 ||ogsdgcgtf.com^
+d37882 1
 d37887 2
 d37903 1
 d37905 1
 d37910 1
 d37922 2
 d37929 1
-d37950 1
+d37949 2
+d37957 1
 d37960 2
 d37971 1
 d37973 2
+d37976 1
+d37980 1
+d37987 1
+d37993 1
 d38005 1
+d38009 1
 d38013 1
+a38029 1
+||ombrealbany.com^
 d38034 1
 d38037 1
 d38059 1
 d38063 1
+d38065 1
 d38067 1
 d38079 1
 d38082 1
+d38085 2
 d38092 1
 d38132 1
 d38144 1
@@ -1517,25 +2146,35 @@ a38164 1
 ||onlinegoodsonline.online^
 d38175 2
 d38199 1
+d38226 1
 a38236 1
 ||oophyteaparai.shop^
 d38248 1
+d38261 1
 d38266 1
+a38266 1
+||opdomains.space^
 d38271 1
 a38274 1
 ||opengalaxyapps.monster^
+d38296 1
 a38306 1
 ||opoduchadmir.com^
+d38317 1
 d38324 1
 d38337 1
 a38337 1
 ||optargone-2.online^
+d38339 1
+d38354 1
 d38358 1
+d38360 1
 a38360 1
 ||oqejrexclrbqoo.com^
 d38362 1
 d38391 1
 d38394 2
+d38407 2
 d38420 1
 d38423 1
 d38432 1
@@ -1543,9 +2182,13 @@ a38432 1
 ||oritooep.win^
 a38433 1
 ||orjiwaemryaml.com^
+d38446 1
 d38452 1
 d38454 1
 d38458 1
+a38458 1
+||osadooffinegold.com^
+d38464 1
 a38465 1
 ||osfultrbriolenai.info^
 a38468 1
@@ -1557,29 +2200,39 @@ d38531 1
 d38534 1
 d38556 1
 d38568 1
+d38588 1
 d38592 1
 d38598 3
 d38603 1
-d38639 1
+d38638 2
+d38644 1
 d38688 1
 d38702 1
 d38712 1
 a38721 1
 ||oversolosisor.com^
 d38742 1
+d38748 1
 d38752 1
 a38755 1
 ||ovyyszfod.fun^
 d38773 1
 d38782 1
 d38793 2
+a38794 1
+||oxhoftarius.com^
 d38799 1
 d38811 1
 d38822 1
 d38825 1
+d38833 1
+d38836 1
+d38838 1
 d38840 2
 d38849 2
 d38853 1
+d38861 1
+d38867 1
 d38873 1
 d38904 1
 d38921 1
@@ -1587,55 +2240,87 @@ d38938 1
 a38941 1
 ||palatablelay.pro^
 d38946 1
+d38948 1
+d38977 1
+d38979 1
+d38984 1
+d39009 1
 d39013 1
 d39018 1
 d39025 1
+d39035 1
+d39066 1
 d39072 1
 d39077 1
+d39090 1
+d39112 1
 a39112 1
 ||pasengpros.com^
-d39178 1
+d39119 1
+d39178 2
 d39200 1
 d39204 1
 d39214 1
 d39220 1
 d39222 1
+d39241 1
 d39256 1
 d39269 1
 d39291 1
+d39297 1
 d39308 1
+a39309 1
+||pedangaishons.com^
+d39314 1
+d39318 1
 d39342 1
 a39345 1
 ||pehgoloe.click^
+d39353 1
 d39359 1
 d39379 1
+d39381 1
 d39389 1
+d39394 1
 d39398 1
 a39408 1
 ||perennialmythcooper.com^
 d39413 1
 d39425 1
+d39432 2
 d39438 1
 d39443 1
+d39451 2
 d39468 1
 d39483 1
 d39490 1
+d39527 1
 d39533 1
 d39537 1
 d39539 1
 d39544 1
+d39562 1
+d39582 1
 d39588 1
 a39632 1
 ||phockukoagu.net^
 d39640 1
 d39649 1
 d39652 2
+d39664 1
 d39700 1
 d39706 1
 d39719 1
-d39756 1
+d39728 1
+d39754 3
+d39769 1
+d39774 1
 d39790 2
 d39794 1
+d39796 1
+d39804 1
+d39815 1
+d39824 1
 d39840 1
 a39840 1
 ||pjojddwlppfah.xyz^
@@ -1644,27 +2329,39 @@ a39852 1
 a39859 1
 ||pkpkcnsomql.com^
 d39868 1
+d39872 1
 d39901 1
 d39904 1
 d39917 1
+a39932 1
+||playingkatespecial.com^
 d39970 1
 d39982 1
+d39990 1
+d40004 1
 a40037 1
 ||pmkez.tech^
 d40044 1
 d40068 1
+d40081 1
 d40083 1
+d40095 1
 d40098 1
 d40106 1
+d40116 1
+d40118 1
 d40149 1
 d40162 1
-d40171 1
+d40169 3
 d40173 1
+d40177 2
 d40181 1
 a40275 1
 ||posewardenreligious.com^
 d40290 1
+d40307 1
 d40330 1
+d40334 1
 d40345 1
 d40371 1
 d40380 1
@@ -1675,46 +2372,66 @@ d40436 1
 d40440 1
 d40456 1
 d40470 1
-d40480 1
+d40479 2
 d40522 1
 d40525 1
 d40528 1
 d40537 1
 d40542 1
+d40556 1
 a40567 2
 ||primarilyresources.com^
 ||primarkingfun.giving^
-d40627 1
+d40575 2
+d40626 2
+d40646 1
+a40652 1
+||prodigysomeone.click^
+d40665 1
 d40683 1
 d40702 1
+d40726 1
 d40731 1
 d40747 1
+d40749 1
 d40755 1
+d40791 1
 d40794 1
 d40799 1
 d40812 2
 d40869 1
+d40879 1
 d40912 1
 d40929 1
 d40937 1
 a40944 1
 ||psunseewhu.com^
 d40950 1
+d40952 1
 d40954 1
 d40958 1
 a41023 1
 ||ptoavibsaron.net^
+a41062 1
+||ptwmcd.com^
 d41073 1
 d41085 1
 d41105 1
 d41110 1
 d41114 1
+d41118 1
+d41120 1
 a41122 1
 ||pulpphlegma.shop^
 d41137 1
 d41144 1
+d41164 1
+d41171 1
+d41175 1
+d41184 1
 a41193 1
 ||push1005.com^
+d41282 1
 d41287 1
 d41297 1
 a41339 1
@@ -1724,47 +2441,78 @@ a41367 1
 ||pzvai.site^
 d41371 1
 d41379 1
-d41384 1
+d41383 2
 d41391 1
 d41399 1
+d41401 1
 d41406 1
 d41438 1
+d41445 2
+d41451 1
+d41453 1
+d41455 2
+d41458 1
+d41464 1
 d41487 2
+d41491 1
 d41497 1
 d41503 1
 d41509 1
+d41527 1
 d41544 1
+d41550 2
 d41570 1
 d41591 1
+a41595 1
+||qptirapg.com^
+d41616 2
+d41627 2
 d41634 1
 d41649 1
 d41653 2
+a41695 1
+||queryastray.com^
+d41709 1
+d41728 1
 d41736 1
 d41750 1
-d41780 2
+d41768 1
+d41771 2
+d41776 1
+d41778 1
+d41780 3
 d41803 1
+d41807 3
+d41814 3
 d41869 1
 d41893 1
 d41915 1
 d41918 1
-d41968 1
+d41951 1
+d41964 1
+d41968 2
 d41984 1
-d42037 1
-d42040 1
+d41987 1
+d42008 1
+d42010 1
+d42036 2
+d42039 2
 d42042 1
 d42047 1
 d42050 1
 a42050 1
 ||rctgljra.com^
+d42135 2
 d42152 1
 d42178 1
 d42184 1
 d42198 1
 d42201 1
-d42214 1
+d42213 2
 d42216 1
 d42221 1
 d42224 1
+d42226 1
 d42236 1
 d42241 1
 a42241 1
@@ -1772,45 +2520,73 @@ a42241 1
 d42244 1
 d42252 1
 d42254 1
+a42259 1
+||redundancymail.com^
+d42279 1
+d42281 1
 d42291 1
+d42298 1
 d42320 2
+d42328 1
 d42348 1
+d42350 2
 d42356 1
 d42360 1
 d42377 1
+d42399 1
 d42407 1
 d42419 1
 d42432 1
 d42440 1
-d42456 1
+d42455 2
+d42463 1
+d42489 1
+d42510 1
 d42523 1
 d42534 1
+d42559 1
 d42568 1
 d42585 1
 d42609 1
 d42622 1
+d42625 1
+d42648 1
+d42655 1
 a42655 1
 ||retingexylogen.com^
 d42671 1
 d42674 1
+d42721 1
+d42734 2
 d42740 1
 d42745 1
-d42797 1
+d42773 1
+d42783 1
+d42788 1
+d42796 2
 d42800 1
+d42809 1
+d42816 1
 d42823 1
 d42835 1
+a42843 1
+||rigourgovernessanxiety.com^
 d42865 1
 d42876 1
 d42881 1
 d42885 1
 d42905 1
-d42910 1
+d42909 2
 d42928 1
 d42939 1
 d42944 1
+d42949 2
+d42960 3
 d42975 1
 a42975 1
 ||rnnlfpaxjar.xyz^
+d42997 1
+d43012 1
 d43019 2
 d43041 1
 d43046 1
@@ -1820,9 +2596,13 @@ a43093 1
 d43102 1
 d43123 1
 d43146 1
+d43151 1
 d43158 1
 d43172 1
-d43202 1
+d43191 1
+d43202 2
+d43206 1
+d43210 1
 d43212 1
 d43219 1
 d43277 1
@@ -1831,44 +2611,69 @@ d43312 1
 d43338 1
 d43348 1
 d43352 2
+d43360 1
+d43362 1
 a43368 1
 ||ruohmghwpzzp.com^
 d43372 2
 d43387 1
 d43392 1
 d43401 1
+d43413 1
 d43439 1
 d43450 1
+d43454 1
+d43458 1
 d43471 1
 d43474 1
-d43482 1
+d43482 2
 d43490 1
 d43494 1
 d43522 1
+d43552 1
+d43556 1
+d43558 1
 d43565 1
+d43580 1
 d43605 1
 d43619 1
+d43629 1
 a43629 1
 ||sarfoman.co.in^
+d43646 1
+d43656 1
+d43666 1
+a43669 1
+||sausagefaithfemales.com^
 d43682 1
 d43684 1
 d43699 1
 d43717 1
 d43737 1
+d43743 1
+d43763 1
 d43776 1
 a43779 1
 ||schedulerationally.com^
+d43820 1
 d43825 1
 d43831 1
 d43835 1
 d43844 1
 d43861 1
+d43884 1
 d43913 1
 d43928 1
 d43941 1
+d43954 1
 d43993 1
 d44036 1
+d44044 1
+d44050 1
 d44064 2
+d44080 1
+d44086 1
+d44089 1
 d44096 1
 d44099 1
 d44115 1
@@ -1880,65 +2685,102 @@ d44175 1
 d44188 1
 d44212 1
 d44223 1
+d44228 1
 a44228 1
 ||shaggyacquaintanceassessment.com^
+d44241 1
 a44248 1
 ||shallowbottle.pro^
+d44257 1
 d44279 1
 d44305 1
 d44309 1
 d44355 1
+d44364 1
 d44367 1
+d44372 1
+d44389 1
+d44407 1
+d44409 1
 d44417 1
 d44419 1
 d44426 1
 d44429 1
 a44431 1
 ||show-creative1.com^
+d44435 1
 d44443 1
 d44461 2
-a44492 1
+d44476 1
+d44493 2
+a44494 1
 ||sibilantsuccess.com^
+a44522 1
+||sightdisintegrate.com^
+d44534 1
+d44552 1
 d44555 1
+d44575 1
+d44591 1
+d44593 1
 d44599 1
 d44619 1
+d44629 1
 d44631 1
 d44633 1
 d44652 1
+d44654 1
 d44669 1
 a44681 1
 ||skillsombineukdw.com^
 d44701 1
 d44706 1
 d44723 1
+a44724 1
+||slangedshirley.com^
 d44730 1
+d44732 1
 d44742 1
 d44749 1
+a44756 1
+||slightestpretenddebate.com^
 d44759 1
-d44789 1
+d44788 2
 d44793 1
+d44799 1
 d44811 1
+d44861 1
 d44877 1
 d44879 1
 d44890 1
 d44905 1
 a44905 1
 ||snappffgxtwwpvt.com^
+d44914 1
+d44920 1
 d44937 1
+d44954 1
 d44963 1
 d44990 1
 d44996 1
+d45010 1
+d45027 1
 d45033 1
+d45039 1
 d45042 1
 d45052 1
+d45055 1
 d45059 1
 d45065 1
 d45084 1
+d45091 1
 d45104 1
 d45109 1
+d45120 1
 d45126 1
 d45160 1
 d45172 1
+d45176 1
 d45182 1
 d45196 1
 d45215 1
@@ -1947,56 +2789,85 @@ d45230 1
 d45236 1
 d45242 2
 d45245 1
-d45256 1
+d45256 2
 d45284 1
+d45286 1
 d45308 1
+d45311 1
 d45340 1
 d45357 1
+d45363 1
 d45376 1
+d45382 1
+d45391 1
+d45404 1
+d45409 1
 d45430 1
 d45462 1
 d45466 1
-d45492 1
-d45496 1
+d45491 2
+d45495 2
 d45519 1
 d45530 1
 d45543 1
+d45549 1
 d45563 1
 d45574 1
 d45577 1
+d45585 1
+d45596 1
 d45653 1
 d45656 2
+d45696 1
+d45719 1
+d45723 1
 a45732 1
 ||storkto.com^
+a45746 1
+||stoutsinkles.shop^
 a45754 1
 ||stquality.org^
+a45760 1
+||strainprimar.com^
+d45774 1
 d45804 1
+d45809 1
 d45816 1
 d45821 1
+d45823 1
 d45849 1
+d45887 1
+d45894 1
+d45899 1
 d45943 1
+d45948 1
 d45956 1
 d45962 1
 a45965 1
 ||sufferingtail.com^
+d45971 1
 d45988 1
 d45991 1
 a45992 1
 ||sulideshalfman.click^
 d45997 1
+d45999 1
 d46002 1
 d46006 1
 d46009 1
+d46023 1
 d46028 1
 d46040 1
 a46080 1
 ||supqajfecgjv.com^
 d46088 1
+d46108 1
+d46119 1
 d46121 1
 d46151 1
 a46176 1
 ||swanpanflic.com^
-d46215 1
+d46215 2
 d46227 1
 d46230 2
 d46249 1
@@ -2008,19 +2879,37 @@ d46332 1
 d46336 1
 d46338 1
 d46349 1
+d46353 1
 d46361 1
 d46364 1
+d46368 1
 d46374 1
 d46416 1
-d46419 1
-d46457 1
+d46419 2
+d46431 1
+d46436 1
+d46453 1
+d46456 2
+d46467 2
+d46470 1
+d46474 1
+d46480 1
 d46498 1
+d46501 1
+d46529 1
 d46537 1
 d46549 1
+d46575 1
 d46588 1
+d46594 1
 d46625 1
+d46629 1
+d46655 1
+d46669 1
+d46679 1
 d46682 1
-d46711 1
+d46690 1
+d46710 2
 d46725 1
 d46736 1
 d46743 1
@@ -2031,39 +2920,57 @@ d46778 1
 d46799 1
 a46805 1
 ||theetchedreeb.net^
+d46829 1
 d46837 1
 d46863 1
 d46896 1
+d46923 1
 d46926 1
 d46947 1
+d46966 1
 d46969 1
-d46979 1
+d46978 2
 d47031 1
+d47060 1
 d47065 1
+d47107 1
 d47118 1
+d47123 1
 d47128 1
+d47151 2
 d47157 1
 d47162 2
 d47178 1
 d47180 1
+d47197 1
 d47223 1
 a47237 1
 ||tocontraceptive.com^
 d47242 2
 d47254 1
+d47260 2
+d47266 1
 d47278 1
 d47288 1
+d47298 1
 a47302 1
 ||tookiroufiz.net^
 d47337 1
+d47359 1
 d47377 1
 d47393 1
+d47415 1
 d47418 1
+d47434 1
 d47456 1
+d47461 1
+a47461 1
+||tqnupxrwvo.com^
 d47572 1
 d47595 1
 d47601 2
-d47675 1
+d47610 1
+d47674 2
 d47684 1
 d47691 1
 a47691 1
@@ -2074,10 +2981,15 @@ a47722 1
 d47725 1
 d47734 2
 d47784 1
+a47806 1
+||tscvhizqdyi.com^
 d47846 1
+d47856 2
 d47872 1
 d47874 1
+d47889 1
 d47922 1
+d47927 1
 d47931 1
 d47935 1
 d47940 1
@@ -2086,6 +2998,9 @@ d47989 1
 a48001 1
 ||twxwjhitymk.com^
 d48022 1
+a48030 1
+||tympanojann.com^
+d48032 1
 d48047 1
 d48067 1
 d48074 1
@@ -2097,52 +3012,85 @@ d48116 1
 d48119 1
 d48122 2
 d48125 1
+d48139 1
 d48152 1
 d48183 1
 d48205 1
+d48215 1
 d48219 1
 d48230 2
 d48237 1
 d48254 1
-d48270 1
+d48269 2
+d48323 1
 d48327 1
+d48337 1
 d48347 1
 d48357 1
 d48361 2
 d48364 1
+d48377 1
+d48388 1
 d48391 1
 d48409 1
+d48417 1
 d48437 1
+d48439 1
+d48446 1
 d48448 1
-d48457 1
+d48456 2
+d48473 1
 d48481 1
+d48498 1
+d48512 1
 d48525 1
 d48540 1
 d48549 1
+d48555 1
+d48557 1
 d48572 1
+d48578 1
 a48587 1
 ||updatenow.pro^
 d48594 1
+d48601 1
 d48623 1
 d48632 1
+d48638 1
 a48639 1
 ||uptightdecreaseclinical.com^
 d48648 1
+d48662 1
+d48672 1
 d48677 1
 d48732 1
+d48737 1
+a48739 1
+||usxabwaiinnu.com^
+d48748 1
+d48751 1
+d48768 1
 d48823 1
 d48843 1
+d48860 1
 a48863 1
 ||vaicheemoa.net^
+d48881 1
 d48898 1
 d48918 1
 d48954 1
+d48975 1
 d49011 1
+d49028 1
+d49035 1
 d49037 1
+d49048 1
+d49054 1
 d49097 1
 d49134 1
 d49138 1
 d49161 1
+d49193 1
 a49236 1
 ||vieva.xyz^
 d49250 1
@@ -2154,20 +3102,24 @@ d49298 1
 d49300 1
 d49311 2
 d49317 1
-d49321 1
+d49321 2
 d49353 1
+d49363 1
 d49393 1
 a49407 1
 ||vistalacrux.click^
+d49411 1
 a49412 1
 ||vitrifywarman.click^
 d49427 2
+d49434 1
 d49451 1
 d49478 1
 d49481 1
 a49483 1
 ||voguesmaison.com^
 d49525 1
+d49528 1
 a49544 1
 ||voxkiahuxdbbxn.com^
 d49560 1
@@ -2182,18 +3134,23 @@ d49679 1
 d49681 2
 d49716 1
 d49730 1
+d49744 1
 d49761 1
 d49776 1
+d49780 1
 d49787 1
 d49793 1
+d49811 1
 d49820 1
 d49863 2
 d49874 1
-d49876 1
-d49880 1
+d49876 2
+d49879 2
 d49885 1
+d49903 1
 d49909 1
 d49941 1
+d49956 1
 a49958 1
 ||web-protection-app.com^
 a49973 1
@@ -2203,7 +3160,8 @@ d49987 2
 d49994 1
 d50040 1
 d50047 1
-d50079 1
+d50076 1
+d50078 2
 d50083 1
 d50094 1
 d50107 1
@@ -2211,17 +3169,43 @@ a50117 1
 ||whainsairgi.net^
 a50133 1
 ||whataparleys.com^
+d50138 1
+d50140 1
+d50187 1
+d50205 1
 d50208 1
+a50213 1
+||whirredbajau.com^
+d50233 1
 d50245 1
+d50275 1
 d50300 2
+d50315 1
 d50325 1
 d50328 1
+d50337 1
+d50367 1
 d50377 1
+d50386 1
+d50412 1
 d50431 1
+d50462 2
+d50466 2
+d50469 1
+d50472 3
+d50480 2
+d50487 1
+d50492 1
+d50495 1
+d50506 1
 d50509 1
+d50523 2
+d50527 1
 d50548 1
+d50571 1
 d50591 1
 d50595 1
+d50611 2
 d50634 1
 d50654 1
 d50679 1
@@ -2244,7 +3228,11 @@ d50827 1
 d50841 1
 d50843 1
 d50847 1
-d50853 1
+d50852 2
+d50856 1
+d50864 2
+d50882 3
+d50903 1
 d50920 1
 d50925 1
 d50941 2
@@ -2264,14 +3252,21 @@ d51192 1
 d51221 1
 d51233 1
 d51264 2
-d51308 1
+d51308 2
 d51313 1
+d51317 1
+d51323 1
+d51327 1
 d51336 1
+d51341 1
+d51344 1
 d51371 1
 d51385 1
 d51400 1
 a51400 1
 ||yellochloed.shop^
+a51431 1
+||ygkw9x53vm45.shop^
 d51471 1
 a51476 1
 ||yimemediatesup.com^
@@ -2280,35 +3275,82 @@ d51515 1
 d51521 1
 d51529 1
 d51561 1
+d51600 1
+d51611 1
 d51613 1
 d51621 2
 d51625 1
 d51640 1
+a51643 1
+||ysoojjul.com^
 d51647 1
 d51651 1
 d51660 1
+d51669 1
+d51679 1
+d51682 1
+a51697 1
+||yuuchxfuutmdyyd.xyz^
 d51699 1
 d51728 1
 a51728 1
 ||yyjutfcmnaps.com^
 d51740 1
 d51744 1
+d51746 1
 d51792 1
 d51816 1
+d51819 3
 d51837 1
+d51846 2
 a51849 1
 ||zenaidapier.click^
+d51869 2
 a51871 1
 ||zestyparticular.pro^
+d51877 2
+d51889 1
+d51905 2
+d51913 1
+d51921 1
+d51951 1
+d51954 1
+d51959 1
 a51991 1
 ||zmqyzjlozozbz.top^
+d52040 1
+d52042 1
+d52066 1
+d52078 1
+d52083 1
+d52086 1
+d52098 1
+d52107 1
+d52117 1
+d52120 1
+d52124 1
+d52133 1
+d52139 2
 d52143 1
+d52149 1
+d52152 1
+d52157 1
 d52160 1
 d52162 1
 d52170 1
 d52174 1
 d52179 1
-d52219 2
+d52185 1
+d52196 1
+d52201 2
+d52205 1
+d52218 3
+d52246 1
+d52262 1
+d52278 1
+d52292 1
+d52302 1
+d52308 1
 a52339 1
 ||abdedenneer.com^$document
 a52344 1
@@ -2319,18 +3361,21 @@ a52378 1
 ||aftrk3.com^$document
 a52384 1
 ||amnioteunteem.click^$document
+d52413 1
 a52416 1
 ||bestreceived.com^$document
 a52426 1
 ||blurbreimbursetrombone.com^$document
 a52437 1
 ||candyai.love^$document
+d52443 1
 a52449 1
 ||cheebilaix.com^$document
 a52481 1
 ||deluxe-download.com^$document
 a52504 1
 ||easelegbike.com^$document
+d52509 1
 a52509 1
 ||epsashoofil.net^$document
 a52534 1
@@ -2367,25 +3412,39 @@ a52670 1
 ||opengalaxyapps.monster^$document
 a52672 1
 ||optargone-2.online^$document
+d52675 1
 a52678 1
 ||oversolosisor.com^$document
+d52682 1
+d52690 1
+d52718 1
 a52724 1
 ||push1005.com^$document
 a52727 1
 ||qnp16tstw.com^$document
 a52733 1
 ||realsh.xyz^$document
+d52759 1
 a52761 1
 ||sarfoman.co.in^$document
 a52762 1
 ||schedulerationally.com^$document
 a52791 1
 ||sulideshalfman.click^$document
+d52812 1
+d52818 1
+d52847 1
+d52852 1
+d52873 1
 a52873 1
 ||waisheph.com^$document
 a52876 2
 ||web-protection-app.com^$document
 ||webfanclub.com^$document
+d52884 1
+d53245 1
+a54295 1
+||20382207.xyz^$document,popup
 a54336 1
 ||49766251.xyz^$document,popup
 a54360 1
@@ -2407,6 +3466,8 @@ a54956 1
 d54959 2
 a55151 1
 ||bestreceived.com^$popup
+a55284 1
+||cabbagereporterpayroll.com^$popup
 d55422 1
 d55531 1
 a55722 1
@@ -2415,6 +3476,8 @@ d55768 1
 d55778 1
 a55802 1
 ||eumarkdepot.com^$popup
+a55885 1
+||feudsherbane.click^$popup
 a55964 1
 ||fstsrv16.com^$popup
 a55997 1
@@ -2440,6 +3503,8 @@ a56652 1
 a56661 1
 ||mandjasgrozde.com^$popup
 d56701 1
+a56712 1
+||meherdewogoud.com^$popup
 a56715 1
 ||menews.org^$popup
 d56876 1
@@ -2450,6 +3515,8 @@ a56922 1
 a56930 1
 ||ntrftrksec.com^$popup
 d57041 1
+a57046 1
+||opdomains.space^$popup
 a57049 1
 ||opengalaxyapps.monster^$popup
 a57072 1
@@ -2463,6 +3530,8 @@ a57305 1
 ||primarkingfun.giving^$popup
 a57406 1
 ||qnp16tstw.com^$popup
+a57413 1
+||quilladot.org^$popup
 a57616 1
 ||sarfoman.co.in^$popup
 a57670 1
@@ -2473,6 +3542,8 @@ a58265 1
 d58338 1
 a58413 1
 ||web-protection-app.com^$popup
+a58442 1
+||wheksuns.net^$popup
 d58558 1
 a58691 1
 ||23.109.170.255^$popup
@@ -2508,19 +3579,24 @@ a68807 1
 abysscdn.com,hqq.ac,hqq.to,hqq.tv,linris.xyz,megaplay.cc,meucdn.vip,netuplayer.top,ntvid.online,plushd.bio,waaw.to,watchonlinehd123.sbs,wiztube.xyz##a[title="Free money easy"]
 a69293 1
 truecar.com##.card:has([href*="marketplace&sponsored"])
+a69331 1
+nysun.com##.mr-\[-50vw\]
 d69456 1
-a69965 1
+a69965 2
+tripadvisor.com#?#.AaFRW:-abp-contains(Sponsored)
 shoprite.com##div[class^="Row"]:has(div[data-component] a[data-testid] picture source[media="(min-width: 1024px)"] + img[class*="ImageTextButtonImage"][src*=".jpg"])
 a71775 1
 @@||dragontea.ink^$generichide
 d71797 1
 a71797 1
 @@||imasdk.googleapis.com/js/sdkloader/ima3_dai.js$domain=247sports.com|4029tv.com|bet.com|bloomberg.co.jp|bloomberg.com|cbc.ca|cbssports.com|cc.com|clickorlando.com|embed.comicbook.com|gbnews.com|history.com|kcci.com|kcra.com|ketv.com|kmbc.com|koat.com|koco.com|ksbw.com|mynbc5.com|paramountplus.com|s.yimg.jp|sbs.com.au|tv.rakuten.co.jp|vk.sportsbull.jp|wapt.com|wbaltv.com|wcvb.com|wdsu.com|wesh.com|wgal.com|wisn.com|wjcl.com|wlky.com|wlwt.com|wmtw.com|wmur.com|worldsurfleague.com|wpbf.com|wtae.com|wvtm13.com|wxii12.com|wyff4.com
-diff name:easyprivacy lines:21 checksum:65200e3489
+diff name:easyprivacy lines:23 checksum:7c77881854
 d4 2
 a5 2
-! Last modified: Fri, 11 Oct 2024 21:50:57 +0000
-! Diff-Path: ../patches/2024.10.11.1345.patch#easyprivacy
+! Last modified: Sat, 12 Oct 2024 02:04:35 +0000
+! Diff-Path: ../patches/2024.10.12.208.patch#easyprivacy
+a3133 1
+||aseads.com^
 a11133 1
 ||roomvo.com/services/event/
 a13220 1
