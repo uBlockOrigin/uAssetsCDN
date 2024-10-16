@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Quick fixes
 ! Expires: 12 hours
-! Last modified: Wed, 16 Oct 2024 11:19:18 +0000
-! Diff-Path: ../patches/2024.10.16.768.patch#ublock-quick-fixes
+! Last modified: Wed, 16 Oct 2024 17:15:29 +0000
+! Diff-Path: ../patches/2024.10.16.1047.patch#ublock-quick-fixes
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/quick-fixes.txt ***
@@ -69,7 +69,10 @@ japscan.lol#@#+js(rmnt, script, Ne\'+\'Si)
 japscan.lol#@#+js(rmnt, script, /N.{0\,3}e.{0\,3}S.{0\,3}i/)
 japscan.lol#@#+js(rmnt, script, =eval()
 japscan.lol#@#+js(rmnt, script, /N.{0\,10}e.{0\,10}S.{0\,10}i|S.{0\,10}i.{0\,10}N.{0\,10}e/)
-japscan.lol##+js(rmnt, script, /\{return new Function.+\)\(\);\};var /)
+japscan.lol#@#+js(rmnt, script, /\{return new Function.+\)\(\);\};var /)
+japscan.lol#@#+js(rmnt, script, Function(\'return \'+)
+japscan.lol#@#+js(rmnt, script, re\'+\'turn)
+japscan.lol##+js(rmnt, script, nApB!)
 /^https?:\/\/[-a-z]{8,15}\.(?:com|net)\/401\/\d{7}(?:\?v=\d+)?$/$script,3p,domain=japscan.lol,important
 /^https?:\/\/[a-z]{8,15}\.xyz\/$/$xhr,3p,to=xyz,method=head,header=x-traceid2,domain=japscan.lol,important
 /^https?:\/\/[a-z]{8,15}\.com\/$/$xhr,3p,to=com,method=head,header=x-traceid2,domain=japscan.lol,important
@@ -134,6 +137,10 @@ jmzkzesy.xyz##+js(acs, Math, localStorage['\x)
 !#endif
 wiki.yjsnpi.nu##+js(set, HTMLElement.prototype.remove, noopFunc)
 wiki.yjsnpi.nu##+js(set, DOMTokenList.prototype.remove, noopFunc)
+wiki.yjsnpi.nu##+js(trusted-replace-argument, document.querySelectorAll, 0, json:"iframe[src*='affid=']", condition, /^img/)
+wiki.yjsnpi.nu##+js(trusted-replace-argument, document.getElementById, 0, json:"iframe[src*='affid=']", condition, /^bodyContent$/)
+wiki.yjsnpi.nu##+js(trusted-replace-argument, document.getElementsByClassName, 0, json:"iframe[src*='affid=']", condition, /^mediawiki/)
+wiki.yjsnpi.nu##+js(trusted-replace-argument, document.getElementsByTagName, 0, json:"iframe[src*='affid=']", condition, /^body$/)
 $frame,redirect-rule=noopframe,domain=wiki.yjsnpi.nu
 wiki.yjsnpi.nu##iframe[src*="?affid="]
 wiki.yjsnpi.nu###mw-content-text > div.im[style^="min-height:"]
@@ -144,12 +151,11 @@ wiki.yjsnpi.nu###mw-content-text > div[style*="min-height:"]:has(> a[rel*="spons
 wiki.yjsnpi.nu#@#+js(ra, id, #bodyContent)
 wiki.yjsnpi.nu##body img, body .Inmbox, body .lazy-image-placeholder:style(width: auto !important; height: auto !important; opacity: 1 !important; visibility: visible !important; display: block !important; color: unset !important; background: none !important;)
 wiki.yjsnpi.nu###comments-loading
-kahoku.news#@#.vr2_pickup-main
-iwb.jp##+js(nostif, getComputedStyle(a).height)
 pinterest.*#@#div[data-test-id="pin"]:has(div[title^="Promoted"])
 /^https:\/\/[0-9a-z]{8}\.[A-z0-9-]+\.[A-z]{2,3}\/[a-z]+\/[a-z0-9]{10}\.html$/$match-case,doc,badfilter
 @@||ebanking.meezanbank.com/AmbitRetailFrontEnd/js/fingerprint2.min.js$1p
 /^https?:\/\/(?:www\.|[0-9a-z]{7,10}\.)?[-0-9a-z]{5,}\.com\/\/?(?:[0-9a-f]{2}\/){2,3}[0-9a-f]{32}\.js/$script,xhr,3p,redirect=noop.js,to=com,badfilter
 /^https?:\/\/(?:www\.|[0-9a-z]{7,10}\.)?[-0-9a-z]{5,}\.com\/\/?(?:[0-9a-z]{2}\/){2,3}[0-9a-f]{32}\.js/$script,xhr,3p,redirect=noop.js,to=com
 ||www.amazon.com/*/ref=$doc,uritransform=/\/ref=\w+//,badfilter
+/dp/*/ref=$doc,uritransform=/\/ref=\w+//,to=www.amazon.com,badfilter
 flickr.com#@#.sub-photo-right-view [href^="/account/upgrade"]:upward(.sub-photo-right-view > div)

@@ -1,5 +1,5 @@
 ! Title: uBlock₀ filters – Quick fixes
-! Last modified: Wed, 16 Oct 2024 11:19:18 +0000
+! Last modified: Wed, 16 Oct 2024 17:15:29 +0000
 ! Expires: 8 hours
 ! Description: Immediate, temporary filters to fix websites
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -87,7 +87,10 @@ japscan.lol#@#+js(rmnt, script, Ne\'+\'Si)
 japscan.lol#@#+js(rmnt, script, /N.{0\,3}e.{0\,3}S.{0\,3}i/)
 japscan.lol#@#+js(rmnt, script, =eval()
 japscan.lol#@#+js(rmnt, script, /N.{0\,10}e.{0\,10}S.{0\,10}i|S.{0\,10}i.{0\,10}N.{0\,10}e/)
-japscan.lol##+js(rmnt, script, /\{return new Function.+\)\(\);\};var /)
+japscan.lol#@#+js(rmnt, script, /\{return new Function.+\)\(\);\};var /)
+japscan.lol#@#+js(rmnt, script, Function(\'return \'+)
+japscan.lol#@#+js(rmnt, script, re\'+\'turn)
+japscan.lol##+js(rmnt, script, nApB!)
 /^https?:\/\/[-a-z]{8,15}\.(?:com|net)\/401\/\d{7}(?:\?v=\d+)?$/$script,3p,domain=japscan.lol,important
 /^https?:\/\/[a-z]{8,15}\.xyz\/$/$xhr,3p,to=xyz,method=head,header=x-traceid2,domain=japscan.lol,important
 /^https?:\/\/[a-z]{8,15}\.com\/$/$xhr,3p,to=com,method=head,header=x-traceid2,domain=japscan.lol,important
@@ -176,6 +179,10 @@ jmzkzesy.xyz##+js(acs, Math, localStorage['\x)
 ! https://github.com/AdguardTeam/AdguardFilters/commit/337aaa82e68d2aeae140b46d5d234a86e2f0cde3
 wiki.yjsnpi.nu##+js(set, HTMLElement.prototype.remove, noopFunc)
 wiki.yjsnpi.nu##+js(set, DOMTokenList.prototype.remove, noopFunc)
+wiki.yjsnpi.nu##+js(trusted-replace-argument, document.querySelectorAll, 0, json:"iframe[src*='affid=']", condition, /^img/)
+wiki.yjsnpi.nu##+js(trusted-replace-argument, document.getElementById, 0, json:"iframe[src*='affid=']", condition, /^bodyContent$/)
+wiki.yjsnpi.nu##+js(trusted-replace-argument, document.getElementsByClassName, 0, json:"iframe[src*='affid=']", condition, /^mediawiki/)
+wiki.yjsnpi.nu##+js(trusted-replace-argument, document.getElementsByTagName, 0, json:"iframe[src*='affid=']", condition, /^body$/)
 $frame,redirect-rule=noopframe,domain=wiki.yjsnpi.nu
 wiki.yjsnpi.nu##iframe[src*="?affid="]
 wiki.yjsnpi.nu###mw-content-text > div.im[style^="min-height:"]
@@ -186,12 +193,6 @@ wiki.yjsnpi.nu###mw-content-text > div[style*="min-height:"]:has(> a[rel*="spons
 wiki.yjsnpi.nu#@#+js(ra, id, #bodyContent)
 wiki.yjsnpi.nu##body img, body .Inmbox, body .lazy-image-placeholder:style(width: auto !important; height: auto !important; opacity: 1 !important; visibility: visible !important; display: block !important; color: unset !important; background: none !important;)
 wiki.yjsnpi.nu###comments-loading
-
-! https://github.com/AdguardTeam/AdguardFilters/commit/56183cc80ce1e10c8c09810f6832d20ae64d87c5
-kahoku.news#@#.vr2_pickup-main
-
-! https://github.com/uBlockOrigin/uAssets/issues/21578#issuecomment-2404243121
-iwb.jp##+js(nostif, getComputedStyle(a).height)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/25614
 pinterest.*#@#div[data-test-id="pin"]:has(div[title^="Promoted"])
@@ -208,6 +209,8 @@ pinterest.*#@#div[data-test-id="pin"]:has(div[title^="Promoted"])
 
 ! https://github.com/uBlockOrigin/uAssets/issues/25667
 ||www.amazon.com/*/ref=$doc,uritransform=/\/ref=\w+//,badfilter
+! https://www.reddit.com/r/uBlockOrigin/comments/1g50usk/amazon_similar_items_link_resolving_to_bad_url/
+/dp/*/ref=$doc,uritransform=/\/ref=\w+//,to=www.amazon.com,badfilter
 
 ! https://github.com/uBlockOrigin/uAssets/issues/25678
 flickr.com#@#.sub-photo-right-view [href^="/account/upgrade"]:upward(.sub-photo-right-view > div)
