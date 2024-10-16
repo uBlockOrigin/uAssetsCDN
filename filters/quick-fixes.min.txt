@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Quick fixes
 ! Expires: 12 hours
-! Last modified: Wed, 16 Oct 2024 06:17:43 +0000
-! Diff-Path: ../patches/2024.10.16.443.patch#ublock-quick-fixes
+! Last modified: Wed, 16 Oct 2024 11:19:18 +0000
+! Diff-Path: ../patches/2024.10.16.768.patch#ublock-quick-fixes
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/quick-fixes.txt ***
@@ -133,6 +133,7 @@ jmzkzesy.xyz##+js(acs, Math, localStorage['\x)
 *$frame,csp=sandbox allow-downloads allow-forms allow-modals allow-same-origin allow-scripts,from=filemoon.*
 !#endif
 wiki.yjsnpi.nu##+js(set, HTMLElement.prototype.remove, noopFunc)
+wiki.yjsnpi.nu##+js(set, DOMTokenList.prototype.remove, noopFunc)
 $frame,redirect-rule=noopframe,domain=wiki.yjsnpi.nu
 wiki.yjsnpi.nu##iframe[src*="?affid="]
 wiki.yjsnpi.nu###mw-content-text > div.im[style^="min-height:"]
@@ -141,6 +142,8 @@ wiki.yjsnpi.nu###mw-content-text > div[style*="min-height:"]:has(> div[id^="im-"
 wiki.yjsnpi.nu###mw-content-text > div[style*="min-height:"]:has(> div[style] > div[id^="im-"] > script)
 wiki.yjsnpi.nu###mw-content-text > div[style*="min-height:"]:has(> a[rel*="sponsored"][target="_blank"] > img)
 wiki.yjsnpi.nu#@#+js(ra, id, #bodyContent)
+wiki.yjsnpi.nu##body img, body .Inmbox, body .lazy-image-placeholder:style(width: auto !important; height: auto !important; opacity: 1 !important; visibility: visible !important; display: block !important; color: unset !important; background: none !important;)
+wiki.yjsnpi.nu###comments-loading
 kahoku.news#@#.vr2_pickup-main
 iwb.jp##+js(nostif, getComputedStyle(a).height)
 pinterest.*#@#div[data-test-id="pin"]:has(div[title^="Promoted"])
@@ -149,3 +152,4 @@ pinterest.*#@#div[data-test-id="pin"]:has(div[title^="Promoted"])
 /^https?:\/\/(?:www\.|[0-9a-z]{7,10}\.)?[-0-9a-z]{5,}\.com\/\/?(?:[0-9a-f]{2}\/){2,3}[0-9a-f]{32}\.js/$script,xhr,3p,redirect=noop.js,to=com,badfilter
 /^https?:\/\/(?:www\.|[0-9a-z]{7,10}\.)?[-0-9a-z]{5,}\.com\/\/?(?:[0-9a-z]{2}\/){2,3}[0-9a-f]{32}\.js/$script,xhr,3p,redirect=noop.js,to=com
 ||www.amazon.com/*/ref=$doc,uritransform=/\/ref=\w+//,badfilter
+flickr.com#@#.sub-photo-right-view [href^="/account/upgrade"]:upward(.sub-photo-right-view > div)
