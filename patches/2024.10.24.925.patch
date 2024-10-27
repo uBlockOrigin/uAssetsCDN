@@ -1,15 +1,15 @@
-diff name:ublock-annoyances lines:6 checksum:896e9cc58d
+diff name:ublock-annoyances lines:6 checksum:80513804ba
 d3 2
 a4 2
 ! Last modified: Sat, 26 Oct 2024 13:24:51 +0000
-! Diff-Path: ../patches/2024.10.27.180.patch#ublock-annoyances
+! Diff-Path: ../patches/2024.10.27.213.patch#ublock-annoyances
 a3518 1
 photopea.com##.bnotify
-diff name:ublock-badware lines:36 checksum:3907796f29
+diff name:ublock-badware lines:36 checksum:1e3959760b
 d3 2
 a4 2
 ! Last modified: Sat, 26 Oct 2024 17:21:41 +0000
-! Diff-Path: ../patches/2024.10.27.180.patch#ublock-badware
+! Diff-Path: ../patches/2024.10.27.213.patch#ublock-badware
 d690 2
 a694 2
 ||mediafire.com/folder/90qj06387ezr8/$doc
@@ -42,23 +42,28 @@ a2813 1
 a4339 2
 ||bitdefender.top^$doc,to=~bitdefender.com
 ||caressesetboulesdepoils.fr^$doc
-diff name:ublock-filters lines:91 checksum:6c2d452281
+diff name:ublock-filters lines:96 checksum:99888cdee8
 d3 2
 a4 2
-! Last modified: Sun, 27 Oct 2024 02:55:33 +0000
-! Diff-Path: ../patches/2024.10.27.180.patch#ublock-filters
-d2059 1
-a2059 1
-xfreehd.com##^script:has-text(/nativeads|navigator\.brave|goodDay/)
-d2061 1
-a2061 1
-xfreehd.com##+js(rmnt, script, /nativeads|navigator\.brave|goodDay/)
+! Last modified: Sun, 27 Oct 2024 03:09:10 +0000
+! Diff-Path: ../patches/2024.10.27.213.patch#ublock-filters
+d2054 9
 a5392 2
 @@||duden.de^$ghide
 duden.de##+js(no-fetch-if, googlesyndication)
 a8976 1
 mkvcinemas.*###SH-Ads
 d9018 10
+a9053 9
+*$popunder,domain=xfreehd.com,3p
+xfreehd.com##.nvheader > span:has-text(Advertisement)
+*$frame,redirect-rule=noopframe,domain=xfreehd.com
+xfreehd.com##.ad-body:remove()
+!#if cap_html_filtering
+xfreehd.com##^script:has-text(/nativeads|navigator\.brave|goodDay|\.abk_msg/)
+!#else
+xfreehd.com##+js(rmnt, script, /nativeads|navigator\.brave|goodDay|\.abk_msg/)
+!#endif
 a9485 1
 beaumontenterprise.com,bigrapidsnews.com,ctinsider.com,ctpost.com,darientimes.com,expressnews.com,greenwichtime.com,houstonchronicle.com,lmtonline.com,manisteenews.com,michigansthumb.com,middletownpress.com,milfordmirror.com,mrt.com,myjournalcourier.com,ncadvertiser.com,newstimes.com,nhregister.com,ourmidland.com,registercitizen.com,sfchronicle.com,sheltonherald.com,stamfordadvocate.com,theheraldreview.com,thehour.com,theintelligencer.com,theridgefieldpress.com,thetelegraph.com,timesunion.com,trumbulltimes.com,wiltonbulletin.com,yourconroenews.com#@#[name^="google_ads_iframe"]
 a9958 1
@@ -134,11 +139,11 @@ radiantsong.com,rabo.no,ragnarokscanlation.*,rahim-soft.com,rail-log.net,raishin
 d22845 1
 a22845 1
 lordchannel.com##+js(rmnt, script, await)
-diff name:ublock-privacy lines:16 checksum:51fce2c04a
+diff name:ublock-privacy lines:16 checksum:44d7796845
 d3 2
 a4 2
 ! Last modified: Sat, 26 Oct 2024 06:06:09 +0000
-! Diff-Path: ../patches/2024.10.27.180.patch#ublock-privacy
+! Diff-Path: ../patches/2024.10.27.213.patch#ublock-privacy
 d310 1
 a310 1
 /^https:\/\/(?:[^.]+\.){2}(?:com|io|net)\/c(?:\/\d+){3}\?.+?&u=http/$doc,to=com|io|net,urlskip=?u
@@ -151,11 +156,11 @@ a326 4
 ||streak-link.com/*/http$doc,urlskip=/\bstreak-link\.com\/[^\/]+\/https?%3A%2F%2F([^\/]+)/ +https -uricomponent
 a742 1
 pandadoc.com##+js(no-fetch-if, segment.io)
-diff name:ublock-quick-fixes lines:64 checksum:a464d884d7
+diff name:ublock-quick-fixes lines:64 checksum:8e5b755075
 d3 2
 a4 2
 ! Last modified: Sat, 26 Oct 2024 16:14:55 +0000
-! Diff-Path: ../patches/2024.10.27.180.patch#ublock-quick-fixes
+! Diff-Path: ../patches/2024.10.27.213.patch#ublock-quick-fixes
 d22 1
 a22 1
 www.youtube.com##+js(trusted-rpnt, script, (function serverContract(), /*START*/"YOUTUBE_PREMIUM_LOGO"!==ytInitialData?.topbar?.desktopTopbarRenderer?.logo?.topbarLogoRenderer?.iconImage?.iconType&&(location.href.startsWith("https://www.youtube.com/tv#/")||location.href.startsWith("https://www.youtube.com/embed/")||document.addEventListener("DOMContentLoaded"\,(function(){const t=()=>{const t=document.getElementById("movie_player");if(!t)return;if(!t.getStatsForNerds?.()?.debug_info?.startsWith?.("SSAP\, AD"))return;const e=t.getProgressState?.();e&&e.duration>0&&(e.loaded<e.duration||e.duration-e.current>1)&&t.seekTo?.(e.duration)};t()\,new MutationObserver((()=>{t()})).observe(document\,{childList:!0\,subtree:!0})})));(function serverContract(), sedCount, 1)
@@ -216,19 +221,19 @@ img-load.com##html
 ##a[href*=".css-load.com/fl1hrrg"]
 ##a[href*=".img-load.com/fl1hrrg"]
 @@||consent-api.onetrust.com/v1/preferences^$xhr,domain=paramountplus.com
-diff name:ublock-unbreak lines:7 checksum:7a2cec5bdf
+diff name:ublock-unbreak lines:7 checksum:f34f044070
 d3 2
 a4 2
 ! Last modified: Fri, 25 Oct 2024 04:41:56 +0000
-! Diff-Path: ../patches/2024.10.27.180.patch#ublock-unbreak
+! Diff-Path: ../patches/2024.10.27.213.patch#ublock-unbreak
 a2700 2
 @@||cdn.segment.com/*/analytics.min.js$script,domain=app.pandadoc.com
 pandadoc.com##+js(rmnt, script, adBlockEnabled)
-diff name:easylist lines:209 checksum:5ce301f116
+diff name:easylist lines:209 checksum:b0c8a35ff2
 d4 2
 a5 2
 ! Last modified: Sun, 27 Oct 2024 02:13:48 +0000
-! Diff-Path: ../patches/2024.10.27.180.patch#easylist
+! Diff-Path: ../patches/2024.10.27.213.patch#easylist
 a16334 1
 ||3cb9b57efc.com^
 a16365 1
@@ -434,11 +439,11 @@ a63032 1
 himovies.to,home-barista.com,rarpc.co,washingtontimes.com##a[onclick]
 a63519 1
 thedailywtf.com##.article-body > div:has-text([Advertisement])
-diff name:easyprivacy lines:24 checksum:8d9a1416a5
+diff name:easyprivacy lines:24 checksum:60642bef18
 d4 2
 a5 2
 ! Last modified: Sat, 26 Oct 2024 21:50:04 +0000
-! Diff-Path: ../patches/2024.10.27.180.patch#easyprivacy
+! Diff-Path: ../patches/2024.10.27.213.patch#easyprivacy
 a9600 1
 ||api.june.so^
 a9988 1
