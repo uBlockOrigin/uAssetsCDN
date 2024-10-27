@@ -1,5 +1,5 @@
 ! Title: uBlock filters (2024)
-! Last modified: Sun, 27 Oct 2024 12:50:17 +0000
+! Last modified: Sun, 27 Oct 2024 17:59:05 +0000
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -763,10 +763,11 @@ xfreehd.com##.nvheader > span:has-text(Advertisement)
 *$frame,redirect-rule=noopframe,domain=xfreehd.com
 xfreehd.com##.ad-body:remove()
 !#if cap_html_filtering
-xfreehd.com##^script:has-text(/nativeads|navigator\.brave|goodDay|\.abk_msg/)
+xfreehd.com##^script:has-text(/popMagic|nativeads|navigator\.brave|\.abk_msg|\.innerHTML|adestt01_c/)
 !#else
-xfreehd.com##+js(rmnt, script, /nativeads|navigator\.brave|goodDay|\.abk_msg/)
+xfreehd.com##+js(rmnt, script, /popMagic|nativeads|navigator\.brave|\.abk_msg|\.innerHTML|adestt01_c/)
 !#endif
+xfreehd.com##+js(nostif, .innerHTML)
 
 ! END: Rules from filters.txt
 
@@ -3696,6 +3697,14 @@ gdflix.*##^script:has-text(/\{delete window\[/)
 
 ! uupbom.com popups
 uupbom.com##+js(nowoif)
+||clunkyentirelinked.com^
 
 ! https://github.com/uBlockOrigin/uAssets/issues/25814
 3rooodnews.net##+js(rmnt, script, advads)
+
+! jattfilms. store popups
+jattfilms.*###clickfakeplayer[href]:remove-attr(href)
+||baseballletters.com^
+
+! https://github.com/uBlockOrigin/uAssets/issues/25818
+||imasdk.googleapis.com/js/sdkloader/ima3.js$script,redirect=google-ima.js,domain=aleklasa.pl

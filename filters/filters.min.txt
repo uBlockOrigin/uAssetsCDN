@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Sun, 27 Oct 2024 12:50:17 +0000
-! Diff-Path: ../patches/2024.10.27.806.patch#ublock-filters
+! Last modified: Sun, 27 Oct 2024 17:59:05 +0000
+! Diff-Path: ../patches/2024.10.27.1110.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -9041,10 +9041,11 @@ xfreehd.com##.nvheader > span:has-text(Advertisement)
 *$frame,redirect-rule=noopframe,domain=xfreehd.com
 xfreehd.com##.ad-body:remove()
 !#if cap_html_filtering
-xfreehd.com##^script:has-text(/nativeads|navigator\.brave|goodDay|\.abk_msg/)
+xfreehd.com##^script:has-text(/popMagic|nativeads|navigator\.brave|\.abk_msg|\.innerHTML|adestt01_c/)
 !#else
-xfreehd.com##+js(rmnt, script, /nativeads|navigator\.brave|goodDay|\.abk_msg/)
+xfreehd.com##+js(rmnt, script, /popMagic|nativeads|navigator\.brave|\.abk_msg|\.innerHTML|adestt01_c/)
 !#endif
+xfreehd.com##+js(nostif, .innerHTML)
 ! END: Rules from filters.txt
 ! START: Regional lists
 ! <<<<< czech slovak filters >>>>>
@@ -10616,7 +10617,12 @@ gdflix.*##^script:has-text(/\{delete window\[/)
 10gb.vn##+js(set, detectedAdblock, noopFunc)
 ! uupbom.com popups
 uupbom.com##+js(nowoif)
+||clunkyentirelinked.com^
 3rooodnews.net##+js(rmnt, script, advads)
+! jattfilms. store popups
+jattfilms.*###clickfakeplayer[href]:remove-attr(href)
+||baseballletters.com^
+||imasdk.googleapis.com/js/sdkloader/ima3.js$script,redirect=google-ima.js,domain=aleklasa.pl
 ! Link shortener filters go into their own dedicated list
 ! *** filters/ubo-link-shorteners.txt ***
 ! gplinks all domains (gplinks.co/EWu8)
@@ -18682,9 +18688,9 @@ apkmaven.*###countdown
 apkmaven.*###download_link:style(display: block !important;)
 photopea.com##div[style]:has(> a[href*="photopea.com"][href*="ads"])
 !#if cap_html_filtering
-||photopea.com^$doc,replace=/<head>/<script>if (localStorage.length === 0 || typeof JSON.parse(localStorage._ppp)['0_uid'] === 'undefined') {Object.defineProperty(window, 'innerWidth', {get() { return document.documentElement.offsetWidth + 320 },});}<\/script><head>/
+||photopea.com^$doc,replace=/<head>/<script>if (window.innerWidth !== document.documentElement.offsetWidth + 320) {Object.defineProperty(window, 'innerWidth', {get() { return document.documentElement.offsetWidth + 320 },});}<\/script><head>/
 !#else
-photopea.com##+js(rpnt, script, added=false;, "added=false;if (localStorage.length === 0 || typeof JSON.parse(localStorage._ppp)['0_uid'] === 'undefined') {Object.defineProperty(window, 'innerWidth', {get() { return document.documentElement.offsetWidth + 320 },});}")
+photopea.com##+js(trusted-rpnt, script, added=false;, "added=false;if (window.innerWidth !== document.documentElement.offsetWidth + 320) {Object.defineProperty(window, 'innerWidth', {get() { return document.documentElement.offsetWidth + 320 },});}")
 !#endif
 !photopea.com##+js(rpnt, script, /^.*?(function gtag).*$/, document.documentElement.setAttribute('onreset'\,(function addCustomEvent(){document.addEventListener('resizecanvas'\,()=>{window.innerWidth=document.documentElement.clientWidth+(window.screen.width<1600?180:320)})})());document.documentElement.dispatchEvent(new CustomEvent('reset'));document.documentElement.removeAttribute('onreset');function resize(event={}){if(!event.skip){document.dispatchEvent(new CustomEvent('resizecanvas'));const resizeEvent=new Event('resize');resizeEvent.skip=true;window.dispatchEvent(resizeEvent)}}let debounce;window.addEventListener('resize'\,event=>{clearTimeout(debounce);debounce=setTimeout(()=>resize(event)\,100)});resize();)
 ||pagead2.googlesyndication.com^$3p,xhr,method=head,redirect-rule=noop.js,domain=photopea.com
