@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Mon, 28 Oct 2024 13:36:12 +0000
-! Diff-Path: ../patches/2024.10.28.868.patch#ublock-filters
+! Last modified: Mon, 28 Oct 2024 18:44:19 +0000
+! Diff-Path: ../patches/2024.10.28.1160.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -9031,16 +9031,9 @@ winfuture.de##[id$="_adContainer"]
 @@||widget.spoods.io/loader.js$script,domain=winfuture.de
 emurom.net##+js(set, dvsize, 52)
 emurom.net##+js(aost, jQuery, removeDLElements)
-*$popunder,domain=xfreehd.com,3p
 xfreehd.com##.nvheader > span:has-text(Advertisement)
 *$frame,redirect-rule=noopframe,domain=xfreehd.com
 xfreehd.com##.ad-body:remove()
-!#if cap_html_filtering
-xfreehd.com##^script:has-text(/popMagic|nativeads|navigator\.brave|\.abk_msg|\.innerHTML|adestt01_c/)
-!#else
-xfreehd.com##+js(rmnt, script, /popMagic|nativeads|navigator\.brave|\.abk_msg|\.innerHTML|adestt01_c/)
-!#endif
-xfreehd.com##+js(nostif, .innerHTML)
 ! END: Rules from filters.txt
 ! START: Regional lists
 ! <<<<< czech slovak filters >>>>>
@@ -9089,6 +9082,9 @@ sinhasannews.com##.entry-content > figure.wp-block-image:has(> img[class^="wp-im
 sinhasannews.com##.entry-content > figure.wp-block-image:has(> img[class^="wp-image-"][src^="https://www.sinhasannews.com/"][width="1024"][height="770"][alt^="Screenshot "])
 sinhasannews.com##.entry-content > figure.wp-block-image:has(> img[class^="wp-image-"][src^="https://www.sinhasannews.com/"][width="1022"][height="1024"][alt^="Screenshot "])
 sinhasannews.com##.entry-content > figure.wp-block-image:has(> img[class^="wp-image-"][src^="https://www.sinhasannews.com/"][width="1024"][height="800"][alt^="Img "])
+||hdfilmcehennemi1.net/rekla/$media
+hdfilmcehennemi1.net##.money-child
+hdfilmcehennemi1.net##.money-text
 ! END: Regional lists
 flixscans.org##+js(no-fetch-if, googlesyndication)
 mhn.quest##+js(nostif, adblock)
@@ -10182,7 +10178,11 @@ ytlarge.com##ins.adsbygoogle[data-ad-slot]
 seeklogo.com##+js(nowoif, shutterstock.com)
 filmizlehdizle.com,fullfilmizlesene.net##+js(rpnt, script,this.ads.length > this.ads_start, 1==2)
 sportsurge.net##+js(acs, document.documentElement, break;case $.)
-sportsurge.net##+js(rmnt, script, adserverDomain)
+!#if cap_html_filtering
+sportsurge.net,volokit2.com##^script:has-text(/adserverDomain|\);break;case /)
+!#else
+sportsurge.net,volokit2.com##+js(rmnt, script, /adserverDomain|\);break;case /)
+!#endif
 antenasport.online,dudestream.com,embedstreams.me,ilovetoplay.xyz,joyousplay.xyz,sportsurge.net,streameast.*,techcabal.net,volokit2.com##+js(aopr, Adcash)
 ||api.aieasypic.com/api/civit_model_version/ad_list/$xhr,3p
 wuxia.click##.mantine-Center-root + br + div[class^="mantine-"]:has(> .adsbygoogle)
@@ -11659,7 +11659,7 @@ ikingfile.mooo.com##+js(nowoif)
 fuckingfast.co##+js(rpnt, script, !seen && ad, false)
 ||fuckingfast.co/f/*/dl^$xhr,1p
 ||senditfast.cloud^$doc
-streamelements.com##+js(set, google_srt, 0)
+streamelements.com##+js(set, google_srt, 1)
 streamelements.com##+js(set, sensorsDataAnalytic201505, {})
 ||validate.strms.net/*adblock%3Dtrue$doc,uritransform=/adblock%3Dtrue/adblock%3Dfalse/
 ! shortylink. store popup
