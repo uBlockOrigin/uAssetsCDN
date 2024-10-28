@@ -1,19 +1,19 @@
-diff name:ublock-annoyances lines:6 checksum:844e1da11d
+diff name:ublock-annoyances lines:6 checksum:bdffec9156
 d3 2
 a4 2
 ! Last modified: Mon, 28 Oct 2024 02:26:51 +0000
-! Diff-Path: ../patches/2024.10.28.270.patch#ublock-annoyances
+! Diff-Path: ../patches/2024.10.28.567.patch#ublock-annoyances
 a4029 1
 ||sndcdn.com/assets/*.js^$script,domain=soundcloud.com,replace=/shouldBlockScrubbing\(\w\.getMediaDuration\(\)\)/shouldBlockScrubbing(false)/
-diff name:ublock-badware lines:3 checksum:589d876c7c
+diff name:ublock-badware lines:3 checksum:3f447ade29
 d4 1
 a4 1
-! Diff-Path: ../patches/2024.10.28.270.patch#ublock-badware
-diff name:ublock-filters lines:45 checksum:9528580d0e
+! Diff-Path: ../patches/2024.10.28.567.patch#ublock-badware
+diff name:ublock-filters lines:67 checksum:9201fa06b9
 d3 2
 a4 2
-! Last modified: Mon, 28 Oct 2024 03:22:17 +0000
-! Diff-Path: ../patches/2024.10.28.270.patch#ublock-filters
+! Last modified: Mon, 28 Oct 2024 06:05:11 +0000
+! Diff-Path: ../patches/2024.10.28.567.patch#ublock-filters
 d5717 3
 d7702 2
 d9044 1
@@ -24,9 +24,12 @@ a9046 1
 xfreehd.com##+js(rmnt, script, /popMagic|nativeads|navigator\.brave|\.abk_msg|\.innerHTML|adestt01_c/)
 a9047 1
 xfreehd.com##+js(nostif, .innerHTML)
+d10608 1
+a10608 1
+! gecmisi.com.tr##+js(trusted-replace-argument, document.querySelector, 0, json:".adsbygoogle", condition, .adsbygoogle.adsbygoogle-noablate)
 a10618 1
 ||clunkyentirelinked.com^
-a10619 7
+a10619 9
 ! jattfilms. store popups
 jattfilms.*###clickfakeplayer[href]:remove-attr(href)
 ||baseballletters.com^
@@ -34,6 +37,8 @@ jattfilms.*###clickfakeplayer[href]:remove-attr(href)
 tvn24.pl##+js(json-prune, playlist.movie.advertising.ad_server)
 @@||cdntvn.pl/*/advert.js$xhr,domain=tvn24.pl
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$script,redirect=google-ima.js,domain=tvn24.pl
+a1movies.*##+js(aeld, DOMContentLoaded, showPopup)
+a1movies.*##+js(nowoif)
 a12478 1
 ||adxcel.com^
 a12484 1
@@ -49,21 +54,38 @@ nsw2u.*##[href^="https://bit.ly/"]
 nsw2u.*##+js(no-xhr-if, googlesyndication)
 ||com/|$xhr,3p,method=head,domain=nsw2u.com
 ||xyz/|$xhr,3p,method=head,domain=nsw2u.com
+d14820 1
+a14820 13
+720pstream.*,embedstream.me,jumbtv.com##.bg-dark.position-absolute
+!#if cap_html_filtering
+720pstream.*,embedstream.me,jumbtv.com##^script:has-text(adserverDomain)
+jumbtv.com##^script:has-text(/break;case|FingerprintJS/)
+!#else
+720pstream.*,embedstream.me,jumbtv.com##+js(rmnt, script, adserverDomain)
+jumbtv.com##+js(rmnt, script, /break;case|FingerprintJS/)
+jumbtv.com##+js(aeld, message)
+!#endif
+||usaballs.fun^
+||variationsradio.com^
+||kaitakavixen.shop^
+||gliraimsofu.net^
 d18685 1
 a18685 1
 ||photopea.com^$doc,replace=/<head>/<script>if (window.innerWidth !== document.documentElement.offsetWidth + 320) {Object.defineProperty(window, 'innerWidth', {get() { return document.documentElement.offsetWidth + 320 },});}<\/script><head>/
 d18687 1
 a18687 1
 photopea.com##+js(trusted-rpnt, script, added=false;, "added=false;if (window.innerWidth !== document.documentElement.offsetWidth + 320) {Object.defineProperty(window, 'innerWidth', {get() { return document.documentElement.offsetWidth + 320 },});}")
-diff name:ublock-privacy lines:3 checksum:a2d58d4bcb
+a20508 1
+ipacrack.com##+js(no-fetch-if, thaudray.com)
+diff name:ublock-privacy lines:3 checksum:2fa5306ac8
 d4 1
 a4 1
-! Diff-Path: ../patches/2024.10.28.270.patch#ublock-privacy
-diff name:ublock-quick-fixes lines:32 checksum:5c1fa04096
+! Diff-Path: ../patches/2024.10.28.567.patch#ublock-privacy
+diff name:ublock-quick-fixes lines:34 checksum:2b82f76393
 d3 2
 a4 2
-! Last modified: Mon, 28 Oct 2024 03:13:29 +0000
-! Diff-Path: ../patches/2024.10.28.270.patch#ublock-quick-fixes
+! Last modified: Mon, 28 Oct 2024 05:52:00 +0000
+! Diff-Path: ../patches/2024.10.28.567.patch#ublock-quick-fixes
 d59 1
 a59 1
 japscan.lol#@#+js(aeld, DOMContentLoaded, LoVe)
@@ -84,7 +106,7 @@ wiki.yjsnpi.nu#@#+js(aost, Function.prototype.toString, /g\s.+comments\.js/)
 wiki.yjsnpi.nu#@#+js(aost, Function.prototype.toString, /s\s.+comments\.js/)
 wiki.yjsnpi.nu##+js(aost, Function.prototype.toString, /So\s.+comments\.js/)
 d146 3
-a164 7
+a164 9
 !#if cap_html_filtering
 xfreehd.com##^script:has-text(/nativeads|navigator\.brave|\.abk_msg|\.innerHTML|illegal/)
 !#else
@@ -92,15 +114,17 @@ xfreehd.com##+js(rmnt, script, /nativeads|navigator\.brave|\.abk_msg|\.innerHTML
 !#endif
 xfreehd.com##+js(nostif, /\.innerHTML|illegal/)
 ||adxcel.com^$media,redirect=noop-1s.mp4:10,domain=open.spotify.com
-diff name:ublock-unbreak lines:3 checksum:df575fc94c
+gecmisi.com.tr#@#+js(trusted-replace-argument, document.querySelector, 0, json:".adsbygoogle", condition, .adsbygoogle.adsbygoogle-noablate)
+gecmisi.com.tr##+js(trusted-replace-argument, document.querySelector, 0, json:"div[align='center']", condition, .adsbygoogle.adsbygoogle-noablate)
+diff name:ublock-unbreak lines:3 checksum:697b9dc8d8
 d4 1
 a4 1
-! Diff-Path: ../patches/2024.10.28.270.patch#ublock-unbreak
-diff name:easylist lines:26 checksum:6b8aa77873
+! Diff-Path: ../patches/2024.10.28.567.patch#ublock-unbreak
+diff name:easylist lines:26 checksum:38d1a375fe
 d4 2
 a5 2
 ! Last modified: Mon, 28 Oct 2024 02:12:04 +0000
-! Diff-Path: ../patches/2024.10.28.270.patch#easylist
+! Diff-Path: ../patches/2024.10.28.567.patch#easylist
 a26597 1
 ||fwbejnuplyuxufm.xyz^
 a28938 1
@@ -123,7 +147,7 @@ a59042 1
 karryon.com.au##.ads-wrap
 a60775 1
 karryon.com.au##.ko-ads-wrapper
-diff name:easyprivacy lines:3 checksum:a3748190c5
+diff name:easyprivacy lines:3 checksum:78d4215cbb
 d5 1
 a5 1
-! Diff-Path: ../patches/2024.10.28.270.patch#easyprivacy
+! Diff-Path: ../patches/2024.10.28.567.patch#easyprivacy

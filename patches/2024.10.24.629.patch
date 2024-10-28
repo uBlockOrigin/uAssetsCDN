@@ -1,17 +1,17 @@
-diff name:ublock-annoyances lines:8 checksum:844e1da11d
+diff name:ublock-annoyances lines:8 checksum:bdffec9156
 d3 2
 a4 2
 ! Last modified: Mon, 28 Oct 2024 02:26:51 +0000
-! Diff-Path: ../patches/2024.10.28.270.patch#ublock-annoyances
+! Diff-Path: ../patches/2024.10.28.567.patch#ublock-annoyances
 a3518 1
 photopea.com##.bnotify
 a4028 1
 ||sndcdn.com/assets/*.js^$script,domain=soundcloud.com,replace=/shouldBlockScrubbing\(\w\.getMediaDuration\(\)\)/shouldBlockScrubbing(false)/
-diff name:ublock-badware lines:118 checksum:589d876c7c
+diff name:ublock-badware lines:118 checksum:3f447ade29
 d3 2
 a4 2
 ! Last modified: Sat, 26 Oct 2024 17:21:41 +0000
-! Diff-Path: ../patches/2024.10.28.270.patch#ublock-badware
+! Diff-Path: ../patches/2024.10.28.567.patch#ublock-badware
 d519 1
 d528 1
 d608 1
@@ -126,11 +126,11 @@ d4388 1
 a4432 2
 ||bitdefender.top^$doc,to=~bitdefender.com
 ||caressesetboulesdepoils.fr^$doc
-diff name:ublock-filters lines:137 checksum:9528580d0e
+diff name:ublock-filters lines:156 checksum:9201fa06b9
 d3 2
 a4 2
-! Last modified: Mon, 28 Oct 2024 03:22:17 +0000
-! Diff-Path: ../patches/2024.10.28.270.patch#ublock-filters
+! Last modified: Mon, 28 Oct 2024 06:05:11 +0000
+! Diff-Path: ../patches/2024.10.28.567.patch#ublock-filters
 d2054 9
 a2187 1
 *$script,domain=ariva.de,redirect-rule=noopjs
@@ -161,7 +161,7 @@ a10539 1
 nexdrive.*,vegamovies3.org##+js(nowoif)
 a10540 1
 ||jeestauglahity.net^
-a10602 27
+a10602 29
 ronorp.net##+js(aeld, load, detect)
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$domain=cnet.com,important
 send.cm##+js(aopr, LieDetector)
@@ -169,7 +169,7 @@ send.cm##+js(nowoif)
 ||freedom.send.cm/s.js$script,1p
 vinovo.to##+js(nowoif)
 ||ad.optimads.info^
-gecmisi.com.tr##+js(trusted-replace-argument, document.querySelector, 0, json:".adsbygoogle", condition, .adsbygoogle.adsbygoogle-noablate)
+! gecmisi.com.tr##+js(trusted-replace-argument, document.querySelector, 0, json:".adsbygoogle", condition, .adsbygoogle.adsbygoogle-noablate)
 schnittberichte.com##.branding
 schnittberichte.com##.section__adbanner
 schnittberichte.com##[href^="/goto.php?ID="]
@@ -189,6 +189,8 @@ jattfilms.*###clickfakeplayer[href]:remove-attr(href)
 tvn24.pl##+js(json-prune, playlist.movie.advertising.ad_server)
 @@||cdntvn.pl/*/advert.js$xhr,domain=tvn24.pl
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$script,redirect=google-ima.js,domain=tvn24.pl
+a1movies.*##+js(aeld, DOMContentLoaded, showPopup)
+a1movies.*##+js(nowoif)
 a11296 1
 akcartoons.in,cybercityhelp.in##+js(set, alert, throwFunc)
 a12460 1
@@ -220,6 +222,21 @@ actionviewphotography.com,exporntoons.net,mat6tube.*,noodlemagazine.com,expornto
 actionviewphotography.com,exporntoons.net,mat6tube.*,noodlemagazine.com,exporntoons.net,whatisareverseauction.com,sibtok.com,ukdevilz.com,tyler-brown.com##div[style]:has(> [id*="_ad_native_"])
 actionviewphotography.com,exporntoons.net,mat6tube.*,noodlemagazine.com,exporntoons.net,whatisareverseauction.com,sibtok.com,ukdevilz.com,tyler-brown.com##noindex
 actionviewphotography.com,exporntoons.net,mat6tube.*,noodlemagazine.com,exporntoons.net,whatisareverseauction.com,sibtok.com,ukdevilz.com,tyler-brown.com##+js(nano-stb, download, 1100)
+d14801 1
+a14801 13
+720pstream.*,embedstream.me,jumbtv.com##.bg-dark.position-absolute
+!#if cap_html_filtering
+720pstream.*,embedstream.me,jumbtv.com##^script:has-text(adserverDomain)
+jumbtv.com##^script:has-text(/break;case|FingerprintJS/)
+!#else
+720pstream.*,embedstream.me,jumbtv.com##+js(rmnt, script, adserverDomain)
+jumbtv.com##+js(rmnt, script, /break;case|FingerprintJS/)
+jumbtv.com##+js(aeld, message)
+!#endif
+||usaballs.fun^
+||variationsradio.com^
+||kaitakavixen.shop^
+||gliraimsofu.net^
 d18666 1
 a18666 1
 ||photopea.com^$doc,replace=/<head>/<script>if (window.innerWidth !== document.documentElement.offsetWidth + 320) {Object.defineProperty(window, 'innerWidth', {get() { return document.documentElement.offsetWidth + 320 },});}<\/script><head>/
@@ -256,6 +273,8 @@ a20338 1
 www.chip.de##+js(rmnt, script, /\.length > 0\) \{  \}/)
 a20344 1
 ||free.webcompanion.com/*/index.php?*campaign=*&partner=$popup,doc
+a20487 1
+ipacrack.com##+js(no-fetch-if, thaudray.com)
 a20721 1
 seznam.cz##+js(rmnt, script, adComm)
 d21618 1
@@ -264,11 +283,11 @@ radiantsong.com,rabo.no,ragnarokscanlation.*,rahim-soft.com,rail-log.net,raishin
 d22844 1
 a22844 1
 lordchannel.com##+js(rmnt, script, await)
-diff name:ublock-privacy lines:19 checksum:a2d58d4bcb
+diff name:ublock-privacy lines:19 checksum:2fa5306ac8
 d3 2
 a4 2
 ! Last modified: Sat, 26 Oct 2024 06:06:09 +0000
-! Diff-Path: ../patches/2024.10.28.270.patch#ublock-privacy
+! Diff-Path: ../patches/2024.10.28.567.patch#ublock-privacy
 d310 1
 a310 1
 /^https:\/\/(?:[^.]+\.){2}(?:com|io|net)\/c(?:\/\d+){3}\?.+?&u=http/$doc,to=com|io|net,urlskip=?u
@@ -284,11 +303,11 @@ a323 7
 ||streak-link.com/*/http$doc,urlskip=/\bstreak-link\.com\/[^\/]+\/https?%3A%2F%2F([^\/]+)/ +https -uricomponent
 a739 1
 pandadoc.com##+js(no-fetch-if, segment.io)
-diff name:ublock-quick-fixes lines:83 checksum:5c1fa04096
+diff name:ublock-quick-fixes lines:85 checksum:2b82f76393
 d3 2
 a4 2
-! Last modified: Mon, 28 Oct 2024 03:13:29 +0000
-! Diff-Path: ../patches/2024.10.28.270.patch#ublock-quick-fixes
+! Last modified: Mon, 28 Oct 2024 05:52:00 +0000
+! Diff-Path: ../patches/2024.10.28.567.patch#ublock-quick-fixes
 d22 1
 a22 1
 www.youtube.com##+js(trusted-rpnt, script, (function serverContract(), /*START*/"YOUTUBE_PREMIUM_LOGO"!==ytInitialData?.topbar?.desktopTopbarRenderer?.logo?.topbarLogoRenderer?.iconImage?.iconType&&(location.href.startsWith("https://www.youtube.com/tv#/")||location.href.startsWith("https://www.youtube.com/embed/")||document.addEventListener("DOMContentLoaded"\,(function(){const t=()=>{const t=document.getElementById("movie_player");if(!t)return;if(!t.getStatsForNerds?.()?.debug_info?.startsWith?.("SSAP\, AD"))return;const e=t.getProgressState?.();e&&e.duration>0&&(e.loaded<e.duration||e.duration-e.current>1)&&t.seekTo?.(e.duration)};t()\,new MutationObserver((()=>{t()})).observe(document\,{childList:!0\,subtree:!0})})));(function serverContract(), sedCount, 1)
@@ -345,7 +364,7 @@ wiki.yjsnpi.nu#@#+js(aost, Function.prototype.toString, /g\s.+comments\.js/)
 wiki.yjsnpi.nu#@#+js(aost, Function.prototype.toString, /s\s.+comments\.js/)
 wiki.yjsnpi.nu##+js(aost, Function.prototype.toString, /So\s.+comments\.js/)
 d153 5
-a158 22
+a158 24
 ! Ad-Shield
 ||ad-shield.cc^$xhr,ping,popup,doc
 ||79180284.xyz^$xhr,ping,popup,doc
@@ -368,19 +387,21 @@ xfreehd.com##+js(rmnt, script, /nativeads|navigator\.brave|\.abk_msg|\.innerHTML
 !#endif
 xfreehd.com##+js(nostif, /\.innerHTML|illegal/)
 ||adxcel.com^$media,redirect=noop-1s.mp4:10,domain=open.spotify.com
-diff name:ublock-unbreak lines:7 checksum:df575fc94c
+gecmisi.com.tr#@#+js(trusted-replace-argument, document.querySelector, 0, json:".adsbygoogle", condition, .adsbygoogle.adsbygoogle-noablate)
+gecmisi.com.tr##+js(trusted-replace-argument, document.querySelector, 0, json:"div[align='center']", condition, .adsbygoogle.adsbygoogle-noablate)
+diff name:ublock-unbreak lines:7 checksum:697b9dc8d8
 d3 2
 a4 2
 ! Last modified: Fri, 25 Oct 2024 04:41:56 +0000
-! Diff-Path: ../patches/2024.10.28.270.patch#ublock-unbreak
+! Diff-Path: ../patches/2024.10.28.567.patch#ublock-unbreak
 a2700 2
 @@||cdn.segment.com/*/analytics.min.js$script,domain=app.pandadoc.com
 pandadoc.com##+js(rmnt, script, adBlockEnabled)
-diff name:easylist lines:235 checksum:6b8aa77873
+diff name:easylist lines:235 checksum:38d1a375fe
 d4 2
 a5 2
 ! Last modified: Mon, 28 Oct 2024 02:12:04 +0000
-! Diff-Path: ../patches/2024.10.28.270.patch#easylist
+! Diff-Path: ../patches/2024.10.28.567.patch#easylist
 a16334 1
 ||3cb9b57efc.com^
 a16365 1
@@ -612,11 +633,11 @@ a63518 1
 thedailywtf.com##.article-body > div:has-text([Advertisement])
 a66228 1
 @@||ads.atmosphere.copernicus.eu^$popup
-diff name:easyprivacy lines:24 checksum:a3748190c5
+diff name:easyprivacy lines:24 checksum:78d4215cbb
 d4 2
 a5 2
 ! Last modified: Sat, 26 Oct 2024 21:50:04 +0000
-! Diff-Path: ../patches/2024.10.28.270.patch#easyprivacy
+! Diff-Path: ../patches/2024.10.28.567.patch#easyprivacy
 a9600 1
 ||api.june.so^
 a9988 1
