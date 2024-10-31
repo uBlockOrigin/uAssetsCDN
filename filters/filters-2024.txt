@@ -1,5 +1,5 @@
 ! Title: uBlock filters (2024)
-! Last modified: Thu, 31 Oct 2024 06:45:31 +0000
+! Last modified: Thu, 31 Oct 2024 12:06:17 +0000
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -2774,6 +2774,7 @@ service.webgoto.net##:not(:matches-path(/amafav/)) a[href^="https://www.amazon.c
 ! https://github.com/uBlockOrigin/uAssets/issues/24536
 ! https://github.com/uBlockOrigin/uAssets/issues/24538
 dreamdth.com,freemodsapp.in,onlytech.com##+js(acs, eval, replace)
+dreamdth.com,freemodsapp.in,onlytech.com##+js(nostif, document.createElement)
 freemodsapp.in##^script:has-text(/eval\(.+?decodeURIComponent/)
 
 ! https://www.reddit.com/r/uBlockOrigin/comments/1e67wai/cannot_open_videos_on_tokuzilla_unless_i_disable/
@@ -3764,3 +3765,26 @@ xxxbfvideo.net##+js(rmnt, script, document.cookie)
 xxxbfvideo.net##+js(nowoif)
 ||xxxbfvideo.net/assetsv3/wa.js^
 ||cdnflex.me^
+
+! https://github.com/uBlockOrigin/uAssets/issues/25851
+||headerbidding.ai^$script,domain=hegra.cam,redirect=noopjs
+filespayout.com##[href="javascript:void(0);"]
+
+! https://github.com/uBlockOrigin/uAssets/issues/25859
+filmy4wap.co.in##[href^="https://www.highcpmrevenuegate.com/"]
+filmy4wap.co.in##+js(nowoif)
+!#if cap_html_filtering
+filmy4wap.co.in##^meta[http-equiv="refresh"]
+filmy4wap.co.in##^script[data-cfasync]:has-text(/h=decodeURIComponent|popundersPerIP/)
+filmy4wap.co.in##^script:has-text(/window\.open|\.createElement/)
+!#else
+filmy4wap.co.in##+js(refresh-defuser)
+filmy4wap.co.in##+js(rpnt, script, window.dataLayer =, '(()=>{const time=parseInt(document.querySelector("meta[http-equiv=\"refresh\"]").content.split(";")[0])*1000+1000;setTimeout(()=>{document.body.innerHTML=document.body.innerHTML},time)})();window.dataLayer =', sedCount, 1)
+filmy4wap.co.in##+js(rmnt, script, /h=decodeURIComponent|popundersPerIP|window\.open|\.createElement/)
+!#endif
+||amusementchillyforce.com^$all
+||nextmeon.com^
+||traffprogo20.com^
+||hollow-love.com^
+||brightcriticism.com^
+||slight-tooth.com^
