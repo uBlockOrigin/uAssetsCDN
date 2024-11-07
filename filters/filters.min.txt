@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Thu, 07 Nov 2024 07:09:02 +0000
-! Diff-Path: ../patches/2024.11.7.565.patch#ublock-filters
+! Last modified: Thu, 07 Nov 2024 14:15:15 +0000
+! Diff-Path: ../patches/2024.11.7.864.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -10674,6 +10674,15 @@ moviesmod.*,topmovies.*##+js(nowoif)
 /wp-content/themes/blogarise-child/check.js^
 toonstream.*##+js(nowoif, _blank)
 toonstream.*##.SH-Ads
+regenzi.site##+js(rmnt, script, /_0x|brave|onerror/)
+regenzi.site##[href^="https://fulvideozrt.click/"]
+@@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js|$xhr,domain=infinityscans.xyz|infinityscans.net
+@@||pagead2.googlesyndication.com/tag/js/gpt.js|$xhr,domain=infinityscans.xyz|infinityscans.net
+*$script,redirect-rule=noopjs,domain=infinityscans.xyz|infinityscans.net
+||enigmaswhereas.com^$all
+||highmanapts.com^$all
+||ephokeerailoon.net^$all
+pcgeeks-games.com##+js(rmnt, script, adb)
 ! Link shortener filters go into their own dedicated list
 ! *** filters/ubo-link-shorteners.txt ***
 ! gplinks all domains (gplinks.co/EWu8)
@@ -16034,6 +16043,7 @@ maxstream.video,maxlinks.online,maxstreams.site##h1:has-text(/adblock|supporter/
 @@||uprot.net^$ghide
 uprot.net##*[style="display:none;"]:style(display:block !important)
 @@||ads.host-cdn.net/ads2.js$script,domain=maxstream.video|maxlinks.online|maxstreams.site|uprot.net
+@@||maxlinks.online^$ghide
 videoseyred.in##+js(nowoif)
 !#if !cap_html_filtering
 listendata.com##+js(rmnt, script, AdBlocker)
@@ -17706,6 +17716,7 @@ cdn.gamemonetize.com###imaContainer
 superpsx.com##+js(no-xhr-if, googlesyndication)
 superpsx.com##+js(aost, document.getElementById, adsBlocked)
 superpsx.com##+js(no-fetch-if, /googlesyndication|doubleclick/, length:10, {"type": "cors"})
+superpsx.com##+js(set, penciBlocksArray, [])
 so1.asia##+js(nano-stb, , , 0.02)
 so1.asia##+js(nano-sib, , , 0.02)
 so1.asia##+js(rc, hidden, .panel-body > .text-center > button)
@@ -18784,9 +18795,9 @@ apkmaven.*###countdown
 apkmaven.*###download_link:style(display: block !important;)
 photopea.com##div[style]:has(> a[href*="photopea.com"][href*="ads"])
 !#if cap_html_filtering
-||photopea.com^$doc,replace=/<head>/<script>if (typeof localStorage !== 'undefined' && typeof JSON.parse(localStorage._ppp)['0_uid'] === 'undefined') {Object.defineProperty(window, 'innerWidth', {get() { return document.documentElement.offsetWidth + 320 },});}<\/script><head>/
+||photopea.com^$doc,replace=/<head>/<script>if (typeof localStorage !== 'undefined' && typeof JSON.parse(localStorage._ppp)['0_uid'] === 'undefined') {const originalvisualViewport=window.visualViewport; Object.defineProperty(window, 'visualViewport', {value: new Proxy(originalvisualViewport, {get(target,property) {if (property === 'width') {return document.documentElement.offsetWidth+320} return target[property]}}), configurable:true});}<\/script><head>/
 !#else
-photopea.com##+js(trusted-rpnt, script, added=false;, "added=false;if (typeof localStorage !== 'undefined' && typeof JSON.parse(localStorage._ppp)['0_uid'] === 'undefined') {Object.defineProperty(window, 'innerWidth', {get() { return document.documentElement.offsetWidth + 320 },});}")
+photopea.com##+js(trusted-rpnt, script, added=false;, "added=false;if (typeof localStorage !== 'undefined' && typeof JSON.parse(localStorage._ppp)['0_uid'] === 'undefined') {const originalvisualViewport=window.visualViewport; Object.defineProperty(window, 'visualViewport', {value: new Proxy(originalvisualViewport, {get(target,property) {if (property === 'width') {return document.documentElement.offsetWidth+320} return target[property]}}), configurable:true});}")
 !#endif
 !photopea.com##+js(rpnt, script, /^.*?(function gtag).*$/, document.documentElement.setAttribute('onreset'\,(function addCustomEvent(){document.addEventListener('resizecanvas'\,()=>{window.innerWidth=document.documentElement.clientWidth+(window.screen.width<1600?180:320)})})());document.documentElement.dispatchEvent(new CustomEvent('reset'));document.documentElement.removeAttribute('onreset');function resize(event={}){if(!event.skip){document.dispatchEvent(new CustomEvent('resizecanvas'));const resizeEvent=new Event('resize');resizeEvent.skip=true;window.dispatchEvent(resizeEvent)}}let debounce;window.addEventListener('resize'\,event=>{clearTimeout(debounce);debounce=setTimeout(()=>resize(event)\,100)});resize();)
 ||pagead2.googlesyndication.com^$3p,xhr,method=head,redirect-rule=noop.js,domain=photopea.com
@@ -22803,7 +22814,7 @@ bestx.stream,boosterx.stream,moviesapi.club,stream.anplay.in###video_player ~ di
 ! Clickadu reinjection
 asiaon.*,asiaontop.com,bunkrr.*,fapfappy.com,homemoviestube.com,jav.direct,javmix.tv,klmanga.*,komikmanhwa.me,lovingsiren.com,manga1001.*,mangaraw.*,mangarawjp.*,netfapx.com,syosetu.*,xanimeporn.com##+js(acs, WebAssembly, atob)
 /aas/r45d/vki/*$script,redirect=noop.js
-/^https:\/\/[a-z]{8,12}\.com\/en\/(?:[a-z]{2,5}\/){0,2}[a-z]{2,}\?(?:[a-z]+=(?:\d+|[a-z]+)&)*?id=[12]\d{6}/$script,3p,match-case,to=com,header=etag
+/^https:\/\/[a-z]{8,12}\.com\/en\/(?:[a-z]{2,5}\/){0,2}[a-z]{2,}\?(?:[a-z]+=(?:\d+|[a-z]+)&)*?id=[12]\d{6}/$script,3p,match-case,to=com
 /public/assets/js/popunder.js^$script
 /public/assets/js/popunderClickadu.js^$script
 gaminginfos.com##+js(rmnt, script, /userAgent|adb|htmls/)
