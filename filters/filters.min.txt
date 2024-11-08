@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Fri, 08 Nov 2024 04:29:55 +0000
-! Diff-Path: ../patches/2024.11.8.327.patch#ublock-filters
+! Last modified: Fri, 08 Nov 2024 10:14:46 +0000
+! Diff-Path: ../patches/2024.11.8.628.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -8612,6 +8612,12 @@ x1337x.eu##.mgbox
 /ma.js^$script,domain=1337x.*|x1337x.*
 /mm.js^$script,domain=1337x.*|x1337x.*
 x1337x.*##+js(aopw, Adcash)
+!#if cap_html_filtering
+1337x.ninjaproxy1.com##^script:has-text(/h=decodeURIComponent|popundersPerIP/)
+!#else
+1337x.ninjaproxy1.com##+js(rmnt, script, /h=decodeURIComponent|popundersPerIP/)
+!#endif
+1337x.ninjaproxy1.com##div[onclick^="location.href='https://1337x.onlyvpn.site/"]
 cheatcloud.cc,cheater.ninja,cheatermad.com,cheatsquad.gg##+js(nano-sib, clearInterval)
 cheatsquad.gg##+js(nosiif, visibility, 1000)
 cheatermad.com##+js(nostif, offset)
@@ -10697,6 +10703,10 @@ regenzi.site##[href^="https://fulvideozrt.click/"]
 ||ephokeerailoon.net^$all
 pcgeeks-games.com##+js(rmnt, script, adb)
 pes6.es##+js(set, Object.prototype.DetectByGoogleAd, noopFunc)
+! faanproj.com ads
+faanproj.com##.gmr-bannerpopup
+flyplayer.xyz##.pppx
+flyplayer.xyz##+js(nowoif)
 ! Link shortener filters go into their own dedicated list
 ! *** filters/ubo-link-shorteners.txt ***
 ! gplinks all domains (gplinks.co/EWu8)
@@ -14259,7 +14269,7 @@ songspk.*##+js(aost, Object, /(?=^(?!.*(https)))/)
 ! ##+js(acs, document.createElement, ;}}};break;case $.)
 moviesnation.*##+js(acs, document.createElement, ;}}};break;case $.)
 ! ##+js(acs, EventTarget.prototype.addEventListener, delete window)
-11xmovies.*,720pflix.*,9animetv.to,10hitmovies.com,advertisertape.com,alphatron.tv,animeflv.*,animeunity.to,animeyabu.org,anitube.*,arc018.to,ate60vs7zcjhsjo5qgv8.com,buffshub.stream,clickndownload.*,daddylive1.ru,enorme.tv,fastdokan.*,file4go.*,flostreams.xyz,fsportshd.net,gdflix.*,hdfilme.*,hdhub4u.*,hdstream.one,jpopsingles.eu,lato.sx,linkz.wiki,lulu.st,lulustream.com,movies4u.*,movieshubweb.com,moviezwap.*,player.smashy.stream,putlocker.*,sflix.*,soap2day.*,sportsgames.today,sportshub.stream,storynavigation.com,streamtape.*,swiftload.io,subtitlecat.com,tamilprint29.*,thedaddy.to,toonstream.*,tvsportslive.fr,vidsrc.*,viprow.*,vixcloud.co,vodkapr3mium.com,volokit2.com,ythd.org,watchadsontape.com##+js(acs, EventTarget.prototype.addEventListener, delete window)
+11xmovies.*,720pflix.*,9animetv.to,10hitmovies.com,advertisertape.com,alphatron.tv,animeflv.*,animeunity.to,animeyabu.org,anitube.*,arc018.to,ate60vs7zcjhsjo5qgv8.com,buffshub.stream,clickndownload.*,daddylive1.ru,enorme.tv,fastdokan.*,file4go.*,flostreams.xyz,fsportshd.net,gdflix.*,hdfilme.*,hdhub4u.*,hdstream.one,jpopsingles.eu,lato.sx,linkz.wiki,lulu.st,lulustream.com,movies4u.*,movieshubweb.com,moviezwap.*,player.smashy.stream,putlocker.*,sflix.*,soap2day.*,sportsgames.today,sportshub.stream,storynavigation.com,streamruby.com,streamtape.*,swiftload.io,subtitlecat.com,tamilprint29.*,thedaddy.to,toonstream.*,tvsportslive.fr,vidsrc.*,viprow.*,vixcloud.co,vodkapr3mium.com,volokit2.com,ythd.org,watchadsontape.com##+js(acs, EventTarget.prototype.addEventListener, delete window)
 ! ##^script:has-text(/\{delete window\[/)
 11xmovies.*##^script:has-text(/\{delete window\[/)
 atlaq.com,bolly4umovies.*,douploads.net,moalm-qudwa.blogspot.com,shurt.pw##+js(aopr, zfgformats)
@@ -20664,7 +20674,7 @@ emturbovid.com,findjav.com,javggvideo.xyz,mmtv01.xyz,stbturbo.xyz,streamsilk.com
 ||emturbovid.com^$csp=sandbox allow-forms allow-same-origin allow-scripts allow-modals allow-orientation-lock allow-pointer-lock allow-presentation allow-top-navigation
 !#endif
 ##.jw-wrapper > div[style="opacity: 0; visibility: hidden; overflow: hidden; display: block; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%;"]
-streamsilk.com##+js(set, HTMLAnchorElement.prototype.click, noopFunc)
+streamsilk.com##+js(rpnt, script, window.dataLayer =, 'window.HTMLAnchorElement.prototype.click=new Proxy(window.HTMLAnchorElement.prototype.click,{apply:(target,thisArg,args)=>{if(thisArg&&!thisArg.href.includes("streamsilk.com"))return;return Reflect.apply(target,thisArg,args)}});window.dataLayer =', sedCount, 1)
 18pussy.porn,milf-porn.xxx##.footer-margin
 18pussy.porn,milf-porn.xxx##.table
 /ab/thejsfile.js
