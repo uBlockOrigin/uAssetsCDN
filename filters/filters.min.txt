@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Mon, 11 Nov 2024 03:21:26 +0000
-! Diff-Path: ../patches/2024.11.11.210.patch#ublock-filters
+! Last modified: Mon, 11 Nov 2024 07:00:31 +0000
+! Diff-Path: ../patches/2024.11.11.510.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -8563,8 +8563,14 @@ streambucket.net##+js(acs, atob, /popundersPerIP[\s\S]*?Date[\s\S]*?getElementsB
 kokostream.net##+js(nowoif)
 *$script,3p,denyallow=gstatic.com,domain=streambucket.net
 player.smashy.stream##.react-responsive-modal-root
-player.smashystream.com##+js(rmnt, script, HTMLAllCollection)
 player.smashystream.com##+js(nowoif)
+!#if cap_html_filtering
+smashystream.com##^script:has-text(/shown_at|WebAssembly/)
+!#else
+smashystream.com##+js(rmnt, script, /shown_at|WebAssembly/)
+smashystream.com##+js(acs, globalThis, shown_at)
+!#endif
+smashyplayer.top##+js(aeld, click, document.createElement)
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$script,domain=smashyplayer.top,redirect=google-ima.js
 ! EL badfilter
 ||ate60vs7zcjhsjo5qgv8.com^$badfilter
@@ -10731,17 +10737,10 @@ ainonline.com##+js(no-xhr-if, adsbygoogle)
 @@||karistudio.com^$script,1p
 karistudio.com##+js(nostif, getComputedStyle)
 cambro.io##+js(acs, document.querySelectorAll, popMagic)
-!#if cap_html_filtering
-smashystream.com##^script:has-text(/shown_at|WebAssembly/)
-!#else
-smashystream.com##+js(rmnt, script, /shown_at|WebAssembly/)
-smashystream.com##+js(acs, globalThis, shown_at)
-!#endif
-smashyplayer.top##+js(aeld, click, document.createElement)
-||imasdk.googleapis.com/js/sdkloader/ima3.js$script,redirect=google-ima.js,domain=smashyplayer.top
 ##.infiniteads_placeholder
 thetimes.com##.channel-header-ad
 thetimes.com##.ad-container
+uploadhive.com##[href="javascript:void(0);"]
 ! Link shortener filters go into their own dedicated list
 ! *** filters/ubo-link-shorteners.txt ***
 ! gplinks all domains (gplinks.co/EWu8)
@@ -19771,7 +19770,8 @@ flipkart.com##div[style*="width:24px;height:20px;"]:has(img[src*="/promos/"]):up
 !#endif
 tamarindoyam.com##+js(nostif, show)
 thothd.com##.table
-/player/player_ads.html?advertising_id=$frame,1p,redirect-rule=noop.html
+/player/player_ads.html?advertising_id=$frame,1p,redirect=noop.html
+/player/stats.php?$image,redirect=1x1.gif
 #@#.ads-iframe
 ##.ads-iframe:not([style="position: absolute; left: -10px; top: -10px;"])
 mafiatown.pl##+js(set, aLoad, noopFunc)
@@ -23443,6 +23443,7 @@ hes-goals.io##+js(rmnt, script, AdBlock)
 hesgoal-live.io##+js(aeld, load, onload)
 footstockings.com##+js(set, flashvars.video_click_url, '')
 footstockings.com##+js(set, flashvars.popunder_url, '')
+footstockings.com##+js(set, flashvars.protect_block, '')
 ! google. com sponsored ad
 google.com##.D1fz0e
 00m.in###url:style(display: block !important;)

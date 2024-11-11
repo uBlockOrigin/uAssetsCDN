@@ -1,8 +1,8 @@
-diff name:ublock-annoyances lines:37 checksum:ea64663ab4
+diff name:ublock-annoyances lines:37 checksum:865fb6f520
 d3 2
 a4 2
 ! Last modified: Sun, 10 Nov 2024 14:43:21 +0000
-! Diff-Path: ../patches/2024.11.11.210.patch#ublock-annoyances
+! Diff-Path: ../patches/2024.11.11.510.patch#ublock-annoyances
 d34 2
 d834 2
 d873 2
@@ -36,17 +36,20 @@ android1pro.com##style:has-text(@media print):remove()
 d3567 1
 a3567 1
 androidpolice.com,makeuseof.com,movieweb.com,xda-developers.com,thegamer.com,cbr.com,gamerant.com,screenrant.com,howtogeek.com,thethings.com,simpleflying.com,dualshockers.com##+js(remove-cookie, /articlesLimit|articlesRead|previousPage/, when, scroll keydown)
-diff name:ublock-badware lines:54 checksum:028a9bb531
+diff name:ublock-badware lines:68 checksum:7ed9efd96e
 d3 2
 a4 2
-! Last modified: Mon, 11 Nov 2024 02:15:39 +0000
-! Diff-Path: ../patches/2024.11.11.210.patch#ublock-badware
+! Last modified: Mon, 11 Nov 2024 04:19:44 +0000
+! Diff-Path: ../patches/2024.11.11.510.patch#ublock-badware
 a650 1
 ||malenirt.site^$all
 a2999 1
 ||webmailrupdatekorea.firebaseapp.com^$all
 a3001 1
 ||hootbio.com/bellmail$all,to=~webmail.bell.net
+a3006 2
+||resisted-amusing-driver.glitch.me^$all
+||glitch.me/public/index_CNC.html^$doc
 a3076 1
 ||airbnb-pi-three.vercel.app^$all,to=~airbnb.com
 a3175 1
@@ -54,6 +57,10 @@ a3175 1
 d3276 1
 a3276 1
 /am/*.php^$doc,to=arubabusiness.it|mybluehost.me|serv00.net|wcomhost.com|~amendes.gouv.fr
+a3288 3
+||antaidossiersuivamendimpayeer*.zynekcctv.com^$all,to=~amendes.gouv.fr
+||zynekcctv.com/amandes/$doc,to=~amendes.gouv.fr
+/amandes/infospage.php^$doc,to=~amendes.gouv.fr
 a3309 1
 ||activatecustomerduesupportdillegence.com^$all,to=~asb.co.nz
 a3486 1
@@ -64,8 +71,9 @@ a3580 1
 ||microsoft-verify.glitch.me^$all
 a3585 1
 ||arvgroup.az/hash/$all
-a3644 1
+a3644 2
 ||zhongwen-telegram.com^$all
+||dxyezzxkrvqf.top^$all
 a3809 1
 ! bitvavo
 d3812 2
@@ -75,6 +83,10 @@ a3813 3
 ||bitvavo*.vip^$doc,to=vip|~bitvavo.com
 a3824 1
 ||megadropclaim.com^$all,to=~binance.com
+a3906 3
+||instapass.fr^$all
+||snappass.fr^$all
+||appinstallcheck.com^$all
 a4417 1
 ||cpeciadogfoods.com^$all
 d4492 1
@@ -82,7 +94,7 @@ a4492 3
 /^https:\/\/gov\.[^.]*gr\.[a-z]{2,6}/$doc,to=~gov|~edu|~gov.gr
 ||0.gp/greece2^$all,to=~gov.gr
 ||gr93.sbs^$all,to=~gov.gr
-a4546 8
+a4546 10
 ||solomonegbe.com^$all
 ||notion.ramchhaya.com^$all,to=~notion.so
 ||furnotilioin.site^$all,to=~notion.so
@@ -91,11 +103,13 @@ a4546 8
 ||gstatis.co^$all
 ||at^$script,xhr,3p,ipaddress=185.215.113.111
 ||pekanbaru.one^$all,to=~coinbase.com
-diff name:ublock-filters lines:182 checksum:8a5537500d
+||noticesgove.top^$all,to=~gov.uk
+/^https:\/\/winterpaymen[a-z]{2,5}\.top\//$doc,to=top|~gov.uk
+diff name:ublock-filters lines:187 checksum:20b53cd89b
 d3 2
 a4 2
-! Last modified: Mon, 11 Nov 2024 03:21:26 +0000
-! Diff-Path: ../patches/2024.11.11.210.patch#ublock-filters
+! Last modified: Mon, 11 Nov 2024 07:00:31 +0000
+! Diff-Path: ../patches/2024.11.11.510.patch#ublock-filters
 a553 1
 mediafire.com##.center:style(margin-top:50px !important)
 a2579 6
@@ -130,9 +144,15 @@ a7326 2
 jacquieetmichel.net##+js(rmnt, script, popUnderUrl)
 jacquieetmichel.net##+js(ra, data-popunder-url)
 d7892 1
-a8553 5
-player.smashystream.com##+js(rmnt, script, HTMLAllCollection)
+a8553 11
 player.smashystream.com##+js(nowoif)
+!#if cap_html_filtering
+smashystream.com##^script:has-text(/shown_at|WebAssembly/)
+!#else
+smashystream.com##+js(rmnt, script, /shown_at|WebAssembly/)
+smashystream.com##+js(acs, globalThis, shown_at)
+!#endif
+smashyplayer.top##+js(aeld, click, document.createElement)
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$script,domain=smashyplayer.top,redirect=google-ima.js
 ! EL badfilter
 ||ate60vs7zcjhsjo5qgv8.com^$badfilter
@@ -188,7 +208,7 @@ a10680 3
 gameshop4u.com,regenzi.site##+js(rmnt, script, /_0x|brave|onerror/)
 gameshop4u.com,regenzi.site##[href^="https://fulvideozrt.click/"]
 @@*$xhr,3p,domain=infinityscans.xyz|infinityscans.net
-a10685 23
+a10685 16
 pes6.es##+js(set, Object.prototype.DetectByGoogleAd, noopFunc)
 ! faanproj.com ads
 faanproj.com##.gmr-bannerpopup
@@ -201,17 +221,10 @@ ainonline.com##+js(no-xhr-if, adsbygoogle)
 @@||karistudio.com^$script,1p
 karistudio.com##+js(nostif, getComputedStyle)
 cambro.io##+js(acs, document.querySelectorAll, popMagic)
-!#if cap_html_filtering
-smashystream.com##^script:has-text(/shown_at|WebAssembly/)
-!#else
-smashystream.com##+js(rmnt, script, /shown_at|WebAssembly/)
-smashystream.com##+js(acs, globalThis, shown_at)
-!#endif
-smashyplayer.top##+js(aeld, click, document.createElement)
-||imasdk.googleapis.com/js/sdkloader/ima3.js$script,redirect=google-ima.js,domain=smashyplayer.top
 ##.infiniteads_placeholder
 thetimes.com##.channel-header-ad
 thetimes.com##.ad-container
+uploadhive.com##[href="javascript:void(0);"]
 d13060 3
 a13062 3
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$script,3p,redirect=google-ima.js,domain=alleneconomicmatter.com|bethshouldercan.com|bradleyviewdoctor.com|brookethoughi.com|brucevotewithin.com|cindyeyefinal.com|donaldlineelse.com|edwardarriveoften.com|erikcoldperson.com|evelynthankregion.com|graceaddresscommunity.com|heatherdiscussionwhen.com|housecardsummerbutton.com|jamessoundcost.com|jamesstartstudent.com|jamiesamewalk.com|jasminetesttry.com|jasonresponsemeasure.com|jayservicestuff.com|jessicaglassauthor.com|johntryopen.com|josephseveralconcern.com|kathleenmemberhistory.com|kennethofficialitem.com|lisatrialidea.com|lorimuchbenefit.com|loriwithinfamily.com|lukecomparetwo.com|markstyleall.com|michaelapplysome.com|morganoperationface.com|nonesnanking.com|paulkitchendark.com|phenomenalityuniform.com|prefulfilloverdoor.com|rebeccaneverbase.com|roberteachfinal.com|robertplacespace.com|ryanagoinvolve.com|sandrataxeight.com|seanshowcould.com|sethniceletter.com|shannonpersonalcost.com|sharonwhiledemocratic.com|susanhavekeep.com|toddpartneranimal.com|vincentincludesuccessful.com,important
@@ -261,6 +274,10 @@ apkmirror.com,automobile-catalog.com,motorbikecatalog.com##+js(rmnt, script, err
 d19656 1
 a19656 1
 apkmirror.com,automobile-catalog.com,motorbikecatalog.com,blog.esuteru.com,blog.livedoor.jp,itainews.com,jin115.com,allthetests.com,javatpoint.com,globalrph.com,carscoops.com,crosswordsolver.com,cruciverba.it,ff14net.2chblog.jp,heureka.cz,indiatimes.com,laleggepertutti.it,meeco.kr,mirrored.to,motscroises.fr,news4vip.livedoor.biz,oeffnungszeitenbuch.de,onecall2ch.com,oraridiapertura24.it,palabr.as,petitfute.com,rabitsokuhou.2chblog.jp,rostercon.com,suzusoku.blog.jp,the-crossword-solver.com,thestockmarketwatch.com,wfmz.com,word-grabber.com,wort-suchen.de,woxikon.*,freemcserver.net,golf-live.at,kreuzwortraetsel.de,raetsel-hilfe.de,verkaufsoffener-sonntag.com,horairesdouverture24.fr,nyitvatartas24.hu,modhub.us,yugioh-starlight.com,winfuture.de,talkwithstranger.com##^script:has-text(error-report.com)
+d19717 1
+a19717 2
+/player/player_ads.html?advertising_id=$frame,1p,redirect=noop.html
+/player/stats.php?$image,redirect=1x1.gif
 a20415 1
 ||moloco-cr.jiocinema.com/creative/$xhr,1p
 d20503 2
@@ -274,20 +291,24 @@ streamsilk.com##+js(rpnt, script, window.dataLayer =, 'window.HTMLAnchorElement.
 d21747 1
 a21747 1
 ta3arof.net,taariikh.net,tabonitobrasil.tv,taisha-diet.com,talentstareducation.com,tamilanzone.com,tamilhit.tech,tamilnaadi.com,tamilultra.team,tatsublog.com,tbazzar.com,teachersupdates.net,team-octavi.com,team-rcv.xyz,teamkong.tk,teamupinternational.com,techacrobat.com,techastuces.com,techbytesblog.com,techdriod.com,techedubyte.com,techiepirates.com,techiestalk.in,techkeshri.com,techlog.ta-yan.ai,technewslive.org,technewsrooms.com,technicalviral.com,technorj.com,technorozen.com,techoreview.com,techprakash.com,techsbucket.com,techstwo.com,techyhigher.com,techyrick.com,tecnomd.com,tecnoscann.com,tedenglish.site,tehnotone.com,telephone-soudan.com,teluguhitsandflops.com,temporeale.info,tenbaiquest.com,tespedia.com,testious.com,thangdangblog.com,thaript.com,the-loop.xyz,theapothecarydiariesmanga.com,thebigblogs.com,thedilyblog.com,thermoprzepisy.pl,theworldobits.com,thebreakermanga.online,thecannalysts.blog,theconomy.me,thegamearcade.com,theinternettaughtme.com,thejoblives.com,thelastgamestandingexp.com,theliveupdate.com,thenewsglobe.net,theprofoundreport.com,thesextube.net,thesleak.com,thesportsupa.com,thewambugu.com,thiagorossi.com.br,throwsmallstone.com,tiny-sparklies.com,titfuckvideos.com,tirumalatirupatiyatra.in,tnewsnetwork.com,today-obits.com,todays-obits.com,toeflgratis.com,tokoasrimotedanpayet.my.id,toorco.com,top10trends.net,topfaucet.us,topsworldnews.com,toptenknowledge.com,torrentdofilmeshd.net,torrentgame.org,totally.top,towerofgod.top,tr3fit.xyz,trendflatt.com,trendohunts.com,trgtkls.org,tukangsapu.net,tunabagel.net,turkeymenus.com,turkishseriestv.net,tutorialesdecalidad.com,tutorialsduniya.com,twodots.com.br,tw.xn--h9jepie9n6a5394exeq51z.com##+js(noeval-if, /chp_?ad/)
-diff name:ublock-privacy lines:8 checksum:17a21caec8
+a23389 1
+footstockings.com##+js(set, flashvars.protect_block, '')
+diff name:ublock-privacy lines:10 checksum:2caeb2cdf6
 d3 2
 a4 2
-! Last modified: Sun, 10 Nov 2024 17:53:43 +0000
-! Diff-Path: ../patches/2024.11.11.210.patch#ublock-privacy
+! Last modified: Mon, 11 Nov 2024 04:25:55 +0000
+! Diff-Path: ../patches/2024.11.11.510.patch#ublock-privacy
+a334 1
+||search.app^*link=http$doc,urlskip=?link
 a658 1
 spankbang.com##+js(set, send_gravity_event, noopFunc)
 a699 1
 ||karistudio.com/wp-content/plugins/wp-statistics/assets/js/tracker.js^$important
-diff name:ublock-quick-fixes lines:49 checksum:f278659675
+diff name:ublock-quick-fixes lines:57 checksum:2e1404abd6
 d3 2
 a4 2
-! Last modified: Sun, 10 Nov 2024 20:43:03 +0000
-! Diff-Path: ../patches/2024.11.11.210.patch#ublock-quick-fixes
+! Last modified: Mon, 11 Nov 2024 07:53:07 +0000
+! Diff-Path: ../patches/2024.11.11.510.patch#ublock-quick-fixes
 d56 12
 d76 3
 a78 10
@@ -310,6 +331,14 @@ a130 1
 infinityscans.xyz,infinityscans.net##+js(rpnt, script, /\(function\(\){var [a-zA-Z]{8}=atob\(\'.*?\)\;\}\)\(\);.*?\$\.ajax\(\{/,  $.ajax({)
 a132 1
 infinityscans.xyz,infinityscans.net##div[class="alert alert-danger alert-dismissible fade show m-0 p-0"]:has-text(uBlock Origin)
+d143 2
+a144 3
+! filemoon
+file-1bl9ruic-moon.com,file-kg88oaak-embed.com,file-mi11ljwj-embed.com,file-zz40pd56-embed.com,file-sp32aoh8-moon.com,moon-kg83docx.com,moon-fm43w1qv.com,moonfile-62es3l9z.com##+js(nowoif)
+file-1bl9ruic-moon.com,file-kg88oaak-embed.com,file-mi11ljwj-embed.com,file-zz40pd56-embed.com,file-sp32aoh8-moon.com,moon-kg83docx.com,moon-fm43w1qv.com,moonfile-62es3l9z.com##+js(acs, Math, localStorage['\x)
+a150 2
+||gxfh59u4.xyz^
+||nubileforward.com^
 d158 1
 a158 2
 wiki.yjsnpi.nu#@#+js(nostif, /\(\)=>\{[0-9A-z]+=[0-9A-z]+/)
@@ -333,77 +362,120 @@ d191 6
 a196 2
 ||computerbase.de/analytics$xhr,1p
 music.amazon.*#@##overlay:has([href*="privacyprefs/"])
-diff name:ublock-unbreak lines:10 checksum:d28b4d7f30
+diff name:ublock-unbreak lines:11 checksum:52f630da8f
 d3 2
 a4 2
-! Last modified: Sat, 09 Nov 2024 03:14:22 +0000
-! Diff-Path: ../patches/2024.11.11.210.patch#ublock-unbreak
-a2708 5
+! Last modified: Mon, 11 Nov 2024 07:05:35 +0000
+! Diff-Path: ../patches/2024.11.11.510.patch#ublock-unbreak
+a2708 6
 ! unbreak Email and SMS solutions
 ||klclick1.com^$badfilter
 ||klclick1.com^$3p
 ||wurfl.io/wurfl.js$script,redirect=noopjs,domain=smartcharts.net,important
 smartcharts.net##+js(set, WURFL, {})
-diff name:easylist lines:377 checksum:c2569f1459
+/^https?:\/\/.*\.(jpg|jpeg|gif|png|svg|ico|js|txt|css|srt|vtt|webp)/$popup,from=123series.ru|19turanosephantasia.com|1movieshd.cc|4anime.gg|4stream.gg|5movies.fm|720pstream.nu|745mingiestblissfully.com|adblockstrtape.link|animepahe.ru|animesultra.net|asianembed.io|bato.to|batotoo.com|batotwo.com|bigclatterhomesguideservice.com|bormanga.online|bunnycdn.ru|clicknupload.to|cloudvideo.tv|dailyuploads.net|databasegdriveplayer.co|divicast.com|dood.la|dood.pm|dood.sh|dood.so|dood.to|dood.video|dood.watch|dood.ws|dood.yt|doodcdn.com|dopebox.to|dramacool.pk|eplayvid.com|eplayvid.net|europixhd.net|exey.io|extreme-down.plus|files.im|filmestorrents.net|flashx.net|fmovies.app|fmovies.ps|fmovies.world|fraudclatterflyingcar.com|gayforfans.com|gdtot.nl|go-stream.site|gogoanime.run|gogoanimes.to|gomovies.pics|gospeljingle.com|hexupload.net|hindilinks4u.cam|hindilinks4u.nl|housecardsummerbutton.com|kaiju-no8.com|kaisen-jujutsu.com|kimoitv.com|kissanimes.net|leveling-solo.org|lookmoviess.com|magusbridemanga.com|mixdrop.sx|mkvcage.site|mlbstream.me|mlsbd.shop|mlwbd.host|movierulz.cam|movies2watch.ru|movies2watch.tv|moviesrulz.net|mp4upload.com|myflixer.it|myflixer.pw|myflixer.today|myflixertv.to|nflstream.io|ngomik.net|nkiri.com|nswgame.com|olympicstreams.co|paidnaija.com|playemulator.online|primewire.today|prmovies.org|putlocker-website.com|putlocker.digital|racaty.io|racaty.net|record-ragnarok.com|redirect-ads.com|reputationsheriffkennethsand.com|sflix.to|shadowrangers.live|skidrow-games.com|skidrowcodex.net|sockshare.ac|sockshare1.com|solarmovies.movie|speedvideo.net|sportsbay.watch|steampiay.cc|stemplay.cc|streamani.net|streamsb.net|streamsport.icu|streamta.pe|streamtape.cc|streamtape.com|streamtape.net|streamz.ws|strikeout.cc|strikeout.nu|strtape.cloud|strtape.site|strtape.tech|strtapeadblock.me|strtpe.link|tapecontent.net|telerium.net|tinycat-voe-fashion.com|toxitabellaeatrebates306.com|turkish123.com|un-block-voe.net|upbam.org|uploadmaza.com|upmovies.net|upornia.com|uprot.net|upstream.to|upvid.co|v-o-e-unblock.com|vidbam.org|vidembed.cc|vidnext.net|vido.fun|vidsrc.me|vipbox.lc|vipleague.pm|viprow.nu|vipstand.pm|voe-un-block.com|voe-unblock.com|voe.sx|voeun-block.net|voeunbl0ck.com|voeunblck.com|voeunblk.com|voeunblock3.com|vumooo.vip|watchserieshd.tv|watchseriesstream.com|xmovies8.fun|xn--tream2watch-i9d.com|yesmovies.mn|youflix.site|youtube4kdownloader.com|ytanime.tv|yts-subs.com,badfilter
+diff name:easylist lines:569 checksum:095b6f4977
 d4 2
 a5 2
-! Last modified: Mon, 11 Nov 2024 02:07:27 +0000
-! Diff-Path: ../patches/2024.11.11.210.patch#easylist
+! Last modified: Mon, 11 Nov 2024 06:50:46 +0000
+! Diff-Path: ../patches/2024.11.11.510.patch#easylist
 a15929 1
 ||044da016b3.com^
 a16379 1
 ||4d3f87f705.com^
+d16768 1
 a16913 1
 ||achesbunters.shop^
 a17225 1
 ||adoredstation.pro^
+d17553 1
 a17725 1
 ||agreedairdalton.com^
 a17750 1
 ||ahvradotws.com^
+d17778 1
+a17865 1
+||aklmjylwvkjbb.top^
+d18028 1
 a18124 1
 ||amjllwbovlyba.top^
 a18145 1
 ||amoutjsvp-u.club^
+d18218 1
+d18389 1
 a18456 1
 ||architectmalicemossy.com^
+a18534 1
+||arrqumzr.com^
 a18611 1
 ||ashlingzanyish.com^
 a18865 1
 ||augilrunie.net^
+a18907 1
+||auscwuhd.com^
+d18937 1
 a18971 1
 ||avocetriches.com^
 a19100 1
 ||azcmcacuc.com^
 a19277 1
 ||baobabsruesome.com^
+a19587 1
+||bertrambawdily.shop^
 a20266 1
 ||brazilprocyon.com^
+d20413 1
+d20421 1
+a20633 1
+||cabfrrovkqjflc.com^
+d20664 1
 a20759 1
 ||caqhdxnuumhgie.com^
 a21033 1
 ||cetxouafsctgf.com^
+d21063 1
+d21122 1
+d21145 1
+a21202 1
+||chiamfxz.com^
+d21205 1
 a21370 1
 ||cjbyfsmr.life^
+d21381 1
+d21384 1
 a21456 1
 ||clevernessdeclare.com^
+d21517 1
 a21564 1
 ||cloutlavenderwaitress.com^
+a21606 1
+||coalkitchen.com^
 a21817 1
 ||concedederaserskyline.com^
+a21825 1
+||concludedstoredtechnique.com^
 a21909 1
 ||consolationgratitudeunwise.com^
 a21956 1
 ||contentprotectforce.com^
 a21999 1
 ||coohaiwhoonol.net^
+d22166 1
 a22312 1
 ||csfgbmwsxjgibf.com^
 a22313 2
 ||cskcnipgkq.club^
 ||csldbxey.com^
+d22413 1
+a22413 1
+||cxjyibjio.com^
+d22418 1
 a22433 1
 ||cypfdxbynb.com^
+a22449 1
+||d1a0c6affa.com^
+a22498 1
+||dagheepsoach.net^
 a22520 1
 ||dakotasboreens.top^
 a22603 1
@@ -414,30 +486,50 @@ a23061 1
 ||didspack.com^
 a23116 1
 ||dimpledplan.pro^
+d23118 1
+a23335 1
+||djaqcrjtdzgmep.com^
+a23360 1
+||dnagwyxbi.rocks^
 a23497 1
 ||dotersstums.com^
+a23517 1
+||doufoushig.xyz^
 a23760 1
 ||dustourregraft.top^
 a23824 1
 ||e19533834e.com^
+a23833 1
+||e7e34b16ed.com^
+d23998 1
 a24021 1
 ||eekrogrameety.net^
+a24040 1
+||eertoamogn.net^
+d24210 1
 a24320 1
 ||enshawlschwas.top^
 a24589 1
 ||evgytklqupoi.com^
+d24614 1
+a24634 1
+||exceedinglytells.com^
 a24897 1
 ||fanocaraway.shop^
 a24961 1
 ||favoredkuwait.top^
+d25094 1
 a25144 1
 ||fifesmahdism.com^
 a25186 1
 ||fine-click.pro^
+d25226 1
 a25335 1
 ||flockexecute.com^
 a25754 1
 ||fullylustreenjoyed.com^
+a25821 1
+||fxkxiuyo.com^
 a25953 1
 ||garotedwhiff.top^
 a25957 1
@@ -448,8 +540,13 @@ a25996 1
 ||gazpachos28.fun^
 a25997 1
 ||gazumping30.fun^
+a26143 1
+||ghostgenie.com^
 a26226 1
 ||gkrtgrcquwttq.xyz^
+a26228 1
+||gkyornyu.com^
+d26246 1
 a26297 1
 ||gliptoacaft.net^
 a26577 1
@@ -460,26 +557,42 @@ a26643 1
 ||graugnoogimsauy.net^
 a26738 1
 ||grizzlier30.fun^
+a26747 1
+||grobungairdoul.net^
+d26754 1
 a26829 1
 ||gtubumgalb.com^
 a26838 1
 ||guardiannostrils.com^
+a26925 1
+||gzzplxzjzbckkg.com^
 a26957 1
 ||haggingmasha.top^
 a26980 1
 ||hakqkhtlav.com^
+a26987 1
+||halibiulobcokt.top^
 a27041 1
 ||haqafzlur.com^
 a27494 1
 ||hoggershumblie.top^
+d27503 1
+a27640 1
+||housemaidvia.com^
 a27673 1
 ||hqxzgqkuzcv.com^
+d27797 1
+a27857 1
+||iceocean.shop^
+a27869 1
+||icsoqxwevywn.com^
 a27963 1
 ||ijhyugb.com^
 a27990 1
 ||illiterate-finance.com^
 a28136 1
 ||inareputaonforhavin.com^
+d28740 1
 a28751 1
 ||janncamps.top^
 a28800 1
@@ -491,30 +604,45 @@ a28861 1
 ||jerbwqcyrznrm.com^
 a28941 1
 ||jlovoiqtgarh.com^
+d28958 1
+d28977 1
+d29039 1
 a29094 1
 ||juezrgkwvz.com^
+d29266 1
 a29441 1
 ||kmupo.one^
+a29497 1
+||koluraishimtouw.net^
 a29525 1
 ||kouphouwhajee.net^
+d29538 1
 a29611 1
 ||kviglxabhwwhf.xyz^
 a29894 1
 ||legiswoollen.shop^
 a30113 1
 ||listerabromous.com^
+a30207 1
+||lobbiessurfman.top^
 a30334 1
 ||louderoink.shop^
+d30411 1
 a30476 1
 ||lupininmiscook.shop^
 a30494 1
 ||lutoorgourgi.com^
+d31019 1
 a31041 1
 ||mellatetapered.shop^
 a31079 1
 ||mergobouks.xyz^
 a31144 1
 ||mhndfpbssfcsr.com^
+a31213 1
+||mimicdivineconstable.com^
+d31311 1
+d31454 1
 a31467 1
 ||momidrovy.top^
 a31543 1
@@ -527,26 +655,48 @@ a31941 1
 ||naupsakiwhy.com^
 a32491 1
 ||nronudigd.xyz^
+d32497 1
 a32508 1
 ||ntlcgevw-u.one^
+a32514 1
+||ntomjlkjkp.com^
 a32590 1
 ||nwq-frjbumf.today^
+a32678 1
+||oassackegh.net^
 a32716 1
 ||obr3.space^
 a32785 1
 ||odqciqdazjuk.com^
+d33087 1
+a33128 1
+||oocmoaghurs.net^
 a33145 1
 ||oolsutsougri.net^
 a33312 1
 ||originatecrane.com^
+d33318 1
 a33347 1
 ||osmoticupbound.com^
+a33685 1
+||painfullypenny.com^
 a33733 1
 ||pangzz.xyz^
 a33941 1
 ||pcqze.tech^
+d33985 1
+a33992 1
+||peerlesshallucinate.com^
 a33997 1
 ||peewhouheeku.net^
+a34082 1
+||perpetratorjeopardize.com^
+a34225 1
+||phonicsblitz.com^
+d34261 1
+d34365 1
+d34456 1
+d34565 1
 a34821 1
 ||pqvpcahwuvfo.life^
 a35247 1
@@ -555,36 +705,70 @@ a35271 1
 ||pswticsbnt.com^
 a35345 1
 ||ptougeegnep.net^
+d35360 1
+a35410 1
+||puhrzvjuzb.com^
+d35609 1
 a35622 1
 ||pzdwscqipdbg.com^
+a35623 1
+||pznhfofqtwkky.com^
 a35642 1
 ||qaklbrqevbzqz.top^
+a35725 1
+||qmxbqwbprwavac.xyz^
+d35888 1
+a35999 1
+||rantedcamels.shop^
+a36001 1
+||rapacitylikelihood.com^
 a36059 1
 ||razorvenue.com^
 a36076 1
 ||rddjzbwt.click^
+a36128 1
+||reamsswered.com^
+a36350 1
+||releaseavailandproc.org^
+d36509 1
+a36552 1
+||restrictionsvan.com^
 a36711 1
 ||rightscarletcloaksa.com^
+d37153 1
 a37171 1
 ||ryazabti.com^
 a37441 1
 ||schizypdq.com^
+d37649 1
 a37746 1
 ||sevenbuzz.com^
+a37837 1
+||shatsoutheshe.net^
 a37937 1
 ||shoorsoacmo.xyz^
 a37939 1
 ||shooterlearned.com^
 a38017 1
 ||sidebiologyretirement.com^
+a38183 1
+||skullmagnets.com^
+a38316 1
+||smotherpeppermint.com^
 a38336 1
 ||snarlsfuzzes.com^
 a38367 1
 ||soadaupaila.net^
+d38470 1
+a38476 1
+||soovoaglab.net^
+d38500 1
 a38526 1
 ||sovietsdryers.top^
 a38765 1
 ||stallionshootimmigrant.com^
+a38797 1
+||startercost.com^
 a38832 1
 ||stavegroove.com^
 a38947 1
@@ -599,6 +783,7 @@ a39590 1
 ||tationalhedgelnha.com^
 a39618 1
 ||tcloaksandtheirclean.com^
+d39702 1
 a39718 1
 ||tensasscarify.com^
 a39748 1
@@ -607,22 +792,32 @@ a39776 1
 ||tgbpdufhyqbvhx.com^
 a39790 1
 ||thaithawhokr.net^
+d39855 1
 a39956 1
 ||thjadeau.com^
 a39992 1
 ||thouphouwhad.net^
 a39993 1
 ||thouptoorg.com^
+a40163 1
+||tmwsiaoqlzi.com^
+d40196 1
 a40758 1
 ||turndynamicforbes.com^
 a40828 1
 ||tyfqjbuk.one^
+a40878 1
+||ubertyguberla.shop^
 a40941 1
 ||ujmkqrnhfio.com^
+d40969 1
 a40989 1
 ||umggxggvv.com^
+a41283 1
+||uqecqpnnzt.online^
 a41286 1
 ||urauvipsidu.com^
+d41425 1
 a41429 1
 ||valetsangoise.top^
 a41566 1
@@ -633,34 +828,59 @@ a41659 1
 ||vfyhwapi.com^
 a41892 1
 ||vjlyljbjjmley.top^
+a42027 1
+||vulsubsaugrourg.net^
+d42056 1
+a42145 1
+||warmupstenuti.shop^
+a42157 1
+||washingchew.com^
 a42316 1
 ||wehaveinourd.com^
+d42373 1
 a42398 1
 ||whalerkentia.com^
+d42526 1
 a42651 1
 ||withnimmunger.com^
+d42671 1
 a42697 1
 ||wmptengate.com^
 a42753 1
 ||woodieababua.com^
+d42848 1
+a42882 1
+||wristhunknagging.com^
 a42955 1
 ||wxqbopca-i.global^
 a43039 1
 ||xhbulmpl.com^
 a43056 1
 ||xjlqybkll.com^
+d43071 1
 a43237 1
 ||yeebpadqk.com^
+a43243 1
+||yellowishmixture.pro^
+a43270 1
+||yhzqxgmhehm.com^
+a43327 1
+||yobaxqnj.com^
 a43430 1
 ||yvvmnkmbf.com^
 a43444 1
 ||yycdbemrvsfihb.com^
 a43465 1
 ||zaiteegraity.net^
+d43482 1
+d43602 1
 a43649 1
 ||zoiefwqhcaczun.com^
 a43678 1
 ||zpilkesyasa.com^
+d43786 1
+d44318 1
+d45710 1
 a47006 1
 ||concedederaserskyline.com^$popup
 a47107 1
@@ -712,6 +932,8 @@ independent.co.uk,standard.co.uk##[class]:has(> [data-mpu])
 d60910 1
 a60962 1
 wayfair.co.uk,wayfair.com##div[data-hb-id="Grid.Item"]:has(a[href*="&sponsoredid="])
+a61007 1
+bleepingcomputer.com##ul#bc-home-news-main-wrap > li:has-text(Sponsored)
 a61229 1
 balls.ie##div[style="min-height: 170px;"]
 a61461 1
@@ -722,11 +944,11 @@ d61474 1
 a61480 1
 checkfelix.com,kayak.ae,kayak.bo,kayak.ch,kayak.cl,kayak.co.cr,kayak.co.id,kayak.co.in,kayak.co.jp,kayak.co.kr,kayak.co.th,kayak.co.uk,kayak.co.ve,kayak.com,kayak.com.ar,kayak.com.au,kayak.com.br,kayak.com.co,kayak.com.do,kayak.com.ec,kayak.com.gt,kayak.com.hk,kayak.com.hn,kayak.com.mx,kayak.com.my,kayak.com.ni,kayak.com.pa,kayak.com.pe,kayak.com.ph,kayak.com.pr,kayak.com.py,kayak.com.sv,kayak.com.tr,kayak.com.uy,kayak.de,kayak.dk,kayak.es,kayak.fr,kayak.ie,kayak.it,kayak.nl,kayak.no,kayak.pl,kayak.pt,kayak.sa,kayak.se,kayak.sg,swoodoo.com##div[class*="-ad-card"]
 d61593 1
-diff name:easyprivacy lines:28 checksum:9ded57d51f
+diff name:easyprivacy lines:28 checksum:e3c9a53439
 d4 2
 a5 2
 ! Last modified: Sun, 10 Nov 2024 13:00:10 +0000
-! Diff-Path: ../patches/2024.11.11.210.patch#easyprivacy
+! Diff-Path: ../patches/2024.11.11.510.patch#easyprivacy
 a6508 1
 ||coalkitchen.com^
 a6958 1
