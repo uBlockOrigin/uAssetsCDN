@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Sat, 16 Nov 2024 16:29:59 +0000
-! Diff-Path: ../patches/2024.11.16.1111.patch#ublock-filters
+! Last modified: Sat, 16 Nov 2024 21:09:58 +0000
+! Diff-Path: ../patches/2024.11.16.1405.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -7007,8 +7007,6 @@ upzone.cc##+js(acs, document.getElementById, undefined)
 ##.rkads
 ###bt-ads
 @@||lutontoday.co.uk^$ghide
-@@||kikiers.com^$ghide
-@@||kikiers.com^$script,1p
 @@||cdntvn.pl^$script,domain=player.pl
 @@||player.pl^$cname
 @@||player.pl^$ehide
@@ -10621,7 +10619,9 @@ filmy4wap.co.in##+js(rmnt, script, /h=decodeURIComponent|popundersPerIP|window\.
 !#endif
 leakshaven.com##+js(no-fetch-if, googlesyndication)
 flaticon.com##.soul-p-nsba
-||cdnpk.net^$domain=flaticon.com
+flaticon.com##+js(json-prune-fetch-response, data.[].affiliate_url, , propsToMatch, cdnpk.net/v2/images/search?)
+flaticon.com##+js(no-fetch-if, cdnpk.net/Rest/Media/, war:noop.json)
+||cdnpk.net/sponsor/
 ||api.gettyimages.com/v3/search/images/creative?*referral_destinations$xhr,domain=flaticon.com
 ##.ads-btns
 .gif^$image,domain=vcloud.lol
@@ -19143,7 +19143,7 @@ utopiascans.com##+js(ra, href, [href*="discord"])
 @@/popup*$script,1p,domain=streamingcommunity.*
 streamingcommunity.*##+js(no-xhr-if, /thaudray\.com|putchumt\.com/)
 streamingcommunity.*##+js(set, adBlockDetected, noopFunc)
-streamingcommunity.*##+js(alert-buster)
+streamingcommunity.computer##div.centered.modal
 streamingcommunity.*##^script:has-text(/adblock/i)
 !#if env_firefox
 @@||googletagmanager.com/gtag/js$xhr,domain=streamingcommunity.*
