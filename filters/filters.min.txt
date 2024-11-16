@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Sat, 16 Nov 2024 13:20:17 +0000
-! Diff-Path: ../patches/2024.11.16.808.patch#ublock-filters
+! Last modified: Sat, 16 Nov 2024 16:29:59 +0000
+! Diff-Path: ../patches/2024.11.16.1111.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -6000,9 +6000,9 @@ shrink.*##.banner
 @@||shrink.*^$ghide
 bigbtc.win##div[style^="width:300px;height:250px"]
 @@||onceagain.mooo.com/prebid.js$script,domain=bigbtc.win
-bigbtc.win,cryptofun.space##^script:has-text(/block-adb|-0x|adblock/)
+bigbtc.win,cryptofun.space##^script:has-text(/block-adb|-0x|ad block|alert/)
 !#if !cap_html_filtering
-bigbtc.win,cryptofun.space##+js(rmnt, script, /block-adb|-0x|adblock/)
+bigbtc.win,cryptofun.space##+js(rmnt, script, /block-adb|-0x|ad block|alert/)
 !#endif
 @@||bigbtc.win^$ghide
 bigbtc.win,cryptofun.space###block-adb-enabled, #block-add-enabled
@@ -6794,7 +6794,6 @@ vupload.com##+js(nowoif)
 @@||savetolink.com^$ghide
 @@||blogshinobijawi.blogspot.com^$ghide
 karanapk.com##+js(set, google_jobrunner, true)
-*$frame,3p,domain=ironysub.net
 camhub.world##+js(nostif, visibility, 2000)
 ||camhub.world/player/player_ads.html$frame,1p,redirect=noopframe
 ! camhub.cc anti-adb/popunder
@@ -6802,11 +6801,8 @@ camhub.cc##.table
 camhub.cc##+js(nostif, innerText, 2000)
 camhub.cc##+js(set, flashvars.popunder_url, '')
 camhub.*##.popunder-opener
-! averio.de anti adb
-@@||averio.de^$ghide
 ! moneyhouse.ch anti adb
 moneyhouse.ch##+js(nostif, bait)
-@@||itavisen.no^$ghide
 ! megalink.pro anti adb
 megalink.*##+js(aopr, app_vars.force_disable_adblock)
 megalink.*##+js(set, blurred, false)
@@ -6823,7 +6819,6 @@ mrpiracy.*##+js(aopr, LieDetector)
 mrpiracy.*##+js(nowoif)
 ||mrpiracy.*/images/*.gif$image
 ! canalplus.com anti adb + ads
-@@||canalplus-bo.net/web/canal/*$xhr,domain=canalplus.com
 @@||fwmrm.net/ad/*$xhr,domain=canalplus.com
 *$media,redirect=noopmp3-0.1s,domain=canalplus.com
 @@||bran-media.canalplus.pro^$media,domain=canalplus.com
@@ -6862,22 +6857,6 @@ bitcointalk.org##:xpath(//span[contains(text(),"Advert")]/../..)
 bitcointalk.org##td:has(> span[class]:has-text(Advert))
 bitcointalk.org##.fpcontainer
 fluentu.com##+js(aopr, __eiPb)
-forocoches.com##+js(aopr, pbjsChunk)
-forocoches.com##table.cajasnews > tbody > tr > td > table > tbody > tr:has(> td > a[rel=nofollow]:has-text(Promos))
-forocoches.com##table.cajasprin > tbody > tr > td:has(iframe[src^="//cdn.forocoches.com/lwa/forocoches/fc_promo.html"])
-forocoches.com##table.tborder#threadslist > tbody[id^="threadbits_forum_"] > tr:has(> [id^="td_threadtitle_"][style^="background-color: #"].alt1 > .smallfont > span)
-forocoches.com##table.tborder[id^="table"] > tbody:has(> tr > .alt1 [href][target]):has(strong)
-forocoches.com##table.tborder > tbody:has(> tr > .alt1 [href^="/link.php?url=https%3A%2F%2Fwww.pccomponentes.com"][target])
-forocoches.com##table.tborder > tbody:has(> tr > .alt1 > table > tbody > tr > td > a):has(strong):has(span > font > strong)
-forocoches.com##table.tborder > tbody:has(> tr > .alt1 > table > tbody > tr > td > table > tbody > tr > td > strong > a[target][href])
-forocoches.com##table.tborder[id^="table"] > tbody > tr > .alt1:has(> table[id^="table"] > tbody > tr > td > div[style] > a[style][href^="/foro/"] > strong)
-forocoches.com##table.tborder[id^="table"] > tbody:has(> tr > .alt1 > table[id^="table"] > tbody > tr > td > [href] + span > br + strong)
-forocoches.com###vbnotices
-m.forocoches.com##div.title-forum-display-destacado
-m.forocoches.com##.page > div > ul > li[style^="word-wrap:break-word; word-break:break-word; background-color: #"]
-m.forocoches.com##.page > div > ul[style]:has(> li > div[style] > a[style][href^="/foro/"] > strong)
-m.forocoches.com##ul > li:has([id*="adslot"])
-||cdn.forocoches.com/lwa/forocoches/*_promo.html$frame,1p
 @@||naruto-arena.net^$script,1p
 investmentwatchblog.com##+js(acs, Math, '0x)
 investmentwatchblog.com##+js(aopw, ABD)
@@ -6930,6 +6909,7 @@ gmx.*,web.de##+js(aeld, timeupdate)
 tv2.no##+js(json-prune, enabled, testhide)
 @@||player.clevercast.com/players/video-js/video-js-plugins/videojs.ads.min.js$script,1p
 elamigosedition.com##+js(aost, document.addEventListener, blocker)
+elamigosedition.com##+js(nowoif)
 camcam.cc##+js(no-fetch-if, adsbygoogle)
 ihow.info##+js(nostif, getComputedStyle, 250)
 @@||eldia.com^$ghide
@@ -6977,16 +6957,6 @@ metro.us##+js(set, Adv_ab, false)
 games.metro.us##+js(rpnt, script, "isAdBlockerEnabled":true, "isAdBlockerEnabled":false)
 ! oltnertagblatt .ch anti adb
 @@||nwch.az-cdn.ch^$script,domain=oltnertagblatt.ch
-*$media,domain=series-d.com,redirect=noopmp3-0.1s
-||imgur.com/*.gif$image,domain=series-d.com
-.gif$image,domain=series-d.com
-@@||cdn.jsdelivr.net/npm/*/fuckadblock$script,xhr,domain=series-d.com
-@@||googleusercontent.com^$media,domain=series-d.com
-@@||googlevideo.com/videoplayback$media,domain=series-d.com
-series-d.com##.mb-3.text-center.container-fluid
-@@||series-d.com^$ghide
-! enxf.net anti adb
-enxf.net##+js(acs, $, adblock)
 listenonrepeat.com##+js(acs, googlefc)
 !#if !env_mobile
 news18.com##+js(aeld, scroll, getElementById)
@@ -7024,7 +6994,6 @@ cinemaxxl.de##+js(set, adblock, false)
 cinemaxxl.de##noscript:has-text(Adblocker):remove()
 ||cinemaxxl.de/js/adblock.js$script
 anime-i.com##+js(nostif, nextFunction, 2000)
-||google.com/adsid/integrator.js$script,redirect=noopjs,domain=961thebreeze.com
 cartoonth12.com##.header-ad
 *.gif$domain=cartoonth12.com,image
 @@||jwpcdn.com/player/$script,domain=player.cartoonth12.com
@@ -7037,9 +7006,6 @@ upzone.cc##+js(acs, document.getElementById, undefined)
 ##.header-menu-bottom-ads
 ##.rkads
 ###bt-ads
-*.gif$domain=doo4k.com,image
-*$media,domain=doo4k.com,redirect=noopmp3-0.1s
-@@||cdn.ekcdn.me/video.mp4$media,domain=doo4k.com
 @@||lutontoday.co.uk^$ghide
 @@||kikiers.com^$ghide
 @@||kikiers.com^$script,1p
@@ -7079,8 +7045,6 @@ cariskuy.com##+js(nostif, nextFunction, 450)
 ||domnovrek.com^$3p
 ! blackavelic.com anti adb
 blackavelic.com##+js(aeld, load, 2000)
-series-d.com##+js(nano-sib, curAd)
-series-d.com##+js(nowoif)
 ||googlesyndication.com/pagead/js/adsbygoogle.js$script,redirect=noopjs:10,domain=felanovia.com
 thelanb.com##+js(aeld, load, undefined)
 planetaminecraft.com##+js(set, ab, false)
@@ -10731,6 +10695,7 @@ alocdnnetu.xyz##+js(set, Blob, noopFunc)
 ! flix-wave.lol antiadb
 flix-wave.lol##+js(nostif, offsetHeight)
 flix-wave.lol##+js(aopr, Adcash)
+@@||edumail.icu/storage/js/frontend_loader.js^$script,1p
 ! Link shortener filters go into their own dedicated list
 ! *** filters/ubo-link-shorteners.txt ***
 ! gplinks all domains (gplinks.co/EWu8)
@@ -14272,10 +14237,10 @@ songspk.*##+js(aost, Object, /(?=^(?!.*(https)))/)
 ! ##+js(acs, document.createElement, ;}}};break;case $.)
 moviesnation.*##+js(acs, document.createElement, ;}}};break;case $.)
 ! ##+js(acs, EventTarget.prototype.addEventListener, delete window)
-11xmovies.*,720pflix.*,9animetv.to,10hitmovies.com,advertisertape.com,alphatron.tv,andyday.tv,animeflv.*,animeunity.to,animeyabu.org,anitube.*,arc018.to,ate60vs7zcjhsjo5qgv8.com,buffshub.stream,clickndownload.*,daddylive1.ru,enorme.tv,fastdokan.*,file4go.*,flostreams.xyz,freshwaterdell.com,fsportshd.net,gdflix.*,gdriveplayer.*,hdfilme.*,hdhub4u.*,hdstream.one,jpopsingles.eu,joyousplay.xyz,lato.sx,linkz.wiki,lulu.st,lulustream.com,movies4u.*,movieshubweb.com,moviezwap.*,player.smashy.stream,putlocker.*,sflix.*,soap2day.*,sportsgames.today,sportshub.stream,storynavigation.com,streamblasters.*,streamed.su,streamruby.com,streamtape.*,swiftload.io,subtitlecat.com,tamilprint29.*,thedaddy.to,toonstream.*,topembed.pw,tvsportslive.fr,vidsrc.*,viprow.*,vixcloud.co,vodkapr3mium.com,volokit2.com,ythd.org,watchadsontape.com##+js(acs, EventTarget.prototype.addEventListener, delete window)
+11xmovies.*,720pflix.*,9animetv.to,10hitmovies.com,advertisertape.com,alphatron.tv,andyday.tv,animeflv.*,animeunity.to,animeyabu.org,anitube.*,arc018.to,ask4movie.*,ate60vs7zcjhsjo5qgv8.com,buffshub.stream,clickndownload.*,daddylive1.ru,enorme.tv,fastdokan.*,file4go.*,flostreams.xyz,freshwaterdell.com,fsportshd.net,gdflix.*,gdriveplayer.*,hdfilme.*,hdhub4u.*,hdstream.one,jpopsingles.eu,joyousplay.xyz,lato.sx,linkz.wiki,lulu.st,lulustream.com,movies4u.*,movieshubweb.com,moviezwap.*,player.smashy.stream,putlocker.*,sflix.*,soap2day.*,sportsgames.today,sportshub.stream,storynavigation.com,streamblasters.*,streamed.su,streamruby.com,streamtape.*,swiftload.io,subtitlecat.com,tamilprint29.*,thedaddy.to,toonstream.*,topembed.pw,tvsportslive.fr,vidsrc.*,viprow.*,vixcloud.co,vodkapr3mium.com,volokit2.com,ythd.org,watchadsontape.com##+js(acs, EventTarget.prototype.addEventListener, delete window)
 ! ##^script:has-text('{delete window[')
 !#if cap_html_filtering
-11xmovies.*,buffshub.stream,cinego.tv,lulustream.com,sportshub.stream,streamblasters.*,streamed.su,topcinema.cam,topembed.pw,vixcloud.co##^script:has-text('{delete window[')
+11xmovies.*,ask4movie.*,buffshub.stream,cinego.tv,lulustream.com,sportshub.stream,streamblasters.*,streamed.su,topcinema.cam,topembed.pw,vixcloud.co##^script:has-text('{delete window[')
 !#else
 11xmovies.*,buffshub.stream,cinego.tv,lulustream.com,sportshub.stream,streamblasters.*,topcinema.cam,topembed.pw##+js(rmnt, script, '{delete window[')
 !#endif
@@ -14316,6 +14281,7 @@ file4go.net##+js(no-xhr-if, outbrain)
 ||flaxdescale.com^
 ||go.bundlebyte.net^
 ||leesaushoah.net^
+||leewibaijoa.com^$doc,popup
 ||nozoakamsaun.net^
 ||ostupsaury.net^
 ||psaussasta.net^
@@ -16389,7 +16355,8 @@ embed.nana2play.com##+js(nostif, debugger)
 embed.nana2play.com##+js(nano-stb, load_ads)
 ||googles.video^
 ||ad.mail.ru^$3p
-ask4movie.*##+js(aopr, mm)
+ask4movie.*##+js(aopr, AaDetector)
+ask4movie.*##+js(nowoif)
 riotbits.com##+js(aost, String.prototype.charCodeAt, ai_)
 easymp3converter.com##+js(nowoif, !yt2api)
 easymp3converter.com##body > div[style$="z-index: 300000;"]
