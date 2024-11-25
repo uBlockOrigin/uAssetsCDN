@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Sun, 24 Nov 2024 12:57:28 +0000
-! Diff-Path: ../patches/2024.11.24.1282.patch#ublock-filters
+! Last modified: Mon, 25 Nov 2024 01:12:13 +0000
+! Diff-Path: ../patches/2024.11.25.184.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -66,9 +66,9 @@ ze.tt,zeit.de##+js(nostif, .call(null), 10)
 meineorte.com,osthessen-news.de,techadvisor.com,focus.de##+js(nostif, .call(null))
 kicker.de##+js(set, ov.advertising.tisoomi.loadScript, noopFunc)
 !#if cap_html_filtering
-alpin.de,boersennews.de,chefkoch.de,chip.de,clever-tanken.de,desired.de,donnerwetter.de,fanfiktion.de,focus.de,formel1.de,frustfrei-lernen.de,gewinnspiele.tv,giga.de,gut-erklaert.de,kino.de,messen.de,nickles.de,nordbayern.de,spielfilm.de,teltarif.de,unsere-helden.com,weltfussball.at,watson.de,moviepilot.de,mactechnews.de,sport1.de##^script:has-text(DisplayAcceptableAdIfAdblocked)
+alpin.de,boersennews.de,chefkoch.de,chip.de,clever-tanken.de,desired.de,donnerwetter.de,fanfiktion.de,focus.de,formel1.de,frustfrei-lernen.de,gewinnspiele.tv,giga.de,gut-erklaert.de,kino.de,messen.de,nickles.de,nordbayern.de,spielfilm.de,teltarif.de,unsere-helden.com,weltfussball.at,watson.de,moviepilot.de,mactechnews.de,sport1.de,welt.de##^script:has-text(DisplayAcceptableAdIfAdblocked)
 !#else
-alpin.de,boersennews.de,chefkoch.de,chip.de,clever-tanken.de,desired.de,donnerwetter.de,fanfiktion.de,focus.de,formel1.de,frustfrei-lernen.de,gewinnspiele.tv,giga.de,gut-erklaert.de,kino.de,messen.de,nickles.de,nordbayern.de,spielfilm.de,teltarif.de,unsere-helden.com,weltfussball.at,watson.de,moviepilot.de,mactechnews.de,sport1.de##+js(rmnt, script, DisplayAcceptableAdIfAdblocked)
+alpin.de,boersennews.de,chefkoch.de,chip.de,clever-tanken.de,desired.de,donnerwetter.de,fanfiktion.de,focus.de,formel1.de,frustfrei-lernen.de,gewinnspiele.tv,giga.de,gut-erklaert.de,kino.de,messen.de,nickles.de,nordbayern.de,spielfilm.de,teltarif.de,unsere-helden.com,weltfussball.at,watson.de,moviepilot.de,mactechnews.de,sport1.de,welt.de##+js(rmnt, script, DisplayAcceptableAdIfAdblocked)
 !#endif
 ||giga.de/special/gutscheine/*.png$script,1p
 ||kino.de/mages/*.png$script,1p
@@ -18510,7 +18510,8 @@ beststremo.com##+js(nostif, 0x)
 ! mypornhere.com popup, ads
 mypornhere.com##+js(set, flashvars.adv_start_html, '')
 mypornhere.com##.item[style="text-align:center !important;"]
-welt.de##[id^="outbrain_widget_"].OUTBRAIN[data-src]:has(> .ob-widget > .ob-widget-items-container > .ob-dynamic-rec-container > a[data-adv-id][rel*="sponsored"])
+welt.de##[id^="outbrain_widget_"].OUTBRAIN[data-src] > .ob-widget > .ob-cards > [id^="outbrain_widget_"].OUTBRAIN[data-src]
+welt.de##[id^="outbrain_widget_"].OUTBRAIN[data-src] > .ob-widget > .ob-widget-header:has(> span.ob-widget-text:has-text(MEHR AUS DEM NETZ))
 welt.de##.c-ad-container
 welt.de##+js(ra, onmousedown, .ob-dynamic-rec-link, stay)
 welt.de##.q-advertisement-banner
@@ -19195,6 +19196,10 @@ streamingcommunity.*##^script:has-text(/adblock/i)
 !#if !env_firefox
 ||googletagmanager.com^$xhr,domain=streamingcommunity.*,redirect-rule=noop.js
 !#endif
+streamingcommunity.*##.slide-banner
+streamingcommunity.*##+js(aeld, click, popName)
+streamingcommunity.*##+js(nowoif, _blank)
+||streamingcommunity.*/slide-banner/$all
 ! tennistream. com => players => popups
 larsenik.com##+js(nowoif)
 /main.js$script,3p,domain=criptologico.com
@@ -19607,7 +19612,9 @@ canale.live##+js(nosiif, href)
 /loader.min.js$xhr,script,domain=dogdrip.net|infinityfree.com|thestar.co.uk|yorkshirepost.co.uk|smsonline.cloud,replace=/function [\$]{1}\([a-z]{1,2},[a-z]{1,2},[a-z]{1,2}\)\{.*?\)\]\([a-z]{1,2}\)\}\}function /function /g
 ||thestar.co.uk/_build/main.$script,1p,replace=/,adshield\:\w{2}//
 ||yorkshirepost.co.uk/_build/main.$script,1p,replace=/,adshield\:\w{2}//
-infinityfree.com##+js(trusted-replace-argument, HTMLScriptElement.prototype.setAttribute, 1, json:"https://html-load.com/loader.min.js#", condition, /-load\.com\/loader\.min\.js$/)
+-load.com/loader.min.js|$important,domain=dogdrip.net|infinityfree.com|smsonline.cloud
+dogdrip.net,infinityfree.com,smsonline.cloud##+js(trusted-replace-argument, HTMLScriptElement.prototype.setAttribute, 1, json:"https://html-load.com/loader.min.js#", condition, /html-load\.com\/loader\.min\.js$/)
+dogdrip.net,infinityfree.com,smsonline.cloud##+js(trusted-replace-argument, HTMLScriptElement.prototype.setAttribute, 1, json:"https://css-load.com/loader.min.js#", condition, /css-load\.com\/loader\.min\.js$/)
 !#else
 *$doc,csp=script-src-attr 'none',to=badmouth1.com|freemcserver.net
 ||html-load.com/loader.min.js$domain=badmouth1.com|freemcserver.net
