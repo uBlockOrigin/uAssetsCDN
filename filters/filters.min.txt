@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Tue, 26 Nov 2024 08:28:58 +0000
-! Diff-Path: ../patches/2024.11.26.513.patch#ublock-filters
+! Last modified: Tue, 26 Nov 2024 12:02:31 +0000
+! Diff-Path: ../patches/2024.11.26.814.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -3943,8 +3943,6 @@ syracusefan.com##+js(acs, $, initDetection)
 @@||promods.net/kampyle.js$script,1p
 argio-logic.net##+js(acs, document.getElementById, alert)
 appstore-discounts.com##+js(acs, document.getElementById, undefined)
-onlineatlas.us#@#ins.adsbygoogle[data-ad-slot]
-onlineatlas.us#@#ins.adsbygoogle[data-ad-client]
 ohorse.com##+js(aopw, check)
 @@||tabooporns.com^$ghide
 player.tabooporns.com##+js(aopr, BetterJsPop)
@@ -9011,6 +9009,9 @@ dexterclearance.com#@#ins.adsbygoogle[data-ad-slot]
 dexterclearance.com#@#ins.adsbygoogle[data-ad-client]
 dexterclearance.com##.adsbygoogle:style(max-height: 1px !important;)
 dexterclearance.com##+js(rmnt, script, adBlock)
+onlineatlas.us#@#ins.adsbygoogle[data-ad-slot]
+onlineatlas.us#@#ins.adsbygoogle[data-ad-client]
+onlineatlas.us##+js(alert-buster)
 ! END: Rules from filters.txt
 ! START: Regional lists
 ! <<<<< czech slovak filters >>>>>
@@ -19629,9 +19630,8 @@ canale.live##+js(nosiif, href)
 /loader.min.js$xhr,script,domain=dogdrip.net|infinityfree.com|thestar.co.uk|yorkshirepost.co.uk|smsonline.cloud,replace=/function [\$]{1}\([a-z]{1,2},[a-z]{1,2},[a-z]{1,2}\)\{.*?\)\]\([a-z]{1,2}\)\}\}function /function /g
 ||thestar.co.uk/_build/main.$script,1p,replace=/,adshield\:\w{2}//
 ||yorkshirepost.co.uk/_build/main.$script,1p,replace=/,adshield\:\w{2}//
--load.com/loader.min.js|$important,domain=dogdrip.net|infinityfree.com|smsonline.cloud
-dogdrip.net,infinityfree.com,smsonline.cloud##+js(trusted-replace-argument, HTMLScriptElement.prototype.setAttribute, 1, json:"https://html-load.com/loader.min.js#", condition, /html-load\.com\/loader\.min\.js$/)
-dogdrip.net,infinityfree.com,smsonline.cloud##+js(trusted-replace-argument, HTMLScriptElement.prototype.setAttribute, 1, json:"https://css-load.com/loader.min.js#", condition, /css-load\.com\/loader\.min\.js$/)
+*$doc,to=dogdrip.net|infinityfree.com|smsonline.cloud,replace=/data-sdk/defer data-sdk/
+@@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js|$script,xhr,domain=dogdrip.net|infinityfree.com|smsonline.cloud
 !#else
 *$doc,csp=script-src-attr 'none',to=badmouth1.com|freemcserver.net
 ||html-load.com/loader.min.js$domain=badmouth1.com|freemcserver.net
@@ -20461,7 +20461,7 @@ snaptik.app##+js(aost, $, openAdsModal)
 jiocinema.com##ins[id^="jioads"]
 ||viacom18.moloco.com/adserver/v1$xhr,domain=jiocinema.com
 ||moloco-cr.jiocinema.com/creative/$xhr,1p
-||imasdk.googleapis.com/js/sdkloader/ima3.js$script,redirect-rule=google-ima.js,domain=jiocinema.com
+||imasdk.googleapis.com/js/sdkloader/ima3.js$script,redirect=google-ima.js,domain=jiocinema.com
 ! unsupported browser
 jiocinema.com##+js(set, navigator.brave, undefined)
 ! anti adb koamnewsnow. com
@@ -20496,6 +20496,7 @@ www.chip.de###CR[class="Downloads-Detail"] > #G32 > #M1 > [class="wrapper-safe"]
 www.chip.de###CR[class="Downloads-Detail"] > #G32 > #M1 > [class="wrapper-safe"] > [class="fb mt-lg"] > [class="fb-col-lg-4 is-hidden-sm is-hidden-md"] > section[class="mt-md"] > h3 + table:has(img[src*="https://im.chip.de/ii/"])
 www.chip.de###CR[class="Downloads-Detail"] > #G32 > #M1 > div[class]:has(> [class="ar-1-1 bg-gray-l"] > a[title^="Zum Download: "] > img[src*="https://im.chip.de/ii/"])
 www.chip.de###CR[class="Downloads-Detail"] > #G32 > #M1 > div:not([class], [id]):has(> [class] > [class] > .bg-gray-l a img[src*="https://im.chip.de/ii/"])
+www.chip.de###CR[class="Downloads-Detail"] > #G32 > #M1 > div[class]:has(> div[class][style="min-height: 250px;"] > ul.is-separated a img[src*="https://im.chip.de/ii/"])
 www.chip.de###CR[class="Downloads-Getfile"] > #G32 > #M1 > *:not(section[class="wrapper-safe mt-md ft-alts"]) a[href^="https://www.chip.de/downloads/"][title]:has(img[src*="https://im.chip.de/ii/"][alt][width][data-was-processed])
 www.chip.de###CR[class="Downloads-Select"] > #G32 > #M1 > div:not([class], [id]):has(> [class] > .bg-gray-l a img[src*="https://im.chip.de/ii/"])
 www.chip.de###CR[class="Downloads-Select"] > #G32 > #M1 > [class="wrapper-safe"] > [class="fb mt-md"] > [class="fb-col-lg-4 is-hidden-sm is-hidden-md"] > [class]:has(img[src*="https://im.chip.de/ii/"] + div > span[style^="width: "])
@@ -20504,9 +20505,11 @@ www.chip.de###CR[class="Downloads-Select"] > #G32 > #M1 > div:not([class="wrappe
 www.chip.de###CR[class="Downloads-Getfile"] > #G32 > #M1 > div:not([class="wrapper-safe"]) [class="ar-1-1 bg-gray-l"]:has(> a[title^="Zum Download: "] > img[src*="https://im.chip.de/ii/"])
 ! restore speed (the anti adblock script causing lag spikes)
 !#if cap_html_filtering
-www.chip.de##^script:has-text(/\] \+ 1\) \}\}\)\;/)
+www.chip.de##^script:has-text(/\+\+\) \{  \} \}/)
+www.chip.de##^script:has-text(?metric=transit.counter&key=fail_redirect&tags=)
 !#else
-www.chip.de##+js(rmnt, script, /\] \+ 1\) \}\}\)\;/)
+www.chip.de##+js(rmnt, script, /\+\+\) \{  \} \}/)
+www.chip.de##+js(rmnt, script, ?metric=transit.counter&key=fail_redirect&tags=)
 !#endif
 ||nah-versorger.de^$3p
 ||stopundstart.de^$3p
@@ -23193,8 +23196,7 @@ audiotools.pro,audizine.com,blackenterprise.com,cheatsheet.com,cwtv.com,esportst
 familyminded.com,foxvalleyfoodie.com,merriam-webster.com,news.com.au,playstationlifestyle.net,sportsnaut.com,tempumail.com,toledoblade.com##+js(aopr, __cmpGdprAppliesGlobally)
 pc-builds.com,qtoptens.com,reuters.com,today.com,videogamer.com,wrestlinginc.com##+js(set, admiral, noopFunc)
 !#if cap_html_filtering
-abc17news.com,bailiwickexpress.com,barnsleychronicle.com,chaptercheats.com,commercialobserver.com,competentedigitale.ro##^script:has-text('"v4ac1eiZr0"')
-freeconvert.com,fsm-media.com,funtasticlife.com,fwmadebycarli.com##^script:has-text('"v4ac1eiZr0"')
+abc17news.com,bailiwickexpress.com,barnsleychronicle.com,chaptercheats.com,commercialobserver.com,competentedigitale.ro,freeconvert.com##^script:has-text('"v4ac1eiZr0"')
 gamerant.com,gfinityesports.com,givemesport.com,gulflive.com##^script:has-text('"v4ac1eiZr0"')
 helloflo.com,homeglowdesign.com,honeygirlsworld.com,hotcars.com,howtogeek.com##^script:has-text('"v4ac1eiZr0"')
 imgur.com,insider-gaming.com,insurancejournal.com##^script:has-text('"v4ac1eiZr0"')
@@ -23213,10 +23215,10 @@ cheatsheet.com,pwinsider.com##^script:has-text(admiral)
 bethcakes.com,betweenenglandandiowa.com,bgr.com,blogher.com,blu-ray.com,bluegraygal.com,briefeguru.de,brobible.com##^script:has-text('"").split(",")[4]')
 cbsnews.com,cbssports.com,celiacandthebeast.com,cleveland.com##^script:has-text('"").split(",")[4]')
 dailykos.com,dailyvoice.com,decider.com,didyouknowfacts.com,dogtime.com##^script:has-text('"").split(",")[4]')
-eater.com,eldiariony.com,femestella.com,footwearnews.com,free-power-point-templates.com,frogsandsnailsandpuppydogtail.com,inc.com,indiewire.com,inquisitr.com,intouchweekly.com,kcrg.com,kentucky.com,knowyourmeme.com,last.fm,lifeandstylemag.com,mandatory.com,masslive.com,mlive.com,nbcsports.com,news.com.au,nj.com,nypost.com,oregonlive.com,pagesix.com,pennlive.com,rollingstone.com,sbnation.com,sheknows.com,sneakernews.com,sport-fm.gr,stylecaster.com,syracuse.com,tastingtable.com,thecw.com,themarysue.com,tvline.com,usmagazine.com,wimp.com,yourcountdown.to##^script:has-text('"").split(",")[4]')
+eater.com,eldiariony.com,femestella.com,footwearnews.com,free-power-point-templates.com,frogsandsnailsandpuppydogtail.com,funtasticlife.com,fwmadebycarli.com##^script:has-text('"").split(",")[4]')
+inc.com,indiewire.com,inquisitr.com,intouchweekly.com,kcrg.com,kentucky.com,knowyourmeme.com,last.fm,lifeandstylemag.com,mandatory.com,masslive.com,mlive.com,nbcsports.com,news.com.au,nj.com,nypost.com,oregonlive.com,pagesix.com,pennlive.com,rollingstone.com,sbnation.com,sheknows.com,sneakernews.com,sport-fm.gr,stylecaster.com,syracuse.com,tastingtable.com,thecw.com,themarysue.com,tvline.com,usmagazine.com,wallup.net,wimp.com,yourcountdown.to##^script:has-text('"").split(",")[4]')
 !#else
-abc17news.com,bailiwickexpress.com,barnsleychronicle.com,chaptercheats.com,commercialobserver.com,competentedigitale.ro##+js(rmnt, script, '"v4ac1eiZr0"')
-freeconvert.com,fsm-media.com,funtasticlife.com,fwmadebycarli.com##+js(rmnt, script, '"v4ac1eiZr0"')
+abc17news.com,bailiwickexpress.com,barnsleychronicle.com,chaptercheats.com,commercialobserver.com,competentedigitale.ro,freeconvert.com##+js(rmnt, script, '"v4ac1eiZr0"')
 gamerant.com,gfinityesports.com,givemesport.com,gulflive.com##+js(rmnt, script, '"v4ac1eiZr0"')
 helloflo.com,homeglowdesign.com,honeygirlsworld.com,hotcars.com,howtogeek.com##+js(rmnt, script, '"v4ac1eiZr0"')
 imgur.com,insider-gaming.com,insurancejournal.com##+js(rmnt, script, '"v4ac1eiZr0"')
@@ -23235,7 +23237,8 @@ cheatsheet.com,pwinsider.com##+js(rmnt, script, admiral)
 bethcakes.com,betweenenglandandiowa.com,bgr.com,blogher.com,blu-ray.com,bluegraygal.com,briefeguru.de,brobible.com##+js(rmnt, script, '"").split(",")[4]')
 cbsnews.com,cbssports.com,celiacandthebeast.com,cleveland.com##+js(rmnt, script, '"").split(",")[4]')
 dailykos.com,dailyvoice.com,decider.com,didyouknowfacts.com,dogtime.com##+js(rmnt, script, '"").split(",")[4]')
-eater.com,eldiariony.com,femestella.com,footwearnews.com,free-power-point-templates.com,frogsandsnailsandpuppydogtail.com,inc.com,indiewire.com,inquisitr.com,intouchweekly.com,kcrg.com,kentucky.com,knowyourmeme.com,last.fm,lifeandstylemag.com,mandatory.com,masslive.com,mlive.com,nbcsports.com,news.com.au,nj.com,nypost.com,oregonlive.com,pagesix.com,pennlive.com,rollingstone.com,sbnation.com,sheknows.com,sneakernews.com,sport-fm.gr,stylecaster.com,syracuse.com,tastingtable.com,thecw.com,themarysue.com,tvline.com,usmagazine.com,wimp.com,yourcountdown.to##+js(rmnt, script, '"").split(",")[4]')
+eater.com,eldiariony.com,femestella.com,footwearnews.com,free-power-point-templates.com,frogsandsnailsandpuppydogtail.com,funtasticlife.com,fwmadebycarli.com##+js(rmnt, script, '"").split(",")[4]')
+inc.com,indiewire.com,inquisitr.com,intouchweekly.com,kcrg.com,kentucky.com,knowyourmeme.com,last.fm,lifeandstylemag.com,mandatory.com,masslive.com,mlive.com,nbcsports.com,news.com.au,nj.com,nypost.com,oregonlive.com,pagesix.com,pennlive.com,rollingstone.com,sbnation.com,sheknows.com,sneakernews.com,sport-fm.gr,stylecaster.com,syracuse.com,tastingtable.com,thecw.com,themarysue.com,tvline.com,usmagazine.com,wallup.net,wimp.com,yourcountdown.to##+js(rmnt, script, '"").split(",")[4]')
 !#endif
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$domain=givemesport.com,important
 superherohype.com##a.wp-block-button__link:is([href^="https://amzn.to/"], [href^="https://www.amazon.com/"])

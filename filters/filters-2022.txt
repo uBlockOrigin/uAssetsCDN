@@ -1,5 +1,5 @@
 ! Title: uBlock filters (2022)
-! Last modified: Mon, 25 Nov 2024 15:11:02 +0000
+! Last modified: Tue, 26 Nov 2024 11:55:13 +0000
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -3567,9 +3567,8 @@ canale.live##+js(nosiif, href)
 /loader.min.js$xhr,script,domain=dogdrip.net|infinityfree.com|thestar.co.uk|yorkshirepost.co.uk|smsonline.cloud,replace=/function [\$]{1}\([a-z]{1,2},[a-z]{1,2},[a-z]{1,2}\)\{.*?\)\]\([a-z]{1,2}\)\}\}function /function /g
 ||thestar.co.uk/_build/main.$script,1p,replace=/,adshield\:\w{2}//
 ||yorkshirepost.co.uk/_build/main.$script,1p,replace=/,adshield\:\w{2}//
--load.com/loader.min.js|$important,domain=dogdrip.net|infinityfree.com|smsonline.cloud
-dogdrip.net,infinityfree.com,smsonline.cloud##+js(trusted-replace-argument, HTMLScriptElement.prototype.setAttribute, 1, json:"https://html-load.com/loader.min.js#", condition, /html-load\.com\/loader\.min\.js$/)
-dogdrip.net,infinityfree.com,smsonline.cloud##+js(trusted-replace-argument, HTMLScriptElement.prototype.setAttribute, 1, json:"https://css-load.com/loader.min.js#", condition, /css-load\.com\/loader\.min\.js$/)
+*$doc,to=dogdrip.net|infinityfree.com|smsonline.cloud,replace=/data-sdk/defer data-sdk/
+@@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js|$script,xhr,domain=dogdrip.net|infinityfree.com|smsonline.cloud
 !#else
 *$doc,csp=script-src-attr 'none',to=badmouth1.com|freemcserver.net
 ||html-load.com/loader.min.js$domain=badmouth1.com|freemcserver.net
@@ -4963,7 +4962,7 @@ jiocinema.com##ins[id^="jioads"]
 ||viacom18.moloco.com/adserver/v1$xhr,domain=jiocinema.com
 ||moloco-cr.jiocinema.com/creative/$xhr,1p
 ! https://github.com/uBlockOrigin/uAssets/issues/22431
-||imasdk.googleapis.com/js/sdkloader/ima3.js$script,redirect-rule=google-ima.js,domain=jiocinema.com
+||imasdk.googleapis.com/js/sdkloader/ima3.js$script,redirect=google-ima.js,domain=jiocinema.com
 ! unsupported browser
 jiocinema.com##+js(set, navigator.brave, undefined)
 
@@ -5003,6 +5002,7 @@ www.chip.de###CR[class="Downloads-Detail"] > #G32 > #M1 > [class="wrapper-safe"]
 www.chip.de###CR[class="Downloads-Detail"] > #G32 > #M1 > [class="wrapper-safe"] > [class="fb mt-lg"] > [class="fb-col-lg-4 is-hidden-sm is-hidden-md"] > section[class="mt-md"] > h3 + table:has(img[src*="https://im.chip.de/ii/"])
 www.chip.de###CR[class="Downloads-Detail"] > #G32 > #M1 > div[class]:has(> [class="ar-1-1 bg-gray-l"] > a[title^="Zum Download: "] > img[src*="https://im.chip.de/ii/"])
 www.chip.de###CR[class="Downloads-Detail"] > #G32 > #M1 > div:not([class], [id]):has(> [class] > [class] > .bg-gray-l a img[src*="https://im.chip.de/ii/"])
+www.chip.de###CR[class="Downloads-Detail"] > #G32 > #M1 > div[class]:has(> div[class][style="min-height: 250px;"] > ul.is-separated a img[src*="https://im.chip.de/ii/"])
 www.chip.de###CR[class="Downloads-Getfile"] > #G32 > #M1 > *:not(section[class="wrapper-safe mt-md ft-alts"]) a[href^="https://www.chip.de/downloads/"][title]:has(img[src*="https://im.chip.de/ii/"][alt][width][data-was-processed])
 www.chip.de###CR[class="Downloads-Select"] > #G32 > #M1 > div:not([class], [id]):has(> [class] > .bg-gray-l a img[src*="https://im.chip.de/ii/"])
 www.chip.de###CR[class="Downloads-Select"] > #G32 > #M1 > [class="wrapper-safe"] > [class="fb mt-md"] > [class="fb-col-lg-4 is-hidden-sm is-hidden-md"] > [class]:has(img[src*="https://im.chip.de/ii/"] + div > span[style^="width: "])
@@ -5011,9 +5011,11 @@ www.chip.de###CR[class="Downloads-Select"] > #G32 > #M1 > div:not([class="wrappe
 www.chip.de###CR[class="Downloads-Getfile"] > #G32 > #M1 > div:not([class="wrapper-safe"]) [class="ar-1-1 bg-gray-l"]:has(> a[title^="Zum Download: "] > img[src*="https://im.chip.de/ii/"])
 ! restore speed (the anti adblock script causing lag spikes)
 !#if cap_html_filtering
-www.chip.de##^script:has-text(/\] \+ 1\) \}\}\)\;/)
+www.chip.de##^script:has-text(/\+\+\) \{  \} \}/)
+www.chip.de##^script:has-text(?metric=transit.counter&key=fail_redirect&tags=)
 !#else
-www.chip.de##+js(rmnt, script, /\] \+ 1\) \}\}\)\;/)
+www.chip.de##+js(rmnt, script, /\+\+\) \{  \} \}/)
+www.chip.de##+js(rmnt, script, ?metric=transit.counter&key=fail_redirect&tags=)
 !#endif
 ||nah-versorger.de^$3p
 ||stopundstart.de^$3p
