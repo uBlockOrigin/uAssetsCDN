@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Thu, 28 Nov 2024 09:44:59 +0000
-! Diff-Path: ../patches/2024.11.28.631.patch#ublock-filters
+! Last modified: Thu, 28 Nov 2024 15:16:07 +0000
+! Diff-Path: ../patches/2024.11.28.927.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -180,8 +180,6 @@ tvtoday.de##+js(nosiif, fireEvent, 500)
 chip.de##.js_download_button:has(> a.Download-Button--Free[href*="withinstaller"][href*="lastchanged"])
 chip.de##+js(json-prune, enabled, force_disabled)
 ##[href*="/afu.php"]
-kisscartoon.*##+js(aeld, mousedown, clientX)
-kisscartoon.*###upgrade_pop
 blackmod.net##.js-notices.notices--bottom_fixer.notices
 onrpg.com##a[href*="mmo-it.com/"]
 onrpg.com##[href^="http://server.cpmstar.com/click.aspx"]
@@ -2023,7 +2021,8 @@ tubemania.org##+js(nowoif)
 wp-time.com##a[href^="https://goo.gl/"]:has(img)
 wp-time.com###pop-ad-wrap
 #@#.reklama
-~offmoto.com##.reklama:not(.ads)
+##.reklama:not(.ads)
+offmoto.com#@#.reklama:not(.ads)
 cumlouder.com##+js(aopw, ExoLoader)
 nme.com##.advert:style(z-index: -999999 !important;)
 nme.com###wrapper:style(padding-top: 0 !important;)
@@ -10733,7 +10732,7 @@ live-sport.duktek.pro###overlay
 live-sport.duktek.pro###cloudUrl
 live-sport.duktek.pro##[href*="?key"][target="_blank"]:remove-attr(href)
 *$doc,ipaddress=199.59.243.227,to=~parked.domain|animeseries.so|audiobookbay.li|hhdstreams.club|janitor.ai|kahoo.it|pix4link.com|skipthecommericals.xyz|sshagan.net
-###target.pk-page-ready > #pk-status-message
+###target.pk-page-ready #pk-status-message
 akirabox.com##+js(aeld, click, Ads)
 akirabox.com##+js(nowoif, _blank)
 ||shareease.link^$all
@@ -10804,11 +10803,18 @@ voz.vn##.p-pageWrapper:style(margin-bottom: 0px !important;)
 lk21official.pics##+js(set-cookie, lk21-player-dona, 1)
 lk21official.pics###top-b
 iqksisgw.xyz##+js(nostif, "document['\x")
+stream.hownetwork.xyz##+js(disable-newtab-links)
 /assets/jquery/p2anime.js?v=
+||kind-lecture.com^
 bestcam.tv##+js(rmnt, script, pre_roll_url)
 ||ma3ion.com^
 streamruby.com##+js(rmnt, script, wpadmngr.com)
 ||astirduller.com^
+they.tube##+js(set, detectedAdblock, noopFunc)
+videocdnal24.xyz##+js(nowoif)
+||bidster.net^
+||skeatrighter.com^
+filma24.band##.textwidget
 ! Link shortener filters go into their own dedicated list
 ! *** filters/ubo-link-shorteners.txt ***
 ! gplinks all domains (gplinks.co/EWu8)
@@ -20319,7 +20325,7 @@ model-viewer.com##.adsbygoogle:style(width:11px;height:11px)
 model-viewer.com##.adsbygoogle:upward(1):style(min-height:11px!important;height:11px!important;opacity:0)
 mangapt.com##+js(nostif, show)
 onscreensvideo.com##+js(aopr, __Y)
-||imasdk.googleapis.com/js/sdkloader/ima3.js$script,redirect-rule=google-ima.js,domain=ketchuptv.com
+||imasdk.googleapis.com/js/sdkloader/ima3.js$script,redirect=google-ima.js,domain=ketchuptv.com
 @@||playstore.pw^$ghide
 playstore.pw###page > center:has([href="#down"]) ~ #content .entry-content > :not(center)
 playstore.pw###targetdiv:style(display: inline !important;)
@@ -20337,17 +20343,16 @@ sportstiger.com##.midd_ads
 sportstiger.com##.fullads_banner
 sportstiger.com##[class^="customHTML-ads"]
 sportstiger.com##body:style(overflow: auto !important;)
-||js.wpadmngr.com/static/adManager.js$script,redirect-rule=noopjs
+||js.wpadmngr.com/static/adManager.js$script,redirect=noopjs
 picgiraffe.com##+js(nostif, showModal)
 ! picyield. com popups / anti adb
 picyield.com##+js(aost, document.body.appendChild)
 picyield.com##.adbwarning
 maxgaming.fi##+js(aeld, contextmenu)
-||mail-ads.google.com^$xhr,domain=rxd-mods.xyz,redirect-rule=nooptext
 javseen.tv##+js(aopr, jsPopunder)
 ||javseen.tv/fire2/popup*$script,1p
 @@||ad.71i.de/somtag/loader/loader.js$script,domain=video.sat1.de|wetter.com
-||ad.71i.de/somtag/config/$script,redirect-rule=noopjs,domain=sat1.de|wetter.com
+||ad.71i.de/somtag/config/$script,redirect=noopjs,domain=sat1.de|wetter.com
 ||player-feedback.p7s1video.net/pf/$script
 yourmomdoesporn.com#@#[data-revive-zoneid]
 freehdinterracialporn.in##+js(aopr, decodeURI)
@@ -20366,8 +20371,8 @@ soranews24.com##.ads-relatedbottom:not(.ad300x250)
 @@||fundingchoicesmessages.google.com/i/pub-*$script,domain=soranews24.com
 @@||fundingchoicesmessages.google.com/f/$script,domain=soranews24.com
 @@||tpc.googlesyndication.com/simgad/$xhr,domain=soranews24.com
-||googlesyndication.com/safeframe/$frame,redirect-rule=noop.html,domain=soranews24.com
-||tpc.googlesyndication.com^$image,redirect-rule=1x1.gif,domain=soranews24.com
+||googlesyndication.com/safeframe/$frame,redirect=noop.html,domain=soranews24.com
+||tpc.googlesyndication.com^$image,redirect=1x1.gif,domain=soranews24.com
 soranews24.com#@#.ad
 soranews24.com###aw0[on="tap:exit-api.exit(target='landingPage',_googClickLocation='2')"]
 soranews24.com###aw0[onclick="ha('aw0')"]
@@ -20448,7 +20453,7 @@ hdmoviesflix.*##+js(aopw, p$00a)
 @@||meteo365.es^$ghide
 meteo365.es##ins.adsbygoogle
 uploadgig.com##+js(nowoif)
-||adoto.net/dashboard/display/items.php$xhr,redirect-rule=nooptext
+||adoto.net/dashboard/display/items.php$xhr,redirect=nooptext
 soltoshindo.com##+js(aopr, Swal.fire)
 soltoshindo.com##+js(set, console.clear, noopFunc)
 cutty.app##+js(set, blurred, false)
@@ -22903,7 +22908,7 @@ bangpremier.com##.presentation-space-m-panel
 bangpremier.com###my-content:style(display: block !important;)
 ! S_Popup sites
 moviesapi.club##+js(aopr, my_pop)
-bestx.stream,moviesapi.club##+js(nowoif)
+bestx.stream,boosterx.stream,moviesapi.club##+js(nowoif)
 moviesapi.club,bestx.stream,boosterx.stream,watchx.top##+js(no-fetch-if, googlesyndication)
 animesaga.in,moviesapi.club,bestx.stream,watchx.top##+js(set, S_Popup, 10)
 bestx.stream,boosterx.stream,moviesapi.club,stream.anplay.in###video_player ~ div[id]:has(> div[style^="position:fixed;inset:0px;z-index"] > a[target="_blank"])
@@ -23232,7 +23237,6 @@ familyminded.com,foxvalleyfoodie.com,merriam-webster.com,news.com.au,playstation
 pc-builds.com,qtoptens.com,reuters.com,today.com,videogamer.com,wrestlinginc.com##+js(set, admiral, noopFunc)
 !#if cap_html_filtering
 abc17news.com,bailiwickexpress.com,barnsleychronicle.com,chaptercheats.com,commercialobserver.com,competentedigitale.ro,freeconvert.com##^script:has-text('"v4ac1eiZr0"')
-gamerant.com,gfinityesports.com,givemesport.com,gulflive.com##^script:has-text('"v4ac1eiZr0"')
 helloflo.com,homeglowdesign.com,honeygirlsworld.com,hotcars.com,howtogeek.com##^script:has-text('"v4ac1eiZr0"')
 imgur.com,insider-gaming.com,insurancejournal.com##^script:has-text('"v4ac1eiZr0"')
 jasminemaria.com,kion546.com,lehighvalleylive.com,lettyskitchen.com,lifeinleggings.com,liveandletsfly.com,lizzieinlace.com,localnews8.com,lonestarlive.com##^script:has-text('"v4ac1eiZr0"')
@@ -23251,10 +23255,9 @@ bethcakes.com,betweenenglandandiowa.com,bgr.com,blogher.com,blu-ray.com,bluegray
 cbsnews.com,cbssports.com,celiacandthebeast.com,cleveland.com##^script:has-text('"").split(",")[4]')
 dailykos.com,dailyvoice.com,decider.com,didyouknowfacts.com,dogtime.com##^script:has-text('"").split(",")[4]')
 eater.com,eldiariony.com,femestella.com,footwearnews.com,free-power-point-templates.com,frogsandsnailsandpuppydogtail.com,funtasticlife.com,fwmadebycarli.com##^script:has-text('"").split(",")[4]')
-inc.com,indiewire.com,inquisitr.com,intouchweekly.com,kcrg.com,kentucky.com,knowyourmeme.com,last.fm,lifeandstylemag.com,mandatory.com,masslive.com,mlive.com,nbcsports.com,news.com.au,nj.com,nypost.com,oregonlive.com,pagesix.com,pennlive.com,rollingstone.com,sbnation.com,sheknows.com,sneakernews.com,sport-fm.gr,stylecaster.com,syracuse.com,tastingtable.com,thecw.com,themarysue.com,tvline.com,usmagazine.com,wallup.net,wimp.com,yourcountdown.to##^script:has-text('"").split(",")[4]')
+gulflive.com,inc.com,indiewire.com,inquisitr.com,intouchweekly.com,kcrg.com,kentucky.com,knowyourmeme.com,last.fm,lifeandstylemag.com,mandatory.com,masslive.com,mlive.com,nbcsports.com,news.com.au,nj.com,nypost.com,oregonlive.com,pagesix.com,pennlive.com,rollingstone.com,sbnation.com,sheknows.com,sneakernews.com,sport-fm.gr,stylecaster.com,syracuse.com,tastingtable.com,thecw.com,thedailymeal.com,themarysue.com,tvline.com,usmagazine.com,wallup.net,wimp.com,yourcountdown.to##^script:has-text('"").split(",")[4]')
 !#else
 abc17news.com,bailiwickexpress.com,barnsleychronicle.com,chaptercheats.com,commercialobserver.com,competentedigitale.ro,freeconvert.com##+js(rmnt, script, '"v4ac1eiZr0"')
-gamerant.com,gfinityesports.com,givemesport.com,gulflive.com##+js(rmnt, script, '"v4ac1eiZr0"')
 helloflo.com,homeglowdesign.com,honeygirlsworld.com,hotcars.com,howtogeek.com##+js(rmnt, script, '"v4ac1eiZr0"')
 imgur.com,insider-gaming.com,insurancejournal.com##+js(rmnt, script, '"v4ac1eiZr0"')
 jasminemaria.com,kion546.com,lehighvalleylive.com,lettyskitchen.com,lifeinleggings.com,liveandletsfly.com,lizzieinlace.com,localnews8.com,lonestarlive.com##+js(rmnt, script, '"v4ac1eiZr0"')
@@ -23273,7 +23276,7 @@ bethcakes.com,betweenenglandandiowa.com,bgr.com,blogher.com,blu-ray.com,bluegray
 cbsnews.com,cbssports.com,celiacandthebeast.com,cleveland.com##+js(rmnt, script, '"").split(",")[4]')
 dailykos.com,dailyvoice.com,decider.com,didyouknowfacts.com,dogtime.com##+js(rmnt, script, '"").split(",")[4]')
 eater.com,eldiariony.com,femestella.com,footwearnews.com,free-power-point-templates.com,frogsandsnailsandpuppydogtail.com,funtasticlife.com,fwmadebycarli.com##+js(rmnt, script, '"").split(",")[4]')
-inc.com,indiewire.com,inquisitr.com,intouchweekly.com,kcrg.com,kentucky.com,knowyourmeme.com,last.fm,lifeandstylemag.com,mandatory.com,masslive.com,mlive.com,nbcsports.com,news.com.au,nj.com,nypost.com,oregonlive.com,pagesix.com,pennlive.com,rollingstone.com,sbnation.com,sheknows.com,sneakernews.com,sport-fm.gr,stylecaster.com,syracuse.com,tastingtable.com,thecw.com,themarysue.com,tvline.com,usmagazine.com,wallup.net,wimp.com,yourcountdown.to##+js(rmnt, script, '"").split(",")[4]')
+gulflive.com,inc.com,indiewire.com,inquisitr.com,intouchweekly.com,kcrg.com,kentucky.com,knowyourmeme.com,last.fm,lifeandstylemag.com,mandatory.com,masslive.com,mlive.com,nbcsports.com,news.com.au,nj.com,nypost.com,oregonlive.com,pagesix.com,pennlive.com,rollingstone.com,sbnation.com,sheknows.com,sneakernews.com,sport-fm.gr,stylecaster.com,syracuse.com,tastingtable.com,thecw.com,thedailymeal.com,themarysue.com,tvline.com,usmagazine.com,wallup.net,wimp.com,yourcountdown.to##+js(rmnt, script, '"").split(",")[4]')
 !#endif
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$domain=givemesport.com,important
 superherohype.com##a.wp-block-button__link:is([href^="https://amzn.to/"], [href^="https://www.amazon.com/"])
