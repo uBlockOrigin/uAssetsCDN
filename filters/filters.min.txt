@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Fri, 29 Nov 2024 10:50:26 +0000
-! Diff-Path: ../patches/2024.11.29.682.patch#ublock-filters
+! Last modified: Fri, 29 Nov 2024 16:00:19 +0000
+! Diff-Path: ../patches/2024.11.29.993.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -143,12 +143,9 @@ aupetitparieur.com,allthingsvegas.com,100percentfedup.com,beforeitsnews.com,conc
 aupetitparieur.com,allthingsvegas.com,100percentfedup.com,beforeitsnews.com,concomber.com,conservativebrief.com,conservativefiringline.com,dailylol.com,funnyand.com,letocard.fr,mamieastuce.com,meilleurpronostic.fr,patriotnationpress.com,toptenz.net,vitamiiin.com,writerscafe.org,populist.press,dailytruthreport.com,livinggospeldaily.com,first-names-meanings.com,welovetrump.com,thehayride.com,thelibertydaily.com,thepoke.co.uk,thepolitistick.com,theblacksphere.net,shark-tank.com,naturalblaze.com,greatamericanrepublic.com,dailysurge.com,truthlion.com,flagandcross.com,westword.com,republicbrief.com,freedomfirstnetwork.com,phoenixnewtimes.com,designbump.com,clashdaily.com,madworldnews.com,reviveusa.com,sonsoflibertymedia.com,thedesigninspiration.com,videogamesblogger.com,protrumpnews.com,thepalmierireport.com,kresy.pl,thepatriotjournal.com,gellerreport.com,thegatewaypundit.com,wltreport.com,miaminewtimes.com,politicalsignal.com,rightwingnews.com,bigleaguepolitics.com,comicallyincorrect.com##+js(rmnt, script, /==undefined.*body/)
 !#endif
 appteka.store##+js(aost, Math.random, /injectedScript|blob/)
-whatfinger.com##+js(set, oeo, noopFunc)
 ||rddywd.com^$image,redirect=1x1.gif
 @@||rddywd.com/advertising.js$script
-@@||thegatewaypundit.com^$image,1p
 @@||wltreport.com^$image,1p
-wltreport.com##.top-banner
 newser.com##+js(aeld, load, Object)
 funnyand.com##.ad-unit-desktop
 conservativebrief.com###main-box-3
@@ -180,7 +177,6 @@ tvtoday.de##+js(nosiif, fireEvent, 500)
 chip.de##.js_download_button:has(> a.Download-Button--Free[href*="withinstaller"][href*="lastchanged"])
 chip.de##+js(json-prune, enabled, force_disabled)
 ##[href*="/afu.php"]
-blackmod.net##.js-notices.notices--bottom_fixer.notices
 onrpg.com##a[href*="mmo-it.com/"]
 onrpg.com##[href^="http://server.cpmstar.com/click.aspx"]
 onrpg.com###onrpg-hotbox-widget
@@ -6399,7 +6395,8 @@ multiup.io,multiup.org,multiup.eu##+js(acs, decodeURI, decodeURIComponent)
 multiup.io,multiup.org,multiup.eu##+js(nosiif, .submit)
 multiup.io##+js(rpnt, script, setInterval)
 multiup.io,multiup.org,multiup.eu##.text-center.bg-info
-multiup.io,multiup.org,multiup.eu##div.col-md-4:has(> .panel > .panel-footer > a[href^="/download-fast/"][namehost^="UseNet"])
+multiup.io,multiup.org,multiup.eu##div.col-md-4:has(> .panel > .panel-footer > a[href^="/download-fast/"])
+multiup.io,multiup.org,multiup.eu##a[href^="/download-fast/"]
 multiup.io,multiup.org,multiup.eu##.mfp-ready
 multiup.io,multiup.org,multiup.eu##div.text-center:has(a[class="btn btn-success"][href^="abp:subscribe"])
 *$popunder,3p,domain=multiup.io|multiup.org|multiup.eu
@@ -9395,7 +9392,6 @@ thehackernews.com##+js(rmnt, script, imgSrc)
 mielec.pl##+js(rmnt, script, document.createElement("script"))
 @@||ddzswov1e84sp.cloudfront.net^$script,domain=free-content.pro
 @@||onasider.top/tc$xhr,domain=free-content.pro
-/yzfdmoan.js$script,redirect-rule=noop.js
 boredbat.com##+js(aopr, b2a)
 tekken8combo.kagewebsite.com##+js(no-fetch-if, googlesyndication)
 zoro.*##+js(nowoif)
@@ -10113,7 +10109,12 @@ service.webgoto.net##:not(:matches-path(/amafav/)) a[href^="https://www.amazon.c
 dreamdth.com,freemodsapp.in,onlytech.com##+js(acs, eval, replace)
 dreamdth.com,freemodsapp.in,onlytech.com##+js(nostif, document.createElement)
 freemodsapp.in##^script:has-text(/eval\(.+?decodeURIComponent/)
+!#if env_firefox
+tokuzilla.net##[onclick*="_blank"]:remove-attr(onclick)
+!#else
 tokuzilla.net##+js(ra, onclick, [onclick*="_blank"], stay)
+!#endif
+tokuzilla.net##+js(nowoif, _blank)
 javball.com##+js(no-fetch-if, adsbygoogle)
 javball.com##+js(aopr, popns)
 eurostreaming.casino##+js(acs, document.documentElement, break;case $.)
@@ -10727,6 +10728,8 @@ brbeast.com##.pppx
 superflixapi.dev##.sflix_space
 ! goflix. sbs popups
 ||goflix.sbs^$csp=sandbox allow-same-origin allow-scripts allow-modals allow-orientation-lock allow-pointer-lock allow-presentation allow-top-navigation allow-popups
+goflix.sbs##div.col-md-4:has(> .panel > .panel-footer > a[href^="/download-fast/"])
+goflix.sbs##.text-center.bg-info
 ||google.com/adsense/domains/caf.js^$script,redirect=noopjs
 ##html[lang][style^="--main-bg-color"] > body:not([class]):not([id]) > div#container[style="visibility: visible;"] > div#banner[style="opacity:0"] ~ main:not([class]):not([id]) > div#message
 ! filmeserialetv.org => player alocdnnetu.xyz => popups
@@ -10829,6 +10832,8 @@ filma24.band##.textwidget
 ||site-config.com^$3p
 ||content-settings.com^$3p
 ||config-factory.com^$3p
+! popups
+safetxt.net##+js(rmnt, script, window.open)
 ! Link shortener filters go into their own dedicated list
 ! *** filters/ubo-link-shorteners.txt ***
 ! gplinks all domains (gplinks.co/EWu8)
@@ -18232,7 +18237,6 @@ surfline.com##+js(aeld, timeupdate, , elements, .quiver-cam-player--ad-not-runni
 ||cdn-surfline.com/*/preroll_$media,3p,redirect=noopmp3-0.1s,domain=surfline.com
 ! NSFW faps. club - popunder
 faps.club##+js(acs, onload, open)
-chineseanime.co.in##+js(acs, String.fromCharCode, ai_adb)
 aspdotnet-suresh.com,tudo-para-android.com,urdulibrarypk.blogspot.com##+js(aeld, load, onload)
 *.png#$image,redirect-rule=1x1.gif
 *.gif#$image,redirect-rule=1x1.gif
