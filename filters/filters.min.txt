@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Thu, 28 Nov 2024 17:23:53 +0000
-! Diff-Path: ../patches/2024.11.28.1227.patch#ublock-filters
+! Last modified: Fri, 29 Nov 2024 00:41:35 +0000
+! Diff-Path: ../patches/2024.11.29.119.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -2702,8 +2702,8 @@ ashemaletube.com##+js(rpnt, script, /url:.*?'\,/, url: ''\,)
 ashemaletube.com###site-wrapper:style(padding-top: 0 !important;)
 ashemaletube.com##.header-ads-wrapper
 @@/key=$media,domain=ashemaletube.com
-ashemaletube.com##li[class]:has(a[href^="https://shemale.show/"][rel="sponsored"])
-ashemaletube.com##.js-toggle-content-wrapper a[href^="https://shemale.show/"][rel="sponsored"]:upward(.js-toggle-content-wrapper)
+ashemaletube.com##.no-popup:has(> a[href^="https://shemale.show/"])
+ashemaletube.com##.js-toggle-content-wrapper a[href^="https://shemale.show/"]:upward(.js-toggle-content-wrapper)
 ashemaletube.com##.ads-wrapper
 hotscope.tv##+js(nowoif)
 hotscope.tv##[style^="transform"]:has(#videoHolder)
@@ -9386,7 +9386,7 @@ thehackernews.com##+js(rmnt, script, imgSrc)
 mielec.pl##+js(rmnt, script, document.createElement("script"))
 @@||ddzswov1e84sp.cloudfront.net^$script,domain=free-content.pro
 @@||onasider.top/tc$xhr,domain=free-content.pro
-/yzfdmoan.js$script,redirect=noop.js
+/yzfdmoan.js$script,redirect-rule=noop.js
 boredbat.com##+js(aopr, b2a)
 tekken8combo.kagewebsite.com##+js(no-fetch-if, googlesyndication)
 zoro.*##+js(nowoif)
@@ -10815,6 +10815,10 @@ videocdnal24.xyz##+js(nowoif)
 ||bidster.net^
 ||skeatrighter.com^
 filma24.band##.textwidget
+! thenation.com anti-adb
+||site-config.com^$3p
+||content-settings.com^$3p
+||config-factory.com^$3p
 ! Link shortener filters go into their own dedicated list
 ! *** filters/ubo-link-shorteners.txt ***
 ! gplinks all domains (gplinks.co/EWu8)
@@ -22725,7 +22729,8 @@ vidpro.net##+js(nowoif)
 ! doronime
 -cpm-ads.$badfilter
 timestamp.fr##+js(ra, onclick, [type="submit"])
-javdragon.com###preroll
+javdragon.org###preroll
+javdragon.org##+js(set, univresalP, noopFunc)
 embedaio.cc##+js(nowoif)
 ||embedaio.cc/cdn-cgi/trace
 ! tonanmedia.my.id skip countdown & adb
@@ -22962,7 +22967,9 @@ nyaa.iss.ink##+js(nostif, popUnder)
 ! DriveBot Popup(From Gdflix)
 drivebot.*##+js(nostif, /GoToURL|delay/)
 ||srvy.ninja/assets/adb/js/detector.min.js
+||srvy.ninja/assets/property/js/ads.js
 srvy.ninja##+js(set, nudgeAdBlock, noopFunc)
+srvy.ninja##+js(no-xhr-if, /googlesyndication|ads/)
 @@||7plus.com.au^$ghide
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$script,redirect=google-ima.js,domain=7plus.com.au
 modrinth.com##a[rel*="sponsored"]:upward(.normal-page__content > div)
@@ -23292,6 +23299,7 @@ blogtruyenmoi.com##+js(aeld, click, alink)
 levelupalone.com##+js(aopr, popns)
 bagi.co.in,keran.co##+js(rmnt, script, /charAt|XMLHttpRequest/)
 getthit.com##+js(no-fetch-if, /ads|googletagmanager/)
+getthit.com##+js(set, sharedController.adblockDetector, noopFunc)
 linkz.wiki,movies4u.*,movies4u3.*##+js(nowoif)
 movies4u.*,movies4u3.*##.ads-btns
 movies4u.*##[href^="https://cutt.ly/"]
