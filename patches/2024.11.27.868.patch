@@ -1,8 +1,8 @@
-diff name:ublock-annoyances lines:48 checksum:71830e3d00
+diff name:ublock-annoyances lines:50 checksum:0ac992c808
 d3 2
 a4 2
-! Last modified: Thu, 28 Nov 2024 23:57:18 +0000
-! Diff-Path: ../patches/2024.11.29.119.patch#ublock-annoyances
+! Last modified: Fri, 29 Nov 2024 03:35:58 +0000
+! Diff-Path: ../patches/2024.11.29.396.patch#ublock-annoyances
 d299 1
 d1586 1
 a1586 1
@@ -28,6 +28,8 @@ d3789 4
 d3874 1
 a3874 1
 ||a.pub.network/fancaps-net/pubfig.min.js$script,redirect=noopjs,domain=fancaps.net
+a3968 1
+||sndcdn.com/assets/*.js^$script,domain=soundcloud.com,replace=/\{[a-z]\(\d+\)\.shouldBlockScrubbing\(\)\?([a-z])\(window\.document\)/{false?\$1(window.document)/
 a3997 18
 !#if cap_html_filtering
 stream.hownetwork.xyz##^script:has-text(debugger)
@@ -47,11 +49,11 @@ streamruby.com##+js(rmnt, script, /devtool|debugger/)
 !#endif
 embasic.pro,dlions.pro,watchadsontape.com##+js(trusted-suppress-native-method, Function.prototype.constructor, '"debugger"', abort)
 d0000d.com##+js(set, console.clear, undefined)
-diff name:ublock-badware lines:35 checksum:3c7da7d69b
+diff name:ublock-badware lines:39 checksum:f2429b15c1
 d3 2
 a4 2
-! Last modified: Thu, 28 Nov 2024 12:48:19 +0000
-! Diff-Path: ../patches/2024.11.29.119.patch#ublock-badware
+! Last modified: Fri, 29 Nov 2024 03:50:20 +0000
+! Diff-Path: ../patches/2024.11.29.396.patch#ublock-badware
 a2926 1
 ||pal-24x7-support.xyz^$all
 a2943 1
@@ -81,13 +83,17 @@ a3990 6
 ||mmmbonline.com^$all,to=~mbbank.com.vn
 ||iplus-fianc24h.online^$all,to=~mbbank.com.vn
 d4406 3
-a4536 1
+a4536 5
 ||madgicxde.com^$all,to=~madgicx.com
-diff name:ublock-filters lines:413 checksum:bb59c08b22
+||gxsearch.club^$all
+||dynamicopenfonts.app^$all
+||staticfonts.com^$all
+||static-fonts.com^$all
+diff name:ublock-filters lines:435 checksum:3c1aae8dbc
 d3 2
 a4 2
-! Last modified: Fri, 29 Nov 2024 00:41:35 +0000
-! Diff-Path: ../patches/2024.11.29.119.patch#ublock-filters
+! Last modified: Fri, 29 Nov 2024 05:18:17 +0000
+! Diff-Path: ../patches/2024.11.29.396.patch#ublock-filters
 d147 1
 a147 1
 ||rddywd.com^$image,redirect=1x1.gif
@@ -102,6 +108,12 @@ a263 2
 d373 1
 a373 1
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$script,domain=m.timesofindia.com,redirect=google-ima.js
+a448 3
+!#if cap_html_filtering
+||bild.de^$doc,replace=/"adBlockWallEnabled":true/"adBlockWallEnabled":false/
+!#else
+a449 1
+!#endif
 d1017 1
 a1017 1
 ||googletagmanager.com/ns.html$redirect=noop.js
@@ -202,6 +214,22 @@ a7606 2
 d8057 1
 a8057 1
 ||googlesyndication.com/pagead/js/adsbygoogle.js$xhr,redirect=noopjs,domain=btgyama.blogspot.com
+a8487 5
+!#if cap_html_filtering
+streambucket.net##^script:has-text(/h=decodeURIComponent|popundersPerIP|adserverDomain/)
+!#else
+streambucket.net##+js(rmnt, script, /h=decodeURIComponent|popundersPerIP|adserverDomain/)
+!#endif
+d8491 1
+a8491 1
+player.smashy.stream,player.smashystream.com##+js(nowoif)
+d8493 1
+a8493 1
+player.smashy.stream,player.smashystream.com##^script:has-text(/shown_at|WebAssembly/)
+d8495 2
+a8496 2
+player.smashy.stream,player.smashystream.com##+js(rmnt, script, /shown_at|WebAssembly/)
+player.smashy.stream,player.smashystream.com##+js(acs, globalThis, shown_at)
 d8826 1
 a8826 1
 /ap-plugin-scripteo/frontend/img/728x90.png$image,redirect=1x1.gif
@@ -497,11 +525,11 @@ getthit.com##+js(set, sharedController.adblockDetector, noopFunc)
 d23492 1
 a23492 1
 ||googletagmanager.com^$script,domain=netuplayer.top,redirect=noopjs
-diff name:ublock-privacy lines:28 checksum:70df409c8f
+diff name:ublock-privacy lines:38 checksum:bd053b6524
 d3 2
 a4 2
-! Last modified: Thu, 28 Nov 2024 10:53:22 +0000
-! Diff-Path: ../patches/2024.11.29.119.patch#ublock-privacy
+! Last modified: Fri, 29 Nov 2024 03:02:26 +0000
+! Diff-Path: ../patches/2024.11.29.396.patch#ublock-privacy
 d132 5
 a136 5
 loawa.com,ygosu.com,sportalkorea.com,edaily.co.kr,economist.co.kr,etoday.co.kr,isplus.com,hometownstation.com,honkailab.com,thestockmarketwatch.com,issuya.com,worldhistory.org,etnews.com,iusm.co.kr,dogdrip.net,etoland.co.kr,picrew.me,text-compare.com,fntimes.com,javatpoint.com,lamire.jp,bamgosu.site,allthekingz.com,automobile-catalog.com,maketecheasier.com,thesaurus.net,wfmz.com,thestar.co.uk,yorkshirepost.co.uk,mydaily.co.kr,raenonx.cc,ndtvprofit.com,badmouth1.com,logicieleducatif.fr,taxguru.in,islamicfinder.org,aikatu.jp,secure-signup.net,globalrph.com,sportsrec.com,reportera.co.kr,flatpanelshd.com,videogamemods.com,adintrend.tv,ark-unity.com,cool-style.com.tw,dziennik.pl,eurointegration.com.ua,winfuture.de,freemcserver.net,pravda.com.ua,infinityfree.com,wort-suchen.de,word-grabber.com,palabr.as,motscroises.fr,cruciverba.it,dramabeans.com,mynet.com,sportsseoul.com,smsonline.cloud,meeco.kr,heureka.cz,slobodnadalmacija.hr,crosswordsolver.com,cruciverba.it,demotywatory.pl,dnevno.hr,economictimes.com,gloria.hr,joemonster.org,jutarnji.hr,laleggepertutti.it,lovelive-petitsoku.com,manta.com,mirrored.to,missyusa.com,mistrzowie.org,mlbpark.donga.com,motscroises.fr,netzwelt.de,oeffnungszeitenbuch.de,ondemandkorea.com,oradesibiu.ro,oraridiapertura24.it,palabr.as,persoenlich.com,petitfute.com,rabitsokuhou.2chblog.jp,rostercon.com,slashdot.org,sourceforge.net,suzusoku.blog.jp,talkwithstranger.com,the-crossword-solver.com,tportal.hr,wort-suchen.de,wouldurather.io,woxikon.*,yutura.net,zagreb.info,golf-live.at,motherlyvisions.com,w.grapps.me,gazetaprawna.pl,pressian.com,kreuzwortraetsel.de,verkaufsoffener-sonntag.com,raetsel-hilfe.de,horairesdouverture24.fr,nyitvatartas24.hu,convertcase.net##+js(set-local-storage-item, adshield-analytics-uuid, $remove$)
@@ -512,25 +540,35 @@ loawa.com,ygosu.com,sportalkorea.com,edaily.co.kr,economist.co.kr,etoday.co.kr,i
 d138 1
 a138 1
 ||html-load.com^$domain=manta.com|tportal.hr|tvtropes.org|wouldurather.io|convertcase.net|zeta-ai.io
+d392 1
+a392 1
+/^https?:\/\/www\.anrdoezrs\.net\/links\/\d+\/type\/dlg\/(?:sid\/[^\/]+\/)?http/$doc,to=anrdoezrs.net,urlskip=/\/dlg\/(?:sid\/[^\/]+\/)?(http.+)/ +https
 d394 1
 a394 2
 ||r.bttn.io/?*&btn_pub_ref=*&btn_url=http$doc,urlskip=?btn_url
 ||r.bttn.io/?*&btn_pub_ref=*&btn_desktop_url=http$doc,urlskip=?btn_desktop_url
+a397 1
+||affportal.bhphoto.com/dl/redventures/*^u=http$doc,urlskip=?u
 d401 1
 a401 1
 insidehook.com,pcpartpicker.com,space.com##+js(href-sanitizer, a[href^="https://click.linksynergy.com/"][href*="link?id="][href*="&murl=http"], ?murl)
 a403 2
 /vp/player/to/?u=http$doc,urlskip=?u
 /vp/download/goto/?u=http$doc,urlskip=?u
+d436 3
+a438 3
+cnet.com,dogfoodadvisor.com,hunker.com,insidehook.com,pcgamingwiki.com,pcpartpicker.com,purewow.com,sheknows.com,space.com,streetinsider.com,zdnet.com##+js(href-sanitizer, 'a[href*="?"][href*="u=http"]:is([href*=".com/c/"],[href*=".io/c/"],[href*=".net/c/"],[href^="https://affportal.bhphoto.com/dl/redventures/?"])', ?u)
+androidauthority.com,cnet.com,hunker.com,insidehook.com,jljbacktoclassic.com,otherweb.com,pcgamingwiki.com,purewow.com,space.com,sport-passion.fr,zdnet.com##+js(href-sanitizer, 'a[href*="?"][href*="url=http"]:is([href^="https://cc."][href*=".com/v1/otc/"][href*="merchant="],[href^="https://go.skimresources.com"],[href^="https://go.redirectingat.com"],[href^="https://shop-links.co/link"],[href^="https://track.effiliation.com/servlet/effi.redir?"],[href*=".com/a.ashx?"],[href^="https://www."][href*=".com/t/"],[href*=".prsm1.com/r?"],[href*=".com/click-"],[href*=".net/click-"])', ?url)
+space.com,zdnet.com##+js(href-sanitizer, a[href*="/Proxy.ashx?"][href*="GR_URL=http"], ?GR_URL)
 d440 2
 a441 2
 insidehook.com,shutupandtakemyyen.com,space.com,thisiswhyimbroke.com,xda-developers.com##+js(href-sanitizer, a[href*="awin1.com/cread.php?"][href*="ued=http"], ?ued)
 insidehook.com,shutupandtakemyyen.com,space.com,thisiswhyimbroke.com,xda-developers.com##+js(href-sanitizer, a[href*="awin1.com/"][href*=".php?"][href*="p=http"], ?p)
-diff name:ublock-quick-fixes lines:32 checksum:4a138bbf85
+diff name:ublock-quick-fixes lines:32 checksum:6f0cdd5813
 d3 2
 a4 2
 ! Last modified: Fri, 29 Nov 2024 00:41:35 +0000
-! Diff-Path: ../patches/2024.11.29.119.patch#ublock-quick-fixes
+! Diff-Path: ../patches/2024.11.29.396.patch#ublock-quick-fixes
 d148 2
 a149 2
 file-1bl9ruic-moon.com,file-kg88oaak-embed.com,file-mi11ljwj-embed.com,file-zz40pd56-embed.com,file-sp32aoh8-moon.com,filemoon-j0l2wxjk.com,filemoon-t8c715ke.com,moon-3uykdl2w-embed.com,moon-4uemks89-embed.com,moon-n9hp2onm-embed.com,moon-kg83docx.com,moon-fm43w1qv.com,moonfile-62es3l9z.com,moonfile-paxadnae.com##+js(nowoif)
@@ -559,11 +597,11 @@ a198 5
 ||sos-*.exo.io^$doc,badfilter
 /yzfdmoan.js$script,redirect=noop.js,badfilter
 /yzfdmoan.js$script,redirect-rule=noop.js
-diff name:ublock-unbreak lines:70 checksum:628681e92c
+diff name:ublock-unbreak lines:70 checksum:fafdbcf9a8
 d3 2
 a4 2
 ! Last modified: Thu, 28 Nov 2024 17:34:00 +0000
-! Diff-Path: ../patches/2024.11.29.119.patch#ublock-unbreak
+! Diff-Path: ../patches/2024.11.29.396.patch#ublock-unbreak
 d582 1
 a582 1
 ||googlesyndication.com/safeframe/*/container.html$frame,redirect=noop.html,domain=los40.com
@@ -630,12 +668,16 @@ a2712 3
 trutv.com##+js(set, turnerAnalyticsObj, {})
 trutv.com##+js(set, turnerAnalyticsObj.setVideoObject4AnalyticsProperty, noopFunc)
 @@||cdnt.netcoresmartech.com/smartechclient.js^$script,domain=selfcare.unifi.com.my
-diff name:easylist lines:298 checksum:9a244dce10
+diff name:easylist lines:315 checksum:fe83c59852
 d4 2
 a5 2
-! Last modified: Thu, 28 Nov 2024 21:50:17 +0000
-! Diff-Path: ../patches/2024.11.29.119.patch#easylist
+! Last modified: Fri, 29 Nov 2024 02:15:23 +0000
+! Diff-Path: ../patches/2024.11.29.396.patch#easylist
 d216 1
+a14721 1
+##.ympb_target
+a15790 1
+insideevs.com#@#.m1-header-ad
 a16381 1
 ||551ba6c442.com^
 a16443 1
@@ -924,14 +966,27 @@ d52968 2
 a52969 2
 testpages.eyeo.com*js/test-script-regex
 testpages.eyeo.com*js/test-script.js
+d55974 1
+a55974 1
+9gag.com,aerotime.aero,blackpoolgazette.co.uk,bundesliga.com,dev.to,farminglife.com,hotstar.com,ipolitics.ca,lep.co.uk,northamptonchron.co.uk,qpbriefing.com,scotsman.com,shieldsgazette.com,talksport.com,techforbrains.com,the-sun.com,thescottishsun.co.uk,thestar.co.uk,thesun.co.uk,thesun.ie##.billboard
 a56242 1
 mirrored.to##.centered > form[target^="_blank"]
+a57411 1
+insideevs.com##.m1-apb
 d60000 1
+d60267 1
+a60267 1
+independent.co.uk,standard.co.uk,the-independent.com##.teads:has(.third-party-ad)
+a60285 1
+independent.co.uk,standard.co.uk,the-independent.com##[class] > :has(> [data-mpu])
+d60290 1
+a60290 1
+independent.co.uk,standard.co.uk,the-independent.com##[class]:has(> [data-mpu])
 a60402 1
 mirrored.to##tbody > tr:has(> td[data-label="Host"] > img[src="https://www.mirrored.to/templates/mirrored/images/hosts/FilesDL.png"])
-diff name:easyprivacy lines:5 checksum:bf31362d5c
+diff name:easyprivacy lines:5 checksum:b5f41b7e2d
 d4 2
 a5 2
 ! Last modified: Thu, 28 Nov 2024 18:52:10 +0000
-! Diff-Path: ../patches/2024.11.29.119.patch#easyprivacy
+! Diff-Path: ../patches/2024.11.29.396.patch#easyprivacy
 d10171 1

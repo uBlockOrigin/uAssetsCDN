@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Fri, 29 Nov 2024 00:41:35 +0000
-! Diff-Path: ../patches/2024.11.29.119.patch#ublock-filters
+! Last modified: Fri, 29 Nov 2024 05:18:17 +0000
+! Diff-Path: ../patches/2024.11.29.396.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -444,7 +444,11 @@ bild.de##.ad-wrapper
 bild.de##aside[data-type="ad"]
 ||tagger.opecloud.com^$xhr,redirect=noop.txt,domain=bild.de
 bild.de##+js(aopr, SmartAdServerASMI)
+!#if cap_html_filtering
+||bild.de^$doc,replace=/"adBlockWallEnabled":true/"adBlockWallEnabled":false/
+!#else
 bild.de##+js(rpnt, script, "adBlockWallEnabled":true, "adBlockWallEnabled":false)
+!#endif
 sport.bild.de#@#.ad-wrapper
 spiele.bild.de##+js(nano-stb, , 10000)
 @@||imasdk.googleapis.com/js/sdkloader/ima3.js$script,xhr,domain=spiele.bild.de
@@ -8480,15 +8484,20 @@ embed.smashystream.com###addiv
 streambucket.net##+js(acs, EventTarget.prototype.addEventListener, /runPop|aclib|window\.open/)
 streambucket.net##+js(acs, atob, /popundersPerIP[\s\S]*?Date[\s\S]*?getElementsByTagName[\s\S]*?insertBefore/)
 streambucket.net##+js(aopr, Adcash)
+!#if cap_html_filtering
+streambucket.net##^script:has-text(/h=decodeURIComponent|popundersPerIP|adserverDomain/)
+!#else
+streambucket.net##+js(rmnt, script, /h=decodeURIComponent|popundersPerIP|adserverDomain/)
+!#endif
 kokostream.net##+js(nowoif)
 *$script,3p,denyallow=gstatic.com,domain=streambucket.net
 player.smashy.stream##.react-responsive-modal-root
-player.smashystream.com##+js(nowoif)
+player.smashy.stream,player.smashystream.com##+js(nowoif)
 !#if cap_html_filtering
-smashystream.com##^script:has-text(/shown_at|WebAssembly/)
+player.smashy.stream,player.smashystream.com##^script:has-text(/shown_at|WebAssembly/)
 !#else
-smashystream.com##+js(rmnt, script, /shown_at|WebAssembly/)
-smashystream.com##+js(acs, globalThis, shown_at)
+player.smashy.stream,player.smashystream.com##+js(rmnt, script, /shown_at|WebAssembly/)
+player.smashy.stream,player.smashystream.com##+js(acs, globalThis, shown_at)
 !#endif
 smashyplayer.top##+js(aeld, click, document.createElement)
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$script,domain=smashyplayer.top,redirect=google-ima.js
