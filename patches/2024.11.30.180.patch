@@ -1,37 +1,57 @@
-diff name:ublock-annoyances lines:12 checksum:7b290cae9f
+diff name:ublock-annoyances lines:20 checksum:aa991a4929
 d3 2
 a4 2
-! Last modified: Sat, 30 Nov 2024 22:30:50 +0000
-! Diff-Path: ../patches/2024.12.1.228.patch#ublock-annoyances
+! Last modified: Sun, 01 Dec 2024 05:08:00 +0000
+! Diff-Path: ../patches/2024.12.1.510.patch#ublock-annoyances
 d892 2
 a893 2
 ||redditstatic.com/shreddit/*/xpromo-nsfw-blocking-modal-$script
 reddit.com##div.prompt:has(> .viewInApp)
-a3976 3
+d3293 1
+a3484 1
+||bestx.stream/assets/js/devtools-detector.js
+a3976 8
 sussytoons.site##+js(nosiif, /devtool|console\.clear/)
 sussytoons.site##+js(aeld, keydown, 123)
 sussytoons.site##+js(set, Object.prototype.disableMenu, false)
-diff name:ublock-badware lines:9 checksum:4977eb2796
+!#if cap_html_filtering
+mostream.us##^script:has-text(/devtoolsDetector|keyCode|preventDefault/)
+!#else
+mostream.us##+js(rmnt, script, /devtoolsDetector|keyCode|preventDefault/)
+!#endif
+diff name:ublock-badware lines:9 checksum:65e4a37540
 d3 2
 a4 2
 ! Last modified: Sat, 30 Nov 2024 03:34:46 +0000
-! Diff-Path: ../patches/2024.12.1.228.patch#ublock-badware
+! Diff-Path: ../patches/2024.12.1.510.patch#ublock-badware
 a4558 4
 ||megadrive.solutions^$all
 ||geeksprosoftwareprints.org^$all
 ||select-easy123print.com^$all
 ||printcaretech.com^$all
-diff name:ublock-filters lines:67 checksum:41b8cd0605
+diff name:ublock-filters lines:115 checksum:91265a379e
 d3 2
 a4 2
-! Last modified: Sun, 01 Dec 2024 03:43:40 +0000
-! Diff-Path: ../patches/2024.12.1.228.patch#ublock-filters
+! Last modified: Sun, 01 Dec 2024 08:26:41 +0000
+! Diff-Path: ../patches/2024.12.1.510.patch#ublock-filters
 d2689 1
 a2689 1
 youmath.it##+js(no-xhr-if, /adnxs.com|onetag-sys.com|teads.tv|google-analytics.com|rubiconproject.com|casalemedia.com/)
+d5421 1
+a5421 1
+job.inshokuten.com,kurukura.jp,netmile.co.jp#@#.ad-area:not(.text-ad)
 a9078 1
 sussytoons.site##+js(no-fetch-if, doubleclick)
-a10838 8
+d9274 1
+a9274 1
+linkos.*,phois.pro,trrs.pro,sharedrive.*##+js(nowoif)
+d9759 1
+a9759 1
+$frame,csp=sandbox allow-downloads allow-forms allow-modals allow-same-origin allow-scripts,to=~buymeacoffee.com|~cbox.ws|~chatango.com|~cloudflare.com|~d21.team|~dailymotion.com|~discord.com|~disqus.com|~dood.*|~embed.su|~edgecastcdn.net|~facebook.com|~frembed.*|~google.*|~hcaptcha.com|~ko-fi.com|~mixdrop.*|~ok.ru|~primewire.*|~recaptcha.net|~strcdn.org|~streambucket.net|~twitter.com|~vidbinge.*|~vidmoly.*|~vixcloud.co|~youtu.be|~youtube.com|~youtube-nocookie.com,from=1jour1film.*|animefever.cc|animeunity.to|anitaku.bz|antennasports.ru|bingemaster.netlify.app|bluphim.*|broflix.cc|cinemadeck.com|dailypudding.com|detodopeliculas.nu|dlhd.so|euro2024direct.ru|freek.to|hurawatch.art|kaas.ro|kickassanime.*|kipflix.vercel.app|kissanime.*|lk21official.pics|moflix-stream.day|movie3k.net|osteusfilmestuga.online|phimmoifhd.com|popcornmovies.to|putlockers.*|roselife.site|roshy.tv|seriescultes.store|smashystream.com|soccerinhd.com|visualnewshub.com|xsportbox.com
+d9761 1
+a9761 1
+$frame,csp=sandbox allow-downloads allow-forms allow-modals allow-same-origin allow-scripts,to=~buymeacoffee.com|~cbox.ws|~chatango.com|~cloudflare.com|~d21.team|~dailymotion.com|~discord.com|~disqus.com|~dood.*|~edgecastcdn.net|~embed.su|~emturbovid.com|~facebook.com|~frembed.*|~google.*|~hcaptcha.com|~ko-fi.com|~mixdrop.*|~moviesapi.*|~ok.ru|~ply4.com|~primewire.*|~recaptcha.net|~strcdn.org|~streambucket.net|~topembed.pw|~twitter.com|~vidbinge.*|~vidlink.*|~vidmoly.*|~vidsrc.*|~vixcloud.co|~youtu.be|~youtube.com|~youtube-nocookie.com,from=animefever.cc|animeunity.to|bluphim.*|broflix.cc|cinemadeck.com|dailypudding.com|detodopeliculas.nu|kaas.ro|kickassanime.*|kipflix.vercel.app|kissanime.*|phimmoifhd.com|seriescultes.store|soccerinhd.com|visualnewshub.com|xsportbox.com
+a10838 22
 animedao.com.ru##+js(no-xhr-if, googlesyndication)
 abs-cbn.com##div[style*="999999"]:has(div[style^="background-color:#ECEDEF;"] > p)
 abs-cbn.com##div[style*="2147483647"]:has(.imp-adSlot-0)
@@ -40,9 +60,45 @@ abs-cbn.com##.css-168qn5i, .css-1slfery, .css-xcd31q:has(div[class^="imp-adSlot"
 gmanetwork.com###leaderboard
 gmanetwork.com##.mrec_ad
 gmanetwork.com##.latest_mrec_ad
-a14417 2
+!#if cap_html_filtering
+atlasstudiousa.com##^script:has-text(WebAssembly)
+!#else
+atlasstudiousa.com##+js(rmnt, script, WebAssembly)
+!#endif
+atlasstudiousa.com##+js(acs, $, window.open)
+atlasstudiousa.com##+js(nowoif, _blank)
+||dauntssquills.com^
+||cdn.jsdelivr.net/gh/lookatdons/gasak^
+! worldfree4u. now popups
+worldfree4u.*##+js(nowoif)
+! ranoz. gg popups
+ranoz.gg##+js(nowoif, _blank)
+||sgeiruehou.cfd^$all
+a12210 5
+!#if cap_html_filtering
+adblockeronstape.*,adblockplustape.*,adblockstreamtape.*,adblockstrtape.*,adblockstrtech.*,adblocktape.*,advertisertape.com,antiadtape.*,gettapeads.com,noblocktape.*,stapadblockuser.*,stape.*,strcloud.*,streamadblocker.*,streamadblockplus.*,streamnoads.com,streamta.*,streamtape.*,streamtapeadblockuser.*,strtape.*,strtapeadblock.*,strtapeadblocker.*,strtpe.*,tapeadsenjoyer.com,tapeadvertisement.com,tapeantiads.com,tapeblocker.com,tapelovesads.org,tapenoads.com,tapewithadblock.org,watchadsontape.com##^script:has-text(/WebAssembly|forceunder/)
+!#else
+adblockeronstape.*,adblockplustape.*,adblockstreamtape.*,adblockstrtape.*,adblockstrtech.*,adblocktape.*,advertisertape.com,antiadtape.*,gettapeads.com,noblocktape.*,stapadblockuser.*,stape.*,strcloud.*,streamadblocker.*,streamadblockplus.*,streamnoads.com,streamta.*,streamtape.*,streamtapeadblockuser.*,strtape.*,strtapeadblock.*,strtapeadblocker.*,strtpe.*,tapeadsenjoyer.com,tapeadvertisement.com,tapeantiads.com,tapeblocker.com,tapelovesads.org,tapenoads.com,tapewithadblock.org,watchadsontape.com##+js(rmnt, script, /WebAssembly|forceunder/)
+!#endif
+a12227 1
+||bulkagetufas.com^
+d14395 1
+a14395 1
+10hitmovies.com,11xmovies.*,2024tv.ru,720pflix.*,9animetv.to,9xmoovies.com,advertisertape.com,alphatron.tv,andyday.tv,animeflv.*,animeunity.to,animeyabu.org,anitube.*,apkship.shop,arc018.to,ask4movie.*,ate60vs7zcjhsjo5qgv8.com,avjosa.com,buffshub.stream,capo4play.com,checklinks.online,clickndownload.*,cookiewebplay.xyz,crackstreamsfree.com,daddylive1.ru,dlolcast.pro,embasic.pro,engstreams.shop,enorme.tv,fastdokan.*,file4go.*,flostreams.xyz,footballstreams.lol,footybite.to,foreverquote.xyz,freetvsports.com,freshwaterdell.com,fsportshd.net,gdflix.*,gdriveplayer.*,hdfilme.*,hdhub4u.*,hdstream.one,hdstream.one,hexload.com,hoca2.com,hoca4u.xyz,joyousplay.xyz,jpopsingles.eu,kingstreamz.site,lato.sx,linkz.wiki,lulu.st,lulustream.com,messitv.org,movies4u.*,movieshubweb.com,moviezwap.*,nbabite.to,neymartv.net,nflbite.to,pkembed.*,player.smashy.stream,pahe.*,poscitechs.lol,putlocker.*,reddit-streams.online,ripplestream4u.*,rojadirectaenhd.net,rojadirectaenvivo.la,rubyvid.com,s2watch.link,sflix.*,shazysport.pro,showflix.*,soap2day.*,soccerstreams.best,sportsgames.today,sportshub.stream,sportsloverz.xyz,sportsurge.best,sportzlive.shop,storynavigation.com,streamblasters.*,streameast.*,streamed.su,streamlivetv.site,streamruby.com,streamtape.*,subtitlecat.com,swiftload.io,tamilprint29.*,tarjetarojaenvivo.lat,thedaddy.to,thehesgoal.com,toonstream.*,topembed.pw,totalsportek.*,tvsportslive.fr,usgate.xyz,uqload.*,vidsrc.*,viprow.*,vixcloud.co,vodkapr3mium.com,volokit2.com,watchadsontape.com,weakstreams.online,worldstreamz.shop,xcloud.*,ythd.org##+js(acs, EventTarget.prototype.addEventListener, delete window)
+d14398 1
+a14398 1
+11xmovies.*,2024tv.ru,9xmoovies.com,apkship.shop,ask4movie.*,avjosa.com,buffshub.stream,capo4play.com,checklinks.online,cinego.tv,clickndownload.*,cookiewebplay.xyz,crackstreamsfree.com,cricstream.me,dlolcast.pro,embasic.pro,engstreams.shop,footballstreams.lol,footybite.to,foreverquote.xyz,freetvsports.com,fstream365.com,hdstream.one,hoca2.com,hoca4u.xyz,kingstreamz.site,lulustream.com,messitv.org,mostream.us,nbabite.to,neymartv.net,nflbite.to,pahe.*,pkembed.*,poscitechs.lol,reddit-streams.online,ripplestream4u.*,rojadirectaenhd.net,rojadirectaenvivo.la,rubyvid.com,s2watch.link,shazysport.pro,showflix.*,soccerstreams.best,sportshub.stream,sportsloverz.xyz,sportsurge.best,sportzlive.shop,streamblasters.*,streameast.*,streamed.su,streamlivetv.site,tarjetarojaenvivo.lat,thehesgoal.com,topcinema.cam,topembed.pw,totalsportek.*,usgate.xyz,uqload.*,vixcloud.co,weakstreams.online,worldstreamz.shop,xcloud.*##^script:has-text('{delete window[')
+d14400 1
+a14400 1
+11xmovies.*,buffshub.stream,cinego.tv,fstream365.com,lulustream.com,mostream.us,sportshub.stream,streamblasters.*,topcinema.cam,topembed.pw##+js(rmnt, script, '{delete window[')
+a14417 6
 vidsrc.cc#@#+js(acs, EventTarget.prototype.addEventListener, delete window)
 ||vidsrc.cc/saas/js/script.all.js
+@@||fastlycdn.com/ajax/libs/react/*/cjs/react.production.min.js^$script,3p
+||mostream.us/popuv.js^
+||malurusoenone.top^
+/assets/jquery/css.js^$script,1p,strict1p
+d14426 2
 d14858 3
 d14878 1
 d14889 7
@@ -89,15 +145,28 @@ askpaccosi.com###wpsafe-generate, #wpsafe-link:style(display: block !important)
 d17533 5
 a18393 1
 ||ay.delivery/client-v2.js^$script,3p,redirect=noopjs
-diff name:ublock-privacy lines:3 checksum:6868efe02b
-d4 1
-a4 1
-! Diff-Path: ../patches/2024.12.1.228.patch#ublock-privacy
-diff name:ublock-quick-fixes lines:18 checksum:d1ca46ed93
+diff name:ublock-privacy lines:16 checksum:e3938dc99a
 d3 2
 a4 2
-! Last modified: Sun, 01 Dec 2024 03:46:07 +0000
-! Diff-Path: ../patches/2024.12.1.228.patch#ublock-quick-fixes
+! Last modified: Sun, 01 Dec 2024 06:35:18 +0000
+! Diff-Path: ../patches/2024.12.1.510.patch#ublock-privacy
+d318 1
+a319 2
+/^https?:\/\/(?:[^.]+\.){2}(?:com|io|net)\/c(?:\/\d+){3}\/?\?.*?&?u=http/$doc,to=com|io|net,urlskip=?u +https
+/^https?:\/\/(?:[^.]+\.){2}(?:com|io|net)\/c(?:\/\d+){3}\/?\?.*?&?url=http/$doc,to=com|io|net,urlskip=?url +https
+d345 1
+a345 1
+||digidip.net/visit?*url=http$doc,urlskip=?url
+a399 1
+||redirect.viglink.com/*^u=http$doc,urlskip=?u
+a401 2
+||amazon.com/gp/redirect.html?*&location=http$doc,urlskip=?location
+||link.sylikes.com/*^url=http$doc,urlskip=?url
+diff name:ublock-quick-fixes lines:19 checksum:3c04175d53
+d3 2
+a4 2
+! Last modified: Sun, 01 Dec 2024 05:46:59 +0000
+! Diff-Path: ../patches/2024.12.1.510.patch#ublock-quick-fixes
 d75 2
 a76 3
 japscan.lol#@#+js(aeld, DOMContentLoaded, /=>\{\s*function|^.{600\,700}$|Argus|Netflix|Germany|efined'|ty'\+|setTimeout\(function/)
@@ -109,18 +178,20 @@ file-1bl9ruic-moon.com,file-kg88oaak-embed.com,file-mi11ljwj-embed.com,file-zz40
 file-1bl9ruic-moon.com,file-kg88oaak-embed.com,file-mi11ljwj-embed.com,file-zz40pd56-embed.com,file-sp32aoh8-moon.com,filemoon-j0l2wxjk.com,filemoon-t8c715ke.com,fle-2ggdmu8q-moo.com,moon-3uykdl2w-embed.com,moon-4uemks89-embed.com,moon-n9hp2onm-embed.com,moon-kg83docx.com,moon-fm43w1qv.com,moonfile-62es3l9z.com,moonfile-paxadnae.com##+js(acs, Math, localStorage['\x)
 a154 1
 ||hpilzison-r.online^
-a201 2
+a201 3
 bing.com##.b_algo:has(p[class^="b_lineclamp2 b_algoSlug "])
 exploader.net##+js(spoof-css, article > div[style="margin-left: -63px;width: 1120px;height: 450px;margin-bottom: 5px;display: flex;align-items: center;"], clip, auto)
-diff name:ublock-unbreak lines:3 checksum:9751381de8
-d4 1
-a4 1
-! Diff-Path: ../patches/2024.12.1.228.patch#ublock-unbreak
-diff name:easylist lines:341 checksum:b9cbefb79e
+||d1wix2gc2cgqis.cloudfront.net^$badfilter
+diff name:ublock-unbreak lines:4 checksum:8f8b5d6c09
+d3 2
+a4 2
+! Last modified: Sun, 01 Dec 2024 05:47:16 +0000
+! Diff-Path: ../patches/2024.12.1.510.patch#ublock-unbreak
+diff name:easylist lines:350 checksum:6bc80c2411
 d4 2
 a5 2
-! Last modified: Sun, 01 Dec 2024 02:31:25 +0000
-! Diff-Path: ../patches/2024.12.1.228.patch#easylist
+! Last modified: Sun, 01 Dec 2024 04:02:54 +0000
+! Diff-Path: ../patches/2024.12.1.510.patch#easylist
 d14401 1
 d14404 1
 d14522 1
@@ -134,6 +205,9 @@ d14737 1
 d14765 1
 a14765 1
 ##[data-revive-zoneid]
+d15639 1
+a15639 1
+job.inshokuten.com,kurukura.jp#@#.ad-area
 a16110 1
 ||2483may2024.com^
 d16374 1
@@ -452,13 +526,21 @@ d47825 1
 d49156 1
 d49333 1
 d49446 1
+d55497 1
 a59274 1
 ceoexpress.com##.widgetContentIfrWrapperAd
 a59393 1
 wunderground.com##AD-TRIPLE-BOX
+d60478 2
+a60479 1
+bing.com##.b_algo:has(p[class^="b_lineclamp2 b_algoSlug "])
+a60598 1
+brisbanetimes.com.au,smh.com.au,theage.com.au,watoday.com.au##[class] > [class]:has(> [data-testid="ad"])
 a60602 1
 standard.co.uk##[class]:has(> [data-fluid-zoneid])
-diff name:easyprivacy lines:3 checksum:d75c09bcc5
-d5 1
-a5 1
-! Diff-Path: ../patches/2024.12.1.228.patch#easyprivacy
+diff name:easyprivacy lines:5 checksum:d6c6bece60
+d4 2
+a5 2
+! Last modified: Sun, 01 Dec 2024 06:52:43 +0000
+! Diff-Path: ../patches/2024.12.1.510.patch#easyprivacy
+d11996 1
