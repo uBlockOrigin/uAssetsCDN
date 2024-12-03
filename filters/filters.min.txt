@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Tue, 03 Dec 2024 03:55:41 +0000
-! Diff-Path: ../patches/2024.12.3.328.patch#ublock-filters
+! Last modified: Tue, 03 Dec 2024 09:13:21 +0000
+! Diff-Path: ../patches/2024.12.3.633.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -10864,6 +10864,11 @@ cdn.tiesraides.lv##+js(rpnt, script, vid.vast, //vid.vast)
 ||cdn.tiesraides.lv/app/viblast/*/lib/vast-client.js
 456movie.com##+js(acs, clearTimeout, popundersPerIP)
 ||stretchedbystander.com^
+!#if cap_html_filtering
+getfiles.co.uk##^script:has-text(checkAdBlock)
+!#else
+getfiles.co.uk##+js(rmnt, script, checkAdBlock)
+!#endif
 ! Link shortener filters go into their own dedicated list
 ! *** filters/ubo-link-shorteners.txt ***
 ! gplinks all domains (gplinks.co/EWu8)
@@ -11375,6 +11380,15 @@ appsbull.com,diudemy.com,maqal360.com##+js(rmnt, script, onerror)
 @@||cdn.jsdelivr.net^$script,domain=appsbull.com|diudemy.com|maqal360.com
 appsbull.com,diudemy.com,maqal360.com##+js(set, private, false)
 appsbull.com,diudemy.com,maqal360.com##+js(rpnt, script, "'IFRAME'", "'BODY'")
+!#if env_firefox
+maqal360.com##+js(set, navigator.serviceWorker, {})
+!#else
+maqal360.com##+js(set, navigator.webkitTemporaryStorage.queryUsageAndQuota, noopFunc)
+!#endif
+maqal360.com##+js(set, document.onkeydown, noopFunc)
+maqal360.com##+js(aeld, contextmenu, preventDefault)
+maqal360.com##+js(aeld, visibilitychange, remainingSeconds)
+||revbid.net^
 mphealth.online##+js(rmnt, script, onerror)
 mphealth.online###yuidea-btn-after, #yuidea-btmbtn:style(display: block !important;)
 mphealth.online###yuidea-btn-after, #yuidea-btmbtn:remove-attr(disabled)
