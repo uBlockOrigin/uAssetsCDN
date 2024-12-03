@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Tue, 03 Dec 2024 09:13:21 +0000
-! Diff-Path: ../patches/2024.12.3.633.patch#ublock-filters
+! Last modified: Tue, 03 Dec 2024 12:12:30 +0000
+! Diff-Path: ../patches/2024.12.3.928.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -10869,6 +10869,7 @@ getfiles.co.uk##^script:has-text(checkAdBlock)
 !#else
 getfiles.co.uk##+js(rmnt, script, checkAdBlock)
 !#endif
+tptvencore.co.uk##+js(no-xhr-if, springserve.com)
 ! Link shortener filters go into their own dedicated list
 ! *** filters/ubo-link-shorteners.txt ***
 ! gplinks all domains (gplinks.co/EWu8)
@@ -19187,6 +19188,9 @@ streamingcommunity.*##^script:has-text(/adblock/i)
 !#if !env_firefox
 ||googletagmanager.com^$xhr,domain=streamingcommunity.*,redirect-rule=noop.js
 !#endif
+||streamingcommunity.$doc,csp=worker-src 'none'
+||streamingcommunity.*/sw.js^
+streamingcommunity.*##+js(rpnt, script, /^.+/s, navigator.serviceWorker.getRegistrations().then((registrations=>{for(const registration of registrations){if(registration.scope.includes("streamingcommunity.computer")){registration.unregister()}}}));, condition, swDidInit)
 streamingcommunity.*##.slide-banner:has(> .slide-banner__container)
 streamingcommunity.*##+js(aeld, click, popName)
 streamingcommunity.*##+js(nowoif, _blank)
@@ -21803,9 +21807,9 @@ meilblog.com##.adblock_title
 enryumanga.com,varnascan.com###close-teaser
 enryumanga.com,varnascan.com###floatcenter
 !#if cap_html_filtering
-ftuapps.*,hentaiseason.com,hoodtrendspredict.com,osteusfilmestuga.online,showflix.*,tvappapk.com,twobluescans.com,varnascan.xyz##^script:has-text('decodeURIComponent(escape')
+bi-girl.net,ftuapps.*,hentaiseason.com,hoodtrendspredict.com,osteusfilmestuga.online,showflix.*,tvappapk.com,twobluescans.com,varnascan.xyz##^script:has-text(/decodeURIComponent\(escape|fairAdblock/)
 !#else
-ftuapps.*,hentaiseason.com,hoodtrendspredict.com,osteusfilmestuga.online,showflix.*,tvappapk.com,twobluescans.com,varnascan.xyz##+js(rmnt, script, 'decodeURIComponent(escape')
+bi-girl.net,ftuapps.*,hentaiseason.com,hoodtrendspredict.com,osteusfilmestuga.online,showflix.*,tvappapk.com,twobluescans.com,varnascan.xyz##+js(rmnt, script, /decodeURIComponent\(escape|fairAdblock/)
 hentaiseason.com,showflix.*##+js(aost, document.getElementById, fairAdblock)
 !#endif
 ftuapps.*##body > div:has(.adblock_title)
