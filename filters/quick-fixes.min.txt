@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Quick fixes
 ! Expires: 12 hours
-! Last modified: Fri, 06 Dec 2024 02:36:19 +0000
-! Diff-Path: ../patches/2024.12.6.512.patch#ublock-quick-fixes
+! Last modified: Fri, 06 Dec 2024 12:59:24 +0000
+! Diff-Path: ../patches/2024.12.6.814.patch#ublock-quick-fixes
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/quick-fixes.txt ***
@@ -33,6 +33,7 @@ www.youtube.com##+js(trusted-replace-xhr-response, /"adPlacements.*?([A-Z]"\}|"\
 www.youtube.com##+js(trusted-replace-xhr-response, /"adPlacements.*?("adSlots"|"adBreakHeartbeatParams")/gms, $1, /\/player(?:\?.+)?$/)
 !#endif
 www.youtube.com##+js(set, yt.config_.EXPERIMENT_FLAGS.web_bind_fetch, false)
+www.youtube.com##+js(trusted-prevent-dom-bypass, Node.prototype.appendChild, fetch)
 web.facebook.com,www.facebook.com##+js(json-prune, require.0.3.0.__bbox.require.[].3.1.__bbox.result.data, require.0.3.0.__bbox.require.[].3.1.__bbox.result.data.node.sponsored_data.id_for_advertisement)
 web.facebook.com,www.facebook.com##+js(json-prune, require.0.3.0.__bbox.require.[].3.1.__bbox.result.data, require.0.3.0.__bbox.require.[].3.1.__bbox.result.data.sponsored_auction_distance)
 web.facebook.com,www.facebook.com##+js(rpnt, script, '/null,"category_sensitive"[^\n]+?,"__typename":"SponsoredData"[^\n]+"cursor":"[^"]+"\}/g', null})
@@ -64,10 +65,11 @@ japscan.lol#@#+js(rmnt, script, navpromo2)
 japscan.lol#@#+js(aeld, DOMContentLoaded, /clipPath|0p'\+|typeof kDo|Niger|Charger|GoodDay|funct'|t'\+'y|setTimeout\(function/)
 japscan.lol##+js(aeld, load, /navpromo|clipPath|0p'\+/)
 japscan.lol#@#+js(nostif, /function\(\s*\)\{var|getProp|font|Size|\+'px|\/0'\+/)
-japscan.lol##+js(rmnt, script, navpr)
-japscan.lol##+js(aeld, DOMContentLoaded, /TikAm|pointerEvents|\/110\.|NeSi|Niger|Charger|GoodDay|funct'|t'\+'y/)
-japscan.lol###Roizbo:remove()
-japscan.lol##.FjZoRa
+japscan.lol#@#+js(rmnt, script, navpr)
+japscan.lol#@#+js(aeld, DOMContentLoaded, /TikAm|pointerEvents|\/110\.|NeSi|Niger|Charger|GoodDay|funct'|t'\+'y/)
+japscan.lol###Roizbz:remove()
+japscan.lol##+js(rmnt, script, /'vpr|navp'|function Ti|\}{4}\(\)/)
+japscan.lol##+js(aeld, DOMContentLoaded, /TikBm|terEvents|ont'\+|'\/11|Ne'|Niger|Charger|GoodDay|funct'|t'\+'y/)
 ||japscan.lol/zjs/$script,replace=/function GoodDay\(\)\{.+?\}\}\}//
 japscan.lol#@#.navbar-nav > li#navpromo2.nav-item > a[href^="http://www.toueapo.shop/"]:style(text-indent: -5000px !important;)
 japscan.lol##.navbar-nav > li#navpromo2.nav-item > a[href^="http://www.toueapo.shop/"]:not(:empty):style(clip-path: circle(0) !important;)
@@ -118,15 +120,13 @@ poophq.com,veev.to##+js(no-xhr-if, /\/preroll\.engine$/)
 *$other,3p,denyallow=veevcdn.co,domain=poophq.com|veev.to
 @@*$ghide,domain=poophq.com|veev.to
 veev.to#@#.avb-active
-@@||widgets.outbrain.com/outbrain.js$xhr,domain=animefire.info|animesonlinecc.us|animesonliner4.com|animesup.info|animeyabu.net|animeyabu.org|anitube.us|anitube.vip|caroloportunidades.com.br|dattebayo-br.com|drstonebr.com|flyanimes.cloud|goanimes.vip|goyabu.us|hinatasoul.com|isekaibrasil.com|meuanime.info|otakuanimess.net|superanimes.in
-animefire.info,animesonlinecc.us,animesonliner4.com,animesup.info,animeyabu.net,animeyabu.org,anitube.us,anitube.vip,caroloportunidades.com.br,dattebayo-br.com,drstonebr.com,flyanimes.cloud,goanimes.vip,goyabu.us,hinatasoul.com,isekaibrasil.com,meuanime.info,otakuanimess.net,superanimes.in##+js(trusted-prevent-xhr, outbrain.com, outbrain)
-caroloportunidades.com.br,coempregos.com.br,foodiesgallery.com##+js(nostif, hasAdblock)
-infinityscans.xyz,infinityscans.net##+js(no-fetch-if, /api\/collect|api\/chapter/)
-infinityscans.xyz,infinityscans.net##+js(rpnt, script, /\(async function\(\)\{try\{let.*?\]\(\)\;\}\}\(\)\);/)
-infinityscans.xyz,infinityscans.net##+js(trusted-replace-outbound-text, atob, window.matchMedia('(display-mode: standalone)').matches, true)
-infinityscans.xyz,infinityscans.net##+js(nowoif, _blank)
-infinityscans.xyz,infinityscans.net##div[class="alert alert-danger alert-dismissible fade show m-0 p-0"]:has-text(uBlock Origin)
-@@*$script,denyallow=googletagmanager.com|bidgear.com,domain=infinityscans.xyz|infinityscans.net
+infinityscans.xyz,infinityscans.net,infinityscans.org##+js(no-fetch-if, /api\/collect|api\/chapter|api-chapter/)
+infinityscans.xyz,infinityscans.net,infinityscans.org##+js(rpnt, script, /\(async function\(\)\{try\{let.*?\]\(\)\;\}\}\(\)\);/)
+infinityscans.xyz,infinityscans.net,infinityscans.org##+js(trusted-replace-outbound-text, atob, window.matchMedia('(display-mode: standalone)').matches, true)
+infinityscans.xyz,infinityscans.net,infinityscans.org##+js(nowoif, _blank)
+infinityscans.xyz,infinityscans.net,infinityscans.org##div[class="alert alert-danger alert-dismissible fade show m-0 p-0"]:has-text(uBlock Origin)
+@@*$script,denyallow=googletagmanager.com|bidgear.com|googlesyndication.com,domain=infinityscans.xyz|infinityscans.net|infinityscans.org
+||gd2sfh.infinityscans.net^
 sportnews.to,soccershoes.blog##+js(aeld, DOMContentLoaded, adsSrc)
 *$script,redirect-rule=noopjs,domain=sportnews.to|sportshub.to
 1001tracklists.com##[target="_blank"][rel$=" noopener noreferrer"]:has(> img[src*="/"][src*="_"]), [target="_blank"][rel^="noopener noreferrer"]:has(> img[src*="/"][src*="_"])
@@ -146,15 +146,12 @@ file-1bl9ruic-moon.com,file-kg88oaak-embed.com,file-mi11ljwj-embed.com,file-zz40
 *$frame,csp=sandbox allow-downloads allow-forms allow-modals allow-same-origin allow-scripts,from=filemoon.*
 !#endif
 ||hpilzison-r.online^
-||1xzf53lo.xyz^
-||jjmrmeovo.world^
 ||kaarheciqa.xyz^
 ||klh3j19w.xyz^
 ||gxfh59u4.xyz^
 ||nubileforward.com^
 ||op3xdork.xyz^
 ||skvxbool.xyz^
-||vawk0ap3.xyz^
 wiki.yjsnpi.nu###mw-content-text div[style] a:is([href*="contents.fc2.com"],[href*="dmm.co.jp"]):style(font-size: 0 !important;)
 wiki.yjsnpi.nu###mw-content-text div[style] a:is([href*="contents.fc2.com"],[href*="dmm.co.jp"]) img:style(height: 0 !important;)
 wiki.yjsnpi.nu##+js(spoof-css, #mw-content-text div[style] a:is([href*="contents.fc2.com"],[href*="dmm.co.jp"]), font-size, 14px)
@@ -172,30 +169,19 @@ wiki.yjsnpi.nu##^script[src^="/w/load.php?lang=ja&modules="][defer]:not(async)
 ||wiki.yjsnpi.nu/w/load.php?lang=ja&modules=$script,replace=/\((?:function)?\s*\([\$\w]*[\W\s]+?(const|function)[\S\s]+?catch[\S\s]+?catch[\S\s]+?catch[\S\s]+?\)\([\$\w]*\);?\s*\$//
 !#endif
 ! Ad-Shield
-html-load.com##html,body:style(height: 0 !important; overflow: hidden !important;)
-content-loader.com##html,body:style(height: 0 !important; overflow: hidden !important;)
-css-load.com##html,body:style(height: 0 !important; overflow: hidden !important;)
-img-load.com##html,body:style(height: 0 !important; overflow: hidden !important;)
-*##span[id^="img_"][class^="img_"] > div[style="display: flex; justify-content: center; align-items: center; position: relative;"] > iframe[src][marginwidth][width][style]:style(height: 0 !important; overflow: hidden !important;)
+html-load.com##html,body:style(height: 1px !important; overflow: hidden !important;)
+content-loader.com##html,body:style(height: 1px !important; overflow: hidden !important;)
+css-load.com##html,body:style(height: 1px !important; overflow: hidden !important;)
+img-load.com##html,body:style(height: 1px !important; overflow: hidden !important;)
+*##span[id^="img_"][class^="img_"] > div[style$="align-items: center; position: relative;"] > iframe[src][marginwidth][width][style]:style(height: 1px !important; overflow: hidden !important;)
 ||karistudio.com/wp-content/themes/blogarise-child/check2.js$important
 karistudio.com##p.chapter_content:style(display: block !important; visibility: visible !important; opacity: 1 !important; transform: none !important;)
 !cursomecanet.com##+js(nostif, /document\.write|Math\.floor/)
 cursomecanet.com##+js(no-fetch-if, https, , '{"statusText": "", "type": "cors"}')
 cursomecanet.com##+js(aost, fetch, .js?)
 ||cursomecanet.com/registro$xhr,1p
-startpage.com#@#[style]:has(path):has([href*="aff"])
-/gdpr-appliance.js$badfilter
-||sos-bg-sof-*.exo.io^$all,badfilter
-||sos-at-vie-*.exo.io^$all,badfilter
-||sos-*.exo.io^$doc,badfilter
-/yzfdmoan.js$script,redirect=noop.js,badfilter
-!! https://github.com/AdguardTeam/AdguardFilters/commit/22885eaacf049b4188aaf28f997c38268154b357#commitcomment-149702237
-nicovideo.jp#@#div[class*="anim-n_slideFadeInFromBottom"]
-! unbreak video
-watchadsontape.com#@#+js(trusted-suppress-native-method, Function.prototype.constructor, '"debugger"', abort)
 bing.com##li.b_algo:has(> [class="b_caption"] > p.b_lineclamp2[class*="b_algo"][class*="slug"] > span.algoSlug_icon)
 exploader.net#@#article > div[style="margin-left: -63px;width: 1120px;height: 450px;margin-bottom: 5px;display: flex;align-items: center;"]:style(position: absolute !important; clip:rect(1px,1px,1px,1px) !important;)
 exploader.net#@#+js(spoof-css, article > div[style="margin-left: -63px;width: 1120px;height: 450px;margin-bottom: 5px;display: flex;align-items: center;"], clip, auto)
-exploader.net##+js(spoof-css, a[href^="https://al.dmm.co"], display, block)
-||d1wix2gc2cgqis.cloudfront.net^$badfilter
+exploader.net#@#+js(spoof-css, a[href^="https://al.dmm.co"], display, block)
 entra.news,microsoftsecurityinsights.com,substack.com#@#+js(trusted-set-cookie, intro_popup_last_hidden_at, $currentDate$, , , reload, 1)
