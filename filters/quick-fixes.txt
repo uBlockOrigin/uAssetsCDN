@@ -1,5 +1,5 @@
 ! Title: uBlock₀ filters – Quick fixes
-! Last modified: Sat, 07 Dec 2024 13:40:55 +0000
+! Last modified: Sat, 07 Dec 2024 18:07:45 +0000
 ! Expires: 8 hours
 ! Description: Immediate, temporary filters to fix websites
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -222,10 +222,14 @@ karistudio.com##p.chapter_content:style(display: block !important; visibility: v
 !cursomecanet.com##+js(nostif, /document\.write|Math\.floor/)
 cursomecanet.com##+js(no-fetch-if, https, , '{"statusText": "", "type": "cors"}')
 cursomecanet.com##+js(aost, fetch, .js?)
+cursomecanet.com##[style="display: none;"]:style(display: block !important;)
+cursomecanet.com##[style="display: none;"] + div[id][style*="color:"]
 ||cursomecanet.com/registro$xhr,1p
 
 ! https://github.com/uBlockOrigin/uAssets/issues/25344
-bing.com##li.b_algo:has(> [class="b_caption"] > p.b_lineclamp2)
+bing.com##+js(trusted-replace-argument, DOMTokenList.prototype.contains, 0, , condition , /^b_algo$/)
+bing.com##li.b_algo:has(> .b_title a[href^="https://www.bing.com/aclk?"])
+bing.com##li.b_algo:has(> [class="b_caption"] > p[class*=" "])
 
 ! https://github.com/AdguardTeam/AdguardFilters/issues/183252
 exploader.net#@#article > div[style="margin-left: -63px;width: 1120px;height: 450px;margin-bottom: 5px;display: flex;align-items: center;"]:style(position: absolute !important; clip:rect(1px,1px,1px,1px) !important;)
