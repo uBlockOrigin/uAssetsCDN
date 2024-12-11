@@ -1,5 +1,5 @@
 ! Title: uBlock₀ filters – Quick fixes
-! Last modified: Tue, 10 Dec 2024 17:24:37 +0000
+! Last modified: Wed, 11 Dec 2024 13:27:03 +0000
 ! Expires: 8 hours
 ! Description: Immediate, temporary filters to fix websites
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -146,25 +146,20 @@ poophq.com,veev.to##+js(no-xhr-if, /\/preroll\.engine$/)
 veev.to#@#.avb-active
 
 ! https://github.com/uBlockOrigin/uAssets/issues/20401
-infinityscans.xyz,infinityscans.net,infinityscans.org##+js(no-fetch-if, /api\/collect|api\/chapter|api-chapter/)
 infinityscans.xyz,infinityscans.org##+js(no-fetch-if, infinityscans.net)
-infinityscans.xyz,infinityscans.net,infinityscans.org##+js(rpnt, script, /async function \(xhr\) \{\s+\(function\(\)\{var .*?\'\]\(\)\;\}\}\(\)\)\;/s, async function (xhr) {)
+infinityscans.xyz,infinityscans.net,infinityscans.org##+js(rpnt, script, /\}\)\;\s+\(function\(\)\{.*?\)\;\}\)\(\)\;\s+\$\.ajax\(\{/s, }); $.ajax({)
 infinityscans.xyz,infinityscans.net,infinityscans.org##+js(trusted-replace-outbound-text, atob, window.matchMedia('(display-mode: standalone)').matches, true)
 infinityscans.xyz,infinityscans.net,infinityscans.org##+js(nowoif, _blank)
-infinityscans.xyz,infinityscans.net,infinityscans.org##div[class="alert alert-danger alert-dismissible fade show m-0 p-0"]:has-text(uBlock Origin)
+infinityscans.xyz,infinityscans.net,infinityscans.org##div[class="alert alert-danger fade show m-0 p-0"]:has-text(uBlock Origin)
 @@*$script,denyallow=googletagmanager.com|bidgear.com|googlesyndication.com,domain=infinityscans.xyz|infinityscans.net|infinityscans.org
 ||b5rh0rt.infinityscans.net^$xhr,important
 
 ! https://github.com/uBlockOrigin/uAssets/issues/8719
-1001tracklists.com##[target="_blank"][rel*="noopener"][rel*="noreferrer"]:has(> img[src*="/"][src*="_"]), [target="_blank"][rel^="noopener noreferrer"]:has(> img[src*="/"][src*="_"])
-1001tracklists.com##div[style^="margin: 10px 0px; text-align: center;"]:has(a img[src*="/"][src*="_"])
-1001tracklists.com##div[style^="text-align: center; margin-bottom: 10px;"]:has(a img[src*="/"][src*="_"])
+1001tracklists.com##a[href^="https://"][target="_blank"][onclick*="challenge"]:has(> img[src*="/"][src*="_"][alt][title]):remove()
+1001tracklists.com###head + [id] > div:first-child > div:first-child:has(a img[src*="/"][src*="_"][alt][title])
+1001tracklists.com###head + [id] > div:first-child > [style]:has(a img[src*="/"][src*="_"][alt][title])
+1001tracklists.com##div[style^="margin: 10px 0;"]:has(a img[src*="/"][src*="_"])
 1001tracklists.com##div[id]:has(> [data-freestar-ad]):remove()
-1001tracklists.com###root > div[id]:last-child > [style] a[target][rel]:has(img[src*="/"][src*="_"])
-1001tracklists.com###root > div[id]:first-child > [style] a[target][rel]:has(img[src*="/"][src*="_"])
-1001tracklists.com###root > div[id] > div:first-child:not([id], [class]):has(a[target][rel]:has(img[src*="/"][src*="_"]))
-1001tracklists.com##a[href^="https://"][target="_blank"][rel="noopener noreferrer"][onclick*="challenge"]:has(> img[src*="/"][src*="_"][alt][title]):remove()
-1001tracklists.com##+js(spoof-css, '[target="_blank"][rel*="noopener"][rel*="noreferrer"]:has(> img[src*="/"][src*="_"])', display, block)
 
 ! filemoon
 ! https://github.com/AdguardTeam/AdguardFilters/issues/190044
@@ -235,7 +230,7 @@ exploader.net##+js(spoof-css, a[style*="display:"][href^="https://al.dmm.co.jp"]
 exploader.net##a[style*="display:"][href^="https://al.dmm.co.jp"] img
 exploader.net##a[style*="display:"][href^="https://al.dmm.co.jp"] > div:has(img):style(height: 20px !important;)
 exploader.net##a[style*="display:"][href^="https://al.dmm.co.jp"] span
-exploader.net##+js(aost, Element.prototype.getBoundingClientRect, set_daotag)
+exploader.net##+js(aost, Element.prototype.getBoundingClientRect, /[0-9a-z]{20\,}\s.+daotag/)
 ||daotag.com/tag/$script,replace=/if\(images\[i_key\]\.parentNode\.offsetHeight<rand\)/if(0)/,domain=exploader.net
 ||daotag.com/tag/$script,replace=/if\(rand\+'px'!=dev_height\)/if(0)/,domain=exploader.net
 
@@ -248,3 +243,6 @@ entra.news,microsoftsecurityinsights.com,substack.com#@#+js(trusted-set-cookie, 
 ! https://github.com/uBlockOrigin/uAssets/issues/26392
 #@##__next > div[style="position:fixed;z-index:9999;top:16px;left:16px;right:16px;bottom:16px;pointer-events:none"]
 #@##__next > div.absolute.inset-0.w-full.h-screen.z-\[99999\]
+
+! https://github.com/AdguardTeam/AdguardFilters/commit/0495106b27155dc142317e779d0082cd6c7eb326#r150204132
+||city.onomichi.hiroshima.jp/uploaded/banner/$badfilter
