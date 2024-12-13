@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Quick fixes
 ! Expires: 12 hours
-! Last modified: Thu, 12 Dec 2024 17:39:59 +0000
-! Diff-Path: ../patches/2024.12.12.1161.patch#ublock-quick-fixes
+! Last modified: Thu, 12 Dec 2024 22:21:29 +0000
+! Diff-Path: ../patches/2024.12.13.122.patch#ublock-quick-fixes
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/quick-fixes.txt ***
@@ -173,9 +173,13 @@ exploader.net##a[style*="display:"][href^="https://al.dmm.co.jp"] span
 exploader.net##+js(aost, Element.prototype.getBoundingClientRect, /[0-9a-z]{20\,}\s.+daotag/)
 ||daotag.com/tag/$script,replace=/if\(images\[i_key\]\.parentNode\.offsetHeight<rand\)/if(0)/,domain=exploader.net
 ||daotag.com/tag/$script,replace=/if\(rand\+'px'!=dev_height\)/if(0)/,domain=exploader.net
-entra.news,microsoftsecurityinsights.com,substack.com#@#+js(trusted-set-cookie, intro_popup_last_hidden_at, $currentDate$, , , reload, 1)
 @@||ac.cnstrc.com^$xhr,domain=bjs.com
 #@##__next > div[style="position:fixed;z-index:9999;top:16px;left:16px;right:16px;bottom:16px;pointer-events:none"]
 #@##__next > div.absolute.inset-0.w-full.h-screen.z-\[99999\]
 ||city.onomichi.hiroshima.jp/uploaded/banner/$badfilter
 pixiv.net#@#+js(set-cookie-reload, privacy_policy_agreement, 6)
+!#if cap_html_filtering
+www.chip.de##^script:has-text(/ \=\=\= [0-9]{1,2}\) \{ \}/)
+!#else
+www.chip.de##+js(rmnt, script, / \=\=\= [0-9]{1,2}\) \{ \}/)
+!#endif
