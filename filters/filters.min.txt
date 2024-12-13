@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Fri, 13 Dec 2024 09:37:23 +0000
-! Diff-Path: ../patches/2024.12.13.631.patch#ublock-filters
+! Last modified: Fri, 13 Dec 2024 15:22:06 +0000
+! Diff-Path: ../patches/2024.12.13.928.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -10905,6 +10905,13 @@ peachprintable.com###popID
 gputrends.net##+js(set-local-storage-item, adWatched, true)
 vikatan.com##+js(nostif, /adblock|isblock/i)
 ||kryptografie.de/js/wb_dead.js
+! [NSFW] https://dhtpre.com/file/5qhvr18btje8 - detection
+!#if cap_html_filtering
+dhtpre.com##^script:has-text(setADBFlag)
+!#else
+dhtpre.com##+js(rmnt, script, setADBFlag)
+!#endif
+anroll.net##+js(acs, EventTarget.prototype.addEventListener, delete window)
 ! Link shortener filters go into their own dedicated list
 ! *** filters/ubo-link-shorteners.txt ***
 ! gplinks all domains (gplinks.co/EWu8)
@@ -11967,6 +11974,8 @@ upfiles-urls.com##+js(set, blurred, false)
 rentry.co##article:has(#download-your-archive-file)
 ||sharecube.pro^$all
 ||flyshare.cfd^$all
+! shortencash. click antiadb
+shortencash.click##+js(nostif, displayAdBlockerMessage)
 !#if env_mobile
 ! *** filters/filters-mobile.txt ***
 !----- 2020 -----
@@ -14065,7 +14074,7 @@ cryptowin.io##+js(acs, document.getElementById, 'body')
 @@||cryptowin.io^$ghide
 cryptowin.io##.panel-body > p[style=" color:#818181; background-color: #fffdc4; text-align: center; font-size: 14px; border-radius: 2px; width: 320px; max-width: 100%; margin: auto; margin-top: 15px; "]
 cryptowin.io##.hidden-xs
-0gomovies.*,cdnqq.net,cdn1.fastvid.co,movi.pk,ncdn22.xyz,netu.ac,player.msmini.*,player.sbnmp.*,netuplayer.*,vapley.*##+js(nowoif)
+cdnqq.net,cdn1.fastvid.co,movi.pk,ncdn22.xyz,netu.ac,player.msmini.*,player.sbnmp.*,netuplayer.*,vapley.*##+js(nowoif)
 0gogle.com##+js(aopr, __Y)
 movi.pk##+js(aeld, , vads)
 movi.pk##+js(acs, eval, replace)
@@ -19706,7 +19715,7 @@ dogdrip.net,infinityfree.com##ins.adsbygoogle:style(height: 1px !important; visi
 ||img-load.com^$media,redirect=noop-1s.mp4
 ||html-load.com^$font,ping
 ||html-load.com^$media,redirect=noop-1s.mp4
-||html-load.com^$script,xhr,domain=blog.esuteru.com|blog.livedoor.jp|itainews.com|jin115.com|lamire.jp|picrew.me|ndtvprofit.com|crosswordsolver.com|cruciverba.it|demotywatory.pl|dnevno.hr|gloria.hr|heureka.cz|javatpoint.com|joemonster.org|lacuarta.com|laleggepertutti.it|m.economictimes.com|meeco.kr|mirrored.to|mistrzowie.org|motscroises.fr|oeffnungszeitenbuch.de|ondemandkorea.com|oraridiapertura24.it|palabr.as|persoenlich.com|petitfute.com|powerpyx.com|rabitsokuhou.2chblog.jp|rostercon.com|sourceforge.net|suzusoku.blog.jp|the-crossword-solver.com|thestockmarketwatch.com|word-grabber.com|wort-suchen.de|woxikon.*|yutura.net|zagreb.info|golf-live.at|motherlyvisions.com|kreuzwortraetsel.de|raetsel-hilfe.de|verkaufsoffener-sonntag.com|horairesdouverture24.fr|nyitvatartas24.hu|modhub.us|ff14net.2chblog.jp|news4vip.livedoor.biz|onecall2ch.com|yugioh-starlight.com|winfuture.de|automobile-catalog.com|motorbikecatalog.com|talkwithstranger.com|apkmirror.com|wetteronline.de|syosetu.com
+||html-load.com^$script,xhr,domain=blog.esuteru.com|blog.livedoor.jp|itainews.com|jin115.com|lamire.jp|picrew.me|ndtvprofit.com|crosswordsolver.com|cruciverba.it|demotywatory.pl|dziennik.pl|dnevno.hr|gloria.hr|heureka.cz|javatpoint.com|joemonster.org|lacuarta.com|laleggepertutti.it|m.economictimes.com|meeco.kr|mirrored.to|mistrzowie.org|motscroises.fr|oeffnungszeitenbuch.de|ondemandkorea.com|oraridiapertura24.it|palabr.as|persoenlich.com|petitfute.com|powerpyx.com|rabitsokuhou.2chblog.jp|rostercon.com|sourceforge.net|suzusoku.blog.jp|the-crossword-solver.com|thestockmarketwatch.com|word-grabber.com|wort-suchen.de|woxikon.*|yutura.net|zagreb.info|golf-live.at|motherlyvisions.com|kreuzwortraetsel.de|raetsel-hilfe.de|verkaufsoffener-sonntag.com|horairesdouverture24.fr|nyitvatartas24.hu|modhub.us|ff14net.2chblog.jp|news4vip.livedoor.biz|onecall2ch.com|yugioh-starlight.com|winfuture.de|automobile-catalog.com|motorbikecatalog.com|talkwithstranger.com|apkmirror.com|wetteronline.de|syosetu.com
 ||css-load.com^$domain=ygosu.com|loawa.com|bamgosu.site|thestockmarketwatch.com
 ||css-load.com^$redirect=noopjs,domain=honkailab.com
 ||07c225f3.online^$domain=economist.co.kr|hometownstation.com|sportalkorea.com|edaily.co.kr|isplus.com|tenasia.hankyung.com|etoday.co.kr
