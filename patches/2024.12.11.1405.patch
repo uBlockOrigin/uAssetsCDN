@@ -1,17 +1,17 @@
-diff name:ublock-annoyances lines:8 checksum:6515afd706
+diff name:ublock-annoyances lines:8 checksum:0d0266e467
 d3 2
 a4 2
 ! Last modified: Thu, 12 Dec 2024 21:14:22 +0000
-! Diff-Path: ../patches/2024.12.15.128.patch#ublock-annoyances
+! Diff-Path: ../patches/2024.12.15.443.patch#ublock-annoyances
 d2685 2
 a3996 2
 fandom.com##+js(trusted-set-cookie, fandomLeftPanelPersistence, collapsed)
 baomidou.com##astro-island[opts^="{\"name\":\"CheckAdBlocked\""]
-diff name:ublock-badware lines:32 checksum:a4c1a204d6
+diff name:ublock-badware lines:33 checksum:ff658d08f7
 d3 2
 a4 2
-! Last modified: Sat, 14 Dec 2024 01:30:47 +0000
-! Diff-Path: ../patches/2024.12.15.128.patch#ublock-badware
+! Last modified: Sun, 15 Dec 2024 05:29:52 +0000
+! Diff-Path: ../patches/2024.12.15.443.patch#ublock-badware
 a1023 1
 ||my-bitbank.cc^$all
 a2833 1
@@ -36,15 +36,16 @@ d4518 1
 a4518 2
 /^https:\/\/usps\.com-(?:[-\w]+\.){1,2}[a-z]{2,4}\//$doc,to=~com|~net|~org|~edu|~gov
 /^https:\/\/amazon\.com-(?:[-\w]+\.){1,2}[a-z]{2,4}\//$doc,to=~com|~net|~org|~edu|~gov
-a4607 3
+a4607 4
 ||advairmds.ru^$all,to=~bbc.com
 ! fake cloudflare captcha
 ||pub-549d59daefd74f7583e1766800fe7b07.r2.dev^
-diff name:ublock-filters lines:192 checksum:58326ec9fe
+||r-tiktok.com^$all,to=~tiktok.com
+diff name:ublock-filters lines:201 checksum:9782c16f35
 d3 2
 a4 2
-! Last modified: Sat, 14 Dec 2024 21:53:30 +0000
-! Diff-Path: ../patches/2024.12.15.128.patch#ublock-filters
+! Last modified: Sun, 15 Dec 2024 05:18:38 +0000
+! Diff-Path: ../patches/2024.12.15.443.patch#ublock-filters
 d441 1
 a441 1
 2ddl.*,allitebooks.*,bonstreams.net,convertinmp4.com,crictime.com,ddlvalley.me,dramamate.*,eztv.*,fluvore.com,kiss-anime.*,letmewatchthis.*,mac-torrents.com,mkvcage.*,nflstream.io,oceanoffgames.com,pastehere.xyz,sawlive.tv,skidrowcrack.com,toros.co,uptobox.com,yts.*,zooqle.*##+js(nowebrtc)
@@ -134,8 +135,17 @@ a13696 1
 d14060 1
 a14060 1
 cdnqq.net,cdn1.fastvid.co,movi.pk,ncdn22.xyz,netu.ac,player.msmini.*,player.sbnmp.*,netuplayer.*,vapley.*##+js(nowoif)
-a14427 1
-xcloud.*##+js(aost, EventTarget.prototype.addEventListener, /(?=^(?!.*(challenge-platform|jquery|challenges\.cloudflare\.com)))/)
+d14425 1
+a14425 1
+~xcloud.host,xcloud.*##+js(rpnt, script, /window.open.*/gms, window.open(url\, "_self");})
+d14427 2
+a14428 3
+~xcloud.host,xcloud.*##+js(noeval-if, window.open)
+~xcloud.host,xcloud.*##+js(aost, EventTarget.prototype.addEventListener, /(?=^(?!.*(challenge-platform|jquery|challenges\.cloudflare\.com|jwplayer)))/)
+~xcloud.host,xcloud.*##^script:has-text(/eval\(.+?RegExp/)
+d14433 1
+a14433 1
+~xcloud.host,xcloud.*##.ads-btns
 a14438 1
 ||diligentcloset.com^
 a14440 1
@@ -233,11 +243,11 @@ ydr.com##+js(set, gnt.u.adfree, true)
 d23784 1
 a23784 1
 @@||cimanow.cc^$script,1p
-diff name:ublock-privacy lines:33 checksum:994ab73e4f
+diff name:ublock-privacy lines:33 checksum:fd95980e35
 d3 2
 a4 2
 ! Last modified: Sat, 14 Dec 2024 10:03:50 +0000
-! Diff-Path: ../patches/2024.12.15.128.patch#ublock-privacy
+! Diff-Path: ../patches/2024.12.15.443.patch#ublock-privacy
 d43 1
 a43 8
 ||click.redditmail.com/CL0/$urlskip=/\/CL0\/(http.*?)\/\d\/[a-f0-9-]+\// -uricomponent
@@ -267,11 +277,11 @@ discord.com##+js(no-xhr-if, discord.com/api/v9/science)
 a874 2
 chatgpt.com##+js(no-fetch-if, method:/post/i url:/^https?:\/\/chatgpt\.com\/ces\/v1\/[a-z]$/)
 chatgpt.com##+js(no-fetch-if, method:/post/i url:ab.chatgpt.com/v1/rgstr)
-diff name:ublock-quick-fixes lines:60 checksum:e90babd5ae
+diff name:ublock-quick-fixes lines:64 checksum:1cacb78c5d
 d3 2
 a4 2
-! Last modified: Sat, 14 Dec 2024 15:16:05 +0000
-! Diff-Path: ../patches/2024.12.15.128.patch#ublock-quick-fixes
+! Last modified: Sun, 15 Dec 2024 02:43:28 +0000
+! Diff-Path: ../patches/2024.12.15.443.patch#ublock-quick-fixes
 d57 8
 d66 8
 a73 2
@@ -304,13 +314,17 @@ a171 7
 @@||img-load.com^$media
 @@||html-load.com^$media
 dogdrip.net,infinityfree.com,smsonline.cloud,webdesignledger.com##+js(trusted-replace-argument, String.prototype.split, 0, json:"/1", condition, /^\/$/)
-d176 1
-a176 5
+d176 2
+a177 9
 cursomecanet.com##div[style]:has(a[href][target="_blank"]):style(display: block !important;)
 cursomecanet.com##+js(no-fetch-if, .php)
 cursomecanet.com##+js(rpnt, script, "'OK'", "''")
 @@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$script,redirect-rule,domain=cursomecanet.com
 ||cursomecanet.com/registro$xhr,1p
+bing.com##+js(trusted-replace-argument, HTMLLIElement.prototype.querySelector, 0, undefined, condition, /^a?\.tilk$/)
+bing.com##+js(trusted-replace-argument, HTMLLIElement.prototype.querySelector, 0, undefined, condition, .b_title > h2 > a)
+bing.com##+js(trusted-override-element-method, HTMLDivElement.prototype.querySelector, li.b_algo:has(.tilk) > div, undefined)
+bing.com##li.b_algo:has(> :is(.b_tpcn, .b_title, h2) a[href^="https://www.bing.com/aclick?"])
 d179 4
 d185 9
 a193 5
@@ -328,20 +342,20 @@ www.chip.de##+js(rmnt, script, / \=\=\= [0-9]{1,2}\) \{ \}/)
 @@||premium.services.zam.com/v1/api/$xhr,domain=wowhead.com
 ! baited
 /nativeads-v2.js$badfilter
-diff name:ublock-unbreak lines:8 checksum:48e1c23386
+diff name:ublock-unbreak lines:8 checksum:bf5a7ddd74
 d3 2
 a4 2
 ! Last modified: Sat, 14 Dec 2024 04:42:05 +0000
-! Diff-Path: ../patches/2024.12.15.128.patch#ublock-unbreak
+! Diff-Path: ../patches/2024.12.15.443.patch#ublock-unbreak
 d2698 1
 a2698 2
 speedtest.net##+js(set, Object.prototype.que, noopFunc)
 speedtest.net##+js(set, Object.prototype.que.push, noopFunc)
-diff name:easylist lines:131 checksum:0a5c693e0c
+diff name:easylist lines:131 checksum:042aa8fd36
 d4 2
 a5 2
 ! Last modified: Sat, 14 Dec 2024 09:50:12 +0000
-! Diff-Path: ../patches/2024.12.15.128.patch#easylist
+! Diff-Path: ../patches/2024.12.15.443.patch#easylist
 d126 1
 d236 1
 a236 1
@@ -469,11 +483,11 @@ google.ac,google.ad,google.ae,google.al,google.am,google.as,google.at,google.az,
 d63207 1
 a63207 1
 @@||player.ex.co/player/$script,domain=mm-watch.com|theautopian.com|usatoday.com|ydr.com
-diff name:easyprivacy lines:38 checksum:53a11b7cdb
+diff name:easyprivacy lines:38 checksum:ee3912e57c
 d4 2
 a5 2
 ! Last modified: Sat, 14 Dec 2024 21:50:20 +0000
-! Diff-Path: ../patches/2024.12.15.128.patch#easyprivacy
+! Diff-Path: ../patches/2024.12.15.443.patch#easyprivacy
 d259 1
 d2583 1
 a6471 1
