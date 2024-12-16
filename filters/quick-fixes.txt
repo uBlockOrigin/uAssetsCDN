@@ -1,5 +1,5 @@
 ! Title: uBlock₀ filters – Quick fixes
-! Last modified: Sun, 15 Dec 2024 20:36:14 +0000
+! Last modified: Mon, 16 Dec 2024 12:58:13 +0000
 ! Expires: 8 hours
 ! Description: Immediate, temporary filters to fix websites
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -132,8 +132,8 @@ poophq.com,veev.to##+js(no-xhr-if, /\/preroll\.engine$/)
 veev.to#@#.avb-active
 
 ! https://github.com/uBlockOrigin/uAssets/issues/20401
-infinityscans.xyz,infinityscans.org##+js(no-fetch-if, .infinityscans.net)
-infinityscans.xyz,infinityscans.net,infinityscans.org##+js(rpnt, script, /\}\)\;\s+\(function\(\){var .*?\;\}\)\(\)\; /s, });)
+infinityscans.xyz,infinityscans.org##+js(no-fetch-if, .infinityscans.net method:POST)
+infinityscans.xyz,infinityscans.net,infinityscans.org##+js(rpnt, script, /\}\)\;\s+\(function\(\)\{var .*?\$\(\"/s, }); $(")
 infinityscans.xyz,infinityscans.net,infinityscans.org##+js(trusted-replace-outbound-text, atob, window.matchMedia('(display-mode: standalone)').matches, true)
 infinityscans.xyz,infinityscans.net,infinityscans.org##+js(nowoif, _blank)
 infinityscans.xyz,infinityscans.net,infinityscans.org##div[class="alert alert-danger fade show m-0 p-0"]:has-text(/uBlock|AdGuard|advertisments/i)
@@ -176,8 +176,9 @@ wiki.yjsnpi.nu##^script[src^="/w/load.php?lang=ja&modules="][defer]:not(async)
 !#endif
 
 ! Ad-Shield
-*##span[id^="img_"][class^="img_"] > div[style*="justify-content:"][style*="align-items:"][style*="relative"][style*="center"] > iframe[src][marginwidth][width][style]:style(clip-path: circle(0) !important;)
-dogdrip.net,infinityfree.com,~forum.infinityfree.com,smsonline.cloud,webdesignledger.com##+js(trusted-replace-argument, String.prototype.split, 0, json:"/1", condition, /^\/$/)
+*##span[id^="img_"][class^="img_"] > div[style*="justify-content:"][style*="align-items:"][style*="relative"][style*="center"] > iframe[src][marginwidth][width][style]:style(margin-right: -5000px !important;)
+! https://github.com/uBlockOrigin/uAssets/issues/26487
+dogdrip.net,smsonline.cloud,webdesignledger.com,www.infinityfree.com,dashboard.infinityfree.com##+js(trusted-replace-argument, String.prototype.split, 0, json:"/1", condition, /^\/$/)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/25990
 ||karistudio.com/wp-content/themes/blogarise-child/check2.js$important
@@ -202,11 +203,11 @@ bing.com##li.b_algo:has(> :is(.b_tpcn, .b_title, h2) a[href^="https://www.bing.c
 bing.com##li.b_algo:has(> :is(.b_tpcn, .b_title, h2) a[href^="https://www.bing.com/aclk?"])
 
 ! https://github.com/AdguardTeam/AdguardFilters/issues/183252
-exploader.net##article div:not(article>div[style="width: 750px;margin-left: auto;margin-right: auto;"],article>div[style="width: 750px;margin-left: auto;margin-right: auto;"]>div[style="float: right;width: 180px;"],[class="information"],[class="information"]+[class="thumbnail"],[class="information"]>[class="warning"],[class="information"]>[class="d_"]):watch-attr(style,class):has(div:not([style]):not([class]) div a[href^="https://al.dmm.co.jp"],article>#freefiles>#sort,article>#freefiles>[class="list"])
-exploader.net##+js(ra, class|style, article div:not(article>div[style="width: 750px;margin-left: auto;margin-right: auto;"]\,article>div[style="width: 750px;margin-left: auto;margin-right: auto;"]>div[style="float: right;width: 180px;"]\,[class="information"]\,[class="information"]+[class="thumbnail"]\,[class="information"]>[class="warning"]\,[class="information"]>[class="d_"]\,article>#freefiles>#sort\,article>#freefiles>[class="list"]), complete)
+exploader.net##a[style*="display:"][href^="https://al.dmm.co.jp"] img:style(position: absolute !important; clip:rect(1px,1px,1px,1px) !important;)
+exploader.net##a[style*="display:"][href^="https://al.dmm.co.jp"] span:style(position: absolute !important; clip:rect(1px,1px,1px,1px) !important;)
+exploader.net##+js(spoof-css, a[style*="display:"][href^="https://al.dmm.co.jp"] img\,a[style*="display:"][href^="https://al.dmm.co.jp"] span, clip, '')
 exploader.net##:matches-path(/(^\/$|\/free|\/search|\/preview|\/tag)/)a[href^="https://al.dmm.co.jp"]
 exploader.net###preview_images > span[class^="tracking_"]
-||daotag.com/tag/$script,replace=/if\(.+?\)(\{window\.[0-9a-f]{20\,}=false;window\.[0-9a-z]{20\,}=false;return;\})/if(0)\$1/m,domain=exploader.net
 
 ! https://github.com/uBlockOrigin/uAssets/issues/26348
 @@||ac.cnstrc.com^$xhr,domain=bjs.com
