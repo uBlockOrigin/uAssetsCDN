@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Quick fixes
 ! Expires: 12 hours
-! Last modified: Wed, 18 Dec 2024 08:25:25 +0000
-! Diff-Path: ../patches/2024.12.18.630.patch#ublock-quick-fixes
+! Last modified: Wed, 18 Dec 2024 15:27:25 +0000
+! Diff-Path: ../patches/2024.12.18.946.patch#ublock-quick-fixes
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/quick-fixes.txt ***
@@ -55,9 +55,8 @@ sandratableother.com##+js(set, console.clear, undefined)
 japscan.lol##+js(aost, onload, inlineScript)
 *$image,redirect-rule=1x1.gif,domain=japscan.lol
 japscan.lol##+js(aeld, load, /navpromo|clipPath|0p'\+/)
-japscan.lol##+js(aeld, DOMContentLoaded, /function\s*\(\s*\)\s*\{[$\w]+\s*\(function\s*\(\s*\)|Porita|getComputedStyle'|getAttribute'|#Roi'\+|\+'pr|\(Lol|Niger|Charger|GoodDay|funct'|t'\+'y/)
-japscan.lol##+js(spoof-css, .navbar-nav > li#navpromo2.nav-item, width, auto)
-japscan.lol##.navbar-nav > li#navpromo2.nav-item:style(width: 0 !important; overflow: hidden !important;)
+japscan.lol##+js(aeld, DOMContentLoaded, /Zodora|checkVar\)|p'\+'r|Niger|Charger|GoodDay|funct'|t'\+'y/)
+japscan.lol##.navbar-nav > li#navpromo2.nav-item:style(clip-path: circle(0) !important;)
 ||japscan.lol/zjs/$script,replace=/function GoodDay\(\)\{.+?\}\}\}//
 japscan.lol#@#.navbar-nav > li#navpromo2.nav-item
 japscan.lol##body > style + .container > .row > #main + #sidebar.col-md-3 > .card.mt-1 > .card[style="margin: 0px auto; display: block;"] > iframe[id^="__clb-"][id$="_container"][style^="display: inline-block; width: 300px; height: 250px;"][sandbox="allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-forms allow-scripts allow-top-navigation-to-custom-protocols"][scrolling="no"]
@@ -148,13 +147,13 @@ wiki.yjsnpi.nu##^script[src^="/w/load.php?lang=ja&modules="][defer]:not(async)
 dogdrip.net,infinityfree.com,smsonline.cloud,webdesignledger.com##+js(trusted-replace-argument, Array.prototype.forEach, 0, noopFunc, condition, /\w+=>\w+\+=String\[\w+\(\d+\)]\(\w+\)/)
 ||karistudio.com/wp-content/themes/blogarise-child/check2.js$important
 karistudio.com##p.chapter_content:style(display: block !important; visibility: visible !important; opacity: 1 !important; transform: none !important;)
-*$xhr,redirect-rule=noop.txt,domain=cursomecanet.com
+@@*$xhr,1p,domain=cursomecanet.com
 bing.com##+js(trusted-replace-outbound-text, DOMTokenList.prototype.toString, b_algoSlug, b_algo)
 bing.com##li.b_algo:has(> :is(.b_tpcn, .b_title, h2) a[href^="https://www.bing.com/aclick?"])
 bing.com##li.b_algo:has(> :is(.b_tpcn, .b_title, h2) a[href^="https://www.bing.com/aclk?"])
-exploader.net##a[style*="display:"][href^="https://al.dmm.co.jp"] img:style(position: absolute !important; clip:rect(1px,1px,1px,1px) !important;)
-exploader.net##a[style*="display:"][href^="https://al.dmm.co.jp"] span:style(position: absolute !important; clip:rect(1px,1px,1px,1px) !important;)
-exploader.net##+js(spoof-css, a[style*="display:"][href^="https://al.dmm.co.jp"] img\,a[style*="display:"][href^="https://al.dmm.co.jp"] span, clip, '')
+exploader.net##+js(trusted-rpnt, script, window.addEventListener, (async()=>{const path=document.querySelector('script[src^="https://daotag.com/tag/').getAttribute('src');const getVal=async()=>{const res=await fetch(path);const text=await res.text();const val=text.match(/[0-9a-f]{20\,}/);return val[0]};let value=await getVal();if(!value&&typeof value==='undefined'||value!==!1){window[value]=!0}})();window.addEventListener)
+||daotag.com^$xhr,badfilter
+||daotag.com/tag/$script,domain=exploader.net,important
 exploader.net##:matches-path(/(^\/$|\/free|\/search|\/preview|\/tag)/)a[href^="https://al.dmm.co.jp"]
 exploader.net###preview_images > span[class^="tracking_"]
 ||daotag.com/tag/$script,replace=/if\s*\(!(window\.[0-9a-z]{20\,})\)[\S\s]+/if(!\$1&&typeof \$1==='undefined'||\$1!==false){\$1=true}/,domain=exploader.net
@@ -173,3 +172,4 @@ www.chip.de##+js(rmnt, script, / \=\=\= [0-9]{1,2}\) \{ \}/)
 /nativeads-v2.js$badfilter
 ||hebiichigo.com^$badfilter
 ||hebiichigo.com^$3p
+||business-center-$doc,badfilter
