@@ -32,3 +32,4 @@ Mirrors:
 - <https://ublockorigin.pages.dev/>
 - <https://www.jsdelivr.com/package/gh/uBlockOrigin/uAssetsCDN>
 - <https://cdn.statically.io/>
+
