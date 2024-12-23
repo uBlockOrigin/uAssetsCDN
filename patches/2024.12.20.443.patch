@@ -1,16 +1,26 @@
-diff name:ublock-annoyances lines:7 checksum:188c927493
+diff name:ublock-annoyances lines:17 checksum:942469cb3a
 d3 2
 a4 2
-! Last modified: Sat, 21 Dec 2024 20:38:46 +0000
-! Diff-Path: ../patches/2024.12.23.327.patch#ublock-annoyances
-a3997 2
+! Last modified: Mon, 23 Dec 2024 07:22:57 +0000
+! Diff-Path: ../patches/2024.12.23.629.patch#ublock-annoyances
+a3997 12
 ! t3n.de anti adblock in articles
 ||assets.t3n.de/t3n-de/assets/t3n/2018/scripts/abdtn-$script,1p
-diff name:ublock-badware lines:28 checksum:db98b7ff13
+!#if env_firefox
+foxteller.com##[oncontextmenu]:remove-attr(/^on(?:contextmenu|copy|cut)$/)
+!#else
+foxteller.com##+js(ra, oncontextmenu|oncopy|oncut, [id^="chapter"], stay)
+!#endif
+foxteller.com##+js(aeld, contextmenu, preventDefault)
+foxteller.com##+js(aeld, selectionchange, .html)
+foxteller.com##+js(set, document.onkeydown, noopFunc)
+foxteller.com##+js(trusted-suppress-native-method, RegExp.prototype.test, '"contact@foxteller.com"', abort)
+foxteller.com##.m-content#chapter .chapter-content p:style(cursor: revert !important; -webkit-touch-callout: default !important; -webkit-user-select: text !important; -khtml-user-select: text !important; -moz-user-select: text !important; -ms-user-select: text !important; user-select: text !important; -webkit-tap-highlight-color: revert !important;)
+diff name:ublock-badware lines:28 checksum:77dbd0fbfe
 d3 2
 a4 2
 ! Last modified: Mon, 23 Dec 2024 03:20:14 +0000
-! Diff-Path: ../patches/2024.12.23.327.patch#ublock-badware
+! Diff-Path: ../patches/2024.12.23.629.patch#ublock-badware
 a2459 1
 ||rain890o.fun^$doc
 d3184 3
@@ -35,11 +45,11 @@ a3837 1
 /^https:\/\/(?:[^.]+\.)?\d{6}-coinbase\.com\//$doc,to=com|~coinbase.com
 a4712 1
 ||winfreebigwindeal.top^$all
-diff name:ublock-filters lines:2643 checksum:10bd3eedbf
+diff name:ublock-filters lines:2651 checksum:e7ce2a0d08
 d3 2
 a4 2
-! Last modified: Mon, 23 Dec 2024 04:06:57 +0000
-! Diff-Path: ../patches/2024.12.23.327.patch#ublock-filters
+! Last modified: Mon, 23 Dec 2024 09:30:10 +0000
+! Diff-Path: ../patches/2024.12.23.629.patch#ublock-filters
 d29 2
 a34 2
 ||youtube.com/youtubei/v1/get_watch?$xhr,1p,replace=/"adPlacements.*?([A-Z]"\}|"\}{2\,4})\}\]\,//
@@ -73,11 +83,11 @@ a19812 1
 ap7am.com,cinema.com.my,dolldivine.com,giornalone.it,iplocation.net,jutarnji.hr,mediaindonesia.com,slobodnadalmacija.hr##+js(rmnt, script, adrecover.com)
 d21881 1
 a21881 1
-celebzcircle.com,bi-girl.net,ftuapps.*,hentaiseason.com,hoodtrendspredict.com,osteusfilmestuga.online,ragnarokscanlation.opchapters.com,sampledrive.org,showflix.*,tvappapk.com,twobluescans.com,varnascan.xyz##^script:has-text(/decodeURIComponent\(escape|fairAdblock/)
+celebzcircle.com,bi-girl.net,ftuapps.*,hentaiseason.com,hoodtrendspredict.com,osteusfilmestuga.online,ragnarokscanlation.opchapters.com,sampledrive.org,showflix.*,tojimangas.com,tvappapk.com,twobluescans.com,varnascan.xyz##^script:has-text(/decodeURIComponent\(escape|fairAdblock/)
 d21883 1
 a21883 1
-celebzcircle.com,bi-girl.net,ftuapps.*,hentaiseason.com,hoodtrendspredict.com,osteusfilmestuga.online,ragnarokscanlation.opchapters.com,sampledrive.org,showflix.*,tvappapk.com,twobluescans.com,varnascan.xyz##+js(rmnt, script, /decodeURIComponent\(escape|fairAdblock/)
-a24156 2601
+celebzcircle.com,bi-girl.net,ftuapps.*,hentaiseason.com,hoodtrendspredict.com,osteusfilmestuga.online,ragnarokscanlation.opchapters.com,sampledrive.org,showflix.*,tojimangas.com,tvappapk.com,twobluescans.com,varnascan.xyz##+js(rmnt, script, /decodeURIComponent\(escape|fairAdblock/)
+a24156 2609
 ! *** uAssets:filters/filters-2024.txt ***
 ! START: Rules from filters.txt
 360haven.com###pageWrapper:style(display: initial !important;)
@@ -2677,13 +2687,21 @@ javx.cc##+js(aeld, DOMContentLoaded, window.open)
 tab-maker.com##+js(no-fetch-if, googletagmanager, length:10)
 ||arabs.alarbda.com^
 netflix.com##+js(json-prune, result.adverts)
+!#if cap_html_filtering
+123animehub.cc##^script:has-text(shown_at)
+!#else
+123animehub.cc##+js(rmnt, script, shown_at)
+!#endif
+worldpopulationreview.com###top_ad_container + div:style(padding-top: 4rem !important;)
+gofirmware.com##+js(aeld, click, window.open)
+gofirmware.com##+js(nowoif, _blank)
 ! *** uAssets:filters/filters-2025.txt ***
 ! GitHub pull requests: https://github.com/uBlockOrigin/uAssets/pulls
-diff name:ublock-privacy lines:18 checksum:c698747ad1
+diff name:ublock-privacy lines:19 checksum:5a1db7a672
 d3 2
 a4 2
-! Last modified: Sun, 22 Dec 2024 14:44:24 +0000
-! Diff-Path: ../patches/2024.12.23.327.patch#ublock-privacy
+! Last modified: Mon, 23 Dec 2024 10:00:06 +0000
+! Diff-Path: ../patches/2024.12.23.629.patch#ublock-privacy
 d139 5
 a143 5
 loawa.com,ygosu.com,sportalkorea.com,edaily.co.kr,economist.co.kr,etoday.co.kr,isplus.com,hometownstation.com,honkailab.com,thestockmarketwatch.com,issuya.com,worldhistory.org,etnews.com,iusm.co.kr,dogdrip.net,etoland.co.kr,picrew.me,text-compare.com,fntimes.com,javatpoint.com,lamire.jp,bamgosu.site,allthekingz.com,automobile-catalog.com,maketecheasier.com,thesaurus.net,wfmz.com,thestar.co.uk,yorkshirepost.co.uk,mydaily.co.kr,raenonx.cc,ndtvprofit.com,badmouth1.com,logicieleducatif.fr,taxguru.in,islamicfinder.org,aikatu.jp,secure-signup.net,globalrph.com,sportsrec.com,reportera.co.kr,flatpanelshd.com,videogamemods.com,adintrend.tv,ark-unity.com,cool-style.com.tw,dziennik.pl,eurointegration.com.ua,winfuture.de,freemcserver.net,pravda.com.ua,infinityfree.com,wort-suchen.de,word-grabber.com,palabr.as,motscroises.fr,cruciverba.it,dramabeans.com,mynet.com,sportsseoul.com,smsonline.cloud,meeco.kr,heureka.cz,slobodnadalmacija.hr,ap7am.com,autoby.jp,cinema.com.my,crosswordsolver.com,cruciverba.it,daily.co.jp,demotywatory.pl,dnevno.hr,dolldivine.com,economictimes.com,giornalone.it,gloria.hr,iplocation.net,joemonster.org,jutarnji.hr,lacuarta.com,laleggepertutti.it,lovelive-petitsoku.com,manta.com,mediaindonesia.com,mirrored.to,missyusa.com,mistrzowie.org,mlbpark.donga.com,motscroises.fr,netzwelt.de,oeffnungszeitenbuch.de,ondemandkorea.com,oradesibiu.ro,oraridiapertura24.it,palabr.as,persoenlich.com,petitfute.com,powerpyx.com,rabitsokuhou.2chblog.jp,rostercon.com,slashdot.org,sourceforge.net,suzusoku.blog.jp,talkwithstranger.com,the-crossword-solver.com,tportal.hr,webdesignledger.com,wort-suchen.de,wouldurather.io,woxikon.*,yutura.net,zagreb.info,golf-live.at,motherlyvisions.com,w.grapps.me,gazetaprawna.pl,pressian.com,kreuzwortraetsel.de,verkaufsoffener-sonntag.com,raetsel-hilfe.de,horairesdouverture24.fr,nyitvatartas24.hu,convertcase.net##+js(set-local-storage-item, adshield-analytics-uuid, $remove$)
@@ -2693,16 +2711,17 @@ loawa.com,ygosu.com,sportalkorea.com,edaily.co.kr,economist.co.kr,etoday.co.kr,i
 loawa.com,ygosu.com,sportalkorea.com,edaily.co.kr,economist.co.kr,etoday.co.kr,isplus.com,hometownstation.com,honkailab.com,thestockmarketwatch.com,issuya.com,worldhistory.org,etnews.com,iusm.co.kr,dogdrip.net,etoland.co.kr,picrew.me,text-compare.com,fntimes.com,javatpoint.com,lamire.jp,bamgosu.site,allthekingz.com,automobile-catalog.com,maketecheasier.com,thesaurus.net,wfmz.com,thestar.co.uk,yorkshirepost.co.uk,mydaily.co.kr,raenonx.cc,ndtvprofit.com,badmouth1.com,logicieleducatif.fr,taxguru.in,islamicfinder.org,aikatu.jp,secure-signup.net,globalrph.com,sportsrec.com,reportera.co.kr,flatpanelshd.com,videogamemods.com,adintrend.tv,ark-unity.com,cool-style.com.tw,dziennik.pl,eurointegration.com.ua,winfuture.de,freemcserver.net,pravda.com.ua,infinityfree.com,wort-suchen.de,word-grabber.com,palabr.as,motscroises.fr,cruciverba.it,dramabeans.com,mynet.com,sportsseoul.com,smsonline.cloud,meeco.kr,heureka.cz,slobodnadalmacija.hr,ap7am.com,autoby.jp,cinema.com.my,crosswordsolver.com,cruciverba.it,daily.co.jp,demotywatory.pl,dnevno.hr,dolldivine.com,economictimes.com,giornalone.it,gloria.hr,iplocation.net,joemonster.org,jutarnji.hr,lacuarta.com,laleggepertutti.it,lovelive-petitsoku.com,manta.com,mediaindonesia.com,mirrored.to,missyusa.com,mistrzowie.org,mlbpark.donga.com,motscroises.fr,netzwelt.de,oeffnungszeitenbuch.de,ondemandkorea.com,oradesibiu.ro,oraridiapertura24.it,palabr.as,persoenlich.com,petitfute.com,powerpyx.com,rabitsokuhou.2chblog.jp,rostercon.com,slashdot.org,sourceforge.net,suzusoku.blog.jp,talkwithstranger.com,the-crossword-solver.com,tportal.hr,webdesignledger.com,wort-suchen.de,wouldurather.io,woxikon.*,yutura.net,zagreb.info,golf-live.at,motherlyvisions.com,w.grapps.me,gazetaprawna.pl,pressian.com,kreuzwortraetsel.de,verkaufsoffener-sonntag.com,raetsel-hilfe.de,horairesdouverture24.fr,nyitvatartas24.hu,convertcase.net##+js(set-local-storage-item, /_fa_Y2FjaGVfYWRibG9ja19jaXJjdW12ZW50X3Njb3Jl$/, $remove$)
 a754 1
 ||onlyfans.com/away^$urlskip=?url
-a818 4
+a818 5
 ! beacons.ai analytics
 ||beacons.ai/api/rtanalytics/
 ||beacons.ai/api/public_actions
 ||store.steampowered.com/app/usabilitytracking/
-diff name:ublock-quick-fixes lines:32 checksum:9b2c230d08
+||joinhoney.com/evs
+diff name:ublock-quick-fixes lines:32 checksum:52bbb269c3
 d3 2
 a4 2
-! Last modified: Mon, 23 Dec 2024 04:03:44 +0000
-! Diff-Path: ../patches/2024.12.23.327.patch#ublock-quick-fixes
+! Last modified: Mon, 23 Dec 2024 08:47:42 +0000
+! Diff-Path: ../patches/2024.12.23.629.patch#ublock-quick-fixes
 d27 1
 a27 3
 !www.youtube.com##+js(json-prune-fetch-response, playerAds adPlacements adSlots playerResponse.playerAds playerResponse.adPlacements playerResponse.adSlots [].playerResponse.adPlacements [].playerResponse.playerAds [].playerResponse.adSlots, , propsToMatch, /\/(?:player|playlist|get_watch)\?/)
@@ -2722,7 +2741,7 @@ d133 2
 a134 2
 *##span[id^="img_"][class^="img_"] > style:first-child + div[style*="align-items"][style*="relative"][style*="center"] > iframe[src][marginwidth][width][style]:style(transform: translateX(-10000px) !important;)
 dogdrip.net,infinityfree.com,smsonline.cloud,webdesignledger.com##+js(trusted-replace-outbound-text, decodeURIComponent, /^(Chrome|Firefox)\/$/, $1/1)
-d140 10
+d137 13
 a149 5
 bing.com##li.b_algo:has(.b_algoSlug):remove-class(b_algo)
 bing.com##ol#b_results > li:has(> :is(.b_tpcn, .b_title, h2) a[href^="https://www.bing.com/aclick?"])
@@ -2731,19 +2750,19 @@ exploader.net##+js(spoof-css, article > div[style*="1120px"] > div, clip, '')
 exploader.net##article > div[style*="1120px"] > div:style(position: absolute !important; clip:rect(1px,1px,1px,1px) !important)
 d152 1
 d158 4
-diff name:ublock-unbreak lines:7 checksum:c9a22f71f1
+diff name:ublock-unbreak lines:7 checksum:e187bf6cc8
 d3 2
 a4 2
 ! Last modified: Mon, 23 Dec 2024 03:08:23 +0000
-! Diff-Path: ../patches/2024.12.23.327.patch#ublock-unbreak
+! Diff-Path: ../patches/2024.12.23.629.patch#ublock-unbreak
 a2729 2
 hagerty.com##+js(set, MT, {})
 hagerty.com##+js(set, MT.track, noopFunc)
-diff name:easylist lines:929 checksum:98afb0bdc4
+diff name:easylist lines:929 checksum:d0ce6295fb
 d4 2
 a5 2
 ! Last modified: Mon, 23 Dec 2024 03:50:02 +0000
-! Diff-Path: ../patches/2024.12.23.327.patch#easylist
+! Diff-Path: ../patches/2024.12.23.629.patch#easylist
 d22 1
 d26 1
 d44 1
@@ -3669,11 +3688,11 @@ a60216 1
 coincarp.com##.border-bottom:has-text(Sponsored)
 a60813 1
 youtube.com###mealbar-promo-renderer
-diff name:easyprivacy lines:8 checksum:404994234f
+diff name:easyprivacy lines:8 checksum:2a4f7c18f7
 d4 2
 a5 2
 ! Last modified: Sun, 22 Dec 2024 06:50:10 +0000
-! Diff-Path: ../patches/2024.12.23.327.patch#easyprivacy
+! Diff-Path: ../patches/2024.12.23.629.patch#easyprivacy
 a14276 1
 ||mixpanel-proxy.coingecko.com^
 a52681 1
