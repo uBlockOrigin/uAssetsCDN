@@ -1,12 +1,12 @@
-diff name:ublock-annoyances lines:3 checksum:b9edcad6c5
+diff name:ublock-annoyances lines:3 checksum:188c927493
 d4 1
 a4 1
-! Diff-Path: ../patches/2024.12.23.113.patch#ublock-annoyances
-diff name:ublock-badware lines:24 checksum:28f7a157e5
+! Diff-Path: ../patches/2024.12.23.327.patch#ublock-annoyances
+diff name:ublock-badware lines:26 checksum:db98b7ff13
 d3 2
 a4 2
-! Last modified: Sun, 22 Dec 2024 01:46:02 +0000
-! Diff-Path: ../patches/2024.12.23.113.patch#ublock-badware
+! Last modified: Mon, 23 Dec 2024 03:20:14 +0000
+! Diff-Path: ../patches/2024.12.23.327.patch#ublock-badware
 d3185 3
 a3194 4
 ! gov.au
@@ -27,11 +27,13 @@ a3638 1
 d3838 1
 a3838 1
 /^https:\/\/(?:[^.]+\.)?\d{6}-coinbase\.com\//$doc,to=com|~coinbase.com
-diff name:ublock-filters lines:45 checksum:b6bc5f6ca0
+a4713 1
+||winfreebigwindeal.top^$all
+diff name:ublock-filters lines:44 checksum:10bd3eedbf
 d3 2
 a4 2
-! Last modified: Sun, 22 Dec 2024 16:01:18 +0000
-! Diff-Path: ../patches/2024.12.23.113.patch#ublock-filters
+! Last modified: Mon, 23 Dec 2024 04:06:57 +0000
+! Diff-Path: ../patches/2024.12.23.327.patch#ublock-filters
 d811 1
 d11984 1
 a11984 1
@@ -52,12 +54,10 @@ a23303 2
 usersdrive.com##+js(nowoif, _blank)
 ||holputy.shop^$popup,doc
 d24004 2
-a24005 9
+a24005 7
 !#if cap_html_filtering
-favoyeurtube.net##^script:has-text(minBid)
 rubystm.com,streamruby.com##^script:has-text(wpadmngr.com)
 !#else
-favoyeurtube.net##+js(rmnt, script, minBid)
 rubystm.com,streamruby.com##+js(rmnt, script, wpadmngr.com)
 !#endif
 rubystm.com##+js(set, cRAds, false)
@@ -65,19 +65,20 @@ rubystm.com##+js(set, cRAds, false)
 a24020 1
 abs-cbn.com##div[style*="2147483647"]:has(> div[style$="z-index: 999;"])
 d24023 1
-a24023 1
-abs-cbn.com##:is(.css-168qn5i, .css-1slfery, .css-xcd31q, .css-4dbdht, .css-1d3bbye):has(div[class^="imp-adSlot"])
+a24023 2
+abs-cbn.com##:is(.css-168qn5i, .css-1slfery, .css-xcd31q, .css-4dbdht, .css-1d3bbye, .css-ob4cto):has(div[class^="imp-adSlot"])
+abs-cbn.com##.css-15j76c0:has(> div[style*="z-index: 99999"])
 a24122 1
 @@||titulky.com^$script,1p
 a24165 1
 netflix.com##+js(json-prune, result.adverts)
 a24166 1
 ! GitHub pull requests: https://github.com/uBlockOrigin/uAssets/pulls
-diff name:ublock-privacy lines:11 checksum:bccc9b0fa8
+diff name:ublock-privacy lines:11 checksum:c698747ad1
 d3 2
 a4 2
 ! Last modified: Sun, 22 Dec 2024 14:44:24 +0000
-! Diff-Path: ../patches/2024.12.23.113.patch#ublock-privacy
+! Diff-Path: ../patches/2024.12.23.327.patch#ublock-privacy
 a754 1
 ||onlyfans.com/away^$urlskip=?url
 a818 4
@@ -85,11 +86,11 @@ a818 4
 ||beacons.ai/api/rtanalytics/
 ||beacons.ai/api/public_actions
 ||store.steampowered.com/app/usabilitytracking/
-diff name:ublock-quick-fixes lines:20 checksum:6da44d1198
+diff name:ublock-quick-fixes lines:20 checksum:9b2c230d08
 d3 2
 a4 2
-! Last modified: Sun, 22 Dec 2024 16:20:36 +0000
-! Diff-Path: ../patches/2024.12.23.113.patch#ublock-quick-fixes
+! Last modified: Mon, 23 Dec 2024 04:03:44 +0000
+! Diff-Path: ../patches/2024.12.23.327.patch#ublock-quick-fixes
 d58 2
 a59 2
 japscan.lol##+js(aeld, load, /function\s*\(\s*\)\s*\{\s*[$\w]+\s*\(\s*function\s*\(\s*\)\s*\{\s*|Yutamo|='\/'\+|appendChild'\]/)
@@ -98,31 +99,63 @@ d61 1
 a61 2
 japscan.lol##+js(set-attr, .navbar-nav > li#navpromo2.nav-item > a, href, '')
 japscan.lol##.navbar-nav > li#navpromo2.nav-item:style(opacity: 0 !important;)
-d136 1
-a136 1
-bing.com##+js(rpnt, script, '/(\(function\([a-z]\,[a-z]\)\{onload)/', '(()=>{const o={apply:(o,t,e)=>!(!t.value.includes("b_algoSlug")||"b_algo"!==e[0])||Reflect.apply(o,t,e)};DOMTokenList.prototype.contains=new Proxy(DOMTokenList.prototype.contains,o)})();$1')
-d139 6
-a144 2
+d136 9
+a144 5
+bing.com##li.b_algo:has(.b_algoSlug):remove-class(b_algo)
+bing.com##ol#b_results > li:has(> :is(.b_tpcn, .b_title, h2) a[href^="https://www.bing.com/aclick?"])
+bing.com##ol#b_results > li:has(> :is(.b_tpcn, .b_title, h2) a[href^="https://www.bing.com/aclk?"])
 exploader.net##+js(spoof-css, article > div[style*="1120px"] > div, clip, '')
 exploader.net##article > div[style*="1120px"] > div:style(position: absolute !important; clip:rect(1px,1px,1px,1px) !important)
 d147 1
-diff name:ublock-unbreak lines:3 checksum:973a514510
-d4 1
-a4 1
-! Diff-Path: ../patches/2024.12.23.113.patch#ublock-unbreak
-diff name:easylist lines:192 checksum:61003b3344
+diff name:ublock-unbreak lines:7 checksum:c9a22f71f1
+d3 2
+a4 2
+! Last modified: Mon, 23 Dec 2024 03:08:23 +0000
+! Diff-Path: ../patches/2024.12.23.327.patch#ublock-unbreak
+a2729 2
+hagerty.com##+js(set, MT, {})
+hagerty.com##+js(set, MT.track, noopFunc)
+diff name:easylist lines:372 checksum:98afb0bdc4
 d4 2
 a5 2
-! Last modified: Sun, 22 Dec 2024 13:00:21 +0000
-! Diff-Path: ../patches/2024.12.23.113.patch#easylist
+! Last modified: Mon, 23 Dec 2024 03:50:02 +0000
+! Diff-Path: ../patches/2024.12.23.327.patch#easylist
+a15860 1
+||05fa754f24.com^
 a16190 1
 ||3103cf02ec.com^
+a16451 1
+||7719094ddf.com^
+a16608 1
+||a4f074a2f8.com^
+a16645 1
+||abaolokvmmwrb.top^
 a16655 1
 ||abbotsgalen.com^
+a17646 1
+||ahokaski.com^
 a18286 1
 ||approbationoutwardconstrue.com^
+a18636 1
+||ationforeahyouglas.com^
+a18674 1
+||attaintobiit.shop^
+a18908 1
+||awlaxvnpyf.com^
+a18936 1
+||axdbzqorym.com^
 a19175 1
 ||barricadecourse.com^
+a19221 1
+||baucheedoa.net^
+a19418 1
+||bemolintrans.shop^
+a19590 1
+||bibitheedseck.net^
+a19631 1
+||bigotstatuewider.com^
+a20172 1
+||brizzdirging.top^
 a20382 1
 ||businesstremendoushad.com^
 a20407 1
@@ -131,14 +164,30 @@ a20446 1
 ||c-trzylshv.vip^
 a21054 1
 ||chitchaudsoax.net^
+a21106 1
+||choumtonunignou.net^
+a21204 1
+||ckgeflumkryp.com^
+a21492 1
+||cokerymyocele.shop^
+a21549 1
+||comefukmendat.com^
 a21552 1
 ||comerhurlentertain.com^
 a21585 1
 ||comoideludes.shop^
 a21680 1
 ||conforminteractbuzz.com^
+a21867 1
+||corneredtomb.com^
+a22103 1
+||crueltysugar.shop^
 a22272 1
 ||d19a04d0igndnt.cloudfront.net^
+a22279 1
+||d2kecuadujf2df.cloudfront.net^
+a22283 1
+||d3u0wd7ppfhcxv.cloudfront.net^
 a22368 1
 ||dangersfluentnewsletter.com^
 a22919 1
@@ -153,18 +202,38 @@ a23717 1
 ||ebigrooxoomsust.net^
 a23799 1
 ||eebuksaicmirte.net^
+a23818 1
+||eejersenset.net^
 a23951 1
 ||elentmatch.com^
+a24054 1
+||endationforea.com^
+a24237 1
+||ersgaxbmd.xyz^
+a24313 1
+||etobepartouk.com^
+a24691 1
+||fareputfeablea.com^
 a24769 1
 ||fdmmgwlcg.com^
 a24816 1
 ||feghijupvucw.com^
+a24837 1
+||fennecsenlard.shop^
+a25024 1
+||fixed-complex.pro^
 a25066 1
 ||flawgrandparentsmysterious.com^
 a25322 1
 ||forwhimsicottan.com^
 a25536 1
 ||fupembtsdkx.com^
+a25716 1
+||garsleviter.shop^
+a26155 1
+||glumtoazaxom.net^
+a26489 1
+||grexackugnee.net^
 a26621 1
 ||gubsikroord.net^
 a27090 1
@@ -175,52 +244,104 @@ a27439 1
 ||hpskiqiafxshdf.com^
 a27782 1
 ||imbarkfrailty.com^
+a28037 1
+||inksgurjun.top^
+a28201 1
+||intricateinscription.com^
+a28424 1
+||iyzhcfro.com^
 a28607 1
 ||jezer.site^
+a28632 1
+||jidroumsaghetu.xyz^
 a28979 1
 ||kczu-ohhuf.site^
 a29003 1
 ||keiztimzdbjt.click^
+a29063 1
+||kichelgibsons.shop^
+a29264 1
+||krigialinters.top^
+a29306 1
+||kuqpdxek.today^
+a29458 1
+||laolcwsd.tech^
+a29512 1
+||lauphoonajup.net^
 a29532 1
 ||layerrepeatedlychancy.com^
 a29700 1
 ||lgjtvyurnivf.com^
+a29839 1
+||liskpiculs.shop^
 a30146 1
 ||lskillsexkcerl.com^
+a30377 1
+||magitangly.top^
+a30869 1
+||mhfkleqnjlfbqe.com^
 a31101 1
 ||mobcardel.top^
 a31432 1
 ||mustersvyrnwy.top^
+a31605 1
+||naplespogrom.top^
 a31666 1
 ||ncojkokhi.com^
 a32062 1
 ||notablefaxfloss.com^
 a32179 1
 ||nsftrmxwehcsm.com^
+a32203 1
+||ntsiwoulukdlik.com^
+a32363 1
+||oartauksak.net^
+a32365 1
+||oartylkbt.com^
 a32386 1
 ||obesityvanmost.shop^
 a32403 1
 ||obqaxzon.com^
+a32824 1
+||ooghourgaiy.net^
+a33155 1
+||outhaushauviy.xyz^
 a33187 1
 ||outwallastron.top^
+a33295 1
+||oxtuycevz.com^
 a33301 1
 ||oyaoknzgoqkq.com^
 a33333 1
 ||pacifics.sbs^
+a33777 1
+||personantaeus.top^
+a33861 1
+||phautchauni.net^
 a33970 1
 ||picturescil.shop^
 a34068 1
 ||pjtoaewbccpchu.com^
+a34299 1
+||poloistwilrone.shop^
 a34406 1
 ||positivelyassertappreciation.com^
 a34448 1
 ||poucooptee.net^
 a34842 1
 ||prudentperform.com^
+a34917 1
+||psoltoanoucamte.net^
+a35049 1
+||pturdaumpustool.net^
 a35064 1
 ||pubertybloatgrief.com^
 a35406 1
 ||qnowyhbtjqvyn.com^
+a35475 1
+||quasarcouhage.top^
+a35563 1
+||qylmbemvlzjew.top^
 a35567 1
 ||qywjvlaoyeavv.top^
 a35630 1
@@ -239,10 +360,20 @@ a36354 1
 ||riemvocule.com^
 a36378 1
 ||rikharenut.shop^
+a36465 1
+||rnyvukdnylwnqtj.com^
+a36731 1
+||rudishtremolo.top^
+a36747 1
+||rukskijruza.com^
 a36854 1
 ||sacedoamte.net^
+a36989 1
+||saukaivounoa.xyz^
 a37380 1
 ||setworkgoloka.shop^
+a37435 1
+||shaitakroaks.net^
 a37653 1
 ||sialsizably.shop^
 a37685 1
@@ -251,28 +382,64 @@ a38004 1
 ||snzqtmjas.com^
 a38149 1
 ||soumoastout.net^
+a38381 1
+||stachysrekick.top^
 a38583 1
 ||stjpezyt.com^
 a39208 1
 ||tationseleauks.com^
 a39275 1
 ||technologyinsolubleportion.com^
+a39299 1
+||teindsoutsea.shop^
+a39305 1
+||telegakapur.shop^
+a39693 1
+||tilrozafains.net^
+a39762 1
+||tlpfjgsstoytfm.com^
 a39867 1
 ||topatternbackache.com^
+a39948 1
+||tovwhxpomgkd.com^
 a40248 1
 ||trunchsubnect.com^
+a40271 1
+||trutinewapatoo.top^
+a40523 1
+||ugbkfsvqkayt.icu^
+a40677 1
+||undoseire.top^
+a40687 1
+||unfiledbunkum.shop^
 a40701 1
 ||unhatedkrubi.shop^
 a40736 1
 ||unluredtawgi.shop^
 a40858 1
 ||upsidetrug.com^
+a40876 1
+||uqljlsqtrbrpu.com^
+a40972 1
+||uwdjwfqvxpo.xyz^
+a40978 1
+||uwzaq.world^
+a41060 1
+||vanirausones.shop^
+a41119 1
+||vbiovkqt.com^
 a41510 1
 ||voopsookie.net^
 a41568 1
 ||vtoajoyxqicss.com^
+a41576 1
+||vugloubeky.net^
+a41682 1
+||wardagecouched.shop^
 a41761 1
 ||wazoceckoo.net^
+a41790 1
+||wdqrmaro.com^
 a41869 1
 ||weighssloughs.shop^
 a42053 1
@@ -283,12 +450,30 @@ a42210 1
 ||wjljwqbmmjaqz.top^
 a42530 1
 ||xaea12play.xyz^
+a42554 1
+||xcvrdyjthpep.com^
+a42597 1
+||xjgilqkymq.com^
+a42788 1
+||yequiremuke.com^
+a42882 1
+||yomxt.icu^
+a42928 1
+||ypersonalrecome.com^
 a42933 1
 ||yqghjejqlhbsv.com^
 a42936 1
 ||yresumeformor.com^
+a43012 1
+||zajpkgpmgll.com^
+a43040 1
+||zbdcjjpat.com^
+a43059 1
+||zeemeewhoowhoa.xyz^
 a43066 1
 ||zeksaugaunes.net^
+a43091 1
+||zevwkbzwkblle.top^
 a47461 1
 ||joahahewhoo.net^$popup
 a47959 1
@@ -303,11 +488,11 @@ a52784 2
 ||putlocker.*/sab_
 a59431 1
 coingecko.com##[data-ads-target="banner"]
-diff name:easyprivacy lines:8 checksum:5789a20fe0
+diff name:easyprivacy lines:8 checksum:404994234f
 d4 2
 a5 2
 ! Last modified: Sun, 22 Dec 2024 06:50:10 +0000
-! Diff-Path: ../patches/2024.12.23.113.patch#easyprivacy
+! Diff-Path: ../patches/2024.12.23.327.patch#easyprivacy
 a14276 1
 ||mixpanel-proxy.coingecko.com^
 a52681 1
