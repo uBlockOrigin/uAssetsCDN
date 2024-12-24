@@ -1,12 +1,12 @@
-diff name:ublock-annoyances lines:20 checksum:5d0586115c
+diff name:ublock-annoyances lines:26 checksum:2e2ba84f77
 d3 2
 a4 2
-! Last modified: Mon, 23 Dec 2024 15:44:24 +0000
-! Diff-Path: ../patches/2024.12.24.393.patch#ublock-annoyances
+! Last modified: Tue, 24 Dec 2024 10:39:35 +0000
+! Diff-Path: ../patches/2024.12.24.680.patch#ublock-annoyances
 d3874 1
 a3874 1
 lookmovie2.*##+js(trusted-replace-xhr-response, /Timeout":\d+/, Timeout":0, /api/v)
-a3997 12
+a3997 18
 ! t3n.de anti adblock in articles
 ||assets.t3n.de/t3n-de/assets/t3n/2018/scripts/abdtn-$script,1p
 !#if env_firefox
@@ -19,11 +19,17 @@ foxteller.com##+js(aeld, selectionchange, .html)
 foxteller.com##+js(set, document.onkeydown, noopFunc)
 foxteller.com##+js(trusted-suppress-native-method, RegExp.prototype.test, '"contact@foxteller.com"', abort)
 foxteller.com##.m-content#chapter .chapter-content p:style(cursor: revert !important; -webkit-touch-callout: default !important; -webkit-user-select: text !important; -khtml-user-select: text !important; -moz-user-select: text !important; -ms-user-select: text !important; user-select: text !important; -webkit-tap-highlight-color: revert !important;)
-diff name:ublock-badware lines:31 checksum:85396b3069
+!#if cap_html_filtering
+blog.tangwudi.com##^script:has-text(stopPrntScr)
+!#else
+blog.tangwudi.com##+js(rmnt, script, stopPrntScr)
+!#endif
+blog.tangwudi.com##:not(input):not(textarea)::selection:style(background-color: #338FFF !important; color: white !important;)
+diff name:ublock-badware lines:31 checksum:ab5a889ab4
 d3 2
 a4 2
 ! Last modified: Tue, 24 Dec 2024 05:18:19 +0000
-! Diff-Path: ../patches/2024.12.24.393.patch#ublock-badware
+! Diff-Path: ../patches/2024.12.24.680.patch#ublock-badware
 a2459 1
 ||rain890o.fun^$doc
 d3184 3
@@ -51,11 +57,11 @@ a4712 4
 ||kvkmodule.4dq.com^$all
 ! fake dating
 /^https:\/\/[0-9a-z]{7}\.([0-9a-z]{7})\.top\/[0-9a-z]{7}\?t=\1&cid=[0-9a-z]+/$document,to=top,match-case
-diff name:ublock-filters lines:2683 checksum:0980258c6b
+diff name:ublock-filters lines:2699 checksum:89d0ed749f
 d3 2
 a4 2
-! Last modified: Tue, 24 Dec 2024 05:50:05 +0000
-! Diff-Path: ../patches/2024.12.24.393.patch#ublock-filters
+! Last modified: Tue, 24 Dec 2024 10:38:24 +0000
+! Diff-Path: ../patches/2024.12.24.680.patch#ublock-filters
 d29 2
 a34 2
 ||youtube.com/youtubei/v1/get_watch?$xhr,1p,replace=/"adPlacements.*?([A-Z]"\}|"\}{2\,4})\}\]\,//
@@ -76,10 +82,21 @@ a8365 3
 d8394 2575
 d11852 2
 d11856 1
-a12043 3
+a12043 14
 ! bollydrive. rest adpopup redirection
 bollydrive.rest##+js(aeld, , history.go)
 compu-pc.com##+js(acs, document.querySelectorAll, pastepc)
+quins.us##+js(no-fetch-if, doubleclick, , {"type": "opaque"})
+quins.us##+js(set, document.hasFocus, trueFunc)
+!#if cap_html_filtering
+flycutlink.com##^script:has-text(/google_ad_client|popMagic/)
+!#else
+flycutlink.com##+js(acs, document.addEventListener, google_ad_client)
+flycutlink.com##+js(acs, document.querySelectorAll, popMagic)
+!#endif
+flycutlink.com##+js(set, blurred, false)
+flycutlink.com##+js(nowoif)
+flycutlink.com##+js(set, go_popup, {})
 d14541 1
 a14541 1
 0dramacool.net,0gomovie.*,0gomovies.*,185.53.88.104,185.53.88.204,185.53.88.15,123moviefree.*,123movies4k.net,1kmovies.*,1madrasdub.*,1primewire.*,1rowsports.com,2embed.*,2madrasdub.*,2umovies.*,4anime.*,4share-mp3.net,9animetv.to,720pstream.me,aagmaal.com,abysscdn.com,adblockplustape.*,ajkalerbarta.com,akstream.xyz,altadefinizione01.*,androidapks.biz,androidsite.net,animeonlinefree.org,animesite.net,animespank.com,aniworld.to,apkmody.io,appsfree4u.com,atomixhq.*,audioz.download,awafim.tv,bdnewszh.com,beastlyprints.com,beinmatch.*,bengalisite.com,bestfullmoviesinhd.org,betteranime.net,blacktiesports.live,brmovies.*,buffsports.stream,ch-play.com,cima4u.*,clickforhire.com,clicknupload.*,cloudy.pk,cmovies.*,computercrack.com,coolcast2.com,crackedsoftware.biz,crackfree.org,cracksite.info,cricfree.*,crichd.*,cryptoblog24.info,cuatrolatastv.blogspot.com,cydiasources.net,databasegdriveplayer.*,decmelfot.xyz,dirproxy.com,dood.*,dopebox.to,downloadapk.info,downloadapps.info,downloadgames.info,downloadmusic.info,downloadsite.org,downloadwella.com,ebooksite.org,educationtips213.blogspot.com,egyup.live,elgoles.pro,embed.meomeo.pw,embed.scdn.to,emulatorsite.com,essaysharkwriting.club,exploreera.net,extrafreetv.com,f1stream.*,fakedetail.com,faselhd.*,fbstream.*,fclecteur.com,filemoon.*,filepress.*,files.im,filmlinks4u.*,filmpertutti.*,filmyzilla.*,flexyhit.com,fmoviefree.net,fmovies24.com,fmovies.*,footyhunter3.xyz,freeflix.info,freemoviesu4.com,freeplayervideo.com,freesoccer.net,french-stream.*,fseries.org,fzlink.*,gamefast.org,gamesite.info,gettapeads.com,gmanga.me,gocast123.me,gofilms4u.*,gogoanime.*,gogohd.net,gogoplay5.com,gomoviz.*,gooplay.net,gostreamon.net,happy2hub.org,harimanga.com,hdmoviefair.*,hdmovies4u.*,hdmovies50.*,hdmoviesfair.*,healthnewsreel.com,hexupload.net,hh3dhay.*,hinatasoul.com,hindilinks4u.*,hindisite.net,holymanga.net,hotmasti.*,hurawatch.*,hxfile.co,isosite.org,iv-soft.com,januflix.expert,jewelry.com.my,johnwardflighttraining.com,kabarportal.com,klmanga.*,klubsports.*,kstorymedia.com,la123movies.org,lespassionsdechinouk.com,libertestreamvf.*,lilymanga.net,linksdegrupos.com.br,linkz.wiki,livetvon.*,livestreamtv.pk,macsite.info,manga1000.*,manga1001.*,mangaraw.*,mangarawjp.*,mangasite.org,manhuascan.com,megamovies.org,membed.net,mlbstream.*,moddroid.com,motogpstream.*,movi.pk,moviefree2.com,movierulz.*,movies123.*,movies-watch.com.pk,movies2watch.*,moviesden.*,moviesite.app,moviesonline.fm,moviesx.org,moviezaddiction.*,msmoviesbd.com,musicsite.biz,myfernweh.com,myflixer.*,myviid.com,nazarickol.com,nbastream.*,netcine.*,nflstream.*,nhlstream.*,noob4cast.com,nsw2u.com,oko.sh,olympicstreams.me,onlinewatchmoviespk.*,orangeink.pk,pahaplayers.click,patchsite.net,pctfenix.*,pctnew.*,pdfsite.net,pksmovies.*,play1002.com,player-cdn.com,plyjam.*,plylive.*,pogolinks.*,popcorntime.*,poscitech.*,productkeysite.com,projectfreetv.one,romsite.org,rufiguta.com,rugbystreams.*,rytmp3.io,send.cm,seriesite.net,seriezloaded.com.ng,serijehaha.com,shahed4u.*,sflix.*,shrugemojis.com,siteapk.net,siteflix.org,sitegames.net,sitekeys.net,sitepdf.com,sitesunblocked.*,sitetorrent.com,softwaresite.net,solarmovies.*,sportbar.live,sportcast.*,sportkart1.xyz,sportskart.*,sports-stream.*,ssyoutube.com,stardima.com,stream4free.live,streaming-french.*,streamers.*,streamingcommunity.*,strikeout.*,superapk.org,supermovies.org,t20cup.*,tainio-mania.online,talaba.su,tamilguns.org,tatabrada.tv,techtrendmakers.com,tennisstreams.*,thememypc.net,thetechzone.online,thripy.com,tonnestreamz.xyz,torrentdosfilmes.*,toonanime.*,travelplanspro.com,turcasmania.com,tusfiles.com,tvonlinesports.com,tvply.*,ufcstream.*,ultramovies.org,uploadbank.com,uptomega.*,uqload.*,urdubolo.pk,vudeo.*,vidoo.*,vidspeeds.com,vipbox.*,vipboxtv.*,vipleague.*,viprow.*,warezsite.net,watchmovies2.com,watchmoviesforfree.org,watchofree.com,watchsite.net,watchsouthpark.tv,watchtvch.club,web.livecricket.is,webseries.club,worldcupstream.pm,y2mate.com,yesmovies.*,yomovies.*,yomovies1.*,youapk.net,youtube4kdownloader.com,yt2mp3s.*,yts-subs.com##+js(aeld, , break;case $.)
@@ -117,7 +134,7 @@ a22705 1
 rekidai-info.github.io##+js(nostif, , 2000)
 a22851 1
 nicomanga.com###welcome-bar
-a24156 2617
+a24156 2622
 ! *** uAssets:filters/filters-2024.txt ***
 ! START: Rules from filters.txt
 360haven.com###pageWrapper:style(display: initial !important;)
@@ -2733,13 +2750,18 @@ wvt.free.nf##.tracking-btn
 ||sweatypositive.com^
 ||cdn.jwplayer.com/libraries/QSNV25sR.js^$script,domain=www.ratemyprofessors.com
 faceittracker.net##+js(no-fetch-if, fundingchoicesmessages)
+!#if cap_html_filtering
+blog.tangwudi.com##^script:has-text(ai_adb)
+!#else
+blog.tangwudi.com##+js(rmnt, script, ai_adb)
+!#endif
 ! *** uAssets:filters/filters-2025.txt ***
 ! GitHub pull requests: https://github.com/uBlockOrigin/uAssets/pulls
-diff name:ublock-privacy lines:23 checksum:c3ef020155
+diff name:ublock-privacy lines:25 checksum:3b7d1d489b
 d3 2
 a4 2
-! Last modified: Tue, 24 Dec 2024 03:58:56 +0000
-! Diff-Path: ../patches/2024.12.24.393.patch#ublock-privacy
+! Last modified: Tue, 24 Dec 2024 09:08:01 +0000
+! Diff-Path: ../patches/2024.12.24.680.patch#ublock-privacy
 d139 5
 a143 6
 loawa.com,ygosu.com,sportalkorea.com,edaily.co.kr,economist.co.kr,etoday.co.kr,isplus.com,hometownstation.com,honkailab.com,thestockmarketwatch.com,issuya.com,worldhistory.org,etnews.com,iusm.co.kr,dogdrip.net,etoland.co.kr,picrew.me,text-compare.com,fntimes.com,javatpoint.com,lamire.jp,bamgosu.site,allthekingz.com,automobile-catalog.com,maketecheasier.com,thesaurus.net,wfmz.com,thestar.co.uk,yorkshirepost.co.uk,mydaily.co.kr,raenonx.cc,ndtvprofit.com,badmouth1.com,logicieleducatif.fr,taxguru.in,islamicfinder.org,aikatu.jp,secure-signup.net,globalrph.com,sportsrec.com,reportera.co.kr,flatpanelshd.com,videogamemods.com,adintrend.tv,ark-unity.com,cool-style.com.tw,dziennik.pl,eurointegration.com.ua,winfuture.de,freemcserver.net,pravda.com.ua,infinityfree.com,wort-suchen.de,word-grabber.com,palabr.as,motscroises.fr,cruciverba.it,dramabeans.com,mynet.com,sportsseoul.com,smsonline.cloud,meeco.kr,heureka.cz,slobodnadalmacija.hr,ap7am.com,autoby.jp,bg-mania.jp,cinema.com.my,crosswordsolver.com,cruciverba.it,daily.co.jp,demotywatory.pl,dnevno.hr,dolldivine.com,economictimes.com,giornalone.it,gloria.hr,iplocation.net,j-town.net,joemonster.org,jutarnji.hr,lacuarta.com,laleggepertutti.it,lovelive-petitsoku.com,manta.com,mediaindonesia.com,mirrored.to,missyusa.com,mistrzowie.org,mlbpark.donga.com,motscroises.fr,netzwelt.de,oeffnungszeitenbuch.de,ondemandkorea.com,oradesibiu.ro,oraridiapertura24.it,palabr.as,persoenlich.com,petitfute.com,powerpyx.com,rabitsokuhou.2chblog.jp,rostercon.com,slashdot.org,sourceforge.net,suzusoku.blog.jp,talkwithstranger.com,the-crossword-solver.com,tportal.hr,webdesignledger.com,wort-suchen.de,wouldurather.io,woxikon.*,yutura.net,zagreb.info,golf-live.at,motherlyvisions.com,w.grapps.me,gazetaprawna.pl,pressian.com,kreuzwortraetsel.de,verkaufsoffener-sonntag.com,raetsel-hilfe.de,horairesdouverture24.fr,nyitvatartas24.hu,convertcase.net##+js(set-local-storage-item, adshield-analytics-uuid, $remove$)
@@ -2753,17 +2775,19 @@ a691 1
 /^https?:\/\/chatgpt\.com\/ces\/v1\/[a-z]$/$xhr,domain=chatgpt.com|openai.com|sora.com,method=post
 a754 1
 ||onlyfans.com/away^$urlskip=?url
-a818 5
+a818 7
 ! beacons.ai analytics
 ||beacons.ai/api/rtanalytics/
 ||beacons.ai/api/public_actions
 ||store.steampowered.com/app/usabilitytracking/
 ||joinhoney.com/evs
-diff name:ublock-quick-fixes lines:43 checksum:3715a82c9a
+||g.doubleclick.net/tag/js/gpt.js$script,xhr,domain=cornwalllive.com,important
+||g.doubleclick.net/gpt/pubads_impl_$domain=cornwalllive.com,important
+diff name:ublock-quick-fixes lines:45 checksum:710091bf73
 d3 2
 a4 2
-! Last modified: Tue, 24 Dec 2024 05:06:56 +0000
-! Diff-Path: ../patches/2024.12.24.393.patch#ublock-quick-fixes
+! Last modified: Tue, 24 Dec 2024 11:16:38 +0000
+! Diff-Path: ../patches/2024.12.24.680.patch#ublock-quick-fixes
 d27 1
 a27 3
 !www.youtube.com##+js(json-prune-fetch-response, playerAds adPlacements adSlots playerResponse.playerAds playerResponse.adPlacements playerResponse.adSlots [].playerResponse.adPlacements [].playerResponse.playerAds [].playerResponse.adSlots, , propsToMatch, /\/(?:player|playlist|get_watch)\?/)
@@ -2790,7 +2814,7 @@ infinityscans.xyz,infinityscans.net,infinityscans.org##+js(rmnt, script, /b5rh0r
 d127 5
 d133 2
 a134 2
-*##span[id^="img_"][class^="img_"] > style:first-child + div[style*="align-items"][style*="relative"][style*="center"] > iframe[src][marginwidth][width][style]:style(transform: translateX(-10000px) !important;)
+*##span[id^="img_"][class^="img_"] > style:first-child + div[style*="flex"][style*="relative"] > iframe[src][marginwidth][width][style]:style(content-visibility: hidden !important;)
 dogdrip.net,infinityfree.com,smsonline.cloud,webdesignledger.com##+js(trusted-replace-outbound-text, decodeURIComponent, /^(Chrome|Firefox)\/$/, $1/1)
 d137 13
 a149 5
@@ -2800,22 +2824,24 @@ bing.com##ol#b_results > li:has(> :is(.b_tpcn, .b_title, h2) a[href^="https://ww
 exploader.net##+js(spoof-css, article > div[style*="1120px"] > div, clip, '')
 exploader.net##article > div[style*="1120px"] > div:style(position: absolute !important; clip:rect(1px,1px,1px,1px) !important)
 d152 1
-d158 4
-a164 1
+d158 5
+a164 3
 9db.jp#@##footer
-diff name:ublock-unbreak lines:7 checksum:2e1ae2f66f
+altema.jp###sidebar-in > div.widget_text:has(.tuika-widget > a[href*="utm_"])
+altema.jp##.koukoku_common_tag
+diff name:ublock-unbreak lines:7 checksum:9f92699ea4
 d3 2
 a4 2
 ! Last modified: Mon, 23 Dec 2024 03:08:23 +0000
-! Diff-Path: ../patches/2024.12.24.393.patch#ublock-unbreak
+! Diff-Path: ../patches/2024.12.24.680.patch#ublock-unbreak
 a2729 2
 hagerty.com##+js(set, MT, {})
 hagerty.com##+js(set, MT.track, noopFunc)
-diff name:easylist lines:1058 checksum:037c6254a3
+diff name:easylist lines:1068 checksum:9b39668f8c
 d4 2
 a5 2
-! Last modified: Tue, 24 Dec 2024 03:49:57 +0000
-! Diff-Path: ../patches/2024.12.24.393.patch#easylist
+! Last modified: Tue, 24 Dec 2024 09:50:07 +0000
+! Diff-Path: ../patches/2024.12.24.680.patch#easylist
 d22 1
 d26 1
 d44 1
@@ -2951,6 +2977,8 @@ a21080 1
 ||choumtonunignou.net^
 a21178 1
 ||ckgeflumkryp.com^
+a21325 1
+||clktds.org^
 a21398 1
 ||cnxlskkkebks.xyz^
 a21465 1
@@ -3019,6 +3047,8 @@ a23156 1
 d23183 1
 a23345 1
 ||draftedorgany.com^
+a23397 1
+||drivago.top^
 a23429 1
 ||dryabletwine.com^
 d23544 1
@@ -3870,18 +3900,68 @@ a61109 1
 eporner.com###addesktop
 a61110 1
 eporner.com###admobileoutstream
-diff name:easyprivacy lines:14 checksum:478314cc54
+d62854 1
+a62854 1
+@@||g.doubleclick.net/tag/js/gpt.js$script,xmlhttprequest,domain=accuweather.com|adamtheautomator.com|bestiefy.com|blastingnews.com|bloomberg.com|chromatographyonline.com|cornwalllive.com|devclass.com|digitaltrends.com|edy.rakuten.co.jp|epaper.timesgroup.com|euronews.com|filmweb.pl|formularywatch.com|games.coolgames.com|gearpatrol.com|journaldequebec.com|managedhealthcareexecutive.com|mediaite.com|medicaleconomics.com|nycgo.com|olx.pl|physicianspractice.com|repretel.com|spiegel.de|standard.co.uk|telsu.fi|theta.tv|weather.com|wralsportsfan.com
+d62858 1
+a62858 1
+@@||g.doubleclick.net/gpt/pubads_impl_$domain=accuweather.com|blastingnews.com|bloomberg.com|chelseafc.com|chromatographyonline.com|cornwalllive.com|digitaltrends.com|downdetector.com|edy.rakuten.co.jp|epaper.timesgroup.com|formularywatch.com|game.anymanager.io|games.coolgames.com|managedhealthcareexecutive.com|mediaite.com|medicaleconomics.com|nationalreview.com|nationalworld.com|nbcsports.com|nycgo.com|physicianspractice.com|scotsman.com|telsu.fi|voici.fr|weather.com
+diff name:easyprivacy lines:58 checksum:2cf1054b99
 d4 2
 a5 2
-! Last modified: Mon, 23 Dec 2024 15:50:20 +0000
-! Diff-Path: ../patches/2024.12.24.393.patch#easyprivacy
+! Last modified: Tue, 24 Dec 2024 09:50:07 +0000
+! Diff-Path: ../patches/2024.12.24.680.patch#easyprivacy
+a6224 1
+||agileformer.com^
+a6354 1
+||binarycrest.com^
+a6504 1
+||ciderfeast.com^
+a6753 1
+||earnbaht.com^
+a6814 1
+||epicoldschool.com^
+a6914 1
+||flushingbeast.com^
+a6927 1
+||fourpawsahead.com^
+a7002 1
+||gossamerwing.com^
+a7086 1
+||homebizplaza.com^
+a7094 1
+||hookconference.com^
+a7141 1
+||insulatech.com^
+a7371 1
+||newartreview.com^
+a7461 1
+||pegsbuttons.com^
+a7557 1
+||propsynergy.com^
+a7763 1
+||seespice.com^
+a8070 1
+||tasselapp.com^
+a8093 1
+||tenhourweek.com^
+a8099 1
+||thejavalane.com^
 a11420 1
 ||stats2.indianpornempire.com^
 a14276 1
 ||mixpanel-proxy.coingecko.com^
+a14540 1
+||s.pie.org^
+a14915 1
+||ua.financialexpress.com/api/capture
+a52101 1
+||altema-log.com^
 a52681 1
 @@||api.app.mobilelocker.eu/api/latest/application-environment/ahoy/events$~third-party
 a52715 1
 @@||cdn.matomo.cloud/tekuchi.matomo.cloud/matomo.js$domain=berkeleygroup.digital
+a52775 1
+@@||evergage.com/api2/event/$domain=mbusa.com
 a53307 1
 @@||moneypartners.co.jp/web/*/fingerprint.js$~third-party

@@ -1,12 +1,12 @@
-diff name:ublock-annoyances lines:18 checksum:5d0586115c
+diff name:ublock-annoyances lines:24 checksum:2e2ba84f77
 d3 2
 a4 2
-! Last modified: Mon, 23 Dec 2024 15:44:24 +0000
-! Diff-Path: ../patches/2024.12.24.393.patch#ublock-annoyances
+! Last modified: Tue, 24 Dec 2024 10:39:35 +0000
+! Diff-Path: ../patches/2024.12.24.680.patch#ublock-annoyances
 d3874 1
 a3874 1
 lookmovie2.*##+js(trusted-replace-xhr-response, /Timeout":\d+/, Timeout":0, /api/v)
-a3999 10
+a3999 16
 !#if env_firefox
 foxteller.com##[oncontextmenu]:remove-attr(/^on(?:contextmenu|copy|cut)$/)
 !#else
@@ -17,21 +17,27 @@ foxteller.com##+js(aeld, selectionchange, .html)
 foxteller.com##+js(set, document.onkeydown, noopFunc)
 foxteller.com##+js(trusted-suppress-native-method, RegExp.prototype.test, '"contact@foxteller.com"', abort)
 foxteller.com##.m-content#chapter .chapter-content p:style(cursor: revert !important; -webkit-touch-callout: default !important; -webkit-user-select: text !important; -khtml-user-select: text !important; -moz-user-select: text !important; -ms-user-select: text !important; user-select: text !important; -webkit-tap-highlight-color: revert !important;)
-diff name:ublock-badware lines:9 checksum:85396b3069
+!#if cap_html_filtering
+blog.tangwudi.com##^script:has-text(stopPrntScr)
+!#else
+blog.tangwudi.com##+js(rmnt, script, stopPrntScr)
+!#endif
+blog.tangwudi.com##:not(input):not(textarea)::selection:style(background-color: #338FFF !important; color: white !important;)
+diff name:ublock-badware lines:9 checksum:ab5a889ab4
 d3 2
 a4 2
 ! Last modified: Tue, 24 Dec 2024 05:18:19 +0000
-! Diff-Path: ../patches/2024.12.24.393.patch#ublock-badware
+! Diff-Path: ../patches/2024.12.24.680.patch#ublock-badware
 a4717 4
 ||winfreebigwindeal.top^$all
 ||kvkmodule.4dq.com^$all
 ! fake dating
 /^https:\/\/[0-9a-z]{7}\.([0-9a-z]{7})\.top\/[0-9a-z]{7}\?t=\1&cid=[0-9a-z]+/$document,to=top,match-case
-diff name:ublock-filters lines:69 checksum:0980258c6b
+diff name:ublock-filters lines:85 checksum:89d0ed749f
 d3 2
 a4 2
-! Last modified: Tue, 24 Dec 2024 05:50:05 +0000
-! Diff-Path: ../patches/2024.12.24.393.patch#ublock-filters
+! Last modified: Tue, 24 Dec 2024 10:38:24 +0000
+! Diff-Path: ../patches/2024.12.24.680.patch#ublock-filters
 d811 1
 a2756 1
 ||enjoyx.com^$frame,3p
@@ -40,8 +46,19 @@ a8362 3
 /^https?:\/\/(?:[a-z]{2}\.)?[0-9a-z]{5,16}\.[a-z]{3,7}\/[a-z](?=[a-z]{0,25}[0-9A-Z])[0-9a-zA-Z]{3,26}\/\d{4,6}(?:\?[_a-z]=[-0-9a-z]+)?$/$script,3p,match-case,redirect=noop.js
 /^https?:\/\/(?:[a-z]{2}\.)?[0-9a-z]{7,16}\.com\/[a-z](?=[a-z]{0,25}[0-9A-Z])[0-9a-zA-Z]{3,26}\/\d{4,6}(?:\?[_a-z]=[-0-9a-z]+)?$/$frame,xhr,popup,3p,match-case,to=com
 /^https?:\/\/(?:[a-z]{2}\.)?[0-9a-z]{7,16}\.website\/[a-z](?=[a-z]{0,25}[0-9A-Z])[0-9a-zA-Z]{3,26}\/\d{4,6}(?:\?[_a-z]=[-0-9a-z]+)?$/$frame,xhr,popup,3p,match-case
-a9464 1
+a9464 12
 compu-pc.com##+js(acs, document.querySelectorAll, pastepc)
+quins.us##+js(no-fetch-if, doubleclick, , {"type": "opaque"})
+quins.us##+js(set, document.hasFocus, trueFunc)
+!#if cap_html_filtering
+flycutlink.com##^script:has-text(/google_ad_client|popMagic/)
+!#else
+flycutlink.com##+js(acs, document.addEventListener, google_ad_client)
+flycutlink.com##+js(acs, document.querySelectorAll, popMagic)
+!#endif
+flycutlink.com##+js(set, blurred, false)
+flycutlink.com##+js(nowoif)
+flycutlink.com##+js(set, go_popup, {})
 d17193 1
 a17193 1
 ||html-load.com^$script,xhr,domain=blog.esuteru.com|blog.livedoor.jp|itainews.com|jin115.com|lamire.jp|picrew.me|ndtvprofit.com|autoby.jp|bg-mania.jp|crosswordsolver.com|cruciverba.it|daily.co.jp|demotywatory.pl|dziennik.pl|dnevno.hr|gloria.hr|heureka.cz|j-town.net|javatpoint.com|joemonster.org|lacuarta.com|laleggepertutti.it|m.economictimes.com|meeco.kr|mirrored.to|mistrzowie.org|motscroises.fr|oeffnungszeitenbuch.de|ondemandkorea.com|oraridiapertura24.it|palabr.as|persoenlich.com|petitfute.com|powerpyx.com|rabitsokuhou.2chblog.jp|rostercon.com|sourceforge.net|suzusoku.blog.jp|the-crossword-solver.com|thestockmarketwatch.com|word-grabber.com|wort-suchen.de|woxikon.*|yutura.net|zagreb.info|golf-live.at|motherlyvisions.com|kreuzwortraetsel.de|raetsel-hilfe.de|verkaufsoffener-sonntag.com|horairesdouverture24.fr|nyitvatartas24.hu|modhub.us|ff14net.2chblog.jp|news4vip.livedoor.biz|onecall2ch.com|yugioh-starlight.com|winfuture.de|automobile-catalog.com|motorbikecatalog.com|talkwithstranger.com|apkmirror.com|wetteronline.de|syosetu.com
@@ -78,7 +95,7 @@ abs-cbn.com##:is(.css-168qn5i, .css-1slfery, .css-xcd31q, .css-4dbdht, .css-1d3b
 abs-cbn.com##.css-15j76c0:has(> div[style*="z-index: 99999"])
 a24132 1
 @@||titulky.com^$script,1p
-a24176 16
+a24176 21
 !#if cap_html_filtering
 123animehub.cc##^script:has-text(shown_at)
 !#else
@@ -95,13 +112,18 @@ wvt.free.nf##.tracking-btn
 ||sweatypositive.com^
 ||cdn.jwplayer.com/libraries/QSNV25sR.js^$script,domain=www.ratemyprofessors.com
 faceittracker.net##+js(no-fetch-if, fundingchoicesmessages)
+!#if cap_html_filtering
+blog.tangwudi.com##^script:has-text(ai_adb)
+!#else
+blog.tangwudi.com##+js(rmnt, script, ai_adb)
+!#endif
 a24177 1
 ! GitHub pull requests: https://github.com/uBlockOrigin/uAssets/pulls
-diff name:ublock-privacy lines:18 checksum:c3ef020155
+diff name:ublock-privacy lines:20 checksum:3b7d1d489b
 d3 2
 a4 2
-! Last modified: Tue, 24 Dec 2024 03:58:56 +0000
-! Diff-Path: ../patches/2024.12.24.393.patch#ublock-privacy
+! Last modified: Tue, 24 Dec 2024 09:08:01 +0000
+! Diff-Path: ../patches/2024.12.24.680.patch#ublock-privacy
 d139 5
 a143 6
 loawa.com,ygosu.com,sportalkorea.com,edaily.co.kr,economist.co.kr,etoday.co.kr,isplus.com,hometownstation.com,honkailab.com,thestockmarketwatch.com,issuya.com,worldhistory.org,etnews.com,iusm.co.kr,dogdrip.net,etoland.co.kr,picrew.me,text-compare.com,fntimes.com,javatpoint.com,lamire.jp,bamgosu.site,allthekingz.com,automobile-catalog.com,maketecheasier.com,thesaurus.net,wfmz.com,thestar.co.uk,yorkshirepost.co.uk,mydaily.co.kr,raenonx.cc,ndtvprofit.com,badmouth1.com,logicieleducatif.fr,taxguru.in,islamicfinder.org,aikatu.jp,secure-signup.net,globalrph.com,sportsrec.com,reportera.co.kr,flatpanelshd.com,videogamemods.com,adintrend.tv,ark-unity.com,cool-style.com.tw,dziennik.pl,eurointegration.com.ua,winfuture.de,freemcserver.net,pravda.com.ua,infinityfree.com,wort-suchen.de,word-grabber.com,palabr.as,motscroises.fr,cruciverba.it,dramabeans.com,mynet.com,sportsseoul.com,smsonline.cloud,meeco.kr,heureka.cz,slobodnadalmacija.hr,ap7am.com,autoby.jp,bg-mania.jp,cinema.com.my,crosswordsolver.com,cruciverba.it,daily.co.jp,demotywatory.pl,dnevno.hr,dolldivine.com,economictimes.com,giornalone.it,gloria.hr,iplocation.net,j-town.net,joemonster.org,jutarnji.hr,lacuarta.com,laleggepertutti.it,lovelive-petitsoku.com,manta.com,mediaindonesia.com,mirrored.to,missyusa.com,mistrzowie.org,mlbpark.donga.com,motscroises.fr,netzwelt.de,oeffnungszeitenbuch.de,ondemandkorea.com,oradesibiu.ro,oraridiapertura24.it,palabr.as,persoenlich.com,petitfute.com,powerpyx.com,rabitsokuhou.2chblog.jp,rostercon.com,slashdot.org,sourceforge.net,suzusoku.blog.jp,talkwithstranger.com,the-crossword-solver.com,tportal.hr,webdesignledger.com,wort-suchen.de,wouldurather.io,woxikon.*,yutura.net,zagreb.info,golf-live.at,motherlyvisions.com,w.grapps.me,gazetaprawna.pl,pressian.com,kreuzwortraetsel.de,verkaufsoffener-sonntag.com,raetsel-hilfe.de,horairesdouverture24.fr,nyitvatartas24.hu,convertcase.net##+js(set-local-storage-item, adshield-analytics-uuid, $remove$)
@@ -113,14 +135,16 @@ loawa.com,ygosu.com,sportalkorea.com,edaily.co.kr,economist.co.kr,etoday.co.kr,i
 d691 1
 a691 1
 /^https?:\/\/chatgpt\.com\/ces\/v1\/[a-z]$/$xhr,domain=chatgpt.com|openai.com|sora.com,method=post
-a822 2
+a822 4
 ||store.steampowered.com/app/usabilitytracking/
 ||joinhoney.com/evs
-diff name:ublock-quick-fixes lines:31 checksum:3715a82c9a
+||g.doubleclick.net/tag/js/gpt.js$script,xhr,domain=cornwalllive.com,important
+||g.doubleclick.net/gpt/pubads_impl_$domain=cornwalllive.com,important
+diff name:ublock-quick-fixes lines:37 checksum:710091bf73
 d3 2
 a4 2
-! Last modified: Tue, 24 Dec 2024 05:06:56 +0000
-! Diff-Path: ../patches/2024.12.24.393.patch#ublock-quick-fixes
+! Last modified: Tue, 24 Dec 2024 11:16:38 +0000
+! Diff-Path: ../patches/2024.12.24.680.patch#ublock-quick-fixes
 d58 2
 a59 4
 japscan.lol##+js(aeld, DOMContentLoaded, /Niger|Charger|GoodDay|funct'|t'\+'y/)
@@ -138,6 +162,9 @@ infinityscans.xyz,infinityscans.net,infinityscans.org##^script:has-text(/b5rh0rt
 !#else
 infinityscans.xyz,infinityscans.net,infinityscans.org##+js(rmnt, script, /b5rh0rt|\;\}\}catch\(_/)
 !#endif
+d129 1
+a129 1
+*##span[id^="img_"][class^="img_"] > style:first-child + div[style*="flex"][style*="relative"] > iframe[src][marginwidth][width][style]:style(content-visibility: hidden !important;)
 d133 12
 a144 5
 bing.com##li.b_algo:has(.b_algoSlug):remove-class(b_algo)
@@ -146,21 +173,24 @@ bing.com##ol#b_results > li:has(> :is(.b_tpcn, .b_title, h2) a[href^="https://ww
 exploader.net##+js(spoof-css, article > div[style*="1120px"] > div, clip, '')
 exploader.net##article > div[style*="1120px"] > div:style(position: absolute !important; clip:rect(1px,1px,1px,1px) !important)
 d147 1
-a155 1
+d153 1
+a155 3
 9db.jp#@##footer
-diff name:ublock-unbreak lines:7 checksum:2e1ae2f66f
+altema.jp###sidebar-in > div.widget_text:has(.tuika-widget > a[href*="utm_"])
+altema.jp##.koukoku_common_tag
+diff name:ublock-unbreak lines:7 checksum:9f92699ea4
 d3 2
 a4 2
 ! Last modified: Mon, 23 Dec 2024 03:08:23 +0000
-! Diff-Path: ../patches/2024.12.24.393.patch#ublock-unbreak
+! Diff-Path: ../patches/2024.12.24.680.patch#ublock-unbreak
 a2729 2
 hagerty.com##+js(set, MT, {})
 hagerty.com##+js(set, MT.track, noopFunc)
-diff name:easylist lines:397 checksum:037c6254a3
+diff name:easylist lines:407 checksum:9b39668f8c
 d4 2
 a5 2
-! Last modified: Tue, 24 Dec 2024 03:49:57 +0000
-! Diff-Path: ../patches/2024.12.24.393.patch#easylist
+! Last modified: Tue, 24 Dec 2024 09:50:07 +0000
+! Diff-Path: ../patches/2024.12.24.680.patch#easylist
 d15594 1
 a15594 1
 backcar.fr,encuentra24.com,flat-ads.com,job.inshokuten.com#@#.ad-content
@@ -218,6 +248,8 @@ a21110 1
 ||choumtonunignou.net^
 a21208 1
 ||ckgeflumkryp.com^
+a21355 1
+||clktds.org^
 a21496 1
 ||cokerymyocele.shop^
 a21553 1
@@ -245,6 +277,8 @@ a22927 1
 ||diltqdxecyicf.com^
 a23165 1
 ||dlgeebfbcp.com^
+a23434 1
+||drivago.top^
 a23623 1
 ||dzinzafogdpog.com^
 a23809 1
@@ -554,14 +588,64 @@ a61422 1
 eporner.com###addesktop
 a61423 1
 eporner.com###admobileoutstream
-diff name:easyprivacy lines:10 checksum:478314cc54
+d63167 1
+a63167 1
+@@||g.doubleclick.net/tag/js/gpt.js$script,xmlhttprequest,domain=accuweather.com|adamtheautomator.com|bestiefy.com|blastingnews.com|bloomberg.com|chromatographyonline.com|cornwalllive.com|devclass.com|digitaltrends.com|edy.rakuten.co.jp|epaper.timesgroup.com|euronews.com|filmweb.pl|formularywatch.com|games.coolgames.com|gearpatrol.com|journaldequebec.com|managedhealthcareexecutive.com|mediaite.com|medicaleconomics.com|nycgo.com|olx.pl|physicianspractice.com|repretel.com|spiegel.de|standard.co.uk|telsu.fi|theta.tv|weather.com|wralsportsfan.com
+d63171 1
+a63171 1
+@@||g.doubleclick.net/gpt/pubads_impl_$domain=accuweather.com|blastingnews.com|bloomberg.com|chelseafc.com|chromatographyonline.com|cornwalllive.com|digitaltrends.com|downdetector.com|edy.rakuten.co.jp|epaper.timesgroup.com|formularywatch.com|game.anymanager.io|games.coolgames.com|managedhealthcareexecutive.com|mediaite.com|medicaleconomics.com|nationalreview.com|nationalworld.com|nbcsports.com|nycgo.com|physicianspractice.com|scotsman.com|telsu.fi|voici.fr|weather.com
+diff name:easyprivacy lines:54 checksum:2cf1054b99
 d4 2
 a5 2
-! Last modified: Mon, 23 Dec 2024 15:50:20 +0000
-! Diff-Path: ../patches/2024.12.24.393.patch#easyprivacy
+! Last modified: Tue, 24 Dec 2024 09:50:07 +0000
+! Diff-Path: ../patches/2024.12.24.680.patch#easyprivacy
+a6224 1
+||agileformer.com^
+a6354 1
+||binarycrest.com^
+a6504 1
+||ciderfeast.com^
+a6753 1
+||earnbaht.com^
+a6814 1
+||epicoldschool.com^
+a6914 1
+||flushingbeast.com^
+a6927 1
+||fourpawsahead.com^
+a7002 1
+||gossamerwing.com^
+a7086 1
+||homebizplaza.com^
+a7094 1
+||hookconference.com^
+a7141 1
+||insulatech.com^
+a7371 1
+||newartreview.com^
+a7461 1
+||pegsbuttons.com^
+a7557 1
+||propsynergy.com^
+a7763 1
+||seespice.com^
+a8070 1
+||tasselapp.com^
+a8093 1
+||tenhourweek.com^
+a8099 1
+||thejavalane.com^
 a11420 1
 ||stats2.indianpornempire.com^
+a14541 1
+||s.pie.org^
+a14916 1
+||ua.financialexpress.com/api/capture
+a52102 1
+||altema-log.com^
 a52717 1
 @@||cdn.matomo.cloud/tekuchi.matomo.cloud/matomo.js$domain=berkeleygroup.digital
+a52777 1
+@@||evergage.com/api2/event/$domain=mbusa.com
 a53309 1
 @@||moneypartners.co.jp/web/*/fingerprint.js$~third-party
