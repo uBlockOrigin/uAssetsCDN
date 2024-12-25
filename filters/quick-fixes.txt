@@ -1,5 +1,5 @@
 ! Title: uBlock₀ filters – Quick fixes
-! Last modified: Wed, 25 Dec 2024 12:10:17 +0000
+! Last modified: Wed, 25 Dec 2024 14:12:29 +0000
 ! Expires: 8 hours
 ! Description: Immediate, temporary filters to fix websites
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -109,7 +109,7 @@ poophq.com,veev.to##+js(set, fapit.check, noopFunc)
 !poophq.com,veev.to##+js(no-xhr-if, url:!/cdn\.plyr\.io|veev\.to|\/dl\?op=player_api/ method:GET)
 poophq.com,veev.to##+js(no-xhr-if, /vast.php?)
 poophq.com,veev.to##+js(no-xhr-if, adsbygoogle, length:35000-55000)
-poophq.com,veev.to##+js(rpnt, script, /['"]h.*?o.*?v.*?c.*?\/a.*?js/, "$1(function() {'use strict'; const handler = {apply: (target, thisArg, argumentsList) => {const e = argumentsList; if (e[0] && e[0].html?.detected === null && typeof e[0].html?.instance?.start === 'function' && typeof e[0].env?.instance?.start === 'function' && typeof e[0].http?.instance?.start === 'function') {const resetBooleans = function() {Object.keys(this).forEach(key => {if (typeof this[key] === 'boolean') {this[key] = false;}});}; ['html', 'env', 'http'].forEach(name => {e[0][name].instance.start = resetBooleans;});} return Reflect.apply(target, thisArg, argumentsList);}}; window.Object.keys = new Proxy(Object.keys, handler);})();", includes, break;else)
+poophq.com,veev.to##+js(rpnt, script, /['"]h.*?o.*?c.*?a.*?js/, "$1(function() {'use strict'; const handler = {apply: (target, thisArg, argumentsList) => {const e = argumentsList; if (e[0] && e[0].html?.detected === null && typeof e[0].html?.instance?.start === 'function' && typeof e[0].env?.instance?.start === 'function' && typeof e[0].http?.instance?.start === 'function') {const resetBooleans = function() {Object.keys(this).forEach(key => {if (typeof this[key] === 'boolean') {this[key] = false;}});}; ['html', 'env', 'http'].forEach(name => {e[0][name].instance.start = resetBooleans;});} return Reflect.apply(target, thisArg, argumentsList);}}; window.Object.keys = new Proxy(Object.keys, handler);})();", includes, break;else)
 poophq.com,veev.to##+js(no-xhr-if, /\/preroll\.engine$/)
 *$script,3p,domain=poophq.com|veev.to,redirect-rule=noopjs
 *$other,3p,denyallow=veevcdn.co,domain=poophq.com|veev.to
@@ -117,8 +117,7 @@ poophq.com,veev.to##+js(no-xhr-if, /\/preroll\.engine$/)
 veev.to#@#.avb-active
 
 ! https://github.com/uBlockOrigin/uAssets/issues/20401
-infinityscans.xyz,infinityscans.net,infinityscans.org##+js(rpnt, script, /async function \(xhr\) \{\s+\(function\(\){var .*?\)\;\}\)\(\)\; /s, async function (xhr) {)
-infinityscans.xyz,infinityscans.net,infinityscans.org##+js(rpnt, script, /\(function\(\)\{var .*?\)\;\}\)\(\)\;\s+\$\.ajax\(\{/, $.ajax({)
+infinityscans.xyz,infinityscans.net,infinityscans.org##+js(rpnt, script, /\}\)\;\s+\(function\(\)\{var .*?\)\;\}\)\(\)\;\s+\$\.ajax\(\{/, }); $.ajax({)
 infinityscans.xyz,infinityscans.net,infinityscans.org##+js(trusted-replace-outbound-text, atob, window.matchMedia('(display-mode: standalone)').matches, true)
 infinityscans.xyz,infinityscans.net,infinityscans.org##+js(nowoif, _blank)
 infinityscans.xyz,infinityscans.net,infinityscans.org##div[class="alert alert-info m-0 p-0"]:has-text(/uBlock|AdGuard|advertisments/i)
@@ -129,6 +128,10 @@ infinityscans.xyz,infinityscans.net,infinityscans.org##^script:has-text(/b5rh0rt
 !#else
 infinityscans.xyz,infinityscans.net,infinityscans.org##+js(rmnt, script, /b5rh0rt|\;\}\}catch\(_/)
 !#endif
+
+! https://github.com/uBlockOrigin/uAssets/issues/2320
+panel.freemcserver.net#@#+js(rpnt, script, 'G-1B4LC0KT6C');, 'G-1B4LC0KT6C'); window.setTimeout(function(){blockPing()}\,200);)
+panel.freemcserver.net##+js(rpnt, script, 'G-1B4LC0KT6C');, 'G-1B4LC0KT6C'); localStorage.setItem("tuna"\, "dW5kZWZpbmVk"); localStorage.setItem("sausage"\, "ZmFsc2U="); window.setTimeout(function(){fuckYouUblockAndJobcenterTycoon(false)}\,200);)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/8719
 1001tracklists.com##div[id]:has(> [data-freestar-ad]):remove()
@@ -152,11 +155,7 @@ file-1bl9ruic-moon.com,file-kg88oaak-embed.com,file-mi11ljwj-embed.com,file-sp32
 ||hpilzison-r.online^
 ||kaarheciqa.xyz^
 ||klh3j19w.xyz^
-||gxfh59u4.xyz^
-||hoicksfq.xyz^
-||lv9qr0g0.xyz^
 ||nubileforward.com^
-||op3xdork.xyz^
 ||skvxbool.xyz^
 
 ! Ad-Shield
@@ -186,9 +185,6 @@ www.chip.de##^script:has-text(/ \=\=\= [0-9]{1,2}\) \{ \}/)
 www.chip.de##+js(rmnt, script, / \=\=\= [0-9]{1,2}\) \{ \}/)
 !#endif
 
-! https://github.com/easylist/easylist/commit/b769f49d5e96598bf2c58fbbc13b02a48e37c741
-@@||c-web.cedyna.co.jp/customer/img/spacer.gif?$1p
-
 ! https://github.com/AdguardTeam/AdguardFilters/issues/194895
 @@||res.ads.nicovideo.jp/assets/js/ads2.js$domain=sp.nicovideo.jp
 
@@ -207,3 +203,6 @@ rekidai-info.github.io##+js(nosiif, , 1000)
 
 ! https://github.com/AdguardTeam/AdguardFilters/issues/195216
 ||status.techtarget.itmedia.co.jp^$badfilter
+
+! https://github.com/easylist/easylist/commit/e422fac2e6df2e43359715b3f3d6d00338aa37ee
+indiatimes.com#@#.adhide
