@@ -1,5 +1,5 @@
 ! Title: uBlock₀ filters – Quick fixes
-! Last modified: Thu, 26 Dec 2024 02:50:44 +0000
+! Last modified: Thu, 26 Dec 2024 05:37:22 +0000
 ! Expires: 8 hours
 ! Description: Immediate, temporary filters to fix websites
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -72,10 +72,10 @@ sandratableother.com##+js(set, console.clear, undefined)
 japscan.lol##+js(aost, onload, inlineScript)
 *$image,redirect-rule=1x1.gif,domain=japscan.lol
 japscan.lol##+js(aeld, DOMContentLoaded, /Niger|Charger|GoodDay|funct'|t'\+'y/)
-japscan.lol##+js(aeld, /DOMContentLoaded|load/, /function\s*\(\s*\)\s*\{\s*[^s]["'\,;=`\s\w]*[^s][$\w]+\s*\(\s*function\s*\(\s*[$\w]*\s*\)\s*\{\s*[a-z]+\s|Gourito|n'\+|'edStyle|='0';/)
+japscan.lol##+js(aeld, /DOMContentLoaded|load/, /^[$\w]+\s*=>\s*\{\s*(?:const|var|let)\s+[$\w]+\s*=\s*[$\w]+\s*;|playGo|a'\+|'N'\+/)
 japscan.lol##+js(trusted-set-attr, .navbar-nav > li#navpromo2.nav-item > a, href, " ")
 japscan.lol##.navbar-nav > li#navpromo2.nav-item:style(opacity: 0.1 !important;)
-japscan.lol##+js(aost, Document.prototype.getElementById, stackDepth:3)
+japscan.lol##+js(aost, Document.prototype.getElementById, stackDepth:2)
 ||japscan.lol/zjs/$script,replace=/function GoodDay\(\)\{.+?\}\}\}//
 japscan.lol##body > style + .container > .row > #main + #sidebar.col-md-3 > .card.mt-1 > .card[style="margin: 0px auto; display: block;"] > iframe[id^="__clb-"][id$="_container"][style^="display: inline-block; width: 300px; height: 250px;"][sandbox="allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-forms allow-scripts allow-top-navigation-to-custom-protocols"][scrolling="no"]
 japscan.lol##body > style + .container > .row > #main.col-md-9 > .card > .card-body[style="margin: 0px auto; display: block;"] > iframe[id^="__clb-"][id$="_container"][style^="display: inline-block; width: 300px; height: 100px;"][sandbox="allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-forms allow-scripts allow-top-navigation-to-custom-protocols"][scrolling="no"]
@@ -176,8 +176,7 @@ bing.com##ol#b_results > li:has(> :is(.b_tpcn, .b_title, h2) a[href^="https://ww
 bing.com##ol#b_results > li:has(> :is(.b_tpcn, .b_title, h2) a[href^="https://www.bing.com/aclk?"])
 
 ! https://github.com/AdguardTeam/AdguardFilters/issues/183252
-exploader.net##+js(spoof-css, article > div[style*="1120px"] > div, clip, '')
-exploader.net##article > div[style*="1120px"] > div:style(position: absolute !important; clip:rect(1px,1px,1px,1px) !important)
+exploader.net##article > div[style*="1120px"] > div:style(clip-path: circle(0) !important;)
 
 ! https://github.com/easylist/easylistgermany/issues/216
 !#if cap_html_filtering
@@ -197,10 +196,8 @@ altema.jp###sidebar-in > div.widget_text:has(.tuika-widget > a[href*="utm_"])
 altema.jp##.koukoku_common_tag
 
 ! https://github.com/AdguardTeam/AdguardFilters/issues/153796
-rekidai-info.github.io##+js(nostif, /\(\)=>\{(?:const|let|var)|location/)
-rekidai-info.github.io##+js(nostif, , 2000)
-rekidai-info.github.io##+js(nosiif, /\(\)=>\{(?:const|let|var)|location/)
-rekidai-info.github.io##+js(nosiif, , 1000)
+rekidai-info.github.io##+js(nostif, adStatus)
+rekidai-info.github.io##+js(nosiif, /\(\)=>\{[$\w]+==/)
 
 ! https://github.com/AdguardTeam/AdguardFilters/issues/195216
 ||status.techtarget.itmedia.co.jp^$badfilter
