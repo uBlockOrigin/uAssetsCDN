@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Quick fixes
 ! Expires: 12 hours
-! Last modified: Fri, 27 Dec 2024 16:54:50 +0000
-! Diff-Path: ../patches/2024.12.28.325.patch#ublock-quick-fixes
+! Last modified: Sat, 28 Dec 2024 06:21:57 +0000
+! Diff-Path: ../patches/2024.12.28.626.patch#ublock-quick-fixes
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/quick-fixes.txt ***
@@ -56,10 +56,12 @@ sandratableother.com##+js(set, console.clear, undefined)
 japscan.lol##+js(aost, onload, inlineScript)
 *$image,redirect-rule=1x1.gif,domain=japscan.lol
 japscan.lol##+js(aeld, DOMContentLoaded, /Niger|Charger|GoodDay|funct'|t'\+'y/)
-japscan.lol##+js(trusted-set-attr, .navbar-nav > li#navpromo2.nav-item > a, href, " ")
-japscan.lol##.navbar-nav > li#navpromo2.nav-item:style(opacity: 0.1 !important;)
-japscan.lol##+js(aeld, /DOMContentLoaded|load/, /^[$\w]+\s*=>\s*\{\s*(?:const|var|let)\s+[$\w]+\s*=\s*[$\w]+\s*[\,;]\s*[$\w]+\s=['"]|Youpi|push'\]|\+'nt|\+'i/)
-japscan.lol##+js(trusted-suppress-native-method, Document.prototype.querySelector, '"/^#navpromo/"', abort)
+japscan.lol##+js(aeld, /DOMContentLoaded|load/, /^[$\w]+\s*=>\s*\{\s*(?:const|var|let)\s+(?:[$\w]+\s*=\s*[$\w]+\s*[\,;])+\s*[$\w]+\s*=['"]|Youha|appendChild'\]|==='0px'|'\+'\)|\+'e'\]|\}\.constructor/)
+japscan.lol##.navbar-nav > li#navpromo2.nav-item:style(height: 0 !important;)
+japscan.lol##+js(trusted-suppress-native-method, Document.prototype.querySelectorAll, '"/^#navpromo/"', abort)
+japscan.lol##+js(trusted-replace-argument, parseFloat, 0, json:"20", condition, /px/)
+japscan.lol##+js(aost, getComputedStyle, stackDepth:3)
+japscan.lol##+js(norafif, /^/)
 ||japscan.lol/zjs/$script,replace=/function GoodDay\(\)\{.+?\}\}\}//
 japscan.lol##body > style + .container > .row > #main + #sidebar.col-md-3 > .card.mt-1 > .card[style="margin: 0px auto; display: block;"] > iframe[id^="__clb-"][id$="_container"][style^="display: inline-block; width: 300px; height: 250px;"][sandbox="allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-forms allow-scripts allow-top-navigation-to-custom-protocols"][scrolling="no"]
 japscan.lol##body > style + .container > .row > #main.col-md-9 > .card > .card-body[style="margin: 0px auto; display: block;"] > iframe[id^="__clb-"][id$="_container"][style^="display: inline-block; width: 300px; height: 100px;"][sandbox="allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-forms allow-scripts allow-top-navigation-to-custom-protocols"][scrolling="no"]
@@ -149,8 +151,10 @@ www.chip.de##+js(rmnt, script, / \=\=\= [0-9]{1,2}\) \{ \}/)
 9db.jp#@##footer
 altema.jp###sidebar-in > div.widget_text:has(.tuika-widget > a[href*="utm_"])
 altema.jp##.koukoku_common_tag
-rekidai-info.github.io##+js(nostif, /loc|about:blank/)
-rekidai-info.github.io##+js(nostif, /loc|about:blank/)
+rekidai-info.github.io##+js(nostif, /\(\s*\)\s*=>\s*\{/, !20)
+rekidai-info.github.io##+js(nosiif, /\(\s*\)\s*=>\s*\{/, !20)
+rekidai-info.github.io##+js(nostif, /loc|about:blank|href|window/)
+rekidai-info.github.io##+js(nosiif, /loc|about:blank|href|window/)
 ||status.techtarget.itmedia.co.jp^$badfilter
 indiatimes.com#@#.adhide
 @@||toweroffantasy-global.com/events/accounttransfer/public/js/fingerprint.js$1p
