@@ -1,5 +1,5 @@
 ! Title: uBlock₀ filters – Quick fixes
-! Last modified: Sat, 28 Dec 2024 22:48:56 +0000
+! Last modified: Sun, 29 Dec 2024 06:13:40 +0000
 ! Expires: 8 hours
 ! Description: Immediate, temporary filters to fix websites
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -72,12 +72,19 @@ sandratableother.com##+js(set, console.clear, undefined)
 japscan.lol##+js(aost, onload, inlineScript)
 *$image,redirect-rule=1x1.gif,domain=japscan.lol
 japscan.lol##+js(aeld, DOMContentLoaded, /Niger|Charger|GoodDay|funct'|t'\+'y/)
-japscan.lol##+js(aeld, /DOMContentLoaded|load/, /^[$\w]+\s*=>\s*\{\s*(?:const|var|let)\s+(?:[$\w]+\s*=\s*[$\w]+\s*[\,;])+\s*[$\w]+\s*=['"]|Youha|appendChild'\]|==='0px'|'\+'\)|\+'e'\]|\}\.constructor/)
+japscan.lol##+js(aeld, /DOMContentLoaded|load/, /^[$\w]+\s*=>\s*\{\s*\w+\s*(?:[$\w]+\s*=\s*[$\w]+\s*[\,;])+\s*[$\w]+\s*=['"]|Yuki|pro'|getCo'|href'\)|=='0p'|shop/)
 japscan.lol##.navbar-nav > li#navpromo2.nav-item:style(height: 0 !important;)
-japscan.lol##+js(trusted-suppress-native-method, Document.prototype.querySelectorAll, '"/^#navpromo/"', abort)
-japscan.lol##+js(trusted-replace-argument, parseFloat, 0, json:"20", condition, /px/)
-japscan.lol##+js(aost, getComputedStyle, stackDepth:3)
+japscan.lol##+js(trusted-suppress-native-method, Document.prototype.getElementById, '"/^navpromo/"', prevent)
+japscan.lol##+js(trusted-suppress-native-method, Document.prototype.querySelector, '"/^#navpromo/"', prevent)
+japscan.lol##+js(trusted-suppress-native-method, Document.prototype.querySelectorAll, '"/^#navpromo/"', prevent)
+japscan.lol##+js(trusted-suppress-native-method, Document.prototype.getElementById, '"/^R/"', prevent)
+japscan.lol##+js(trusted-suppress-native-method, Document.prototype.querySelector, '"/^#R/"', prevent)
+japscan.lol##+js(trusted-suppress-native-method, Document.prototype.querySelectorAll, '"/^#R/"', prevent)
+japscan.lol##+js(trusted-replace-argument, parseFloat, 0, json:"21")
+japscan.lol##+js(aost, getComputedStyle, stackDepth:2)
 japscan.lol##+js(norafif, /^/)
+japscan.lol##+js(set, NeSi, noopFunc)
+japscan.lol###Roiyehe:remove()
 ||japscan.lol/zjs/$script,replace=/function GoodDay\(\)\{.+?\}\}\}//
 japscan.lol##body > style + .container > .row > #main + #sidebar.col-md-3 > .card.mt-1 > .card[style="margin: 0px auto; display: block;"] > iframe[id^="__clb-"][id$="_container"][style^="display: inline-block; width: 300px; height: 250px;"][sandbox="allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-forms allow-scripts allow-top-navigation-to-custom-protocols"][scrolling="no"]
 japscan.lol##body > style + .container > .row > #main.col-md-9 > .card > .card-body[style="margin: 0px auto; display: block;"] > iframe[id^="__clb-"][id$="_container"][style^="display: inline-block; width: 300px; height: 100px;"][sandbox="allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-forms allow-scripts allow-top-navigation-to-custom-protocols"][scrolling="no"]
@@ -154,20 +161,18 @@ file-1bl9ruic-moon.com,file-kg88oaak-embed.com,file-mi11ljwj-embed.com,file-sp32
 !#if env_firefox
 *$frame,csp=sandbox allow-downloads allow-forms allow-modals allow-same-origin allow-scripts,from=filemoon.*
 !#endif
+! https://github.com/easylist/easylist/commit/814f9c556fd29795dc6160bfb8a96d4ea0fa9984
 ||hpilzison-r.online^
 ||kaarheciqa.xyz^
 ||klh3j19w.xyz^
 ||nubileforward.com^
 ||skvxbool.xyz^
+! ^^^Remove after 4,Jan. 2025
 
 ! Ad-Shield
 *##span[id^="img_"][class^="img_"] > style:first-child + div[style*="relative"] > iframe[src][marginwidth][width][style]:style(mask-image: linear-gradient(transparent, transparent) !important; -webkit-mask-image: linear-gradient(transparent, transparent) !important; z-index: -2147483647 !important;)
 ! https://github.com/uBlockOrigin/uAssets/issues/26487
 dogdrip.net,infinityfree.com,smsonline.cloud,webdesignledger.com##+js(trusted-replace-outbound-text, Number.prototype.toString, '/^-?\d{9,10}$/', )
-
-! https://github.com/uBlockOrigin/uAssets/issues/25990
-||karistudio.com/wp-content/themes/blogarise-child/check2.js$important
-karistudio.com##p.chapter_content:style(display: block !important; visibility: visible !important; opacity: 1 !important; transform: none !important;)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/25344
 ! https://github.com/uBlockOrigin/uAssets/pull/26342
@@ -192,9 +197,6 @@ www.chip.de##^script:has-text(/ \=\=\= [0-9]{1,2}\) \{ \}/)
 www.chip.de##+js(rmnt, script, / \=\=\= [0-9]{1,2}\) \{ \}/)
 !#endif
 
-! https://github.com/AdguardTeam/AdguardFilters/commit/c09e55758c06f929992118a6cd378a1c9351f37f#r150671062
-9db.jp#@##footer
-
 ! https://github.com/AdguardTeam/AdguardFilters/issues/195130
 altema.jp###sidebar-in > div.widget_text:has(.tuika-widget > a[href*="utm_"])
 altema.jp##.koukoku_common_tag
@@ -202,8 +204,8 @@ altema.jp##.koukoku_common_tag
 ! https://github.com/AdguardTeam/AdguardFilters/issues/153796
 rekidai-info.github.io##+js(nostif, /^\(\s*\)\s*=>\s*\{/, !20)
 rekidai-info.github.io##+js(nosiif, /^\(\s*\)\s*=>\s*\{/, !20)
-rekidai-info.github.io##+js(nostif, /loc|about:blank|href|window/)
-rekidai-info.github.io##+js(nosiif, /loc|about:blank|href|window/)
+rekidai-info.github.io##+js(nostif, /loc|about:blank|href|window/, !100)
+rekidai-info.github.io##+js(nosiif, /loc|about:blank|href|window/, !100)
 
 ! https://github.com/AdguardTeam/AdguardFilters/issues/195216
 ||status.techtarget.itmedia.co.jp^$badfilter
