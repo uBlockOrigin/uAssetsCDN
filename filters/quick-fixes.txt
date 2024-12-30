@@ -1,5 +1,5 @@
 ! Title: uBlock₀ filters – Quick fixes
-! Last modified: Sun, 29 Dec 2024 16:51:47 +0000
+! Last modified: Mon, 30 Dec 2024 11:55:17 +0000
 ! Expires: 8 hours
 ! Description: Immediate, temporary filters to fix websites
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -74,6 +74,7 @@ japscan.lol##+js(aost, onload, inlineScript)
 japscan.lol##+js(aeld, DOMContentLoaded, /Niger|Charger|GoodDay|funct'|t'\+'y/)
 japscan.lol##.navbar-nav > li#navpromo2.nav-item:style(height: 0 !important;)
 japscan.lol##+js(norafif, /^/)
+japscan.lol##+js(spoof-css, .navbar-nav > li#navpromo2.nav-item, height, auto)
 ||japscan.lol/zjs/$script,replace=/function GoodDay\(\)\{.+?\}\}\}//
 japscan.lol##body > style + .container > .row > #main + #sidebar.col-md-3 > .card.mt-1 > .card[style="margin: 0px auto; display: block;"] > iframe[id^="__clb-"][id$="_container"][style^="display: inline-block; width: 300px; height: 250px;"][sandbox="allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-forms allow-scripts allow-top-navigation-to-custom-protocols"][scrolling="no"]
 japscan.lol##body > style + .container > .row > #main.col-md-9 > .card > .card-body[style="margin: 0px auto; display: block;"] > iframe[id^="__clb-"][id$="_container"][style^="display: inline-block; width: 300px; height: 100px;"][sandbox="allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-forms allow-scripts allow-top-navigation-to-custom-protocols"][scrolling="no"]
@@ -115,12 +116,12 @@ poophq.com,veev.to##+js(no-xhr-if, /\/preroll\.engine$/)
 veev.to#@#.avb-active
 
 ! https://github.com/uBlockOrigin/uAssets/issues/20401
+infinityscans.xyz,infinityscans.net,infinityscans.org##+js(rpnt, script, /async function \(xhr\) \{\s+\(function\(\){var .*?\;\}\)\(\)\; /s, async function (xhr) {)
 infinityscans.xyz,infinityscans.net,infinityscans.org##+js(rpnt, script, /\}\)\;\s+\(function\(\)\{var .*?\)\;\}\)\(\)\;\s+\$\.ajax\(\{/s, }); $.ajax({)
 infinityscans.xyz,infinityscans.net,infinityscans.org##+js(trusted-replace-outbound-text, atob, window.matchMedia('(display-mode: standalone)').matches, true)
 infinityscans.xyz,infinityscans.net,infinityscans.org##+js(nowoif, _blank)
 infinityscans.xyz,infinityscans.net,infinityscans.org##div[class="alert alert-info m-0 p-0"]:has-text(/uBlock|AdGuard|advertisments/i)
 @@*$script,denyallow=googletagmanager.com|bidgear.com|googlesyndication.com|a.magsrv.com|fstatic.netpub.media,domain=infinityscans.xyz|infinityscans.net|infinityscans.org
-||b5rh0rt.infinityscans.net^$xhr,important
 !#if cap_html_filtering
 infinityscans.xyz,infinityscans.net,infinityscans.org##^script:has-text(/b5rh0rt|\;\}\}catch\(_/)
 !#else
@@ -175,7 +176,6 @@ bing.com##ol#b_results > li:has(> :is(.b_tpcn, .b_title, h2) a[href^="https://ww
 exploader.net##+js(trusted-replace-argument, window.addEventListener, 0, json:"DOMContentLoaded", condition, /^load$/)
 exploader.net##article div:not(article>div[style="width: 750px;margin-left: auto;margin-right: auto;"],article>div[style="width: 750px;margin-left: auto;margin-right: auto;"]>div[style="float: right;width: 180px;"],[class="information"],[class="information"]+[class="thumbnail"],[class="information"]>[class="warning"],[class="information"]>[class="d_"]):watch-attr(style,class):has(div:not([style]):not([class]) div a[href^="https://al.dmm.co.jp"],article>#freefiles>#sort,article>#freefiles>[class="list"])
 exploader.net##+js(ra, class|style, article div:not(article>div[style="width: 750px;margin-left: auto;margin-right: auto;"]\,article>div[style="width: 750px;margin-left: auto;margin-right: auto;"]>div[style="float: right;width: 180px;"]\,[class="information"]\,[class="information"]+[class="thumbnail"]\,[class="information"]>[class="warning"]\,[class="information"]>[class="d_"]\,article>#freefiles>#sort\,article>#freefiles>[class="list"]), complete)
-exploader.net##+js(trusted-rpnt, script, /window\.addEventListener\('load'\,\s*function\(\)\s*\{\s*(if\(!window\.[0-9a-z]{20\,}\)window\.[0-9a-z]{20\,}\.innerHTML=[0-9a-z]{20\,}\('[0-9a-z]{20\,}'\))\}\);/, $1)
 exploader.net##+js(trusted-set, document.readyState, json:"complete", runAt, 2)
 *$image,redirect-rule=32x32.png,domain=exploader.net
 
@@ -191,8 +191,8 @@ altema.jp###sidebar-in > div.widget_text:has(.tuika-widget > a[href*="utm_"])
 altema.jp##.koukoku_common_tag
 
 ! https://github.com/AdguardTeam/AdguardFilters/issues/153796
-rekidai-info.github.io##+js(nostif, /location\.href\s*=\s*"about:blank"\s*\)\s*\}\s*$/)
-rekidai-info.github.io##+js(nosiif, /location\.href\s*=\s*"about:blank"\s*\)\s*\}\s*$/)
+rekidai-info.github.io##+js(nostif, /location\[.+\]\s*=\s*[$\w]+\(\d+\)\s*\)\s*\}/)
+rekidai-info.github.io##+js(nosiif, /location\[.+\]\s*=\s*[$\w]+\(\d+\)\s*\)\s*\}/)
 
 ! https://github.com/AdguardTeam/AdguardFilters/issues/195216
 ||status.techtarget.itmedia.co.jp^$badfilter
