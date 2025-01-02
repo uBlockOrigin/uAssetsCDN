@@ -1,19 +1,19 @@
-diff name:ublock-annoyances lines:10 checksum:f8db4a3f91
+diff name:ublock-annoyances lines:10 checksum:9479538d00
 d3 2
 a4 2
 ! Last modified: Thu, 02 Jan 2025 06:10:15 +0000
-! Diff-Path: ../patches/2025.1.2.628.patch#ublock-annoyances
+! Diff-Path: ../patches/2025.1.2.924.patch#ublock-annoyances
 d4003 1
 a4003 1
 foxteller.com##+js(ra, oncontextmenu|oncopy|oncut, [id^="chapter"], complete)
 a4021 2
 nebula.tv##+js(set-local-storage-item, /^freeVideoFriendly/, $remove$)
 nebula.tv##+js(trusted-replace-argument, Storage.prototype.setItem, 0, json:"freeVideoFriendly", condition, freeVideoFriendlySlug)
-diff name:ublock-badware lines:133 checksum:3ff44e4035
+diff name:ublock-badware lines:134 checksum:616b44b5af
 d3 2
 a4 2
-! Last modified: Wed, 01 Jan 2025 15:17:16 +0000
-! Diff-Path: ../patches/2025.1.2.628.patch#ublock-badware
+! Last modified: Thu, 02 Jan 2025 15:10:41 +0000
+! Diff-Path: ../patches/2025.1.2.924.patch#ublock-badware
 d110 1
 d238 1
 d264 1
@@ -36,8 +36,9 @@ d931 1
 d933 3
 d980 1
 d988 1
-a1010 1
+a1010 2
 ||jplivestreamhd.live^$all
+||lcskincarecenter.com^$all
 d1030 1
 d1034 1
 d1043 1
@@ -143,11 +144,11 @@ a4666 6
 ||likeyoumakehappy.xyz^$all,to=~alza.sk
 ||ninnjaofficial.com^$all,to=~ninjakitchen.com
 ||gtrewe.co.in^$all
-diff name:ublock-filters lines:292 checksum:d2e8783565
+diff name:ublock-filters lines:292 checksum:d134ad712c
 d3 2
 a4 2
 ! Last modified: Thu, 02 Jan 2025 09:37:58 +0000
-! Diff-Path: ../patches/2025.1.2.628.patch#ublock-filters
+! Diff-Path: ../patches/2025.1.2.924.patch#ublock-filters
 d14 2
 a15 2
 www.youtube.com##+js(trusted-replace-fetch-response, '"adPlacements"', '"no_ads"', player?)
@@ -436,22 +437,23 @@ filecrypt.co###jh34[onmousedown^="var lsj = this;loc.href="]
 ! END: Rules from filters.txt
 opentunnel.net##+js(no-xhr-if, ad.plus)
 @@||ad.plus/cdn-cgi/trace|$xhr,method=head,domain=opentunnel.net
-diff name:ublock-privacy lines:10 checksum:dd4d1a5c11
+diff name:ublock-privacy lines:11 checksum:dfc05a8573
 d3 2
 a4 2
-! Last modified: Wed, 01 Jan 2025 07:28:03 +0000
-! Diff-Path: ../patches/2025.1.2.628.patch#ublock-privacy
+! Last modified: Thu, 02 Jan 2025 10:30:48 +0000
+! Diff-Path: ../patches/2025.1.2.924.patch#ublock-privacy
 a820 1
 ://email-analytics.meetup.com/$image
-a830 3
+a830 4
 ||suno.com/metrics/
 ||suno.com/v1//rgstr
 ||suno.com/monitoring
-diff name:ublock-quick-fixes lines:64 checksum:e162fdd5f2
+||github.com/_private/browser/errors
+diff name:ublock-quick-fixes lines:63 checksum:9fd4fcac71
 d3 2
 a4 2
-! Last modified: Thu, 02 Jan 2025 07:55:48 +0000
-! Diff-Path: ../patches/2025.1.2.628.patch#ublock-quick-fixes
+! Last modified: Thu, 02 Jan 2025 14:30:23 +0000
+! Diff-Path: ../patches/2025.1.2.924.patch#ublock-quick-fixes
 d28 2
 a29 2
 www.youtube.com##+js(json-prune-fetch-response, playerAds adPlacements adSlots no_ads playerResponse.playerAds playerResponse.adPlacements playerResponse.adSlots playerResponse.no_ads [].playerResponse.adPlacements [].playerResponse.playerAds [].playerResponse.adSlots [].playerResponse.no_ads, , propsToMatch, /\/(player|get_watch)\?/)
@@ -476,8 +478,8 @@ www.youtube.com##+js(trusted-replace-fetch-response, '"adSlots"', '"no_ads"', pl
 ||youtube.com/youtubei/v1/get_watch?$xhr,1p,replace=/"adSlots"/"no_ads"/
 d58 11
 a68 3
-japscan.lol##+js(aeld, DOMContentLoaded, /110'\+|funct'|t'\+'y/)
-japscan.lol##+js(trusted-suppress-native-method, Document.prototype.querySelectorAll, '".FjZoRb"', abort)
+japscan.lol##+js(aeld, DOMContentLoaded, /'Rb'|\+'10'\+/)
+japscan.lol##+js(trusted-suppress-native-method, Document.prototype.getElementsByClassName, '"FjZoRb"', abort)
 japscan.lol##.navbar-nav > li#navpromo2.nav-item > a:style(height: 0 !important;)
 d70 2
 a71 1
@@ -500,31 +502,31 @@ a132 1
 a133 1
 ||j-mxponyz.love^
 d141 2
-a142 2
-*##span[id^="img_"][class^="img_"] > style:first-child + div[style*="justify-content"]:has(> iframe[src][marginwidth][width][style])::after:style(content: ""; display: block !important; position: absolute !important; width: 100% !important; height: 100% !important; background-color: white !important; top: 0 !important; z-index: 2147483647 !important;)
+a142 3
+*##body > div[id^="img_"][class^="img_"][style^="width"]:first-child:style(visibility: hidden !important;)
+*##body > a:only-child > div[id^="img_"][class^="img_"]:style(visibility: hidden !important;)
 dogdrip.net,infinityfree.com,smsonline.cloud,webdesignledger.com##+js(trusted-replace-argument, String.prototype.concat, 0, , condition, '/^-?\d{9,10}$/')
-d149 1
-a150 3
-exploader.net##+js(aost, document.readyState, /:1[01]\d:/)
-exploader.net##+js(trusted-rpnt, script, /let [0-9a-z]{20\,};document\.addEventListener\(['"]DOMContentLoaded['"]\,\s*function\(\)\s*\{\s*([0-9a-z]{20\,}\s*=\s*function\(\)\s*\{\s*window\.[0-9a-z]{20\,}\.innerHTML=[0-9a-z]{10\,}\(['"][0-9a-z]{10\,}['"]\)\s*\})\s*\}\);?/, let $1)
-exploader.net##+js(aeld, DOMContentLoaded, setAdjustItems)
+d146 5
+a150 1
+exploader.net##+js(ra, href, a[style*="display:"][href^="https://al.dmm.co.jp"], stay)
 d157 6
 a162 1
 rekidai-info.github.io##+js(nostif, /aframe|querySelector/)
 d164 1
-diff name:ublock-unbreak lines:7 checksum:e9b0084e4c
+diff name:ublock-unbreak lines:8 checksum:63a0e7bfc7
 d3 2
 a4 2
-! Last modified: Mon, 30 Dec 2024 14:31:15 +0000
-! Diff-Path: ../patches/2025.1.2.628.patch#ublock-unbreak
-a2731 2
+! Last modified: Thu, 02 Jan 2025 14:17:30 +0000
+! Diff-Path: ../patches/2025.1.2.924.patch#ublock-unbreak
+a2731 3
 ||xlivesex.com^$badfilter
 @@||ads.pubmatic.com/AdServer/js/pwt/$script,domain=cdn.thepublive.com
-diff name:easylist lines:841 checksum:e799ecb8e2
+||imasdk.googleapis.com/js/sdkloader/ima3.js$script,domain=spiele.heise.de,redirect=google-ima.js,important
+diff name:easylist lines:841 checksum:90b7f47948
 d4 2
 a5 2
 ! Last modified: Wed, 01 Jan 2025 15:50:09 +0000
-! Diff-Path: ../patches/2025.1.2.628.patch#easylist
+! Diff-Path: ../patches/2025.1.2.924.patch#easylist
 d806 2
 a807 2
 /wp-content/plugins/wp-super-popup-pro/*$script
@@ -1362,11 +1364,11 @@ a63363 1
 d63369 1
 a63369 1
 @@||g.doubleclick.net/pagead/managed/js/gpt/$script,domain=adamtheautomator.com|allestoringen.be|allestoringen.nl|aussieoutages.com|canadianoutages.com|downdetector.ae|downdetector.ca|downdetector.co.nz|downdetector.co.uk|downdetector.co.za|downdetector.com|downdetector.com.ar|downdetector.com.br|downdetector.dk|downdetector.es|downdetector.fi|downdetector.fr|downdetector.hk|downdetector.ie|downdetector.in|downdetector.it|downdetector.jp|downdetector.mx|downdetector.no|downdetector.pl|downdetector.pt|downdetector.ru|downdetector.se|downdetector.sg|downdetector.tw|downdetector.web.tr|euronews.com|filmweb.pl|hoyme.jp|ictnews.org|journaldequebec.com|mediaite.com|spiegel.de|thestar.co.uk|xn--allestrungen-9ib.at|xn--allestrungen-9ib.ch|xn--allestrungen-9ib.de|yorkshirepost.co.uk
-diff name:easyprivacy lines:135 checksum:0cb54da143
+diff name:easyprivacy lines:138 checksum:fdac37972b
 d4 2
 a5 2
-! Last modified: Thu, 02 Jan 2025 09:50:17 +0000
-! Diff-Path: ../patches/2025.1.2.628.patch#easyprivacy
+! Last modified: Thu, 02 Jan 2025 13:03:36 +0000
+! Diff-Path: ../patches/2025.1.2.924.patch#easyprivacy
 a2664 1
 /wup?cid=
 d3102 1
@@ -1487,6 +1489,9 @@ d33994 1
 d34005 2
 d34008 1
 d45984 1
+a51480 2
+||united.web.de/confirm?
+||united.web.de/event?
 d52760 1
 a52760 1
 @@||cdn.segment.com/analytics.js/$script,domain=abstractapi.com|app.cryptotrader.tax|driversed.com|fender.com|finerdesk.com|foxbusiness.com|foxnews.com|givingassistant.org|inxeption.io|reuters.com|squaretrade.com|swatches.interiordefine.com

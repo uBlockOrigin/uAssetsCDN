@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Quick fixes
 ! Expires: 12 hours
-! Last modified: Thu, 02 Jan 2025 07:55:48 +0000
-! Diff-Path: ../patches/2025.1.2.628.patch#ublock-quick-fixes
+! Last modified: Thu, 02 Jan 2025 14:30:23 +0000
+! Diff-Path: ../patches/2025.1.2.924.patch#ublock-quick-fixes
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/quick-fixes.txt ***
@@ -68,8 +68,8 @@ sandratableother.com##+js(set, console.clear, undefined)
 @@||pagead2.googlesyndication.com^$script,domain=next-episode.net
 japscan.lol##+js(aost, onload, inlineScript)
 *$image,redirect-rule=1x1.gif,domain=japscan.lol
-japscan.lol##+js(aeld, DOMContentLoaded, /110'\+|funct'|t'\+'y/)
-japscan.lol##+js(trusted-suppress-native-method, Document.prototype.querySelectorAll, '".FjZoRb"', abort)
+japscan.lol##+js(aeld, DOMContentLoaded, /'Rb'|\+'10'\+/)
+japscan.lol##+js(trusted-suppress-native-method, Document.prototype.getElementsByClassName, '"FjZoRb"', abort)
 japscan.lol##.navbar-nav > li#navpromo2.nav-item > a:style(height: 0 !important;)
 japscan.lol##+js(norafif, /^/)
 japscan.lol##+js(spoof-css, .navbar-nav > li#navpromo2.nav-item > a, height, 40px)
@@ -143,18 +143,13 @@ file-1bl9ruic-moon.com,file-kg88oaak-embed.com,file-mi11ljwj-embed.com,file-sp32
 ||skvxbool.xyz^
 ! ^^^Remove after 4,Jan. 2025
 ! Ad-Shield
-*##span[id^="img_"][class^="img_"] > style:first-child + div[style*="justify-content"]:has(> iframe[src][marginwidth][width][style])::after:style(content: ""; display: block !important; position: absolute !important; width: 100% !important; height: 100% !important; background-color: white !important; top: 0 !important; z-index: 2147483647 !important;)
+*##body > div[id^="img_"][class^="img_"][style^="width"]:first-child:style(visibility: hidden !important;)
+*##body > a:only-child > div[id^="img_"][class^="img_"]:style(visibility: hidden !important;)
 dogdrip.net,infinityfree.com,smsonline.cloud,webdesignledger.com##+js(trusted-replace-argument, String.prototype.concat, 0, , condition, '/^-?\d{9,10}$/')
 bing.com##li.b_algo:has(a[href^="https://www.bing.com/aclick?"], a[href^="https://www.bing.com/aclk?"]):remove-class(b_algo)
 bing.com##ol#b_results > li:has(> :is(.b_tpcn, .b_title, h2) a[href^="https://www.bing.com/aclick?"])
 bing.com##ol#b_results > li:has(> :is(.b_tpcn, .b_title, h2) a[href^="https://www.bing.com/aclk?"])
-exploader.net##+js(trusted-replace-argument, window.addEventListener, 0, json:"DOMContentLoaded", condition, /^load$/)
-exploader.net##article div:not(article>div[style="width: 750px;margin-left: auto;margin-right: auto;"],article>div[style="width: 750px;margin-left: auto;margin-right: auto;"]>div[style="float: right;width: 180px;"],[class="information"],[class="information"]+[class="thumbnail"],[class="information"]>[class="warning"],[class="information"]>[class="d_"]):watch-attr(style,class):has(div:not([style]):not([class]) div a[href^="https://al.dmm.co.jp"],article>#freefiles>#sort,article>#freefiles>[class="list"])
-exploader.net##+js(ra, class|style, article div:not(article>div[style="width: 750px;margin-left: auto;margin-right: auto;"]\,article>div[style="width: 750px;margin-left: auto;margin-right: auto;"]>div[style="float: right;width: 180px;"]\,[class="information"]\,[class="information"]+[class="thumbnail"]\,[class="information"]>[class="warning"]\,[class="information"]>[class="d_"]\,article>#freefiles>#sort\,article>#freefiles>[class="list"]), complete)
-exploader.net##+js(trusted-set, document.readyState, json:"complete", runAt, 2)
-exploader.net##+js(aost, document.readyState, /:1[01]\d:/)
-exploader.net##+js(trusted-rpnt, script, /let [0-9a-z]{20\,};document\.addEventListener\(['"]DOMContentLoaded['"]\,\s*function\(\)\s*\{\s*([0-9a-z]{20\,}\s*=\s*function\(\)\s*\{\s*window\.[0-9a-z]{20\,}\.innerHTML=[0-9a-z]{10\,}\(['"][0-9a-z]{10\,}['"]\)\s*\})\s*\}\);?/, let $1)
-exploader.net##+js(aeld, DOMContentLoaded, setAdjustItems)
+exploader.net##+js(ra, href, a[style*="display:"][href^="https://al.dmm.co.jp"], stay)
 *$image,redirect-rule=32x32.png,domain=exploader.net
 !#if cap_html_filtering
 www.chip.de##^script:has-text(/ \=\=\= [0-9]{1,2}\) \{ \}/)
