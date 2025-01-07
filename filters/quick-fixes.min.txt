@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Quick fixes
 ! Expires: 12 hours
-! Last modified: Tue, 07 Jan 2025 12:23:23 +0000
-! Diff-Path: ../patches/2025.1.7.942.patch#ublock-quick-fixes
+! Last modified: Tue, 07 Jan 2025 18:08:12 +0000
+! Diff-Path: ../patches/2025.1.7.1226.patch#ublock-quick-fixes
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/quick-fixes.txt ***
@@ -138,15 +138,10 @@ brr-69xwmut5-moo.com,file-1bl9ruic-moon.com,file-kg88oaak-embed.com,file-mi11ljw
 *$frame,csp=sandbox allow-downloads allow-forms allow-modals allow-same-origin allow-scripts,from=filemoon.*|u6lyxl0w.skin
 !#endif
 ||j-mxponyz.love^
-||hpilzison-r.online^
-||kaarheciqa.xyz^
-||klh3j19w.xyz^
-||nubileforward.com^
-||skvxbool.xyz^
-! ^^^Remove after 4,Jan. 2025
 ! Ad-Shield
-*##body > div[id^="img_"][class^="img_"][style^="width"]:first-child:style(visibility: hidden !important;)
-*##body > a:only-child > div[id^="img_"][class^="img_"]:style(visibility: hidden !important;)
+*##body > div[id^="img_"][class^="img_"][style^="width"]:first-child:style(position: absolute !important; top: -100000px !important;)
+*##body > div:first-child > script + div[id^="img_"][class^="img_"]:style(position: absolute !important; top: -100000px !important;)
+*##body > a:only-child > div[id^="img_"][class^="img_"]:style(position: absolute !important; top: -100000px !important;)
 dogdrip.net,infinityfree.com,smsonline.cloud##+js(trusted-replace-argument, String.prototype.replace, 1, json:"/loader.min.js", condition, .js?h=)
 bing.com##li.b_algo:has(a[href^="https://www.bing.com/aclick?"], a[href^="https://www.bing.com/aclk?"]):remove-class(b_algo)
 bing.com##ol#b_results > li:has(> :is(.b_tpcn, .b_title, h2) a[href^="https://www.bing.com/aclick?"])
@@ -154,7 +149,7 @@ bing.com##ol#b_results > li:has(> :is(.b_tpcn, .b_title, h2) a[href^="https://ww
 exploader.net##+js(ra, href, a[style*="display:"][href^="https://al.dmm.co.jp"], stay)
 *$image,redirect-rule=32x32.png,domain=exploader.net
 ||dmm.co.jp^$domain=exploader.net,badfilter
-exploader.net##+js(trusted-rpnt, script, /^document\.addEventListener\('DOMContentLoaded.+?function\(\).+?\(\);.+/, (()=>{const e="広告ブロックをしていると画像プレビューを使用できません。広告ブロックを解除してダウンロードページをリロードしてください";let t=!1\,n="";const o=new Set\,c=c=>{c.preventDefault();const l=c.target.href\,r=window.open(l\,"_blank");r.addEventListener("load"\,(c=>{if(c.target.documentElement.innerText.includes(e)){const c=o.values().next().value;n=c\,o.delete(c);const l=setInterval((()=>{if(r.document.documentElement?.innerText.includes(e)){const e=o.values().next().value;n=e\,o.delete(e)\,r.location.replace(r.location.href.replace(/\?.*/\,`?${e}`))}if(!t&&r.document.getElementById("preview_images")){document.querySelectorAll(".dl_button[href]").forEach((e=>e.href=e.href.replace(/\?.*/\,`?${n}`)))\,t=!0\,clearInterval(l)}})\,500);r.location.replace(r.location.href.replace(/\?.*/\,`?${c}`))}}))};document.addEventListener("DOMContentLoaded"\,(()=>{const e=document.querySelector("body script").textContent.match(/"] = '(.*?)'/g);if(!e)return;e.forEach((e=>{const t=e.replace(/.*'(.*?)'/\,"$1");o.add(t)}));const t=document.querySelector('.dl_button[href*="preview"]').href.split("?")[1];o.has(t)&&o.delete(t);document.querySelectorAll(".dl_button[href]").forEach((e=>e.addEventListener("click"\,c)))}))})();, sedCount, 1)
+exploader.net##+js(trusted-rpnt, script, /^document\.addEventListener\('DOMContentLoaded.+?function\(\).+?\(\);.+/, (()=>{const e=1028;let t=!1\,n="";const r=new Set;let a;const l=t=>{t.preventDefault();const l=t.target.href\,c=window.open(l\,"_blank");c&&c.addEventListener("load"\,(t=>{const l=t.target.querySelector("img.preview_images_img");if(l?.naturalHeight!==e||600!==l?.naturalWidth)return;const i=r.values().next().value;n=i\,r.delete(i)\,a=setInterval(o\,500\,c);const u=c.location.href.replace(/\?.*/\,`?${i}`);c.location.replace(u)}))}\,o=l=>{const o=l.document?.querySelector("img.preview_images_img");if(o?.naturalHeight===e&&600===o?.naturalWidth){const e=r.values().next().value;n=e\,r.delete(e);const t=l.location.href.replace(/\?.*/\,`?${e}`);l.location.replace(t)}if(!t&&o&&o.naturalHeight&&o.naturalWidth&&(o.naturalHeight!==e||600!==o.naturalWidth)){document.querySelectorAll(".dl_button[href]").forEach((e=>e.href=e.href.replace(/\?.*/\,`?${n}`)))\,t=!0\,clearInterval(a)}};document.addEventListener("DOMContentLoaded"\,(()=>{const e=document.querySelector("body script");if(!e)return;const t=e?.textContent?.match(/"] = '(.*?)'/g);if(!t)return;t.forEach((e=>{const t=e.replace(/.*'(.*?)'/\,"$1");r.add(t)}));const n=document.querySelector('.dl_button[href*="preview"]');if(!n)return;const a=n.href.split("?")[1];r.has(a)&&r.delete(a);document.querySelectorAll(".dl_button[href]").forEach((e=>e.addEventListener("click"\,l)))}))})();, sedCount, 1)
 exploader.net##+js(acs, EventTarget.prototype.addEventListener, .innerHTML)
 ||daotag.com/tag/$script,domain=exploader.net,important
 exploader.net##:matches-path(/(^\/$|\/free|\/search|\/preview|\/tag)/)a[target="_blank"][style*="display"] img
