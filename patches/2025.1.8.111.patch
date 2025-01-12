@@ -1,8 +1,8 @@
-diff name:ublock-annoyances lines:12 checksum:edbdd97251
+diff name:ublock-annoyances lines:12 checksum:952f22a440
 d3 2
 a4 2
 ! Last modified: Sat, 11 Jan 2025 03:46:16 +0000
-! Diff-Path: ../patches/2025.1.11.1158.patch#ublock-annoyances
+! Diff-Path: ../patches/2025.1.12.120.patch#ublock-annoyances
 a4022 7
 !#if cap_html_filtering
 nihongoaz.com##^script:has-text(contentprotector)
@@ -11,11 +11,11 @@ nihongoaz.com##+js(rmnt, script, contentprotector)
 !#endif
 nihongoaz.com##body:style(-webkit-touch-callout: default !important; -webkit-user-select: text !important; -khtml-user-select: text !important; -moz-user-select: text !important; -ms-user-select: text !important; user-select: text !important; -webkit-tap-highlight-color: revert !important; cursor: revert !important;)
 ||bitchute.com/*/play_$media,1p,redirect=noopmp3-0.1s
-diff name:ublock-badware lines:48 checksum:79efdf7eff
+diff name:ublock-badware lines:52 checksum:37e803c184
 d3 2
 a4 2
-! Last modified: Sat, 11 Jan 2025 06:50:05 +0000
-! Diff-Path: ../patches/2025.1.11.1158.patch#ublock-badware
+! Last modified: Sun, 12 Jan 2025 01:01:42 +0000
+! Diff-Path: ../patches/2025.1.12.120.patch#ublock-badware
 a616 2
 ||girlslusts.com^$all
 ||desirefygirls.com^$all
@@ -33,6 +33,10 @@ a689 2
 ||loaderware.cc^$all
 a2377 1
 ||track.chkr7.com^$all
+a2476 1
+/^https:\/\/[-a-z]{16,}\.z\d{2}\.web\.core\.windows\.net\/[a-z]{70,}(\/[a-z]{50,})?\.html/$doc,match-case,domain=web.core.windows.net
+a2497 1
+||windows.net/*/media/beep.mp3
 a2786 3
 /^https:\/\/[a-z0-9]{3,}\.[a-z]{8,10}\.ru\/[a-zA-Z0-9]{6,8}\/#[A-Z][a-z]{5,}@[a-z]+\.com$/$doc,match-case,to=ru
 /t2dolalrwe/*$doc
@@ -60,11 +64,11 @@ a4237 3
 !#endif
 a4583 1
 ||semrushmall.com^$all,to=~semrush.com
-diff name:ublock-filters lines:319 checksum:b3f8a93d79
+diff name:ublock-filters lines:319 checksum:8ff0706580
 d3 2
 a4 2
 ! Last modified: Sat, 11 Jan 2025 18:32:01 +0000
-! Diff-Path: ../patches/2025.1.11.1158.patch#ublock-filters
+! Diff-Path: ../patches/2025.1.12.120.patch#ublock-filters
 d496 3
 d501 2
 d770 1
@@ -380,11 +384,11 @@ hunterscomics.com##+js(no-xhr-if, pubfuture, length:10)
 /^https:\/\/hunterscomics\.com\/wp-content\/themes(\/[a-f]{6}){2}\.js\?ver=/$script,1p,domain=hunterscomics.com
 ||bigwarp.io/images/close.png$image
 bigwarp.io###blk1:style(display: none !important;)
-diff name:ublock-privacy lines:29 checksum:65fa948995
+diff name:ublock-privacy lines:29 checksum:f41f70ca1a
 d3 2
 a4 2
 ! Last modified: Sat, 11 Jan 2025 04:17:34 +0000
-! Diff-Path: ../patches/2025.1.11.1158.patch#ublock-privacy
+! Diff-Path: ../patches/2025.1.12.120.patch#ublock-privacy
 d122 1
 a122 1
 botcomics.com,cefirates.com,chandlerorchards.com,comicleaks.com,marketdata.app,monumentmetals.com,tapmyback.com,ping.gg,revistaferramental.com.br,hawpar.com,alpacafinance.org,nookgaming.com,enkeleksamen.no,kvest.ee,creatordrop.com,panpots.com,cybernetman.com,bitdomain.biz,gerardbosch.xyz,fort-shop.kiev.ua,accuretawealth.com,resourceya.com,tracktheta.com,adaptive.marketing,camberlion.com,replai.io,trybawaryjny.pl,segops.madisonspecs.com,stresshelden-coaching.de,controlconceptsusa.com,ryaktive.com,tip.etip-staging.etip.io##^script:has-text("join('')")
@@ -410,18 +414,22 @@ a824 2
 a839 2
 ! razorpay analytics
 ||razorpay.com/v1/track
-diff name:ublock-quick-fixes lines:51 checksum:8bf2d57a5d
+diff name:ublock-quick-fixes lines:55 checksum:fc34be79b7
 d3 2
 a4 2
-! Last modified: Sat, 11 Jan 2025 16:42:26 +0000
-! Diff-Path: ../patches/2025.1.11.1158.patch#ublock-quick-fixes
+! Last modified: Sun, 12 Jan 2025 00:45:30 +0000
+! Diff-Path: ../patches/2025.1.12.120.patch#ublock-quick-fixes
 d69 1
 d71 2
 d74 2
-a75 3
+a75 7
 japscan.lol##.navbar-nav > li#navpromo2.nav-item > a:style(content-visibility: hidden !important;)
 japscan.lol##+js(spoof-css, .navbar-nav > li#navpromo2.nav-item > a, content-visibility, visible)
+!#if !env_firefox
 japscan.lol##+js(trusted-suppress-native-method, Document.prototype.getElementById, '/^navpromo/', abort, stackDepth:3)
+!#else
+japscan.lol##+js(trusted-suppress-native-method, Document.prototype.getElementById, '/^navpromo/', abort)
+!#endif
 d107 1
 a107 1
 poophq.com,veev.to##+js(rpnt, script, /=\(['"].*?h.*?o.*?c.*?a.*?s['"]?/, "$1(function() {'use strict'; const handler = {apply: (target, thisArg, argumentsList) => {const e = argumentsList; if (e[0] && e[0].html?.detected === null && typeof e[0].html?.instance?.start === 'function' && typeof e[0].env?.instance?.start === 'function' && typeof e[0].http?.instance?.start === 'function') {const resetBooleans = function() {Object.keys(this).forEach(key => {if (typeof this[key] === 'boolean') {this[key] = false;}});}; ['html', 'env', 'http'].forEach(name => {e[0][name].instance.start = resetBooleans;});} return Reflect.apply(target, thisArg, argumentsList);}}; window.Object.keys = new Proxy(Object.keys, handler);})();", includes, break;else)
@@ -462,11 +470,11 @@ quora.com#@#.q-sticky[style*="box-sizing: border-box; position: sticky;"]
 chat.deepseek.com#@#+js(no-xhr-if, /api/v0/events)
 ||hyogo-tourism.jp/img/top/bnr-$badfilter
 ||doujin-assets.dmm.co.jp/p/dc/doujin/bnr$badfilter
-diff name:ublock-unbreak lines:16 checksum:6eae51609f
+diff name:ublock-unbreak lines:16 checksum:ed7e28611e
 d3 2
 a4 2
 ! Last modified: Sat, 11 Jan 2025 15:34:13 +0000
-! Diff-Path: ../patches/2025.1.11.1158.patch#ublock-unbreak
+! Diff-Path: ../patches/2025.1.12.120.patch#ublock-unbreak
 d600 1
 d1269 2
 d1326 5
@@ -479,11 +487,11 @@ a2558 3
 @@/smartechclient.js^$script,to=netcore.co.in|netcoresmartech.com,from=hdfcfund.com
 /smartechclient.js^$script,to=netcore.co.in|netcoresmartech.com,redirect=noopjs,from=hdfcfund.com,important
 hdfcfund.com##+js(set, smartech, noopFunc)
-diff name:easylist lines:300 checksum:e6af93f65c
+diff name:easylist lines:300 checksum:5354cbb740
 d4 2
 a5 2
 ! Last modified: Sat, 11 Jan 2025 18:50:18 +0000
-! Diff-Path: ../patches/2025.1.11.1158.patch#easylist
+! Diff-Path: ../patches/2025.1.12.120.patch#easylist
 d20 1
 d23 1
 d32 1
@@ -780,11 +788,11 @@ a61905 1
 atlanticsuperstore.ca,fortinos.ca,loblaws.ca,maxi.ca,newfoundlandgrocerystores.ca,nofrills.ca,provigo.ca,realcanadiansuperstore.ca,valumart.ca,yourindependentgrocer.ca,zehrs.ca#?#.css-0:has(> div > .chakra-linkbox:-abp-contains(sponsored))
 a63829 1
 @@||intelyvale.com.mx/ads/images/$domain=valesdegasolina.mx
-diff name:easyprivacy lines:38 checksum:1d2999cde4
+diff name:easyprivacy lines:38 checksum:8f2ebcc1b0
 d4 2
 a5 2
 ! Last modified: Sat, 11 Jan 2025 13:01:28 +0000
-! Diff-Path: ../patches/2025.1.11.1158.patch#easyprivacy
+! Diff-Path: ../patches/2025.1.12.120.patch#easyprivacy
 d1189 1
 a1189 1
 /impressions?$~xmlhttprequest
