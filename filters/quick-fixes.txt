@@ -1,5 +1,5 @@
 ! Title: uBlock₀ filters – Quick fixes
-! Last modified: Mon, 13 Jan 2025 08:39:09 +0000
+! Last modified: Mon, 13 Jan 2025 14:10:14 +0000
 ! Expires: 8 hours
 ! Description: Immediate, temporary filters to fix websites
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -84,10 +84,8 @@ sandratableother.com##+js(set, console.clear, undefined)
 ! https://github.com/uBlockOrigin/uAssets/issues/23806
 *$image,redirect-rule=1x1.gif,domain=japscan.lol
 japscan.lol##+js(norafif, /^/)
-japscan.lol##.navbar-nav > li#navpromo2.nav-item > a:style(content-visibility: hidden !important;)
-japscan.lol##+js(spoof-css, .navbar-nav > li#navpromo2.nav-item > a, content-visibility, visible)
-japscan.lol##+js(trusted-suppress-native-method, Document.prototype.querySelector, '/^#navpromo/', abort)
-japscan.lol##+js(trusted-suppress-native-method, Document.prototype.getElementById, '/^OhNo/', abort)
+japscan.lol##+js(ra, href, .navbar-nav > li#navpromo2.nav-item > a, complete)
+japscan.lol##.navbar-nav > li#navpromo2.nav-item:watch-attr(href) > a:not([href])
 ||japscan.lol/zjs/$script,replace=/function GoodDay\(\)\{.+?\}\}\}//
 japscan.lol##body > style + .container > .row > #main + #sidebar.col-md-3 > .card.mt-1 > .card[style="margin: 0px auto; display: block;"] > iframe[id^="__clb-"][id$="_container"][style^="display: inline-block; width: 300px; height: 250px;"][sandbox="allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-forms allow-scripts allow-top-navigation-to-custom-protocols"][scrolling="no"]
 japscan.lol##body > style + .container > .row > #main.col-md-9 > .card > .card-body[style="margin: 0px auto; display: block;"] > iframe[id^="__clb-"][id$="_container"][style^="display: inline-block; width: 300px; height: 100px;"][sandbox="allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-forms allow-scripts allow-top-navigation-to-custom-protocols"][scrolling="no"]
@@ -178,10 +176,10 @@ smsonline.cloud##html[data-theme][lang] [id^="img_"][style]:has(iframe[framebord
 ~dogdrip.net,~infinityfree.com,~smsonline.cloud,*##body > div:first-child > script + div[id^="img_"][class^="img_"]:style(position: absolute !important; top: -100000px !important;)
 ~dogdrip.net,~infinityfree.com,~smsonline.cloud,*##body > a:only-child > div[id^="img_"][class^="img_"]:style(position: absolute !important; top: -100000px !important;)
 ~dogdrip.net,~infinityfree.com,~smsonline.cloud,*##div[style*="fixed"] span[id^="img_"][class^="img_"] > style:first-child + div[style*="flex"][style*="relative"]:style(width: 10000px !important;)
-07c225f3.online,content-loader.com,css-load.com,html-load.com,img-load.com##body > *:not(pre):style(filter: opacity(0) !important; pointer-events: none !important;)
+07c225f3.online,content-loader.com,css-load.com,html-load.com,img-load.com##body > *:not(pre):style(pointer-events: none !important; transform: translateX(100000px) !important;)
 ! https://github.com/uBlockOrigin/uAssets/issues/26487
 -load.com/script/$xhr,domain=dogdrip.net|infinityfree.com|smsonline.cloud
-dogdrip.net,infinityfree.com,smsonline.cloud##+js(nostif, );throw new Error()
+dogdrip.net,infinityfree.com,smsonline.cloud##+js(nostif, )](this\,...)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/25344
 ! https://github.com/uBlockOrigin/uAssets/pull/26342
@@ -239,3 +237,6 @@ chat.deepseek.com#@#+js(no-xhr-if, /api/v0/events)
 
 ! https://github.com/AdguardTeam/AdguardFilters/commit/01d5a682dd50208ca1e503e38d9a2684e62e8d6f
 app-ranking.net#@#.haj
+
+! https://github.com/uBlockOrigin/uAssets/issues/26823
+/^https?:\/\/[a-z0-9]{6,20}\.[a-z]{6,20}\.co\.in\//$all,to=co.in,badfilter

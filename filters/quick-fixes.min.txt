@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Quick fixes
 ! Expires: 12 hours
-! Last modified: Mon, 13 Jan 2025 08:39:09 +0000
-! Diff-Path: ../patches/2025.1.13.681.patch#ublock-quick-fixes
+! Last modified: Mon, 13 Jan 2025 14:10:14 +0000
+! Diff-Path: ../patches/2025.1.13.993.patch#ublock-quick-fixes
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/quick-fixes.txt ***
@@ -68,10 +68,8 @@ sandratableother.com##+js(set, console.clear, undefined)
 @@||pagead2.googlesyndication.com^$script,domain=next-episode.net
 *$image,redirect-rule=1x1.gif,domain=japscan.lol
 japscan.lol##+js(norafif, /^/)
-japscan.lol##.navbar-nav > li#navpromo2.nav-item > a:style(content-visibility: hidden !important;)
-japscan.lol##+js(spoof-css, .navbar-nav > li#navpromo2.nav-item > a, content-visibility, visible)
-japscan.lol##+js(trusted-suppress-native-method, Document.prototype.querySelector, '/^#navpromo/', abort)
-japscan.lol##+js(trusted-suppress-native-method, Document.prototype.getElementById, '/^OhNo/', abort)
+japscan.lol##+js(ra, href, .navbar-nav > li#navpromo2.nav-item > a, complete)
+japscan.lol##.navbar-nav > li#navpromo2.nav-item:watch-attr(href) > a:not([href])
 ||japscan.lol/zjs/$script,replace=/function GoodDay\(\)\{.+?\}\}\}//
 japscan.lol##body > style + .container > .row > #main + #sidebar.col-md-3 > .card.mt-1 > .card[style="margin: 0px auto; display: block;"] > iframe[id^="__clb-"][id$="_container"][style^="display: inline-block; width: 300px; height: 250px;"][sandbox="allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-forms allow-scripts allow-top-navigation-to-custom-protocols"][scrolling="no"]
 japscan.lol##body > style + .container > .row > #main.col-md-9 > .card > .card-body[style="margin: 0px auto; display: block;"] > iframe[id^="__clb-"][id$="_container"][style^="display: inline-block; width: 300px; height: 100px;"][sandbox="allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-forms allow-scripts allow-top-navigation-to-custom-protocols"][scrolling="no"]
@@ -146,9 +144,9 @@ smsonline.cloud##html[data-theme][lang] [id^="img_"][style]:has(iframe[framebord
 ~dogdrip.net,~infinityfree.com,~smsonline.cloud,*##body > div:first-child > script + div[id^="img_"][class^="img_"]:style(position: absolute !important; top: -100000px !important;)
 ~dogdrip.net,~infinityfree.com,~smsonline.cloud,*##body > a:only-child > div[id^="img_"][class^="img_"]:style(position: absolute !important; top: -100000px !important;)
 ~dogdrip.net,~infinityfree.com,~smsonline.cloud,*##div[style*="fixed"] span[id^="img_"][class^="img_"] > style:first-child + div[style*="flex"][style*="relative"]:style(width: 10000px !important;)
-07c225f3.online,content-loader.com,css-load.com,html-load.com,img-load.com##body > *:not(pre):style(filter: opacity(0) !important; pointer-events: none !important;)
+07c225f3.online,content-loader.com,css-load.com,html-load.com,img-load.com##body > *:not(pre):style(pointer-events: none !important; transform: translateX(100000px) !important;)
 -load.com/script/$xhr,domain=dogdrip.net|infinityfree.com|smsonline.cloud
-dogdrip.net,infinityfree.com,smsonline.cloud##+js(nostif, );throw new Error()
+dogdrip.net,infinityfree.com,smsonline.cloud##+js(nostif, )](this\,...)
 bing.com##li.b_algo:has(a[href^="https://www.bing.com/aclick?"], a[href^="https://www.bing.com/aclk?"]):remove-class(b_algo)
 bing.com##ol#b_results > li:has(> :is(.b_tpcn, .b_title, h2) a[href^="https://www.bing.com/aclick?"])
 bing.com##ol#b_results > li:has(> :is(.b_tpcn, .b_title, h2) a[href^="https://www.bing.com/aclk?"])
@@ -179,3 +177,4 @@ chat.deepseek.com#@#+js(no-xhr-if, /api/v0/events)
 ||hyogo-tourism.jp/img/top/bnr-$badfilter
 ||doujin-assets.dmm.co.jp/p/dc/doujin/bnr$badfilter
 app-ranking.net#@#.haj
+/^https?:\/\/[a-z0-9]{6,20}\.[a-z]{6,20}\.co\.in\//$all,to=co.in,badfilter
