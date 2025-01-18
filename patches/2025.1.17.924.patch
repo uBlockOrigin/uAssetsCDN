@@ -1,26 +1,26 @@
-diff name:ublock-annoyances lines:6 checksum:26ad09fa67
+diff name:ublock-annoyances lines:6 checksum:e5507f7cb0
 d3 2
 a4 2
 ! Last modified: Sat, 18 Jan 2025 02:28:40 +0000
-! Diff-Path: ../patches/2025.1.18.987.patch#ublock-annoyances
+! Diff-Path: ../patches/2025.1.18.1281.patch#ublock-annoyances
 a898 1
 ||redditstatic.com/shreddit/*/xpromo-untagged-content-blocking-modal-$script
-diff name:ublock-badware lines:10 checksum:406e4d32f5
+diff name:ublock-badware lines:10 checksum:93d7078c9d
 d3 2
 a4 2
 ! Last modified: Sat, 18 Jan 2025 06:39:26 +0000
-! Diff-Path: ../patches/2025.1.18.987.patch#ublock-badware
+! Diff-Path: ../patches/2025.1.18.1281.patch#ublock-badware
 d4622 1
 a4634 1
 ||ezdrive.com-$doc,to=~mass.gov
 a4636 2
 /^https:\/\/(?:[-a-z0-9]{2,}\.){1,2}(?:[a-z]{2,3}|click|online)\/(?:[-a-z0-9]+\/){1,4}[a-zA-Z0-9]{150}\/index\?a=/$doc,xhr,match-case,method=get,to=~edu|~gov
 /^https:\/\/(?:[-a-z0-9]{2,}\.){1,2}(?:[a-z]{2,3}|click|online)\/(?:[-a-z0-9]+\/){1,4}[a-zA-Z0-9]{150}\/verify\b/$doc,match-case,method=get,to=~edu|~gov
-diff name:ublock-filters lines:87 checksum:1314a301e0
+diff name:ublock-filters lines:99 checksum:db50bf6864
 d3 2
 a4 2
-! Last modified: Sat, 18 Jan 2025 14:38:52 +0000
-! Diff-Path: ../patches/2025.1.18.987.patch#ublock-filters
+! Last modified: Sat, 18 Jan 2025 17:41:52 +0000
+! Diff-Path: ../patches/2025.1.18.1281.patch#ublock-filters
 d69 1
 a69 1
 alpin.de,boersennews.de,chefkoch.de,chip.de,clever-tanken.de,desired.de,donnerwetter.de,fanfiktion.de,focus.de,formel1.de,frustfrei-lernen.de,gewinnspiele.tv,giga.de,gut-erklaert.de,kino.de,messen.de,nickles.de,nordbayern.de,spielfilm.de,teltarif.de,unsere-helden.com,weltfussball.at,watson.de,moviepilot.de,mactechnews.de,sport1.de,welt.de,sport.de##^script:has-text(DisplayAcceptableAdIfAdblocked)
@@ -28,31 +28,43 @@ d72 1
 a72 1
 alpin.de,boersennews.de,chefkoch.de,chip.de,clever-tanken.de,desired.de,donnerwetter.de,fanfiktion.de,focus.de,formel1.de,frustfrei-lernen.de,gewinnspiele.tv,giga.de,gut-erklaert.de,kino.de,messen.de,nickles.de,nordbayern.de,spielfilm.de,teltarif.de,unsere-helden.com,weltfussball.at,watson.de,moviepilot.de,mactechnews.de,sport1.de,welt.de,sport.de##+js(rmnt, script, DisplayAcceptableAdIfAdblocked)
 d173 2
-d2474 2
-a2475 1
-||amazonaws.com/homad-global-configs.schneevonmorgen.com/global_config.json$xhr,redirect=nooptext,domain=n-tv.de|golem.de
-d2480 2
+d2473 12
 d4797 16
+d5616 1
 d6723 4
 a6726 3
 player.buffed.de,player.gamezone.de,player.gamesaktuell.de,player.pcgames.de,player.videogameszone.de,player.pcgameshardware.de##+js(rpnt, script, /'globalConfig':.*?"\,\s};var exportz/s, };var exportz)
 golem.de##+js(no-xhr-if, damoh)
 vip.de,rtl.de,cinema.de##+js(no-xhr-if, svonm)
 d6729 3
-a6731 2
+a6731 3
+! web.de and gmx.net
 ||uicdn.com/uimag/*/assets/_sn_/vendor/homad.min.js
 giga.de,kino.de,spieletipps.de,desired.de##+js(rpnt, script, /\"homad\"\,/)
-a6732 2
-sport.de##+js(set, player_542213.advertisingGeneral.homad.useAdBlockDefend, false)
+d6733 1
+a6733 10
+sport.de##+js(rpnt, script, useAdBlockDefend: true, useAdBlockDefend: false)
 stern.de##+js(set, foundation.adPlayer.bitmovin, {})
-a6736 1
+brigitte.de##+js(trusted-replace-xhr-response, "enabled": true, "enabled": false, brigitte.de)
+wetter.de##+js(no-xhr-if, homad-global-configs)
+!#if cap_html_filtering
 spiegel.de##^script:has-text(homad)
+||welt.de/homadConfigEnabled.json$xhr,replace=/"enabled":true/"enabled":false/
+||golem.de/staticrl/scripts/radiant/rmp-rl_$script,1p,replace=/var conf = \{.*?'postrollAdTag': 'response\.empty'\s\}\;/var conf = {}/s
+||cinema.de/sites/default/files/js/js_$script,1p,replace=/var conf=\{'globalConfig'.*?'vpaid':'true'\};var exportz=/var conf={}; var exportz=/
+!#else
+d6736 2
 d6740 5
-a6744 6
+a6744 11
 tvspielfilm.de,tvtoday.de,chip.de,focus.de,fitforfun.de##+js(set, DL8_GLOBALS.enableAdSupport, false)
 tvspielfilm.de,tvtoday.de,chip.de,focus.de,fitforfun.de##+js(set, DL8_GLOBALS.useHomad, false)
 tvspielfilm.de,tvtoday.de,chip.de,focus.de,fitforfun.de##+js(set, DL8_GLOBALS.enableHomadDesktop, false)
 tvspielfilm.de,tvtoday.de,chip.de,focus.de,fitforfun.de##+js(set, DL8_GLOBALS.enableHomadMobile, false)
+!#if env_chromium
+||amazonaws.com/homad-global-configs.schneevonmorgen.com/global_config.json$xhr,redirect=nooptext,domain=n-tv.de|golem.de
+!#endif
+n-tv.de##+js(set, Object.prototype.adReinsertion, noopFunc)
+player.rtl2.de##+js(set, getHomadConfig, noopFunc)
 ||united-infos.net^$domain=gmx.*|web.de
 focus.de,kicker.de##+js(json-prune, enabled, force_disabled)
 a9356 1
@@ -104,11 +116,11 @@ a23838 4
 a23949 2
 laser-pics.com##+js(no-fetch-if, googlesyndication)
 laser-pics.com##a[id^="download-btn"]:style(display: block !important;)
-diff name:ublock-privacy lines:14 checksum:12e8a254de
+diff name:ublock-privacy lines:14 checksum:42ac5204bd
 d3 2
 a4 2
 ! Last modified: Sat, 18 Jan 2025 06:04:10 +0000
-! Diff-Path: ../patches/2025.1.18.987.patch#ublock-privacy
+! Diff-Path: ../patches/2025.1.18.1281.patch#ublock-privacy
 d139 6
 a144 6
 loawa.com,ygosu.com,sportalkorea.com,edaily.co.kr,economist.co.kr,etoday.co.kr,isplus.com,hometownstation.com,honkailab.com,thestockmarketwatch.com,issuya.com,worldhistory.org,etnews.com,iusm.co.kr,dogdrip.net,etoland.co.kr,picrew.me,text-compare.com,fntimes.com,javatpoint.com,lamire.jp,bamgosu.site,allthekingz.com,automobile-catalog.com,maketecheasier.com,thesaurus.net,wfmz.com,thestar.co.uk,yorkshirepost.co.uk,mydaily.co.kr,raenonx.cc,ndtvprofit.com,badmouth1.com,logicieleducatif.fr,taxguru.in,islamicfinder.org,aikatu.jp,secure-signup.net,globalrph.com,sportsrec.com,reportera.co.kr,flatpanelshd.com,videogamemods.com,adintrend.tv,ark-unity.com,cool-style.com.tw,dziennik.pl,eurointegration.com.ua,winfuture.de,freemcserver.net,pravda.com.ua,infinityfree.com,wort-suchen.de,word-grabber.com,palabr.as,motscroises.fr,cruciverba.it,dramabeans.com,mynet.com,sportsseoul.com,smsonline.cloud,meeco.kr,heureka.cz,slobodnadalmacija.hr,ap7am.com,autoby.jp,bg-mania.jp,cinema.com.my,crosswordsolver.com,cruciverba.it,daily.co.jp,dailydot.com,demotywatory.pl,dnevno.hr,dolldivine.com,economictimes.com,forsal.pl,gazetaprawna.pl,giornalone.it,gloria.hr,iplocation.net,j-cast.com,j-town.net,joemonster.org,jutarnji.hr,kompasiana.com,lacuarta.com,laleggepertutti.it,lovelive-petitsoku.com,mamastar.jp,manta.com,mariowiki.com,mediaindonesia.com,mirrored.to,missyusa.com,mistrzowie.org,mlbpark.donga.com,motscroises.fr,netzwelt.de,nmplus.hk,oeffnungszeitenbuch.de,ondemandkorea.com,oradesibiu.ro,oraridiapertura24.it,palabr.as,persoenlich.com,petitfute.com,powerpyx.com,rabitsokuhou.2chblog.jp,rostercon.com,slashdot.org,sourceforge.net,suzusoku.blog.jp,talkwithstranger.com,the-crossword-solver.com,tportal.hr,tvtv.ca,tvtv.us,watchdocumentaries.com,webdesignledger.com,wort-suchen.de,wouldurather.io,woxikon.*,yutura.net,zagreb.info,golf-live.at,motherlyvisions.com,w.grapps.me,gazetaprawna.pl,pressian.com,kreuzwortraetsel.de,verkaufsoffener-sonntag.com,raetsel-hilfe.de,horairesdouverture24.fr,nyitvatartas24.hu,convertcase.net##+js(set-local-storage-item, adshield-analytics-uuid, $remove$)
@@ -119,11 +131,11 @@ loawa.com,ygosu.com,sportalkorea.com,edaily.co.kr,economist.co.kr,etoday.co.kr,i
 loawa.com,ygosu.com,sportalkorea.com,edaily.co.kr,economist.co.kr,etoday.co.kr,isplus.com,hometownstation.com,honkailab.com,thestockmarketwatch.com,issuya.com,worldhistory.org,etnews.com,iusm.co.kr,dogdrip.net,etoland.co.kr,picrew.me,text-compare.com,fntimes.com,javatpoint.com,lamire.jp,bamgosu.site,allthekingz.com,automobile-catalog.com,maketecheasier.com,thesaurus.net,wfmz.com,thestar.co.uk,yorkshirepost.co.uk,mydaily.co.kr,raenonx.cc,ndtvprofit.com,badmouth1.com,logicieleducatif.fr,taxguru.in,islamicfinder.org,aikatu.jp,secure-signup.net,globalrph.com,sportsrec.com,reportera.co.kr,flatpanelshd.com,videogamemods.com,adintrend.tv,ark-unity.com,cool-style.com.tw,dziennik.pl,eurointegration.com.ua,winfuture.de,freemcserver.net,pravda.com.ua,infinityfree.com,wort-suchen.de,word-grabber.com,palabr.as,motscroises.fr,cruciverba.it,dramabeans.com,mynet.com,sportsseoul.com,smsonline.cloud,meeco.kr,heureka.cz,slobodnadalmacija.hr,ap7am.com,autoby.jp,bg-mania.jp,cinema.com.my,crosswordsolver.com,cruciverba.it,daily.co.jp,dailydot.com,demotywatory.pl,dnevno.hr,dolldivine.com,economictimes.com,forsal.pl,gazetaprawna.pl,giornalone.it,gloria.hr,iplocation.net,j-cast.com,j-town.net,joemonster.org,jutarnji.hr,kompasiana.com,lacuarta.com,laleggepertutti.it,lovelive-petitsoku.com,mamastar.jp,manta.com,mariowiki.com,mediaindonesia.com,mirrored.to,missyusa.com,mistrzowie.org,mlbpark.donga.com,motscroises.fr,netzwelt.de,nmplus.hk,oeffnungszeitenbuch.de,ondemandkorea.com,oradesibiu.ro,oraridiapertura24.it,palabr.as,persoenlich.com,petitfute.com,powerpyx.com,rabitsokuhou.2chblog.jp,rostercon.com,slashdot.org,sourceforge.net,suzusoku.blog.jp,talkwithstranger.com,the-crossword-solver.com,tportal.hr,tvtv.ca,tvtv.us,watchdocumentaries.com,webdesignledger.com,wort-suchen.de,wouldurather.io,woxikon.*,yutura.net,zagreb.info,golf-live.at,motherlyvisions.com,w.grapps.me,gazetaprawna.pl,pressian.com,kreuzwortraetsel.de,verkaufsoffener-sonntag.com,raetsel-hilfe.de,horairesdouverture24.fr,nyitvatartas24.hu,convertcase.net##+js(set-local-storage-item, /_fa_Y2FjaGVfYWRibG9ja19jaXJjdW12ZW50X3Njb3Jl$/, $remove$)
 a851 1
 ||internal-api.prolific.com/api/v1/statistics/
-diff name:ublock-quick-fixes lines:20 checksum:ba4183954f
+diff name:ublock-quick-fixes lines:20 checksum:a92d1bf2f7
 d3 2
 a4 2
 ! Last modified: Sat, 18 Jan 2025 13:33:30 +0000
-! Diff-Path: ../patches/2025.1.18.987.patch#ublock-quick-fixes
+! Diff-Path: ../patches/2025.1.18.1281.patch#ublock-quick-fixes
 d71 1
 a71 1
 japscan.lol##+js(trusted-set-attr, .navbar-nav > li#navpromo2.nav-item > a, href, 'https://www.example.com/?test=http://www.toueapo.shop/')
@@ -140,15 +152,15 @@ robertordercharacter.com,voe.sx##+js(nowoif)
 robertordercharacter.com,voe.sx##+js(set, console.clear, undefined)
 a180 1
 ||gstatic.com/atari/embeds/*/intermediate-frame-minified.html?jsh=m%3B%2F_%2Fscs%2Fabc-static%2F_%2Fjs%2Fk%3Dgapi.lb.en.5oZHy0SiJxw.O%2Fd%3D1%2Frs%3DAHpOoo-Hry6DG-RE4t9kNz_t6hiwmwXOmA%2Fm%3D__features__&r=$frame,domain=sites.google.com,badfilter
-diff name:ublock-unbreak lines:3 checksum:fc918cc965
+diff name:ublock-unbreak lines:3 checksum:5d91e37c2a
 d4 1
 a4 1
-! Diff-Path: ../patches/2025.1.18.987.patch#ublock-unbreak
-diff name:easylist lines:132 checksum:bd4840989c
+! Diff-Path: ../patches/2025.1.18.1281.patch#ublock-unbreak
+diff name:easylist lines:132 checksum:697e4dabf0
 d4 2
 a5 2
 ! Last modified: Sat, 18 Jan 2025 15:50:14 +0000
-! Diff-Path: ../patches/2025.1.18.987.patch#easylist
+! Diff-Path: ../patches/2025.1.18.1281.patch#easylist
 d20 1
 d22 2
 a23 1
@@ -277,11 +289,11 @@ a62432 1
 coomer.su,kemono.su,pics-x.com,pinflix.com,sdhentai.com,urlgalleries.net##.ad-container
 a62738 1
 coomer.su,kemono.su##.header + aside
-diff name:easyprivacy lines:23 checksum:d6369ab8ec
+diff name:easyprivacy lines:23 checksum:955a1ac346
 d4 2
 a5 2
 ! Last modified: Sat, 18 Jan 2025 12:59:00 +0000
-! Diff-Path: ../patches/2025.1.18.987.patch#easyprivacy
+! Diff-Path: ../patches/2025.1.18.1281.patch#easyprivacy
 a6883 1
 ||feedten.com^
 a9098 1

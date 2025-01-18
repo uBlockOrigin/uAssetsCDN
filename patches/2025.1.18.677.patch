@@ -1,16 +1,16 @@
-diff name:ublock-annoyances lines:3 checksum:26ad09fa67
+diff name:ublock-annoyances lines:3 checksum:e5507f7cb0
 d4 1
 a4 1
-! Diff-Path: ../patches/2025.1.18.987.patch#ublock-annoyances
-diff name:ublock-badware lines:3 checksum:406e4d32f5
+! Diff-Path: ../patches/2025.1.18.1281.patch#ublock-annoyances
+diff name:ublock-badware lines:3 checksum:93d7078c9d
 d4 1
 a4 1
-! Diff-Path: ../patches/2025.1.18.987.patch#ublock-badware
-diff name:ublock-filters lines:49 checksum:1314a301e0
+! Diff-Path: ../patches/2025.1.18.1281.patch#ublock-badware
+diff name:ublock-filters lines:61 checksum:db50bf6864
 d3 2
 a4 2
-! Last modified: Sat, 18 Jan 2025 14:38:52 +0000
-! Diff-Path: ../patches/2025.1.18.987.patch#ublock-filters
+! Last modified: Sat, 18 Jan 2025 17:41:52 +0000
+! Diff-Path: ../patches/2025.1.18.1281.patch#ublock-filters
 d69 1
 a69 1
 alpin.de,boersennews.de,chefkoch.de,chip.de,clever-tanken.de,desired.de,donnerwetter.de,fanfiktion.de,focus.de,formel1.de,frustfrei-lernen.de,gewinnspiele.tv,giga.de,gut-erklaert.de,kino.de,messen.de,nickles.de,nordbayern.de,spielfilm.de,teltarif.de,unsere-helden.com,weltfussball.at,watson.de,moviepilot.de,mactechnews.de,sport1.de,welt.de,sport.de##^script:has-text(DisplayAcceptableAdIfAdblocked)
@@ -18,31 +18,43 @@ d72 1
 a72 1
 alpin.de,boersennews.de,chefkoch.de,chip.de,clever-tanken.de,desired.de,donnerwetter.de,fanfiktion.de,focus.de,formel1.de,frustfrei-lernen.de,gewinnspiele.tv,giga.de,gut-erklaert.de,kino.de,messen.de,nickles.de,nordbayern.de,spielfilm.de,teltarif.de,unsere-helden.com,weltfussball.at,watson.de,moviepilot.de,mactechnews.de,sport1.de,welt.de,sport.de##+js(rmnt, script, DisplayAcceptableAdIfAdblocked)
 d173 2
-d2474 2
-a2475 1
-||amazonaws.com/homad-global-configs.schneevonmorgen.com/global_config.json$xhr,redirect=nooptext,domain=n-tv.de|golem.de
-d2480 2
+d2473 12
 d4797 16
+d5616 1
 d6723 4
 a6726 3
 player.buffed.de,player.gamezone.de,player.gamesaktuell.de,player.pcgames.de,player.videogameszone.de,player.pcgameshardware.de##+js(rpnt, script, /'globalConfig':.*?"\,\s};var exportz/s, };var exportz)
 golem.de##+js(no-xhr-if, damoh)
 vip.de,rtl.de,cinema.de##+js(no-xhr-if, svonm)
 d6729 3
-a6731 2
+a6731 3
+! web.de and gmx.net
 ||uicdn.com/uimag/*/assets/_sn_/vendor/homad.min.js
 giga.de,kino.de,spieletipps.de,desired.de##+js(rpnt, script, /\"homad\"\,/)
-a6732 2
-sport.de##+js(set, player_542213.advertisingGeneral.homad.useAdBlockDefend, false)
+d6733 1
+a6733 10
+sport.de##+js(rpnt, script, useAdBlockDefend: true, useAdBlockDefend: false)
 stern.de##+js(set, foundation.adPlayer.bitmovin, {})
-a6736 1
+brigitte.de##+js(trusted-replace-xhr-response, "enabled": true, "enabled": false, brigitte.de)
+wetter.de##+js(no-xhr-if, homad-global-configs)
+!#if cap_html_filtering
 spiegel.de##^script:has-text(homad)
+||welt.de/homadConfigEnabled.json$xhr,replace=/"enabled":true/"enabled":false/
+||golem.de/staticrl/scripts/radiant/rmp-rl_$script,1p,replace=/var conf = \{.*?'postrollAdTag': 'response\.empty'\s\}\;/var conf = {}/s
+||cinema.de/sites/default/files/js/js_$script,1p,replace=/var conf=\{'globalConfig'.*?'vpaid':'true'\};var exportz=/var conf={}; var exportz=/
+!#else
+d6736 2
 d6740 5
-a6744 6
+a6744 11
 tvspielfilm.de,tvtoday.de,chip.de,focus.de,fitforfun.de##+js(set, DL8_GLOBALS.enableAdSupport, false)
 tvspielfilm.de,tvtoday.de,chip.de,focus.de,fitforfun.de##+js(set, DL8_GLOBALS.useHomad, false)
 tvspielfilm.de,tvtoday.de,chip.de,focus.de,fitforfun.de##+js(set, DL8_GLOBALS.enableHomadDesktop, false)
 tvspielfilm.de,tvtoday.de,chip.de,focus.de,fitforfun.de##+js(set, DL8_GLOBALS.enableHomadMobile, false)
+!#if env_chromium
+||amazonaws.com/homad-global-configs.schneevonmorgen.com/global_config.json$xhr,redirect=nooptext,domain=n-tv.de|golem.de
+!#endif
+n-tv.de##+js(set, Object.prototype.adReinsertion, noopFunc)
+player.rtl2.de##+js(set, getHomadConfig, noopFunc)
 ||united-infos.net^$domain=gmx.*|web.de
 focus.de,kicker.de##+js(json-prune, enabled, force_disabled)
 d13848 1
@@ -56,28 +68,28 @@ a23069 6
 ||cdn.adsninja.ca/an_sn.js^$script,important,domain=androidpolice.com|cbr.com|collider.com|dualshockers.com|gamerant.com|howtogeek.com|makeuseof.com|movieweb.com|screenrant.com|thegamer.com|xda-developers.com
 ||cdn.adsninja.ca/adsninja_worker.js^$important,domain=androidpolice.com|cbr.com|collider.com|dualshockers.com|gamerant.com|howtogeek.com|makeuseof.com|movieweb.com|screenrant.com|thegamer.com|xda-developers.com
 ||cdn.adsninja.ca/biddertypelibrary/$script,important,domain=androidpolice.com|cbr.com|collider.com|dualshockers.com|gamerant.com|howtogeek.com|makeuseof.com|movieweb.com|screenrant.com|thegamer.com|xda-developers.com
-diff name:ublock-privacy lines:3 checksum:12e8a254de
+diff name:ublock-privacy lines:3 checksum:42ac5204bd
 d4 1
 a4 1
-! Diff-Path: ../patches/2025.1.18.987.patch#ublock-privacy
-diff name:ublock-quick-fixes lines:8 checksum:ba4183954f
+! Diff-Path: ../patches/2025.1.18.1281.patch#ublock-privacy
+diff name:ublock-quick-fixes lines:8 checksum:a92d1bf2f7
 d3 2
 a4 2
 ! Last modified: Sat, 18 Jan 2025 13:33:30 +0000
-! Diff-Path: ../patches/2025.1.18.987.patch#ublock-quick-fixes
+! Diff-Path: ../patches/2025.1.18.1281.patch#ublock-quick-fixes
 d129 2
 a130 2
 brr-55bsolwf-moo.com,brr-69xwmut5-moo.com,file-1bl9ruic-moon.com,file-kg88oaak-embed.com,file-mi11ljwj-embed.com,file-sp32aoh8-moon.com,file-zz40pd56-embed.com,filemoon-j0l2wxjk.com,filemoon-t8c715ke.com,fle-2ggdmu8q-moo.com,fle-5r8dchma-moo.com,fle-rvd0i9o8-moo.com,mee-6zeqsgv2.com,mee-cccdoz45.com,mee-dp6h8dp2.com,mee-x63tvple.com,moo-teau4c9h-mkay.com,moo-uakkxorh-mkay.com,moon-3uykdl2w-embed.com,moon-4uemks89-embed.com,moon-fm43w1qv.com,moon-kg83docx.com,moon-n9hp2onm-embed.com,moonfile-62es3l9z.com,moonfile-paxadnae.com##+js(nowoif)
 brr-55bsolwf-moo.com,brr-69xwmut5-moo.com,file-1bl9ruic-moon.com,file-kg88oaak-embed.com,file-mi11ljwj-embed.com,file-sp32aoh8-moon.com,file-zz40pd56-embed.com,filemoon-j0l2wxjk.com,filemoon-t8c715ke.com,fle-2ggdmu8q-moo.com,fle-5r8dchma-moo.com,fle-rvd0i9o8-moo.com,mee-6zeqsgv2.com,mee-cccdoz45.com,mee-dp6h8dp2.com,mee-x63tvple.com,moo-teau4c9h-mkay.com,moo-uakkxorh-mkay.com,moon-3uykdl2w-embed.com,moon-4uemks89-embed.com,moon-fm43w1qv.com,moon-kg83docx.com,moon-n9hp2onm-embed.com,moonfile-62es3l9z.com,moonfile-paxadnae.com##+js(acs, Math, localStorage['\x)
-diff name:ublock-unbreak lines:3 checksum:fc918cc965
+diff name:ublock-unbreak lines:3 checksum:5d91e37c2a
 d4 1
 a4 1
-! Diff-Path: ../patches/2025.1.18.987.patch#ublock-unbreak
-diff name:easylist lines:27 checksum:bd4840989c
+! Diff-Path: ../patches/2025.1.18.1281.patch#ublock-unbreak
+diff name:easylist lines:27 checksum:697e4dabf0
 d4 2
 a5 2
 ! Last modified: Sat, 18 Jan 2025 15:50:14 +0000
-! Diff-Path: ../patches/2025.1.18.987.patch#easylist
+! Diff-Path: ../patches/2025.1.18.1281.patch#easylist
 a16122 1
 ||3e1898dbbe.com^
 a22316 1
@@ -101,11 +113,11 @@ a48893 1
 d62176 1
 a62176 1
 ! ABP CSS injection filters
-diff name:easyprivacy lines:9 checksum:d6369ab8ec
+diff name:easyprivacy lines:9 checksum:955a1ac346
 d4 2
 a5 2
 ! Last modified: Sat, 18 Jan 2025 12:59:00 +0000
-! Diff-Path: ../patches/2025.1.18.987.patch#easyprivacy
+! Diff-Path: ../patches/2025.1.18.1281.patch#easyprivacy
 a10485 1
 ||h-bid.com^$third-party
 a13472 1
