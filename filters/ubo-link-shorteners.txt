@@ -1,5 +1,5 @@
 ! Title: uBlock filters – Link shorteners
-! Last modified: Fri, 31 Jan 2025 17:07:28 +0000
+! Last modified: Sat, 01 Feb 2025 23:53:34 +0000
 ! Expires: 5 days
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Homepage: https://github.com/uBlockOrigin/uAssets
@@ -1399,9 +1399,11 @@ fuckingfast.co##+js(rpnt, script, !seen && ad, false)
 ||senditfast.cloud^$doc
 
 ! https://www.reddit.com/r/uBlockOrigin/comments/1g59yxn/adblock_detection_on_streamelementscom/ (https://strms .net/callofdragons_zelderler)
+! https://link.streamelements.com/startrek_ribenchi anti-adb
 streamelements.com##+js(trusted-set, google_srt, json:0.61234)
 streamelements.com##+js(set, sensorsDataAnalytic201505, {})
 ||validate.strms.net/*adblock%3Dtrue$doc,uritransform=/adblock%3Dtrue/adblock%3Dfalse/
+*$script,3p,redirect-rule=noop.js,domain=streamelements.com|strms.net
 
 ! shortylink. store popup
 shortylink.store##+js(aopr, open)
@@ -1494,3 +1496,17 @@ tickhosting.com##+js(set, detectedAdblock, undefined)
 ! krakenfiles. com popups
 krakenfiles.com##+js(nowoif)
 ||wounofoarausooy.net^$popup
+
+! https://github.com/uBlockOrigin/uAssets/issues/27050
+aman-dn.blogspot.com#@#.ads-ad
+aman-dn.blogspot.com###overlay
+aman-dn.blogspot.com###popup
+aman-dn.blogspot.com##body:style(overflow: auto !important;)
+aman-dn.blogspot.com##span[style]:has(> span[style]:has-text(ADVERTISEMENT))
+aman-dn.blogspot.com###info-message:has-text(ADBLOCK)
+aman-dn.blogspot.com##+js(nano-sib, countdown)
+
+! https://github.com/AdguardTeam/AdguardFilters/issues/197502
+in91vip.win##+js(rpnt, script, (isAdsenseBlocked), (false))
+in91vip.win##+js(set, isTabActive, true)
+in91vip.win###continueBtn
