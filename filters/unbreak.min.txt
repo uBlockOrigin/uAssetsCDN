@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Unbreak
 ! Expires: 5 days
-! Last modified: Sat, 01 Feb 2025 18:57:16 +0000
-! Diff-Path: ../patches/2025.2.2.678.patch#ublock-unbreak
+! Last modified: Sun, 02 Feb 2025 13:38:47 +0000
+! Diff-Path: ../patches/2025.2.2.988.patch#ublock-unbreak
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/unbreak.txt ***
@@ -831,7 +831,6 @@ recensionihot.com#@#a[href^="https://www.moscarossa.biz/"]
 |https://$script,3p,domain=thepiratebay.org,badfilter
 *$script,3p,domain=animepahe.com,badfilter
 @@||google.*/search$popup
-*$script,3p,domain=putlockertv.to,badfilter
 @@||js.duhnet.tv/*/player/html5/$script,domain=cnnturk.com
 @@||scdn.co/cdn/js/gtag.$script,domain=spotify.com
 @@||spclient.wg.spotify.com/$xhr,domain=spotify.com
@@ -846,8 +845,6 @@ wallpaperaccess.com##+js(nano-sib)
 ||svc.dynamics.com/f/m/
 washingtonpost.com#@#.pb-md.pt-md
 order-order.com#@#.tag-sponsored
-! broken by french list https://github.com/uBlockOrigin/uAssets/issues/6851#issuecomment-626328180
-*$frame,3p,domain=vidcloud9.com,badfilter
 ! unbreak clipwatching player on firefox
 !#if env_firefox
 @@*$csp=worker-src 'none',domain=clipwatching.com
@@ -891,10 +888,6 @@ order-order.com#@#.tag-sponsored
 *$popup,domain=uptobox.com,badfilter
 ! CNAME https://forums.lanik.us/viewtopic.php?p=154928#p154928
 @@||sdv.fr^$script,domain=ladepeche.fr
-*$script,3p,domain=zt-za.com,badfilter
-*$frame,3p,domain=zt-za.com,badfilter
-*$script,3p,domain=zt-protect.com,badfilter
-*$script,3p,domain=zt-protect.net,badfilter
 @@||googletagmanager.com/gtm.js$script,domain=vw-sklep.pl
 getcoloringpages.com#@#.adsBlock
 *$script,redirect-rule=noopjs,domain=hopkinssports.com
@@ -904,17 +897,10 @@ getcoloringpages.com#@#.adsBlock
 @@||media.larena.it/media/lib/cmp/quantcast.js$script,1p
 @@||imasdk.googleapis.com/js/sdkloader/ima3.js$script,domain=larena.it
 *$script,domain=larena.it,redirect-rule=noopjs
-! unblock items on wotcheatmods
-*$css,3p,domain=wotcheatmods.com,badfilter
-*$script,3p,domain=wotcheatmods.com,badfilter
-*$image,3p,domain=wotcheatmods.com,badfilter
 @@||api.useinsider.com^$domain=lenovo.com
 @@||image.useinsider.com/lenovosg/$image,domain=lenovo.com
 @@||inside-graph.com^$domain=lenovo.com
 @@||confirmit.com/api/$domain=lenovo.com
-||opensubtitles.org^*.js|$script,domain=opensubtitles.org,badfilter
-! cutcaptcha.com|filecrypt.* CNAME
-@@||bullads.net^$script,frame,xhr,domain=filecrypt.co|cutcaptcha.com|filecrypt.cc
 @@||static.motortrader.com.my/advert/$image,domain=motortrader.com.my
 @@||choice.faktor.io^$frame,script,xhr,domain=gids.tv
 ! alidns.com CNAME
@@ -930,10 +916,6 @@ getcoloringpages.com#@#.adsBlock
 ! vix .com broken page
 @@||cdn.taboola.com/libtrc/$script,domain=vix.com
 .net/ads/$badfilter
-nfmovies.com#@#+js(aopr, $myui)
-@@||nfmovies.com/static/side.jpg$xhr,1p
-|https://$xhr,3p,domain=cloudvideo.tv,badfilter
-|https://$css,3p,domain=cloudvideo.tv,badfilter
 @@||cdn.plyr.io/*/plyr.svg$xhr,domain=mp4upload.com
 ! broken video on cookinggames .com
 @@||bitent.com/lock_html5/adPlayer/v*/adPlayer.js$script,domain=cookinggames.com
@@ -951,14 +933,11 @@ saltspringexchange.com#@#.single-ad
 @@||fhi.no^$cname
 ||logsss.com^$badfilter
 @@||google.*^$cname
-/ads1.$badfilter
 ! broken video player https://www.gmx.net/magazine/sport/fussball/bundesliga/transfermarkt-2020-bundesliga-coronakrise-euro-zweimal-umdrehen-34888082
 @@||fluid.4strokemedia.com/www/delivery/asyncspc.php$xhr,1p
 @@||imasdk.googleapis.com/js/sdkloader/ima3.js$script,domain=4strokemedia.com
 @@||cand.li/api/assets/$xhr,1p
 @@||cravitus.*/api/adverts/*$xhr,domain=cravitus.com|cravitus.lt
-! broken videos on pornhive .tv => videobin .co/embed
-*$frame,3p,domain=pornhive.tv,badfilter
 @@||s0.2mdn.net/ads/studio/Enabler.js$script,domain=kabum.com.br
 @@||couponcabin.com/ga.*.js$1p
 ||slickdeals.net/scripts/*/js-campaign-tracking.js$script,1p,redirect=noop.js
@@ -982,9 +961,6 @@ verizon.com##+js(set, newPageViewSpeedtest, noopFunc)
 *$script,3p,domain=hentaihaven.org,badfilter
 humanbenchmark.com##+js(set, pubg.unload, noopFunc)
 @@||t8cdn.com/js/lazyload.min.js$script,domain=tube8.*
-! moviesweb .info thunbs + player broken
-|https://$frame,3p,domain=moviesweb.info,badfilter
-|https://$image,3p,domain=moviesweb.info,badfilter
 @@||message-fra.sp-prod.net^$script,xhr,domain=manager-magazin.de
 ||doubleclick.net/tag/js/gpt.js$script,redirect=googletagservices_gpt.js,domain=aristeguinoticias.com
 @@||news12.com^$frame,1p
