@@ -1,5 +1,5 @@
 ! Title: uBlock filters – Privacy
-! Last modified: Sun, 02 Feb 2025 06:21:19 +0000
+! Last modified: Sun, 02 Feb 2025 10:03:54 +0000
 ! Expires: 7 days
 ! Description: |
 !   Some of these filters make use of the `important` filter option,`
@@ -1198,6 +1198,9 @@ $removeparam=igshid,domain=instagram.com|threads.net
 ||msn.com^$doc,removeparam=cvid
 ||msn.com^$doc,removeparam=ei
 ||msn.com^$doc,removeparam=vid
+! spotify.com tracking
+||open.spotify.com^$removeparam=referral
+||open.spotify.com^$removeparam=si
 ! https://github.com/uBlockOrigin/uAssets/issues/18938#issuecomment-1693238481
 ! https://community.brave.com/t/unable-to-open-reddit-com-urls-in-private-tabs/503125/4
 !#if env_firefox
@@ -1438,8 +1441,9 @@ forum.blu-ray.com##+js(ra, onclick|oncontextmenu|onmouseover, a[href][onclick*="
 ! https://github.com/uBlockOrigin/uBlock-issues/issues/3206#issuecomment-2403795984
 ||podtrac.com^*redirect.mp3/$urlskip=/\/redirect\.mp3\/([^?]+\.mp3\b)/ +https
 ! https://github.com/uBlockOrigin/uBlock-issues/issues/3206#issuecomment-2406674420
+! https://www.reddit.com/r/uBlockOrigin/comments/1if6l4n/podcasts_not_playing_on_web_with_ublockorigin/
+/track/*$to=chtbl.com|chrt.fm|tracking.swap.fm,urlskip=/\/track\/\w+\/([^?]+)/ +https
 ||pdst.fm/e/$urlskip=/\/e\/([^?]+)/ +https
-||chtbl.com/track/$urlskip=/\/track\/\w+\/([^?]+)/ +https
 ||mgln.ai/e/$urlskip=/\/e\/\w+\/([^?]+)/ +https
 ||pdrl.fm^$urlskip=/pdrl\.fm\/\w+\/([^?]+)/ +https
 
@@ -1583,11 +1587,13 @@ chat.deepseek.com##.ds-modal-overlay
 ||ipify.org^$domain=realmoasis.com
 
 ! https://github.com/easylist/easylist/issues/21148
-www.hoyoverse.com##+js(remove-cookie, /^DEVICEFP/)
+www.hoyolab.com,www.hoyoverse.com##+js(remove-cookie, /^DEVICEFP/)
 hoyoverse.com,~www.hoyoverse.com##+js(trusted-set-cookie, DEVICEFP, 1, , , domain, hoyoverse.com)
 hoyoverse.com,~www.hoyoverse.com##+js(trusted-set-cookie, DEVICEFP_SEED_ID, 1, , , domain, hoyoverse.com)
 hoyoverse.com,~www.hoyoverse.com##+js(trusted-set-cookie, DEVICEFP_SEED_TIME, 1, , , domain, hoyoverse.com)
 hoyoverse.com,~www.hoyoverse.com##+js(rpnt, script, /^/, '(()=>{const remove=()=>{["","_SEED_ID","_SEED_TIME"].forEach((cookie=>{document.cookie="DEVICEFP"+cookie+"=; domain=.hoyoverse.com; path=/; Max-Age=-1000; expires=Thu, 01 Jan 1970 00:00:00 GMT"}));console.debug("Removed")};window.addEventListener("beforeunload",remove)})();', sedCount, 1)
+hoyolab.com,~www.hoyolab.com##+js(trusted-set-cookie, DEVICEFP, 1, , , domain, hoyolab.com)
+hoyolab.com,~www.hoyolab.com##+js(trusted-rpnt, script, /^/, '(()=>{const remove=()=>{document.cookie="DEVICEFP=; domain=.hoyolab.com; path=/; Max-Age=-1000; expires=Thu, 01 Jan 1970 00:00:00 GMT";console.debug("Removed")};window.addEventListener("beforeunload",remove)})();')
 
 ! Merge in resource-abuse.txt
 !#include resource-abuse.txt
