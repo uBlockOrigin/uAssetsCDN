@@ -1,5 +1,5 @@
 ! Title: uBlock₀ filters – Quick fixes
-! Last modified: Fri, 07 Feb 2025 20:59:45 +0000
+! Last modified: Sat, 08 Feb 2025 06:40:18 +0000
 ! Expires: 8 hours
 ! Description: Immediate, temporary filters to fix websites
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -85,7 +85,8 @@ maxfinishseveral.com##+js(set, console.clear, undefined)
 *$image,redirect-rule=1x1.gif,domain=japscan.lol
 japscan.lol##+js(norafif, /^/)
 japscan.lol##+js(trusted-set-attr, .navbar-nav > li#navpromo2.nav-item > a, onclick, 'let a=function(){};return false;')
-japscan.lol##+js(rmnt, script, Good_2025)
+japscan.lol#@#+js(rmnt, script, Good_2025)
+japscan.lol##+js(acs, addEventListener, Happy)
 japscan.lol#@#body > .container.text-center > .mb-2.mt-2[style="margin: 0px auto; display: block;"] > .text-center > a.donate[href^="http"][target="_blank"][rel="noopener noreferrer nofollow"]:not([href^="http://japscan.lol"]) > img
 japscan.lol#@#body > style + .container > .row > #main.col-md-9 > .card > #chapters.tab-content > .row.justify-content-center.align-items-center > a.image-box.donate[href^="http"][target="_blank"][rel="noopener noreferrer nofollow"]:not([href^="http://japscan.lol"]) > img
 japscan.lol#@#body > .container.text-center > div.mt-3[style="margin: 0px auto; display: block;"] > a.Aikoi.donate[target="_blank"][href^="https://www."][href*="/?utm_source=manga&utm_"]:not([href^="https://www.google"]):not([href^="https://www.japscan"]):not([href^="https://www.example"]) > img.img-fluid[src^="/imgs/onc/"]
@@ -113,6 +114,7 @@ japscan.lol#@#div.container > [href]
 /^https?:\/\/(?:[a-z]{2}\.)?[a-z]{7,14}\.com\/r(?=[a-z]*[0-9A-Z])[0-9A-Za-z]{10,16}\/[A-Za-z]{5}(?:\?param=\w+)?$/$script,3p,match-case,to=com,domain=japscan.lol,important
 /\/[0-9a-f]{32}\/invoke\.js/$script,3p,domain=japscan.lol,important
 /^https?:\/\/(?:www\.|[0-9a-z]{7,10}\.)?[-0-9a-z]{5,}\.com\/\/?(?:[0-9a-z]{2}\/){2,3}[0-9a-f]{32}\.js/$script,xhr,3p,to=com,domain=japscan.lol,important
+/cuid/?f=https%$xhr,3p,domain=japscan.lol,important
 
 ! https://github.com/uBlockOrigin/uAssets/issues/21064
 ! https://github.com/uBlockOrigin/uAssets/issues/24220
@@ -171,8 +173,6 @@ panel.freemcserver.net##+js(rpnt, script, 'G-1B4LC0KT6C');, 'G-1B4LC0KT6C'); loc
 ! filemoon
 ! https://github.com/AdguardTeam/AdguardFilters/issues/190044
 ! https://www.reddit.com/r/uBlockOrigin/comments/1fuaaw5/asblock_detected_in_ask4porncc
-279kzq8a4lqa0ddt7sfp825b0epdl922oqu6.fun##+js(nowoif)
-279kzq8a4lqa0ddt7sfp825b0epdl922oqu6.fun##+js(acs, Math, localStorage['\x)
 u26bekrb.fun##+js(set, adBlockDetected, undefined)
 !#if ext_devbuild
 $frame,3p,domain=filemoon.*|8rm3l0i9.fun,replace='/^/<script>(()=>{window.open=new Proxy(window.open,{apply:(n,o,w)=>{}});let e=document.querySelector("script");e.innerHTML.includes("window.open")&&e.parentElement.removeChild(e)})();<\/script>/i'
@@ -205,9 +205,6 @@ smsonline.cloud##html[data-theme][lang] [id^="img_"][style]:has(iframe[framebord
 dogdrip.net,infinityfree.com,slashdot.org,smsonline.cloud##+js(no-fetch-if, -load.com/script/, length:101)
 dogdrip.net,infinityfree.com,slashdot.org,smsonline.cloud##+js(nostif, )](this\,..., 4000-6000)
 slashdot.org##+js(aeld, , )](this\,...)
-! https://github.com/AdguardTeam/AdguardFilters/issues/197724
-/advertising/ad-shield.js$script
-||html-load.com^$script,xhr,domain=nikkansports.com
 ! https://github.com/easylist/easylist/commit/3eb1065a41497b1e7522863233e729b53d422d3c
 ||report.error-report.com^$frame,badfilter
 
@@ -219,27 +216,13 @@ bing.com##li.b_algo:has(a[href^="https://www.bing.com/aclick?"], a[href^="https:
 bing.com##ol#b_results > li:has(> :is(.b_tpcn, .b_title, h2) a[href^="https://www.bing.com/aclick?"])
 bing.com##ol#b_results > li:has(> :is(.b_tpcn, .b_title, h2) a[href^="https://www.bing.com/aclk?"])
 
-! https://github.com/AdguardTeam/AdguardFilters/issues/183252
-exploader.net##+js(trusted-rpnt, script, /^var \w+=\[.+/, (()=>{let e=[];document.addEventListener("DOMContentLoaded"\,(()=>{const t=document.querySelector("body script").textContent.match(/"] = '(.*?)'/g);if(!t)return;t.forEach((t=>{const r=t.replace(/.*'(.*?)'/\,"$1");e.push(r)}));const r=document.querySelector('.dl_button[href*="preview"]').href.split("?")[1];e.includes(r)&&(e=e.filter((e=>e!==r)));document.querySelectorAll(".dl_button[href]").forEach((t=>{t.target="_blank";let r=t.cloneNode(!0);r.href=t.href.replace(/\?.*/\,`?${e[0]}`)\,t.after(r);let o=t.cloneNode(!0);o.href=t.href.replace(/\?.*/\,`?${e[1]}`)\,t.after(o)}))}))})();, sedCount, 1)
-
 ! https://github.com/AdguardTeam/AdguardFilters/issues/153796
 rekidai-info.github.io##+js(nostif, /aframe|querySelector/, 1000-)
 rekidai-info.github.io##+js(nosiif, location[_0x)
 
-! https://github.com/uBlockOrigin/uAssets/issues/26197
-! https://github.com/uBlockOrigin/uAssets/issues/26983
-||kemono.su/api/v1/creators$badfilter
-||coomer.su/api/v1/creators$badfilter
-||kemono.su/api/v1/creators|
-||coomer.su/api/v1/creators|
-
-! https://github.com/easylist/easylist/commit/9b7a9a7f2c9caddd825bbc571800d0d785bf533d temp
-ekitan.com,kissanadu.com#@#.sidebar-ad:not(.adsbygoogle)
-job.inshokuten.com,kurukura.jp,netmile.co.jp#@#.ad-area:not(.text-ad)
-
 ! https://github.com/uBlockOrigin/uAssets/issues/27015
 myreadingmanga.info##+js(aopr, exoNoExternalUI38djdkjDDJsio96)
-||myreadingmanga.info/vjs/mrm_
+||myreadingmanga.info/*.php$script,xhr
 
 ! https://www.reddit.com/r/uBlockOrigin/comments/1if6l4n/podcasts_not_playing_on_web_with_ublockorigin/
 @@/traffic.megaphone.fm/*.mp3^$media,domain=open.spotify.com
