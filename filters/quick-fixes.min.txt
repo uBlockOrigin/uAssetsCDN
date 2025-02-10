@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Quick fixes
 ! Expires: 12 hours
-! Last modified: Mon, 10 Feb 2025 06:56:23 +0000
-! Diff-Path: ../patches/2025.2.10.566.patch#ublock-quick-fixes
+! Last modified: Mon, 10 Feb 2025 12:05:15 +0000
+! Diff-Path: ../patches/2025.2.10.867.patch#ublock-quick-fixes
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/quick-fixes.txt ***
@@ -57,6 +57,7 @@ web.facebook.com,www.facebook.com##+js(rpnt, script, '/null,"category_sensitive"
 !#else
 web.facebook.com,www.facebook.com##+js(trusted-replace-xhr-response, '/null,"category_sensitive"[^\n]+?,"__typename":"SponsoredData"[^\n]+"cursor":"[^"]+"\}/g', null}, /api/graphql)
 !#endif
+web.facebook.com,www.facebook.com##+js(json-prune, require.0.3.0.__bbox.require.[].3.1.__bbox.result.data.viewer.sideFeed.nodes.0.ads)
 ! VOE sites
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$script,3p,redirect=google-ima.js,domain=maxfinishseveral.com,important
 maxfinishseveral.com##+js(nowoif)
@@ -70,7 +71,7 @@ maxfinishseveral.com##+js(set, console.clear, undefined)
 japscan.lol##+js(norafif, /^/)
 japscan.lol##+js(trusted-set-attr, .navbar-nav > li#navpromo2.nav-item > a, onclick, 'let a=function(){};return false;')
 japscan.lol#@#+js(rmnt, script, Good_2025)
-japscan.lol##+js(rmnt, script, toueapo)
+japscan.lol##+js(rmnt, script, console)
 japscan.lol#@#body > .container.text-center > .mb-2.mt-2[style="margin: 0px auto; display: block;"] > .text-center > a.donate[href^="http"][target="_blank"][rel="noopener noreferrer nofollow"]:not([href^="http://japscan.lol"]) > img
 japscan.lol#@#body > style + .container > .row > #main.col-md-9 > .card > #chapters.tab-content > .row.justify-content-center.align-items-center > a.image-box.donate[href^="http"][target="_blank"][rel="noopener noreferrer nofollow"]:not([href^="http://japscan.lol"]) > img
 japscan.lol#@#body > .container.text-center > div.mt-3[style="margin: 0px auto; display: block;"] > a.Aikoi.donate[target="_blank"][href^="https://www."][href*="/?utm_source=manga&utm_"]:not([href^="https://www.google"]):not([href^="https://www.japscan"]):not([href^="https://www.example"]) > img.img-fluid[src^="/imgs/onc/"]
@@ -115,7 +116,8 @@ poophq.com,veev.to##+js(rmnt, script, /__abburi|ad-provider\.js|while\\x20\(true
 ||adsco.re^$xhr,important,domain=poophq.com|veev.to
 poophq.com,veev.to##+js(no-xhr-if, 162.252.214.4, true)
 !#else
-poophq.com,veev.to##+js(nosiif, !grecaptcha.render()
+poophq.com,veev.to##+js(nosiif, !captchaInstance = grecaptcha.render("#captchaDownload"\, {sitekey: )
+poophq.com,veev.to##+js(nosiif, /\"ad\"\+\"s\"\+\"co\"|\+0\]\[0\+|\'p\'\+\'ow\'|\'t\'\+\'r\'\+\'\'\+\'ig\'|\+llndk|t\[\'state\'\]|catch\(err\)\{\}\;var|\"e3\"\)\}\)\,|\"\+Math\[|52295|\+\"\/a\"\+\"\.j\"\+\"s\"/)
 !#endif
 *$script,3p,domain=poophq.com|veev.to,redirect-rule=noopjs
 *$other,3p,denyallow=veevcdn.co,domain=poophq.com|veev.to
@@ -169,10 +171,10 @@ smsonline.cloud##html[data-theme][lang] [id^="img_"][style]:has(iframe[framebord
 *$doc,to=slashdot.org,replace=/data-sdk/defer data-sdk/
 /^https:\/\/www\.[0-9a-f]{4,8}(?:-(?:\d{4}-){3}[0-9a-f]{12})?\.(?:live|site|xyz)\/script\/[.0-9A-Za-z]+\.js$/$script,3p,match-case,to=live|site|xyz,header=x-length
 dogdrip.net,infinityfree.com,slashdot.org,smsonline.cloud##+js(no-fetch-if, -load.com/script/, length:101)
-dogdrip.net,infinityfree.com,slashdot.org,smsonline.cloud##+js(nostif, )](this\,..., 4000-6000)
+dogdrip.net,infinityfree.com,slashdot.org,smsonline.cloud##+js(nostif, )](this\,..., 3000-6000)
 slashdot.org##+js(aeld, , )](this\,...)
 -load.com/script/$xhr,domain=smsonline.cloud
-smsonline.cloud##+js(nostif, (new Error(, 4000-6000)
+smsonline.cloud##+js(nostif, (new Error(, 3000-6000)
 smsonline.cloud##aside[class^="css-"]:has(> p:has-text(Advertisement) + ins.adsbygoogle)
 ||report.error-report.com^$frame,badfilter
 bing.com##li.b_algo:has(a[href^="https://www.bing.com/aclick?"], a[href^="https://www.bing.com/aclk?"]):remove-class(b_algo)
