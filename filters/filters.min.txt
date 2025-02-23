@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Sat, 22 Feb 2025 19:56:43 +0000
-! Diff-Path: ../patches/2025.2.22.1282.patch#ublock-filters
+! Last modified: Sun, 23 Feb 2025 02:27:53 +0000
+! Diff-Path: ../patches/2025.2.23.177.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -806,20 +806,6 @@ player.glomex.com,merkur.de,tz.de##+js(set, Object.prototype._getSalesHouseConfi
 player.glomex.com##+js(no-fetch-if, player-feedback)
 ||player-feedback*.glomex.*^
 theoutline.com##.stack-embed
-wired.com##[class^="OutbrainGridColumn-"]
-wired.com##[class^="StickyHeroAdWrapper-"]
-wired.com###around-the-web
-||googlesyndication.com/pagead/*$script,important,domain=wired.com
-||wired.com/ams/page-ads.js$important,script
-wired.com##+js(nostif, Bait)
-! "Sponsored stories" section spotted 1st-hand at:
-wired.com##.sponsored-stories-component
-! wired.com: more EasyList's exception filters to counter
-||doubleclick.net^$important,script,domain=wired.com
-wired.com##[id^="cns_ads_"]
-wired.com##[class^="adv"]
-wired.com##.failsafe-desktop
-wired.com##.consumer-marketing-unit
 androidrepublic.org##+js(acs, $, samInitDetection)
 biqle.*##+js(acs, decodeURI, decodeURIComponent)
 biqle.*##+js(aopr, Date.prototype.toUTCString)
@@ -23274,12 +23260,8 @@ gamerxyt.com##+js(aeld, DOMContentLoaded, history.go)
 cheatography.com##+js(nostif, adblocker)
 japonhentai.com##+js(acs, document.querySelectorAll, popMagic)
 fomo.id##+js(json-prune-fetch-response, data.[-].inner.ctaCopy, , propsToMatch, ?page=)
-!#if cap_html_filtering
-||filiser.eu/_next/static/chunks/*.js^$script,replace=/\[0\];\w<\w\.length/[0];false/
-!#else
-||i.imgur.com/*.mp4^$media,redirect=noopmp3-0.1s,domain=filiser.eu
-@@/^https:\/\/i\.imgur\.com\/(?:Nb8hauQ|qgn2xUN|asEQRCN|ppLF03C|gSh2lrT|zUniMdp|7gscsmm|vh8L243|MYyC34P)\.mp4/$media,domain=filiser.eu
-!#endif
+/_next/static/chunks/*.js^$script,1p,replace=/\[0\];\w<\w\.length/[0];false/,domain=filiser.eu|wishflix.cc
+filiser.eu,wishflix.cc##+js(rpnt, script, (self.__next_f=, '["timeupdate","durationchange","ended","enterpictureinpicture","leavepictureinpicture","loadeddata","loadedmetadata","loadstart","pause","play","playing","ratechange","resize","seeked","seeking","suspend","volumechange","waiting"].forEach((e=>{window.addEventListener(e,(()=>{const e=document.getElementById("player"),t=document.querySelector(".plyr__time");e.src.startsWith("https://i.imgur.com")&&"none"===window.getComputedStyle(t).display&&(e.src="https://cdn.plyr.io/static/blank.mp4",e.paused&&e.plyr.play())}))}));(self.__next_f=', sedCount, 1)
 kimcilonlyofc.com##+js(rmnt, script, mdpDeblocker)
 kimcilonlyofc.com##+js(nowoif)
 shahid.mbc.net##+js(no-fetch-if, /gampad/ads?)
@@ -23767,6 +23749,24 @@ mma-core.*##.rsky
 mma-core.*##.outVidAd
 mma-core.*##.banr
 ||webpartners.co^$3p
+wired.com##[class^="OutbrainGridColumn-"]
+wired.com##[class^="StickyHeroAdWrapper-"]
+wired.com###around-the-web
+||googlesyndication.com/pagead/*$script,important,domain=wired.com
+||wired.com/ams/page-ads.js$important,script
+! "Sponsored stories" section spotted 1st-hand at:
+wired.com##.sponsored-stories-component
+! wired.com: more EasyList's exception filters to counter
+||doubleclick.net^$important,script,domain=wired.com
+wired.com##[id^="cns_ads_"]
+wired.com##[class^="adv"]
+wired.com##.failsafe-desktop
+wired.com##.consumer-marketing-unit
+! Fake paywall, users with ads can read articles once, need to clear all cookies and data to reproduce
+@@||wired.com^$ghide
+wired.com##+js(set, cns.library, true)
+wired.com##+js(trusted-replace-argument, document.querySelectorAll, 0, json:"#app-root", condition, google_ads_iframe)
+wired.com##.full-bleed-ad
 ! END: Rules from filters.txt
 ! START: Regional lists
 ! <<<<< ABPVN >>>>>
