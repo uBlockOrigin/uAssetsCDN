@@ -1,15 +1,15 @@
-diff name:ublock-annoyances lines:6 checksum:b8edf366c0
+diff name:ublock-annoyances lines:6 checksum:e01f9661b1
 d3 2
 a4 2
 ! Last modified: Fri, 07 Mar 2025 12:17:51 +0000
-! Diff-Path: ../patches/2025.3.8.93.patch#ublock-annoyances
+! Diff-Path: ../patches/2025.3.8.322.patch#ublock-annoyances
 a909 1
 ||redditstatic.com/shreddit/en-US/xpromo-nsfw-bypassable-modal-desktop-$script
-diff name:ublock-badware lines:35 checksum:8e5548cc6d
+diff name:ublock-badware lines:35 checksum:c4edf5e2b2
 d3 2
 a4 2
 ! Last modified: Fri, 07 Mar 2025 10:50:10 +0000
-! Diff-Path: ../patches/2025.3.8.93.patch#ublock-badware
+! Diff-Path: ../patches/2025.3.8.322.patch#ublock-badware
 d193 1
 d617 1
 d815 1
@@ -41,31 +41,54 @@ d3361 1
 d3934 1
 d4185 1
 d4187 1
-diff name:ublock-filters lines:11 checksum:743c960e26
+diff name:ublock-filters lines:34 checksum:ad63ff151b
 d3 2
 a4 2
-! Last modified: Fri, 07 Mar 2025 21:15:05 +0000
-! Diff-Path: ../patches/2025.3.8.93.patch#ublock-filters
+! Last modified: Sat, 08 Mar 2025 05:20:59 +0000
+! Diff-Path: ../patches/2025.3.8.322.patch#ublock-filters
+a433 1
+bild.de##+js(trusted-replace-argument, JSON.parse, 0, repl:/"adBlockWallEnabled":true/"adBlockWallEnabled":false/, condition, adBlockWallEnabled)
+a9286 2
+4khd.com##+js(no-xhr-if, ?testing)
+4khd.com##+js(acs, document.querySelectorAll, popMagic)
 a15288 1
 h-flash.com##a[href^="https://a.candyai.love/"]
+d18739 1
+a18739 1
+daemon-hentai.com,daij1n.info,dailykpop.net,dailytechupdates.in,dailyweb.pl,davidsonbuilders.com,dabangbastar.com,day4news.com,daybuy.tw,deathonnews.com,dejongeturken.com,delvein.tech,demonictl.com,demonyslowianskie.pl,depressionhurts.us,derusblog.com,descargaranimes.com,descargaseriestv.com,design4months.com,desirenovel.com,desktopsolution.org,destakenewsgospel.com,destinationsjourney.com,detikbangka.com,dev-dark-blog.pantheonsite.io,devopslanka.com,dewfuneralhomenews.com,dhankasamaj.com,diamondfansub.com,diencobacninh.com,digitalseoninja.com,dignityobituary.com,diplomaexamcorner.com,dipprofit.com,dir-tech.com,diskizone.com,diversanews.com,diyprojectslab.com,djqunjab.in,djsofchhattisgarh.in,dma-upd.org,dobletecno.com,dominican-republic.co.il,donghuaworld.com,donlego.com,doublemindtech.com,doumura.com,downloadbatch.me,downloader.is,downloads.sayrodigital.net,downloads.wegomovies.com,downloadtanku.org,dpscomputing.com,drake-scans.com,drakecomic.com,dramafren.com,drzna.com,dubaitime.net,dumovies.com,dvd-flix.com,dvdgayonline.com##+js(trusted-suppress-native-method, eval, '"/chp_?ad/"')
 a19785 1
 fap-nation.org##.natio-target
+a23794 1
+||anyonegoal.com^
+a23796 1
+||colonelsurvival.com^
+a23799 1
+||gtdslaters.com^
+a23805 1
+||unneartripler.com^
+d23835 2
+a23836 5
+!#if cap_html_filtering
+streamingnow.mov##^script:has-text(/popundersPerIP|adserverDomain|wpadmngr/)
+!#else
+streamingnow.mov##+js(rmnt, script, /popundersPerIP|adserverDomain|wpadmngr/)
+!#endif
 a24193 2
 ! opensubtitles.org popups
 opensubtitles.org##+js(set-cookie, download-counter, 1)
-diff name:ublock-privacy lines:7 checksum:d530374ab7
+diff name:ublock-privacy lines:7 checksum:73cad65f76
 d3 2
 a4 2
 ! Last modified: Fri, 07 Mar 2025 11:00:37 +0000
-! Diff-Path: ../patches/2025.3.8.93.patch#ublock-privacy
+! Diff-Path: ../patches/2025.3.8.322.patch#ublock-privacy
 d586 1
 a586 1
 $doc,removeparam=s_cid
-diff name:ublock-quick-fixes lines:11 checksum:ba39c03005
+diff name:ublock-quick-fixes lines:26 checksum:9f47cfe6bb
 d3 2
 a4 2
-! Last modified: Fri, 07 Mar 2025 16:49:55 +0000
-! Diff-Path: ../patches/2025.3.8.93.patch#ublock-quick-fixes
+! Last modified: Sat, 08 Mar 2025 03:38:42 +0000
+! Diff-Path: ../patches/2025.3.8.322.patch#ublock-quick-fixes
 d71 1
 a71 2
 japscan.lol##+js(aeld, load, typeof lol)
@@ -73,15 +96,30 @@ japscan.lol##+js(rmnt, script, /const [0-9A-Za-z]{9}=/)
 d115 1
 a115 1
 poophq.com,veev.to,doods.to##+js(trusted-set, window.__ascvertkn, json:"BQKCAAAAAAAC")
-diff name:ublock-unbreak lines:3 checksum:e38779b824
+d146 10
+a155 2
+!#if !ext_devbuild
+$frame,3p,domain=filemoon.*|8rm3l0i9.fun|iqksisgw.xyz|u6lyxl0w.skin|l1afav.net,replace='/^/<script>(()=>{window.open=new Proxy(window.open,{apply:(e,t,r)=>{}});const e=new WeakMap,t=(e,t)=>{try{e.dispatchEvent(new Event(t))}catch{}};XMLHttpRequest.prototype;self.XMLHttpRequest=class extends self.XMLHttpRequest{open(t,r,...n){if(e.delete(this),new URL(r).hostname.endsWith(".cdn255.com"))return super.open(t,r,...n);const s={method:t,url:r},a=Object.assign(s,{xhr:this,headers:{date:"","content-type":"","content-length":""},url:s.url,props:{response:{value:""},responseText:{value:""},responseXML:{value:null}}});return e.set(this,a),super.open(t,r,...n)}send(...r){const n=e.get(this);return void 0===n?super.send(...r):!1===n.defer?(n.headers["content-length"]=`${n.props.response.value}`.length,Object.defineProperties(n.xhr,{readyState:{value:4},responseURL:{value:n.url},status:{value:200},statusText:{value:"OK"}}),void Object.defineProperties(n.xhr,n.props)):void Promise.resolve("").then((()=>n)).then((e=>(Object.defineProperties(e.xhr,{readyState:{value:1,configurable:!0},responseURL:{value:n.url}}),t(e.xhr,"readystatechange"),e))).then((e=>(n.headers["content-length"]=`${e.props.response.value}`.length,Object.defineProperties(e.xhr,{readyState:{value:2,configurable:!0},status:{value:200},statusText:{value:"OK"}}),t(e.xhr,"readystatechange"),e))).then((e=>(Object.defineProperties(e.xhr,{readyState:{value:3,configurable:!0}}),Object.defineProperties(e.xhr,e.props),t(e.xhr,"readystatechange"),e))).then((e=>{Object.defineProperties(e.xhr,{readyState:{value:4}}),t(e.xhr,"readystatechange"),t(e.xhr,"load"),t(e.xhr,"loadend")}))}};let r=document.querySelector("script");r.innerHTML.includes("window.open")&&r.parentElement.removeChild(r)})();<\/script>/'
+d157 4
+a160 5
+/^https:\/\/[a-z0-9]{2,}-[a-z0-9]{8}(?:-[a-z0-9]{3,})?\.[a-z]{3}\/[a-z0-9]+\/[a-z0-9]{12}\b/$frame,3p,match-case,to=~net|~org|~gov|~edu,ipaddress=/^(1(72\.67\.\d{3}|04\.21\.\d+)\.\d+|188\.114\.(96|97)\.0|64:ff9b::[a-f0-9]{4}:[a-f0-9]{1,4})$/,replace='/^/<script>(()=>{window.open=new Proxy(window.open,{apply:(n,o,w)=>{}});let e=document.querySelector("script");e.innerHTML.includes("window.open")&&e.parentElement.removeChild(e)})();<\/script>/i'
+/^https:\/\/(?:[a-z0-9]{5,8}|(?:[a-z0-9]+-)+[a-z0-9]{5,}(?:-[a-z0-9]+)*)\.fun\/[a-z0-9]+\/[a-z0-9]{12}\b/$frame,3p,match-case,to=fun,ipaddress=/^(1(72\.67\.\d{3}|04\.21\.\d+)\.\d+|188\.114\.(96|97)\.0|64:ff9b::[a-f0-9]{4}:[a-f0-9]{1,4})$/,replace='/^/<script>(()=>{window.open=new Proxy(window.open,{apply:(n,o,w)=>{}});let e=document.querySelector("script");e.innerHTML.includes("window.open")&&e.parentElement.removeChild(e)})();<\/script>/i'
+/^https:\/\/[a-z0-9]{36}\.fun\/[a-z0-9]+\/[a-z0-9]{12}\b/$frame,3p,match-case,to=fun,ipaddress=/^(1(72\.67\.\d{3}|04\.21\.\d+)\.\d+|188\.114\.(96|97)\.0|64:ff9b::[a-f0-9]{4}:[a-f0-9]{1,4})$/,replace='/^/<script>(()=>{window.open=new Proxy(window.open,{apply:(n,o,w)=>{}});let e=document.querySelector("script");e.innerHTML.includes("window.open")&&e.parentElement.removeChild(e)})();<\/script>/i'
+/^https:\/\/[a-z0-9]{6}\.(?:fun|lol|net|org)\/[a-z0-9]+\/[a-z0-9]{12}\b/$frame,3p,match-case,to=fun|lol|net|org,ipaddress=/^(1(72\.67\.\d{3}|04\.21\.\d+)\.\d+|188\.114\.(96|97)\.0|64:ff9b::[a-f0-9]{4}:[a-f0-9]{1,4})$/,replace='/^/<script>(()=>{window.open=new Proxy(window.open,{apply:(n,o,w)=>{}});let e=document.querySelector("script");e.innerHTML.includes("window.open")&&e.parentElement.removeChild(e)})();<\/script>/i'
+*$frame,3p,replace=/adBlockDetected//,from=filemoon.*
+a161 1
+!#endif
+d170 1
+d194 1
+diff name:ublock-unbreak lines:3 checksum:e8b0246c48
 d4 1
 a4 1
-! Diff-Path: ../patches/2025.3.8.93.patch#ublock-unbreak
-diff name:easylist lines:100 checksum:ca5943c4a1
+! Diff-Path: ../patches/2025.3.8.322.patch#ublock-unbreak
+diff name:easylist lines:173 checksum:1b85e3cd7f
 d4 2
 a5 2
-! Last modified: Fri, 07 Mar 2025 18:50:59 +0000
-! Diff-Path: ../patches/2025.3.8.93.patch#easylist
+! Last modified: Sat, 08 Mar 2025 03:50:00 +0000
+! Diff-Path: ../patches/2025.3.8.322.patch#easylist
 a777 2
 ! Filemoon
 ?bd=ppd&r=$document
@@ -96,16 +134,48 @@ a16609 1
 ||academic-level.pro^
 a16757 1
 ||adbbihbmyki.com^
+a17536 1
+||aj2517.bid^
+a17573 1
+||akuigesf.com^
+a17830 1
+||amongstbestrew.top^
+a18024 1
+||apocopeargent.com^
+a18366 1
+||asukedrevenue.org^
+a18503 1
+||augurrolley.top^
 a18527 1
 ||aunsoocmunoan.net^
+a18764 1
+||b442172e.b-cdn.net^
 a20861 1
 ||cigoadrouz.com^
+a20922 1
+||ckdxbragemqum.com^
+a21462 1
+||constitutealtered.com^
+a21935 1
+||cupriteshivas.shop^
+a22055 1
+||d8hdm94ldw8yr.cloudfront.net^
 a23319 1
 ||dxfxprblebylv.com^
+a23653 1
+||eiyxigbmfik.com^
+a24172 1
+||excessiveunwind.com^
+a24815 1
+||flawsfairish.top^
 a25750 1
 ||glaiksoachou.com^
+a26098 1
+||grandparentsfortunes.com^
 a26108 1
 ||grapefruitstarchbeep.com^
+a26317 1
+||gtdslaters.com^
 a26598 1
 ||hauwoopauy.net^
 a26611 1
@@ -114,16 +184,44 @@ a26804 1
 ||hfogzeaggalh.com^
 a27258 1
 ||huxitsaise.net^
+a27502 1
+||imbet.site^
 a28657 1
 ||kapnqcbhdxjfokr.com^
+a28692 1
+||kcaactpkyp.com^
+a28694 1
+||kcfdom.com^
+a28900 1
+||knowgrownupdoomed.com^
+a29099 1
+||lactifyfabraea.shop^
 a29158 1
 ||lankyteaching.com^
+a29245 1
+||lbsinters.shop^
+a29816 1
+||lovingboulevard.com^
+a29911 1
+||lumex.space^
+a30405 1
+||medalslumut.shop^
+a31083 1
+||mukindwouldm.org^
 a32876 1
 ||overcoythuoc.com^
+a34146 1
+||ppqqmnssuxzd.com^
 a34623 1
 ||ptifaustounsaz.com^
+a34950 1
+||qaklbrqyzbvqr.top^
+a35616 1
+||reinforceburger.com^
 a35971 1
 ||richeighth.shop^
+a36824 1
+||seasideextinguishprinciples.com^
 a37338 1
 ||silurehoghood.com^
 a39548 1
@@ -132,8 +230,18 @@ a39600 1
 ||tqrgivpfygemxft.com^
 a40140 1
 ||ufachoustoh.net^
+a40270 1
+||uncertainfollow.com^
+a40376 1
+||unneartripler.com^
 a40625 1
 ||uzbeknisse.top^
+a41006 1
+||viowrel.com^
+a41169 1
+||vplxmpagryjvl.space^
+a41177 1
+||vpxzunvaldxcp.world^
 a45174 1
 ||89296649.xyz^
 a52716 1
@@ -173,20 +281,26 @@ a58482 1
 audi-sport.net,emtbforums.com,forums.bluemoon-mcfc.co.uk,overtake.gg,racedepartment.com,resetera.com,satelliteguys.us##.samCodeUnit
 a58567 1
 tri247.com##.show-ad
+d59459 1
+a59818 1
+builtbybit.com##[style="margin-top: 20px; display: flex; justify-content: center;"]
 a61053 1
 insideevs.com##.outstream_partner
 d63544 1
 a63544 1
 @@://xhamster.$script,~third-party
-diff name:easyprivacy lines:13 checksum:326d05dc34
+diff name:easyprivacy lines:16 checksum:4f5056fbbf
 d4 2
 a5 2
-! Last modified: Fri, 07 Mar 2025 21:49:55 +0000
-! Diff-Path: ../patches/2025.3.8.93.patch#easyprivacy
+! Last modified: Sat, 08 Mar 2025 01:42:52 +0000
+! Diff-Path: ../patches/2025.3.8.322.patch#easyprivacy
 a3064 1
 /mail.thermomix.com/i/*$image
 a3104 1
 /tp.mkt.vorwerk.com/r/*$image
+d9810 1
+a11606 1
+||telemetry.transcend.io^
 a52183 1
 ||mbp-japan.com/js/pv.js
 d53046 1
