@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Unbreak
 ! Expires: 5 days
-! Last modified: Wed, 12 Mar 2025 07:23:39 +0000
-! Diff-Path: ../patches/2025.3.12.567.patch#ublock-unbreak
+! Last modified: Wed, 12 Mar 2025 12:51:58 +0000
+! Diff-Path: ../patches/2025.3.12.869.patch#ublock-unbreak
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/unbreak.txt ***
@@ -2685,8 +2685,7 @@ the-independent.com##+js(no-fetch-if, npttech.com/advertising.js)
 ||npttech.com/advertising.js$xhr,domain=the-independent.com,redirect=noop.js,important
 !#endif
 @@||icanhazip.com^$xhr,domain=dnscheck.tools
-www.nvidia.com##+js(remove-cookie, ak_bmsc)
-nvidia.com,~www.nvidia.com##+js(rpnt, script, /^(\w)/, '(()=>{const remove=()=>{document.cookie="ak_bmsc=; domain=.nvidia.com; path=/; Max-Age=-1000; expires=Thu, 01 Jan 1970 00:00:00 GMT";console.debug("Removed")};remove();setTimeout(remove,5e3);window.addEventListener("beforeunload",remove)})();$1', sedCount, 1)
+nvidia.com##+js(trusted-set-cookie, ak_bmsc, , 0, , domain, .nvidia.com)
 @@||assets.adobedtm.com/extensions/*/AppMeasurement$script,domain=medscape.com
 ||g.doubleclick.net/tag/js/gpt.js$script,xmlhttprequest,domain=kino.de,important
 ||g.doubleclick.net/pagead/managed/js/gpt/$script,domain=kino.de,important
@@ -2708,4 +2707,3 @@ some.porn###native__skeleton
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$script,domain=airtelxstream.in,redirect=google-ima.js,important
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$redirect=google-ima.js,domain=digi24.ro,important
 ||imasdk.googleapis.com/js/sdkloader/ima3_dai.js$redirect=noopjs,domain=digi24.ro,important
-@@/com.snowplowanalytics.snowplow/*$domain=7plus.com.au
