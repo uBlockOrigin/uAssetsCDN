@@ -1,5 +1,5 @@
 ! Title: uBlock₀ filters – Quick fixes
-! Last modified: Thu, 13 Mar 2025 10:11:06 +0000
+! Last modified: Thu, 13 Mar 2025 14:38:50 +0000
 ! Expires: 8 hours
 ! Description: Immediate, temporary filters to fix websites
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -105,7 +105,7 @@ japscan.lol#@#div.container > [href]
 /^https:\/\/(?!curltophp|regexgenius)[a-z]{8,12}\.com\/en\/(?!blog)(?:[a-z]{2,10}\/){0,2}[a-z]{2,}\?(?:[a-z]+=(?:\d+|[a-z]+)&)*?id=(?!1234)[12]\d{6}/$script,3p,match-case,to=com,domain=japscan.lol,important
 /^https?:\/\/(?:[a-z]{2}\.)?(?!curltophp|regexgenius)[0-9a-z]{5,16}\.[a-z]{3,7}\/[a-z](?=[a-z]{0,25}[0-9A-Z])[0-9a-zA-Z]{3,26}\/\d{4,6}(?:\?[_v]=\d+)?$/$script,3p,match-case,domain=japscan.lol,important
 /^https?:\/\/(?:[a-z]{2}\.)?(?!curltophp|regexgenius)[a-z]{7,14}\.com\/r(?=[a-z]*[0-9A-Z])[0-9A-Za-z]{10,16}\/[A-Za-z]{5}(?:\?param=\w+)?$/$script,3p,match-case,to=com,domain=japscan.lol,important
-/\/[0-9a-f]{32}\/invoke\.js/$script,3p,domain=japscan.lol,important
+/^https?:\/\/(www\.)?(?!curltophp|regexgenius)([a-z0-9]{5,32}\.)([a-z]{2,8})\/[0-9a-f]{32}\/invoke\.js$/$script,3p,domain=japscan.lol,important
 /^https?:\/\/(?!curltophp|regexgenius)(?:www\.|[0-9a-z]{7,10}\.)?[-0-9a-z]{5,}\.com\/\/?(?:[0-9a-z]{2}\/){2,3}[0-9a-f]{32}\.js/$script,xhr,3p,to=com,domain=japscan.lol,important
 /cuid/?f=https%$xhr,3p,domain=japscan.lol,important
 /^https:\/\/(?!curltophp|regexgenius)[a-z]{3,5}\.[a-z]{10,14}\.top\/[a-z]{10,16}\/[a-z]{5,6}(?:\?d=\d)?$/$script,xhr,3p,match-case,to=top,domain=japscan.lol,important
@@ -115,26 +115,25 @@ japscan.lol#@#div.container > [href]
 ! https://github.com/uBlockOrigin/uAssets/issues/24220
 ! https://github.com/uBlockOrigin/uAssets/issues/25121#issuecomment-2325357098
 poophq.com,veev.to,doods.to##+js(nowoif)
-poophq.com,veev.to,doods.to##+js(set, fapit.check, noopFunc)
 poophq.com,veev.to,doods.to##+js(no-xhr-if, /vast.php?)
 poophq.com,veev.to,doods.to##+js(no-xhr-if, adsbygoogle, length:35000-55000)
 poophq.com,veev.to,doods.to##+js(no-xhr-if, /click\.com|preroll|native_render\.js|acscdn/, length:10001)
 poophq.com,veev.to,doods.to##+js(nostif, )]();}, 500)
 !#if cap_html_filtering
-||static.veevcdn.co/assets/videoplayer/$script,3p,replace=/return new Promise\(function\(ac\,ad\).*?\}\)\[/return new Promise(function(){})[/,domain=poophq.com|veev.to|doods.to
-||a.pemsrv.com/ad-provider.js$xhr,important,domain=poophq.com|veev.to|doods.to
+||static.veevcdn.co/assets/videoplayer/$script,3p,replace=/adblockEnabled\'\:\!0x0/adblockEnabled':false/,domain=poophq.com|veev.to|doods.to
+||a.orbsrv.com/ad-provider.js$xhr,important,domain=poophq.com|veev.to|doods.to
 !#else
 !#if ext_ubol
 @@||c.adsco.re/|$script,domain=poophq.com|veev.to|doods.to
 ||adsco.re^$xhr,important,domain=poophq.com|veev.to|doods.to
 poophq.com,veev.to,doods.to##+js(no-xhr-if, 162.252.214.4, true)
 !#else
-poophq.com,veev.to,doods.to##+js(nostif, /function\s*\(\s*\)\s*{\s*ac\s*\(\s*(`|"|')\s*[a-z][0-9]\s*(`|"|')\s*\)\s*\;\s*\}/)
+poophq.com,veev.to,doods.to##+js(nostif, /^\s*function\s*\(\s*\)\s*{\s*[a-z]{1\,2}\s*\(.{1\,10}$/)
 poophq.com,veev.to,doods.to##+js(nostif, /^\s*function\s*.{55\,90}$/)
-poophq.com,veev.to,doods.to##+js(nostif, /timeout|Handlers|\.trigger|\"e3\"|function\(\)\{t\=|\"\,r\.|\'on\'|\"\)\}|\'\]\,\"|triggerHand/)
+poophq.com,veev.to,doods.to##+js(nostif, /iggerHandl|\"e\"\+\"3\"|\"\,r\[\"|\'\s*\+\s*\'|\]\(r\[\"/)
 ||adsco.re^$script,redirect=none:5,domain=poophq.com|veev.to|doods.to
 /dl?op=aa&cmd=ga&_a=$xhr,1p,important,domain=poophq.com|veev.to|doods.to
-||a.pemsrv.com/ad-provider.js$xhr,important,domain=poophq.com|veev.to|doods.to
+||a.orbsrv.com/ad-provider.js$xhr,important,domain=poophq.com|veev.to|doods.to
 !#endif
 !#endif
 *$script,3p,domain=poophq.com|veev.to|doods.to,redirect-rule=noopjs
@@ -170,8 +169,8 @@ panel.freemcserver.net##+js(rpnt, script, 'G-1B4LC0KT6C');, 'G-1B4LC0KT6C'); loc
 ! https://github.com/AdguardTeam/AdguardFilters/issues/190044
 ! https://www.reddit.com/r/uBlockOrigin/comments/1fuaaw5/asblock_detected_in_ask4porncc
 ! https://github.com/uBlockOrigin/uAssets/issues/27173
-xo7c.com,v1kkm.com,hmt6u.com,guum5.com,l8e8.com,l99j.com,58n1.com,z4h4.com,qa2h.com,/^moon(?:-[a-z0-9]+)?-embed\.com$/,/^moonfile-[a-z0-9-]+\.com$/,/^[0-9a-z]{5,8}\.(cfd|fun|sbs)$/,/^moo-[a-z0-9]+(-[a-z0-9]+)*-mkay\.com$/,/^file-[a-z0-9]+(-[a-z0-9]+)*-(moon|embed)\.com$/,/^fle-[a-z0-9]+(-[a-z0-9]+)*-moo\.com$/,/^filemoon-[a-z0-9]+(?:-[a-z0-9]+)*\.(?:com|xyz)$/##+js(nowoif, /\d\.\d{10\,}/)
-xo7c.com,v1kkm.com,hmt6u.com,guum5.com,l8e8.com,l99j.com,58n1.com,z4h4.com,qa2h.com,/^moon(?:-[a-z0-9]+)?-embed\.com$/,/^moonfile-[a-z0-9-]+\.com$/,/^[0-9a-z]{5,8}\.(cfd|fun|sbs)$/,/^moo-[a-z0-9]+(-[a-z0-9]+)*-mkay\.com$/,/^file-[a-z0-9]+(-[a-z0-9]+)*-(moon|embed)\.com$/,/^fle-[a-z0-9]+(-[a-z0-9]+)*-moo\.com$/,/^filemoon-[a-z0-9]+(?:-[a-z0-9]+)*\.(?:com|xyz)$/##+js(acs, Math.random, parseInt(localStorage['\x)
+6jlvu.com,xo7c.com,v1kkm.com,hmt6u.com,guum5.com,l8e8.com,l99j.com,58n1.com,z4h4.com,qa2h.com,/^moon(?:-[a-z0-9]+)?-embed\.com$/,/^moonfile-[a-z0-9-]+\.com$/,/^[0-9a-z]{5,8}\.(cfd|fun|sbs)$/,/^moo-[a-z0-9]+(-[a-z0-9]+)*-mkay\.com$/,/^file-[a-z0-9]+(-[a-z0-9]+)*-(moon|embed)\.com$/,/^fle-[a-z0-9]+(-[a-z0-9]+)*-moo\.com$/,/^filemoon-[a-z0-9]+(?:-[a-z0-9]+)*\.(?:com|xyz)$/##+js(nowoif, /\d\.\d{10\,}/)
+6jlvu.com,xo7c.com,v1kkm.com,hmt6u.com,guum5.com,l8e8.com,l99j.com,58n1.com,z4h4.com,qa2h.com,/^moon(?:-[a-z0-9]+)?-embed\.com$/,/^moonfile-[a-z0-9-]+\.com$/,/^[0-9a-z]{5,8}\.(cfd|fun|sbs)$/,/^moo-[a-z0-9]+(-[a-z0-9]+)*-mkay\.com$/,/^file-[a-z0-9]+(-[a-z0-9]+)*-(moon|embed)\.com$/,/^fle-[a-z0-9]+(-[a-z0-9]+)*-moo\.com$/,/^filemoon-[a-z0-9]+(?:-[a-z0-9]+)*\.(?:com|xyz)$/##+js(acs, Math.random, parseInt(localStorage['\x)
 u26bekrb.fun##+js(set, adBlockDetected, undefined)
 !#if !ext_devbuild
 $frame,3p,domain=filemoon.*|8rm3l0i9.fun|iqksisgw.xyz|u6lyxl0w.skin|l1afav.net,replace='/^/<script>(()=>{window.open=new Proxy(window.open,{apply:(e,t,r)=>{}});const e=new WeakMap,t=(e,t)=>{try{e.dispatchEvent(new Event(t))}catch{}};XMLHttpRequest.prototype;self.XMLHttpRequest=class extends self.XMLHttpRequest{open(t,r,...n){if(e.delete(this),new URL(r).hostname.endsWith(".cdn255.com"))return super.open(t,r,...n);const s={method:t,url:r},a=Object.assign(s,{xhr:this,headers:{date:"","content-type":"","content-length":""},url:s.url,props:{response:{value:""},responseText:{value:""},responseXML:{value:null}}});return e.set(this,a),super.open(t,r,...n)}send(...r){const n=e.get(this);return void 0===n?super.send(...r):!1===n.defer?(n.headers["content-length"]=`${n.props.response.value}`.length,Object.defineProperties(n.xhr,{readyState:{value:4},responseURL:{value:n.url},status:{value:200},statusText:{value:"OK"}}),void Object.defineProperties(n.xhr,n.props)):void Promise.resolve("").then((()=>n)).then((e=>(Object.defineProperties(e.xhr,{readyState:{value:1,configurable:!0},responseURL:{value:n.url}}),t(e.xhr,"readystatechange"),e))).then((e=>(n.headers["content-length"]=`${e.props.response.value}`.length,Object.defineProperties(e.xhr,{readyState:{value:2,configurable:!0},status:{value:200},statusText:{value:"OK"}}),t(e.xhr,"readystatechange"),e))).then((e=>(Object.defineProperties(e.xhr,{readyState:{value:3,configurable:!0}}),Object.defineProperties(e.xhr,e.props),t(e.xhr,"readystatechange"),e))).then((e=>{Object.defineProperties(e.xhr,{readyState:{value:4}}),t(e.xhr,"readystatechange"),t(e.xhr,"load"),t(e.xhr,"loadend")}))}};let r=document.querySelector("script");r.innerHTML.includes("window.open")&&r.parentElement.removeChild(r)})();<\/script>/'
@@ -235,3 +234,6 @@ bg-gledai.*,gledaitv.*##+js(no-fetch-if, method:HEAD)
 ! https://github.com/AdguardTeam/AdguardFilters/issues/200690
 ||fujoho.jp/index.php$frame,3p,badfilter
 #@#.fujoho_custom_banner
+
+! https://github.com/easylist/easylist/commit/5e62c9a6b725b4023a7ea07a84d90a8a74c8bb05
+@@||f-tra.com^$script,domain=pokemoncenter-online.com
