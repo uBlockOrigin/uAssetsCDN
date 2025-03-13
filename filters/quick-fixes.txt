@@ -1,5 +1,5 @@
 ! Title: uBlock₀ filters – Quick fixes
-! Last modified: Wed, 12 Mar 2025 19:15:47 +0000
+! Last modified: Thu, 13 Mar 2025 01:50:04 +0000
 ! Expires: 8 hours
 ! Description: Immediate, temporary filters to fix websites
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -121,7 +121,7 @@ poophq.com,veev.to,doods.to##+js(no-xhr-if, adsbygoogle, length:35000-55000)
 poophq.com,veev.to,doods.to##+js(no-xhr-if, /click\.com|preroll|native_render\.js|acscdn/, length:10001)
 poophq.com,veev.to,doods.to##+js(nostif, )]();}, 500)
 !#if cap_html_filtering
-||static.veevcdn.co/assets/videoplayer/$script,3p,replace=/\=\'e0\'\;return new Promise\(function\(.*?\}\)\[/='e0';return new Promise(function(){})[/,domain=poophq.com|veev.to|doods.to
+||static.veevcdn.co/assets/videoplayer/$script,3p,replace=/return new Promise\(function\(ac\,ad\).*?\}\)\[/return new Promise(function(){})[/,domain=poophq.com|veev.to|doods.to
 ||a.pemsrv.com/ad-provider.js$xhr,important,domain=poophq.com|veev.to|doods.to
 !#else
 !#if ext_ubol
@@ -129,9 +129,9 @@ poophq.com,veev.to,doods.to##+js(nostif, )]();}, 500)
 ||adsco.re^$xhr,important,domain=poophq.com|veev.to|doods.to
 poophq.com,veev.to,doods.to##+js(no-xhr-if, 162.252.214.4, true)
 !#else
-poophq.com,veev.to,doods.to##+js(trusted-set, adscoreLibLoader.state, json:"loading")
-poophq.com,veev.to,doods.to##+js(set, window.adscoreLibLoader._init, true)
-poophq.com,veev.to,doods.to##+js(nostif, /^\s*function\s*\(\s*\)\s*\{.{55\,90}$/)
+poophq.com,veev.to,doods.to##+js(nostif, /function\s*\(\s*\)\s*{\s*ac\s*\(\s*(`|"|')\s*[a-z][0-9]\s*(`|"|')\s*\)\s*\;\s*\}/)
+poophq.com,veev.to,doods.to##+js(nostif, /^\s*function\s*.{55\,90}$/)
+poophq.com,veev.to,doods.to##+js(nostif, /timeout|Handlers|\.trigger|\"e3\"|function\(\)\{t\=|\"\,r\.|\'on\'|\"\)\}|\'\]\,\"|triggerHand/)
 ||adsco.re^$script,redirect=none:5,domain=poophq.com|veev.to|doods.to
 /dl?op=aa&cmd=ga&_a=$xhr,1p,important,domain=poophq.com|veev.to|doods.to
 ||a.pemsrv.com/ad-provider.js$xhr,important,domain=poophq.com|veev.to|doods.to
@@ -231,4 +231,5 @@ bing.com##ol#b_results > li:has(> :is(.b_tpcn, .b_title, h2) a[href^="https://ww
 ||applicationinsights.io^$3p,badfilter
 
 ! https://www.reddit.com/r/uBlockOrigin/comments/1j76tpa/adblock_detected_site_gledaitvlive/
-gledaitv.*##+js(no-fetch-if, method:HEAD)
+! https://www.reddit.com/r/uBlockOrigin/comments/197760n/adblock_detected_httpswwwbggledailive/
+bg-gledai.*,gledaitv.*##+js(no-fetch-if, method:HEAD)
