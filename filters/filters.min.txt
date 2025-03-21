@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Thu, 20 Mar 2025 20:45:33 +0000
-! Diff-Path: ../patches/2025.3.20.1347.patch#ublock-filters
+! Last modified: Fri, 21 Mar 2025 00:44:32 +0000
+! Diff-Path: ../patches/2025.3.21.183.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -8016,7 +8016,7 @@ techdracula.com##ins.adsbygoogle
 /^https?:\/\/[-a-z]{6,}\.info\/[a-d][-\.\/_A-Za-z][DHWXm][-\.\/_A-Za-z][59FVZ][-\.\/_A-Za-z][6swyz][-\.\/_A-Za-z][-\/_0-9a-zA-Z][-\.\/_A-Za-z][-\/_0-9a-zA-Z]{22,162}$/$script,xhr,3p,match-case,to=info
 /^https?:\/\/[-a-z]{6,}\.pro\/[a-d][-\.\/_A-Za-z][DHWXm][-\.\/_A-Za-z][59FVZ][-\.\/_A-Za-z][6swyz][-\.\/_A-Za-z][-\/_0-9a-zA-Z][-\.\/_A-Za-z][-\/_0-9a-zA-Z]{22,162}$/$script,xhr,3p,match-case,to=pro
 /^https?:\/\/[-a-z]{6,}\.xyz\/[a-d][-\.\/_A-Za-z][DHWXm][-\.\/_A-Za-z][59FVZ][-\.\/_A-Za-z][6swyz][-\.\/_A-Za-z][-\/_0-9a-zA-Z][-\.\/_A-Za-z][-\/_0-9a-zA-Z]{22,162}$/$script,xhr,3p,match-case,to=xyz
-/\/[0-9a-f]{32}\.js\b/$script,3p,redirect=noopjs,to=com,from=aniworld.to|s.to|torrentgalaxy-official.com
+/\/[0-9a-f]{32}\.js\b/$script,3p,redirect=noopjs,to=com,from=aniworld.to|hianime.to|s.to|torrentgalaxy-official.com
 ||squirtpresented.com^
 ! As of 2020-04-09, new filters will be added to year-based sublists
 ! Link shortener filters go into their own dedicated list
@@ -23314,7 +23314,7 @@ gputrends.net##+js(set-local-storage-item, adWatched, true)
 vikatan.com##+js(nostif, /adblock|isblock/i)
 /page_beg_wb.js$script,domain=cool-web.de|gps-cache.de|web-spiele.de|fun-seiten.de|photo-alben.de|wetter-vorhersage.de|coolsoftware.de|kryptografie.de|cool--web-de.translate.goog|gps--cache-de.translate.goog|web--spiele-de.translate.goog|fun--seiten-de.translate.goog|photo--alben-de.translate.goog|wetter--vorhersage-de.translate.goog|coolsoftware-de.translate.goog|kryptografie-de.translate.goog
 /js/wb_ban.js$script,domain=cool-web.de|gps-cache.de|web-spiele.de|fun-seiten.de|photo-alben.de|wetter-vorhersage.de|coolsoftware.de|kryptografie.de|cool--web-de.translate.goog|gps--cache-de.translate.goog|web--spiele-de.translate.goog|fun--seiten-de.translate.goog|photo--alben-de.translate.goog|wetter--vorhersage-de.translate.goog|coolsoftware-de.translate.goog|kryptografie-de.translate.goog
-cool-web.de,gps-cache.de,web-spiele.de,fun-seiten.de,photo-alben.de,wetter-vorhersage.de,coolsoftware.de,kryptografie.de,cool--web-de.translate.goog,gps--cache-de.translate.goog,web--spiele-de.translate.goog,fun--seiten-de.translate.goog,photo--alben-de.translate.goog,wetter--vorhersage-de.translate.goog,coolsoftware-de.translate.goog,kryptografie-de.translate.goog##+js(nostif, loadComplete)
+cool-web.de,gps-cache.de,web-spiele.de,fun-seiten.de,photo-alben.de,wetter-vorhersage.de,coolsoftware.de,kryptografie.de,cool--web-de.translate.goog,gps--cache-de.translate.goog,web--spiele-de.translate.goog,fun--seiten-de.translate.goog,photo--alben-de.translate.goog,wetter--vorhersage-de.translate.goog,coolsoftware-de.translate.goog,kryptografie-de.translate.goog##+js(nostif, loadDone)
 ! [NSFW] https://dhtpre.com/file/5qhvr18btje8 - detection
 !#if cap_html_filtering
 dhtpre.com##^script:has-text(setADBFlag)
@@ -24084,3 +24084,9 @@ concealednation.org##+js(set, advanced_ads_check_adblocker, noopFunc)
 *$object,domain=controllerstech.com,redirect=noopjs
 bigconv.com##+js(nowoif)
 @@||1001tracklists.com^$ghide
+1001tracklists.com##div[id]:has(> [data-freestar-ad]):remove()
+1001tracklists.com###head + [id] > div:first-child > div:not([id="topLogo"], [id="pageTitle"], [id="hInfo"]):has(> a > :is(img[src*="/"][src*="_"][alt], div[style*="background"]))
+1001tracklists.com##div:has(+ script:has-text(challenge)):has(a :is(img[src*="/"][src*="_"][alt], [style]))
+1001tracklists.com##div[class="nav tabTop"] + div > div:first-child > div:first-child > a:has(> img[src*="/"][src*="_"][alt])
+1001tracklists.com###head + div[id] > div:last-child > div > a:has(> img[src*="/"][src*="_"][alt])
+1001tracklists.com##+js(spoof-css, div[class="nav tabTop"] + div > div:first-child > div:first-child > a:has(> img[src*="/"][src*="_"][alt])\, #head + div[id] > div:last-child > div > a:has(> img[src*="/"][src*="_"][alt]), display, block)
