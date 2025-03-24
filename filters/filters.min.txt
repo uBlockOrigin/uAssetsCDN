@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Mon, 24 Mar 2025 01:46:27 +0000
-! Diff-Path: ../patches/2025.3.24.122.patch#ublock-filters
+! Last modified: Mon, 24 Mar 2025 06:03:20 +0000
+! Diff-Path: ../patches/2025.3.24.396.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -19300,18 +19300,18 @@ freepublicporn.com##[href*="find-my-girl.com"]
 ! ads /remove filters when fixed in EL
 /sw.js$script,domain=lolabits.se|filechan.org|megaupload.nz|rapidshare.nu|share-online.is|openload.cc|hotfile.io
 @@||shaboysglobal.com^$ghide
-! PersianBlocker filters
+! PersianBlocker trusted filters
 ! app.blubank.com, mobileweb.bankmellat.ir - These sites work fine on the desktop and Android but they only allow iPhone useragent
 app.blubank.com,mobileweb.bankmellat.ir##+js(trusted-set, navigator.userAgent, '{"value": "Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile/15E148 Safari/604.1"}')
 app.blubank.com,mobileweb.bankmellat.ir##+js(set, navigator.standalone, true)
 app.blubank.com##div.fixed[style^="z-index:"]:has-text(گوشی خود را بچرخانید)
 mobileweb.bankmellat.ir##+js(trusted-set, navigator.platform, {"value": "iPhone"})
-uploadboy.com##+js(rpnt, script, self.location.href;, self.location.href; document.addEventListener('DOMContentLoaded'\,()=>{const button=document.querySelector('form > input#method_free');if(button){button.click()}});, sedCount, 1)
-uploadboy.com##+js(rpnt, script, //$('#btn_download').click();, $('#btn_download').click();, sedCount, 1)
+uploadboy.com##+js(trusted-rpnt, script, //$('#btn_download').click();, $('#btn_download').click();, sedCount, 1)
 ||dehlinks.ir/link_download.php?Mozojadid_Id=$doc,replace=/content="15;/content="0;/
 reymit.ir##+js(trusted-rpnt, script, /reymit_ads_for_categories\.length>0|reymit_ads_for_streams\.length>0/g, false)
-! "Download app" on my.irancell.ir
+! my.irancell.ir - "Download app" on mobile
 my.irancell.ir##+js(trusted-click-element, div[class^="css-"][style="transition-duration: 0s;"] > div[dir="auto"][data-testid="needDownloadPS"])
+||migmig.affilio.ir/api/v1/Click^$doc,urlskip=?b64 -base64
 @@||sportdeutschland.tv/assets/*$script,1p
 @@||71i.de/*/loader.js$script,domain=sportdeutschland.tv
 sportdeutschland.tv##+js(set, google.ima.settings.setDisableFlashAds, noopFunc)
@@ -21507,8 +21507,8 @@ timesnewsgroup.com.au##+js(acs, $, popup)
 ! romfree .net anti-adb
 romfree.net##+js(aost, setTimeout, adsBlocked)
 livecamrips.*##+js(rmnt, script, window.open)
-livecamrips.su>>,~cloudflare.com,~disqus.com,~google.com,~mixdrop.*##+js(nowoif, /\d\.\d{10\,}/)
-filemoon.*>>,96ar.com>>,iqksisgw.xyz>>,u6lyxl0w.skin>>##+js(nowoif, /\d\.\d{10\,}/)
+livecamrips.su>>,~cloudflare.com,~disqus.com,~google.com##+js(nowoif)
+filemoon.*>>,96ar.com>>,iqksisgw.xyz>>,u6lyxl0w.skin>>##+js(nowoif)
 /ad?type=$badfilter
 5j386s9.sbs##+js(nowoif)
 ! exactlyhowlong. com detection
@@ -24052,3 +24052,7 @@ read.amazon.*##+js(trusted-click-element, .kw-ads-pagination-button:first-child\
 *$script,redirect-rule=prebid-ads.js,domain=read.amazon.*
 panel.play.hosting##+js(rmnt, script, /adbl/i)
 uxjvp.pro##+js(nowoif)
+mirror.co.uk##div[data-testid*="commercial-"]
+mirror.co.uk##div[class^="Header_masthead"]
+mirror.co.uk##.sticky ~ header:style(top: 0px !important;)
+formatlibrary.com##+js(no-fetch-if, doubleclick)
