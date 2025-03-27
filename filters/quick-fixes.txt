@@ -1,5 +1,5 @@
 ! Title: uBlock₀ filters – Quick fixes
-! Last modified: Thu, 27 Mar 2025 14:11:22 +0000
+! Last modified: Thu, 27 Mar 2025 16:58:47 +0000
 ! Expires: 8 hours
 ! Description: Immediate, temporary filters to fix websites
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -175,7 +175,7 @@ smsonline.cloud##html[data-theme][lang] [id^="img_"][style]:has(iframe[framebord
 ~dogdrip.net,~infinityfree.com,~smsonline.cloud##*:not(body) > a[href^="https://html-load.com/contents/"]
 ~dogdrip.net,~infinityfree.com,~smsonline.cloud##*:not(body) > a[href^="https://07c225f3.online/contents/"]
 07c225f3.online,content-loader.com,css-load.com,html-load.com,img-load.com##html:not(:has(> head > style:only-child:has-text(width:399px;height:411px))):style(filter: opacity(0) !important; pointer-events: none !important;)
-/^https:\/\/www\.[0-9a-f]{4,8}(?:-(?:\d{4}-){3}[0-9a-f]{12})?\.(?:live|site|xyz)\/script\/[-.0-9A-Za-z]+\.[-A-Za-z]{2,30}\.js$/$script,3p,match-case,to=live|site|xyz,header=x-length
+/^https:\/\/www\.[0-9a-z-]{8,}\.xyz\/script\/[-.0-9A-Za-z]+\.[-A-Za-z]{2,30}\.js$/$script,3p,match-case,to=xyz,header=x-length
 *$~script,~frame,~xhr,domain=07c225f3.online|content-loader.com|css-load.com|html-load.com|img-load.com
 ! https://github.com/uBlockOrigin/uAssets/issues/26487
 dogdrip.net,infinityfree.com,smsonline.cloud##+js(no-fetch-if, -load.com/script/, length:101)
@@ -188,7 +188,7 @@ smsonline.cloud##aside[class^="css-"]:has(> p:has-text(Advertisement) + ins.adsb
 ! https://github.com/uBlockOrigin/uAssets/pull/26342
 ! https://github.com/uBlockOrigin/uAssets/issues/26393
 ! https://github.com/uBlockOrigin/uAssets/issues/26623
-bing.com##ol#b_results > li[class="b_algo"]:has(> div[class="b_title"]):has(> div[class="b_tpcn"] > a[class="tilk"]:not([href^="https://www.bing.com/"]))
+bing.com##+js(rpnt, script, _w.keyMap=, '(()=>{const e={apply:(e,l,o)=>{const t=Reflect.apply(e,l,o),n=o[0];if(n.includes(":before{")&&!n.includes("b_lineclamp")){const e=n.split(":before")[0];let l=document.querySelector(`ol#b_results>li.b_algo:has(>div.b_caption>${e})`);l instanceof HTMLLIElement&&(l.style.display="none")}return t}};document.createTextNode=new Proxy(document.createTextNode,e)})();_w.keyMap=')
 bing.com##+js(no-xhr-if, /fd/ls/lsp.aspx)
 bing.com##ol#b_results > li:has(> :is(.b_tpcn, .b_title, h2) a[href^="https://www.bing.com/aclk?"])
 
@@ -226,3 +226,7 @@ duckduckgo.com##ol.react-results--sidebar > li:has(.badge--ad-wrap)
 
 ! https://github.com/AdguardTeam/AdguardFilters/issues/199124
 pvpoke-re.com##+js(trusted-suppress-native-method, Document.prototype.getElementsByTagName, '"body"', abort)
+
+! https://github.com/uBlockOrigin/uAssets/issues/27746
+_adv.js$badfilter
+@@||gouv.fr/*_adv.js
