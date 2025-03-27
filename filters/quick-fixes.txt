@@ -1,5 +1,5 @@
 ! Title: uBlock₀ filters – Quick fixes
-! Last modified: Thu, 27 Mar 2025 09:26:54 +0000
+! Last modified: Thu, 27 Mar 2025 14:11:22 +0000
 ! Expires: 8 hours
 ! Description: Immediate, temporary filters to fix websites
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -174,8 +174,9 @@ smsonline.cloud##html[data-theme][lang] [id^="img_"][style]:has(iframe[framebord
 ~dogdrip.net,~infinityfree.com,~smsonline.cloud##html[class^="img_"][amp4ads=""][i-amphtml-layout=""][i-amphtml-no-boilerplate=""][amp-version="2502032353000"]
 ~dogdrip.net,~infinityfree.com,~smsonline.cloud##*:not(body) > a[href^="https://html-load.com/contents/"]
 ~dogdrip.net,~infinityfree.com,~smsonline.cloud##*:not(body) > a[href^="https://07c225f3.online/contents/"]
-!07c225f3.online,content-loader.com,css-load.com,html-load.com,img-load.com##html:not(:has(> head > style:only-child:has-text(width:399px;height:411px))):style(filter: opacity(0) !important; pointer-events: none !important;)
+07c225f3.online,content-loader.com,css-load.com,html-load.com,img-load.com##html:not(:has(> head > style:only-child:has-text(width:399px;height:411px))):style(filter: opacity(0) !important; pointer-events: none !important;)
 /^https:\/\/www\.[0-9a-f]{4,8}(?:-(?:\d{4}-){3}[0-9a-f]{12})?\.(?:live|site|xyz)\/script\/[-.0-9A-Za-z]+\.[-A-Za-z]{2,30}\.js$/$script,3p,match-case,to=live|site|xyz,header=x-length
+*$~script,~frame,~xhr,domain=07c225f3.online|content-loader.com|css-load.com|html-load.com|img-load.com
 ! https://github.com/uBlockOrigin/uAssets/issues/26487
 dogdrip.net,infinityfree.com,smsonline.cloud##+js(no-fetch-if, -load.com/script/, length:101)
 dogdrip.net,infinityfree.com,smsonline.cloud##+js(nostif, )](this\,..., 3000-6000)
@@ -187,19 +188,13 @@ smsonline.cloud##aside[class^="css-"]:has(> p:has-text(Advertisement) + ins.adsb
 ! https://github.com/uBlockOrigin/uAssets/pull/26342
 ! https://github.com/uBlockOrigin/uAssets/issues/26393
 ! https://github.com/uBlockOrigin/uAssets/issues/26623
-bing.com##+js(rpnt, script, _w.keyMap=, '(()=>{const e={apply:(e,t,n)=>{let o=Reflect.apply(e,t,n);return o instanceof HTMLIFrameElement&&!o.src&&o.contentWindow&&(o.contentWindow.document.body.getElementsByTagName=window.document.body.getElementsByTagName,o.contentWindow.MutationObserver=void 0),o}};HTMLBodyElement.prototype.appendChild=new Proxy(HTMLBodyElement.prototype.appendChild,e);const t={apply:(e,t,n)=>(t instanceof HTMLLIElement&&"b_algo"===t?.classList?.value&&"a"===n?.[0]&&setTimeout((()=>{t.style.display="none"}),100),Reflect.apply(e,t,n))};HTMLBodyElement.prototype.getElementsByTagName=new Proxy(HTMLBodyElement.prototype.getElementsByTagName,t)})();_w.keyMap=')
+bing.com##ol#b_results > li[class="b_algo"]:has(> div[class="b_title"]):has(> div[class="b_tpcn"] > a[class="tilk"]:not([href^="https://www.bing.com/"]))
 bing.com##+js(no-xhr-if, /fd/ls/lsp.aspx)
 bing.com##ol#b_results > li:has(> :is(.b_tpcn, .b_title, h2) a[href^="https://www.bing.com/aclk?"])
 
 ! https://www.reddit.com/r/uBlockOrigin/comments/1j76tpa/adblock_detected_site_gledaitvlive/
 ! https://www.reddit.com/r/uBlockOrigin/comments/197760n/adblock_detected_httpswwwbggledailive/
 bg-gledai.*,gledaitv.*##+js(no-fetch-if, method:HEAD)
-
-! https://github.com/easylist/easylist/commit/5e62c9a6b725b4023a7ea07a84d90a8a74c8bb05
-@@||f-tra.com^$script,domain=pokemoncenter-online.com
-
-! https://github.com/uBlockOrigin/uAssets/issues/27572
-*$script,3p,domain=hitomi.la,badfilter
 
 ! https://github.com/AdguardTeam/AdguardFilters/commit/84dda2a9a94651bbd8bb50521cbe755a82fbecdb
 @@||g.doubleclick.net/gampad/ads?$xhr,domain=video-ac.com
@@ -230,4 +225,4 @@ duckduckgo.com##ol.react-results--sidebar > li:has(.badge--ad-wrap)
 @@||miruro.*/assets/components-shared-popunder-$script,1p
 
 ! https://github.com/AdguardTeam/AdguardFilters/issues/199124
-pvpoke-re.com##+js(aopr, kotoDamaFunctionName)
+pvpoke-re.com##+js(trusted-suppress-native-method, Document.prototype.getElementsByTagName, '"body"', abort)
