@@ -1,5 +1,5 @@
 ! Title: uBlock₀ filters – Quick fixes
-! Last modified: Fri, 28 Mar 2025 22:44:21 +0000
+! Last modified: Sat, 29 Mar 2025 04:19:52 +0000
 ! Expires: 8 hours
 ! Description: Immediate, temporary filters to fix websites
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -64,11 +64,11 @@ web.facebook.com,www.facebook.com##+js(trusted-replace-xhr-response, '/null,[^\n
 
 ! https://github.com/uBlockOrigin/uAssets/issues/24745 - https://voe.sx/e/2z9smej3tebe
 ! VOE sites
-||imasdk.googleapis.com/js/sdkloader/ima3.js$script,3p,redirect=google-ima.js,domain=heatherwholeinvolve.com,important
-heatherwholeinvolve.com##+js(nowoif)
-heatherwholeinvolve.com##+js(set, console.clear, undefined)
-heatherwholeinvolve.com##+js(acs, globalThis, break;case)
-heatherwholeinvolve.com##+js(acs, WebAssembly, atob)
+||imasdk.googleapis.com/js/sdkloader/ima3.js$script,3p,redirect=google-ima.js,domain=kristiesoundsimply.com,important
+kristiesoundsimply.com##+js(nowoif)
+kristiesoundsimply.com##+js(set, console.clear, undefined)
+kristiesoundsimply.com##+js(acs, globalThis, break;case)
+kristiesoundsimply.com##+js(acs, WebAssembly, atob)
 
 ! next-episode .net
 !next-episode.net##+js(rmnt, script, '/[\s\S]{0,}head[\s\S]{1900,}/')
@@ -188,7 +188,7 @@ smsonline.cloud##aside[class^="css-"]:has(> p:has-text(Advertisement) + ins.adsb
 ! https://github.com/uBlockOrigin/uAssets/pull/26342
 ! https://github.com/uBlockOrigin/uAssets/issues/26393
 ! https://github.com/uBlockOrigin/uAssets/issues/26623
-bing.com##+js(rpnt, script, _w.keyMap=, '(()=>{const e={apply:(e,l,o)=>{const t=Reflect.apply(e,l,o),n=o[0];if(n.includes(":before{")&&!n.includes("b_lineclamp")){const e=n.split(":before")[0];let l=document.querySelector(`ol#b_results>li.b_algo:has(>div.b_caption>${e})`);l instanceof HTMLLIElement&&(l.style.display="none")}return t}};document.createTextNode=new Proxy(document.createTextNode,e)})();_w.keyMap=')
+bing.com##+js(rpnt, script, _w.keyMap=, '(()=>{const e={apply:(e,t,n)=>{let o=Reflect.apply(e,t,n);return o instanceof HTMLIFrameElement&&!o.src&&o.contentWindow&&(o.contentWindow.document.body.getElementsByTagName=window.document.body.getElementsByTagName,o.contentWindow.MutationObserver=void 0),o}};HTMLBodyElement.prototype.appendChild=new Proxy(HTMLBodyElement.prototype.appendChild,e);const t={apply:(e,t,n)=>(t instanceof HTMLLIElement&&"b_algo"===t?.classList?.value&&"a"===n?.[0]&&setTimeout((()=>{t.style.display="none"}),100),Reflect.apply(e,t,n))};HTMLBodyElement.prototype.getElementsByTagName=new Proxy(HTMLBodyElement.prototype.getElementsByTagName,t)})();_w.keyMap=')
 bing.com##+js(no-xhr-if, /fd/ls/lsp.aspx)
 bing.com##ol#b_results > li:has(> :is(.b_tpcn, .b_title, h2) a[href^="https://www.bing.com/aclk?"])
 
@@ -203,24 +203,12 @@ bg-gledai.*,gledaitv.*##+js(no-fetch-if, method:HEAD)
 @@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$domain=video-ac.com
 @@||safeframe.googlesyndication.com/safeframe/$domain=video-ac.com
 
-! https://github.com/uBlockOrigin/uBlock-issues/issues/3576 - until 1.63 available on Firefox
-!#if env_firefox
-/.*/$permissions=identity-credentials-get=(),document,badfilter
-!#endif
-
 ! https://www.reddit.com/r/uBlockOrigin/comments/1jef4qb/having_adblock_issues_with_faqwikius/
 faqwiki.us##+js(nostif, .offsetHeight>0)
 faqwiki.us##+js(rmnt, script, /adblock/i)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/17998#issuecomment-2735133418
-||links.duckduckgo.com/d.js?q=$badfilter
 duckduckgo.com##ol.react-results--sidebar > li:has(.badge--ad-wrap)
-
-! https://www.reddit.com/r/uBlockOrigin/comments/1jghjku/missing_embedded_gmail_images/
-&mi_ecmp=$image,badfilter
-
-! https://github.com/uBlockOrigin/uAssets/issues/27689
-*$script,redirect-rule=prebid-ads.js,badfilter
 
 ! https://www.reddit.com/r/uBlockOrigin/comments/1ji7r4o/mirurotv_displays_a_totally_black_page/
 @@||miruro.*/assets/components-shared-popunder-$script,1p
@@ -234,3 +222,6 @@ _adv.js$badfilter
 
 ! https://github.com/AdguardTeam/AdguardFilters/issues/201894
 ||luluvdo.com^$badfilter
+
+! https://github.com/uBlockOrigin/uAssets/issues/27751
+@@||tix.axs.com^$removeparam=irclickid
