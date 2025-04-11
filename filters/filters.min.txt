@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Fri, 11 Apr 2025 14:27:38 +0000
-! Diff-Path: ../patches/2025.4.11.869.patch#ublock-filters
+! Last modified: Fri, 11 Apr 2025 18:38:16 +0000
+! Diff-Path: ../patches/2025.4.11.1161.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -8463,6 +8463,7 @@ loan.punjabworks.com###tp-snp2, #cross-snp2:others()
 loan.punjabworks.com##+js(set, count, 0)
 earnbee.xyz##+js(aopr, open)
 earnbee.xyz###overlay
+||pelistop.xyz/*&url=http$doc,urlskip=?url
 !#if env_mobile
 ! *** filters/filters-mobile.txt ***
 !----- 2020 -----
@@ -10570,6 +10571,7 @@ politico.com##.gallery-carousel-ad
 ! heavy-r .com popunder / ads
 heavy-r.com##+js(acs, document.createElement, insertBefore)
 heavy-r.com##[class^="adzone"]
+||awdeliverynet.com^$3p
 youtubetomp3.*##+js(nowoif)
 youtubetomp3.*##a[href="/button.php"]
 *$script,3p,denyallow=cloudflare.com|cloudflare.net|disqus.com|disquscdn.com|facebook.net|fastlylb.net|fbcdn.net|fluidplayer.com|google.com|googleapis.com|gravatar.com|gstatic.com|hwcdn.net|jsdelivr.net|wp.com,domain=veranime.*|verhentai.*
@@ -12106,15 +12108,14 @@ taming.io###main-box > #middle-wrap ~ div[id$="-bottom"]
 ! y2mate.guru popups
 y2mate.guru##+js(nowoif)
 ! todaypk related
-todaypk.*,todaypktv.*,1todaypk.*,watchtodaypk.com##+js(nowoif)
-1todaypk.*,todaypk.*,watchtodaypk.com##[href="/watchnow.php"]
+todaypk.*,todaypktv.*,1todaypk.*##+js(nowoif)
+1todaypk.*,todaypk.*##[href="/watchnow.php"]
 todaypk.*##[href="/watchfree.php"]
 todaypktv.*##.ad_watch_now
 todaypktv.*##.hd-buttons1
 ||multipledrawers.com^
-faptitans.com,pussysaga.com##.cross-promo-bnr
+faptitans.com##.cross-promo-bnr
 ||faptitans.com^*/rc/logo.jpg
-||pussysaga.com^*/footer/logo_ps.jpg
 ||theonlygames.com/ps_banner/
 world4.eu##+js(aost, String.prototype.charCodeAt, ai_)
 world4.eu##+js(aopr, ai_run_scripts)
@@ -12122,7 +12123,6 @@ world4.eu##+js(aopr, ai_run_scripts)
 *$image,3p,redirect-rule=1x1.gif,domain=world4.eu
 laptrinhx.com##+js(nosiif, clearInterval(i), 1000)
 laptrinhx.com##.ads
-healthtune.site##+js(nostif, nextFunction, 2000)
 @@||imasdk.googleapis.com/js/sdkloader/ima3.js$script,domain=bbcamerica.com
 babestube.com,momvids.com,porndr.com##+js(aopr, decodeURI)
 babestube.com,momvids.com,porndr.com##div[style="position: absolute; inset: 0px; overflow: hidden; z-index: 160; background: transparent none repeat scroll 0% 0%; display: block;"]
@@ -12188,10 +12188,6 @@ crazyporn.xxx##.table
 crazyporn.xxx##.sponsor
 crazyporn.xxx##.item:has(> script[src^="/ai/"])
 freehardcore.com##+js(aopr, decodeURI)
-||freehardcore.com/player/html.php^
-freehardcore.com##div[style="position: absolute; inset: 0px; overflow: hidden; z-index: 160; background: transparent none repeat scroll 0% 0%; display: block;"]
-freehardcore.com##.aside
-freehardcore.com##.spot
 suicidepics.com##+js(nostif, css_class.show)
 *$script,3p,domain=suicidepics.com
 ||adshort.tech^$3p
@@ -12199,18 +12195,15 @@ suicidepics.com##+js(nostif, css_class.show)
 @@||down.fast-down.com^$ghide
 down.fast-down.com##div[style="width:336px; height:280px; background-color:#ffffff; text-align:center"]
 ! Remove if fixed in VIE list
-jav720.net,phimsexkhongche.net##.float-ck
-phimsexkhongche.net##.under-video-block > center
+jav720.net##.float-ck
 jav720.net##.video-player-area > center
-||i.pinimg.com/564x/$domain=jav720.net|phimsexkhongche.net
+||i.pinimg.com/564x/$domain=jav720.net
 usagoals.*##+js(nowoif)
 ||cdn777.net/site/binance-banner.jpg$image
 @@||foxgreat.com^$ghide
 haoweichi.com##+js(aopr, onload)
 haoweichi.com##.ad2
 okteve.com##+js(acs, String.fromCharCode, marginheight)
-msubplix.com##+js(nowoif)
-||msubplix.com/cdn-cgi/trace$xhr,1p
 arab4media.com##+js(acs, addEventListener, nextFunction)
 ! myyouporn .com popups
 myyouporn.com##+js(nowoif)
@@ -12268,20 +12261,6 @@ mylegalporno.com##.zone
 server.satunivers.tv##+js(aeld, load, 2000)
 winaero.com#@#.entry-content > div > div
 winaero.com##[href^="/idx.php"]
-! taxidrivermovie.com PH
-taxidrivermovie.com###scroll-div
-taxidrivermovie.com##.adboard-top
-taxidrivermovie.com##[href="/category/taxi-fares/"]:upward(.thumb)
-embedstream.me##+js(nowebrtc)
-embedstream.me,nolive.me##+js(nowoif)
-embedstream.me##+js(nostif, (), 150)
-embedstream.me##^script:has-text(FingerprintJS)
-embedstream.me##^script:has-text("admc")
-embedstream.me##^script:has-text(\"admc\")
-*$script,3p,denyallow=cloudflare.net|fastly.net|gstatic.com|jsdelivr.net,domain=nolive.me
-embedstream.me##body > .position-absolute
-embedstream.me###aff-click
-@@||embedstream.me/cash.min.js$script,1p
 javporn18.com##+js(acs, document.querySelectorAll, popMagic)
 javporn18.com##+js(acs, mypop)
 javporn18.com###contentDiv
@@ -20184,9 +20163,12 @@ cimanow.cc##section[aria-label="details"] a[id][target="_blank"]
 cimanow.online##+js(ra, href, [target="_blank"], stay)
 cimanow.cc,freex2line.online##+js(acs, document.createElement, globalThis)
 cimanow.cc,freex2line.online##+js(trusted-suppress-native-method, fetch, '"flashtalking"')
+cimanow.cc##+js(acs, document.querySelector, join)
+cimanow.cc,freex2line.online##+js(no-xhr-if, criteo)
 freex2line.online##+js(overlay-buster)
 ||freex2line.online/*/?redirect$doc,urlskip=?redirect -base64
 ||flashtalking.com^$image,redirect=2x2.png,domain=cimanow.cc|cimanow.online
+||criteo.net^$image,redirect=2x2.png,domain=cimanow.cc|freex2line.online
 cimanow.cc##main > a[id][target="_blank"]
 freex2line.online##body >a[id][href][target^="_blank"]
 ||freex2line.online/dwcn/Assets/js/jquery.countdown360.min.js$script,1p
@@ -21286,7 +21268,7 @@ timesnewsgroup.com.au##+js(acs, $, popup)
 ||launcherleaks.net/*main_script.js$script,1p
 livecamrips.*##+js(rmnt, script, window.open)
 livecamrips.su>>,~cloudflare.com,~disqus.com,~google.com##+js(nowoif)
-filemoon.*>>,96ar.com>>,iqksisgw.xyz>>,u6lyxl0w.skin>>,ww9g.com>>,xcoic.com>>,nptsr.live>>##+js(nowoif)
+filemoon.*>>,96ar.com>>,iqksisgw.xyz>>,u6lyxl0w.skin>>,ww9g.com>>,xcoic.com>>,nptsr.live>>,4bct9.live>>,xztgl.com##+js(nowoif)
 designparty.sx>>##+js(nowoif)
 5j386s9.sbs##+js(nowoif)
 ! exactlyhowlong. com detection
@@ -23913,3 +23895,5 @@ azmen.com##.live-button-wrapper
 /player/v*/vast-no-entitlements.js^
 *$script,3p,denyallow=cloudflare.com,domain=nukibooks.com
 manhuaga.com##+js(noeval-if, adsbygoogle)
+goflix.sbs##+js(trusted-set-cookie, welcome_message_1, true, , ,reload, 1)
+goflix.sbs##+js(nowoif, _blank)
