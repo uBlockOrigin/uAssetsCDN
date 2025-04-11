@@ -1,5 +1,5 @@
 ! Title: uBlock filters – Other Annoyances
-! Last modified: Fri, 11 Apr 2025 04:32:13 +0000
+! Last modified: Fri, 11 Apr 2025 04:38:15 +0000
 ! Expires: 7 days
 ! Description: Filters optimized for uBlock Origin, to be used with EasyList's and/or Adguard's "Other Annoyances" list(s)
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -72,6 +72,10 @@ kursnacukrzyce.pl##+js(acs, document.addEventListener, contextmenu)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/27830
 wowturkey.net##+js(rmnt, script, oncontextmenu)
+
+! https://abstream.to/gs6zl1pvrnk2 (NSFW) - anti-devtools
+||abstream.to/js/devtools-detector*.js
+abstream.to##+js(acs, document.onkeydown)
 
 ! END: Anti copy, right-click etc.
 
@@ -1852,7 +1856,10 @@ gamebanana.com##+js(aopr, adBlockDetected)
 ! https://github.com/uBlockOrigin/uAssets/issues/10888#issuecomment-1523943368
 www.reddit.com###nsfw-desktop-auth-blocking-modal-dialog,#nsfw-desktop-auth-blocking-modal-overlay-element
 www.reddit.com###blocking-modal, body > div[style="position: fixed; inset: 0px; backdrop-filter: blur(4px);"], #nsfw-qr-dialog
-www.reddit.com##body:style(overflow:auto !important)
+! https://github.com/uBlockOrigin/uAssets/issues/21810#issuecomment-2782270465
+www.reddit.com##body[style*="overflow"]:style(overflow: auto !important;)
+! https://github.com/uBlockOrigin/uAssets/issues/21810#issuecomment-2778710207
+www.reddit.com##body:has(#blocking-modal):style(pointer-events: auto !important;)
 ||redditstatic.com/shreddit/en-US/xpromo-nsfw-bypassable-modal-desktop-$script
 ! https://www.reddit.com/r/uBlockOrigin/comments/1dzrnq3/remove_popups_from_reddit_mobile/
 www.reddit.com##div.prompt:has(slot[name="view-in-app-button"])
@@ -6658,7 +6665,7 @@ sportando.basketball##.select-none:style(-webkit-touch-callout: default !importa
 ! https://github.com/uBlockOrigin/uAssets/issues/20492
 ! https://github.com/uBlockOrigin/uAssets/issues/22899
 ! https://www.reddit.com/r/uBlockOrigin/comments/1jfthrl/hianime_anti_console_constantly_clearing_console/
-ymovies.vip,aniwatch.to,aniwatchtv.to,megacloud.tv,hianime.*,putlocker.vip,rapid-cloud.co,rabbitstream.net,pupupul.site##+js(set, devtoolsDetector.launch, noopFunc)
+ymovies.vip,aniwatch.to,aniwatchtv.to,megacloud.tv,hianime.*,hianimez.to,putlocker.vip,rapid-cloud.co,rabbitstream.net,pupupul.site##+js(set, devtoolsDetector.launch, noopFunc)
 ||9animetv.to/js/safe.ob.min.js$script
 myflixerz.to,putlocker.pe,theflixertv.to##+js(nosiif, _0x)
 movie4kto.net##+js(nosiif, /DevTools|_0x/)
@@ -7768,10 +7775,6 @@ espressocafe.ro##*:style(-webkit-touch-callout: default !important; -webkit-user
 ! https://github.com/uBlockOrigin/uAssets/issues/26840
 @@||u.gg^$ghide
 
-! https://abstream.to/7u23aksi148u - anti-devtools
-||abstream.to/js/devtools-detector.js
-abstream.to##+js(acs, document.onkeydown)
-
 ! astoryofmasasstruggles.com anti right-click, select, print
 astoryofmasasstruggles.com##+js(rmnt, script, /contextmenu|reEnable/)
 astoryofmasasstruggles.com##*:style(-webkit-touch-callout: default !important; -webkit-user-select: text !important; -khtml-user-select: text !important; -moz-user-select: text !important; -ms-user-select: text !important; user-select: text !important; -webkit-tap-highlight-color: revert !important; cursor: revert !important;)
@@ -7878,3 +7881,7 @@ bilibili.com#@#+js(aost, player.pause, /[0-9a-f]{40}\.js:1\d{2}([\S\s]+\.emit.+c
 !#else
 ||s1.hdslb.com/bfs/static/jinkela/video/video.$script,replace=/t\.user\.isLogin\?/1?/,domain=bilibili.com
 !#endif
+
+! https://store.steampowered.com/app/993090/Lossless_Scaling/
+store.steampowered.com##+js(href-sanitizer, a[href^="https://steamcommunity.com/linkfilter/?u=http"], ?u)
+||steamcommunity.com/linkfilter/?u=http$doc,urlskip=?u

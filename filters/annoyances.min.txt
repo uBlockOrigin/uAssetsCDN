@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Annoyances
 ! Expires: 7 days
-! Last modified: Fri, 11 Apr 2025 04:32:13 +0000
-! Diff-Path: ../patches/2025.4.11.272.patch#ublock-annoyances
+! Last modified: Fri, 11 Apr 2025 04:38:15 +0000
+! Diff-Path: ../patches/2025.4.11.568.patch#ublock-annoyances
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/annoyances.txt ***
@@ -43,6 +43,8 @@ up4stream.com##+js(rmnt, script, debugger)
 up4stream.com##+js(acs, document.onkeydown)
 kursnacukrzyce.pl##+js(acs, document.addEventListener, contextmenu)
 wowturkey.net##+js(rmnt, script, oncontextmenu)
+||abstream.to/js/devtools-detector*.js
+abstream.to##+js(acs, document.onkeydown)
 ! END: Anti copy, right-click etc.
 ! START: Anti-adblock
 @@||socialblade.com^$ghide
@@ -910,7 +912,8 @@ mangaku.*##+js(aeld, contextmenu)
 gamebanana.com##+js(aopr, adBlockDetected)
 www.reddit.com###nsfw-desktop-auth-blocking-modal-dialog,#nsfw-desktop-auth-blocking-modal-overlay-element
 www.reddit.com###blocking-modal, body > div[style="position: fixed; inset: 0px; backdrop-filter: blur(4px);"], #nsfw-qr-dialog
-www.reddit.com##body:style(overflow:auto !important)
+www.reddit.com##body[style*="overflow"]:style(overflow: auto !important;)
+www.reddit.com##body:has(#blocking-modal):style(pointer-events: auto !important;)
 ||redditstatic.com/shreddit/en-US/xpromo-nsfw-bypassable-modal-desktop-$script
 www.reddit.com##div.prompt:has(slot[name="view-in-app-button"])
 ||redditstatic.com/shreddit/*/xpromo-untagged-content-blocking-modal-$script
@@ -3456,7 +3459,7 @@ getemoji.com##+js(set-session-storage-item, fs.adb.dis, 1)
 marinetraffic.com##+js(set, mtGlobal.disabledAds, true)
 marinetraffic.com##.under-map-wrapper:upward(1)
 sportando.basketball##.select-none:style(-webkit-touch-callout: default !important; -webkit-user-select: text !important; -moz-user-select: text !important; -ms-user-select: text !important; user-select: text !important;)
-ymovies.vip,aniwatch.to,aniwatchtv.to,megacloud.tv,hianime.*,putlocker.vip,rapid-cloud.co,rabbitstream.net,pupupul.site##+js(set, devtoolsDetector.launch, noopFunc)
+ymovies.vip,aniwatch.to,aniwatchtv.to,megacloud.tv,hianime.*,hianimez.to,putlocker.vip,rapid-cloud.co,rabbitstream.net,pupupul.site##+js(set, devtoolsDetector.launch, noopFunc)
 ||9animetv.to/js/safe.ob.min.js$script
 myflixerz.to,putlocker.pe,theflixertv.to##+js(nosiif, _0x)
 movie4kto.net##+js(nosiif, /DevTools|_0x/)
@@ -4053,8 +4056,6 @@ nihongoaz.com##body:style(-webkit-touch-callout: default !important; -webkit-use
 espressocafe.ro##+js(rmnt, script, contextmenu)
 espressocafe.ro##*:style(-webkit-touch-callout: default !important; -webkit-user-select: text !important; -khtml-user-select: text !important; -moz-user-select: text !important; -ms-user-select: text !important; user-select: text !important; -webkit-tap-highlight-color: revert !important; cursor: revert !important;)
 @@||u.gg^$ghide
-||abstream.to/js/devtools-detector.js
-abstream.to##+js(acs, document.onkeydown)
 ! astoryofmasasstruggles.com anti right-click, select, print
 astoryofmasasstruggles.com##+js(rmnt, script, /contextmenu|reEnable/)
 astoryofmasasstruggles.com##*:style(-webkit-touch-callout: default !important; -webkit-user-select: text !important; -khtml-user-select: text !important; -moz-user-select: text !important; -ms-user-select: text !important; user-select: text !important; -webkit-tap-highlight-color: revert !important; cursor: revert !important;)
@@ -4113,3 +4114,5 @@ bilibili.com#@#+js(aost, player.pause, /[0-9a-f]{40}\.js:1\d{2}([\S\s]+\.emit.+c
 !#else
 ||s1.hdslb.com/bfs/static/jinkela/video/video.$script,replace=/t\.user\.isLogin\?/1?/,domain=bilibili.com
 !#endif
+store.steampowered.com##+js(href-sanitizer, a[href^="https://steamcommunity.com/linkfilter/?u=http"], ?u)
+||steamcommunity.com/linkfilter/?u=http$doc,urlskip=?u
