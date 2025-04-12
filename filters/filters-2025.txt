@@ -1,5 +1,5 @@
 ! Title: uBlock filters (2025)
-! Last modified: Sat, 12 Apr 2025 08:09:42 +0000
+! Last modified: Sat, 12 Apr 2025 15:15:50 +0000
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -265,6 +265,23 @@ embed.streamx.me##+js(noeval-if, debugger)
 ||ad.kisscartoon.*^$script,1p
 ! https://github.com/uBlockOrigin/uAssets/issues/27799
 kissasian.*>>,~google.com,~youtube.com,~youtube-nocookie.com##+js(nowoif)
+
+! https://github.com/uBlockOrigin/uAssets/issues/7113
+! https://github.com/uBlockOrigin/uAssets/issues/9118
+!broken video ign.com##+js(aopr, __eiPb)
+ign.com##^script:has-text(iframeTestTimeMS)
+ign.com##.preShell:style(height: 0 !important;)
+ign.com###king
+ignboards.com,ign.com##^script:has-text(g02.)
+!#if env_chromium
+||au.ign.com^$inline-script
+! https://github.com/abp-filters/abp-filters-anti-cv/pull/455
+ignboards.com##+js(acs, JSON.stringify)
+!#endif
+*$xhr,redirect-rule=1x1.gif,domain=ign.com
+*$script,redirect-rule=noopjs,domain=ignboards.com
+! https://www.ign.com/articles/baldurs-gate-3s-huge-patch-8-and-its-12-new-subclasses-finally-have-a-release-date - video breakage
+||btloader.com^$script,redirect=noopjs,domain=ign.com
 
 ! END: Rules from filters.txt
 
@@ -1161,9 +1178,6 @@ formatlibrary.com##+js(no-fetch-if, doubleclick)
 /^https?:\/\/[^\/]+\/_fd$/$xhr,1p,strict1p,ipaddress=199.59.243.228
 !#endif
 
-! https://anime-world.co/episode/my-happy-marriage-2x1/ popup
-anime-world.co>>##+js(nowoif)
-
 ! https://github.com/uBlockOrigin/uAssets/issues/27716
 ##.gliaplayer-container
 ||player.gliacloud.com^$3p
@@ -1219,6 +1233,7 @@ chatropolis.com##+js(acs, document.querySelectorAll, popMagic)
 
 ! https://up4stream.com/ccr0jb82zmr1.html - ads
 up4stream.com,ups2up.fun##+js(aeld, DOMContentLoaded, history.go)
+up4stream.com,ups2up.fun##+js(rmnt, script, popunder)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/24812#issuecomment-2763870909
 apl375.me,apl373.me,livestreams.*,maxicast.*##+js(nowoif, _blank)
