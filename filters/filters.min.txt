@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Fri, 18 Apr 2025 01:30:35 +0000
-! Diff-Path: ../patches/2025.4.18.119.patch#ublock-filters
+! Last modified: Fri, 18 Apr 2025 05:52:02 +0000
+! Diff-Path: ../patches/2025.4.18.396.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -8564,7 +8564,7 @@ redd.tube###closeable_widget
 .xyz/event|$xhr,3p
 ! hilltopads
 /^https?:\/\/[-a-z]{6,}\.(?:com?|info|pro|xyz)\/[a-d][-\.\/_A-Za-z][DHWXm][-\.\/_A-Za-z][59FVZ][-\.\/_A-Za-z][6swyz][-\.\/_A-Za-z][-\/_0-9a-zA-Z][-\.\/_A-Za-z][-\/_0-9a-zA-Z]{22,162}$/$script,xhr,3p,match-case,to=co|com|info|pro|xyz
-/\/[0-9a-f]{32}\.js\b/$script,3p,to=com,from=141jav.com|2embed.cc|aniworld.to|desiupload.co|drop.download|fsportshd.net|hianime.to|moviemaniak.com|omegascans.org|onejav.com|player4u.xyz|poophd.pm|pornohd.blue|s.to|sexiezpix.com|streamup.ws|torrentgalaxy-official.com|vegamovvies.to
+/\/[0-9a-f]{32}\.js\b/$script,3p,to=com,from=141jav.com|2embed.cc|aniworld.to|bigwarp.art|desiupload.co|drop.download|fsportshd.net|hianime.to|moviemaniak.com|nekopoi.care|omegascans.org|onejav.com|player4u.xyz|poophd.pm|pornohd.blue|s.to|sexiezpix.com|streampoi.com|streamup.ws|torrentgalaxy-official.com|vegamovvies.to
 ! vidguard
 /\/[0-9a-f]{32}\.js\b/$script,3p,to=com,from=bembed.net|embedv.net|fslinks.org|listeamed.net|v6embed.xyz|vgplayer.xyz|vid-guard.com
 ||beachinfinitegag.com^
@@ -9429,7 +9429,7 @@ goku.sx##+js(aost, Object, inlineScript)
 ! !SECTION: Propeller ads
 ! SECTION: Clickadu
 ! Clickadu reinjection
-18comic.vip,18comic-gquu.vip,asiaon.*,asiaontop.com,bunkrr.*,fapfappy.com,hhkungfu.*,hitomi.la,homemoviestube.com,jav.direct,javmix.tv,klmanga.*,komikmanhwa.me,lovingsiren.com,manga1001.*,mangaraw.*,mangarawjp.*,nelomanga.com,netfapx.com,syosetu.*,xanimeporn.com##+js(acs, WebAssembly, atob)
+18comic.vip,18comic-gquu.vip,asiaon.*,asiaontop.com,bunkrr.*,fapfappy.com,hhkungfu.*,hitomi.la,homemoviestube.com,jav.direct,javmix.tv,klmanga.*,komikmanhwa.me,lovingsiren.com,manga1001.*,mangaraw.*,mangarawjp.*,nekopoi.*,nelomanga.com,netfapx.com,streampoi.com,syosetu.*,xanimeporn.com##+js(acs, WebAssembly, atob)
 /aas/r45d/vki/*$script,redirect=noop.js
 /^https:\/\/[a-z]{8,12}\.com\/en\/(?:[a-z]{2,10}\/){0,2}[a-z]{2,}\?(?:[a-z]+=(?:\d+|[a-z]+)&)*?id=[12]\d{6}/$script,3p,match-case,to=com
 /^https:\/\/[a-z]{8,12}\.com(?:\/[a-z]{2,10}){3}$/$script,3p,match-case,header=etag,to=com
@@ -9440,6 +9440,13 @@ goku.sx##+js(aost, Object, inlineScript)
 /public/assets/js/popunder.js^$script
 /public/assets/js/popunderClickadu.js^$script
 ! !SECTION: Clickadu
+! SECTION: wpadmngr.com ads
+!#if cap_html_filtering
+nekopoi.*,streampoi.com##^script:has-text(wpadmngr.com)
+!#else
+nekopoi.*,streampoi.com##+js(rmnt, script, wpadmngr.com)
+!#endif
+! !SECTION: wpadmngr.com ads
 ! SECTION: pixsera
 pixsera.net##+js(nano-sib, timer)
 pixsera.net##+js(nowoif, !/prcf.fiyar|themes|pixsense|.jpg/)
@@ -21042,7 +21049,6 @@ nekopoi.*##+js(acs, atob, tabunder)
 nekopoi.*##+js(aeld, , adsense)
 nekopoi.*##[href^="http://bit.ly/"]
 .gif$domain=nekopoi.*,image
-nekopoi.*##+js(rmnt, script, wpadmngr.com)
 nekopoi.*##.leftarea
 nekopoi.*###btm_banner
 nekopoi.*>>##+js(nowoif)
@@ -23869,6 +23875,14 @@ savefiles.com##+js(set, SaveFiles.add, noopFunc)
 savefiles.com##body > div[class][oncontextmenu][style="display: block;"]
 ||shoupsoolsoagna.net^
 ||vq4b0q.fun^
+!#if cap_html_filtering
+savefiles.com##^script:has-text(catcher)
+!#else
+savefiles.com##+js(rmnt, script, catcher)
+!#endif
+savefiles.com##div[id^="clickCatcher"]
+###clickCatcher31
+###clickCatcher32
 xmalay1.net##+js(rmnt, script, /isAdBlockActive|WebAssembly/)
 ! europix.top ad popups
 europix.top##a[href][target^="_blank"]:style(pointer-events:none!important)
