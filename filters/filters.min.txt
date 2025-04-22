@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Mon, 21 Apr 2025 16:11:08 +0000
-! Diff-Path: ../patches/2025.4.21.1162.patch#ublock-filters
+! Last modified: Tue, 22 Apr 2025 02:01:26 +0000
+! Diff-Path: ../patches/2025.4.22.123.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -3687,18 +3687,6 @@ milfzr.com##.wpfp_custom_ad_content
 milfzr.com###post-0
 ||milfzr.com/*.gif$image
 wemakesites.net##+js(acs, $, adBlockChecker)
-hulu.com##+js(set, Object.prototype._parseVAST, noopFunc)
-hulu.com##+js(set, Object.prototype.createAdBlocker, noopFunc)
-hulu.com##+js(set, Object.prototype.isAdPeriod, falseFunc)
-||assetshuluimcom-a.akamaihd.net/*.mp3$media,redirect=noopmp3-0.1s,domain=hulu.com
-@@||hulu.com^$ghide
-hulu.com###banner-ad-container
-hulu.com##.ad-choices
-hulu.com##+js(json-prune-fetch-response, breaks pause_ads video_metadata.end_credits_time, pause_ads, propsToMatch, /playlist)
-hulu.com##+js(json-prune-fetch-response, breaks pause_ads video_metadata.end_credits_time, breaks, propsToMatch, /playlist)
-hulu.com##+js(json-prune, breaks pause_ads video_metadata.end_credits_time, pause_ads)
-hulu.com##+js(json-prune, breaks pause_ads video_metadata.end_credits_time, breaks)
-hulu.com##+js(xml-prune, xpath(//*[name()="MPD"]/@mediaPresentationDuration | //*[name()="Period"][.//*[name()="BaseURL" and contains(text()\,'/ads-')]] | //*[name()="Period"]/@start), Period[id^="Ad"i], .mpd)
 myjest.com##+js(nosiif, _$, 12345)
 *$frame,domain=9ig.de,3p
 rgl.vn##+js(set, blurred, false)
@@ -8519,6 +8507,8 @@ redd.tube###closeable_widget
 /^https?:\/\/(?:[a-z]{2}\.)?[0-9a-z]{5,16}\.[a-z]{3,7}\/[a-z](?=[a-z]{0,25}[0-9A-Z])[0-9a-zA-Z]{3,26}\/\d{4,6}(?:\?[_a-z]=[-0-9a-z]+)?$/$script,3p,match-case,redirect=noop.js
 /^https?:\/\/(?:[a-z]{2}\.)?[0-9a-z]{7,16}\.com\/[a-z](?=[a-z]{0,25}[0-9A-Z])[0-9a-zA-Z]{3,26}\/\d{4,6}(?:\?[_a-z]=[-0-9a-z]+)?$/$frame,xhr,popup,3p,match-case,to=com
 /^https?:\/\/(?:[a-z]{2}\.)?[0-9a-z]{7,16}\.website\/[a-z](?=[a-z]{0,25}[0-9A-Z])[0-9a-zA-Z]{3,26}\/\d{4,6}(?:\?[_a-z]=[-0-9a-z]+)?$/$frame,xhr,popup,3p,match-case,to=website
+/^https:\/\/[a-z]{3,5}\.[a-z]{10,14}\.top\/[a-z]{10,16}\/[a-z]{5,6}(?:\?d=\d)?$/$script,xhr,3p,match-case,to=top
+/^https:\/\/[a-z]{3,5}\.[a-z]{10,14}\.top\/[A-Za-z]{10,16}\/[A-Za-z]{5,6}$/$popup,3p,to=top
 ||backletseamen.com^
 ||drapingleden.com^
 ||filmishquila.com^
@@ -9327,7 +9317,7 @@ thumbnails.porncore.net##div[id][style$="height:200px;width:800px;"]
 ! ##+js(aost, Math.random, /\st\.[a-zA-Z]*\s/)
 filmypur.*,kmo.to,nuroflix.*,onifile.com,oxanime.com,pelis28.*,pelisplusgo.*,pelisplusxd.*,pewgame.com,piraproxy.app,repelisgoo.*,repelisgooo.*,repelisgt.*,repelisxd.*,severeporn.com,sexphimhd.net,theproxy.*,tvply.*,vidlox.*,voirseries.io,watchfree.*##+js(aost, Math.random, /\st\.[a-zA-Z]*\s/)
 ! ##+js(acs, globalThis, break;case)
-10starhd.*,1337xx.to,alphagames4u.com,anysex.com,asianclub.*,cheatermad.com,downloadpirate.com,drop.download,embed.casa,exee.app,f2movies.to,fapeza.com,fileone.tv,films5k.com,gcloud.live,hdss.*,imx.to,javideo.pw,javstream.top,just-upload.com,mavplay.*,moviesflix.*,ouo.*,projectfreetv.*,qdembed.com,streamvid.net,ujav.me,videobb.*,voirseries.*##+js(acs, globalThis, break;case)
+10starhd.*,1337xx.to,alphagames4u.com,anysex.com,asianclub.*,cheatermad.com,downloadpirate.com,drop.download,embed.casa,exee.app,f2movies.to,fapeza.com,fileone.tv,films5k.com,gcloud.live,hdss.*,hdtoday.cc,imx.to,javideo.pw,javstream.top,just-upload.com,mavplay.*,moviesflix.*,ouo.*,projectfreetv.*,qdembed.com,streamvid.net,ujav.me,videobb.*,voirseries.*##+js(acs, globalThis, break;case)
 ! ##+js(rmnt, script, globalThis;break;case)
 kickassanime.*##+js(rmnt, script, globalThis;break;case)
 ! ##+js(acs, JSON.parse, Promise)
@@ -19264,8 +19254,6 @@ actvid.*,zoechip.com##^script:has-text(HTMLAllCollection)
 !#else
 actvid.*,zoechip.com##+js(rmnt, script, HTMLAllCollection)
 !#endif
-/^https:\/\/[a-z]{3,5}\.[a-z]{10,14}\.top\/[a-z]{10,16}\/[a-z]{5,6}(?:\?d=\d)?$/$script,xhr,3p,match-case,to=top
-/^https:\/\/[a-z]{3,5}\.[a-z]{10,14}\.top\/[A-Za-z]{10,16}\/[A-Za-z]{5,6}$/$popup,3p,to=top
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$script,redirect=google-ima.js,domain=24ur.com
 *$object,3p,redirect-rule=noopframe,domain=24ur.com
 @@||cdn.jsdelivr.net/npm/videojs-contrib-ads$script,domain=24ur.com
@@ -23302,6 +23290,18 @@ ignboards.com##+js(acs, JSON.stringify)
 *$xhr,redirect-rule=1x1.gif,domain=ign.com
 *$script,redirect-rule=noopjs,domain=ignboards.com
 ||btloader.com^$script,redirect=noopjs,domain=ign.com
+hulu.com##+js(set, Object.prototype._parseVAST, noopFunc)
+hulu.com##+js(set, Object.prototype.createAdBlocker, noopFunc)
+hulu.com##+js(set, Object.prototype.isAdPeriod, falseFunc)
+||assetshuluimcom-a.akamaihd.net/*.mp3$media,redirect=noopmp3-0.1s,domain=hulu.com
+@@||hulu.com^$ghide
+hulu.com###banner-ad-container
+hulu.com##.ad-choices
+! hulu.com##+js(json-prune-fetch-response, breaks custom_breaks_data pause_ads video_metadata.end_credits_time, pause_ads, propsToMatch, /playlist)
+! hulu.com##+js(json-prune-fetch-response, breaks custom_breaks_data pause_ads video_metadata.end_credits_time, breaks, propsToMatch, /playlist)
+! hulu.com##+js(json-prune, breaks pause_ads video_metadata.end_credits_time, pause_ads)
+! hulu.com##+js(json-prune, breaks pause_ads video_metadata.end_credits_time, breaks)
+! hulu.com##+js(xml-prune, xpath(//*[name()="MPD"]/@mediaPresentationDuration | //*[name()="Period"][.//*[name()="BaseURL" and contains(text()\,'/ads-')]] | //*[name()="Period"]/@start), Period[id^="Ad"i], .mpd)
 ! END: Rules from filters.txt
 ! START: Regional lists
 ! <<<<< ABPVN >>>>>
