@@ -1,5 +1,5 @@
 ! Title: uBlock filters (2024)
-! Last modified: Mon, 28 Apr 2025 09:41:04 +0000
+! Last modified: Mon, 28 Apr 2025 14:19:46 +0000
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -339,6 +339,7 @@ xhamster20.*##.player-add-overlay
 ! https://github.com/uBlockOrigin/uAssets/issues/25611
 play.nova.bg##+js(no-xhr-if, googlesyndication)
 play.nova.bg##+js(no-xhr-if, /googima.js)
+play.nova.bg##+js(no-fetch-if, /googima.js)
 
 ! https://github.com/NanoMeow/QuickReports/issues/3256
 @@||thehouseofportable.com^$ghide
@@ -1122,9 +1123,9 @@ stockhideout.com##+js(nosiif, daadb)
 ! https://github.com/AdguardTeam/AdguardFilters/issues/170424
 fm-arena.com##+js(nostif, getComputedStyle, 2000)
 
-! westmanga.fun ads
-westmanga.fun##+js(nowoif)
-westmanga.fun##[src*=".gif"]
+! westmanga.me ads
+westmanga.*##+js(rmnt, script, open)
+westmanga.*##[src*=".gif"]
 
 ! envato-downloader .com anti-adb
 envato-downloader.com##+js(no-fetch-if, google-analytics)
@@ -1141,9 +1142,8 @@ onlyfaucet.com##+js(rmnt, script, /fetch|adb/i)
 ! https://github.com/uBlockOrigin/uAssets/issues/21966
 timesnewsgroup.com.au##+js(acs, $, popup)
 
-! https://github.com/uBlockOrigin/uAssets/issues/21973
 ! https://github.com/uBlockOrigin/uAssets/issues/24179
-||launcherleaks.net/*main_script.js$script,1p
+@@||launcherleaks.net^$ghide
 
 ! https://github.com/uBlockOrigin/uAssets/issues/21985
 livecamrips.*##+js(rmnt, script, window.open)
@@ -1169,8 +1169,9 @@ sportitalialive.com##+js(nostif, ads)
 watch.sling.com##+js(json-prune, ssai_manifest ad_manifest playback_info.ad_info qvt.playback_info.ad_info)
 
 ! https://github.com/AdguardTeam/AdguardFilters/issues/180468
-9goals.live##+js(aeld, load, onload)
-@@||9goals.live^$ghide
+! 9goals.live => 9goals.app
+@@||9goals.*^$ghide
+||vsys.kora-plus.top^$csp=sandbox allow-forms allow-same-origin allow-scripts allow-modals allow-orientation-lock allow-pointer-lock allow-presentation allow-top-navigation
 
 ! digter8 .com anti-adb
 digter8.com##+js(acs, eval, replace)
@@ -1256,9 +1257,6 @@ plc4me.com##+js(rmnt, script, deblocker)
 ! krx18.com
 krx18.com##center > [src*="/ads/"]
 krx18.com###dynamic-image
-
-! https://github.com/uBlockOrigin/uAssets/issues/22126
-playerwatch.xyz##+js(nowoif, , 10)
 
 ! https://old.reddit.com/r/uBlockOrigin/comments/19cwuo4/
 ||ezodn.com^$redirect-rule=noopjs,domain=tv.bdix.app
