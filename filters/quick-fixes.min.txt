@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Quick fixes
 ! Expires: 12 hours
-! Last modified: Thu, 01 May 2025 02:05:11 +0000
-! Diff-Path: ../patches/2025.5.1.568.patch#ublock-quick-fixes
+! Last modified: Thu, 01 May 2025 14:10:58 +0000
+! Diff-Path: ../patches/2025.5.1.868.patch#ublock-quick-fixes
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/quick-fixes.txt ***
@@ -65,17 +65,18 @@ diananatureforeign.com##+js(acs, globalThis, break;case)
 japscan.lol##+js(norafif, /^/)
 japscan.lol##+js(trusted-set-attr, .navbar-nav > li#navpromo2.nav-item > a, onclick, 'let a=function(){};return false;')
 japscan.lol##+js(no-fetch-if, /\/\/ansuksar\.com\/[0-9a-zA-Z]{3\,26}\/\d{4\,6}\b/, length:125746)
-japscan.lol##+js(no-fetch-if, /\/\/platform\.pubadx\.one\/pubadx-ad\.js\?[a-z]=\d{13}/, length:6876)
+japscan.lol##+js(trusted-replace-fetch-response, /(window\.pubadxtag = function \(\) \{)/, $1}, /pubadx-ad.js)
 ! START: Counter Liste FR rules
 japscan.lol#@##main > .card:has(a[href*="/manga/?type="][href*="&content="][target="_blank"])
 japscan.lol#@#div.container > [href]
 ! END
 ||japscan.lol/zjs/$script,replace=/function GoodDay\(\)\{.+?\}\}\}//
 @@*$image,xhr,script,domain=japscan.lol
-*$script,xhr,3p,denyallow=acscdn.com|ansuksar.com|aozoiekopoaka.shop|base64easy.com|base64hub.com|challenges.cloudflare.com|cdn.jsdelivr.net|cdnjs.cloudflare.com|code.jquery.com|coutaricho.shop|curltophp.com|ebooksmangaia.com|faireundon.vip|fkourazirop.shop|fourino.shop|frjelsoieapoas.shop|hakoroubita.shop|mamamiaroubita.shop|morinavotarius.top|regexgenius.com|reoiamlsa.shop|routinato.shop|smaltourinto.shop|tourpowouro.shop,domain=japscan.lol,important
+*$script,xhr,3p,denyallow=acscdn.com|ansuksar.com|aozoiekopoaka.shop|base64easy.com|base64hub.com|challenges.cloudflare.com|cdn.jsdelivr.net|cdnjs.cloudflare.com|code.jquery.com|coutaricho.shop|curltophp.com|ebooksmangaia.com|faireundon.vip|fkourazirop.shop|fourino.shop|frjelsoieapoas.shop|hakoroubita.shop|mamamiaroubita.shop|morinavotarius.top|platform.pubadx.one|regexgenius.com|reoiamlsa.shop|routinato.shop|smaltourinto.shop|tourpowouro.shop,domain=japscan.lol,important
 /^https?:\/\/(?:[a-z]{2}\.)?[0-9a-z]{5,16}\.[a-z]{3,7}\/[a-z](?=[a-z]{0,25}[0-9A-Z])[0-9a-zA-Z]{3,26}\/\d{4,6}(?:\?[_a-z]=[-0-9a-z]+)?$/$script,3p,match-case,redirect=noop.js,important,domain=japscan.lol
 /^https:\/\/acscdn\.com\/script\/(?:aclib|atg|compatibility|ippg|suv4|ut)\.js(\?cb=\d{13})?$/$script,3p,match-case,important,domain=japscan.lol
 japscan.lol#@#+js(rmnt, script, /^\s{5}/)
+||platform.pubadx.one/pubadx-ad.js$script,important,domain=japscan.lol
 poophq.com,veev.to,doods.to##+js(nowoif)
 poophq.com,veev.to,doods.to##+js(no-xhr-if, /vast.php?)
 poophq.com,veev.to,doods.to##+js(no-xhr-if, /click\.com|preroll|native_render\.js|acscdn/, length:10001)
@@ -96,7 +97,7 @@ poophq.com,veev.to,doods.to##+js(no-xhr-if, adsco.re:2087)
 /dl?op=player_api&cmd=*adb=$xhr,1p,important,domain=poophq.com|veev.to|doods.to
 ||adsco.re^$script,redirect=none:5,domain=poophq.com|veev.to|doods.to
 poophq.com,veev.to,doods.to##+js(nostif, /^\s*function\s*\(\s*\)\s*{\s*[a-zA-Z]{1\,2}\s*\(.{1\,10}$/)
-poophq.com,veev.to,doods.to##+js(nostif, /computer|loool|wzaz|wzad|wzac1| \,r\[/)
+poophq.com,veev.to,doods.to##+js(nostif, /compuuter|lool|tzad|wzab|tzac1/)
 !#endif
 !#endif
 *$script,3p,domain=poophq.com|veev.to|doods.to,redirect-rule=noopjs
@@ -193,11 +194,6 @@ gecmisi.com.tr##+js(trusted-replace-argument, String.prototype.includes, 0, json
 aol.com#@#.maas-item:has-text(our Partners)
 ||do7go.com^$badfilter
 ||r2.e-z.host^$badfilter
-hulu.com#@#+js(json-prune-fetch-response, breaks pause_ads video_metadata.end_credits_time, pause_ads, propsToMatch, /playlist)
-hulu.com#@#+js(json-prune-fetch-response, breaks pause_ads video_metadata.end_credits_time, breaks, propsToMatch, /playlist)
-hulu.com#@#+js(json-prune, breaks pause_ads video_metadata.end_credits_time, pause_ads)
-hulu.com#@#+js(json-prune, breaks pause_ads video_metadata.end_credits_time, breaks)
-hulu.com#@#+js(xml-prune, xpath(//*[name()="MPD"]/@mediaPresentationDuration | //*[name()="Period"][.//*[name()="BaseURL" and contains(text()\,'/ads-')]] | //*[name()="Period"]/@start), Period[id^="Ad"i], .mpd)
 hulu.com##+js(json-prune-fetch-response, breaks custom_breaks_data pause_ads video_metadata.end_credits_time, pause_ads, propsToMatch, /playlist)
 hulu.com##+js(json-prune-fetch-response, breaks custom_breaks_data pause_ads video_metadata.end_credits_time, breaks, propsToMatch, /playlist)
 hulu.com##+js(json-prune-fetch-response, breaks custom_breaks_data pause_ads, , propsToMatch, /playlist)
