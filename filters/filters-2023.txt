@@ -1,5 +1,5 @@
 ! Title: uBlock filters (2023)
-! Last modified: Thu, 01 May 2025 18:21:37 +0000
+! Last modified: Sat, 03 May 2025 15:23:52 +0000
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -1033,6 +1033,7 @@ myanimelist.net##+js(rmnt, style, body:not(.ownlist))
 myanimelist.net##[class*="-malside"]
 myanimelist.net##[class*="-pdatla"]
 myanimelist.net##.bookstore-detail-right
+myanimelist.net##.left.bookstores-recommend-plugin-aK0oopie.widget
 
 ! winknews.com anti adblock
 ! homepage live video breakage
@@ -3431,11 +3432,10 @@ lifestyle.bg,news.bg,topsport.bg,webcafe.bg##+js(no-fetch-if, method:HEAD)
 @@/securepubads.$domain=lifestyle.bg|news.bg|topsport.bg,badfilter
 lifestyle.bg,news.bg,topsport.bg,webcafe.bg##.mc-layout__bannerContent
 ! https://github.com/uBlockOrigin/uAssets/issues/28116
-news.bg##+js(nostif, location.href)
 !#if cap_html_filtering
-news.bg##^script:has-text(baitElements)
+news.bg##^script:has-text('href')
 !#else
-news.bg##+js(rmnt, script, baitElements)
+news.bg##+js(rmnt, script, "'href'")
 !#endif
 news.bg##+js(set-local-storage-item, ublock_trace_id, $remove$)
 
