@@ -1,5 +1,5 @@
 ! Title: uBlock₀ filters – Quick fixes
-! Last modified: Mon, 05 May 2025 03:35:26 +0000
+! Last modified: Mon, 05 May 2025 12:31:40 +0000
 ! Expires: 8 hours
 ! Description: Immediate, temporary filters to fix websites
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -90,7 +90,7 @@ japscan.lol#@#div.container > [href]
 ! END
 ||japscan.lol/zjs/$script,replace=/function GoodDay\(\)\{.+?\}\}\}//
 @@*$image,xhr,script,domain=japscan.lol
-*$script,xhr,3p,denyallow=acscdn.com|ansuksar.com|aozoiekopoaka.shop|base64easy.com|base64hub.com|challenges.cloudflare.com|cdn.jsdelivr.net|cdnjs.cloudflare.com|code.jquery.com|coutaricho.shop|curltophp.com|ebooksmangaia.com|faireundon.vip|fkourazirop.shop|fourino.shop|frjelsoieapoas.shop|hakoroubita.shop|mamamiaroubita.shop|morinavotarius.top|platform.pubadx.one|regexgenius.com|reoiamlsa.shop|routinato.shop|smaltourinto.shop|tourpowouro.shop,domain=japscan.lol,important
+*$script,xhr,3p,denyallow=acscdn.com|ansuksar.com|aozoiekopoaka.shop|base64easy.com|base64hub.com|challenges.cloudflare.com|cdn.jsdelivr.net|cdnjs.cloudflare.com|code.jquery.com|coutaricho.shop|curltophp.com|ebooksmangaia.com|faireundon.vip|fkourazirop.shop|fourino.shop|frjelsoieapoas.shop|hakoroubita.shop|mamamiaroubita.shop|morinavotarius.top|platform.pubadx.one|regexgenius.com|reoiamlsa.shop|routinato.shop|smaltourinto.shop|static.cloudflareinsights.com|tourpowouro.shop,domain=japscan.lol,important
 /^https?:\/\/(?:[a-z]{2}\.)?[0-9a-z]{5,16}\.[a-z]{3,7}\/[a-z](?=[a-z]{0,25}[0-9A-Z])[0-9a-zA-Z]{3,26}\/\d{4,6}(?:\?[_a-z]=[-0-9a-z]+)?$/$script,3p,match-case,redirect=noop.js,important,domain=japscan.lol
 /^https:\/\/acscdn\.com\/script\/(?:aclib|atg|compatibility|ippg|suv4|ut)\.js(\?cb=\d{13})?$/$script,3p,match-case,important,domain=japscan.lol
 japscan.lol#@#+js(rmnt, script, /^\s{5}/)
@@ -105,6 +105,7 @@ poophq.com,veev.to,doods.to##+js(no-xhr-if, /click\.com|preroll|native_render\.j
 poophq.com,veev.to##+js(nostif, ]();} , 500)
 !#if cap_html_filtering
 ||static.veevcdn.co/assets/videoplayer/$script,3p,replace=/\'adblockEnabled\':[a-zA-Z]{2}/'adblockEnabled':false/g,domain=poophq.com|veev.to|doods.to
+||static.veevcdn.co/assets/videoplayer/$script,3p,replace=/\'adblockEnabled\'\]\=[a-zA-Z]{2}/'adblockEnabled']=false/g,domain=poophq.com|veev.to|doods.to
 ||static.veevcdn.co/assets/videoplayer/$script,3p,replace=/\'vavl\':\!0x0/'vavl':false/g,domain=poophq.com|veev.to|doods.to
 ||adsco.re^$xhr,important,domain=poophq.com|veev.to|doods.to
 ||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$xhr,important,domain=poophq.com|veev.to|doods.to
@@ -119,7 +120,7 @@ poophq.com,veev.to,doods.to##+js(no-xhr-if, adsco.re:2087)
 /dl?op=player_api&cmd=*adb=$xhr,1p,important,domain=poophq.com|veev.to|doods.to
 ||adsco.re^$script,redirect=none:5,domain=poophq.com|veev.to|doods.to
 poophq.com,veev.to,doods.to##+js(nostif, /^\s*function\s*\(\s*\)\s*{\s*[a-zA-Z]{1\,2}\s*\(.{1\,10}$/)
-poophq.com,veev.to,doods.to##+js(nostif, /computer|l0ool|tzaz|wzab|tzac/)
+poophq.com,veev.to,doods.to##+js(nostif, /camputer|l0o0ol|wzazb|are you behind|tqzac3/)
 !#endif
 !#endif
 *$script,3p,domain=poophq.com|veev.to|doods.to,redirect-rule=noopjs
@@ -223,7 +224,9 @@ pvpoke-re.com##+js(trusted-suppress-native-method, Document.prototype.getElement
 pvpoke-re.com##+js(trusted-suppress-native-method, Document.prototype.getElementsByTagName, '"h2"', prevent, /_tick|[0-9A-Za-z]{8\,}\/?<? https:\/\/pvpoke-re\.com\/[0-9A-Za-z]{8\,}\.js\?v=/)
 pvpoke-re.com##+js(trusted-suppress-native-method, Document.prototype.getElementsByTagName, '"p"', prevent, /_tick|[0-9A-Za-z]{8\,}\/?<? https:\/\/pvpoke-re\.com\/[0-9A-Za-z]{8\,}\.js\?v=/)
 ||pvpoke-re.com/*.js?v=$script,replace=/(\!\[\];function [0-9A-Za-z]{8\,12}\(\)\{)(const|function) _0x[0-9a-f]{6}.+?\}\}\2/\$1}\$2/
-pvpoke-re.com##body *:is([style*="fixed"],[style*="absolute"]):not(header):style(visibility: hidden !important;)
+pvpoke-re.com##body *:is([style*="fixed"],[style*="absolute"],[style*="background"]):not(header):style(visibility: hidden !important;)
+pvpoke-re.com##body header:is([style*="fixed"],[style*="absolute"],[style*="background"]):has(> *:is([style*="fixed"],[style*="absolute"],[style*="background"]):not(header)):style(visibility: hidden !important;)
+pvpoke-re.com##+js(spoof-css, *:is([style*="fixed"]\,[style*="absolute"]\,[style*="background"]):not(header)\,header:is([style*="fixed"]\,[style*="absolute"]\,[style*="background"]), visibility, visible)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/26441
 ||vgwort.de^$image,3p,redirect=1x1.gif,domain=cool-web.de|gps-cache.de|web-spiele.de|fun-seiten.de|photo-alben.de|wetter-vorhersage.de|coolsoftware.de|kryptografie.de|cool-domains.de|net-tours.de|such-maschine.de|qul.de|mailtool.de|c-ix.de|softwareengineer.de|net-tools.de|hilfen.de|45er.de|cooldns.de|hardware-entwicklung.de|cool--web-de.translate.goog|gps--cache-de.translate.goog|web--spiele-de.translate.goog|fun--seiten-de.translate.goog|photo--alben-de.translate.goog|wetter--vorhersage-de.translate.goog|coolsoftware-de.translate.goog|kryptografie-de.translate.goog|cool--domains-de.translate.goog|net--tours-de.translate.goog|such--maschine-de.translate.goog|qul-de.translate.goog|mailtool-de.translate.goog|c--ix-de.translate.goog|softwareengineer-de.translate.goog|net--tools-de.translate.goog|hilfen-de.translate.goog|45er-de.translate.goog|cooldns-de.translate.goog|hardware--entwicklung-de.translate.goog
@@ -288,9 +291,6 @@ qlover.jp#@#.jss128
 ! https://github.com/uBlockOrigin/uAssets/issues/26880#issuecomment-2848908922
 ||vidlink.pro/script.js$badfilter
 
-! https://www.reddit.com/r/Adguard/comments/1keorq3/trouble_with_metacriticcom_no_trailers_play/
-@@||script.wikia.nocookie.net/fandom-ae-assets/identity-service/
-
 ! https://github.com/uBlockOrigin/uAssets/issues/28175
 ||k5a.io^$badfilter
 
@@ -299,3 +299,7 @@ qlover.jp#@#.jss128
 
 ! https://github.com/uBlockOrigin/uAssets/issues/28179
 ||e.mp4.center^$badfilter
+
+! https://github.com/AdguardTeam/AdguardFilters/issues/204507#issuecomment-2848611683
+*$popup,domain=lulustream.com,badfilter
+*$frame,3p,from=lulustream.com,badfilter
