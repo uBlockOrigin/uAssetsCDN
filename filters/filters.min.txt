@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Tue, 20 May 2025 16:41:15 +0000
-! Diff-Path: ../patches/2025.5.20.1118.patch#ublock-filters
+! Last modified: Tue, 20 May 2025 22:16:38 +0000
+! Diff-Path: ../patches/2025.5.20.1405.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -8391,13 +8391,6 @@ redd.tube###closeable_widget
 /^https?:\/\/(?:[a-z]{2}\.)?[0-9a-z]{7,16}\.website\/[a-z](?=[a-z]{0,25}[0-9A-Z])[0-9a-zA-Z]{3,26}\/\d{4,6}(?:\?[_a-z]=[-0-9a-z]+)?$/$frame,xhr,popup,3p,match-case,to=website
 /^https:\/\/[a-z]{3,5}\.[a-z]{10,14}\.top\/[a-z]{10,16}\/[a-z]{5,6}(?:\?d=\d)?$/$script,xhr,3p,match-case,to=top
 /^https:\/\/[a-z]{3,5}\.[a-z]{10,14}\.top\/[A-Za-z]{10,16}\/[A-Za-z]{5,6}$/$popup,3p,to=top
-actvid.*##.block_area iframe:upward(.block_area)
-!#if cap_html_filtering
-123animes.ru,actvid.*,flixhq.to,gomovies.sx,gomoviestv.to,limetorrents.lol,luluvdoo.com,moviesapi.to,vidfast.pro,zoechip.com##^script:has-text(HTMLAllCollection)
-!#else
-123animes.ru,actvid.*,flixhq.to,gomovies.sx,gomoviestv.to,limetorrents.lol,luluvdoo.com,moviesapi.to,vidfast.pro,zoechip.com##+js(rmnt, script, HTMLAllCollection)
-!#endif
-||111movies.com/ad2.js
 /\/t\/[0-9]{3}\/[0-9]{3}\/a[0-9]{4,9}\.js$/$script
 /^https?:\/\/[0-9a-z]{13,14}\.cloudfront\.net\/\?[a-z]{3,5}=\d{6,7}$/$script,xhr,3p
 /^https:\/\/[0-9a-f]{10}\.[0-9a-f]{10}\.com\/[0-9a-f]{32}\.js$/$script,3p,to=com
@@ -9420,13 +9413,14 @@ soap2day.*##+js(rmnt, script, Reflect)
 ! !SECTION: FingerprintJS
 ! SECTION: shown_at popunder
 !#if cap_html_filtering
-123animehub.cc,cataz.to,cineb.rs,mkvcinemas.*,mov18plus.cloud,netmovies.to,torrentdownload.*,torrentdownloads.*,tukipasti.com##^script:has-text(shown_at)
+123animehub.cc,123animes.ru,actvid.*,cataz.to,cineb.rs,flixhq.to,gomovies.sx,gomoviestv.to,limetorrents.lol,luluvdoo.com,mkvcinemas.*,mov18plus.cloud,moviesapi.to,netmovies.to,torrentdownload.*,torrentdownloads.*,tukipasti.com,vidfast.pro,zoechip.com##^script:has-text(shown_at)
 !#else
-123animehub.cc,cataz.to,cineb.rs,mkvcinemas.*,mov18plus.cloud,netmovies.to,torrentdownload.*,torrentdownloads.*,tukipasti.com##+js(rmnt, script, shown_at)
+123animehub.cc,123animes.ru,actvid.*,cataz.to,cineb.rs,flixhq.to,gomovies.sx,gomoviestv.to,limetorrents.lol,luluvdoo.com,mkvcinemas.*,mov18plus.cloud,moviesapi.to,netmovies.to,torrentdownload.*,torrentdownloads.*,tukipasti.com,vidfast.pro,zoechip.com##+js(rmnt, script, shown_at)
 cataz.to##+js(nowoif)
 !#endif
-!#if cap_html_filtering
 cineb.rs,moviesjoyhd.to,rawkuma.com##+js(aeld, mousedown, shown_at)
+actvid.*##.block_area iframe:upward(.block_area)
+||111movies.com/ad2.js
 ! !SECTION: shown_at popunder
 ! SECTION: pixsera
 pixsera.net##+js(nano-sib, timer)
@@ -19890,7 +19884,7 @@ zive.cz###cnc_branding_creative_wrapper:style(min-height: 0px !important; height
 *$script,redirect-rule=noopjs,domain=zive.cz
 web1s.asia##+js(noeval-if, ads)
 web1s.asia##+js(nano-sib, wait)
-sshkit.com,fastssh.com,howdy.id##+js(no-fetch-if, adsbygoogle)
+sshkit.com,fastssh.com,howdy.id##+js(no-fetch-if, /adsbygoogle|doubleclick/)
 @@*$ghide,domain=sshkit.com|fastssh.com|howdy.id
 av-cdn.xyz##+js(nowoif)
 av-cdn.xyz##body > div ~ script + div[class]:last-child
