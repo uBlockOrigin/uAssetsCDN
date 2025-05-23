@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Fri, 23 May 2025 10:23:09 +0000
-! Diff-Path: ../patches/2025.5.23.683.patch#ublock-filters
+! Last modified: Fri, 23 May 2025 16:19:24 +0000
+! Diff-Path: ../patches/2025.5.23.994.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -9244,6 +9244,7 @@ filmywap.*##+js(acs, Object, XMLHttpRequest)
 coinfaucet.io##+js(acs, decodeURI, zfgloadedpopup)
 bitfly.io,pelisplus.*,pelisplus2.*##+js(aost, Math.random, /\st\.[a-zA-Z]*\sinlineScript/)
 shahiid-anime.net##+js(aost, Object, /(?=^(?!.*(https)))/)
+up4stream.com,ups2up.fun##+js(acs, Math, zfgcodeloaded)
 ||flixhq.*/loadme/
 file4go.net##+js(no-xhr-if, outbrain)
 ||omegatoki.com^$all
@@ -9274,6 +9275,7 @@ vidsrc.cc#@#+js(acs, EventTarget.prototype.addEventListener, delete window)
 ||ostupsaury.net^
 ||higouckoavuck.net^$popup
 ||raiphafimept.net^
+||riqhisfus.com^
 ||sefeethameel.com^
 ||sisaurgeegh.net^
 ||smahxdfxxdc.com^
@@ -9326,9 +9328,9 @@ goku.sx##+js(aost, Object, inlineScript)
 ! !SECTION: Clickadu
 ! SECTION: wpadmngr.com ads
 !#if cap_html_filtering
-aiblog.tv,amateurblog.tv,filegram.to,gravureblog.tv,krx18.com,latinblog.tv,nekopoi.*,pornx.to,savefiles.com,silverblog.tv,socialblog.tv,starblog.tv,streampoi.com,streamtape.*,xblog.tv,xmegadrive.com##^script:has-text(wpadmngr.com)
+aiblog.tv,amateurblog.tv,filegram.to,gravureblog.tv,krx18.com,latinblog.tv,nekopoi.*,pornx.to,savefiles.com,silverblog.tv,socialblog.tv,starblog.tv,streampoi.com,streamtape.*,up4stream.com,ups2up.fun,xblog.tv,xmegadrive.com##^script:has-text(wpadmngr.com)
 !#else
-aiblog.tv,amateurblog.tv,filegram.to,gravureblog.tv,krx18.com,latinblog.tv,nekopoi.*,pornx.to,savefiles.com,silverblog.tv,socialblog.tv,starblog.tv,streampoi.com,streamtape.*,xblog.tv,xmegadrive.com##+js(rmnt, script, wpadmngr.com)
+aiblog.tv,amateurblog.tv,filegram.to,gravureblog.tv,krx18.com,latinblog.tv,nekopoi.*,pornx.to,savefiles.com,silverblog.tv,socialblog.tv,starblog.tv,streampoi.com,streamtape.*,up4stream.com,ups2up.fun,xblog.tv,xmegadrive.com##+js(rmnt, script, wpadmngr.com)
 !#endif
 ! !SECTION: wpadmngr.com ads
 ! SECTION: Adcash
@@ -9784,6 +9786,8 @@ playhydrax.com##+js(rpnt, script, (isNoAds), (true))
 ||boobausauhipsa.net^$popup,doc
 ||usheebainaut.com^
 ! !SECTION: Hydrax
+! noadblocker.js "Enhanced Ad Blocker Detection Script"
+/^https:\/\/[a-z0-9]{6,10}\.[a-z]{2,3}\/js\d?\/noadblocker\.js(?:\?v=\d)?$/$script,1p,strict1p
 ! END: General filters (put filters before this line)
 ! *** uAssets:filters/filters-2020.txt ***
 *$script,redirect-rule=noopjs,domain=arcai.com
@@ -23407,8 +23411,10 @@ bemyhole.com##+js(rmnt, script, egoTab)
 bemyhole.com##.headline-sidebar
 bemyhole.com##.cams-button
 bgmiupdate.com.in##+js(set, HTMLImageElement.prototype.onerror, undefined)
-lewdgames.to##+js(acs, document.addEventListener, adLink)
+!lewdgames.to##+js(acs, document.addEventListener, adLink)
 lewdgames.to##a.downloadLink[data-wpel-link="external"]
+lewdgames.to#@##fwdevpDiv0
+lewdgames.to##+js(rpnt, script, /vastSource.*?\,/, vastSource:''\,)
 /\/js\/script_\d{2}\.\d{2}\.js\?\d+$/$script,1p,strict1p
 kissjav.*##+js(acs, WebAssembly, Promise)
 kissjav.*##.asside-link
@@ -23909,3 +23915,6 @@ nmac.to##.adslot_buttom_inner > a[href*="/4/"][target="_blank"]
 ||imasdk.googleapis.com/js/sdkloader/ima3_dai.js$script,redirect=noopjs,domain=680thefan.com
 @@||imasdk.googleapis.com/js/sdkloader/ima3_dai.js$script,domain=680thefan.com
 680thefan.com##.sc-ad-block
+||yasir252.com/file^$doc,urlskip=?link -base64
+goodstream.one##+js(set, adbon, 0)
+||goodstream.one/js2/noadblocker.js
