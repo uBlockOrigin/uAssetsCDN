@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Fri, 30 May 2025 00:49:04 +0000
-! Diff-Path: ../patches/2025.5.30.196.patch#ublock-filters
+! Last modified: Fri, 30 May 2025 06:47:12 +0000
+! Diff-Path: ../patches/2025.5.30.515.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -7121,6 +7121,9 @@ bookmystrip.com,sabkiyojana.com##center:others()
 bookmystrip.com,sabkiyojana.com##+js(set, document.hidden, false)
 bookmystrip.com,sabkiyojana.com##+js(set-cookie, imps, 3, , reload, 1)
 bookmystrip.com,sabkiyojana.com##+js(aopw, AdBDetected)
+!#if !cap_html_filtering
+secretplus.in###SmileyBanner:remove()
+!#endif
 ||api.gplinks.com/track/js/main.js$script,replace=/(var isOverGoogleAd = false;)([\s\S]*)(sendPostback\([\n\s\S]*?\))/\$1\$3;\$2\$3/
 ||api.gplinks.com/track/js/main.js$script,replace=/'IFRAME'/'BODY'/g
 ||api.gplinks.com/track/js/main.js$script,replace=/!document\.hidden/true/gm
@@ -9411,10 +9414,10 @@ soap2day.*##+js(rmnt, script, Reflect)
 ! !SECTION: FingerprintJS
 ! SECTION: shown_at popunder
 !#if cap_html_filtering
-123animehub.cc,123animes.ru,actvid.*,boosterx.stream,cataz.to,cineb.rs,demonicscans.org,flixhq.to,gomovies.sx,gomoviestv.to,limetorrents.lol,luluvdoo.com,mgeko.cc,mkvcinemas.*,mov18plus.cloud,moviesapi.to,netmovies.to,torrentdownload.*,torrentdownloads.*,tukipasti.com,vidfast.pro,zoechip.com##^script:has-text(shown_at)
+123animehub.cc,123animes.ru,actvid.*,boosterx.stream,cataz.to,cineb.rs,demonicscans.org,flixhq.to,gomovies.sx,gomoviestv.to,himovies.sx,limetorrents.lol,luluvdoo.com,mgeko.cc,mkvcinemas.*,mov18plus.cloud,moviesapi.to,netmovies.to,torrentdownload.*,torrentdownloads.*,tukipasti.com,vidfast.pro,zoechip.com##^script:has-text(shown_at)
 moflix-stream.fans##^script:has-text(HTMLAllCollection)
 !#else
-123animehub.cc,123animes.ru,actvid.*,boosterx.stream,cataz.to,cineb.rs,demonicscans.org,flixhq.to,gomovies.sx,gomoviestv.to,limetorrents.lol,luluvdoo.com,mgeko.cc,mkvcinemas.*,mov18plus.cloud,moviesapi.to,netmovies.to,torrentdownload.*,torrentdownloads.*,tukipasti.com,vidfast.pro,zoechip.com##+js(rmnt, script, shown_at)
+123animehub.cc,123animes.ru,actvid.*,boosterx.stream,cataz.to,cineb.rs,demonicscans.org,flixhq.to,gomovies.sx,gomoviestv.to,himovies.sx,limetorrents.lol,luluvdoo.com,mgeko.cc,mkvcinemas.*,mov18plus.cloud,moviesapi.to,netmovies.to,torrentdownload.*,torrentdownloads.*,tukipasti.com,vidfast.pro,zoechip.com##+js(rmnt, script, shown_at)
 moflix-stream.fans##+js(rmnt, script, HTMLAllCollection)
 cataz.to##+js(nowoif)
 !#endif
@@ -20458,6 +20461,7 @@ xvideos.com##a[href*="/go.php?"][href*="&ad="]
 1337x.*,x1337x.*,1337x.ninjaproxy1.com##+js(nostif, location.href)
 1337x.*,x1337x.*,1337x.ninjaproxy1.com##.js-modal-url:remove()
 1337x.*,x1337x.*,1337x.ninjaproxy1.com###alert-popup:remove()
+||x1337x.*/js/vpn.js
 cheatcloud.cc,cheater.ninja,cheatermad.com,cheatsquad.gg##+js(nano-sib, clearInterval)
 cheatsquad.gg##+js(nosiif, visibility, 1000)
 cheatermad.com##+js(nostif, offset)
@@ -23420,7 +23424,6 @@ bemyhole.com##.cams-button
 bgmiupdate.com.in##+js(set, HTMLImageElement.prototype.onerror, undefined)
 !lewdgames.to##+js(acs, document.addEventListener, adLink)
 lewdgames.to##a.downloadLink[data-wpel-link="external"]
-lewdgames.to#@##fwdevpDiv0
 lewdgames.to##+js(rpnt, script, /vastSource.*?\,/, vastSource:''\,)
 /\/js\/script_\d{2}\.\d{2}\.js\?\d+$/$script,1p,strict1p
 kissjav.*##+js(acs, WebAssembly, Promise)
