@@ -1,5 +1,5 @@
 ! Title: uBlock₀ filters – Quick fixes
-! Last modified: Mon, 09 Jun 2025 15:40:06 +0000
+! Last modified: Tue, 10 Jun 2025 13:19:33 +0000
 ! Expires: 8 hours
 ! Description: Immediate, temporary filters to fix websites
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -67,10 +67,8 @@ web.facebook.com,www.facebook.com##div[role="complementary"] a[aria-labelledby][
 web.facebook.com,www.facebook.com##+js(json-prune, require.0.3.0.__bbox.require.[].3.1.__bbox.result.data.serpResponse.results.edges.[-].rendering_strategy.view_model.story.sponsored_data.ad_id)
 web.facebook.com,www.facebook.com##+js(json-edit, ..__bbox.result.data.node[?@.*.__typename=="SponsoredData"])
 !#if ext_devbuild
-!#if env_firefox
 web.facebook.com,www.facebook.com##+js(jsonl-edit-xhr-response, .data[?@.category=="SPONSORED"].node, , propsToMatch, /graphql)
 web.facebook.com,www.facebook.com##+js(jsonl-edit-xhr-response, .data.viewer.news_feed.edges.*[?@.category=="SPONSORED"].node, , propsToMatch, /graphql)
-!#endif
 !#endif
 !#if ext_ubol
 web.facebook.com,www.facebook.com##+js(jsonl-edit-xhr-response, .data[?@.category=="SPONSORED"].node, , propsToMatch, /graphql)
@@ -108,8 +106,8 @@ japscan.lol#@#div.container > [href]
 japscan.lol##+js(trusted-suppress-native-method, Document.prototype.querySelectorAll, '"/^#/"', prevent, /stackDepth:4.+nawNA/)
 japscan.lol##+js(trusted-suppress-native-method, Document.prototype.querySelector, '"/^#/"', prevent, /stackDepth:4.+ inlineScript:2/)
 japscan.lol##+js(nostif, =document[_0x)
-japscan.lol##+js(trusted-suppress-native-method, Document.prototype.getElementsByClassName, '"/^[A-Za-z]{4,7}$/"', prevent, /stackDepth:4.+ inlineScript/)
-japscan.lol##+js(trusted-suppress-native-method, Document.prototype.getElementById, '"/^[A-Za-z]{4,7}$/"', prevent, /stackDepth:4.+ inlineScript/)
+japscan.lol##+js(trusted-suppress-native-method, Document.prototype.getElementsByClassName, '"/^[0-9A-Za-z]{4,7}$/"', prevent, /stackDepth:4.+ inlineScript/)
+japscan.lol##+js(trusted-suppress-native-method, Document.prototype.getElementById, '"/^[0-9A-Za-z]{4,7}$/"', prevent, /stackDepth:4.+ inlineScript/)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/21064
 ! https://github.com/uBlockOrigin/uAssets/issues/24220
@@ -197,7 +195,7 @@ smsonline.cloud##html[data-theme][lang] [id^="img_"][style]:has(iframe[framebord
 ~dogdrip.net,~infinityfree.com,~smsonline.cloud##*:not(body) > a[href^="https://07c225f3.online/content"]
 07c225f3.online,content-loader.com,css-load.com,html-load.com,img-load.com##html:not(:has(> head > style:only-child:has-text(width:399px;height:411px))):style(filter: opacity(0) !important; pointer-events: none !important;)
 /^https:\/\/www\.[0-9a-z-]{8,}\.xyz\/script\/[-.0-9A-Za-z]+\.[-A-Za-z]{2,30}\.js$/$script,3p,match-case,to=xyz,header=x-length
-://html-load.com/loader.min.js
+://html-load.com/loader.min.js$domain=~dogdrip.net|~infinityfree.com|~smsonline.cloud
 /^https:\/\/(?:as(?:loader)?|loader)\.[-0-9A-Za-z]+.[-A-Za-z]{2,30}\/loader.min.js$/$script,1p,strict3p
 ! https://github.com/uBlockOrigin/uAssets/issues/26487
 dogdrip.net,infinityfree.com,smsonline.cloud##+js(no-fetch-if, -load.com/script/, length:101)
@@ -279,10 +277,6 @@ vook.vc##.note-sp-spnsr
 ! FP by Phishing URL Blocklist
 ||sbisec.co.jp/etgate/^$all,badfilter
 ||banei-keiba.or.jp^$badfilter
-
-! fix vjav.tube
-*$script,xhr,3p,denyallow=ampproject.org|arc.io|b-cdn.net|blogger.com|bootstrapcdn.com|bunnycdn.ru|bytecdntp.com|cackle.me|chatango.com|cloudflare.com|cloudflare.net|consentframework.com|disqus.com|disquscdn.com|dmca.com|doodcdn.co|ebacdn.com|facebook.com|facebook.net|fastcomments.com|fastly.net|fastlycdn.com|fastlylb.net|fbcdn.net|fluidplayer.com|fontawesome.com|github.io|google.com|googleapis.com|graphcomment.com|gstatic.com|h-cdn.com|hcaptcha.com|hwcdn.net|ilfcdn.li|instagram.com|intensedebate.com|jquery.com|jsdelivr.net|jwpcdn.com|jwplatform.com|jwpsrv.com|linkvertise.com|media-amazon.com|media-imdb.com|pinterest.com|plyr.io|rabbitstream.net|raincaptcha.com|recaptcha.net|rsc.cdn77.org|sharecast.ws|sharethis.com|shrink.pe|statically.io|staticfile.org|tawk.to|twimg.com|twitter.com|ulogin.ru|unpkg.com|userapi.com|vidazoo.com|vixcloud.co|vk.com|vuukle.com|wp.com|x.com|yastatic.net|youtube.com|ytimg.com|zdassets.com|zencdn.net,domain=everia.club|files.im|filmpornofrancais.fr|gamesmountain.com|moredesi.com|nkiri.com|onlyfullporn.video|vjav.*,badfilter
-*$script,xhr,3p,denyallow=ahcdn.com|ampproject.org|arc.io|b-cdn.net|blogger.com|bootstrapcdn.com|bunnycdn.ru|bytecdntp.com|cackle.me|chatango.com|cloudflare.com|cloudflare.net|consentframework.com|disqus.com|disquscdn.com|dmca.com|doodcdn.co|ebacdn.com|facebook.com|facebook.net|fastcomments.com|fastly.net|fastlycdn.com|fastlylb.net|fbcdn.net|fluidplayer.com|fontawesome.com|github.io|google.com|googleapis.com|graphcomment.com|gstatic.com|h-cdn.com|hcaptcha.com|hwcdn.net|ilfcdn.li|instagram.com|intensedebate.com|jquery.com|jsdelivr.net|jwpcdn.com|jwplatform.com|jwpsrv.com|linkvertise.com|media-amazon.com|media-imdb.com|pinterest.com|plyr.io|rabbitstream.net|raincaptcha.com|recaptcha.net|rsc.cdn77.org|sharecast.ws|sharethis.com|shrink.pe|statically.io|staticfile.org|tawk.to|twimg.com|twitter.com|ulogin.ru|unpkg.com|userapi.com|vidazoo.com|vixcloud.co|vk.com|vuukle.com|wp.com|x.com|yastatic.net|youtube.com|ytimg.com|zdassets.com|zencdn.net,domain=everia.club|files.im|filmpornofrancais.fr|gamesmountain.com|moredesi.com|nkiri.com|onlyfullporn.video|vjav.*
 
 ! https://github.com/uBlockOrigin/uAssets/issues/28682
 ! https://github.com/uBlockOrigin/uAssets/issues/28681
