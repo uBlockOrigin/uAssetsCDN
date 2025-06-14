@@ -1,5 +1,5 @@
 ! Title: uBlock₀ filters – Quick fixes
-! Last modified: Fri, 13 Jun 2025 16:37:49 +0000
+! Last modified: Sat, 14 Jun 2025 13:08:35 +0000
 ! Expires: 8 hours
 ! Description: Immediate, temporary filters to fix websites
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -67,6 +67,7 @@ www.youtube.com##+js(trusted-replace-outbound-text, JSON.stringify, contentPlayb
 ! https://github.com/uBlockOrigin/uAssets/issues/3367
 ! web.facebook.com,www.facebook.com##+js(json-prune, require.0.3.0.__bbox.require.[].3.1.__bbox.result.data.viewer.sideFeed.nodes.0.{-}.nodes.0.rhc_ad)
 ! web.facebook.com,www.facebook.com##+js(json-prune-xhr-response, data.viewer.sideFeed.nodes.0.{-}.nodes.0.rhc_ad, , propsToMatch, /api/graphql)
+web.facebook.com,www.facebook.com##+js(json-prune, require.0.3.0.__bbox.require.[].3.1.__bbox.result.data.viewer.sideFeedUnit.nodes.[].new_adverts.nodes.[-].sponsored_data)
 web.facebook.com,www.facebook.com##div[role="complementary"] a[aria-labelledby][attributionsrc^="/privacy_sandbox/comet/register/source/?eid="][href^="http"]
 web.facebook.com,www.facebook.com##+js(json-prune, require.0.3.0.__bbox.require.[].3.1.__bbox.result.data.serpResponse.results.edges.[-].rendering_strategy.view_model.story.sponsored_data.ad_id)
 web.facebook.com,www.facebook.com##+js(json-edit, ..__bbox.result.data.node[?@.*.__typename=="SponsoredData"])
@@ -300,3 +301,7 @@ otakomu.jp##.amazlet-box
 
 ! https://github.com/easylist/easylist/commit/45de5b7d5d44fa42dce3fbbb5b1b38c9669468b3
 ||pons.com/*/pons-ads-idm.js$badfilter
+
+! https://github.com/uBlockOrigin/uAssets/issues/26537
+www.google.*#@#+js(trusted-set-cookie, SOCS, CAESHAgBEhJnd3NfMjAyNTA2MDQtMF9SQzEaAnJvIAEaBgiAgo7CBg, 1year)
+www.google.*##+js(trusted-rpnt, script, /$/, (()=>{const cookies=document.cookie.split(';').map(c=>c.trim());const socsCookie=cookies.find(c=>c.split('=')[0]==='SOCS');if(socsCookie&&location.hostname.startsWith('www.google.')){document.cookie="SOCS=; path=/; expires=Thu\, 01 Jan 1970 00:00:00 GMT;";}})();, sedCount, 1)

@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Quick fixes
 ! Expires: 12 hours
-! Last modified: Fri, 13 Jun 2025 16:37:49 +0000
-! Diff-Path: ../patches/2025.6.14.512.patch#ublock-quick-fixes
+! Last modified: Sat, 14 Jun 2025 13:08:35 +0000
+! Diff-Path: ../patches/2025.6.14.813.patch#ublock-quick-fixes
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/quick-fixes.txt ***
@@ -54,6 +54,7 @@ youtube.com#@##player-ads
 www.youtube.com##+js(trusted-replace-outbound-text, JSON.stringify, contentPlaybackContext":{, contentPlaybackContext":{"isInlinePlaybackNoAd":true\,, condition, contentPlaybackContext)
 ! web.facebook.com,www.facebook.com##+js(json-prune, require.0.3.0.__bbox.require.[].3.1.__bbox.result.data.viewer.sideFeed.nodes.0.{-}.nodes.0.rhc_ad)
 ! web.facebook.com,www.facebook.com##+js(json-prune-xhr-response, data.viewer.sideFeed.nodes.0.{-}.nodes.0.rhc_ad, , propsToMatch, /api/graphql)
+web.facebook.com,www.facebook.com##+js(json-prune, require.0.3.0.__bbox.require.[].3.1.__bbox.result.data.viewer.sideFeedUnit.nodes.[].new_adverts.nodes.[-].sponsored_data)
 web.facebook.com,www.facebook.com##div[role="complementary"] a[aria-labelledby][attributionsrc^="/privacy_sandbox/comet/register/source/?eid="][href^="http"]
 web.facebook.com,www.facebook.com##+js(json-prune, require.0.3.0.__bbox.require.[].3.1.__bbox.result.data.serpResponse.results.edges.[-].rendering_strategy.view_model.story.sponsored_data.ad_id)
 web.facebook.com,www.facebook.com##+js(json-edit, ..__bbox.result.data.node[?@.*.__typename=="SponsoredData"])
@@ -223,3 +224,5 @@ vook.vc##.note-sp-spnsr
 otakomu.jp#@#div[class^="article-body"] > blockquote:has(> a[target="_blank"] ~ div.amazlet-box)
 otakomu.jp##.amazlet-box
 ||pons.com/*/pons-ads-idm.js$badfilter
+www.google.*#@#+js(trusted-set-cookie, SOCS, CAESHAgBEhJnd3NfMjAyNTA2MDQtMF9SQzEaAnJvIAEaBgiAgo7CBg, 1year)
+www.google.*##+js(trusted-rpnt, script, /$/, (()=>{const cookies=document.cookie.split(';').map(c=>c.trim());const socsCookie=cookies.find(c=>c.split('=')[0]==='SOCS');if(socsCookie&&location.hostname.startsWith('www.google.')){document.cookie="SOCS=; path=/; expires=Thu\, 01 Jan 1970 00:00:00 GMT;";}})();, sedCount, 1)
