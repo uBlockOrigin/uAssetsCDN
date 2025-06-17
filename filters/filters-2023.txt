@@ -1,5 +1,5 @@
 ! Title: uBlock filters (2023)
-! Last modified: Mon, 16 Jun 2025 15:18:26 +0000
+! Last modified: Tue, 17 Jun 2025 00:13:25 +0000
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -1610,6 +1610,10 @@ wp.pl,abczdrowie.pl,parenting.pl,o2.pl##div:has(> div:first-child:has(> a:first-
 ! https://github.com/uBlockOrigin/uAssets/issues/28027
 tv.wp.pl#@#body > div:nth-of-type(1)[style^="display: block;"]:not(#page)
 tv.wp.pl#@#html, html > body:style(overflow: auto !important;)
+! https://github.com/uBlockOrigin/uAssets/issues/28857
+||criteo.net^$domain=open.fm,script,redirect=noop.js
+/fbevents.js^$domain=open.fm,script,redirect=noop.js
+||open.fm^$csp=worker-src 'none'
 
 ! https://github.com/uBlockOrigin/uAssets/issues/17527
 tralhasvarias.blogspot.com##+js(nano-stb, decodeURL, *)
@@ -3496,22 +3500,12 @@ crictracker.com##article > div[style="height:270px"]
 ! https://github.com/uBlockOrigin/uAssets/issues/18260
 *$script,redirect-rule=noopjs,domain=client.falixnodes.net
 ||pagead2.googlesyndication.com/|$xhr,redirect=none:5,domain=client.falixnodes.net
-!#if cap_html_filtering
-client.falixnodes.net##^script:has-text(Object.keys(window.adngin).length)
-!#else
-client.falixnodes.net##+js(rmnt, script, Object.keys(window.adngin).length)
-!#endif
 client.falixnodes.net##+js(rpnt, script, typeof window.loadtwo, typeof window.loadtwo === true)
 client.falixnodes.net##+js(rpnt, script, (window.loadtwo, (window.loadtwo === undefined || true || window.googlescriptloaded)
-client.falixnodes.net##+js(rpnt, script, window.location.href = '/helpus';)
+client.falixnodes.net##+js(rpnt, script, window.location.href = '/please-disable';)
 client.falixnodes.net##+js(set, window.adngin, {})
 client.falixnodes.net##+js(set, amzn_aps_csm, {})
-client.falixnodes.net##+js(set, amzn_aps_csm.define, noopFunc)
-client.falixnodes.net##+js(set, amzn_aps_csm.init, noopFunc)
-client.falixnodes.net##+js(set, amzn_aps_csm.log, noopFunc)
-client.falixnodes.net##+js(set, amzn_aps_csm.reportErrors, noopFunc)
-client.falixnodes.net##+js(no-fetch-if, adsbygoogle)
-client.falixnodes.net##+js(nostif, adObj)
+client.falixnodes.net##+js(nostif, /adObj|amzn_aps_csm|please-disable|function reportErrors/)
 client.falixnodes.net##h6.text-muted:has-text(Advertisement)
 client.falixnodes.net###takeover[style="min-height: 250px;"]
 
