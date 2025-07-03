@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Thu, 03 Jul 2025 15:58:22 +0000
-! Diff-Path: ../patches/2025.7.3.1050.patch#ublock-filters
+! Last modified: Thu, 03 Jul 2025 20:06:14 +0000
+! Diff-Path: ../patches/2025.7.3.1349.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -13597,6 +13597,7 @@ asiaon.*,asiaontop.com##+js(no-xhr-if, doubleclick)
 asiaon.top,asiaontop.com##+js(no-fetch-if, method:HEAD)
 *$script,redirect-rule=noopjs,3p,domain=asiaon.top|asiaontop.com
 asiaon.top,asiaontop.com##a[href^="https://theporndude.com/"]
+asiaon.top,asiaontop.com##+js(href-sanitizer, a[href^="https://link.asiaon.top/full?api="][href*="&url=aHR0c"], ?url -base64)
 bestgamehack.top,hackofgame.com##+js(aopr, open)
 193.124.191.200##+js(acs, eval, replace)
 go.gets4link.com##+js(rc, get-link, .btn-success.get-link[target="_blank"], stay)
@@ -14076,7 +14077,7 @@ theloadout.com##header:style(top:0 !important)
 theloadout.com###nn_astro_wrapper:has(.ad)
 theloadout.com##.nn_mobile_mpu_wrapper
 ceylonssh.com##+js(acs, $, adsbygoogle)
-bowfile.com##+js(nowoif)
+bowfile.com##+js(nowoif, !bowfile.com)
 *$script,redirect-rule=noopjs,domain=bowfile.com
 *$frame,redirect-rule=noopframe,domain=bowfile.com
 ||d192r5l88wrng7.cloudfront.net^$frame,redirect=noopframe
@@ -23828,3 +23829,7 @@ vegamoviese.blog##+js(nowoif)
 @@||madarascans.com^$ghide
 kijk.nl##+js(no-xhr-if, url:ad/banner.gif)
 ||securepubads.g.doubleclick.net/tag/js/gpt.js$script,redirect=noop.js:6,from=tvaplus.ca
+! Fixes gap caused by removed ad
+!#if env_mobile
+outlook.live.com##main > div[style] .vPfg_:has(.wOYnU) ~ *:style(transform: translateY(-80px) !important)
+!#endif
