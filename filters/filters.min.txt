@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Sat, 26 Jul 2025 20:17:54 +0000
-! Diff-Path: ../patches/2025.7.26.1230.patch#ublock-filters
+! Last modified: Sun, 27 Jul 2025 02:18:24 +0000
+! Diff-Path: ../patches/2025.7.27.157.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -440,6 +440,7 @@ wcoanimedub.tv,wcoforever.net##+js(nostif, google_jobrunner)
 wcoforever.net##.anti-ad
 wcoforever.net###sidebar_r1
 @@||embed.watchanimesub.net^$script,1p
+@@||embed.wcostream.com^$ghide
 !#if cap_html_filtering
 embed.wcostream.com##^script:has-text(/google_jobrunner|blockAdBlock/)
 !#else
@@ -8403,6 +8404,8 @@ hdhub4u.fail,hubdrive.wales,moviesubtitles.click,telegratuita.com##+js(aeld, DOM
 ||htagpa.tech^
 ||aghtag.tech^
 /^https:\/\/[a-z0-9]{4,10}\.tech\/c\/(?:[-a-z0-9]+\.){1,3}js$/$script,3p,strict3p,to=tech
+! Advertica
+/^https:\/\/[-0-9a-z]{5,7}.[a-z]{3,5}\/js\/responsive\.js$/$script,3p,match-case,header=etag:/^W/"[0-9a-f]{8}-[0-9a-f]{4}"$/
 ! !SECTION: Popular revolving adservers
 ! SECTION: AdDefend
 !#if env_chromium
@@ -9948,7 +9951,7 @@ desktophut.com###loading-ad
 *$xhr,redirect-rule=nooptext,domain=desktophut.com
 !!!
 a-ads.com##.size300x250
-googlesyndication.com##.GoogleActiveViewElement:not(:has(> #reward_close_button_widget)):not(.recommend_book)
+googlesyndication.com##.GoogleActiveViewElement:not(:has(> #reward_close_button_widget, .recommend_book))
 googlesyndication.com##.GoogleActiveViewElement > div:not(#reward_close_button_widget):not(.recommend_book)
 googlesyndication.com###abgb
 memoriadatv.com##+js(nano-stb)
@@ -17805,7 +17808,7 @@ gledaitv.*##+js(acs, fetch, adsBlocked)
 /js/detectorpro_*.js|$script
 *$script,redirect-rule=noopjs,domain=bg-gledai.*|gledaitv.*
 ||adapex.io^$script,redirect=noopjs,domain=bg-gledai.video|gledaitv.fan
-cdn.bg-gledai.*##+js(aeld, DOMContentLoaded, .textContent)
+cdn.bg-gledai.*,cdn.gledaitv.*##+js(aeld, DOMContentLoaded, .textContent)
 pervclips.com##+js(aopr, decodeURI)
 pervclips.com##.thumb_spots
 pervclips.com##.spot-after
