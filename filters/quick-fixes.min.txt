@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Quick fixes
 ! Expires: 12 hours
-! Last modified: Thu, 31 Jul 2025 06:11:19 +0000
-! Diff-Path: ../patches/2025.7.31.636.patch#ublock-quick-fixes
+! Last modified: Thu, 31 Jul 2025 13:29:31 +0000
+! Diff-Path: ../patches/2025.7.31.934.patch#ublock-quick-fixes
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/quick-fixes.txt ***
@@ -105,7 +105,7 @@ japscan.*##+js(trusted-set, aclib, json:{"isShowingPop": false})
 japscan.*##+js(set, aclib.runInPagePush, {}, as, callback)
 japscan.*##+js(trusted-replace-outbound-text, Function.prototype.toString, ( ) => (( ) => value), 'runInPagePush(t){if(this.#ft.inPagePush)return void this.#r.error("in-page push zone already loaded on page");this.#ft.inPagePush=!0;const{zoneId:e,delay:r,maxAds:n,renderPosDesktop:i,renderPosMobile:o,offsetTop:s,sub1:a,isAutoTag:c,collectiveZoneId:u,linkedZoneId:l,aggressivity:d,recordPageView:h,abTest:f,tagVersionSuffix:g}=t;let{refreshRate:p}=t;if(!e)throw new Error("mandatory zoneId is not provided!");if(!wt(e))throw new Error("zoneId is not a string!");if(void 0!==p&&(!yt(p)||p<0))throw new Error("refreshRate is not an integer or is less than zero");if(void 0!==r&&(!yt(r)||r<0))throw new Error("delay is not an integer or is less than zero");if(void 0!==n&&(!yt(n)||n<1))throw new Error("maxAds is not an integer or is less than one");if(void 0!==i&&!xt(i))throw new Error("renderPosDesktop is not valid");if(void 0!==o&&!xt(o))throw new Error("renderPosMobile is not valid");if(void 0!==s&&(!yt(s)||s<0))throw new Error("offsetTop is not an integer or is less than zero");this.#r.debug("loading in-page push on page"),c?this.#pt.add(u):this.#pt.add(e),void 0!==p&&p>0&&p<10&&(p<5?p*=60:p=30),this.#r.debug("ipp rr set to",p);const v={zoneId:e,refreshRate:p??60,delay:r??0,maxAds:n??1,renderPosDesktop:i??"top",renderPosMobile:o??"top",offsetTop:s??0,sub1:a,isAutoTag:c,collectiveZoneId:u,linkedZoneId:l,aggressivity:d,recordPageView:h,abTest:f,tagVersionSuffix:g,adserverDomain:this.#v,adblockSettings:this.#s,adcashGlobalName:this.#xt,isLoadedAsPartOfLibrary:!1,uniqueFingerprint:this.#C};if(this.#Ct.InPagePush)return v.isLoadedAsPartOfLibrary=!0,void new this.#Ct.InPagePush(v);if(window.InPagePush)new window.InPagePush(v);else{const t=document.createElement("script");t.type="text/javascript",t.src=`${window.location.protocol}//${this.#ht}/script/inpagepush.js`,t.setAttribute("nipp","1"),t.onload=()=>{new window.InPagePush(v)},t.onerror=()=>{this.#r.error(`failed loading ${t.src}`)},document.head.appendChild(t)}}')
 japscan.*##+js(set, aclib.runBanner, {}, as, function)
-japscan.*##+js(aeld, load, sWith)
+japscan.*##+js(aeld, load, /^\s*_0x[0-9a-f]+\s*=>\s*\{\s*(const|let|var)\s+_0x/)
 poophq.com,veev.to,doods.to##+js(nowoif)
 poophq.com,veev.to,doods.to##+js(no-xhr-if, /vast.php?)
 poophq.com,veev.to,doods.to##+js(no-xhr-if, /click\.com|preroll|native_render\.js|acscdn/, length:10001)
@@ -168,7 +168,7 @@ smsonline.cloud##html[data-theme][lang] [id^="img_"][style]:has(iframe[framebord
 ~dogdrip.net,~infinityfree.com,~smsonline.cloud##html[class^="img_"][amp4ads=""][i-amphtml-layout=""][i-amphtml-no-boilerplate=""][amp-version="2502032353000"]
 ~dogdrip.net,~infinityfree.com,~smsonline.cloud##*:not(body) > a[href^="https://content-loader.com/article"]
 ~dogdrip.net,~infinityfree.com,~smsonline.cloud##*:not(body) > a[href^="https://html-load.com/article"]
-~dogdrip.net,~infinityfree.com,~smsonline.cloud##*:not(body) > a[href^="https://07c225f3.online/content"]
+~dogdrip.net,~infinityfree.com,~smsonline.cloud##*:not(body) > a[href^="https://07c225f3.online/article"]
 07c225f3.online,content-loader.com,css-load.com,html-load.com,img-load.com##html:not(:has(> head > style:only-child:has-text(width:399px;height:411px))):style(filter: opacity(0) !important; pointer-events: none !important;)
 /^https:\/\/www\.[0-9a-z-]{8,}\.(?:com|xyz)\/script\/(?:[-.0-9A-Za-z]+\.)?[-0-9A-Za-z]{2,30}\.js$/$script,3p,match-case,header=x-length
 ://html-load.com/loader.min.js$domain=~dogdrip.net|~infinityfree.com|~smsonline.cloud
@@ -184,6 +184,7 @@ bing.com##+js(no-xhr-if, /fd/ls/lsp.aspx)
 bing.com##ol#b_results > li:has(> :is(.b_tpcn, .b_title, h2) a[href^="https://www.bing.com/aclk?"])
 bing.com##ol#b_results > li.b_algo:has(.b_lineclamp3:matches-css-before(content:/^url\(\Sdata:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAAAD.AAAA/))
 bg-gledai.*,gledaitv.*##+js(no-fetch-if, method:HEAD)
+cdn.bg-gledai.*,cdn.gledaitv.*##+js(rmnt, script, .textContent)
 faqwiki.us##+js(nostif, .offsetHeight>0)
 faqwiki.*##+js(rmnt, script, /adblock/i)
 pvpoke-re.com##+js(trusted-suppress-native-method, Element.prototype.insertAdjacentHTML, '"afterbegin"', prevent, /\/[A-Za-z]+\.min\.js\?/)
@@ -226,3 +227,4 @@ nontonx.com###rules-nontonx
 corsaires-paris.com#@#.adhesion:not(body)
 ||api-iam.intercom.io/messenger/web/ping$badfilter
 ||nba.com/*/*/*/*/$script,1p,badfilter
+@@||embed.wcostream.com^$script,1p
