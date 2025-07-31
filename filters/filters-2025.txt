@@ -1,5 +1,5 @@
 ! Title: uBlock filters (2025)
-! Last modified: Thu, 31 Jul 2025 01:24:15 +0000
+! Last modified: Thu, 31 Jul 2025 10:07:26 +0000
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -431,6 +431,15 @@ ext=$script,1p,domain=pouvideo.*|povvideo.*|povw1deo.*|povwideo.*|powv1deo.*|pow
 *$script,3p,denyallow=googleapis.com|google.com|gstatic.com,domain=powcloud.one
 !#endif
 
+! https://github.com/uBlockOrigin/uAssets/issues/4399
+! https://www.reddit.com/r/uBlockOrigin/comments/u72fym/dailymotion_adblock_detected/
+||s3.amazonaws.com/dmas-public/rubicon/bundle.js$script,domain=dailymotion.com
+@@||dailymotion.com^$ghide
+! https://github.com/uBlockOrigin/uAssets/commit/ddafd8d16d0c945ad7befcd2d6f35d846645c161
+!#if !env_mobile
+||dmxleo.dailymotion.com^
+!#endif
+
 ! END: Rules from filters.txt
 
 ! START: Regional lists
@@ -482,7 +491,7 @@ mp3.big.az##.blockreklam
 
 ! https://github.com/uBlockOrigin/uAssets/issues/26682
 opentunnel.net##+js(no-xhr-if, ad.plus)
-@@||ad.plus/cdn-cgi/trace|$xhr,method=head,domain=opentunnel.net
+opentunnel.net##.mb-3.small.text-muted
 
 ! video.genyt.net - Popup
 video.genyt.net##+js(nowoif)
@@ -1748,9 +1757,6 @@ thefappeningblog.com##a[target="_blank"][href*="?"]:not([href*="thefappeningblog
 thefappeningblog.com##a[href="https://thefappeningbeta.com/a"]
 thefappeningblog.com##.textwidget > a[href][target="_blank"]:not([href*="thefappeningblog.com"])
 
-! https://github.com/uBlockOrigin/uAssets/issues/28416
-infomatricula.pt##+js(nostif, ads)
-
 ! https://github.com/AdguardTeam/AdguardFilters/issues/205830
 pornharlot.net##+js(aeld, click, popupInterval)
 
@@ -2244,8 +2250,9 @@ hydrogen.lat##+js(aeld, load, &&)
 ! https://www.bike-magazin.de/fahrraeder/mountainbike/downhill-bikes-freeride-bikes/canyon-sender-2025-die-eilsendung/ - anti-adb
 ||bf-ad.net^$redirect=noopjs,domain=bike-magazin.de
 
+! https://github.com/uBlockOrigin/uAssets/issues/28416
 ! https://forums.lanik.us/viewtopic.php?t=48805-infomatricula-pt
-infomatricula.pt##+js(nostif, setInterval)
+infomatricula.pt##+js(nostif, offsetHeight)
 infomatricula.pt##.container:has(.adsbygoogle)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/29274
@@ -2345,3 +2352,12 @@ policesecurity.com##+js(nosiif, EFFECTIVE_APPS_GCB_BLOCKED_MESSAGE)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/29405
 @@||tv.onefootball.com/assets/videojs-contrib-ads.$1p
+
+! https://www.reddit.com/r/uBlockOrigin/comments/1mdtiuj/ad_blocker_detected_help/
+indexsubtitle.cc##+js(aopw, EnhancedAdBlockDetector)
+
+! https://github.com/AdguardTeam/AdguardFilters/issues/210444
+windroid777.com##+js(rmnt, script, detectAdBlock)
+
+! https://github.com/uBlockOrigin/uAssets/issues/29412
+mediamarkt.be##+js(no-fetch-if, method:HEAD)
