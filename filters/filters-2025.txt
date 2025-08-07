@@ -1,5 +1,5 @@
 ! Title: uBlock filters (2025)
-! Last modified: Thu, 07 Aug 2025 07:29:36 +0000
+! Last modified: Thu, 07 Aug 2025 11:58:31 +0000
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -1846,6 +1846,11 @@ updateroj24.com##.ad-container
 ! https://www.reddit.com/r/uBlockOrigin/comments/1kxmdab/video_ads_in_embedded_videos_of_mega/
 ! https://www.reddit.com/r/uBlockOrigin/comments/1lssmxc/mega_filehoster_showing_ads_in_uploaded_videos/
 mega.nz##+js(json-prune-fetch-response, *, *.aurl, propsToMatch, /cs?id=)
+!#if cap_html_filtering
+||g.api.mega.co.nz/cs?id=$xhr,domain=mega.nz,replace=/^\[.+"aurl".+/[null,null]/
+!#else
+mega.nz##+js(trusted-replace-argument, RegExp.prototype.test, 0, repl:/\.mp4$/.mp3/, condition, .mp4)
+!#endif
 
 ! https://github.com/uBlockOrigin/uAssets/issues/28595
 umatechnology.org##+js(aeld, DOMContentLoaded, -banner)
@@ -2413,4 +2418,22 @@ gulfnews.com###footer > div > div:has(> div[id$="-sticky-ad"])
 evano.com##.overlay
 
 ! https://github.com/uBlockOrigin/uAssets/issues/29486
-*/ads/$media,domain=dizirella.com
+*/ads/$media,xhr,domain=dizirella.com
+||yabancidizim.com/ads/$3p
+##img[width="728"][height="90"]
+
+! https://github.com/uBlockOrigin/uAssets/issues/29507
+*$script,domain=x-x-x.video,3p
+x-x-x.video##+js(rmnt, script, decodeURIComponent)
+||aawspeedy.com^
+tabootube.to##+js(rmnt, script, popMagic)
+
+! https://github.com/uBlockOrigin/uAssets/issues/29341
+majorgeeks.com#@#[style]:has([href*="&utm_source"])
+majorgeeks.com#@#.navigation-light
+majorgeeks.com##.geekywraplight > div:not([class]) > div[style]:has(> a[href*="&utm_source"])
+
+! parcello.org/app/deliverytimes anti adblock
+@@||cdns.symplr.de/parcello.org/parcello.js$script,domain=parcello.org
+parcello.org##.sidebar-ad-space
+parcello.org##.horizontal-ad-space
