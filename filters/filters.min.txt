@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Sun, 10 Aug 2025 02:30:27 +0000
-! Diff-Path: ../patches/2025.8.10.155.patch#ublock-filters
+! Last modified: Sun, 10 Aug 2025 05:01:08 +0000
+! Diff-Path: ../patches/2025.8.10.334.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -8283,6 +8283,7 @@ hdhub4u.fail,hubdrive.wales,moviesubtitles.click,telegratuita.com##+js(aeld, DOM
 /^https?:\/\/([a-z][a-z]\.)?[a-z][a-z][a-z][a-z][a-z][a-z][a-z][a-z]?[a-z]?[a-z]?[a-z]?[a-z]?[a-z]?[a-z]?\.com\/r[0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z]?[0-9A-Za-z]?[0-9A-Za-z]?[0-9A-Za-z]?[0-9A-Za-z]?[0-9A-Za-z]?\/[A-Za-z][A-Za-z][A-Za-z][A-Za-z][A-Za-z]$/$script,xhr,3p,match-case
 !#endif
 ! Ads servers
+||awinriglet.com^
 ||banditsmutter.qpon^
 ||horsiergrassed.com^
 ||jejunalduets.cyou^
@@ -8371,6 +8372,9 @@ hdhub4u.fail,hubdrive.wales,moviesubtitles.click,telegratuita.com##+js(aeld, DOM
 /^https:\/\/[a-z0-9]{4,10}\.tech\/c\/(?:[-a-z0-9]+\.){1,3}js$/$script,3p,strict3p,to=tech
 ! Advertica
 /^https:\/\/[-0-9a-z]{4,7}.[a-z]{3,5}\/js\/responsive\.js$/$script,3p,match-case,header=x-server
+!#if env_safari
+/^https:\/\/[-0-9a-z][-0-9a-z][-0-9a-z][-0-9a-z][-0-9a-z]?[-0-9a-z]?[-0-9a-z]?.[a-z][a-z][a-z][a-z]?[a-z]?\/js\/responsive\.js$/$script,3p,match-case,header=x-server
+!#endif
 ! !SECTION: Popular revolving adservers
 ! SECTION: AdDefend
 !#if env_chromium
@@ -9169,6 +9173,10 @@ nekopoicare.*>>##+js(acs, EventTarget.prototype.addEventListener, delete window)
 /^https?:\/\/[-a-z]{8,15}\.(?:com|net)\/400\/\d{7}(?:\?v=\d+)?$/$script,3p,to=com|net
 /^https?:\/\/[-a-z]{8,15}\.(?:com|net)\/401\/\d{7}(?:\?v=\d+)?$/$script,3p,to=com|net
 /^https?:\/\/[-a-z]{8,15}\.(?:com|net)\/500\/\d{7}\?/$xhr,3p,to=com|net
+!#if env_safari
+/^https?:\/\/[a-z][a-z][a-z][a-z][a-z][a-z][a-z][a-z][a-z]?[a-z]?[a-z]?[a-z]?[a-z]?[a-z]?[a-z]?\.com\/$/$xhr,3p,to=com,method=head,header=access-control-expose-headers:*X-DirectionPartner-Id*
+/^https?:\/\/[a-z][a-z][a-z][a-z][a-z][a-z][a-z][a-z][a-z]?[a-z]?[a-z]?[a-z]?[a-z]?[a-z]?[a-z]?\.xyz\/$/$xhr,3p,to=xyz,method=head,header=access-control-expose-headers:*X-DirectionPartner-Id*
+!#endif
 /^https?:\/\/[a-z0-9]{5,15}\.(?:com|net)\/tag\.min\.js$/$script,3p,to=com|net,redirect=noopjs
 !#if env_safari
 /^https?:\/\/[a-z0-9][a-z0-9][a-z0-9][a-z0-9][a-z0-9][a-z0-9]?[a-z0-9]?[a-z0-9]?[a-z0-9]?[a-z0-9]?[a-z0-9]?[a-z0-9]?[a-z0-9]?[a-z0-9]?[a-z0-9]?\.com\/tag\.min\.js$/$script,3p,to=com
@@ -9814,6 +9822,12 @@ yabaisub.cloud##+js(trusted-click-element, #player-option-1, , 500)
 !#if !env_mobile
 hk.yahoo.com###main-bottom:style(margin-top: 164px !important;)
 !#endif
+ofiii.com##+js(json-prune-fetch-response, prerolls midrolls postrolls comm_ad house_ad pause_ad block_ad end_ad exit_ad pin_ad content_pool vertical_ad elements, , propsToMatch, /detail)
+ofiii.com##.nonlinear_ad
+||adsv.svc.litv.tv^
+||hbs.svc.litv.tv^
+||cdi.ofiii.com/*/video/ad_urls
+@@||imasdk.googleapis.com/js/sdkloader/ima3.js$domain=ofiii.com
 ! NOTE: Czech
 @@||titulky.com^$script,1p
 titulky.com#@#+js(set-constant, xmxalr, '')
@@ -9896,6 +9910,10 @@ filmizle.*,filmizleplus.*,fullhdfilm.*##body:style(background-image: unset !impo
 ||filmvitrini.net/wp-content/themes/filmizle/js/elma.js
 .gif^$image,domain=filmvitrini.net
 filmvitrini.net##.videoust
+asyaanimeleri.pw##+js(rpnt, script, popactive, nopop)
+asyaanimeleri.pw##+js(nowoif, !asyaanimeleri.)
+asyaanimeleri.pw##+js(set-cookie, popcounter, 2)
+asyaanimeleri.pw##.pppx
 ! NOTE: Vietnamese
 qmh.sex##+js(nowoif, _blank)
 qmh.sex##.vip1-play-overlay
@@ -23808,3 +23826,5 @@ ads.flytant.com#@#.google-ads
 premierfantasytools.com##+js(aopw, checkForAdBlocker)
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$redirect=google-ima.js,domain=vidonion.uns.wtf
 pogdesign.co.uk##.box728
+olamovies.*##+js(aeld, DOMContentLoaded, navigator)
+olamovies.*##+js(no-xhr-if, googlesyndication)

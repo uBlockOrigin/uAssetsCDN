@@ -137,6 +137,7 @@ hdhub4u.fail,hubdrive.wales,moviesubtitles.click,telegratuita.com##+js(aeld, DOM
 /^https?:\/\/([a-z][a-z]\.)?[a-z][a-z][a-z][a-z][a-z][a-z][a-z][a-z]?[a-z]?[a-z]?[a-z]?[a-z]?[a-z]?[a-z]?\.com\/r[0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z]?[0-9A-Za-z]?[0-9A-Za-z]?[0-9A-Za-z]?[0-9A-Za-z]?[0-9A-Za-z]?\/[A-Za-z][A-Za-z][A-Za-z][A-Za-z][A-Za-z]$/$script,xhr,3p,match-case
 !#endif
 ! Ads servers
+||awinriglet.com^
 ||banditsmutter.qpon^
 ||horsiergrassed.com^
 ||jejunalduets.cyou^
@@ -235,6 +236,9 @@ hdhub4u.fail,hubdrive.wales,moviesubtitles.click,telegratuita.com##+js(aeld, DOM
 
 ! Advertica
 /^https:\/\/[-0-9a-z]{4,7}.[a-z]{3,5}\/js\/responsive\.js$/$script,3p,match-case,header=x-server
+!#if env_safari
+/^https:\/\/[-0-9a-z][-0-9a-z][-0-9a-z][-0-9a-z][-0-9a-z]?[-0-9a-z]?[-0-9a-z]?.[a-z][a-z][a-z][a-z]?[a-z]?\/js\/responsive\.js$/$script,3p,match-case,header=x-server
+!#endif
 
 ! !SECTION: Popular revolving adservers
 
@@ -1140,6 +1144,10 @@ nekopoicare.*>>##+js(acs, EventTarget.prototype.addEventListener, delete window)
 /^https?:\/\/[-a-z]{8,15}\.(?:com|net)\/400\/\d{7}(?:\?v=\d+)?$/$script,3p,to=com|net
 /^https?:\/\/[-a-z]{8,15}\.(?:com|net)\/401\/\d{7}(?:\?v=\d+)?$/$script,3p,to=com|net
 /^https?:\/\/[-a-z]{8,15}\.(?:com|net)\/500\/\d{7}\?/$xhr,3p,to=com|net
+!#if env_safari
+/^https?:\/\/[a-z][a-z][a-z][a-z][a-z][a-z][a-z][a-z][a-z]?[a-z]?[a-z]?[a-z]?[a-z]?[a-z]?[a-z]?\.com\/$/$xhr,3p,to=com,method=head,header=access-control-expose-headers:*X-DirectionPartner-Id*
+/^https?:\/\/[a-z][a-z][a-z][a-z][a-z][a-z][a-z][a-z][a-z]?[a-z]?[a-z]?[a-z]?[a-z]?[a-z]?[a-z]?\.xyz\/$/$xhr,3p,to=xyz,method=head,header=access-control-expose-headers:*X-DirectionPartner-Id*
+!#endif
 ! https://github.com/uBlockOrigin/uAssets/issues/27734
 ! https://github.com/uBlockOrigin/uAssets/issues/27752
 /^https?:\/\/[a-z0-9]{5,15}\.(?:com|net)\/tag\.min\.js$/$script,3p,to=com|net,redirect=noopjs
@@ -2023,6 +2031,14 @@ yabaisub.cloud##+js(trusted-click-element, #player-option-1, , 500)
 hk.yahoo.com###main-bottom:style(margin-top: 164px !important;)
 !#endif
 
+! https://github.com/uBlockOrigin/uAssets/issues/29551
+ofiii.com##+js(json-prune-fetch-response, prerolls midrolls postrolls comm_ad house_ad pause_ad block_ad end_ad exit_ad pin_ad content_pool vertical_ad elements, , propsToMatch, /detail)
+ofiii.com##.nonlinear_ad
+||adsv.svc.litv.tv^
+||hbs.svc.litv.tv^
+||cdi.ofiii.com/*/video/ad_urls
+@@||imasdk.googleapis.com/js/sdkloader/ima3.js$domain=ofiii.com
+
 ! NOTE: Czech
 ! https://github.com/uBlockOrigin/uAssets/issues/26493
 @@||titulky.com^$script,1p
@@ -2152,6 +2168,12 @@ filmizle.*,filmizleplus.*,fullhdfilm.*##body:style(background-image: unset !impo
 ||filmvitrini.net/wp-content/themes/filmizle/js/elma.js
 .gif^$image,domain=filmvitrini.net
 filmvitrini.net##.videoust
+
+! https://github.com/uBlockOrigin/uAssets/issues/29556
+asyaanimeleri.pw##+js(rpnt, script, popactive, nopop)
+asyaanimeleri.pw##+js(nowoif, !asyaanimeleri.)
+asyaanimeleri.pw##+js(set-cookie, popcounter, 2)
+asyaanimeleri.pw##.pppx
 
 ! NOTE: Vietnamese
 ! https://github.com/uBlockOrigin/uAssets/issues/29346
