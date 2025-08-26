@@ -1,5 +1,5 @@
 ! Title: uBlock filters – Privacy
-! Last modified: Tue, 26 Aug 2025 01:18:52 +0000
+! Last modified: Tue, 26 Aug 2025 05:07:30 +0000
 ! Expires: 7 days
 ! Description: |
 !   Some of these filters make use of the `important` filter option,`
@@ -944,6 +944,9 @@ musescore.com##+js(set-local-storage-item, /^rt_/, $remove$)
 ! https://www.thekitchn.com/how-to-tenderize-steak-23567629
 ||atmedia.link/product?url=http$doc,urlskip=?url
 
+! https://gdeslon.ru/faq/22/
+||f.gdeslon.ru/cf/*^goto=http$doc,urlskip=?goto
+
 ! Click Trackers
 ! https://reddit.com/r/uBlockOrigin/comments/14t3y1d/
 html.duckduckgo.com,lite.duckduckgo.com##+js(href-sanitizer, a[href^="//duckduckgo.com/l/?uddg="], ?uddg)
@@ -1237,6 +1240,14 @@ bostonscally.com##+js(remove-cookie, /__ta_|_shopify_y/, when, scroll keydown)
 !#endif
 ! https://www.4gamers.com.tw/
 4gamers.com.tw##+js(remove-cookie, _pkc, when, scroll keydown)
+! https://eu.4game.com/ 
+! test on uBO first
+!#if !ext_ubol
+4game.com##+js(trusted-set-cookie, trk, , 0, , domain, .4game.com)
+4game.ru##+js(trusted-set-cookie, trk, , 0, , domain, .4game.ru)
+4game.com,4game.ru##+js(set-local-storage-item, /fingerprint|trackingEvents/, $remove$)
+||sdk.optimove.net^
+!#endif
 
 ! Query parameter stripping
 ! Google ads/analytics
@@ -1693,7 +1704,8 @@ nytimes.com##+js(no-fetch-if, api.theathletic.com/graphql body:/PostEvent|PostIm
 ||yandexmetrica.com^
 
 ! https://github.com/uBlockOrigin/uAssets/issues/25432
-/^https:\/\/[a-z]\d{3}\.[a-z]+\.com\/script\.js$/$script,1p,strict3p,domain=com,redirect=noopjs
+! https://github.com/uBlockOrigin/uAssets/issues/23511
+/^https:\/\/[a-z][0-9][0-9][0-9]\.[a-z]+\.com\/script\.js$/$script,1p,match-case,domain=com,redirect=noopjs
 
 ! https://github.com/uBlockOrigin/uAssets/issues/25467
 ||shrinkearn.com/full?*&type=1$urlskip=?url -base64 +https

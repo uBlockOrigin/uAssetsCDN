@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Privacy
 ! Expires: 7 days
-! Last modified: Tue, 26 Aug 2025 01:18:52 +0000
-! Diff-Path: ../patches/2025.8.26.126.patch#ublock-privacy
+! Last modified: Tue, 26 Aug 2025 05:07:30 +0000
+! Diff-Path: ../patches/2025.8.26.402.patch#ublock-privacy
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/privacy.txt ***
@@ -478,6 +478,7 @@ musescore.com##+js(set-local-storage-item, /^rt_/, $remove$)
 ||link.sylikes.com/*^url=http$doc,urlskip=?url
 ||hb.afl.rakuten.co.jp/hgc/*^pc=http$doc,urlskip=?pc
 ||atmedia.link/product?url=http$doc,urlskip=?url
+||f.gdeslon.ru/cf/*^goto=http$doc,urlskip=?goto
 ! Click Trackers
 html.duckduckgo.com,lite.duckduckgo.com##+js(href-sanitizer, a[href^="//duckduckgo.com/l/?uddg="], ?uddg)
 starstyle.com##+js(href-sanitizer, a[href^="https://go.skimresources.com/"][href*="&url=http"], ?url)
@@ -656,6 +657,13 @@ bostonscally.com##+js(remove-cookie, /__ta_|_shopify_y/, when, scroll keydown)
 ||api.intelligems.io/v*/track|
 !#endif
 4gamers.com.tw##+js(remove-cookie, _pkc, when, scroll keydown)
+! test on uBO first
+!#if !ext_ubol
+4game.com##+js(trusted-set-cookie, trk, , 0, , domain, .4game.com)
+4game.ru##+js(trusted-set-cookie, trk, , 0, , domain, .4game.ru)
+4game.com,4game.ru##+js(set-local-storage-item, /fingerprint|trackingEvents/, $remove$)
+||sdk.optimove.net^
+!#endif
 ! Query parameter stripping
 ! Google ads/analytics
 $removeparam=gbraid
@@ -965,7 +973,7 @@ nytimes.com##+js(no-fetch-if, api.theathletic.com/graphql body:/PostEvent|PostIm
 ! *$strict3p,ipaddress=::,domain=~0.0.0.0|~127.0.0.1|~[::1]|~[::]|~local|~localhost
 !#endif
 ||yandexmetrica.com^
-/^https:\/\/[a-z]\d{3}\.[a-z]+\.com\/script\.js$/$script,1p,strict3p,domain=com,redirect=noopjs
+/^https:\/\/[a-z][0-9][0-9][0-9]\.[a-z]+\.com\/script\.js$/$script,1p,match-case,domain=com,redirect=noopjs
 ||shrinkearn.com/full?*&type=1$urlskip=?url -base64 +https
 ! cloudflare.com tracking
 blog.cloudflare.com,www.cloudflare.com##+js(no-fetch-if, method:POST body:zaraz)
