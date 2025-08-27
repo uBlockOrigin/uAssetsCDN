@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Tue, 26 Aug 2025 21:55:51 +0000
-! Diff-Path: ../patches/2025.8.27.774.patch#ublock-filters
+! Last modified: Wed, 27 Aug 2025 15:46:41 +0000
+! Diff-Path: ../patches/2025.8.27.1046.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -9807,11 +9807,11 @@ playhydrax.com##+js(rpnt, script, (isNoAds), (true))
 ! fix emturbovid.com player (e.g. supjav.com)
 emturbovid.com###pop
 emturbovid.com,turbocloud.xyz,turbovid.xyz##.div_pop
-emturbovid.com,findjav.com,javggvideo.xyz,mmtv01.xyz,stbturbo.xyz,trailerhg.xyz,turboplayers.xyz##+js(aeld, click, pop)
-emturbovid.com,findjav.com,javggvideo.xyz,mmtv01.xyz,stbturbo.xyz,trailerhg.xyz,turboplayers.xyz##+js(trusted-set, premium, "'1'")
-emturbovid.com,findjav.com,javggvideo.xyz,mmtv01.xyz,stbturbo.xyz,trailerhg.xyz,turboplayers.xyz##+js(nowoif)
-emturbovid.com,findjav.com,javggvideo.xyz,mmtv01.xyz,stbturbo.xyz,trailerhg.xyz,turboplayers.xyz##+js(nostif, window.open)
-emturbovid.com,findjav.com,javggvideo.xyz,mmtv01.xyz,stbturbo.xyz,trailerhg.xyz,turboplayers.xyz##+js(trusted-rpnt, script, /openNewTab\(".*?"\)/g, null)
+emturbovid.com,findjav.com,javggvideo.xyz,mmtv01.xyz,stbturbo.xyz,trailerhg.xyz,turboplayers.xyz,turbovidhls.com##+js(aeld, click, pop)
+emturbovid.com,findjav.com,javggvideo.xyz,mmtv01.xyz,stbturbo.xyz,trailerhg.xyz,turboplayers.xyz,turbovidhls.com##+js(trusted-set, premium, "'1'")
+emturbovid.com,findjav.com,javggvideo.xyz,mmtv01.xyz,stbturbo.xyz,trailerhg.xyz,turboplayers.xyz,turbovidhls.com##+js(nowoif)
+emturbovid.com,findjav.com,javggvideo.xyz,mmtv01.xyz,stbturbo.xyz,trailerhg.xyz,turboplayers.xyz,turbovidhls.com##+js(nostif, window.open)
+emturbovid.com,findjav.com,javggvideo.xyz,mmtv01.xyz,stbturbo.xyz,trailerhg.xyz,turboplayers.xyz,turbovidhls.com##+js(trusted-rpnt, script, /openNewTab\(".*?"\)/g, null)
 !#if cap_html_filtering
 ||emturbovid.com^$replace=/openNewTab\(".*?"\)/null/g
 ||mmtv01.xyz^$replace=/openNewTab\(".*?"\)/null/g
@@ -9819,6 +9819,7 @@ emturbovid.com,findjav.com,javggvideo.xyz,mmtv01.xyz,stbturbo.xyz,trailerhg.xyz,
 ||javggvideo.xyz^$replace=/openNewTab\(".*?"\)/null/g
 ||trailerhg.xyz^$replace=/openNewTab\(".*?"\)/null/g
 ||turboplayers.xyz^$replace=/openNewTab\(".*?"\)/null/g
+||turbovidhls.com^$replace=/openNewTab\(".*?"\)/null/g
 ||emturbovid.com^$csp=sandbox allow-forms allow-same-origin allow-scripts allow-modals allow-orientation-lock allow-pointer-lock allow-presentation allow-top-navigation
 ||turbovid.xyz^$csp=sandbox allow-forms allow-same-origin allow-scripts allow-modals allow-orientation-lock allow-pointer-lock allow-presentation allow-top-navigation
 !#endif
@@ -23970,3 +23971,10 @@ toono.in##+js(set-cookie, skipAd, 1, , reload, 1)
 ! notunmovie. net ad popups
 notunmovie.net##+js(nowoif)
 ||tremblesyringeillusive.com^$all
+! toonhub4u.me intermediate ad annoyance
+toonhub4u.me##+js(href-sanitizer, a[href^="https://toonhub4u.com/redirect/"], ?url -base64)
+! anime site ads
+animahd.com##+js(nowoif, _blank)
+anime4u.pro##+js(rpnt, script, /window\.location\.href.*?;/)
+||quarterbackchangeless.com^$doc,popup
+links4u.shop##[src^="https://iili.io/"]
