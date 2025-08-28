@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Privacy
 ! Expires: 7 days
-! Last modified: Wed, 27 Aug 2025 09:30:34 +0000
-! Diff-Path: ../patches/2025.8.28.219.patch#ublock-privacy
+! Last modified: Thu, 28 Aug 2025 06:36:45 +0000
+! Diff-Path: ../patches/2025.8.28.515.patch#ublock-privacy
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/privacy.txt ***
@@ -40,7 +40,6 @@ old.reddit.com##a.outbound[data-outbound-url]:remove-attr(data-outbound-url)
 www.reddit.com##+js(json-prune, data.*.elements.edges.[].node.outboundLink)
 www.reddit.com##+js(json-prune, data.children.[].data.outbound_link)
 ||redditstatic.com/shreddit/sentry-$domain=reddit.com
-! www.reddit.com##+js(json-edit-fetch-request, .*, propsToMatch, /svc/shreddit/events)
 ||reddit.com^$doc,removeparam=/web_only=/
 ||reddit.com^$doc,removeparam=/deep_link=/
 ||reddit.com^$doc,removeparam=correlation_id
@@ -535,6 +534,8 @@ slant.co##+js(trusted-replace-argument, HTMLAnchorElement.prototype.getAttribute
 voz.vn##a.link.link--external[href][data-proxy-href]:remove-attr(data-proxy-href)
 spreaker.com##+js(href-sanitizer, body a[href^="https://spreaker.onelink.me/"][href*="&af_web_dp=http"], ?af_web_dp)
 dogdrip.net##+js(href-sanitizer, body a[href^="/link.php?url=http"], ?url)
+||donanimhaber.com/ExternalLinkRedirect?*^url=http$doc,urlskip=?url
+donanimhaber.com##+js(href-sanitizer, body a[href^="/ExternalLinkRedirect?"][href*="url=http"], ?url)
 ||cdn.digg.com/fragments/homepage/static/view-frontpage.js
 arstechnica.com,dermnetnz.org##.gsc-webResult a[data-cturl]:remove-attr(/^data-ct/)
 /detroitchicago/dpv.gif?$image
