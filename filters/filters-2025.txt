@@ -1,5 +1,5 @@
 ! Title: uBlock filters (2025)
-! Last modified: Sat, 30 Aug 2025 08:19:50 +0000
+! Last modified: Sat, 30 Aug 2025 14:22:20 +0000
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -351,7 +351,6 @@ daddylive.*##div > a.btn-outline-primary.btn
 daddylive.link#@#+js(aopr, require)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/6296
-||leadnote.me^
 nudogram.com##.sponsor
 nudogram.com##.super_button
 nudogram.com##.wp_xsize_class
@@ -468,10 +467,13 @@ porn00.*##a[href="https://porn00.org/best-casino/"]
 ! https://github.com/uBlockOrigin/uAssets/issues/5988
 ||videorolls.row.aiv-cdn.net/*.mp4$media,redirect=noopmp3-0.1s,domain=amazon.com
 ! https://github.com/uBlockOrigin/uAssets/issues/14512
+! https://github.com/uBlockOrigin/uAssets/issues/29826
 ! https://www.reddit.com/r/uBlockOrigin/comments/14ftp7a/
 ! https://www.reddit.com/r/uBlockOrigin/comments/1ahd08o/amazon_prime_freevee_with_ads_showing_ads_never/
 www.amazon.co.jp,www.amazon.co.uk,www.amazon.com,www.amazon.de,www.primevideo.com##+js(json-prune, cuepointPlaylist vodPlaybackUrls.result.playbackUrls.cuepoints)
-www.amazon.co.jp,www.amazon.co.uk,www.amazon.com,www.amazon.de,www.primevideo.com##+js(xml-prune, xpath(//*[name()="Period"][.//*[@value="Ad"]] | //*[name()="Period"]/@start), [value="Ad"], .mpd)
+www.amazon.co.jp,www.amazon.co.uk,www.amazon.com,www.amazon.de,www.primevideo.com##+js(xml-prune, xpath(//*[name()="Period"][.//*[@value="Ad"]] | /*[name()="MPD"]/@mediaPresentationDuration | //*[name()="Period"]/@start), [value="Ad"], .mpd)
+www.amazon.co.jp,www.amazon.co.uk,www.amazon.com,www.amazon.de,www.primevideo.com##+js(xml-prune, xpath(//*[name()="Period"][.//*[@value="Draper"]] | /*[name()="MPD"]/@mediaPresentationDuration | //*[name()="Period"]/@start), [value="Draper"], .mpd)
+www.amazon.co.jp,www.amazon.co.uk,www.amazon.com,www.amazon.de,www.primevideo.com##+js(xml-prune, 'xpath(//*[name()="Period"][.//*[name()="BaseURL" and contains(text(),"/interstitial/")]] | /*[name()="MPD"][.//*[name()="BaseURL" and contains(text(),"/interstitial/")]]/@mediaPresentationDuration | /*[name()="MPD"][.//*[name()="BaseURL" and contains(text(),"/interstitial/")]]/*[name()="Period"]/@start)', , .mpd)
 primevideo.com##+js(set, ue_adb_chk, 1)
 /GetPlaybackResources?$xhr,removeparam=deviceAdInsertionTypeOverride,domain=www.amazon.co.jp|www.amazon.co.uk|www.amazon.com|www.amazon.de|www.primevideo.com
 !#if ext_ubol
@@ -1432,7 +1434,6 @@ footybite.to,rargb.to,totalsportek.*,totalsportekhd.com##+js(aeld, , open)
 meltol.net###content_area
 cdn256.xyz###overover
 cdn256.xyz###obrazek
-||reverents.xyz^
 ||kakarotfoot.ru/player/lib.js
 @@||blockietv.xyz/adbdetect/
 ! general
@@ -1983,7 +1984,6 @@ kio.ac##canvas[width="300"][height="150"]
 kio.ac##+js(no-fetch-if, mode:no-cors)
 kio.ac##+js(nostif, mode:"no-cors")
 *$script,3p,redirect-rule=noopjs,domain=kio.ac
-||probableregret.com^
 
 ! https://github.com/uBlockOrigin/uAssets/issues/28793
 magnetdl.*##+js(rpnt, script, /window\.location\.replace\([^)]+\);?/g)
@@ -2498,7 +2498,6 @@ porn4fans.com##.fp-brand
 porn4fans.com##.top-links
 porn4fans.com##.bottom-links
 ||go.*.com/smartpop/$all
-||niscprts.com^
 
 ! https://github.com/uBlockOrigin/uAssets/issues/18846#issuecomment-3172977584
 vice.com##.code-block
@@ -2531,7 +2530,6 @@ kaliscan.io##+js(rmnt, script, MutationObserver)
 ! https://nexusgames.to/game/1-wreckfest-free-download-pc-vpc/
 nexusgames.to##+js(acs, document.addEventListener, window.open)
 nexusgames.to##+js(nowoif, _blank)
-||closercopy.cfd^$all
 
 ! https://github.com/uBlockOrigin/uAssets/issues/29693
 vitalitygames.com##+js(no-fetch-if, googlesyndication)
@@ -2600,7 +2598,6 @@ toono.in##+js(set-cookie, skipAd, 1, , reload, 1)
 
 ! notunmovie. net ad popups
 notunmovie.net##+js(nowoif)
-||tremblesyringeillusive.com^$all
 
 ! toonhub4u.me intermediate ad annoyance
 toonhub4u.me##+js(href-sanitizer, a[href^="https://toonhub4u.com/redirect/"], ?url -base64)
