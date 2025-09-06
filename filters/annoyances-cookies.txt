@@ -1,5 +1,5 @@
 ! Title: uBlock filters – Cookie Notices
-! Last modified: Thu, 04 Sep 2025 12:11:57 +0000
+! Last modified: Sat, 06 Sep 2025 07:14:08 +0000
 ! Expires: 7 days
 ! Description: Filters optimized for uBlock Origin, to be used with EasyList's and/or Adguard's "Cookie Notices" list(s)
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -522,9 +522,17 @@ vpd.fi##+js(trusted-set-cookie, amcookie_allowed, 1, 1year, , domain, www.vpd.fi
 vpd.fi##+js(trusted-set-cookie, amcookie_disallowed, recently_viewed_product%2Crecently_viewed_product_previous%2Crecently_compared_product%2Crecently_compared_product_previous%2C_ga%2C_gid%2C_gat, 1year, , domain, www.vpd.fi)
 ! https://github.com/uBlockOrigin/uAssets/issues/29884
 @@||cmp.pubtech.ai/*/pubtech-cmp-v2*.js$script,domain=everyeye.it
+@@||cmp-assets.pubtech.ai/vendorList/*.json$xhr,domain=everyeye.it
 everyeye.it##+js(trusted-click-element, #pubtech-cmp button[aria-label="Continue without accepting"])
 ! https://github.com/uBlockOrigin/uAssets/issues/29900
 godtlevert.no##+js(trusted-set-local-storage-item, reduxStore, '{"tracking":{"consents":{"All":false,"functional":false,"Segment.io":false},"dialog":{"open":false,"dirty":false},"isConfigured":true},"loyalty":{"hasSeenLoyaltyPage":false}}')
+! https://github.com/uBlockOrigin/uAssets/pull/29946
+pepper.pl,dealabs.com,hotukdeals.com,chollometro.com##+js(trusted-click-element, button[data-t="continueWithoutAccepting"], , 1000)
+preisjaeger.at,mydealz.de##+js(trusted-click-element, button[data-t="rejectAll"], , 1000)
+! https://github.com/uBlockOrigin/uAssets/pull/29935
+! Reject, kleinanzeigen.de does A/B testing with consent banner, should work with all 3 types
+kleinanzeigen.de##+js(trusted-click-element, #gdpr-banner-cmp-button,, 1000)
+kleinanzeigen.de##+js(trusted-click-element, button[aria-label="Datenschutzbestimmungen und Einstellungen ablehnen"],, 1200)
 
 !! Needs additional cookies
 
@@ -2638,9 +2646,6 @@ womex.com##+js(trusted-set-cookie, cookieConsent, '{"essential":1,"statistics":0
 ! functional, date=1
 oem.ee##+js(trusted-set-cookie, cookieConsent, functional=1&analytics=0&marketing=0&updated=1, , , reload, 1)
 
-! continueWithoutAccepting
-pepper.it,pepper.pl,preisjaeger.at,mydealz.de,dealabs.com,hotukdeals.com,chollometro.com##+js(trusted-click-element, button[data-t="continueWithoutAccepting"], , 1000)
-
 ! reject
 makelaarsland.nl##+js(trusted-click-element, button.si-cookie-notice__button--reject, , 1000)
 
@@ -4140,9 +4145,6 @@ winparts.eu,winparts.ie,winparts.se##+js(trusted-click-element, a.aanvaarden.gre
 ! necessary
 sportano.*##+js(trusted-click-element, button.button--preferences, , 900)
 sportano.*##+js(trusted-click-element, button.button--confirm, , 1100)
-
-! accept-wall
-kleinanzeigen.de##+js(trusted-click-element, button#gdpr-banner-accept, , 1000)
 
 ! reject
 crocs.*##+js(trusted-click-element, button.js-btn-reject-all, , 1300)
