@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Sun, 07 Sep 2025 12:46:47 +0000
-! Diff-Path: ../patches/2025.9.7.806.patch#ublock-filters
+! Last modified: Sun, 07 Sep 2025 17:15:05 +0000
+! Diff-Path: ../patches/2025.9.7.1112.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -15575,7 +15575,7 @@ photopea.com##div[style]:has(> a[href*="photopea.com"][href*="ads"])
 !#if cap_html_filtering
 ||photopea.com^$doc,replace=/<head>/<script>if (localStorage.length === 0 || typeof JSON.parse(localStorage._ppp)['0_uid'] === 'undefined') {Object.defineProperty(window\, 'innerWidth'\, {get() { return document.documentElement.offsetWidth + 320 }\,});}<\/script><head>/
 !#else
-! photopea.com##+js(trusted-create-html, head, <img src='/invalid.jpg' onerror='if (localStorage.length === 0 || typeof JSON.parse(localStorage._ppp)["0_uid"] === "undefined") {Object.defineProperty(window\, "innerWidth"\, {get() { return document.documentElement.offsetWidth + 320 }});}'></img>)
+www.photopea.com##+js(trusted-create-html, head, <img src='/ad-choices.png' onerror='if (localStorage.length !== 0 || typeof JSON.parse(localStorage._ppp)["0_uid"] !== "undefined") {Object.defineProperty(window\, "innerWidth"\, {get() { return document.documentElement.offsetWidth + 320 }});}'></img>)
 !#endif
 !photopea.com##+js(rpnt, script, /^.*?(function gtag).*$/, document.documentElement.setAttribute('onreset'\,(function addCustomEvent(){document.addEventListener('resizecanvas'\,()=>{window.innerWidth=document.documentElement.clientWidth+(window.screen.width<1600?180:320)})})());document.documentElement.dispatchEvent(new CustomEvent('reset'));document.documentElement.removeAttribute('onreset');function resize(event={}){if(!event.skip){document.dispatchEvent(new CustomEvent('resizecanvas'));const resizeEvent=new Event('resize');resizeEvent.skip=true;window.dispatchEvent(resizeEvent)}}let debounce;window.addEventListener('resize'\,event=>{clearTimeout(debounce);debounce=setTimeout(()=>resize(event)\,100)});resize();)
 photopea.com##+js(no-fetch-if, uniconsent.com, length:2300)
@@ -22699,7 +22699,12 @@ bestwish.lol##+js(nowoif)
 moovitapp.com##+js(no-fetch-if, doubleclick)
 pourcesoir.in##+js(nostif, /adbl/i)
 mahajobwala.in##+js(rmnt, script, /adbl/i)
-! animeshqip. org ads
+! animeshqip. org antiadb & ads
+animeshqip.org##+js(nostif, getComputedStyle)
+||bitadspace.com^$domain=animeshqip.org
+||api.mintfunnel.co^$domain=animeshqip.org
+animeshqip.org##.media-cover.media > div[style]
+animeshqip.org##.list-caption:has-text(Advertisement)
 uns.bio##+js(nowoif)
 uns.bio###dynamic-overlay
 animeshqip.org###__popup_overlay
