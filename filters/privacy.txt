@@ -1,5 +1,5 @@
 ! Title: uBlock filters – Privacy
-! Last modified: Sat, 06 Sep 2025 07:00:20 +0000
+! Last modified: Sun, 07 Sep 2025 04:32:12 +0000
 ! Expires: 7 days
 ! Description: |
 !   Some of these filters make use of the `important` filter option,`
@@ -593,7 +593,6 @@ bikesales.com.au##^html > head > :is([name="canonical"], [rel="canonical"]):not(
 ||simonzody.com^
 
 ! https://www.nickjr.com/video/n0d0md/gabby-s-dollhouse-gabby-s-dollhouse-official-trailer
-||tags.tiqcdn.com^$domain=nickjr.com
 ||events.paramount.tech^$redirect=nooptext,domain=nickjr.com
 
 ! https://github.com/uBlockOrigin/uAssets/issues/19194
@@ -1082,7 +1081,7 @@ heavyfetish.com##+js(cookie-remover, kt_referer)
 ! https://github.com/uBlockOrigin/uAssets/commit/bae8d13992b1c754f83dc268060a8079973d3253#commitcomment-118856194
 ! https://github.com/uBlockOrigin/uAssets/issues/28257
 nypost.com,pagesix.com##+js(json-prune, dataLayer.trackingId user.trackingId)
-columbian.com,pagesix.com##+js(cookie-remover, blaize_tracking_id)
+columbian.com,pagesix.com,theverge.com##+js(cookie-remover, /^blaize_/, when, scroll keydown)
 ! https://www.factable.com/history/maps-that-show-us-a-new-perspective/3/
 factable.com##+js(cookie-remover, akaclientip)
 factable.com##+js(cookie-remover, hive_geoloc)
@@ -1098,9 +1097,6 @@ microsoft.com##+js(trusted-set-cookie, MicrosoftApplicationsTelemetryDeviceId, ,
 fandom.com##+js(set-cookie, Geo, OK)
 ! https://www.clickorlando.com/weather/2023/09/06/cone-computer-models-more-lee-forecast-to-become-major-hurricane/
 clickorlando.com##+js(set-cookie, bitmovin_analytics_uuid, OK)
-! https://www.1und1.de/
-1und1.de##+js(cookie-remover, /optimizelyEndUserId|s_fid|sc_tcr|s_cc/)
-1und1.de##+js(set-local-storage-item, /optimizely_data|tealium_timing/, $remove$)
 ! Sending tracking cookies
 imgur.com##+js(set, Object.prototype.has_opted_out_tracking, trueFunc)
 ! https://www.boundless.com/
@@ -1266,6 +1262,16 @@ form.typeform.com##+js(trusted-set-cookie, attribution_user_id, , 0, , domain, .
 hopper.com##+js(set-local-storage-item, ld:$anonUserId, $remove$)
 ! https://www.mumuplayer.com/
 mumuplayer.com##+js(set-local-storage-item, /_user_id$/, $remove$)
+! https://www.theverge.com/
+! test on uBO first
+!#if !ext_ubol
+||cdn.concert.io/fins/segment
+||cdn.concert.io/pins/segment
+||theverge.com/SendEventData
+||theverge.com/api/coral-counts
+!#endif
+theverge.com##+js(remove-cookie, vmidv1)
+theverge.com##+js(set-local-storage-item, csg_uid, $remove$)
 
 ! Query parameter stripping
 ! Google ads/analytics
@@ -2094,6 +2100,12 @@ grok.com##+js(no-fetch-if, url:/api/statsig/log_event method:POST)
 
 ! https://www.mercari.com/
 ||gateway.us.zip.co/analytics^
+! test on uBO first
+!#if !ext_ubol
+||mercari.com/ko40/
+||u-web-assets.mercdn.net/assets/scripts/raphaelp-*.js
+mercari.com##+js(json-edit-fetch-request, .*[?.operationName=="TrackEvent"], propsToMatch, /v1/api)
+!#endif
 
 ! https://www.reddit.com/r/uBlockOrigin/comments/1kkytyz/how_to_filter_javascript_url_by_id_attribute/
 /^https:\/\/www\.vogue\.com\/[-\w]{120,}$/$script,1p,strict1p,domain=vogue.com
@@ -2303,6 +2315,13 @@ linklog.tiagorangel.com##+js(set, data, true)
 !#if !ext_ubol
 /dfxaf3-*.js|$script
 ||terabox.app/wfm/jnqp
+!#endif
+
+! Tealium
+! test on uBO first
+!#if !ext_ubol
+||tags.tiqcdn.com/utag/*/prod/utag.js$domain=1und1.de|adidas.co.uk|adidas.nl|adidas.pl|anantara.com|brother-usa.com|calvinklein.ca|cnet.com|grubhub.com|help.dropbox.com|hulu.com|iflscience.com|krymr.com|lineadirecta.com|louisvuitton.com|mcafee.com|mitsubishi-motors.co.jp|modernatx.com|monroeandmain.com|mtv.co.uk|mtv.de|mtv.it|mtvema.com|nickjr.com|post.ch|qvc.jp|radissonhotels.com|sibreal.org|simplybusiness.co.uk|talksport.com|taylor.com|thesun.co.uk|totaljobs.com|truecar.com|uber.com|ubereats.com|usnews.com
+||tags.tiqcdn.com/utag/*/utag.sync.js$domain=calvinklein.ca|hosteurope.de|sibreal.org|yousee.dk
 !#endif
 
 ! Merge in resource-abuse.txt
