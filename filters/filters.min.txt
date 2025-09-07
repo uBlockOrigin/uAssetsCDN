@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Sat, 06 Sep 2025 16:52:34 +0000
-! Diff-Path: ../patches/2025.9.6.1344.patch#ublock-filters
+! Last modified: Sun, 07 Sep 2025 03:05:37 +0000
+! Diff-Path: ../patches/2025.9.7.188.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -449,6 +449,7 @@ wcoforever.net##.anti-ad
 wcoforever.net###sidebar_r1
 @@||embed.watchanimesub.net^$script,1p
 @@||embed.wcostream.com^$ghide
+embed.wcostream.com##+js(remove-cookie, PHPSESSID)
 ||embed.wcostream.com/inc/embed/index.php?file=$uritransform=/index/video-js/
 handelsblatt.com##+js(no-xhr-if, request=adb)
 @@||handelsblatt.com^$ghide
@@ -9874,6 +9875,11 @@ yabaisub.cloud##+js(trusted-click-element, #player-option-1, , 500)
 ||ahskummakjt.com^
 ! !SECTION: .protection / detectAdblock
 ! SECTION: Non-English sites
+! NOTE: Armenian
+||auto.am/static/azd/
+auto.am##.azd-top
+auto.am##.bncont
+auto.am##.toggle-adv-search
 ! NOTE: Chinese
 @@||cdn.jsdmirror.com/gh/justlovemaki/imagehub@main/js/adview_pic_cpc_cpm_cpa_guanggao_gg_guge__ads_300x250.js
 !#if !env_mobile
@@ -17570,7 +17576,6 @@ novelpub.com##div[class][data-mobid] > div[class="vm-placement"][data-id]:upward
 lightnovelspot.com,novelpub.com##*:matches-css-before(content: /Adv/)
 lightnovelspot.com,novelpub.com,webnovelpub.com##+js(nostif, =>)
 ! listen.tidal.com##+js(json-prune, countryCode, tidalId)
-mail.yahoo.com##+js(nostif, ADB)
 taigoforum.de##+js(acs, $, .show)
 myanimelist.net##[data-koukoku-width]:remove()
 myanimelist.net##+js(rmnt, style, body:not(.ownlist))
@@ -20038,6 +20043,7 @@ channel4.com##.advertsMpu
 channel4.com##.block--mpu
 channel4.com##+js(json-prune, adverts.breaks)
 ! mail.yahoo.com stuff
+mail.yahoo.com##+js(json-prune, result.responses.[].response.result.cards.[-].data.offers)
 mail.yahoo.com##[data-test-id="right-rail-ad"]
 mail.yahoo.com##[data-test-id="video-container"]
 mail.yahoo.com##[aria-labelledby^="bottom-sticky-pencil-ad-brand-name"]
@@ -20051,6 +20057,7 @@ yahoo.com###HPSPON-ad
 www.yahoo.com##.sticky[class*="top-"]:has(style)
 www.yahoo.com##div[id]:has(> div[id^="top_center-frontpage_"])
 sports.yahoo.com###defaultLDRB-sizer
+mail.yahoo.com##+js(nostif, ADB)
 jpopsingles.eu##+js(nano-sib, downloadTimer)
 jpopsingles.eu##+js(noeval-if, adsBlocked)
 @@||jpopsingles.eu^$ghide
