@@ -1,5 +1,5 @@
 ! Title: uBlock filters (2025)
-! Last modified: Tue, 09 Sep 2025 17:36:20 +0000
+! Last modified: Wed, 10 Sep 2025 06:00:38 +0000
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -493,6 +493,12 @@ primevideo.com##+js(set, ue_adb_chk, 1)
 nfl.com##[class$="adblock"]
 ! https://github.com/AdguardTeam/AdguardFilters/issues/213076
 nfl.com##+js(no-fetch-if, imasdk)
+
+! https://github.com/uBlockOrigin/uAssets/issues/22511
+@@||savelinks.*^$ghide
+savelinks.*##+js(aopr, LieDetector)
+savelinks.*##+js(nowoif)
+savelinks.*##+js(aeld, DOMContentLoaded, window.open)
 
 ! END: Rules from filters.txt
 
@@ -2037,7 +2043,7 @@ condorsoft.co##+js(no-xhr-if, googlesyndication)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/21941
 /\.gsmarena\.com\/[0-9]+\.php3/$xhr,1p,domain=gsmarena.com
-/\.gsmarena\.com\/[0-9]+\.php\?sSearch=/$xhr,1p,domain=gsmarena.com
+/\.gsmarena\.com\/[0-9]+\.[a-z]+\?sSearch=/$xhr,1p,domain=gsmarena.com
 
 ! https://github.com/AdguardTeam/AdguardFilters/issues/207864
 remotejobzone.online##+js(no-fetch-if, adsbygoogle)
@@ -2721,3 +2727,9 @@ spaziogames.it##div[id^="widgetbay-placeholder"]
 
 ! element picker bypass by site
 kuyhaa.me##+js(aeld, DOMContentLoaded, setInterval)
+
+! https://forge.plebmasters.de/objects - sponsor items
+forge.plebmasters.de##+js(json-prune, results.[-].advertisement)
+
+! https://www.mahfda.com/view/-baldur-s-gate-3 - anti-adb
+mahfda.com##+js(set, __aab_init, true)
