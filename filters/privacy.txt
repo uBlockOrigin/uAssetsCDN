@@ -1,5 +1,5 @@
 ! Title: uBlock filters – Privacy
-! Last modified: Fri, 12 Sep 2025 02:41:54 +0000
+! Last modified: Fri, 12 Sep 2025 08:19:22 +0000
 ! Expires: 7 days
 ! Description: |
 !   Some of these filters make use of the `important` filter option,`
@@ -947,6 +947,9 @@ musescore.com##+js(set-local-storage-item, /^rt_/, $remove$)
 ! https://gdeslon.ru/faq/22/
 ||f.gdeslon.ru/cf/*^goto=http$doc,urlskip=?goto
 
+! https://sourceforge.net/software/
+||sourceforge.net/software/link?*__oadest=http$doc,urlskip=/__oadest=(http[^#&]+)/ -uricomponent
+
 ! Click Trackers
 ! https://reddit.com/r/uBlockOrigin/comments/14t3y1d/
 html.duckduckgo.com,lite.duckduckgo.com##+js(href-sanitizer, a[href^="//duckduckgo.com/l/?uddg="], ?uddg)
@@ -1069,6 +1072,12 @@ arstechnica.com,dermnetnz.org##.gsc-webResult a[data-cturl]:remove-attr(/^data-c
 ! https://ozlosleep.com/pages/buy-sleepbuds
 /wpm@*/web-pixel-
 /shopifycloud/media-analytics/v*/analytics.js
+
+! Test on uBO first
+!#if !ext_ubol
+! https://github.com/AdguardTeam/AdguardFilters/issues/213240
+||bdvmetricas.banvenez.com.ve^
+!#endif
 
 ! Tracking cookies
 ! fastly click-through
