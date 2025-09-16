@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Privacy
 ! Expires: 7 days
-! Last modified: Tue, 16 Sep 2025 12:24:01 +0000
-! Diff-Path: ../patches/2025.9.16.774.patch#ublock-privacy
+! Last modified: Tue, 16 Sep 2025 13:39:27 +0000
+! Diff-Path: ../patches/2025.9.16.1045.patch#ublock-privacy
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/privacy.txt ***
@@ -554,6 +554,7 @@ arstechnica.com,dermnetnz.org##.gsc-webResult a[data-cturl]:remove-attr(/^data-c
 ||11st.co.kr/js/product/RakeData.js
 ||11st.co.kr/emw.st?
 ||paypal.com/v1/r/d/b/$image
+||playnow.wtf^
 !#endif
 ! Tracking cookies
 ! fastly click-through
@@ -697,6 +698,8 @@ mykitsch.com##+js(set-local-storage-item, /lc_anon_user_id|_constructorio_search
 ||lumhdco.mykitsch.com/*/js|$script
 ||rakutenadvertising.io^$3p
 !#endif
+huntress.com##+js(remove-cookie, /^_sp_id/, when, scroll keydown)
+huntress.com##+js(set-local-storage-item, /builderVisitorId|snowplowOutQueue_cf/, $remove$)
 ! Query parameter stripping
 ! Google ads/analytics
 $removeparam=gbraid
@@ -1380,6 +1383,7 @@ forbes.com##main div[class][style^="top:"]:has(> div > fbs-video[ad-unit-path])
 !#if !ext_ubol
 digitalspy.com##section.inline-content-module
 !#endif
+||cdn.jsdelivr.net/npm/statsig-js
 ! Merge in resource-abuse.txt
 ! *** uAssets:filters/resource-abuse.txt ***
 /edgemesh.*.js$script,domain=~edgemesh.com|~edgeno.de
@@ -1454,3 +1458,4 @@ barstoolsports.com##+js(no-fetch-if, method:HEAD)
 miro.com##+js(no-xhr-if, /eventhub\.\w+\.miro\.com\/api\/stream/)
 netflix.com##+js(no-fetch-if, logs.netflix.com)
 lared.cl##+js(no-xhr-if, s73cloud.com/metrics/)
+zorroplay.xyz##+js(rmnt, script, sendFakeRequest)
