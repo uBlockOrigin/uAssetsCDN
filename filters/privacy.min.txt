@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Privacy
 ! Expires: 7 days
-! Last modified: Wed, 17 Sep 2025 08:25:44 +0000
-! Diff-Path: ../patches/2025.9.17.514.patch#ublock-privacy
+! Last modified: Wed, 17 Sep 2025 09:01:29 +0000
+! Diff-Path: ../patches/2025.9.17.813.patch#ublock-privacy
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/privacy.txt ***
@@ -557,6 +557,7 @@ arstechnica.com,dermnetnz.org##.gsc-webResult a[data-cturl]:remove-attr(/^data-c
 ||playnow.wtf^
 &ii=fingerprintjs-pro-react
 intellischool.id##+js(no-xhr-if, fingerprintjs-pro-react)
+||pbc.nypost.com^
 !#endif
 ! Tracking cookies
 ! fastly click-through
@@ -704,6 +705,8 @@ huntress.com##+js(remove-cookie, /^_sp_id/, when, scroll keydown)
 huntress.com##+js(set-local-storage-item, /builderVisitorId|snowplowOutQueue_cf/, $remove$)
 flo.com.tr##+js(remove-cookie, bunsar_visitor_id, when, scroll keydown)
 flo.com.tr##+js(set-local-storage-item, /__anon_id|efl-uuid/, $remove$)
+nypost.com##+js(set-local-storage-item, /SPOTIM_DEVICE_UUID|social-browser-storage/, $remove$)
+gala.com##+js(set-local-storage-item, _gal1, $remove$)
 ! Query parameter stripping
 ! Google ads/analytics
 $removeparam=gbraid
@@ -1389,6 +1392,8 @@ digitalspy.com##section.inline-content-module
 !#endif
 ||cdn.jsdelivr.net/npm/statsig-js
 ||stats.pronouns.page^
+||googletagmanager.com/gtm.js$important,domain=dmax.de
+dmax.de##.block-user:remove-class(block-user)
 ! Merge in resource-abuse.txt
 ! *** uAssets:filters/resource-abuse.txt ***
 /edgemesh.*.js$script,domain=~edgemesh.com|~edgeno.de
