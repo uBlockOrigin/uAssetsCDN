@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Quick fixes
 ! Expires: 12 hours
-! Last modified: Thu, 18 Sep 2025 05:52:31 +0000
-! Diff-Path: ../patches/2025.9.18.568.patch#ublock-quick-fixes
+! Last modified: Thu, 18 Sep 2025 14:19:36 +0000
+! Diff-Path: ../patches/2025.9.18.869.patch#ublock-quick-fixes
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/quick-fixes.txt ***
@@ -98,7 +98,6 @@ jilliandescribecompany.com##+js(acs, globalThis, break;case)
 ||platform.pubadx.one/pubadx-ad.js$script,domain=japscan.*,important
 ||static.cloudflareinsights.com/beacon.min.js/$script,domain=japscan.*,important
 !#endif
-japscan.*##+js(norafif, /^/)
 japscan.*##+js(trusted-set-attr, .navbar-nav > li#navpromo2.nav-item > a, onclick, 'let a=function(){};return false;')
 japscan.*##+js(no-fetch-if, /\/\/ansuksar\.com\/[0-9a-zA-Z]{3\,26}\/\d{4\,6}\b/, length:125746)
 ! START: Counter Liste FR rules
@@ -122,8 +121,9 @@ japscan.*##+js(trusted-replace-argument, String.prototype.includes, 0, json:'', 
 japscan.*##+js(trusted-replace-argument, String.prototype.indexOf, 0, json:'', condition, function runAutoTag() { [native code] })
 japscan.*##+js(trusted-replace-argument, String.prototype.split, 0, json:'', condition, function runAutoTag() { [native code] })
 japscan.*##+js(nostif, /&&\s*[A-Z]{4\,}\(\)/)
-japscan.*##+js(nostif, /\(\s*[\s$0-9A-Z_a-z]*\)\s*=>|^\s*function\s*\(\s*[\s$0-9A-Z_a-z]*\)\s*\{.{10\,100}/, 1000)
-japscan.*##+js(trusted-suppress-native-method, Document.prototype.querySelector, '"/^[.#][A-Za-z]+_[A-Za-z]*$/"', prevent, /stackDepth:4.+inlineScript/)
+japscan.*##+js(nostif, /\(\s*[\s$0-9A-Z_a-z]*\)\s*=>|^\s*function\s*\(\s*[\s$0-9A-Z_a-z]*\)\s*\{.{35\,100}/, 1000)
+japscan.*##+js(trusted-suppress-native-method, Document.prototype.querySelector, '"/^[.#][A-Za-z]+_[A-Za-z]*$/"', prevent, /stackDepth:[45].+inlineScript/)
+japscan.*##+js(trusted-suppress-native-method, Document.prototype.querySelector, '"/^\[class~=/"', prevent, inlineScript)
 poophq.com,veev.to,doods.to##+js(nowoif)
 poophq.com,veev.to,doods.to##+js(no-xhr-if, /vast.php?)
 poophq.com,veev.to,doods.to##+js(no-xhr-if, /click\.com|preroll|native_render\.js|acscdn/, length:10001)
@@ -206,7 +206,8 @@ bing.com##ol#b_results > li:has(> :is(.b_tpcn, .b_title, h2) a[href^="https://ww
 bing.com##ol#b_results > li.b_algo:has(.b_lineclamp3:matches-css-before(content:/^url\(\Sdata:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAAAD.AAAA/))
 cdn.bg-gledai.*,cdn.gledaitv.*##+js(no-fetch-if, method:HEAD)
 cdn.bg-gledai.*,cdn.gledaitv.*##+js(no-xhr-if, method:HEAD)
-cdn.gledaitv.*##+js(rmnt, script, /\.textContent|createObjectURL|Function\(decodedScript\)|script\.innerHTML/)
+cdn.gledaitv.*##+js(rmnt, script, /\.textContent|createObjectURL|Function\(decodedScript\)/)
+cdn.gledaitv.*##+js(trusted-replace-argument, decodeURIComponent, 0, , condition, script.innerHTML)
 cdn.bg-gledai.*,cdn.gledaitv.*##[id^="anti-pedali-"]
 faqwiki.us##+js(nostif, .offsetHeight>0)
 faqwiki.*##+js(rmnt, script, /adblock/i)
@@ -265,8 +266,7 @@ global.novelpia.com##div[id^="novelpia_"]:remove()
 ||trailerhg.xyz^$badfilter
 shopee.sg#@#.shopee-search-item-result__item:has-text(Ad)
 !#if !ext_ubol
-||youtube.com/api/stats/atr?ns=*&ver=2&cmt=1.*&fs=0&*&euri&lact=$xhr,method=post,removeparam
-! ||youtube.com/api/stats/atr?ns=*&ver=2&cmt=1.*&fs=0&*&euri&lact=$xhr,method=post
+||youtube.com/api/stats/atr?ns=*&ver=2&cmt=1.*&fs=0&*&euri&lact=$xhr,method=post
 ||youtube.com/api/stats/qoe?*page&ns=yt&fexp=v1%*&event=streamingstats&$xhr,method=post
 ||youtube.com/ptracking?html5=1&video_id=*&cpn=*&ei=*&ptk=youtube_*&pltype=content$xhr,method=get
 !#endif
