@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Tue, 07 Oct 2025 07:24:33 +0000
-! Diff-Path: ../patches/2025.10.7.515.patch#ublock-filters
+! Last modified: Tue, 07 Oct 2025 13:21:17 +0000
+! Diff-Path: ../patches/2025.10.7.816.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -5693,11 +5693,9 @@ tvspielfilm.de,tvtoday.de,chip.de,focus.de,fitforfun.de##+js(set, DL8_GLOBALS.en
 n-tv.de##+js(set, Object.prototype.adReinsertion, noopFunc)
 player.rtl2.de##+js(set, getHomadConfig, noopFunc)
 ||damoh.welect.de^
-||united-infos.net^$domain=gmx.*|web.de
-focus.de,kicker.de##+js(json-prune, enabled, force_disabled)
 ||damoh.gmx.*/*$media,redirect=noop-0.1s.mp3,1p
 ||united-infos.net^$domain=gmx.*|web.de
-focus.de##+js(json-prune, enabled, force_disabled)
+focus.de,kicker.de##+js(json-prune, enabled, force_disabled)
 gmx.*,web.de##+js(aeld, timeupdate)
 *$media,redirect-rule=noop-0.1s.mp3,3p,domain=gmx.*|web.de
 !#if env_firefox
@@ -9917,7 +9915,7 @@ turtleviplay.xyz##+js(nowoif)
 ! !SECTION: TurboVIPlay
 ! SECTION: BigWarp
 bigwarp.*##+js(nowoif)
-bigwarp.cc##+js(rmnt, script, createOverlay)
+bigwarp.*##+js(acs, document.createElement, overlay)
 ||bigwarp.io/images/close.png$image
 bigwarp.*###blk1
 *$script,3p,denyallow=bigwarp.io|bootstrapcdn.com|fontawesome.com|gstatic.com|jsdelivr.net,domain=bigwarp.cc
@@ -9957,6 +9955,12 @@ auto.am##.toggle-adv-search
 hraparak.am##.big_advert
 ! NOTE: Bulgarian
 ||advertere.zamunda.net^
+@@||seirsanduk.*?loader.js^$script,domain=seirsanduk.*
+@@||ads.poshtata.online/loader.js$script,domain=seirsanduk.*|seirsanduk.com|seirsanduk.net
+! MV3 wildcard issue
+!#if ext_ubol
+@@||seirsanduk.*?loader.js^$script,domain=seirsanduk.com|seirsanduk.online
+!#endif
 ! NOTE: Chinese
 @@||cdn.jsdmirror.com/gh/justlovemaki/imagehub@main/js/adview_pic_cpc_cpm_cpa_guanggao_gg_guge__ads_300x250.js
 !#if !env_mobile
@@ -21732,11 +21736,6 @@ secondhandsongs.com##+js(aost, document.getElementById, inlineScript)
 !#endif
 3bmeteo.com##+js(set, elimina_profilazione, 1)
 3bmeteo.com##+js(set, elimina_pubblicita, 1)
-@@||seirsanduk.*?loader.js^$script,domain=seirsanduk.*
-! MV3 wildcard issue
-!#if ext_ubol
-@@||seirsanduk.*?loader.js^$script,domain=seirsanduk.com|seirsanduk.online
-!#endif
 textreverse.com##+js(no-fetch-if, snigelweb.com)
 textreverse.com##.clearfix
 textreverse.com##.moretooladd
@@ -23683,7 +23682,7 @@ briefly.co.za##.c-adv
 briefly.co.za##.c-adv-branding__top
 sourceb.in##.carbon
 ! popup on age verification
-artificialnudes.com,asianmassage.xyz,bdsmkingdom.xyz,compilationtube.xyz,cosplaynsfw.xyz,crazytoys.xyz,handypornos.net,hardcorelesbian.xyz,latinabbw.xyz,platinporno.com,pornahegao.xyz,pornobait.com,pornfeet.xyz,romanticlesbian.com,sexontheboat.xyz,traumporno.com##+js(set, dclm_ajax_var.disclaimer_redirect_url, '')
+artificialnudes.com,asianal.xyz,asianmassage.xyz,bdsmkingdom.xyz,compilationtube.xyz,cosplaynsfw.xyz,crazytoys.xyz,handypornos.net,hardcorelesbian.xyz,latinabbw.xyz,platinporno.com,pornahegao.xyz,pornobait.com,pornfeet.xyz,romanticlesbian.com,sexontheboat.xyz,traumporno.com##+js(set, dclm_ajax_var.disclaimer_redirect_url, '')
 india.marathinewz.in##+js(no-fetch-if, adsbygoogle, war:googlesyndication_adsbygoogle.js)
 freegames.com##+js(nostif, moneyDetect)
 ! nsfw aagmaal. com 
@@ -23923,7 +23922,6 @@ djmaza.my,hdvideo9.com##+js(nowoif)
 live.arynews.tv##+js(set, Object.prototype.adOnAdBlockPreventPlayback, false)
 1movierulzhd.pro##+js(no-xhr-if, adsbygoogle)
 vdl.np-downloader.com##+js(nowoif, ?key=)
-/vast.php?idzone=
 pornlore.com##.koukoku_1
 pornlore.com##+js(set, pre_roll_url)
 pornlore.com##+js(set, post_roll_url)
