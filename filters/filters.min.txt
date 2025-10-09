@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Thu, 09 Oct 2025 04:59:00 +0000
-! Diff-Path: ../patches/2025.10.9.328.patch#ublock-filters
+! Last modified: Thu, 09 Oct 2025 09:47:02 +0000
+! Diff-Path: ../patches/2025.10.9.632.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -8723,11 +8723,15 @@ akaihentai.com##+js(rmnt, script, popMagic)
 =3&*,0|$script,3p,to=com
 =3&*,1|$script,3p,to=com
 !#if ext_ubol
-/^https:\/\/www\.[a-z]{8,16}\.com\/(?:[a-zA-Z]{1,6}\/){0,2}[a-z](?:client|favico|jsoneditor|random)\.min\.js$/$script,3p,match-case,to=com,header=link:*/>;rel=preconnect
-/^https:\/\/www\.[a-z]{8,16}\.com\/(?:[a-zA-Z]{1,6}\/){0,2}[a-z]{7,11}\.min\.js$/$script,3p,match-case,to=com,header=popads-node
-/\.cloudfront\.net\/(?:[a-zA-Z]{1,6}\/){0,2}[a-z](?:client|favico|jsoneditor|random)\.min\.js$/$script,3p,match-case,to=cloudfront.net,header=link:*/>;rel=preconnect
-/\.cloudfront\.net\/(?:[a-zA-Z]{1,6}\/){0,2}[a-z]{7,11}\.min\.js$/$script,3p,match-case,to=cloudfront.net,header=popads-node
+/^https:\/\/www\.[a-z]{8,16}\.com\/(?:[a-zA-Z]{1,6}\/){0,2}[a-z]{5,11}\.min\.js$/$script,3p,match-case,to=com,header=link:*/>;rel=preconnect
+/^https:\/\/www\.[a-z]{8,16}\.com\/(?:[a-zA-Z]{1,6}\/){0,2}[a-z]{5,11}\.min\.js$/$script,3p,match-case,to=com,header=popads-node
+/\.cloudfront\.net\/(?:[a-zA-Z]{1,6}\/){0,2}[a-z]{5,11}\.min\.js$/$script,3p,match-case,to=cloudfront.net,header=link:*/>;rel=preconnect
+/\.cloudfront\.net\/(?:[a-zA-Z]{1,6}\/){0,2}[a-z]{5,11}\.min\.js$/$script,3p,match-case,to=cloudfront.net,header=popads-node
 ://www.*.css|$script,xhr,3p,to=com,header=link:*/>;rel=preconnect
+!#endif
+!#if env_safari
+/^https?:\/\/www\.[a-z][a-z][a-z][a-z][a-z][a-z][a-z][a-z][a-z]?[a-z]?[a-z]?[a-z]?[a-z]?[a-z]?[a-z]?[a-z]?\.com\/([a-zA-Z][a-zA-Z]?[a-zA-Z]?[a-zA-Z]?[a-zA-Z]?[a-zA-Z]?\/)?([a-zA-Z][a-zA-Z]?[a-zA-Z]?[a-zA-Z]?[a-zA-Z]?[a-zA-Z]?\/)?([a-zA-Z][a-zA-Z]?[a-zA-Z]?[a-zA-Z]?[a-zA-Z]?[a-zA-Z]?\/)?[a-z][a-z][a-z][a-z][a-z][a-z]?[a-z]?[a-z]?[a-z]?[a-z]?[a-z]?\.min\.js$/$script,3p,match-case,to=com,from=dad
+/\.cloudfront\.net\/([a-zA-Z][a-zA-Z]?[a-zA-Z]?[a-zA-Z]?[a-zA-Z]?[a-zA-Z]?\/)?([a-zA-Z][a-zA-Z]?[a-zA-Z]?[a-zA-Z]?[a-zA-Z]?[a-zA-Z]?\/)?([a-zA-Z][a-zA-Z]?[a-zA-Z]?[a-zA-Z]?[a-zA-Z]?[a-zA-Z]?\/)?[a-z][a-z][a-z][a-z][a-z][a-z]?[a-z]?[a-z]?[a-z]?[a-z]?[a-z]?\.min\.js$/$script,3p,match-case,to=cloudfront.net,from=dad
 !#endif
 !#if cap_ipaddress
 /^https:\/\/www\.[a-z]{8,16}\.com\/(?:[A-Za-z]+\/)*(?:[_0-9A-Za-z]{1,20}[-.])*[_0-9A-Za-z]{1,20}\.js$/$script,3p,match-case,to=com,ipaddress=/^([78]9\.1[28]7\.[12]\d{2}\.\d{1,3}|84\.17\.57\.\d{1,2}|207\.211\.208\.184|2a02:6ea0:d[16]0[0c]::\d{1,2})$/
@@ -18880,6 +18884,9 @@ paylinks.cloud##div[id^="idc"][style]
 2embed.*##^script:has-text(break;case)
 *$script,3p,denyallow=ajax.googleapis.com,domain=2embed.cc
 ||guardedoccupybatter.com^
+||cdn.jsdelivr.net/npm/disable-devtool@latest$script,domain=vidapi.xyz
+player4u.xyz,vidapi.xyz##[href*="?key="]:upward(1)
+||xml.clickmediahub.com^
 apkhihe.com##+js(nano-sib, show_download_links)
 lordchannel.com##+js(rmnt, script, await)
 schools.snap.app##div.ant-modal-root:has(img[alt="Advertisement"])
@@ -23912,3 +23919,4 @@ mangadex.org##a[href^="https://www.runoperagx.com/"]
 tv247us.live##+js(nostif, .offsetHeight)
 imleagues.com##+js(nostif, .redirected)
 app.simracing.gp##+js(nostif, .getComputedStyle)
+||audiocircuit.dk/wp-content/plugins/awiftysw/
