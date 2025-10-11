@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Quick fixes
 ! Expires: 12 hours
-! Last modified: Fri, 10 Oct 2025 11:40:32 +0000
-! Diff-Path: ../patches/2025.10.11.179.patch#ublock-quick-fixes
+! Last modified: Sat, 11 Oct 2025 06:46:43 +0000
+! Diff-Path: ../patches/2025.10.11.442.patch#ublock-quick-fixes
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/quick-fixes.txt ***
@@ -126,7 +126,6 @@ japscan.*##+js(trusted-replace-argument, String.prototype.indexOf, 0, json:'', c
 japscan.*##+js(trusted-replace-argument, String.prototype.split, 0, json:'', condition, function runAutoTag() { [native code] })
 japscan.*##+js(nostif, /&&\s*[A-Z]{4\,}\(\)/)
 japscan.*##+js(nostif, /\(\s*[\s$0-9A-Z_a-z]*\)\s*=>|^\s*function\s*\(\s*[\s$0-9A-Z_a-z]*\)\s*\{.{35\,100}|document\[|nextElementSibling/, 1000)
-japscan.*##+js(trusted-suppress-native-method, Document.prototype.querySelector, '"/^[.#][A-Za-z]+_[A-Za-z]*$/"', prevent, /stackDepth:[4-7].+inlineScript/)
 japscan.*##+js(trusted-suppress-native-method, Document.prototype.querySelector, '"/^\[class~=/"', prevent, inlineScript)
 japscan.*##+js(trusted-suppress-native-method, Document.prototype.getElementsByClassName, '"/#/"')
 japscan.*##body > div.full-container > div.full-container.text-center > div.mt-2[style="margin: 0px auto; display: block;"] > a.Aikoi.donate[target="_blank"][rel][href^="https://www.longosto.shop/?utm_source="] > img.img-fluid
@@ -204,9 +203,10 @@ smsonline.cloud##html[data-theme][lang] [id^="img_"][style]:has(iframe[framebord
 07c225f3.online,content-loader.com,css-load.com,html-load.com,img-load.com##html:not(:has(> head > style:only-child:has-text(width:399px;height:411px))):style(filter: opacity(0) !important; pointer-events: none !important;)
 /^https:\/\/www\.[0-9a-z-]{6,}\.(?:com|xyz)\/script\/(?:[-.0-9A-Za-z]+\.)?[-0-9A-Za-z]{2,30}\.js$/$script,3p,match-case,header=x-length
 ://html-load.com/loader.min.js$domain=~dogdrip.net|~infinityfree.com|~smsonline.cloud
-/^https:\/\/(?:as(?:loader)?|loader)\.[-0-9A-Za-z]+\.[-A-Za-z]{2,16}\/loader\.min\.js$/$script,1p,strict3p,match-case,domain=~edu|~gov
+/^https:\/\/(?:as(?:loader)?|loader)\.([-0-9A-Za-z]+\.[-A-Za-z]{2,16})\/(?:loader\.min|script\/(?:www\.)?\1)\.js$/$script,1p,strict3p,match-case,domain=~edu|~gov
 !#if ext_ubol
 /^https:\/\/loader\.[-0-9a-z]+\.[a-z][a-z][a-z]?\/loader\.min\.js$/$script,1p,match-case,domain=~edu|~gov
+/^https:\/\/loader\.[-0-9a-z]+\.[a-z][a-z][a-z]?\/script\/www\.[-0-9a-z]+\.js$/$script,1p,match-case,domain=~edu|~gov
 !#endif
 dogdrip.net,infinityfree.com,smsonline.cloud##+js(no-fetch-if, -load.com/script/, length:101)
 dogdrip.net,infinityfree.com,smsonline.cloud##+js(nostif, )](this\,..., 3000-6000)
@@ -244,10 +244,11 @@ pvpoke-re.com##+js(trusted-replace-argument, Math.round, 0, 121, condition, /^(\
 pvpoke-re.com##+js(trusted-set-attr, *:not(#nitro-top\,.nitro-any\,#nitro-body-desktop\,#nitro-header-mobile) > ins.adsbygoogle:not(:has(#aswift_0)), data-ad-status, filled)
 pvpoke-re.com##+js(trusted-set-attr, ins.adsbygoogle:has(> #aswift_0_host), data-ad-status, unfilled)
 pvpoke-re.com##+js(ra, data-instype, ins.adsbygoogle:has(> div#aswift_0_host), stay)
-||pvpoke-re.com/*.js?v=$replace=/([};])location(?:\[.+?\]){2}\(.+?\)===-(?:\(.+?\)|_?0x[0-9a-f]+)&&.*?location(?:\[.+?\]){2}\(.+?\)+[\,>]-(?:\(.+?\)+|_?0x[0-9a-f]+)\?/\$1 0 ?/
-||pvpoke-re.com/*.js?v=$replace=/if\(location(?:\[.+?\]){2}\(.+?\).*?&&.*?location(?:\[.+?\]){2}\(.+?\)+[\,>]-(?:\(.+?\)+|_?0x[0-9a-f]+\))/if(0)/
-||pvpoke-re.com/*.js?v=$replace=/([};])_0x[0-9a-f]+\[(?:_0x[0-9a-f]+\([-0-9a-fx\,]+?\)|'[A-Za-z]+')\]\(location(?:\[(?:_0x[0-9a-f]+\(.+?\)|'[A-Za-z]+')\]){2}\(.+?\)\,-\(.+?\)\)&&.*?location(?:\[.+?\]){2}\(.+?\)+[\,>]-\(.+?\)\?/\$1 0 ?/
-||pvpoke-re.com/*.js?v=$replace=/if\(_0x[0-9a-f]+\[(?:_0x[0-9a-f]+\([-0-9a-fx\,]+?\)|'[A-Za-z]+')\]\(location(?:\[(?:_0x[0-9a-f]+\(.+?\)|'[A-Za-z]+')\]){2}\(.+?\)\,-\(.+?\)\)&&.*?location(?:\[.+?\]){2}\(.+?\)+[\,>]-(?:\(.+?\)+|_?0x[0-9a-f]+\))/if(0)/
+||pvpoke-re.com/*.js?v=$replace=/([};])location(?:\[.+?\]|[.Oa-z]+){2}\(.+?\)===-(?:\(.+?\)|_?0x[0-9a-f]+|1)&&.*?location(?:\[.+?\]|[.Oa-z]+){2}\(.+?\)+[\,>]-(?:\(.+?\)+|_?0x[0-9a-f]+|1)\?/\$1 0 ?/
+||pvpoke-re.com/*.js?v=$replace=/if\(location(?:\[.+?\]|[.Oa-z]+){2}\(.+?\).*?&&.*?location(?:\[.+?\]|[.Oa-z]+){2}\(.+?\)+[\,>]-(?:\(.+?\)+|_?0x[0-9a-f]+\)|1)/if(0)/
+||pvpoke-re.com/*.js?v=$replace=/([};])_0x[0-9a-f]+\[(?:_0x[0-9a-f]+\([-0-9a-fx\,]+?\)|'[A-Za-z]+'|[.Oa-z]+)\]\(location(?:\[(?:_0x[0-9a-f]+\(.+?\)|'[A-Za-z]+'|[.Oa-z]+)\]){2}\(.+?\)\,-\(.+?\)\)&&.*?location(?:\[.+?\]|[.Oa-z]+){2}\(.+?\)+[\,>]-(?:\(.+?\)|1)\?/\$1 0 ?/
+||pvpoke-re.com/*.js?v=$replace=/if\(_0x[0-9a-f]+\[(?:_0x[0-9a-f]+\([-0-9a-fx\,]+?\)|'[A-Za-z]+'|[.Oa-z]+)\]\(location(?:\[(?:_0x[0-9a-f]+\(.+?\)|'[A-Za-z]+'|[.Oa-z]+)\]){2}\(.+?\)\,-\(.+?\)\)&&.*?location(?:\[.+?\]|[.Oa-z]+){2}\(.+?\)+[\,>]-(?:\(.+?\)+|_?0x[0-9a-f]+\)|1)/if(0)/
+||pvpoke-re.com/*.js?v=$replace=/([};])-(?:\(.+?\)|_?0x[0-9a-f]+|1)===location[.Oa-z]+\(.+?\)&&.*?location[.Oa-z]+\(.+?\)[\,>]-(?:\(.+?\)|_?0x[0-9a-f]+|1)\?/\$1 0 ?/
 ! royalroad.com##+js(trusted-set, nitroAds, 'json:{"version":"20250402 de32690","createAd":"placement generation"}')
 ! royalroad.com##+js(nostif, _0x)
 royalroad.com##.dKKumhSnWiFq75vPUVtmTanQ:has(a[href^="https://www.royalroad.com/a/r?campaign="]:not([href*="&url=https%3A%2F%2Fwww.royalroad.com"]))
