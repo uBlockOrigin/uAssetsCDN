@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Quick fixes
 ! Expires: 12 hours
-! Last modified: Sat, 25 Oct 2025 05:41:35 +0000
-! Diff-Path: ../patches/2025.10.25.680.patch#ublock-quick-fixes
+! Last modified: Sat, 25 Oct 2025 15:16:28 +0000
+! Diff-Path: ../patches/2025.10.25.991.patch#ublock-quick-fixes
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/quick-fixes.txt ***
@@ -265,7 +265,8 @@ embed.wcostream.com##^script:has-text(/google_jobrunner|AdBlock|pubadx|embed\.ht
 !#else
 embed.wcostream.com##+js(rmnt, script, /google_jobrunner|AdBlock|pubadx|embed\.html/i)
 !#endif
-client.falixnodes.net##+js(rmnt, script, /aps_csm|snigelweb|gettheName|YWRuZ2lu|adngin|sighsigh|mycool|100vh|apple-system/)
+client.falixnodes.net##+js(rpnt, script, /function gettheName.*?appendChild\(loader\);/s)
+client.falixnodes.net##+js(rmnt, script, /aps_csm|neptune|function marsredirect/)
 client.falixnodes.net##+js(rpnt, script, /googletag.*?enableServices\(\)\;/s)
 client.falixnodes.net##+js(rpnt, script, /googletag\.pubads\(\).*rewardedSlot\)\;\s+\}\)\;/s)
 ||rm.freex2line.online/*.js|$domain=cimanow.cc
@@ -279,6 +280,7 @@ global.novelpia.com##div[id^="novelpia_"]:remove()
 .com/*.co.jp|$doc,badfilter
 omuzaani.me##+js(rmnt, script, adserverDomain, excludes, debugger)
 omuzaani.me##+js(trusted-replace-outbound-text, Headers.prototype.get, /.+/, image/png, condition, /^text\/plain;charset=UTF-8$/)
+omuzaani.me##+js(trusted-replace-argument, Headers.prototype.has, 0, json:"content-type", condition, cache-control)
 omuzaani.me##+js(rpnt, script, /window.navigator.brave.+;/, false;)
 omuzaani.me##+js(no-fetch-if, summerday, length:10, {"type":"cors"})
 ! dataunlocker.com
