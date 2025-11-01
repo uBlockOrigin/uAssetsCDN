@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Sat, 01 Nov 2025 06:02:40 +0000
-! Diff-Path: ../patches/2025.11.1.512.patch#ublock-filters
+! Last modified: Sat, 01 Nov 2025 11:20:18 +0000
+! Diff-Path: ../patches/2025.11.1.809.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -10088,6 +10088,11 @@ heise.de##.hbs-ad
 heise.de##.stage-advertising
 heise.de##.ad
 heise.de##section[data-layout="TeaserListLayout"] > section[data-component="TeaserList"] > div.relative:has(> div > article > a[data-google-interstitial])
+||testsieger.de/native-retail-media/pdp/brand-showcase/
+||testsieger.de/native-retail-media/pdp/brand-banner/
+testsieger.de##+js(json-prune, offers)
+testsieger.de###sponsoredProductPdp
+testsieger.de###sponsoredAdsHeader
 ! NOTE: Greek
 korinthostv.gr##.sgpb-popup-overlay
 korinthostv.gr##.sgpb-popup-dialog-main-div-wrapper
@@ -15742,9 +15747,9 @@ photopea.com##div[style]:has(> a[href*="photopea.com"][href*="ads"])
 !#if cap_html_filtering
 ||photopea.com^$doc,replace=/<head>/<script>if (localStorage.length === 0 || typeof JSON.parse(localStorage._ppp)['0_uid'] === 'undefined') {Object.defineProperty(window\, 'innerWidth'\, {get() { return document.documentElement.offsetWidth + 320 }\,});}<\/script><head>/
 !#else
-www.photopea.com##+js(trusted-create-html, head, <img src='/ad-choices.png' onerror='if (localStorage.length !== 0 || typeof JSON.parse(localStorage._ppp)["0_uid"] !== "undefined") {Object.defineProperty(window\, "innerWidth"\, {get() { return document.documentElement.offsetWidth + 320 }});}'></img>)
+photopea.com##+js(trusted-create-html, head, <img src='/ad-choices.png' onerror='if (localStorage.length !== 0 || typeof JSON.parse(localStorage._ppp)["0_uid"] !== "undefined") {Object.defineProperty(window\, "innerWidth"\, {get() { return document.documentElement.offsetWidth + 320 }});}'></img>)
+photopea.com##+js(set, __osw, undefined)
 !#endif
-!photopea.com##+js(rpnt, script, /^.*?(function gtag).*$/, document.documentElement.setAttribute('onreset'\,(function addCustomEvent(){document.addEventListener('resizecanvas'\,()=>{window.innerWidth=document.documentElement.clientWidth+(window.screen.width<1600?180:320)})})());document.documentElement.dispatchEvent(new CustomEvent('reset'));document.documentElement.removeAttribute('onreset');function resize(event={}){if(!event.skip){document.dispatchEvent(new CustomEvent('resizecanvas'));const resizeEvent=new Event('resize');resizeEvent.skip=true;window.dispatchEvent(resizeEvent)}}let debounce;window.addEventListener('resize'\,event=>{clearTimeout(debounce);debounce=setTimeout(()=>resize(event)\,100)});resize();)
 photopea.com##+js(no-fetch-if, uniconsent.com)
 ||pagead2.googlesyndication.com^$3p,xhr,method=head,redirect-rule=noop.js,domain=photopea.com
 vods.tv##+js(no-fetch-if, doubleclick)
@@ -17352,6 +17357,7 @@ diamond.jp###contents > div.sub-column > div.title:has(+ #cx-recommed)
 diamond.jp###cx-recommed
 baseballpost.jp###highschool-pickup
 s.response.jp##.aside-box-relation-arti
+business.nikkei.com###pianoRecommendBottom
 ! ziyu.net
 jin115.com,livedoor.biz#?#.plugin-memo:has(> div.side > script[src*="ziyu.net/"])
 okutta.net##.article__footer > div[style="height:500px; overflow-y:scroll;"]
@@ -23955,6 +23961,7 @@ spaziogames.it##div[id^="widgetbay-placeholder"]
 ! element picker bypass by site
 kuyhaa.me##+js(aeld, DOMContentLoaded, setInterval)
 forge.plebmasters.de##+js(json-prune, results.[-].advertisement)
+forge.plebmasters.de##+js(no-fetch-if, /partners/home)
 mahfda.com##+js(set, __aab_init, true)
 agar.live##.side-banner
 agar.live##+js(set, show_videoad_limited, noopFunc)
@@ -24106,3 +24113,5 @@ playertv24.com##+js(nowoif)
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$script,domain=irtv365.com,redirect=google-ima.js
 ||accustomjumper.com^
 elamigosgamez.com##+js(nostif, checkAdblockUser, 1000)
+spedostream2.shop,play.watch20.space##+js(set, adblock_detect, noopFunc)
+seoschmiede.at##+js(rmnt, script, /pirate/i)
