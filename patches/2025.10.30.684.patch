@@ -1,8 +1,8 @@
-diff name:ublock-annoyances lines:12 checksum:ab0f03fb87
+diff name:ublock-annoyances lines:12 checksum:25e91b56be
 d3 2
 a4 2
 ! Last modified: Fri, 31 Oct 2025 10:30:58 +0000
-! Diff-Path: ../patches/2025.11.1.197.patch#ublock-annoyances
+! Diff-Path: ../patches/2025.11.1.512.patch#ublock-annoyances
 a4027 7
 ! 2mnews.ro anti right click - select
 2mnews.ro##+js(rmnt, script, /oncontextmenu|wccp/)
@@ -11,26 +11,30 @@ fic.fan,ficbook.net,fanfictionero.com##+js(trusted-set-local-storage-item, andro
 ! infotrucker.ro anti right click - select
 infotrucker.ro##+js(rmnt, script, oncontextmenu)
 infotrucker.ro##*:style(-webkit-touch-callout: default !important; -webkit-user-select: text !important; -khtml-user-select: text !important; -moz-user-select: text !important; -ms-user-select: text !important; user-select: text !important; -webkit-tap-highlight-color: revert !important; cursor: revert !important;)
-diff name:ublock-badware lines:14 checksum:ff9b63f7cd
+diff name:ublock-badware lines:18 checksum:73dd21391a
 d3 2
 a4 2
-! Last modified: Fri, 31 Oct 2025 07:53:49 +0000
-! Diff-Path: ../patches/2025.11.1.197.patch#ublock-badware
+! Last modified: Sat, 01 Nov 2025 08:15:54 +0000
+! Diff-Path: ../patches/2025.11.1.512.patch#ublock-badware
 a4448 2
 pages.dev##html[lang="ja"] > body > .main-container > #landing.auth-container
 /^https:\/\/[a-z0-9]{4,15}\.pages\.dev\/\d\/login\b/$doc,match-case,to=pages.dev
 a4455 2
 ||checkfv.pages.dev^$all
 ||xblocktest.pages.dev^$all
-a4460 3
+a4460 7
 sport.elwatannews.com##+js(aost, Array.prototype.indexOf, isWin)
 ||gomabalerainc.top^$all
 ||gamefiledo6.pages.dev^$all
-diff name:ublock-experimental lines:13 checksum:2282b5a145
+||sportifymore.$doc
+||voting-express-tl.$doc
+||sportifymore.ct.ws^$all
+||voting-express-tl.ct.ws^$all
+diff name:ublock-experimental lines:13 checksum:83fd41bacd
 d3 2
 a4 2
-! Last modified: Fri, 31 Oct 2025 17:06:23 +0000
-! Diff-Path: ../patches/2025.11.1.197.patch#ublock-experimental
+! Last modified: Sat, 01 Nov 2025 05:20:29 +0000
+! Diff-Path: ../patches/2025.11.1.512.patch#ublock-experimental
 d11 4
 a14 7
 !www.youtube.com#@#+js(trusted-rpnt, script, (function serverContract(), (()=>{if("YOUTUBE_PREMIUM_LOGO"===ytInitialData?.topbar?.desktopTopbarRenderer?.logo?.topbarLogoRenderer?.iconImage?.iconType||location.href.startsWith("https://www.youtube.com/tv#/")||location.href.startsWith("https://www.youtube.com/embed/"))return;document.addEventListener("DOMContentLoaded"\,(function(){const t=()=>{const t=document.getElementById("movie_player");if(!t)return;if(!t.getStatsForNerds?.()?.debug_info?.startsWith?.("SSAP\, AD"))return;const e=t.getProgressState?.();e&&e.duration>0&&(e.loaded<e.duration||e.duration-e.current>1)&&t.seekTo?.(e.duration)};t()\,new MutationObserver((()=>{t()})).observe(document\,{childList:!0\,subtree:!0})}));const t={apply:(t\,e\,r)=>{const o=r[0];return"function"==typeof o&&o.toString().includes("onAbnormalityDetected")&&(r[0]=function(){})\,Reflect.apply(t\,e\,r)}};window.Promise.prototype.then=new Proxy(window.Promise.prototype.then\,t);const e={apply:(t\,e\,r)=>{r[0]&&"object"==typeof r[0]&&(!r[0].attestationRequest&&r[0]?.playbackContext?.contentPlaybackContext?.currentUrl?.startsWith?.("/watch?")?r[0].params&&!r[0].params.startsWith("yAEB")?r[0].params="yAEB"+r[0].params:r[0].params||="yAEB":r[0].playerRequest?.playbackContext?.contentPlaybackContext?.currentUrl?.startsWith?.("/watch?")&&(r[0].playerRequest.params&&!r[0].playerRequest.params.startsWith("yAEB")?r[0].playerRequest.params="yAEB"+r[0].playerRequest.params:r[0].playerRequest.params||="yAEB"));const o=document.getElementById("player-error-message-container");if(o){const t=window.location.search\,e=new URLSearchParams(t).get("v")\,r=new URLSearchParams(t).get("t")??0;e&&(o.remove()\,document.getElementById("error-screen").remove()\,document.getElementById("movie_player").loadVideoById(e\,parseInt(r\,10)))}return Reflect.apply(t\,e\,r)}};window.JSON.stringify=new Proxy(window.JSON.stringify\,e)})();(function serverContract(), sedCount, 1)
@@ -38,13 +42,13 @@ a14 7
 !www.youtube.com#@#+js(trusted-replace-outbound-text, JSON.stringify, {"contentPlaybackContext", {"adPlaybackContext":{"pyv":true}\,"contentPlaybackContext", condition, currentUrl":"/watch)
 www.youtube.com#@#+js(trusted-json-edit-fetch-request, ..client[?.clientScreen=="WATCH"].clientScreen="CHANNEL", propsToMatch, /\/(player|get_watch)/)
 www.youtube.com##+js(trusted-json-edit-fetch-request, ..playbackContext[?.contentPlaybackContext]+={"adPlaybackContext":{"adType":"AD_TYPE_INSTREAM"}}, propsToMatch, /\/(player|get_watch)/)
-www.youtube.com##+js(trusted-replace-outbound-text, JSON.stringify, {"contentPlaybackContext", {"adPlaybackContext":{"adType":"AD_TYPE_INSTREAM"}\,"contentPlaybackContext", condition, currentUrl":"/watch)
+www.youtube.com##+js(trusted-edit-inbound-object, JSON.stringify, 0, ..playbackContext[?.contentPlaybackContext.currentUrl^="/watch"]+={"adPlaybackContext":{"adType":"AD_TYPE_INSTREAM"}})
 !www.youtube.com#@#+js(trusted-rpnt, script, (function serverContract(), (()=>{if("YOUTUBE_PREMIUM_LOGO"===ytInitialData?.topbar?.desktopTopbarRenderer?.logo?.topbarLogoRenderer?.iconImage?.iconType||location.href.startsWith("https://www.youtube.com/tv#/")||location.href.startsWith("https://www.youtube.com/embed/"))return;document.addEventListener("DOMContentLoaded"\,(function(){const t=()=>{const t=document.getElementById("movie_player");if(!t)return;if(!t.getStatsForNerds?.()?.debug_info?.startsWith?.("SSAP\, AD"))return;const e=t.getProgressState?.();e&&e.duration>0&&(e.loaded<e.duration||e.duration-e.current>1)&&t.seekTo?.(e.duration)};t()\,new MutationObserver((()=>{t()})).observe(document\,{childList:!0\,subtree:!0})}));const t={apply:(t\,e\,r)=>{const a=r[0];return"function"==typeof a&&a.toString().includes("onAbnormalityDetected")&&(r[0]=function(){})\,Reflect.apply(t\,e\,r)}};window.Promise.prototype.then=new Proxy(window.Promise.prototype.then\,t);const e={apply:(t\,e\,r)=>{r[0]&&"object"==typeof r[0]&&(!r[0].attestationRequest&&r[0]?.playbackContext?.contentPlaybackContext?.currentUrl?.startsWith?.("/watch?")?r[0].params&&!r[0].params.startsWith("yAEB")?r[0].params="yAEB"+r[0].params:r[0].params||="yAEB":r[0].playerRequest?.playbackContext?.contentPlaybackContext?.currentUrl?.startsWith?.("/watch?")&&(r[0].playerRequest.params&&!r[0].playerRequest.params.startsWith("yAEB")?r[0].playerRequest.params="yAEB"+r[0].playerRequest.params:r[0].playerRequest.params||="yAEB"));const a=document.getElementById("player-error-message-container")\,o=document.getElementById("movie_player");if(a&&"ERROR"===o?.getPlayerResponse?.()?.playabilityStatus?.status){const t=window.location.search\,e=new URLSearchParams(t).get("v")\,r=new URLSearchParams(t).get("t")??0;e&&(a.remove()\,document.getElementById("error-screen").remove()\,o.loadVideoById(e\,parseInt(r\,10)))}return Reflect.apply(t\,e\,r)}};window.JSON.stringify=new Proxy(window.JSON.stringify\,e)})();(function serverContract(), sedCount, 1)
-diff name:ublock-filters lines:99 checksum:81e1a03fed
+diff name:ublock-filters lines:142 checksum:632248c5e6
 d3 2
 a4 2
-! Last modified: Fri, 31 Oct 2025 16:35:46 +0000
-! Diff-Path: ../patches/2025.11.1.197.patch#ublock-filters
+! Last modified: Sat, 01 Nov 2025 06:02:40 +0000
+! Diff-Path: ../patches/2025.11.1.512.patch#ublock-filters
 d117 1
 a4061 1
 zpaste.net##+js(acs, $, open)
@@ -53,6 +57,17 @@ a8128 1
 /\/[0-9a-z]{2}\/[0-9a-f]{32}\.js/$script,xhr,3p,match-case,method=get,to=com,from=123av.com|141jav.com|1piecemanga.com|4chanarchives.com|69shux.co|85po.com|animepelix.net|animerco.org|apkadmin.com|asiaflix.net|bigwarp.art|blogspot.com|bookfrom.net|cdn9mc.com|clicknupload.cfd|comohoy.com|d-pdf.com|desiupload.co|europixhd-official.com|filmnudes.com|fmovies24-to.com|fsportshd.net|fztvseries.ng|hdpornflix.com|hentai2read.com|hianime.nz|hubdrive.space|indi-share.com|ironhentai.com|javboys.com|javbraze.com|javhdporn.net|jgvdata.com|jpopsingles.eu|kisshentaiz.com|koshalworld.com|latinluchas.com|loadedfiles.org|madouqu.com|media.cm|megadiscografiascompletas.com|movielysium.net|monoschino2.com|moviemaniak.com|movies7.us|myxxgirl.com|nekopoi.care|neymartv.net|niraw.com|njav.com|novizer.com|nsfwgify.com|notunmovie.net|omegascans.org|onejav.com|pagalfree.com|pagalnew.com|pagalworld.us|photocalltv.org|pixvid.org|player.subespanolvip.com|plugincrack.com|poophd.pm|popcornmovies.org|pornhoarder.net|pornincest.net|raw.senmanga.com|seriesgod.com|sexiezpix.com|spotidownloader.com|streampoi.com|surrit.store|sxyprn.com|tapepops.com|thecakeboutiquect.com|thefantazy.com|thepiratebay.org|tokyomotion.net|torbobit.net|torrentgalaxy-official.com|torrentjogos.com.br|uniquestream.net|vidboys.com|xfantazy.com|xmegadrive.com
 a8134 1
 ||excruciationaccident.com^
+d8192 3
+a8194 3
+/^https?:\/\/(?:[a-z]{2}\.)?[0-9a-z]{5,16}\.[a-z]{3,7}\/[a-z](?=[a-z]{0,25}[0-9A-Z])[0-9a-zA-Z]{3,26}\/\d{3,6}(?:\?[_a-z]=[-0-9a-z]+)?$/$script,3p,match-case,redirect=noop.js
+/^https?:\/\/(?:[a-z]{2}\.)?[0-9a-z]{7,16}\.com\/[a-z](?=[a-z]{0,25}[0-9A-Z])[0-9a-zA-Z]{3,26}\/\d{3,6}(?:\?[_a-z]=[-0-9a-z]+)?$/$frame,xhr,popup,3p,match-case,to=com
+/^https?:\/\/(?:[a-z]{2}\.)?[0-9a-z]{7,16}\.website\/[a-z](?=[a-z]{0,25}[0-9A-Z])[0-9a-zA-Z]{3,26}\/\d{3,6}(?:\?[_a-z]=[-0-9a-z]+)?$/$frame,xhr,popup,3p,match-case,to=website
+d8196 1
+a8196 1
+/^https?:\/\/(?:[a-z]{2}\.)?[a-z]{7,14}\.[a-z]{3,7}\/[a-z][0-9A-Za-z]{10,}\/\d{3,6}$/$script,3p,match-case,header=Access-Control-Allow-Headers:*megageocheck*
+d8199 1
+a8199 1
+/^https?:\/\/([a-z][a-z]\.)?[0-9a-z][0-9a-z][0-9a-z][0-9a-z][0-9a-z][0-9a-z]?[0-9a-z]?[0-9a-z]?[0-9a-z]?[0-9a-z]?[0-9a-z]?[0-9a-z]?[0-9a-z]?[0-9a-z]?[0-9a-z]?[0-9a-z]?\.[a-z][a-z][a-z][a-z]?[a-z]?[a-z]?[a-z]?\/[a-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z]?[0-9A-Za-z]?[0-9A-Za-z]?[0-9A-Za-z]?[0-9A-Za-z]?[0-9A-Za-z]?[0-9A-Za-z]?[0-9A-Za-z]?[0-9A-Za-z]?[0-9A-Za-z]?[0-9A-Za-z]?[0-9A-Za-z]?[0-9A-Za-z]?[0-9A-Za-z]?[0-9A-Za-z]?[0-9A-Za-z]?\/[0-9][0-9][0-9][0-9]?[0-9]?[0-9]?$/$script,3p,match-case
 d8202 2
 a8203 2
 /^https:\/\/(?:[0-9a-z]{1,30}\.){1,2}cfd\/[a-z](?=[a-z]*[0-9A-Z])[0-9A-Za-z]{10,27}\/[A-Za-z]{5}(?:\?(?:param|_)=\w+)?$/$script,xhr,3p,match-case
@@ -72,33 +87,57 @@ a9346 1
 d9348 1
 a9348 1
 123animehub.cc,123animes.ru,actvid.*,boosterx.stream,cataz.to,cineb.rs,cineb.gg,demonicscans.org,dopebox.to,flixhq.to,gomovies.sx,gomoviestv.to,hdtoday.cc,himovies.sx,hurawatch.cc,hurawatchz.to,jkanime.net,limetorrents.lol,lulustream.com,luluvdoo.com,mangagun.net,mexa.sh,mgeko.cc,mkvcinemas.*,moflix-stream.fans,motchill29.com,mov18plus.cloud,moviesapi.to,movies2watch.tv,netmovies.to,nicomanga.com,phimlongtieng.net,rawinu.com,rawkuma.net,readcomiconline.*,seriesonline.sx,theflixertv.to,torrentdownload.*,toonily.com,torrentdownloads.*,tukipasti.com,vidsrc.cc,watchasians.cc,watch-movies.com.pk,watchseries.*,weloma.art,welovemanga.one,zoechip.com,zoechip.gg##+js(acs, addEventListener, HTMLAllCollection)
-a9476 1
+d9476 1
+a9476 2
+1movierulzhd.wiki,ralli.ee,tvappapk.com,vipotv.com##+js(noeval-if, document.getElementById)
 123multihub.*##+js(noeval-if, adsbygoogle)
+d9704 1
+a9704 1
+*$doc,csp=script-src-attr 'none',to=m.economictimes.com|nextchessmove.com|ondemandkorea.com|tbsradio.jp
 d9712 1
 a9712 1
-||html-load.com^$script,xhr,domain=24sata.hr|373news.com|actugaming.net|aerotrader.com|alc.co.jp|alfa.lt|allthetests.com|animanch.com|aniroleplay.com|apkmirror.com|areaconnect.com|as-web.jp|atvtrader.com|aucfree.com|autoby.jp|autoc-one.jp|autofrage.net|automobile-catalog.com|bab.la|babla.*|baseballchannel.jp|bg-mania.jp|bien.hu|bilis.lt|blogmura.com|boredpanda.com|bunshun.jp|buzzfeed.com|buzzfeednews.com|calculatorsoup.com|cesoirtv.com|chanto.jp.net|cinetrafic.fr|cocokara-next.com|collinsdictionary.com|commercialtrucktrader.com|computerfrage.net|crosswordsolver.com|cruciverba.it|cults3d.com|culturequizz.com|cycletrader.com|daily.co.jp|dailynewshungary.com|dallashoopsjournal.com|dayspedia.com|dict.cc|dictionary.cambridge.org|dictionnaire.lerobert.com|dnevnik.hr|dnevno.hr|doviz.com|dropgame.jp|dreamchance.net|drweil.com|dziennik.pl|ecranlarge.com|eigachannel.jp|equipmenttrader.com|etaplius.lt|ev-times.com|finanzfrage.net|footballchannel.jp|forsal.pl|futabanet.jp|fxstreet-id.com|fxstreet-vn.com|fxstreet.*|game8.jp|games.arkadium.com|gamewith.jp|gardeningsoul.com|gazetaprawna.pl|genialetricks.de|gesundheitsfrage.net|gifu-np.co.jp|gigafile.nu|globalrph.com|gloria.hr|golf-live.at|grapee.jp|gutefrage.net|happymoments.lol|hb-nippon.com|heureka.cz|hochi.news|horairesdouverture24.fr|hotcopper.co.nz|hotcopper.com.au|hvac-talk.com|idokep.hu|infor.pl|invoice-generator.com|iza.ne.jp|j-cast.com|j-town.net|j7p.jp|jablickar.cz|javatpoint.com|jawapos.com|jiji.com|jikayosha.jp|jmty.jp|joemonster.org|judgehype.com|kinmaweb.jp|km77.com|kobe-journal.com|kompasiana.com|kreuzwortraetsel.de|kurashinista.jp|kurashiru.com|kyoteibiyori.com|lacuarta.com|laleggepertutti.it|lamire.jp|langenscheidt.com|laposte.net|lawyersgunsmoneyblog.com|ldoceonline.com|leckerschmecker.me|lifehacker.jp|listentotaxman.com|livenewschat.eu|luremaga.jp|m.economictimes.com|mafab.hu|mahjongchest.com|mainichi.jp|maketecheasier.com|malaymail.com|mamastar.jp|mathplayzone.com|mentalfloss.com|meteo60.fr|midhudsonnews.com|minesweeperquest.com|minkou.jp|mmm.lt|modhub.us|modsfire.com|moin.de|motor-talk.de|motorbikecatalog.com|motorradfrage.net|motscroises.fr|movie-locations.com|muragon.com|namemc.com|nana-press.com|natalie.mu|nationaltoday.com|nbadraft.net|newatlas.com|news.zerkalo.io|newsweekjapan.jp|niketalk.com|nikkan-gendai.com|nikkansports.com|nlab.itmedia.co.jp|notebookcheck.*|notebookcheck-cn.com|notebookcheck-hu.com|notebookcheck-ru.com|notebookcheck-tr.com|nouvelobs.com|nyitvatartas24.hu|oeffnungszeitenbuch.de|ondemandkorea.com|onlineradiobox.com|operawire.com|optionsprofitcalculator.com|oraridiapertura24.it|oricon.co.jp|oxfordlearnersdictionaries.com|palabr.as|pashplus.jp|persoenlich.com|petitfute.com|picksandparlays.net|picrew.me|play-games.com|popdaily.com.tw|powerpyx.com|pptvhd36.com|profitline.hu|programme-tv.net|puzzlegarage.com|pwctrader.com|quefaire.be|radio-australia.org|radio-osterreich.at|raetsel-hilfe.de|raider.io|ranking.net|raskakcija.lt|references.be|reisefrage.net|relevantmagazine.com|reptilesmagazine.com|roleplayer.me|rostercon.com|samsungmagazine.eu|sankei.com|sanspo.com|scribd.com|scribens.com|scribens.fr|si.com|slashdot.org|snowmobiletrader.com|soccerdigestweb.com|solitairehut.com|sourceforge.net|southhemitv.com|sportalkorea.com|sportlerfrage.net|statecollege.com|steamidfinder.com|stocktwits.com|sudokutable.com|superhonda.com|syosetu.com|szamoldki.hu|tastesbetterfromscratch.com|tbs.co.jp|talkwithstranger.com|tbsradio.jp|techdico.com|the-crossword-solver.com|thecelticblog.com|thedigestweb.com|thefirearmblog.com|traicy.com|transparentcalifornia.com|transparentnevada.com|trilltrill.jp|tunebat.com|tvtv.ca|tvtv.us|tweaktown.com|twn.hu|tyda.se|ufret.jp|universalis.fr|uptodown.com|uranai.nosv.org|uscreditcardguide.com|variety.com|verkaufsoffener-sonntag.com|vimm.net|wamgame.jp|watchdocumentaries.com|wattedoen.be|webdesignledger.com|weldingweb.com|wetteronline.de|wfmz.com|wieistmeineip.*|winfuture.de|word-grabber.com|worldhistory|worldjournal.com|worldle.teuteuf.fr|wort-suchen.de|woxikon.*|yakkun.com|young-machine.com|yugioh-starlight.com|yutura.net|zagreb.info|zakzak.co.jp|pons.com
+||html-load.com^$script,xhr,domain=24sata.hr|373news.com|actugaming.net|aerotrader.com|alc.co.jp|alfa.lt|allthetests.com|animanch.com|aniroleplay.com|apkmirror.com|areaconnect.com|as-web.jp|atvtrader.com|aucfree.com|autoby.jp|autoc-one.jp|autofrage.net|automobile-catalog.com|bab.la|babla.*|baseballchannel.jp|bg-mania.jp|bien.hu|bilis.lt|blogmura.com|boardingarea.com|boredpanda.com|bunshun.jp|buchstaben.com|buzzfeed.com|buzzfeednews.com|calculatorsoup.com|cesoirtv.com|chanto.jp.net|cinetrafic.fr|cocokara-next.com|collinsdictionary.com|commercialtrucktrader.com|computerfrage.net|crosswordsolver.com|cruciverba.it|cults3d.com|culturequizz.com|cycletrader.com|daily.co.jp|dailynewshungary.com|dallashoopsjournal.com|daveockop.com|dayspedia.com|dict.cc|dictionary.cambridge.org|dictionnaire.lerobert.com|dnevnik.hr|dnevno.hr|donbalon.com|doviz.com|dropgame.jp|dreamchance.net|drweil.com|dziennik.pl|ecranlarge.com|eigachannel.jp|equipmenttrader.com|etaplius.lt|ev-times.com|finanzfrage.net|fixthecfaa.com|footballchannel.jp|forsal.pl|futabanet.jp|fxstreet-id.com|fxstreet-vn.com|fxstreet.*|game8.jp|games.arkadium.com|gamewith.jp|gardeningsoul.com|gazetaprawna.pl|genialetricks.de|gesundheitsfrage.net|gifu-np.co.jp|gigafile.nu|globalrph.com|gloria.hr|golf-live.at|grapee.jp|gutefrage.net|happymoments.lol|hb-nippon.com|heureka.cz|hochi.news|horairesdouverture24.fr|hotcopper.co.nz|hotcopper.com.au|hvac-talk.com|idokep.hu|infor.pl|invoice-generator.com|iza.ne.jp|j-cast.com|j-town.net|j7p.jp|jablickar.cz|javatpoint.com|jawapos.com|jigsawexplorer.com|jiji.com|jikayosha.jp|jmty.jp|joemonster.org|judgehype.com|kinmaweb.jp|km77.com|kobe-journal.com|kompasiana.com|kreuzwortraetsel.de|kurashinista.jp|kurashiru.com|kyoteibiyori.com|lacuarta.com|laleggepertutti.it|lamire.jp|langenscheidt.com|laposte.net|lawyersgunsmoneyblog.com|ldoceonline.com|leckerschmecker.me|lessdebt.com|lifehacker.jp|listentotaxman.com|livenewschat.eu|luremaga.jp|m.economictimes.com|mafab.hu|mahjongchest.com|mainichi.jp|maketecheasier.com|malaymail.com|mamastar.jp|marineinsight.com|mathplayzone.com|mentalfloss.com|meteo60.fr|midhudsonnews.com|minesweeperquest.com|minkou.jp|mmm.lt|modhub.us|modsfire.com|moin.de|motor-talk.de|motorbikecatalog.com|motorradfrage.net|motscroises.fr|movie-locations.com|muragon.com|namemc.com|nana-press.com|natalie.mu|nationaltoday.com|nbadraft.net|newatlas.com|news.zerkalo.io|newsweekjapan.jp|newsyou.info|nextchessmove.com|niketalk.com|nikkan-gendai.com|nikkansports.com|nintendoeverything.com|nlab.itmedia.co.jp|notebookcheck.*|notebookcheck-cn.com|notebookcheck-hu.com|notebookcheck-ru.com|notebookcheck-tr.com|nouvelobs.com|nyitvatartas24.hu|oeffnungszeitenbuch.de|ondemandkorea.com|onlineradiobox.com|operawire.com|optionsprofitcalculator.com|oraridiapertura24.it|oricon.co.jp|oxfordlearnersdictionaries.com|palabr.as|pashplus.jp|persoenlich.com|petitfute.com|petitrobert.fr|picksandparlays.net|picrew.me|play-games.com|pllive.xmediaeg.com|popdaily.com.tw|powerpyx.com|pptvhd36.com|profitline.hu|programme-tv.net|puzzlegarage.com|pwctrader.com|quefaire.be|radio-australia.org|radio-osterreich.at|raetsel-hilfe.de|raider.io|ranking.net|raskakcija.lt|references.be|reisefrage.net|relevantmagazine.com|reptilesmagazine.com|respublika.lt|roleplayer.me|rostercon.com|rvtrader.com|samsungmagazine.eu|sankei.com|sanspo.com|scribd.com|scribens.com|scribens.fr|si.com|slashdot.org|snowmobiletrader.com|soccerdigestweb.com|solitairehut.com|sourceforge.net|southhemitv.com|sportalkorea.com|sportlerfrage.net|statecollege.com|steamidfinder.com|stocktwits.com|sudokutable.com|superhonda.com|syosetu.com|szamoldki.hu|tastesbetterfromscratch.com|tbs.co.jp|talkwithstranger.com|tbsradio.jp|techdico.com|the-crossword-solver.com|thecelticblog.com|thedigestweb.com|thefirearmblog.com|traicy.com|transparentcalifornia.com|transparentnevada.com|trilltrill.jp|tunebat.com|tvtv.ca|tvtv.us|tweaktown.com|twn.hu|tyda.se|ufret.jp|universalis.fr|uptodown.com|uranai.nosv.org|uscreditcardguide.com|variety.com|verkaufsoffener-sonntag.com|videocelts.com|vimm.net|wallpapers.com|wamgame.jp|watchdocumentaries.com|wattedoen.be|webdesignledger.com|weldingweb.com|wetteronline.de|wfmz.com|wieistmeineip.*|winfuture.de|word-grabber.com|wordhippo.com|worldhistory|worldjournal.com|worldle.teuteuf.fr|wort-suchen.de|woxikon.*|yakkun.com|young-machine.com|yugioh-starlight.com|yutura.net|zagreb.info|zakzak.co.jp|pons.com
+d9717 1
+a9717 1
+||html-load.com^$script,xhr,redirect=noopjs,domain=300cforums.com|a5oc.com|acuraworld.com|airsoftsociety.com|allfordmustangs.com|allpar.com|aquaticplantcentral.com|astraownersnetwork.co.uk|avsforum.com|babybmw.net|beesource.com|bimmerwerkz.com|can-amforum.com|canadianmoneyforum.com|catfish1.com|chevymalibuforum.com|chinacarforums.com|chihuahua-people.com|coloradofans.com|dairygoatinfo.com|digitalhome.ca|diychatroom.com|fordescape.org|fullsizebronco.com|mazda3revolution.com|mdxers.org|mytractorforum.com|odyclub.com|pelotonforum.com|rootzwiki.com|sigtalk.com|skyscrapercity.com|speypages.com|subaruoutback.org|techguy.org|techsupportforum.com|theakforum.net|trailvoy.com|vwvortex.com
 d9754 1
 a9754 2
 oricon.co.jp##+js(rmnt, script, (async()=>{try{var)
-buzzfeed.com,buzzfeednews.com,cults3d.com,dnevnik.hr,doviz.com,genialetricks.de,leckerschmecker.me,moin.de,newatlas.com,oricon.co.jp,picrew.me,popdaily.com.tw,scribd.com,welt.de,winfuture.de##+js(trusted-replace-argument, HTMLScriptElement.prototype.setAttribute, 1, , condition, error-report)
+boardingarea.com,buzzfeed.com,buzzfeednews.com,cults3d.com,dnevnik.hr,doviz.com,genialetricks.de,leckerschmecker.me,moin.de,newatlas.com,nextchessmove.com,oricon.co.jp,picrew.me,popdaily.com.tw,scribd.com,welt.de,winfuture.de##+js(trusted-replace-argument, HTMLScriptElement.prototype.setAttribute, 1, , condition, error-report)
 d9758 1
 a9758 1
-badmouth1.com,cults3d.com,dnevnik.hr,doviz.com,dziennik.pl,eurointegration.com.ua,flatpanelshd.com,footballtransfer.com.ua,footballtransfer.ru,gadgets360.com,genialetricks.de,hoyme.jp,iusm.co.kr,lamire.jp,leckerschmecker.me,logicieleducatif.fr,missyusa.com,moin.de,neowin.net,newatlas.com,picrew.me,razzball.com,sportanalytic.com,text-compare.com,tweaksforgeeks.com,reportera.co.kr,sportsrec.com,sportsseoul.com,wfmz.com,worldhistory.org,onlinegdb.com,winfuture.de,issuya.com,pravda.com.ua,palabr.as,motscroises.fr,cruciverba.it,freemcserver.net,w.grapps.me,gazetaprawna.pl,pressian.com,tz.de,welt.de##^script[onload*="error-report.com"]
-d9764 1
-a9764 1
-doviz.com,neowin.net,newatlas.com,razzball.com,scribd.com##^script[data-cfasync="false"][nowprocket]
+badmouth1.com,boardingarea.com,cults3d.com,dnevnik.hr,doviz.com,dziennik.pl,eurointegration.com.ua,flatpanelshd.com,footballtransfer.com.ua,footballtransfer.ru,gadgets360.com,genialetricks.de,hoyme.jp,iusm.co.kr,lamire.jp,leckerschmecker.me,logicieleducatif.fr,missyusa.com,moin.de,neowin.net,newatlas.com,picrew.me,razzball.com,sportanalytic.com,text-compare.com,tweaksforgeeks.com,reportera.co.kr,sportsrec.com,sportsseoul.com,wfmz.com,worldhistory.org,onlinegdb.com,winfuture.de,issuya.com,pravda.com.ua,palabr.as,motscroises.fr,cruciverba.it,freemcserver.net,w.grapps.me,gazetaprawna.pl,pressian.com,tz.de,welt.de##^script[onload*="error-report.com"]
+d9763 2
+a9764 2
+neowin.net,newatlas.com,nextchessmove.com,razzball.com##^script:has-text(head.appendChild.bind)
+boardingarea.com,doviz.com,neowin.net,newatlas.com,razzball.com,scribd.com,welt.de##^script[data-cfasync="false"][nowprocket]
 d9766 1
 a9766 4
 doviz.com,scribd.com##^script:has-text('(async()=>{try{var')
 si.com##^script:has-text('"https://html-load.com/loader.min.js"')
-welt.de##^script:has-text(await eval)
-24sata.hr,373news.com,actugaming.net,aerotrader.com,alc.co.jp,alfa.lt,allthetests.com,animanch.com,aniroleplay.com,apkmirror.com,areaconnect.com,as-web.jp,atvtrader.com,aucfree.com,autoby.jp,autoc-one.jp,autofrage.net,automobile-catalog.com,bab.la,babla.*,baseballchannel.jp,bien.hu,bilis.lt,boredpanda.com,bunshun.jp,calculatorsoup.com,carscoops.com,cesoirtv.com,chanto.jp.net,cinetrafic.fr,cocokara-next.com,collinsdictionary.com,commercialtrucktrader.com,computerfrage.net,crosswordsolver.com,cruciverba.it,cults3d.com,culturequizz.com,cycletrader.com,daily.co.jp,dailynewshungary.com,dallashoopsjournal.com,dayspedia.com,dict.cc,dictionary.cambridge.org,dictionnaire.lerobert.com,dnevno.hr,dropgame.jp,dreamchance.net,drweil.com,dziennik.pl,ecranlarge.com,eigachannel.jp,equipmenttrader.com,etaplius.lt,ev-times.com,finanzfrage.net,footballchannel.jp,forsal.pl,freemcserver.net,futabanet.jp,fxstreet-id.com,fxstreet-vn.com,fxstreet.*,game8.jp,games.arkadium.com,gamewith.jp,gardeningsoul.com,gazetaprawna.pl,gesundheitsfrage.net,gifu-np.co.jp,gigafile.nu,globalrph.com,golf-live.at,grapee.jp,gutefrage.net,happymoments.lol,hb-nippon.com,heureka.cz,hochi.news,horairesdouverture24.fr,hotcopper.co.nz,hotcopper.com.au,hvac-talk.com,idokep.hu,indiatimes.com,infor.pl,invoice-generator.com,iza.ne.jp,j-cast.com,j-town.net,j7p.jp,jablickar.cz,javatpoint.com,jiji.com,jikayosha.jp,judgehype.com,kinmaweb.jp,km77.com,kobe-journal.com,kreuzwortraetsel.de,kurashinista.jp,kurashiru.com,kyoteibiyori.com,lacuarta.com,lacuarta.com,laleggepertutti.it,langenscheidt.com,laposte.net,lawyersgunsmoneyblog.com,ldoceonline.com,listentotaxman.com,livenewschat.eu,luremaga.jp,mafab.hu,mahjongchest.com,mainichi.jp,maketecheasier.com,malaymail.com,mamastar.jp,mathplayzone.com,meteo60.fr,midhudsonnews.com,minesweeperquest.com,minkou.jp,mmm.lt,modhub.us,modsfire.com,moin.de,motorbikecatalog.com,motorradfrage.net,motscroises.fr,movie-locations.com,muragon.com,namemc.com,nana-press.com,natalie.mu,nationaltoday.com,nbadraft.net,newatlas.com,news.zerkalo.io,newsinlevels.com,newsweekjapan.jp,niketalk.com,nikkan-gendai.com,nlab.itmedia.co.jp,notebookcheck.*,notebookcheck-cn.com,notebookcheck-hu.com,notebookcheck-ru.com,notebookcheck-tr.com,nouvelobs.com,nyitvatartas24.hu,oeffnungszeitenbuch.de,onlineradiobox.com,operawire.com,optionsprofitcalculator.com,oraridiapertura24.it,oxfordlearnersdictionaries.com,palabr.as,pashplus.jp,persoenlich.com,petitfute.com,play-games.com,popdaily.com.tw,powerpyx.com,pptvhd36.com,profitline.hu,programme-tv.net,puzzlegarage.com,pwctrader.com,quefaire.be,radio-australia.org,radio-osterreich.at,raetsel-hilfe.de,raider.io,ranking.net,raskakcija.lt,references.be,reisefrage.net,relevantmagazine.com,reptilesmagazine.com,roleplayer.me,rostercon.com,samsungmagazine.eu,sankei.com,sanspo.com,scribens.com,scribens.fr,slashdot.org,snowmobiletrader.com,soccerdigestweb.com,solitairehut.com,sourceforge.net,southhemitv.com,sportalkorea.com,sportlerfrage.net,statecollege.com,steamidfinder.com,stocktwits.com,sudokutable.com,superhonda.com,syosetu.com,szamoldki.hu,talkwithstranger.com,tastesbetterfromscratch.com,tbs.co.jp,techdico.com,the-crossword-solver.com,thecelticblog.com,thedigestweb.com,thefirearmblog.com,traicy.com,transparentcalifornia.com,transparentnevada.com,trilltrill.jp,tunebat.com,tvtv.ca,tvtv.us,tweaktown.com,twn.hu,tyda.se,ufret.jp,universalis.fr,uptodown.com,uscreditcardguide.com,variety.com,verkaufsoffener-sonntag.com,vimm.net,wamgame.jp,watchdocumentaries.com,wattedoen.be,webdesignledger.com,weldingweb.com,welt.de,wetteronline.de,wfmz.com,wieistmeineip.*,winfuture.de,word-grabber.com,worldjournal.com,worldle.teuteuf.fr,wort-suchen.de,woxikon.*,young-machine.com,yugioh-starlight.com,yutura.net,zagreb.info,zakzak.co.jp,pons.com##^script:has-text(html-load.com)
+boardingarea.com,welt.de##^script:has-text(await eval)
+24sata.hr,373news.com,actugaming.net,aerotrader.com,alc.co.jp,alfa.lt,allthetests.com,animanch.com,aniroleplay.com,apkmirror.com,areaconnect.com,as-web.jp,atvtrader.com,aucfree.com,autoby.jp,autoc-one.jp,autofrage.net,automobile-catalog.com,bab.la,babla.*,baseballchannel.jp,bien.hu,bilis.lt,boredpanda.com,bunshun.jp,buchstaben.com,calculatorsoup.com,carscoops.com,cesoirtv.com,chanto.jp.net,cinetrafic.fr,cocokara-next.com,collinsdictionary.com,commercialtrucktrader.com,computerfrage.net,crosswordsolver.com,cruciverba.it,cults3d.com,culturequizz.com,cycletrader.com,daily.co.jp,dailynewshungary.com,dallashoopsjournal.com,daveockop.com,dayspedia.com,dict.cc,dictionary.cambridge.org,dictionnaire.lerobert.com,dnevno.hr,donbalon.com,dropgame.jp,dreamchance.net,drweil.com,dziennik.pl,ecranlarge.com,eigachannel.jp,equipmenttrader.com,etaplius.lt,ev-times.com,finanzfrage.net,fixthecfaa.com,footballchannel.jp,forsal.pl,freemcserver.net,futabanet.jp,fxstreet-id.com,fxstreet-vn.com,fxstreet.*,game8.jp,games.arkadium.com,gamewith.jp,gardeningsoul.com,gazetaprawna.pl,gesundheitsfrage.net,gifu-np.co.jp,gigafile.nu,globalrph.com,golf-live.at,grapee.jp,gutefrage.net,happymoments.lol,hb-nippon.com,heureka.cz,hochi.news,horairesdouverture24.fr,hotcopper.co.nz,hotcopper.com.au,hvac-talk.com,idokep.hu,indiatimes.com,infor.pl,invoice-generator.com,iza.ne.jp,j-cast.com,j-town.net,j7p.jp,jablickar.cz,javatpoint.com,jigsawexplorer.com,jiji.com,jikayosha.jp,judgehype.com,kinmaweb.jp,km77.com,kobe-journal.com,kreuzwortraetsel.de,kurashinista.jp,kurashiru.com,kyoteibiyori.com,lacuarta.com,lacuarta.com,laleggepertutti.it,langenscheidt.com,laposte.net,lawyersgunsmoneyblog.com,ldoceonline.com,lessdebt.com,listentotaxman.com,livenewschat.eu,luremaga.jp,mafab.hu,mahjongchest.com,mainichi.jp,maketecheasier.com,malaymail.com,mamastar.jp,marineinsight.com,mathplayzone.com,meteo60.fr,midhudsonnews.com,minesweeperquest.com,minkou.jp,mmm.lt,modhub.us,modsfire.com,moin.de,motorbikecatalog.com,motorradfrage.net,motscroises.fr,movie-locations.com,muragon.com,namemc.com,nana-press.com,natalie.mu,nationaltoday.com,nbadraft.net,newatlas.com,news.zerkalo.io,newsinlevels.com,newsweekjapan.jp,newsyou.info,niketalk.com,nikkan-gendai.com,nintendoeverything.com,nlab.itmedia.co.jp,notebookcheck.*,notebookcheck-cn.com,notebookcheck-hu.com,notebookcheck-ru.com,notebookcheck-tr.com,nouvelobs.com,nyitvatartas24.hu,oeffnungszeitenbuch.de,onlineradiobox.com,operawire.com,optionsprofitcalculator.com,oraridiapertura24.it,oxfordlearnersdictionaries.com,palabr.as,pashplus.jp,persoenlich.com,petitfute.com,petitrobert.fr,play-games.com,pllive.xmediaeg.com,popdaily.com.tw,powerpyx.com,pptvhd36.com,profitline.hu,programme-tv.net,puzzlegarage.com,pwctrader.com,quefaire.be,radio-australia.org,radio-osterreich.at,raetsel-hilfe.de,raider.io,ranking.net,raskakcija.lt,references.be,reisefrage.net,relevantmagazine.com,reptilesmagazine.com,respublika.lt,roleplayer.me,rostercon.com,rvtrader.com,samsungmagazine.eu,sankei.com,sanspo.com,scribens.com,scribens.fr,slashdot.org,snowmobiletrader.com,soccerdigestweb.com,solitairehut.com,sourceforge.net,southhemitv.com,sportalkorea.com,sportlerfrage.net,statecollege.com,steamidfinder.com,stocktwits.com,sudokutable.com,superhonda.com,syosetu.com,szamoldki.hu,talkwithstranger.com,tastesbetterfromscratch.com,tbs.co.jp,techdico.com,the-crossword-solver.com,thecelticblog.com,thedigestweb.com,thefirearmblog.com,traicy.com,transparentcalifornia.com,transparentnevada.com,trilltrill.jp,tunebat.com,tvtv.ca,tvtv.us,tweaktown.com,twn.hu,tyda.se,ufret.jp,universalis.fr,uptodown.com,uscreditcardguide.com,variety.com,verkaufsoffener-sonntag.com,videocelts.com,vimm.net,wallpapers.com,wamgame.jp,watchdocumentaries.com,wattedoen.be,webdesignledger.com,weldingweb.com,welt.de,wetteronline.de,wfmz.com,wieistmeineip.*,winfuture.de,word-grabber.com,wordhippo.com,worldjournal.com,worldle.teuteuf.fr,wort-suchen.de,woxikon.*,young-machine.com,yugioh-starlight.com,yutura.net,zagreb.info,zakzak.co.jp,pons.com##^script:has-text(html-load.com)
+d9770 1
+a9770 1
+300cforums.com,a5oc.com,acuraworld.com,airsoftsociety.com,allfordmustangs.com,allpar.com,aquaticplantcentral.com,astraownersnetwork.co.uk,avsforum.com,babybmw.net,beesource.com,bimmerwerkz.com,can-amforum.com,canadianmoneyforum.com,catfish1.com,chevymalibuforum.com,chinacarforums.com,chihuahua-people.com,coloradofans.com,dairygoatinfo.com,digitalhome.ca,diychatroom.com,fordescape.org,fullsizebronco.com,mazda3revolution.com,mdxers.org,mytractorforum.com,odyclub.com,pelotonforum.com,rootzwiki.com,sigtalk.com,skyscrapercity.com,speypages.com,subaruoutback.org,techguy.org,techsupportforum.com,theakforum.net,trailvoy.com,vwvortex.com##^script:has-text(html-load.com)
+d9779 1
+a9779 1
+neowin.net,newatlas.com,nextchessmove.com,razzball.com##+js(rmnt, script, head.appendChild.bind)
 d9781 1
 a9781 4
 doviz.com,scribd.com##+js(rmnt, script, (async()=>{try{var)
 si.com##+js(rmnt, script, '"https://html-load.com/loader.min.js"')
-welt.de##+js(rmnt, script, await eval)
-24sata.hr,373news.com,actugaming.net,aerotrader.com,alc.co.jp,alfa.lt,allthetests.com,animanch.com,aniroleplay.com,apkmirror.com,areaconnect.com,as-web.jp,atvtrader.com,aucfree.com,autoby.jp,autoc-one.jp,autofrage.net,automobile-catalog.com,bab.la,babla.*,baseballchannel.jp,bien.hu,bilis.lt,boredpanda.com,bunshun.jp,calculatorsoup.com,carscoops.com,cesoirtv.com,chanto.jp.net,cinetrafic.fr,cocokara-next.com,collinsdictionary.com,commercialtrucktrader.com,computerfrage.net,crosswordsolver.com,cruciverba.it,cults3d.com,culturequizz.com,cycletrader.com,daily.co.jp,dailynewshungary.com,dallashoopsjournal.com,dayspedia.com,dict.cc,dictionary.cambridge.org,dictionnaire.lerobert.com,dnevno.hr,dropgame.jp,dreamchance.net,drweil.com,dziennik.pl,ecranlarge.com,eigachannel.jp,equipmenttrader.com,etaplius.lt,ev-times.com,finanzfrage.net,footballchannel.jp,forsal.pl,freemcserver.net,futabanet.jp,fxstreet-id.com,fxstreet-vn.com,fxstreet.*,game8.jp,games.arkadium.com,gamewith.jp,gardeningsoul.com,gazetaprawna.pl,gesundheitsfrage.net,gifu-np.co.jp,gigafile.nu,globalrph.com,golf-live.at,grapee.jp,gutefrage.net,happymoments.lol,hb-nippon.com,heureka.cz,hochi.news,horairesdouverture24.fr,hotcopper.co.nz,hotcopper.com.au,hvac-talk.com,idokep.hu,indiatimes.com,infor.pl,invoice-generator.com,iza.ne.jp,j-cast.com,j-town.net,j7p.jp,jablickar.cz,javatpoint.com,jiji.com,jikayosha.jp,judgehype.com,kinmaweb.jp,km77.com,kobe-journal.com,kreuzwortraetsel.de,kurashinista.jp,kurashiru.com,kyoteibiyori.com,lacuarta.com,lacuarta.com,laleggepertutti.it,langenscheidt.com,laposte.net,lawyersgunsmoneyblog.com,ldoceonline.com,listentotaxman.com,livenewschat.eu,luremaga.jp,mafab.hu,mahjongchest.com,mainichi.jp,maketecheasier.com,malaymail.com,mamastar.jp,mathplayzone.com,meteo60.fr,midhudsonnews.com,minesweeperquest.com,minkou.jp,mmm.lt,modhub.us,modsfire.com,moin.de,motorbikecatalog.com,motorradfrage.net,motscroises.fr,movie-locations.com,muragon.com,namemc.com,nana-press.com,natalie.mu,nationaltoday.com,nbadraft.net,newatlas.com,news.zerkalo.io,newsinlevels.com,newsweekjapan.jp,niketalk.com,nikkan-gendai.com,nlab.itmedia.co.jp,notebookcheck.*,notebookcheck-cn.com,notebookcheck-hu.com,notebookcheck-ru.com,notebookcheck-tr.com,nouvelobs.com,nyitvatartas24.hu,oeffnungszeitenbuch.de,onlineradiobox.com,operawire.com,optionsprofitcalculator.com,oraridiapertura24.it,oxfordlearnersdictionaries.com,palabr.as,pashplus.jp,persoenlich.com,petitfute.com,play-games.com,popdaily.com.tw,powerpyx.com,pptvhd36.com,profitline.hu,programme-tv.net,puzzlegarage.com,pwctrader.com,quefaire.be,radio-australia.org,radio-osterreich.at,raetsel-hilfe.de,raider.io,ranking.net,raskakcija.lt,references.be,reisefrage.net,relevantmagazine.com,reptilesmagazine.com,roleplayer.me,rostercon.com,samsungmagazine.eu,sankei.com,sanspo.com,scribens.com,scribens.fr,slashdot.org,snowmobiletrader.com,soccerdigestweb.com,solitairehut.com,sourceforge.net,southhemitv.com,sportalkorea.com,sportlerfrage.net,statecollege.com,steamidfinder.com,stocktwits.com,sudokutable.com,superhonda.com,syosetu.com,szamoldki.hu,talkwithstranger.com,tastesbetterfromscratch.com,tbs.co.jp,techdico.com,the-crossword-solver.com,thecelticblog.com,thedigestweb.com,thefirearmblog.com,traicy.com,transparentcalifornia.com,transparentnevada.com,trilltrill.jp,tunebat.com,tvtv.ca,tvtv.us,tweaktown.com,twn.hu,tyda.se,ufret.jp,universalis.fr,uptodown.com,uscreditcardguide.com,variety.com,verkaufsoffener-sonntag.com,vimm.net,wamgame.jp,watchdocumentaries.com,wattedoen.be,webdesignledger.com,weldingweb.com,welt.de,wetteronline.de,wfmz.com,wieistmeineip.*,winfuture.de,word-grabber.com,worldjournal.com,worldle.teuteuf.fr,wort-suchen.de,woxikon.*,young-machine.com,yugioh-starlight.com,yutura.net,zagreb.info,zakzak.co.jp,pons.com##+js(rmnt, script, html-load.com)
+boardingarea.com,welt.de##+js(rmnt, script, await eval)
+24sata.hr,373news.com,actugaming.net,aerotrader.com,alc.co.jp,alfa.lt,allthetests.com,animanch.com,aniroleplay.com,apkmirror.com,areaconnect.com,as-web.jp,atvtrader.com,aucfree.com,autoby.jp,autoc-one.jp,autofrage.net,automobile-catalog.com,bab.la,babla.*,baseballchannel.jp,bien.hu,bilis.lt,boredpanda.com,bunshun.jp,buchstaben.com,calculatorsoup.com,carscoops.com,cesoirtv.com,chanto.jp.net,cinetrafic.fr,cocokara-next.com,collinsdictionary.com,commercialtrucktrader.com,computerfrage.net,crosswordsolver.com,cruciverba.it,cults3d.com,culturequizz.com,cycletrader.com,daily.co.jp,dailynewshungary.com,dallashoopsjournal.com,daveockop.com,dayspedia.com,dict.cc,dictionary.cambridge.org,dictionnaire.lerobert.com,dnevno.hr,donbalon.com,dropgame.jp,dreamchance.net,drweil.com,dziennik.pl,ecranlarge.com,eigachannel.jp,equipmenttrader.com,etaplius.lt,ev-times.com,finanzfrage.net,fixthecfaa.com,footballchannel.jp,forsal.pl,freemcserver.net,futabanet.jp,fxstreet-id.com,fxstreet-vn.com,fxstreet.*,game8.jp,games.arkadium.com,gamewith.jp,gardeningsoul.com,gazetaprawna.pl,gesundheitsfrage.net,gifu-np.co.jp,gigafile.nu,globalrph.com,golf-live.at,grapee.jp,gutefrage.net,happymoments.lol,hb-nippon.com,heureka.cz,hochi.news,horairesdouverture24.fr,hotcopper.co.nz,hotcopper.com.au,hvac-talk.com,idokep.hu,indiatimes.com,infor.pl,invoice-generator.com,iza.ne.jp,j-cast.com,j-town.net,j7p.jp,jablickar.cz,javatpoint.com,jigsawexplorer.com,jiji.com,jikayosha.jp,judgehype.com,kinmaweb.jp,km77.com,kobe-journal.com,kreuzwortraetsel.de,kurashinista.jp,kurashiru.com,kyoteibiyori.com,lacuarta.com,lacuarta.com,laleggepertutti.it,langenscheidt.com,laposte.net,lawyersgunsmoneyblog.com,ldoceonline.com,lessdebt.com,listentotaxman.com,livenewschat.eu,luremaga.jp,mafab.hu,mahjongchest.com,mainichi.jp,maketecheasier.com,malaymail.com,mamastar.jp,marineinsight.com,mathplayzone.com,meteo60.fr,midhudsonnews.com,minesweeperquest.com,minkou.jp,mmm.lt,modhub.us,modsfire.com,moin.de,motorbikecatalog.com,motorradfrage.net,motscroises.fr,movie-locations.com,muragon.com,namemc.com,nana-press.com,natalie.mu,nationaltoday.com,nbadraft.net,newatlas.com,news.zerkalo.io,newsinlevels.com,newsweekjapan.jp,newsyou.info,niketalk.com,nikkan-gendai.com,nintendoeverything.com,nlab.itmedia.co.jp,notebookcheck.*,notebookcheck-cn.com,notebookcheck-hu.com,notebookcheck-ru.com,notebookcheck-tr.com,nouvelobs.com,nyitvatartas24.hu,oeffnungszeitenbuch.de,onlineradiobox.com,operawire.com,optionsprofitcalculator.com,oraridiapertura24.it,oxfordlearnersdictionaries.com,palabr.as,pashplus.jp,persoenlich.com,petitfute.com,petitrobert.fr,play-games.com,pllive.xmediaeg.com,popdaily.com.tw,powerpyx.com,pptvhd36.com,profitline.hu,programme-tv.net,puzzlegarage.com,pwctrader.com,quefaire.be,radio-australia.org,radio-osterreich.at,raetsel-hilfe.de,raider.io,ranking.net,raskakcija.lt,references.be,reisefrage.net,relevantmagazine.com,reptilesmagazine.com,respublika.lt,roleplayer.me,rostercon.com,rvtrader.com,samsungmagazine.eu,sankei.com,sanspo.com,scribens.com,scribens.fr,slashdot.org,snowmobiletrader.com,soccerdigestweb.com,solitairehut.com,sourceforge.net,southhemitv.com,sportalkorea.com,sportlerfrage.net,statecollege.com,steamidfinder.com,stocktwits.com,sudokutable.com,superhonda.com,syosetu.com,szamoldki.hu,talkwithstranger.com,tastesbetterfromscratch.com,tbs.co.jp,techdico.com,the-crossword-solver.com,thecelticblog.com,thedigestweb.com,thefirearmblog.com,traicy.com,transparentcalifornia.com,transparentnevada.com,trilltrill.jp,tunebat.com,tvtv.ca,tvtv.us,tweaktown.com,twn.hu,tyda.se,ufret.jp,universalis.fr,uptodown.com,uscreditcardguide.com,variety.com,verkaufsoffener-sonntag.com,videocelts.com,vimm.net,wallpapers.com,wamgame.jp,watchdocumentaries.com,wattedoen.be,webdesignledger.com,weldingweb.com,welt.de,wetteronline.de,wfmz.com,wieistmeineip.*,winfuture.de,word-grabber.com,wordhippo.com,worldjournal.com,worldle.teuteuf.fr,wort-suchen.de,woxikon.*,young-machine.com,yugioh-starlight.com,yutura.net,zagreb.info,zakzak.co.jp,pons.com##+js(rmnt, script, html-load.com)
+d9785 1
+a9785 1
+300cforums.com,a5oc.com,acuraworld.com,airsoftsociety.com,allfordmustangs.com,allpar.com,aquaticplantcentral.com,astraownersnetwork.co.uk,avsforum.com,babybmw.net,beesource.com,bimmerwerkz.com,can-amforum.com,canadianmoneyforum.com,catfish1.com,chevymalibuforum.com,chinacarforums.com,chihuahua-people.com,coloradofans.com,dairygoatinfo.com,digitalhome.ca,diychatroom.com,fordescape.org,fullsizebronco.com,mazda3revolution.com,mdxers.org,mytractorforum.com,odyclub.com,pelotonforum.com,rootzwiki.com,sigtalk.com,skyscrapercity.com,speypages.com,subaruoutback.org,techguy.org,techsupportforum.com,theakforum.net,trailvoy.com,vwvortex.com##+js(rmnt, script, html-load.com)
+d9790 1
+a9790 1
+biblegateway.com,blogmura.com,deckshop.pro,gamewith.jp,gruene-zitate.de,jmty.jp,kr-weathernews.com,laposte.net,motor-talk.de,myforecast.com,newser.com,nikkan-gendai.com,picks.my,reneweconomy.com.au,signupgenius.com,slickdeals.net,smithsonianmag.com,thefreebieguy.com,worldhistory.org,zerogpt.com##+js(acs, document.createElement, abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=)
+a9791 2
+! fora software
+saabcentral.com##+js(acs, document.createElement, abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=)
 d9798 1
 a9800 2
 welt.de##+js(no-fetch-if, -load.com/script/, length:101)
@@ -107,11 +146,15 @@ d9858 2
 a9859 2
 adrianmissionminute.com,alejandrocenturyoil.com,heatherwholeinvolve.com,jennifercertaindevelopment.com,jilliandescribecompany.com,johnalwayssame.com,kellywhatcould.com,kristiesoundsimply.com,lukesitturn.com,mariatheserepublican.com,mikaylaarealike.com,nathanfromsubject.com,voe.sx##+js(acs, globalThis, break;case)
 alejandrocenturyoil.com,heatherwholeinvolve.com,jennifercertaindevelopment.com,jilliandescribecompany.com,johnalwayssame.com,jonathansociallike.com,kellywhatcould.com,kristiesoundsimply.com,lukesitturn.com,mikaylaarealike.com,nathanfromsubject.com,voe.sx##+js(acs, WebAssembly, atob)
-a10150 4
+a9993 1
+shipin188.com##+js(rmnt, script, _cpv)
+a10150 6
 novizer.com>>##+js(acs, EventTarget.prototype.addEventListener, delete window)
 ||cyou/player/assets/js/jquery.js?v=$script,1p
 ||cyou/player/assets/js/ads.js?v=$script,1p
 loldewfwvwvwewefdw.cyou##+js(nowoif)
+infogenyus.top#@#.ad-unit:not(.adsbox, .text-ad, .textads):not([style^="width: 1px; height: 1px; position: absolute;"])
+infogenyus.top##+js(rmnt, script, /bait/i)
 a17012 1
 ipalibrary.me##+js(rmnt, script, textContent)
 d17201 7
@@ -122,6 +165,8 @@ nicomanga.com,weloma.art##+js(nowoif)
 a17209 1
 nicomanga.com,nihonkuni.com,rawinu.com,weloma.art,welovemanga.one##+js(set-cookie, smartlink_shown_guest, 1)
 d18757 5
+a19028 1
+play.aetv.com,play.mylifetime.com##+js(trusted-replace-fetch-response, /#EXTINF:[^\n]+\nhttps:\/\/redirector\.googlevideo\.com[^\n]+/gms, /\/ondemand\/.+\.m3u8/)
 d21507 1
 a21507 1
 animeshqip.site,apkship.shop,filedot.to,hdstream.one,kingstreamz.site,live.fastsports.store,livesnow.me,livesports4u.pw,nuxhallas.click,papahd.info,sportmargin.live,sportmargin.online,sportsloverz.xyz,supertipzz.online,ultrastreamlinks.xyz,webmaal.cfd,wizistreamz.xyz##+js(rmnt, script, popundersPerIP)
@@ -131,6 +176,8 @@ a21511 1
 d21540 1
 a21540 1
 *$script,3p,denyallow=ajax.googleapis.com|net.cdn.cloudflare.net|cloudflare.com|fastly.net|jsdelivr.net,domain=autoembed.cc
+a23592 1
+leeapk.com##+js(acs, document.querySelectorAll, localStorage)
 a24087 8
 artru.net##+js(acs, setTimeout, getComputedStyle)
 artru.net##.artru-ads
@@ -140,18 +187,28 @@ playertv24.com##+js(nowoif)
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$script,domain=irtv365.com,redirect=google-ima.js
 ||accustomjumper.com^
 elamigosgamez.com##+js(nostif, checkAdblockUser, 1000)
-diff name:ublock-privacy lines:6 checksum:9e855a74a2
+diff name:ublock-privacy lines:16 checksum:ab652f6326
 d3 2
 a4 2
-! Last modified: Fri, 31 Oct 2025 05:16:25 +0000
-! Diff-Path: ../patches/2025.11.1.197.patch#ublock-privacy
+! Last modified: Sat, 01 Nov 2025 08:00:05 +0000
+! Diff-Path: ../patches/2025.11.1.512.patch#ublock-privacy
+d150 6
+a155 6
+373news.com,aikatu.jp,aniroleplay.com,ap7am.com,areaconnect.com,as-web.jp,aucfree.com,autoby.jp,autoc-one.jp,autofrage.net,automobile-catalog.com,bab.la,babla.*,badmouth1.com,bamgosu.site,bg-mania.jp,bien.hu,bleepingcomputer.com,blogmura.com,buzzfeed.com,buzzfeednews.com,cesoirtv.com,chanto.jp.net,cinema.com.my,cinetrafic.fr,cocokara-next.com,collinsdictionary.com,computerfrage.net,convertcase.net,cool-style.com.tw,crosswordsolver.com,cruciverba.it,cults3d.com,daily.co.jp,dailynewshungary.com,dayspedia.com,dictionary.cambridge.org,dnevno.hr,dogdrip.net,dolldivine.com,donbalon.com,dramabeans.com,dropgame.jp,dziennik.pl,economictimes.com,economist.co.kr,edaily.co.kr,etoday.co.kr,etoland.co.kr,eurointegration.com.ua,ev-times.com,filmibeat.com,flatpanelshd.com,fntimes.com,footballtransfer.com.ua,footballtransfer.ru,forsal.pl,freemcserver.net,fxstreet-id.com,fxstreet-vn.com,fxstreet.*,gazetaprawna.pl,genialetricks.de,giornalone.it,globalrph.com,gloria.hr,golf-live.at,goodreturns.in,hb-nippon.com,heureka.cz,hometownstation.com,honkailab.com,horairesdouverture24.fr,hotcopper.com.au,idokep.hu,infinityfree.com,iplocation.net,islamicfinder.org,isplus.com,issuya.com,iusm.co.kr,j-cast.com,j-town.net,j7p.jp,jablickar.cz,jamaicaobserver.com,javatpoint.com,jawapos.com,jmty.jp,joemonster.org,judgehype.com,jutarnji.hr,kinmaweb.jp,km77.com,knowt.com,kobe-journal.com,kompasiana.com,kreuzwortraetsel.de,kurashinista.jp,kurashiru.com,kyoteibiyori.com,lacuarta.com,lakeshowlife.com,laleggepertutti.it,lamire.jp,ldoceonline.com,leckerschmecker.me,lifehacker.jp,listentotaxman.com,livenewschat.eu,loawa.com,logicieleducatif.fr,mahjongchest.com,maketecheasier.com,malaymail.com,mamastar.jp,manta.com,mathplayzone.com,mediaindonesia.com,mentalfloss.com,meteo60.fr,midhudsonnews.com,minesweeperquest.com,minkou.jp,missyusa.com,mlbpark.donga.com,moin.de,motor-talk.de,motscroises.fr,muragon.com,mykhel.com,mynet.com,nana-press.com,nationaltoday.com,nbadraft.net,netzwelt.de,newsinlevels.com,newsweekjapan.jp,niice-woker.com,niketalk.com,nouvelobs.com,oeffnungszeitenbuch.de,ondemandkorea.com,onlineradiobox.com,optionsprofitcalculator.com,oraridiapertura24.it,oxfordlearnersdictionaries.com,palabr.as,pashplus.jp,persoenlich.com,petitfute.com,picksandparlays.net,picrew.me,powerpyx.com,pptvhd36.com,pravda.com.ua,pressian.com,profitline.hu,puzzlegarage.com,quefaire.be,radio-australia.org,radio-osterreich.at,raenonx.cc,raetsel-hilfe.de,references.be,relevantmagazine.com,reportera.co.kr,roleplayer.me,rostercon.com,samsungmagazine.eu,scribens.com,scribens.fr,slashdot.org,slobodnadalmacija.hr,smsonline.cloud,soccerdigestweb.com,solitairehut.com,sourceforge.net,southhemitv.com,sportalkorea.com,sportanalytic.com,sportsrec.com,sportsseoul.com,szamoldki.hu,talkwithstranger.com,tasty.co,tbsradio.jp,text-compare.com,thatgossip.com,the-crossword-solver.com,thedigestweb.com,thefreebieguy.com,tportal.hr,traicy.com,transparentcalifornia.com,transparentnevada.com,tunebat.com,tvtv.ca,tvtv.us,tweaktown.com,twn.hu,tyda.se,tz.de,ufret.jp,upmedia.mg,verkaufsoffener-sonntag.com,w.grapps.me,watchdocumentaries.com,webdesignledger.com,welt.de,wfmz.com,winfuture.de,word-grabber.com,worldhistory.org,worldjournal.com,wort-suchen.de,woxikon.*,yakkun.com,ygosu.com,yutura.net,zagreb.info,zakzak.co.jp##+js(set-local-storage-item, adshield-analytics-uuid, $remove$)
+373news.com,aikatu.jp,aniroleplay.com,ap7am.com,areaconnect.com,as-web.jp,aucfree.com,autoby.jp,autoc-one.jp,autofrage.net,automobile-catalog.com,bab.la,babla.*,badmouth1.com,bamgosu.site,bg-mania.jp,bien.hu,bleepingcomputer.com,blogmura.com,buzzfeed.com,buzzfeednews.com,cesoirtv.com,chanto.jp.net,cinema.com.my,cinetrafic.fr,cocokara-next.com,collinsdictionary.com,computerfrage.net,convertcase.net,cool-style.com.tw,crosswordsolver.com,cruciverba.it,cults3d.com,daily.co.jp,dailynewshungary.com,dayspedia.com,dictionary.cambridge.org,dnevno.hr,dogdrip.net,dolldivine.com,donbalon.com,dramabeans.com,dropgame.jp,dziennik.pl,economictimes.com,economist.co.kr,edaily.co.kr,etoday.co.kr,etoland.co.kr,eurointegration.com.ua,ev-times.com,filmibeat.com,flatpanelshd.com,fntimes.com,footballtransfer.com.ua,footballtransfer.ru,forsal.pl,freemcserver.net,fxstreet-id.com,fxstreet-vn.com,fxstreet.*,gazetaprawna.pl,genialetricks.de,giornalone.it,globalrph.com,gloria.hr,golf-live.at,goodreturns.in,hb-nippon.com,heureka.cz,hometownstation.com,honkailab.com,horairesdouverture24.fr,hotcopper.com.au,idokep.hu,infinityfree.com,iplocation.net,islamicfinder.org,isplus.com,issuya.com,iusm.co.kr,j-cast.com,j-town.net,j7p.jp,jablickar.cz,jamaicaobserver.com,javatpoint.com,jawapos.com,jmty.jp,joemonster.org,judgehype.com,jutarnji.hr,kinmaweb.jp,km77.com,knowt.com,kobe-journal.com,kompasiana.com,kreuzwortraetsel.de,kurashinista.jp,kurashiru.com,kyoteibiyori.com,lacuarta.com,lakeshowlife.com,laleggepertutti.it,lamire.jp,ldoceonline.com,leckerschmecker.me,lifehacker.jp,listentotaxman.com,livenewschat.eu,loawa.com,logicieleducatif.fr,mahjongchest.com,maketecheasier.com,malaymail.com,mamastar.jp,manta.com,mathplayzone.com,mediaindonesia.com,mentalfloss.com,meteo60.fr,midhudsonnews.com,minesweeperquest.com,minkou.jp,missyusa.com,mlbpark.donga.com,moin.de,motor-talk.de,motscroises.fr,muragon.com,mykhel.com,mynet.com,nana-press.com,nationaltoday.com,nbadraft.net,netzwelt.de,newsinlevels.com,newsweekjapan.jp,niice-woker.com,niketalk.com,nouvelobs.com,oeffnungszeitenbuch.de,ondemandkorea.com,onlineradiobox.com,optionsprofitcalculator.com,oraridiapertura24.it,oxfordlearnersdictionaries.com,palabr.as,pashplus.jp,persoenlich.com,petitfute.com,picksandparlays.net,picrew.me,powerpyx.com,pptvhd36.com,pravda.com.ua,pressian.com,profitline.hu,puzzlegarage.com,quefaire.be,radio-australia.org,radio-osterreich.at,raenonx.cc,raetsel-hilfe.de,references.be,relevantmagazine.com,reportera.co.kr,roleplayer.me,rostercon.com,samsungmagazine.eu,scribens.com,scribens.fr,slashdot.org,slobodnadalmacija.hr,smsonline.cloud,soccerdigestweb.com,solitairehut.com,sourceforge.net,southhemitv.com,sportalkorea.com,sportanalytic.com,sportsrec.com,sportsseoul.com,szamoldki.hu,talkwithstranger.com,tasty.co,tbsradio.jp,text-compare.com,thatgossip.com,the-crossword-solver.com,thedigestweb.com,thefreebieguy.com,tportal.hr,traicy.com,transparentcalifornia.com,transparentnevada.com,tunebat.com,tvtv.ca,tvtv.us,tweaktown.com,twn.hu,tyda.se,tz.de,ufret.jp,upmedia.mg,verkaufsoffener-sonntag.com,w.grapps.me,watchdocumentaries.com,webdesignledger.com,welt.de,wfmz.com,winfuture.de,word-grabber.com,worldhistory.org,worldjournal.com,wort-suchen.de,woxikon.*,yakkun.com,ygosu.com,yutura.net,zagreb.info,zakzak.co.jp##+js(set-local-storage-item, /_fa_bGFzdF9iZmFfYXQ=$/, $remove$)
+373news.com,aikatu.jp,aniroleplay.com,ap7am.com,areaconnect.com,as-web.jp,aucfree.com,autoby.jp,autoc-one.jp,autofrage.net,automobile-catalog.com,bab.la,babla.*,badmouth1.com,bamgosu.site,bg-mania.jp,bien.hu,bleepingcomputer.com,blogmura.com,buzzfeed.com,buzzfeednews.com,cesoirtv.com,chanto.jp.net,cinema.com.my,cinetrafic.fr,cocokara-next.com,collinsdictionary.com,computerfrage.net,convertcase.net,cool-style.com.tw,crosswordsolver.com,cruciverba.it,cults3d.com,daily.co.jp,dailynewshungary.com,dayspedia.com,dictionary.cambridge.org,dnevno.hr,dogdrip.net,dolldivine.com,donbalon.com,dramabeans.com,dropgame.jp,dziennik.pl,economictimes.com,economist.co.kr,edaily.co.kr,etoday.co.kr,etoland.co.kr,eurointegration.com.ua,ev-times.com,filmibeat.com,flatpanelshd.com,fntimes.com,footballtransfer.com.ua,footballtransfer.ru,forsal.pl,freemcserver.net,fxstreet-id.com,fxstreet-vn.com,fxstreet.*,gazetaprawna.pl,genialetricks.de,giornalone.it,globalrph.com,gloria.hr,golf-live.at,goodreturns.in,hb-nippon.com,heureka.cz,hometownstation.com,honkailab.com,horairesdouverture24.fr,hotcopper.com.au,idokep.hu,infinityfree.com,iplocation.net,islamicfinder.org,isplus.com,issuya.com,iusm.co.kr,j-cast.com,j-town.net,j7p.jp,jablickar.cz,jamaicaobserver.com,javatpoint.com,jawapos.com,jmty.jp,joemonster.org,judgehype.com,jutarnji.hr,kinmaweb.jp,km77.com,knowt.com,kobe-journal.com,kompasiana.com,kreuzwortraetsel.de,kurashinista.jp,kurashiru.com,kyoteibiyori.com,lacuarta.com,lakeshowlife.com,laleggepertutti.it,lamire.jp,ldoceonline.com,leckerschmecker.me,lifehacker.jp,listentotaxman.com,livenewschat.eu,loawa.com,logicieleducatif.fr,mahjongchest.com,maketecheasier.com,malaymail.com,mamastar.jp,manta.com,mathplayzone.com,mediaindonesia.com,mentalfloss.com,meteo60.fr,midhudsonnews.com,minesweeperquest.com,minkou.jp,missyusa.com,mlbpark.donga.com,moin.de,motor-talk.de,motscroises.fr,muragon.com,mykhel.com,mynet.com,nana-press.com,nationaltoday.com,nbadraft.net,netzwelt.de,newsinlevels.com,newsweekjapan.jp,niice-woker.com,niketalk.com,nouvelobs.com,oeffnungszeitenbuch.de,ondemandkorea.com,onlineradiobox.com,optionsprofitcalculator.com,oraridiapertura24.it,oxfordlearnersdictionaries.com,palabr.as,pashplus.jp,persoenlich.com,petitfute.com,picksandparlays.net,picrew.me,powerpyx.com,pptvhd36.com,pravda.com.ua,pressian.com,profitline.hu,puzzlegarage.com,quefaire.be,radio-australia.org,radio-osterreich.at,raenonx.cc,raetsel-hilfe.de,references.be,relevantmagazine.com,reportera.co.kr,roleplayer.me,rostercon.com,samsungmagazine.eu,scribens.com,scribens.fr,slashdot.org,slobodnadalmacija.hr,smsonline.cloud,soccerdigestweb.com,solitairehut.com,sourceforge.net,southhemitv.com,sportalkorea.com,sportanalytic.com,sportsrec.com,sportsseoul.com,szamoldki.hu,talkwithstranger.com,tasty.co,tbsradio.jp,text-compare.com,thatgossip.com,the-crossword-solver.com,thedigestweb.com,thefreebieguy.com,tportal.hr,traicy.com,transparentcalifornia.com,transparentnevada.com,tunebat.com,tvtv.ca,tvtv.us,tweaktown.com,twn.hu,tyda.se,tz.de,ufret.jp,upmedia.mg,verkaufsoffener-sonntag.com,w.grapps.me,watchdocumentaries.com,webdesignledger.com,welt.de,wfmz.com,winfuture.de,word-grabber.com,worldhistory.org,worldjournal.com,wort-suchen.de,woxikon.*,yakkun.com,ygosu.com,yutura.net,zagreb.info,zakzak.co.jp##+js(set-local-storage-item, /_fa_dXVpZA==$/, $remove$)
+373news.com,aikatu.jp,aniroleplay.com,ap7am.com,areaconnect.com,as-web.jp,aucfree.com,autoby.jp,autoc-one.jp,autofrage.net,automobile-catalog.com,bab.la,babla.*,badmouth1.com,bamgosu.site,bg-mania.jp,bien.hu,bleepingcomputer.com,blogmura.com,buzzfeed.com,buzzfeednews.com,cesoirtv.com,chanto.jp.net,cinema.com.my,cinetrafic.fr,cocokara-next.com,collinsdictionary.com,computerfrage.net,convertcase.net,cool-style.com.tw,crosswordsolver.com,cruciverba.it,cults3d.com,daily.co.jp,dailynewshungary.com,dayspedia.com,dictionary.cambridge.org,dnevno.hr,dogdrip.net,dolldivine.com,donbalon.com,dramabeans.com,dropgame.jp,dziennik.pl,economictimes.com,economist.co.kr,edaily.co.kr,etoday.co.kr,etoland.co.kr,eurointegration.com.ua,ev-times.com,filmibeat.com,flatpanelshd.com,fntimes.com,footballtransfer.com.ua,footballtransfer.ru,forsal.pl,freemcserver.net,fxstreet-id.com,fxstreet-vn.com,fxstreet.*,gazetaprawna.pl,genialetricks.de,giornalone.it,globalrph.com,gloria.hr,golf-live.at,goodreturns.in,hb-nippon.com,heureka.cz,hometownstation.com,honkailab.com,horairesdouverture24.fr,hotcopper.com.au,idokep.hu,infinityfree.com,iplocation.net,islamicfinder.org,isplus.com,issuya.com,iusm.co.kr,j-cast.com,j-town.net,j7p.jp,jablickar.cz,jamaicaobserver.com,javatpoint.com,jawapos.com,jmty.jp,joemonster.org,judgehype.com,jutarnji.hr,kinmaweb.jp,km77.com,knowt.com,kobe-journal.com,kompasiana.com,kreuzwortraetsel.de,kurashinista.jp,kurashiru.com,kyoteibiyori.com,lacuarta.com,lakeshowlife.com,laleggepertutti.it,lamire.jp,ldoceonline.com,leckerschmecker.me,lifehacker.jp,listentotaxman.com,livenewschat.eu,loawa.com,logicieleducatif.fr,mahjongchest.com,maketecheasier.com,malaymail.com,mamastar.jp,manta.com,mathplayzone.com,mediaindonesia.com,mentalfloss.com,meteo60.fr,midhudsonnews.com,minesweeperquest.com,minkou.jp,missyusa.com,mlbpark.donga.com,moin.de,motor-talk.de,motscroises.fr,muragon.com,mykhel.com,mynet.com,nana-press.com,nationaltoday.com,nbadraft.net,netzwelt.de,newsinlevels.com,newsweekjapan.jp,niice-woker.com,niketalk.com,nouvelobs.com,oeffnungszeitenbuch.de,ondemandkorea.com,onlineradiobox.com,optionsprofitcalculator.com,oraridiapertura24.it,oxfordlearnersdictionaries.com,palabr.as,pashplus.jp,persoenlich.com,petitfute.com,picksandparlays.net,picrew.me,powerpyx.com,pptvhd36.com,pravda.com.ua,pressian.com,profitline.hu,puzzlegarage.com,quefaire.be,radio-australia.org,radio-osterreich.at,raenonx.cc,raetsel-hilfe.de,references.be,relevantmagazine.com,reportera.co.kr,roleplayer.me,rostercon.com,samsungmagazine.eu,scribens.com,scribens.fr,slashdot.org,slobodnadalmacija.hr,smsonline.cloud,soccerdigestweb.com,solitairehut.com,sourceforge.net,southhemitv.com,sportalkorea.com,sportanalytic.com,sportsrec.com,sportsseoul.com,szamoldki.hu,talkwithstranger.com,tasty.co,tbsradio.jp,text-compare.com,thatgossip.com,the-crossword-solver.com,thedigestweb.com,thefreebieguy.com,tportal.hr,traicy.com,transparentcalifornia.com,transparentnevada.com,tunebat.com,tvtv.ca,tvtv.us,tweaktown.com,twn.hu,tyda.se,tz.de,ufret.jp,upmedia.mg,verkaufsoffener-sonntag.com,w.grapps.me,watchdocumentaries.com,webdesignledger.com,welt.de,wfmz.com,winfuture.de,word-grabber.com,worldhistory.org,worldjournal.com,wort-suchen.de,woxikon.*,yakkun.com,ygosu.com,yutura.net,zagreb.info,zakzak.co.jp##+js(set-local-storage-item, /_fa_Y2FjaGVfaXNfYmxvY2tpbmdfYWNjZXB0YWJsZV9hZHM=$/, $remove$)
+373news.com,aikatu.jp,aniroleplay.com,ap7am.com,areaconnect.com,as-web.jp,aucfree.com,autoby.jp,autoc-one.jp,autofrage.net,automobile-catalog.com,bab.la,babla.*,badmouth1.com,bamgosu.site,bg-mania.jp,bien.hu,bleepingcomputer.com,blogmura.com,buzzfeed.com,buzzfeednews.com,cesoirtv.com,chanto.jp.net,cinema.com.my,cinetrafic.fr,cocokara-next.com,collinsdictionary.com,computerfrage.net,convertcase.net,cool-style.com.tw,crosswordsolver.com,cruciverba.it,cults3d.com,daily.co.jp,dailynewshungary.com,dayspedia.com,dictionary.cambridge.org,dnevno.hr,dogdrip.net,dolldivine.com,donbalon.com,dramabeans.com,dropgame.jp,dziennik.pl,economictimes.com,economist.co.kr,edaily.co.kr,etoday.co.kr,etoland.co.kr,eurointegration.com.ua,ev-times.com,filmibeat.com,flatpanelshd.com,fntimes.com,footballtransfer.com.ua,footballtransfer.ru,forsal.pl,freemcserver.net,fxstreet-id.com,fxstreet-vn.com,fxstreet.*,gazetaprawna.pl,genialetricks.de,giornalone.it,globalrph.com,gloria.hr,golf-live.at,goodreturns.in,hb-nippon.com,heureka.cz,hometownstation.com,honkailab.com,horairesdouverture24.fr,hotcopper.com.au,idokep.hu,infinityfree.com,iplocation.net,islamicfinder.org,isplus.com,issuya.com,iusm.co.kr,j-cast.com,j-town.net,j7p.jp,jablickar.cz,jamaicaobserver.com,javatpoint.com,jawapos.com,jmty.jp,joemonster.org,judgehype.com,jutarnji.hr,kinmaweb.jp,km77.com,knowt.com,kobe-journal.com,kompasiana.com,kreuzwortraetsel.de,kurashinista.jp,kurashiru.com,kyoteibiyori.com,lacuarta.com,lakeshowlife.com,laleggepertutti.it,lamire.jp,ldoceonline.com,leckerschmecker.me,lifehacker.jp,listentotaxman.com,livenewschat.eu,loawa.com,logicieleducatif.fr,mahjongchest.com,maketecheasier.com,malaymail.com,mamastar.jp,manta.com,mathplayzone.com,mediaindonesia.com,mentalfloss.com,meteo60.fr,midhudsonnews.com,minesweeperquest.com,minkou.jp,missyusa.com,mlbpark.donga.com,moin.de,motor-talk.de,motscroises.fr,muragon.com,mykhel.com,mynet.com,nana-press.com,nationaltoday.com,nbadraft.net,netzwelt.de,newsinlevels.com,newsweekjapan.jp,niice-woker.com,niketalk.com,nouvelobs.com,oeffnungszeitenbuch.de,ondemandkorea.com,onlineradiobox.com,optionsprofitcalculator.com,oraridiapertura24.it,oxfordlearnersdictionaries.com,palabr.as,pashplus.jp,persoenlich.com,petitfute.com,picksandparlays.net,picrew.me,powerpyx.com,pptvhd36.com,pravda.com.ua,pressian.com,profitline.hu,puzzlegarage.com,quefaire.be,radio-australia.org,radio-osterreich.at,raenonx.cc,raetsel-hilfe.de,references.be,relevantmagazine.com,reportera.co.kr,roleplayer.me,rostercon.com,samsungmagazine.eu,scribens.com,scribens.fr,slashdot.org,slobodnadalmacija.hr,smsonline.cloud,soccerdigestweb.com,solitairehut.com,sourceforge.net,southhemitv.com,sportalkorea.com,sportanalytic.com,sportsrec.com,sportsseoul.com,szamoldki.hu,talkwithstranger.com,tasty.co,tbsradio.jp,text-compare.com,thatgossip.com,the-crossword-solver.com,thedigestweb.com,thefreebieguy.com,tportal.hr,traicy.com,transparentcalifornia.com,transparentnevada.com,tunebat.com,tvtv.ca,tvtv.us,tweaktown.com,twn.hu,tyda.se,tz.de,ufret.jp,upmedia.mg,verkaufsoffener-sonntag.com,w.grapps.me,watchdocumentaries.com,webdesignledger.com,welt.de,wfmz.com,winfuture.de,word-grabber.com,worldhistory.org,worldjournal.com,wort-suchen.de,woxikon.*,yakkun.com,ygosu.com,yutura.net,zagreb.info,zakzak.co.jp##+js(set-local-storage-item, /_fa_Y2FjaGVfaXNfYmxvY2tpbmdfYWRz$/, $remove$)
+373news.com,aikatu.jp,aniroleplay.com,ap7am.com,areaconnect.com,as-web.jp,aucfree.com,autoby.jp,autoc-one.jp,autofrage.net,automobile-catalog.com,bab.la,babla.*,badmouth1.com,bamgosu.site,bg-mania.jp,bien.hu,bleepingcomputer.com,blogmura.com,buzzfeed.com,buzzfeednews.com,cesoirtv.com,chanto.jp.net,cinema.com.my,cinetrafic.fr,cocokara-next.com,collinsdictionary.com,computerfrage.net,convertcase.net,cool-style.com.tw,crosswordsolver.com,cruciverba.it,cults3d.com,daily.co.jp,dailynewshungary.com,dayspedia.com,dictionary.cambridge.org,dnevno.hr,dogdrip.net,dolldivine.com,donbalon.com,dramabeans.com,dropgame.jp,dziennik.pl,economictimes.com,economist.co.kr,edaily.co.kr,etoday.co.kr,etoland.co.kr,eurointegration.com.ua,ev-times.com,filmibeat.com,flatpanelshd.com,fntimes.com,footballtransfer.com.ua,footballtransfer.ru,forsal.pl,freemcserver.net,fxstreet-id.com,fxstreet-vn.com,fxstreet.*,gazetaprawna.pl,genialetricks.de,giornalone.it,globalrph.com,gloria.hr,golf-live.at,goodreturns.in,hb-nippon.com,heureka.cz,hometownstation.com,honkailab.com,horairesdouverture24.fr,hotcopper.com.au,idokep.hu,infinityfree.com,iplocation.net,islamicfinder.org,isplus.com,issuya.com,iusm.co.kr,j-cast.com,j-town.net,j7p.jp,jablickar.cz,jamaicaobserver.com,javatpoint.com,jawapos.com,jmty.jp,joemonster.org,judgehype.com,jutarnji.hr,kinmaweb.jp,km77.com,knowt.com,kobe-journal.com,kompasiana.com,kreuzwortraetsel.de,kurashinista.jp,kurashiru.com,kyoteibiyori.com,lacuarta.com,lakeshowlife.com,laleggepertutti.it,lamire.jp,ldoceonline.com,leckerschmecker.me,lifehacker.jp,listentotaxman.com,livenewschat.eu,loawa.com,logicieleducatif.fr,mahjongchest.com,maketecheasier.com,malaymail.com,mamastar.jp,manta.com,mathplayzone.com,mediaindonesia.com,mentalfloss.com,meteo60.fr,midhudsonnews.com,minesweeperquest.com,minkou.jp,missyusa.com,mlbpark.donga.com,moin.de,motor-talk.de,motscroises.fr,muragon.com,mykhel.com,mynet.com,nana-press.com,nationaltoday.com,nbadraft.net,netzwelt.de,newsinlevels.com,newsweekjapan.jp,niice-woker.com,niketalk.com,nouvelobs.com,oeffnungszeitenbuch.de,ondemandkorea.com,onlineradiobox.com,optionsprofitcalculator.com,oraridiapertura24.it,oxfordlearnersdictionaries.com,palabr.as,pashplus.jp,persoenlich.com,petitfute.com,picksandparlays.net,picrew.me,powerpyx.com,pptvhd36.com,pravda.com.ua,pressian.com,profitline.hu,puzzlegarage.com,quefaire.be,radio-australia.org,radio-osterreich.at,raenonx.cc,raetsel-hilfe.de,references.be,relevantmagazine.com,reportera.co.kr,roleplayer.me,rostercon.com,samsungmagazine.eu,scribens.com,scribens.fr,slashdot.org,slobodnadalmacija.hr,smsonline.cloud,soccerdigestweb.com,solitairehut.com,sourceforge.net,southhemitv.com,sportalkorea.com,sportanalytic.com,sportsrec.com,sportsseoul.com,szamoldki.hu,talkwithstranger.com,tasty.co,tbsradio.jp,text-compare.com,thatgossip.com,the-crossword-solver.com,thedigestweb.com,thefreebieguy.com,tportal.hr,traicy.com,transparentcalifornia.com,transparentnevada.com,tunebat.com,tvtv.ca,tvtv.us,tweaktown.com,twn.hu,tyda.se,tz.de,ufret.jp,upmedia.mg,verkaufsoffener-sonntag.com,w.grapps.me,watchdocumentaries.com,webdesignledger.com,welt.de,wfmz.com,winfuture.de,word-grabber.com,worldhistory.org,worldjournal.com,wort-suchen.de,woxikon.*,yakkun.com,ygosu.com,yutura.net,zagreb.info,zakzak.co.jp##+js(set-local-storage-item, /_fa_Y2FjaGVfYWRibG9ja19jaXJjdW12ZW50X3Njb3Jl$/, $remove$)
+a741 1
+||facebook.com^$removeparam=share_url
 a1425 1
 ||novizer.org/api/send
-diff name:ublock-quick-fixes lines:32 checksum:5d708ffddc
+diff name:ublock-quick-fixes lines:40 checksum:924bc9d8fe
 d3 2
 a4 2
-! Last modified: Fri, 31 Oct 2025 16:57:58 +0000
-! Diff-Path: ../patches/2025.11.1.197.patch#ublock-quick-fixes
+! Last modified: Sat, 01 Nov 2025 05:11:35 +0000
+! Diff-Path: ../patches/2025.11.1.512.patch#ublock-quick-fixes
 d90 1
 d93 4
 a96 4
@@ -162,9 +219,10 @@ a96 4
 a98 1
 *$script,redirect-rule=noop.js,domain=japscan.*
 d110 1
-a110 2
+a110 3
 japscan.*##+js(trusted-set, pubadxtag, 'json:{"divIds":[]}')
 japscan.*##+js(trusted-set, aclib, json:{"isShowingPop":false})
+japscan.*##+js(set, aclib.runInPagePush, noopFunc)
 a184 1
 ://content-loader.com/loader.min.js$domain=~dogdrip.net|~infinityfree.com|~smsonline.cloud
 d218 5
@@ -177,18 +235,25 @@ d225 1
 a225 2
 pvpoke-re.com##+js(trusted-set-attr, *:not(.main-wrap:has(~ [id^="nitro-sidebar"] .nitro-side) #nitro-top\,.main-wrap:has(~ [id^="nitro-sidebar"] .nitro-side) #nitro-body-desktop\,[id^="nitro-sidebar"]:has(.nitro-side) ~ #nitro-header-mobile) > ins.adsbygoogle:not(:has(#aswift_0_host)), data-ad-status, filled)
 pvpoke-re.com##+js(no-fetch-if, url:https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-3497863494706299 method:HEAD mode:no-cors, , , throttle, 121)
-a299 2
+a299 9
 ||rottentomatoes.com/assets/pizza-pie/javascripts/bundles/roma/rt-common.js$badfilter
 ||adult-chess.com^$badfilter
-diff name:ublock-unbreak lines:3 checksum:de84be9e15
+! Reported to regional lists
+||loader.kreuzwortraetsel.de^
+||loader.oeffnungszeitenbuch.de^
+||loader.verkaufsoffener-sonntag.com^
+||loader.wort-suchen.de^
+||loader.woxikon.de^
+||loader.oraridiapertura24.it^
+diff name:ublock-unbreak lines:3 checksum:92fb593dc7
 d4 1
 a4 1
-! Diff-Path: ../patches/2025.11.1.197.patch#ublock-unbreak
-diff name:easylist lines:2666 checksum:22051b5ea4
+! Diff-Path: ../patches/2025.11.1.512.patch#ublock-unbreak
+diff name:easylist lines:2755 checksum:b96090277a
 d4 2
 a5 2
-! Last modified: Sat, 01 Nov 2025 02:23:29 +0000
-! Diff-Path: ../patches/2025.11.1.197.patch#easylist
+! Last modified: Sat, 01 Nov 2025 06:51:50 +0000
+! Diff-Path: ../patches/2025.11.1.512.patch#easylist
 a818 1
 .com/players/*/-1/70/*?hash=-$script,third-party
 d15472 1
@@ -243,6 +308,8 @@ d16133 1
 d16144 1
 d16147 1
 d16149 1
+a16149 1
+||6tnpqnytyolllykq.cfd^
 d16174 2
 d16180 1
 d16191 1
@@ -277,6 +344,8 @@ d16436 1
 d16461 1
 a16461 1
 ||aacycjgsifojcw.com^
+a16462 1
+||aaedgdwcrxtkw.site^
 d16470 1
 a16470 1
 ||aajpntlpd.com^
@@ -430,6 +499,8 @@ d18020 2
 d18024 1
 d18030 1
 d18032 1
+a18032 1
+||aloxiteyacal.rest^
 d18036 1
 d18044 1
 d18048 2
@@ -638,6 +709,8 @@ d19221 2
 d19224 1
 d19235 2
 d19239 4
+a19242 1
+||avwjyvwqyokv.top^
 d19245 1
 a19245 1
 ||avzmhurdchosj.space^
@@ -941,6 +1014,8 @@ d21173 1
 d21201 1
 d21203 1
 d21216 1
+a21216 1
+||bromingigaton.com^
 d21219 1
 d21228 1
 d21245 1
@@ -1106,6 +1181,8 @@ d22276 2
 d22283 1
 a22301 1
 ||cgmfhzvqykwxg.store^
+a22305 1
+||cgsaxsvjvswcu.space^
 d22312 1
 d22319 1
 d22333 1
@@ -1341,6 +1418,8 @@ d24080 1
 a24089 1
 ||cutisbridger.cyou^
 d24092 3
+a24097 1
+||cuyhuxmdfyx.com^
 d24100 1
 d24103 1
 d24116 2
@@ -1596,6 +1675,8 @@ a25899 1
 d25911 1
 d25916 1
 d25923 1
+a25924 1
+||dtpnpxarnas.com^
 d25927 1
 d25940 1
 d25943 2
@@ -1700,6 +1781,8 @@ d26657 1
 a26657 1
 ||ejepontspwiip.website^
 d26661 1
+a26661 1
+||ejjjdruy.com^
 d26667 1
 d26671 3
 d26681 1
@@ -1934,6 +2017,8 @@ d28297 1
 d28300 1
 d28304 1
 d28324 1
+a28324 1
+||fishnetunbid.qpon^
 d28334 1
 d28336 1
 d28339 1
@@ -2081,6 +2166,8 @@ d29271 1
 d29280 1
 d29284 2
 d29288 1
+a29289 1
+||fyewrocgieeog.site^
 d29295 1
 d29306 1
 d29311 1
@@ -2208,10 +2295,14 @@ a30410 1
 ||grabsohofaupoo.net^
 a30562 1
 ||grievouslydowntowngroundless.com^
+a30713 1
+||gsedkytitvtsp.space^
 a30852 1
 ||gusvoxyroosho.site^
 a30928 1
 ||gyghdvuztsxcpr.com^
+a30959 1
+||gyyfvmigbgyle.com^
 a31065 1
 ||hamitescanful.com^
 a31118 1
@@ -2264,6 +2355,8 @@ a33215 1
 ||interpretationairlinerdonation.com^
 a33290 1
 ||ionisejunkmen.cfd^
+a33555 1
+||ivhuajmjwjuru.website^
 a33618 1
 ||iybnvijtblbwk.com^
 a33812 1
@@ -2272,6 +2365,8 @@ a33863 1
 ||jdsqwxdpmfu.com^
 a33957 1
 ||jfkumusjflr.com^
+a33972 1
+||jgcmzlhhvxvpf.website^
 a33997 1
 ||jheetascwyyeh.website^
 a34062 1
@@ -2280,6 +2375,10 @@ a34094 1
 ||jkajyrkqaojzl.top^
 a34096 1
 ||jkbewmebyqamb.top^
+a34173 1
+||jnbarehsnnbgg.online^
+a34237 1
+||joocaglataisi.com^
 a34239 1
 ||joodoothaiphou.net^
 a34320 1
@@ -2298,6 +2397,8 @@ a34568 1
 ||jwlkmxrno.com^
 a34594 1
 ||jxljlmikdnsfb.store^
+a34666 1
+||k7u6lrk7ju8qo9nc18u.rest^
 a34755 1
 ||kawtsayrnwyar.store^
 a34785 1
@@ -2310,6 +2411,10 @@ a34951 1
 ||kgcqegbyqnrnj.space^
 a35184 1
 ||kmsxcaqbwngtbg.com^
+a35189 1
+||kmwzyajvivjuz.space^
+a35359 1
+||kpzdophqurlbw.website^
 a35360 1
 ||kqauptdrdiyyp.space^
 a35383 1
@@ -2320,6 +2425,8 @@ a35633 1
 ||labwcupacoqc.com^
 a35640 1
 ||lacquercheeky.com^
+a35866 1
+||lbswgtbac.com^
 a35887 1
 ||lce9otf4mtbvtvyunm9ttt8e.rest^
 a35962 1
@@ -2336,6 +2443,8 @@ a36813 1
 ||lqbvjmkoozvjj.top^
 a36827 1
 ||lqkkoozmakmky.top^
+a36840 1
+||lrcrochet.cfd^
 a36857 1
 ||lrwgmmuhrimpk.store^
 a36879 1
@@ -2408,10 +2517,18 @@ a39740 1
 ||nojrbeyih.com^
 a39852 1
 ||noutaiboowafee.net^
+a39979 1
+||nscnpwjcxsslq.website^
 a40237 1
 ||nzestuwcvxkbm.online^
+a40238 1
+||nzigunflybfhu.store^
+a40260 1
+||o25241l84jmcukt.cfd^
 a40264 1
 ||o4gph42vjg17vgzx54gq2xuw.cfd^
+a40402 1
+||ocacoongoa.net^
 a40408 1
 ||occjrzpp.com^
 a40417 1
@@ -2495,6 +2612,8 @@ a44145 1
 ||py4ehyjbzx8rhvcw.rest^
 a44173 1
 ||pythiusdroller.click^
+a44194 1
+||q25wuvuv5ci56f2zl6r4hon7crgzbjbm3tx.rest^
 a44274 1
 ||qcmlcwymvatsn.site^
 a44301 1
@@ -2519,8 +2638,11 @@ a44609 1
 ||qpsygjnwhungniv.com^
 a44722 1
 ||qttktsllqbnpx.online^
-a44723 1
+a44723 2
+||qtvjpisthvezx.website^
 ||qtymgbybuxtfi.online^
+a44920 1
+||qybikcimoaa.com^
 a44925 1
 ||qyiwumjlqeibioh.com^
 a44931 1
@@ -2535,6 +2657,8 @@ a45237 1
 ||rdhzeagmyxdim.site^
 a45253 1
 ||rdtppfckuxzmo.website^
+a45314 1
+||reblessideals.shop^
 a45353 1
 ||reclineanomura.click^
 a45454 1
@@ -2543,6 +2667,8 @@ a45538 1
 ||relentdendric.cyou^
 a45576 1
 ||rememberineffectiveadvisedly.com^
+a45615 1
+||reobalkeymyq.top^
 a45774 1
 ||rettypholos.com^
 a45876 1
@@ -2554,6 +2680,8 @@ a45885 2
 ||rgubidzwowcpf.space^
 a45905 1
 ||rhkbcpdi.com^
+a46091 1
+||rkoofgxarguv.com^
 a46110 1
 ||rlvpmbduuf.com^
 a46141 1
@@ -2602,6 +2730,8 @@ a47721 1
 ||shopteebourso.com^
 a48078 1
 ||sledfoolinfo.com^
+a48125 1
+||sljahnmoeqlis.online^
 a48196 1
 ||smearconventional.com^
 a48252 1
@@ -2628,6 +2758,8 @@ a49220 1
 ||suburbanregret.com^
 a49229 1
 ||suchosfluxive.click^
+a49585 1
+||szrymdfpo.com^
 a49618 1
 ||tagsoviet.com^
 a49621 1
@@ -2660,6 +2792,10 @@ a50813 1
 ||trainerunpleasantrite.com^
 a51126 1
 ||ttukphqhic.com^
+a51135 1
+||tubby-roof.com^
+a51196 1
+||turbodeter.com^
 a51325 1
 ||txmpyhqwcjd.com^
 a51351 1
@@ -2668,6 +2804,10 @@ a51385 1
 ||tzxbgwdsbtjzu.online^
 a51535 1
 ||ugqaxpmhdveiv.website^
+a51988 1
+||untriedpoetry.com^
+a52039 1
+||uommyhvsmzozp.website^
 a52101 1
 ||upsausoopochoa.net^
 a52161 1
@@ -2678,6 +2818,8 @@ a52489 1
 ||vaqykqyvvamoy.top^
 a52504 1
 ||varkelmbqlrew.top^
+a52610 1
+||vdjzreyjxrjtn.website^
 a52793 1
 ||vfrhonubgme.com^
 a52816 1
@@ -2710,6 +2852,8 @@ a54482 1
 ||wolfianimpact.cfd^
 a54638 1
 ||wrappedenolase.help^
+a54694 1
+||wsfhouubbqacd.online^
 a54702 1
 ||wstifjysx.com^
 a54718 1
@@ -2718,6 +2862,8 @@ a54736 1
 ||wulunette.help^
 a54858 1
 ||wypmfqgwnetdz.online^
+a54976 1
+||xdlcclgfnyuax.store^
 a54983 1
 ||xdyxzdkconsev.site^
 a54992 1
@@ -2760,6 +2906,8 @@ a55892 1
 ||yqipuxmackzsk.online^
 a55962 1
 ||ytmrujsfokpvb.space^
+a56046 1
+||yxloucsirgwyb.online^
 a56060 1
 ||yyatpfkjgcclyc.com^
 a56109 1
@@ -2772,12 +2920,16 @@ a56163 1
 ||zcpnzuwahtpxi.space^
 a56175 1
 ||zdqdbzqlmk.com^
+a56401 1
+||zlzdxvqabjumy.website^
 a56434 1
 ||znjvedmtgybbk.store^
 a56465 1
 ||zoismeparchs.cfd^
 a56508 1
 ||zp9l4ub31urzy58b.rest^
+a56517 1
+||zpqfqxoczrwfq.space^
 a56526 1
 ||zqjljeyjwvmww.top^
 a56538 1
@@ -2821,6 +2973,8 @@ gogetaroomie.com,snafu-comics.com###top-space
 d68574 1
 a68574 1
 startpage.com,startpagel6srwcjlue4zgq3zevrujfaow726kjytqbbjyrswwmjzcqd.onion##.a-bg-result
+a69131 1
+minecraftskins.com##.antiblock-wrapper
 d69874 1
 a69874 1
 startpage.com,startpagel6srwcjlue4zgq3zevrujfaow726kjytqbbjyrswwmjzcqd.onion##.css-1j5r2ie
@@ -2851,11 +3005,16 @@ a74483 1
 duckduckgo.com##section > div[class]:has(button[data-testid="ad-badge-ad-tooltip-products"])
 a74954 1
 apkmirror.com##.ains
-diff name:easyprivacy lines:35 checksum:3cf7b054a1
+diff name:easyprivacy lines:46 checksum:377c1d4395
 d4 2
 a5 2
-! Last modified: Sat, 01 Nov 2025 02:23:29 +0000
-! Diff-Path: ../patches/2025.11.1.197.patch#easyprivacy
+! Last modified: Sat, 01 Nov 2025 06:51:50 +0000
+! Diff-Path: ../patches/2025.11.1.512.patch#easyprivacy
+d1629 1
+a1629 1
+/oo/*/lsync.
+a1727 1
+/piano-analytics/pa.js
 a5396 1
 ||petametrics.com^$third-party,domain=~telegraph.co.uk
 a6482 1
@@ -2880,7 +3039,13 @@ a8343 1
 ||wirenewsletter.com^
 a10826 1
 ||ip-check-perf.radar.cloudflare.com^
+a11826 1
+||t.fastcmp.com^
 d15954 1
+a53376 1
+||fp.kakaku.com^
+a53453 1
+||softonic.jp/web-stats
 d53999 1
 a53999 1
 @@||api.useinsider.com/api/web/$xmlhttprequest
