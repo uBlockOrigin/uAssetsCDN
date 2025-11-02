@@ -1,5 +1,5 @@
 ! Title: uBlock₀ filters – Quick fixes
-! Last modified: Sat, 01 Nov 2025 23:34:42 +0000
+! Last modified: Sun, 02 Nov 2025 16:50:22 +0000
 ! Expires: 8 hours
 ! Description: Immediate, temporary filters to fix websites
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -137,6 +137,7 @@ japscan.*##+js(trusted-set, pubadxtag, 'json:{"divIds":[]}')
 japscan.*##+js(trusted-set, aclib, json:{"isShowingPop":false})
 japscan.*##+js(set, aclib.runInPagePush, noopFunc)
 japscan.*##+js(set, aclib.runBanner, {}, as, function)
+japscan.*##+js(set, aclib.runInterstitial, throwFunc)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/21064
 ! https://github.com/uBlockOrigin/uAssets/issues/24220
@@ -372,14 +373,6 @@ omuzaani.me##+js(trusted-replace-argument, Headers.prototype.has, 0, json:"conte
 omuzaani.me##+js(rpnt, script, /window.navigator.brave.+;/, false;)
 omuzaani.me##+js(no-fetch-if, summerday, length:10, {"type":"cors"})
 
-! dataunlocker.com
-@@||region1.google-analytics.com/g/collect$xhr,domain=stateless.me
-||region1.google-analytics.com/g/collect?$removeparam,xhr,domain=stateless.me
-@@||stateless.me^$ghide
-
-! Blocked by PL
-@@||dev.visualwebsiteoptimizer.com^$script,xhr,domain=dominos.jp
-
 ! https://github.com/uBlockOrigin/uAssets/issues/24063
 th.gl##+js(nosiif, error)
 
@@ -387,19 +380,8 @@ th.gl##+js(nosiif, error)
 tvtropes.org##+js(nostif, /offsetHeight|loaded/)
 tvtropes.org##+js(set, HTMLScriptElement.prototype.onerror, undefined)
 
-! https://github.com/uBlockOrigin/uAssets/issues/30583
-.salesforce.com/servlet/servlet.ImageServer?$image,badfilter
-
 ! https://www.reddit.com/r/uBlockOrigin/comments/1ohh336/ubo_lite_on_ios_breaks_rotten_tomatoes/
 ||rottentomatoes.com/assets/pizza-pie/javascripts/bundles/roma/rt-common.js$badfilter
-
-! Reported to regional lists
-||loader.kreuzwortraetsel.de^
-||loader.oeffnungszeitenbuch.de^
-||loader.verkaufsoffener-sonntag.com^
-||loader.wort-suchen.de^
-||loader.woxikon.de^
-||loader.oraridiapertura24.it^
 
 ! https://github.com/DandelionSprout/adfilt/discussions/163#discussioncomment-14844870
 @@$doc,removeparam=msid,domain=editorialmanager.com
