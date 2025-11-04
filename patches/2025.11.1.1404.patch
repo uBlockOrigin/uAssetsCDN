@@ -1,42 +1,46 @@
-diff name:ublock-annoyances lines:7 checksum:455f4b474b
+diff name:ublock-annoyances lines:7 checksum:c3e15e86b0
 d3 2
 a4 2
 ! Last modified: Mon, 03 Nov 2025 10:11:39 +0000
-! Diff-Path: ../patches/2025.11.4.126.patch#ublock-annoyances
+! Diff-Path: ../patches/2025.11.4.402.patch#ublock-annoyances
 d3408 1
 a3408 1
 love4u.net##+js(ra, oncontextmenu, [oncontextmenu="return false;"])
-diff name:ublock-badware lines:8 checksum:9ba7150769
+diff name:ublock-badware lines:8 checksum:f30444d729
 d3 2
 a4 2
 ! Last modified: Sun, 02 Nov 2025 04:35:30 +0000
-! Diff-Path: ../patches/2025.11.4.126.patch#ublock-badware
+! Diff-Path: ../patches/2025.11.4.402.patch#ublock-badware
 a4456 1
 /^https:\/\/blockchecker[0-9]\.pages\.dev\//$doc,to=pages.dev
 a4462 1
 ||blockchecker6.pages.dev^$all
-diff name:ublock-experimental lines:16 checksum:e38d6e125d
+diff name:ublock-experimental lines:20 checksum:eedfe9e064
 d3 2
 a4 2
-! Last modified: Mon, 03 Nov 2025 15:28:02 +0000
-! Diff-Path: ../patches/2025.11.4.126.patch#ublock-experimental
-d14 1
-a14 2
-www.youtube.com#@#+js(trusted-edit-inbound-object, JSON.stringify, 0, ..client[?.clientName=="WEB"]+={"clientScreen":"CHANNEL"})
-www.youtube.com#@#+js(trusted-json-edit-fetch-request, ..client[?.clientName=="WEB"]+={"clientScreen":"CHANNEL"}, propsToMatch, /\/(player|get_watch)/)
-d23 2
-a24 4
-www.youtube.com##+js(trusted-replace-fetch-response, /(webPlayerConfig.+?\?start=)(\d+)/, playbackStartConfig":{"startSeconds":$2\,"startPosition":{"streamTimeMillis":"$2000"}}\,"$1$2, /\/(player|get_watch)/)
-www.youtube.com##+js(trusted-replace-fetch-response, "minimumPlaybackRate":100, "minimumPlaybackRate":25, /\/(player|get_watch)/)
-www.youtube.com##+js(trusted-replace-fetch-response, "maximumPlaybackRate":100, "maximumPlaybackRate":200, /\/(player|get_watch)/)
-www.youtube.com##+js(trusted-json-edit-xhr-response, '..playerConfig.granularVariableSpeedConfig+={"minimumPlaybackRate":25,"maximumPlaybackRate":200}', propsToMatch, /\/(player|get_watch)/)
+! Last modified: Tue, 04 Nov 2025 06:29:58 +0000
+! Diff-Path: ../patches/2025.11.4.402.patch#ublock-experimental
+d14 3
+a16 4
+! www.youtube.com#@#+js(trusted-edit-inbound-object, JSON.stringify, 0, ..client[?.clientName=="WEB"]+={"clientScreen":"CHANNEL"})
+! www.youtube.com#@#+js(trusted-json-edit-fetch-request, ..client[?.clientName=="WEB"]+={"clientScreen":"CHANNEL"}, propsToMatch, /\/(player|get_watch)/)
+! www.youtube.com##+js(trusted-json-edit-fetch-request, ..playbackContext[?.contentPlaybackContext]+={"adPlaybackContext":{"adType":"AD_TYPE_INSTREAM"}}, propsToMatch, /\/(player|get_watch)/)
+! www.youtube.com##+js(trusted-edit-inbound-object, JSON.stringify, 0, ..playbackContext[?.contentPlaybackContext.currentUrl^="/watch"]+={"adPlaybackContext":{"adType":"AD_TYPE_INSTREAM"}})
+d22 3
+a24 6
+www.youtube.com##+js(trusted-rpnt, script, (function serverContract(), '(()=>{if("YOUTUBE_PREMIUM_LOGO"===ytInitialData?.topbar?.desktopTopbarRenderer?.logo?.topbarLogoRenderer?.iconImage?.iconType||location.href.startsWith("https://www.youtube.com/tv#/")||location.href.startsWith("https://www.youtube.com/embed/"))return;document.addEventListener("DOMContentLoaded",(function(){const t=()=>{const t=document.getElementById("movie_player");if(!t)return;if(!t.getStatsForNerds?.()?.debug_info?.startsWith?.("SSAP, AD"))return;const e=t.getProgressState?.();e&&e.duration>0&&(e.loaded<e.duration||e.duration-e.current>1)&&t.seekTo?.(e.duration)};t(),new MutationObserver((()=>{t()})).observe(document,{childList:!0,subtree:!0})}));const t={apply:(t,e,n)=>{const o=n[0];return"function"==typeof o&&o.toString().includes("onAbnormalityDetected")&&(n[0]=function(){}),Reflect.apply(t,e,n)}};window.Promise.prototype.then=new Proxy(window.Promise.prototype.then,t),window.location.href.includes("/watch?")&&"BADGE_STYLE_TYPE_MEMBERS_ONLY"!==ytInitialData?.contents?.twoColumnWatchNextResults?.results?.results?.contents?.[0]?.videoPrimaryInfoRenderer?.badges?.[0]?.metadataBadgeRenderer?.style&&"CONTENT_CHECK_REQUIRED"!==ytInitialPlayerResponse?.playabilityStatus?.status&&window.addEventListener("load",(()=>{const t=document.querySelectorAll("script");for(const e of t){const t=e.innerText;if(t.includes("var ytInitialPlayerResponse")&&!t.includes("serverContract")){if(!t.includes("adPlacements")&&!t.includes("adSlots"))return;break}}const e=async function(t){let e=document.getElementById(t);for(;!e;)e=await new Promise((e=>setTimeout((()=>e(document.getElementById(t))),500)));return e}("movie_player"),n=window.location.search,o=new URLSearchParams(n).get("v"),r=new URLSearchParams(n).get("t")??0;if(!e||!o)return;const a=parseInt(r,10);e.then((function(t){t.loadVideoById(o,a)}))}))})();(function serverContract()', sedCount, 1)
+www.youtube.com##+js(trusted-json-edit-xhr-request, ..client[?.clientName=="WEB"]+={"clientScreen":"CHANNEL"}, propsToMatch, /\/(player|get_watch)/)
+! www.youtube.com##+js(trusted-replace-fetch-response, /(webPlayerConfig.+?\?start=)(\d+)/, playbackStartConfig":{"startSeconds":$2\,"startPosition":{"streamTimeMillis":"$2000"}}\,"$1$2, /\/(player|get_watch)/)
+! www.youtube.com##+js(trusted-replace-fetch-response, "minimumPlaybackRate":100, "minimumPlaybackRate":25, /\/(player|get_watch)/)
+! www.youtube.com##+js(trusted-replace-fetch-response, "maximumPlaybackRate":100, "maximumPlaybackRate":200, /\/(player|get_watch)/)
+! www.youtube.com##+js(trusted-json-edit-xhr-response, '..playerConfig.granularVariableSpeedConfig+={"minimumPlaybackRate":25,"maximumPlaybackRate":200}', propsToMatch, /\/(player|get_watch)/)
 a30 1
 www.twitch.tv##button[aria-label="Learn more about this ad"]
-diff name:ublock-filters lines:170 checksum:bf1e3fd34d
+diff name:ublock-filters lines:170 checksum:14448fb423
 d3 2
 a4 2
 ! Last modified: Tue, 04 Nov 2025 01:53:10 +0000
-! Diff-Path: ../patches/2025.11.4.126.patch#ublock-filters
+! Diff-Path: ../patches/2025.11.4.402.patch#ublock-filters
 d5646 1
 a5646 1
 cinema.de##+js(no-xhr-if, svonm)
@@ -203,20 +207,19 @@ a24125 3
 ||ico3c.com/js/bafsd.js
 pics-view.com##+js(aeld, click, link.click)
 /dai/pub/global/$xhr,domain=nowtv.com
-diff name:ublock-privacy lines:3 checksum:f87c98c2d0
+diff name:ublock-privacy lines:3 checksum:8f1b2202a5
 d4 1
 a4 1
-! Diff-Path: ../patches/2025.11.4.126.patch#ublock-privacy
-diff name:ublock-quick-fixes lines:28 checksum:19e5c3c792
+! Diff-Path: ../patches/2025.11.4.402.patch#ublock-privacy
+diff name:ublock-quick-fixes lines:27 checksum:fbc994d465
 d3 2
 a4 2
-! Last modified: Mon, 03 Nov 2025 15:28:02 +0000
-! Diff-Path: ../patches/2025.11.4.126.patch#ublock-quick-fixes
+! Last modified: Tue, 04 Nov 2025 05:40:20 +0000
+! Diff-Path: ../patches/2025.11.4.402.patch#ublock-quick-fixes
 d22 1
-a22 3
+a22 2
 www.youtube.com##+js(trusted-edit-inbound-object, JSON.stringify, 0, ..client[?.clientName=="WEB"]+={"clientScreen":"CHANNEL"})
 www.youtube.com##+js(trusted-json-edit-fetch-request, ..client[?.clientName=="WEB"]+={"clientScreen":"CHANNEL"}, propsToMatch, /\/(player|get_watch)/)
-www.youtube.com##+js(trusted-json-edit-xhr-request, ..client[?.clientName=="WEB"]+={"clientScreen":"CHANNEL"}, propsToMatch, /\/(player|get_watch)/)
 a95 1
 ||network-loop.com/campaigns/banners/$domain=japscan.lol|japscan.si|japscan.vip,important
 a104 1
@@ -224,7 +227,7 @@ a104 1
 a112 3
 japscan.*##+js(set, aclib.runBanner, {}, as, function)
 japscan.*##+js(set, aclib.runInterstitial, throwFunc)
-japscan.*##+js(trusted-suppress-native-method, Document.prototype.getElementById, '"/_/"')
+japscan.*##+js(trusted-suppress-native-method, Document.prototype.getElementById, '"/^[A-Z][0-9A-Z_a-z]{5}$/"')
 d276 2
 a277 4
 client.falixnodes.net##+js(rpnt, script, /window\.location\.href \= ('|")\/(please-disable|neptune|disableadblock|yeahblock|yupblock|verypleasedisable)('|")\;/)
@@ -236,22 +239,27 @@ a299 1
 th.gl##+js(nosiif, Date.now)
 d302 1
 d304 7
-diff name:ublock-unbreak lines:10 checksum:36b0380175
+diff name:ublock-unbreak lines:13 checksum:0c6f9830a3
 d3 2
 a4 2
-! Last modified: Sun, 02 Nov 2025 04:15:35 +0000
-! Diff-Path: ../patches/2025.11.4.126.patch#ublock-unbreak
-a2766 5
+! Last modified: Tue, 04 Nov 2025 04:29:05 +0000
+! Diff-Path: ../patches/2025.11.4.402.patch#ublock-unbreak
+a2766 8
 ||camel3.live/lib/sensorsdata.full.min.js$redirect=noopjs,important
 camel3.live##+js(set, sensorsDataAnalytic201505, {})
 camel3.live##+js(set, sensorsDataAnalytic201505.init, noopFunc)
 camel3.live##+js(set, sensorsDataAnalytic201505.track, noopFunc)
 camel3.live##+js(set, sensorsDataAnalytic201505.register, noopFunc)
-diff name:easylist lines:1017 checksum:84ea167e97
+! StevenBlack/hosts issue
+||live-media-aka.warnermediacdn.com^$badfilter
+@@||live-media-aka.warnermediacdn.com^$xhr,domain=adultswim.com
+diff name:easylist lines:1132 checksum:06325dfcad
 d4 2
 a5 2
-! Last modified: Mon, 03 Nov 2025 21:50:16 +0000
-! Diff-Path: ../patches/2025.11.4.126.patch#easylist
+! Last modified: Tue, 04 Nov 2025 03:58:20 +0000
+! Diff-Path: ../patches/2025.11.4.402.patch#easylist
+a15494 1
+||0e024d23f9.com^
 a15573 1
 ||19tmw2k567ugfijwimqto4.cfd^
 a15858 1
@@ -301,6 +309,8 @@ a17379 1
 ||agatagardens.shop^
 a17504 1
 ||aiewtuaivdcjd.store^
+a17607 1
+||ajjkmozrrvmj.top^
 a17615 1
 ||ajyykkim.com^
 a17647 1
@@ -335,6 +345,8 @@ a18831 1
 ||aweyqaqkrzzr.top^
 a18999 1
 ||b4f8bey4343cvmhftmc.rest^
+a19002 1
+||b5e17bdf06.com^
 a19043 1
 ||bacrtcqhpkmbp.online^
 a19209 1
@@ -351,6 +363,8 @@ a19298 1
 ||bdatmrfm.com^
 a19411 1
 ||belatedguidance.com^
+a19477 1
+||bepeltdoyly.help^
 a19481 1
 ||berberomber.qpon^
 a19482 1
@@ -359,6 +373,8 @@ a19485 1
 ||beroeform.qpon^
 a19623 1
 ||bgaesoorwixmx.site^
+a19655 1
+||bhhgvedfr.com^
 a19761 1
 ||bioxiderattage.com^
 a19811 1
@@ -373,10 +389,13 @@ a20075 1
 ||bogmanfatuism.click^
 a20150 1
 ||boosheewetie.com^
+a20233 1
+||bounhookeys.shop^
 a20603 1
 ||bumfinline.com^
-a20717 1
+a20717 2
 ||bvztijajnvves.site^
+||bw5t2ucqtn3lho.rest^
 a20740 1
 ||bxmyyupyexyci.space^
 a20761 1
@@ -437,6 +456,8 @@ a22634 1
 ||creamy-exit.com^
 a22840 1
 ||cudavagommier.com^
+a23069 1
+||d333f13060.com^
 a23079 1
 ||d6468dab54.com^
 a23171 1
@@ -462,6 +483,10 @@ a23968 1
 ||dissitemanger.com^
 a24018 1
 ||djinnspasewa.cyou^
+a24046 1
+||dktclumdglhds.site^
+a24057 1
+||dljecxbxgaosn.online^
 a24090 1
 ||dmmcom.cc^
 a24139 1
@@ -492,6 +517,8 @@ a25147 1
 ||ejarsartoazem.com^
 a25149 1
 ||ejeerdapsuxurt.net^
+a25162 1
+||ejvopiwqynfcp.site^
 a25231 1
 ||elengerheinic.rest^
 a25234 1
@@ -520,7 +547,8 @@ a25982 1
 ||extralarge-confusion.com^
 a25990 1
 ||extypalhallow.com^
-a25992 1
+a25992 2
+||exuviabootid.click^
 ||exvhfxplywnpz.store^
 a26058 1
 ||f1vp3m3exxhjq9vy.cfd^
@@ -562,6 +590,8 @@ a26870 1
 ||followerattachment.com^
 a26923 1
 ||foreststobaccodecember.com^
+a27115 1
+||frivolouscontest.com^
 a27185 1
 ||fsqgocmhgaikr.site^
 a27221 1
@@ -592,6 +622,8 @@ a27883 1
 ||gicairdooga.com^
 a27979 1
 ||gkjicggvnoabu.website^
+a27981 1
+||gkuocadgecsga.com^
 a28011 1
 ||glaukeslave.cyou^
 a28043 1
@@ -616,12 +648,16 @@ a28763 1
 ||gucoxcnpeljaf.site^
 a28801 1
 ||gulleypupunha.qpon^
+a28888 1
+||gwrsyyrghwnuo.space^
 a28973 1
 ||hacanpaknvc.com^
 a29014 1
 ||hairdressergraduate.com^
 a29030 1
 ||halfwaybab.com^
+a29034 1
+||halloastintype.shop^
 a29234 1
 ||hblrftplb5oqok91e.rest^
 a29243 1
@@ -630,10 +666,14 @@ a29249 1
 ||hcccskbe.com^
 a29282 1
 ||hddymwhdqdnvh.site^
+a29301 1
+||hdumpvwdhhrqq.site^
 a29548 1
 ||hgutlxufr.com^
 a29553 1
 ||hhfycfkazxpch.online^
+a29727 1
+||hjlhzdhkwmhhq.site^
 a29764 1
 ||hldfuccrmhoue.store^
 a29896 1
@@ -683,6 +723,8 @@ a31463 1
 ||isotopytwirp.shop^
 a31568 1
 ||iv3x9cqtgu4h1fhtoehomr578w8t124.cfd^
+a31603 1
+||iwnmzkpzalkbo.online^
 a31614 1
 ||iwwugzbfzslaq.website^
 a31661 1
@@ -711,8 +753,12 @@ a32364 1
 ||jqmebveabvkz.top^
 a32487 1
 ||jubilihobbit.click^
+a32580 1
+||juwtgltywmlqhdx.com^
 a32709 1
 ||k27jwy2mlx95rztx8rh.cfd^
+a32750 1
+||kaleidoscopictouch.com^
 a32792 1
 ||katseefougrena.net^
 a32871 1
@@ -721,6 +767,8 @@ a33074 1
 ||kilahud.cyou^
 a33078 1
 ||kilwtrmhclsfs.online^
+a33108 1
+||kirkborazon.com^
 a33224 1
 ||kmebhqgd.com^
 a33252 1
@@ -745,11 +793,15 @@ a33565 1
 ||kvaurjynazce.com^
 a33640 1
 ||kxnyzhnchempm.store^
+a33664 1
+||kzagvdulumvgl.site^
 a33858 1
 ||latestsknarl.click^
 a33962 2
 ||lcofssqaoct.com^
 ||lcpejownkcajq.space^
+a34079 1
+||legitimatecommon.com^
 a34158 1
 ||lettileroute.com^
 a34170 1
@@ -760,10 +812,14 @@ a34342 1
 ||limpskin.com^
 a34436 1
 ||livid-factor.com^
+a34465 1
+||ljlkqcllihjiy.site^
 a34611 1
 ||lmxjnuysjbyea.space^
 a34613 1
 ||ln1lp1ni57f94x4emqr6kl8j1yxq77h4.rest^
+a34618 1
+||lngmmtgarkw.com^
 a34631 1
 ||lntrsgwikynsf.space^
 a34647 1
@@ -790,6 +846,10 @@ a36229 1
 ||mithzwvtbybug.website^
 a36230 1
 ||mitopamosal.com^
+a36253 1
+||mjiillaizjckm.website^
+a36328 1
+||mmfykwayhgftt.space^
 a36372 1
 ||mnmiunmojyncy.website^
 a36468 1
@@ -808,10 +868,14 @@ a36977 1
 ||mvqwxwnmwhbzb.website^
 a36991 1
 ||mwbdbxinfaatl.site^
+a37198 1
+||naledspinors.com^
 a37247 1
 ||nativesprivately.com^
 a37291 1
 ||nbifegbbhpjag.site^
+a37370 1
+||neatlygalusha.cfd^
 a37449 1
 ||netobscenityoverdo.com^
 a37466 1
@@ -854,12 +918,17 @@ a39226 1
 ||opoiypnrygogix.com^
 a39312 1
 ||ordinary-check.com^
+a39313 1
+||ordinaryneckegg.com^
 a39448 1
 ||ostfucjah.com^
 a39495 1
 ||otpljoausqoif.website^
-a39560 1
+a39560 2
 ||ourgoalsaich.net^
+||ourithauphexaus.com^
+a39608 1
+||outplotthamus.com^
 a39662 1
 ||ovdxmhiobvreg.site^
 a39780 1
@@ -876,12 +945,20 @@ a40279 1
 ||peacyx.com^
 a40330 1
 ||peiwytwfflbdy.space^
+a40630 1
+||phopseeglaickee.net^
 a40664 1
 ||phycicultra.cfd^
+a40840 1
+||pjvcbvjfrzniy.site^
 a40897 1
 ||plashedalight.com^
+a41018 1
+||pm8x4por3oekmw5h1kyl.cfd^
 a41019 1
 ||pmawayqeerhxg.site^
+a41078 1
+||poceidvfuvuja.store^
 a41088 1
 ||poepksqs.com^
 a41110 1
@@ -892,6 +969,8 @@ a41327 1
 ||pougaitaitoochy.net^
 a41421 1
 ||practical-interest.com^
+a41428 1
+||praxkbagds.com^
 a41492 1
 ||prepareprintingapologizing.com^
 a41545 1
@@ -912,6 +991,10 @@ a42543 1
 ||qezugjavxuana.store^
 a42562 1
 ||qfrgvbkxicidkm.com^
+a42649 1
+||qjflnuwsmfnzk.store^
+a42674 1
+||qkqlqjrwyloj.top^
 a42687 1
 ||qlbztvyadkhwk.website^
 a42826 1
@@ -944,6 +1027,8 @@ a43573 1
 ||recommendationbredshrimp.com^
 a43613 1
 ||reddingarcato.rest^
+a43651 1
+||reepawezuhee.com^
 a43710 1
 ||regulationstranger.com^
 a43796 1
@@ -984,6 +1069,8 @@ a44968 1
 ||rxdbycrfg.com^
 a44987 1
 ||ryaqlywkokbj.top^
+a45172 1
+||sanghissed.com^
 a45226 1
 ||sauchuwhipsoud.com^
 a45669 1
@@ -1008,6 +1095,8 @@ a46837 1
 ||spellingdelicatessenremove.com^
 a46857 1
 ||spieledcalking.shop^
+a46909 1
+||sponginarist.cfd^
 a47276 1
 ||stioppdibo.com^
 a47289 1
@@ -1040,6 +1129,8 @@ a48645 1
 ||tiresomesolemnly.com^
 a48650 1
 ||tistvznvtedji.store^
+a48980 1
+||towableunto.cfd^
 a48996 1
 ||tozouwitoad.net^
 a49000 1
@@ -1060,7 +1151,8 @@ a49804 1
 ||uflzxeqahgtvk.website^
 a49888 1
 ||uiutpjruo.com^
-a49899 1
+a49899 2
+||ujf25ozv656t67v4.cfd^
 ||ujgjrajahqcpv.website^
 a49907 1
 ||ujwixwpefcqjw.store^
@@ -1080,6 +1172,8 @@ a50361 1
 ||upczkhwvstjmq.store^
 a50384 1
 ||upmthznjsorzj.space^
+a50486 1
+||urgtuzfabbtgx.website^
 a50504 1
 ||ursamonel.com^
 a50565 1
@@ -1144,6 +1238,8 @@ a52002 1
 ||wazzeyrykjvw.top^
 a52056 1
 ||wcpgduaxnigmfow.com^
+a52545 1
+||winopcozdnpa.com^
 a52572 1
 ||wise-front.com^
 a52755 1
@@ -1167,10 +1263,19 @@ a53052 1
 ||wtjylksatld.com^
 a53063 1
 ||wuccapli.com^
+a53102 1
+||wvq79p7guifrftl3hf8j55q6j5myitvr.rest^
+a53110 1
+||wvyyowuowsrsz.space^
 a53301 1
 ||xcxtfgovt.com^
+a53329 1
+||xejidwidsetmu.space^
 a53367 1
 ||xfyizvwcmdyjm.store^
+a53396 2
+||xhwkporzfjpr.com^
+||xiailvhqrdoml.website^
 a53403 1
 ||xincascoliid.cfd^
 a53450 1
@@ -1187,12 +1292,16 @@ a53621 1
 ||xsmumpxjfjfrn.store^
 a53718 1
 ||xwkyiqdccvsypkm.com^
+a53746 1
+||xxnzjkioqzuyl.space^
 a53926 1
 ||ydqhvlqqhtuli.website^
 a53987 1
 ||yg4prcl144nce81qxgkq1vwqq.rest^
 a54023 1
 ||yhwlqizqrewai.store^
+a54084 1
+||ykwoclkfabviu.space^
 a54123 1
 ||ymjpyeapkcoae.space^
 a54153 1
@@ -1205,10 +1314,20 @@ a54273 1
 ||yqzdkkovmcy.com^
 a54332 1
 ||ytsxuxsdjlwff.store^
+a54376 1
+||yvdaeswkrwcvkg.com^
 a54383 1
 ||yvmfvtciz.com^
+a54384 1
+||yvotaacxzzvub.website^
+a54390 1
+||ywcqpwrkciaqi.com^
 a54398 1
 ||ywqaplahuhtsd.com^
+a54449 1
+||yzraenppksaq.com^
+a54450 1
+||yzsgwklwqzemn.online^
 a54458 1
 ||z3covgl46zj4ou7wx8mvvm6l4y7.rest^
 a54506 1
@@ -1220,6 +1339,8 @@ a54629 1
 a54747 2
 ||zkvovu2lj97q8o7773gig8wluuttop.cfd^
 ||zkyrp8k6uuevu3.rest^
+a54750 1
+||zlikzxdvkhans.website^
 a54901 1
 ||zqjklzrqmjle.top^
 a54975 1
@@ -1265,11 +1386,11 @@ a71992 1
 pexels.com##div[class="RowItem_gridItem__OfhML RowItem_fullWidth__cIdtN RowItem_expand__TR5R6"]
 a74372 1
 shemalez.*##.jw-hardlink-inner
-diff name:easyprivacy lines:20 checksum:5e83742204
+diff name:easyprivacy lines:20 checksum:97435bbbf0
 d4 2
 a5 2
 ! Last modified: Mon, 03 Nov 2025 18:53:25 +0000
-! Diff-Path: ../patches/2025.11.4.126.patch#easyprivacy
+! Diff-Path: ../patches/2025.11.4.402.patch#easyprivacy
 a6529 1
 ||alltypo.com^
 a6618 1
