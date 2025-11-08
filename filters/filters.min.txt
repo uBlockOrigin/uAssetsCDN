@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Fri, 07 Nov 2025 17:27:00 +0000
-! Diff-Path: ../patches/2025.11.8.119.patch#ublock-filters
+! Last modified: Sat, 08 Nov 2025 05:28:11 +0000
+! Diff-Path: ../patches/2025.11.8.328.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -8204,11 +8204,12 @@ hdhub4u.fail,hubdrive.*,moviesubtitles.click,telegratuita.com##+js(aeld, DOMCont
 !#if ext_ubol
 /^https:\/\/[a-z]{7,16}\.[a-z]{3,7}\/[a-z0-9]{14}\/\d{5}$/$script,3p,match-case
 /^https:\/\/[a-z]{2}\.[a-z]{7,14}\.com\/r[0-9A-Za-z]{10,16}\/[A-Za-z]{5}$/$script,3p,match-case
-/^https:\/\/[0-9a-z]+\.[0-9a-z]+\.(cfd|rest)\/[a-z][0-9A-Za-z]{10,20}\/[A-Za-z]{5}$/$script,3p,to=cfd|rest
+/^https:\/\/[0-9a-z]*\.?[0-9a-z]+\.cfd\/[a-z][0-9A-Za-z]{10,20}\/[A-Za-z]{5}$/$script,3p,to=cfd
+/^https:\/\/[0-9a-z]*\.?[0-9a-z]+\.rest\/[a-z][0-9A-Za-z]{10,20}\/[A-Za-z]{5}$/$script,3p,to=rest
 !#endif
 !#if env_safari
 /^https?:\/\/[a-z]?[a-z]?\.?[a-z][a-z][a-z][a-z][a-z][a-z][a-z][a-z]?[a-z]?[a-z]?[a-z]?[a-z]?[a-z]?[a-z]?\.com\/[a-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z]?[0-9A-Za-z]?[0-9A-Za-z]?[0-9A-Za-z]?[0-9A-Za-z]?[0-9A-Za-z]?\/[A-Za-z][A-Za-z][A-Za-z][A-Za-z][A-Za-z]$/$script,xhr,3p,match-case
-/^https:\/\/[0-9a-z]*\.?[0-9a-z]+\.[cr][ef][ds]t?\/[a-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z]?[0-9A-Za-z]?[0-9A-Za-z]?[0-9A-Za-z]?[0-9A-Za-z]?[0-9A-Za-z]?[0-9A-Za-z]?[0-9A-Za-z]?[0-9A-Za-z]?[0-9A-Za-z]?[0-9A-Za-z]?[0-9A-Za-z]?[0-9A-Za-z]?[0-9A-Za-z]?[0-9A-Za-z]?[0-9A-Za-z]?[0-9A-Za-z]?\/[A-Za-z][A-Za-z][A-Za-z][A-Za-z][A-Za-z]$/$script,xhr,3p,match-case,to=cfd|rest
+/^https:\/\/[0-9a-z]*\.?[0-9a-z]+\.[cr][ef][ds]t?\/[a-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z]+\/[A-Za-z][A-Za-z][A-Za-z][A-Za-z][A-Za-z]$/$script,xhr,3p,match-case,to=cfd|rest
 !#endif
 ! generic adserver rules
 /gb/zone?zid=$xhr,3p
@@ -17887,7 +17888,7 @@ bg-gledai.*##+js(acs, document.getElementById, adblock)
 bg-gledai.*###casing > center
 cdn.gledaitv.live##+js(noeval-if, String.fromCharCode)
 bg-gledai.*,gledaitv.*##+js(no-fetch-if, imasdk.googleapis.com)
-gledaitv.*##+js(aopr, checkAdsBlocked)
+! gledaitv.*##+js(aopr, checkAdsBlocked)
 ! gledaitv.*##+js(acs, fetch, adsBlocked)
 /js/detectorpro_*.js|$script
 *$script,redirect-rule=noopjs,domain=bg-gledai.*|gledaitv.*
@@ -22717,6 +22718,19 @@ primevideo.com##+js(set, ue_adb_chk, 1)
 !#else
 /GetPlaybackResources?*%2CCuepointPlaylist$xhr,uritransform=/%2CCuepointPlaylist//,domain=www.amazon.co.jp|www.amazon.co.uk|www.amazon.com|www.amazon.de|www.primevideo.com
 !#endif
+amazon.*###s-results-list-atf > .s-result-item:has(> .s-item-container h5.s-sponsored-list-header)
+amazon.*###s-results-list-atf > .s-result-item:has(.s-item-container h5.s-sponsored-header)
+amazon.*##.s-result-item:has(> .s-item-container > h5 .s-sponsored-info-icon)
+amazon.*##.s-widget:has(> [data-cel-widget^="MAIN"] > [data-cel-widget^="tetris"] > div[id^="CardInstance"][class^="_tetris-"])
+amazon.*##.a-carousel-card:has(> div > div[cel_widget_id^="adplacements:"]):remove()
+amazon.*##.AdHolder
+amazon.*###similarities_feature_div:has(span[id^="ad-feedback-text"])
+amazon.*##div[cel_widget_id="sims-consolidated-5_csm_instrumentation_wrapper"]
+www.amazon.com##+js(rmnt, script, /introSplashVideo.+renderStoresWidgetsPendingList/s)
+read.amazon.*##+js(set, canRunAds, 1)
+read.amazon.*##+js(set, ue_adb_chk, 1)
+read.amazon.*##+js(trusted-click-element, .kw-ads-pagination-button:first-child\,.kw-ads-pagination-button:first-child, , 1000)
+*$script,redirect-rule=prebid-ads.js,domain=read.amazon.*
 9gag.com##[id^="sidebar-stream-"] > h4:has-text(Advertisement)
 9gag.com##.billboard-top-wrapper
 9gag.com###top-navb:style(top: 0 !important;)
@@ -23250,19 +23264,6 @@ vidfast.pro###Advert1
 *$script,3p,domain=player.videasy.net
 ! besthdmovies. com ad popups
 besthdmovies.com##+js(nowoif)
-amazon.*###s-results-list-atf > .s-result-item:has(> .s-item-container h5.s-sponsored-list-header)
-amazon.*###s-results-list-atf > .s-result-item:has(.s-item-container h5.s-sponsored-header)
-amazon.*##.s-result-item:has(> .s-item-container > h5 .s-sponsored-info-icon)
-amazon.*##.s-widget:has(> [data-cel-widget^="MAIN"] > [data-cel-widget^="tetris"] > div[id^="CardInstance"][class^="_tetris-"])
-amazon.*##.a-carousel-card:has(> div > div[cel_widget_id^="adplacements:"]):remove()
-amazon.*##.AdHolder
-amazon.*###similarities_feature_div:has(span[id^="ad-feedback-text"])
-amazon.*##div[cel_widget_id="sims-consolidated-5_csm_instrumentation_wrapper"]
-www.amazon.com##+js(rmnt, script, renderStoresWidgetsPendingList)
-read.amazon.*##+js(set, canRunAds, 1)
-read.amazon.*##+js(set, ue_adb_chk, 1)
-read.amazon.*##+js(trusted-click-element, .kw-ads-pagination-button:first-child\,.kw-ads-pagination-button:first-child, , 1000)
-*$script,redirect-rule=prebid-ads.js,domain=read.amazon.*
 panel.play.hosting##+js(rmnt, script, /adbl/i)
 uxjvp.pro##+js(nowoif)
 mirror.co.uk##div[data-testid*="commercial-"]
@@ -24194,3 +24195,5 @@ sportsbite.cc##+js(nowoif, _blank)
 ||myhentaicomics.com/Assets/frames/$frame,1p
 myhentaicomics.com##+js(acs, addEventListener, fallback)
 myhentaicomics.com##+js(set, HTMLScriptElement.prototype.onerror, undefined)
+||fuseplatform.net^$script,redirect=noopjs,3p,domain=zkillboard.com
+zkillboard.com##.pbcen
