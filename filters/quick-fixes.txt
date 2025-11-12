@@ -1,5 +1,5 @@
 ! Title: uBlock₀ filters – Quick fixes
-! Last modified: Wed, 12 Nov 2025 11:29:20 +0000
+! Last modified: Wed, 12 Nov 2025 17:47:48 +0000
 ! Expires: 8 hours
 ! Description: Immediate, temporary filters to fix websites
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -142,7 +142,7 @@ japscan.*##+js(set, aclib.runInPagePush, noopFunc)
 japscan.*##+js(set, aclib.runBanner, {}, as, function)
 japscan.*##+js(set, aclib.runInterstitial, throwFunc)
 japscan.*##+js(trusted-suppress-native-method, Document.prototype.getElementById, '"/^[A-Z][-0-9A-Z_a-z]{3,}$/"')
-japscan.*##+js(trusted-suppress-native-method, Document.prototype.querySelector, '"/^#[A-Z][A-Za-z]+$/"')
+japscan.*##+js(trusted-suppress-native-method, Document.prototype.querySelector, '"/^#[A-Z][-A-Z_a-z]+$/"')
 
 ! https://github.com/uBlockOrigin/uAssets/issues/21064
 ! https://github.com/uBlockOrigin/uAssets/issues/24220
@@ -293,6 +293,8 @@ pvpoke-re.com##+js(trusted-set-attr, ins.adsbygoogle:has(> #aswift_0_host), data
 pvpoke-re.com##+js(ra, data-instype, ins.adsbygoogle:has(> div#aswift_0_host), stay)
 pvpoke-re.com##+js(trusted-set-attr, *:not(.main-wrap:has(~ [id^="nitro-sidebar"] .nitro-side) #nitro-top\,.main-wrap:has(~ [id^="nitro-sidebar"] .nitro-side) #nitro-body-desktop\,[id^="nitro-sidebar"]:has(.nitro-side) ~ #nitro-header-mobile) > ins.adsbygoogle:not(:has(#aswift_0_host)), data-ad-status, filled)
 pvpoke-re.com##+js(no-fetch-if, url:https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-3497863494706299 method:HEAD mode:no-cors, , , throttle, 121)
+pvpoke-re.com##+js(trusted-replace-node-text, #text, /広告ブロックはエラーを|Werbeblocker können|Los bloqueadores de anuncios|Les bloqueurs de publicité|I blocchi pubblicitari|Os bloqueadores de/, "　　　　　　　　　　　")
+pvpoke-re.com##+js(trusted-replace-node-text, #text, /引き起こす場合があります|Fehler verursachen|pueden causar errores|peuvent provoquer des erreurs|possono causare errori|anúncios podem causar erros/, "　　　　　　　　　　　　")
 ||pvpoke-re.com/*.js?v=$replace=/([};])location(?:\[.+?\]|[.Oa-z]+){2}\(.+?\)===-(?:\(.+?\)|_?0x[0-9a-f]+|1)&&.*?location(?:\[.+?\]|[.Oa-z]+){2}\(.+?\)+(?:[\,>]|===)-(?:\(.+?\)+|_?0x[0-9a-f]+|1)\?/\$1 0 ?/
 ||pvpoke-re.com/*.js?v=$replace=/if\(location(?:\[.+?\]|[.Oa-z]+){2}\(.+?\).*?&&.*?location(?:\[.+?\]|[.Oa-z]+){2}\(.+?\)+(?:[\,>]|===)-(?:\(.+?\)+|_?0x[0-9a-f]+\)|1)/if(0)/
 ||pvpoke-re.com/*.js?v=$replace=/([};])_0x[0-9a-f]+\[(?:_0x[0-9a-f]+\([-0-9a-fx\,]+?\)|'[A-Za-z]+'|[.Oa-z]+)\]\(location(?:\[(?:_0x[0-9a-f]+\(.+?\)|'[A-Za-z]+'|[.Oa-z]+)\]){2}\(.+?\)\,-\(.+?\)\)&&.*?location(?:\[.+?\]|[.Oa-z]+){2}\(.+?\)+(?:[\,>]|===)-(?:\(.+?\)|1)\?/\$1 0 ?/
@@ -360,8 +362,8 @@ client.falixnodes.net##+js(rpnt, script, /googletag\.pubads\(\).*rewardedSlot\)\
 client.falixnodes.net##+js(rpnt, script, .onerror, .ffffff)
 client.falixnodes.net##+js(rpnt, script, /window\.location\.href \= ('|")\/(please-disable|neptune|disableadblock|yeahblock|yupblock|verypleasedisable)('|")\;/)
 client.falixnodes.net##+js(aeld, error, function, elements, [src])
-client.falixnodes.net##+js(nosiif, /didmyscriptloadyet|location|veryveryplease|verypleasedisable|click\(\)/)
-client.falixnodes.net##+js(nostif, /didmyscriptloadyet|location|veryveryplease|verypleasedisable|click\(\)/)
+client.falixnodes.net##+js(nosiif, /lovelylovely|location|veryveryplease|verypleasedisable|click\(\)|MouseEvent|dispatchEvent/)
+client.falixnodes.net##+js(nostif, /lovelylovely|location|veryveryplease|verypleasedisable|click\(\)|MouseEvent|dispatchEvent/)
 *$script,redirect-rule=none:5,domain=client.falixnodes.net
 !#endif
 
