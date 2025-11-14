@@ -1,5 +1,5 @@
 ! Title: uBlock₀ filters – Quick fixes
-! Last modified: Fri, 14 Nov 2025 10:18:43 +0000
+! Last modified: Fri, 14 Nov 2025 15:50:25 +0000
 ! Expires: 8 hours
 ! Description: Immediate, temporary filters to fix websites
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -298,6 +298,7 @@ pvpoke-re.com##+js(trusted-set-attr, *:not(.main-wrap:has(~ [id^="nitro-sidebar"
 pvpoke-re.com##+js(no-fetch-if, url:https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-3497863494706299 method:HEAD mode:no-cors, , , throttle, 121)
 pvpoke-re.com##+js(trusted-replace-node-text, #text, /広告ブロックはエラーを|Werbeblocker können|Los bloqueadores de anuncios|Les bloqueurs de publicité|I blocchi pubblicitari|Os bloqueadores de/, "　　　　　　　　　　　")
 pvpoke-re.com##+js(trusted-replace-node-text, #text, /引き起こす場合があります|Fehler verursachen|pueden causar errores|peuvent provoquer des erreurs|possono causare errori|anúncios podem causar erros/, "　　　　　　　　　　　　")
+pvpoke-re.com##+js(trusted-replace-argument, String.prototype.indexOf, 0, json:"/", condition, /premium)
 ||pvpoke-re.com/*.js?v=$replace=/([};])location(?:\[.+?\]|[.Oa-z]+){2}\(.+?\)===-(?:\(.+?\)|_?0x[0-9a-f]+|1)&&.*?location(?:\[.+?\]|[.Oa-z]+){2}\(.+?\)+(?:[\,>]|===)-(?:\(.+?\)+|_?0x[0-9a-f]+|1)\?/\$1 0 ?/
 ||pvpoke-re.com/*.js?v=$replace=/if\(location(?:\[.+?\]|[.Oa-z]+){2}\(.+?\).*?&&.*?location(?:\[.+?\]|[.Oa-z]+){2}\(.+?\)+(?:[\,>]|===)-(?:\(.+?\)+|_?0x[0-9a-f]+\)|1)/if(0)/
 ||pvpoke-re.com/*.js?v=$replace=/([};])_0x[0-9a-f]+\[(?:_0x[0-9a-f]+\([-0-9a-fx\,]+?\)|'[A-Za-z]+'|[.Oa-z]+)\]\(location(?:\[(?:_0x[0-9a-f]+\(.+?\)|'[A-Za-z]+'|[.Oa-z]+)\]){2}\(.+?\)\,-\(.+?\)\)&&.*?location(?:\[.+?\]|[.Oa-z]+){2}\(.+?\)+(?:[\,>]|===)-(?:\(.+?\)|1)\?/\$1 0 ?/
@@ -406,20 +407,3 @@ tvtropes.org##+js(set, HTMLScriptElement.prototype.onerror, undefined)
 
 ! https://github.com/DandelionSprout/adfilt/discussions/163#discussioncomment-14844870
 @@$doc,removeparam=msid,domain=editorialmanager.com
-
-! https://github.com/uBlockOrigin/uAssets/issues/30676
-/stormcaster.js$badfilter
-
-! https://github.com/easylist/easylistgermany/issues/552
-chip.de#@#.dlcharts + div:not(.List):remove()
-
-! https://github.com/AdguardTeam/AdguardFilters/commit/88b7c107328881d4380b6d26ec7d44aa6bd6dc97
-itest.5ch.net#@#.ad_nth
-itest.5ch.net##.ad_nth:not([style])
-
-! https://github.com/uBlockOrigin/uAssets/issues/30728
-||reuters.com/pf/resources/dist/*/js/index.js?$badfilter
-
-! https://github.com/easylist/easylist/commit/1e589ee066e2c178e83fd77a7df8c26b3f362833
-@@||googletagmanager.com/gtm.js$domain=cashier.dmm.co.jp|cashier.dmm.com
-
