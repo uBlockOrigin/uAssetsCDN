@@ -1,5 +1,5 @@
 ! Title: uBlock filters (2025)
-! Last modified: Fri, 28 Nov 2025 18:46:59 +0000
+! Last modified: Sat, 29 Nov 2025 06:30:32 +0000
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -604,6 +604,25 @@ player.pl##div.adsbygoogle.prebid.adocean.ado.ad.ads.advert.banner.reklama.linkS
 ! https://github.com/uBlockOrigin/uAssets/issues/30802
 player.pl##+js(json-prune-xhr-response, movie.advertising, , propsToMatch, /playlist?)
 player.pl##+js(trusted-json-edit-xhr-response, .mandatoryAdvertising=false, /player/configuration)
+
+! https://github.com/uBlockOrigin/uAssets/issues/870
+! https://www.reddit.com/r/uBlockOrigin/comments/hbxqip/sxyprnnet_video_ads/
+! https://www.reddit.com/r/uBlockOrigin/comments/1966h80/ublock_filters_blocking_website_element/
+sxyprn.*##+js(acs, decodeURI, decodeURIComponent)
+sxyprn.*##+js(set, vast_urls, {})
+sxyprn.*##+js(aopr, popns)
+sxyprn.*##+js(acs, document.createElement, l.parentNode.insertBefore(s)
+sxyprn.*##+js(aopw, __aaZoneid)
+sxyprn.*##.tbd
+sxyprn.*##.cbd
+! https://github.com/uBlockOrigin/uAssets/issues/30092
+*$frame,script,3p,denyallow=cloudflare.com|google.com|googleapis.com|gstatic.com|hcaptcha.com|recaptcha.net,domain=sxyprn.*
+! MV3 wildcard issue
+! https://github.com/uBlockOrigin/uBOL-issues/issues/10
+!#if ext_ubol
+*$frame,script,3p,denyallow=cloudflare.com|google.com|googleapis.com|gstatic.com|hcaptcha.com|recaptcha.net,domain=sxyprn.com|sxyprn.net
+!#endif
+||sxyprn.*/js/epo.js
 
 ! END: Rules from filters.txt
 
@@ -2539,7 +2558,7 @@ policesecurity.com##+js(nosiif, EFFECTIVE_APPS_GCB_BLOCKED_MESSAGE)
 tv.onefootball.com##+js(rpnt, script, 'function OptanonWrapper() {}', '/*start*/(()=>{const o={apply:(o,t,e)=>("ads"===e[0]&&"object"==typeof t&&null!==t&&(t.ads=()=>{}),Reflect.apply(o,t,e))};window.Object.prototype.hasOwnProperty=new Proxy(window.Object.prototype.hasOwnProperty,o)})();document.currentScript.textContent=document.currentScript.textContent.replace(/\/\*start\*\/(.*)\/\*end\*\//g,"");/*end*/function OptanonWrapper() {}')
 
 ! https://www.reddit.com/r/uBlockOrigin/comments/1mdtiuj/ad_blocker_detected_help/
-indexsubtitle.cc##+js(aopw, EnhancedAdBlockDetector)
+indexsubtitle.cc##+js(nostif, _0x)
 
 ! https://github.com/AdguardTeam/AdguardFilters/issues/210444
 windroid777.com##+js(rmnt, script, detectAdBlock)
@@ -3314,3 +3333,6 @@ bandle.app##+js(set, nitroAds.abp, true)
 
 ! https://www.reddit.com/r/uBlockOrigin/comments/1p8yuiq/how_do_i_remove_this/
 inyatrust.co.in##+js(set, detectAdBlock, noopFunc)
+
+! https://github.com/uBlockOrigin/uAssets/issues/30954
+hentaimama.tv##+js(no-fetch-if, havenclick)
