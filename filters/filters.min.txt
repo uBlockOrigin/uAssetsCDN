@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Tue, 30 Dec 2025 12:17:47 +0000
-! Diff-Path: ../patches/2025.12.30.782.patch#ublock-filters
+! Last modified: Tue, 30 Dec 2025 16:48:11 +0000
+! Diff-Path: ../patches/2025.12.30.1052.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -8077,9 +8077,12 @@ outlook.live.com##main > div[style] .vPfg_:has(.wOYnU) ~ *:style(transform: tran
 !#if env_safari
 ||googlevideo.com/videoplayback*ctier=L&*%2Cxpc%2Cctier%2C$xhr,3p,domain=m.youtube.com|music.youtube.com
 !#endif
-dailymotion.com##+js(xml-prune, [breakId], , _VMAP_)
 dailymotion.com##+js(json-prune-fetch-response, advertising, , propsToMatch, /player/metadata)
 dailymotion.com##+js(json-prune-xhr-response, advertising, , propsToMatch, .json)
+!#if env_firefox
+geo.dailymotion.com##+js(xml-prune, [breakId], , _VMAP_)
+geo.dailymotion.com##+js(set, DMP_ENABLE_ADS, false)
+!#endif
 hurriyet.com.tr##.mobileMasthead
 yts.mx##.home-content > div[class]:not([id]):has(> div > a[rel="noindex, nofollow"])
 ! ads placeholder nsfw superporn.com
@@ -22670,9 +22673,6 @@ powcloud.org##+js(aopw, opopnso)
 powcloud.org##+js(aopw, c0ZZ)
 ||s3.amazonaws.com/dmas-public/rubicon/bundle.js$script,domain=dailymotion.com
 @@||dailymotion.com^$ghide
-!#if !env_mobile
-||dmxleo.dailymotion.com^
-!#endif
 ||gainskins.com^$frame,domain=hltv.org
 ||hltv.org/img/newwidgets/$image
 ||hltv.org/img/static/featured_bet_bg.png$image
@@ -24063,6 +24063,12 @@ filmyzilla.*,moviespur.*###clickfakeplayer[href]:remove-attr(href)
 ||openwebmp.com^
 dailymotion.com##+js(set, __NATIVEADS_CANARY__, true)
 dailymotion.com##.WatchingDiscovery__adSection___eLtfR
+!#if env_firefox
+!#if !env_mobile
+||dmxleo.dailymotion.com^
+geo.dailymotion.com##+js(set, DMP_ENABLE_ADS, false)
+!#endif
+!#endif
 www.parkers.co.uk##.async-hide:style(opacity: 1.0 !important)
 streamflash.sx##+js(trusted-rpnt, script, playerUnlocked = false, playerUnlocked = true)
 streamflash.sx###adOverlay
