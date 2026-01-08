@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Quick fixes
 ! Expires: 12 hours
-! Last modified: Wed, 07 Jan 2026 17:43:10 +0000
-! Diff-Path: ../patches/2026.1.8.145.patch#ublock-quick-fixes
+! Last modified: Thu, 08 Jan 2026 05:42:31 +0000
+! Diff-Path: ../patches/2026.1.8.409.patch#ublock-quick-fixes
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/quick-fixes.txt ***
@@ -129,12 +129,12 @@ japscan.*##span ~ span[id][class]:remove()
 !japscan.*##+js(set, aclib.runPop, 1)
 japscan.*##+js(trusted-suppress-native-method, Document.prototype.getElementsByTagName, '"i"')
 japscan.*##+js(trusted-suppress-native-method, Element.prototype.getAttribute, '"/^data-[a-z]{4}$/"')
-japscan.*##+js(trusted-suppress-native-method, Document.prototype.querySelectorAll, '"/^\[data-l$/"')
+japscan.*##+js(trusted-suppress-native-method, Document.prototype.querySelectorAll, '"/^\[data-[a-z]{5}\]$/"')
 japscan.*##+js(trusted-suppress-native-method, Array.from, '"/NodeList/"', prevent, inlineScript)
 japscan.*##[id^="nav"] ~ div[id]:not(.tab-content):remove()
 japscan.*##[style="width:100%;"] > span[id]:remove()
-japscan.*##[id^="nav"] ~ span[id]:remove()
-japscan.*##[style="width:99%;"] > span[id]:remove()
+japscan.*##[id^="nav"] ~ span:remove()
+japscan.*##[style^="width:9"] > span:remove()
 poophq.com,veev.to,doods.to##+js(nowoif)
 poophq.com,veev.to,doods.to##+js(no-xhr-if, /vast.php?)
 poophq.com,veev.to,doods.to##+js(no-xhr-if, /click\.com|preroll|native_render\.js|acscdn/, length:10001)
@@ -207,14 +207,8 @@ smsonline.cloud##html[data-theme][lang] [id^="img_"][style]:has(iframe[framebord
 ~dogdrip.net,~smsonline.cloud##*:not(body) > a[href^="https://07c225f3.online/"]
 07c225f3.online,content-loader.com,css-load.com,html-load.com,img-load.com##html:not(:has(> head > style:only-child:has-text(width:399px;height:411px))):style(filter: opacity(0) !important; pointer-events: none !important;)
 /^https:\/\/[a-z]{3,4}\.[0-9a-z-]{6,}\.(?:com|xyz)\/script\/(?:[-.0-9A-Za-z]+\.)?[-0-9A-Za-z]{2,30}\.js$/$script,3p,match-case,header=x-length
-/:\/\/html-load\.com\/[a-z]{3,6}(?:\.min)?\.js$/$script,3p,match-case,domain=~dogdrip.net|~smsonline.cloud
-/:\/\/content-loader\.com\/[a-z]{3,6}(?:\.min)?\.js$/$script,3p,match-case,domain=~dogdrip.net|~smsonline.cloud
-!#if env_safari
-://html-load.com/loader.min.js$domain=~dogdrip.net|~smsonline.cloud
-://content-loader.com/loader.min.js$domain=~dogdrip.net|~smsonline.cloud
-/:\/\/html-load\.com\/[a-z][a-z][a-z][a-z]?[a-z]?[a-z]?\.js$/$script,3p,match-case,domain=~dogdrip.net|~smsonline.cloud
-/:\/\/content-loader\.com\/[a-z][a-z][a-z][a-z]?[a-z]?[a-z]?\.js$/$script,3p,match-case,domain=~dogdrip.net|~smsonline.cloud
-!#endif
+://html-load.com/*.js$script,3p,domain=~dogdrip.net|~smsonline.cloud
+://content-loader.com/*.js$script,3p,domain=~dogdrip.net|~smsonline.cloud
 /^https:\/\/(?:as(?:loader)?|(?:shield)?load(?:er)?)\.([-0-9A-Za-z]+\.[-A-Za-z]{2,16})\/(?:loader\.min|script\/(?:www\.)?\1)\.js$/$script,1p,strict3p,match-case,domain=~edu|~gov
 /^https:\/\/[a-z]{3,4}\.[a-z]{8,16}\.com\/loader\.min\.js$/$script,3p,match-case,header=etag:/^W\/"[0-9a-f]{32}-\d{13}"$/
 /^https:\/\/d[0-9a-z]{12,13}\.cloudfront\.net\/loader\.min\.js$/$script,3p,match-case,header=etag:/^W\/"[0-9a-f]{32}"$/
@@ -266,7 +260,7 @@ pvpoke-re.com##+js(ra, data-instype, ins.adsbygoogle:has(> div#aswift_0_host), s
 pvpoke-re.com##+js(trusted-set-attr, ins.adsbygoogle.nitro-side\,ins.adsbygoogle.nitro-banner, data-ad-status, filled)
 pvpoke-re.com##+js(no-fetch-if, url:https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-3497863494706299 method:HEAD mode:no-cors, , , throttle, 121)
 pvpoke-re.com##+js(trusted-replace-argument, String.prototype.indexOf, 0, json:"/", condition, /premium)
-pvpoke-re.com##+js(trusted-replace-node-text, script, var menuSlideProtection, /*start*/!function(){const e=window.addEventListener;window.addEventListener=function(t\,n\,i){return"message"===t&&"function"==typeof n&&n.toString().includes("googMsgType")&&setTimeout((()=>{try{const e=document.getElementsByTagName("iframe");for(let t=0;t<e.length;t++){const i=e[t];if(!i.contentWindow)continue;let o;try{o=i.src?new URL(i.src).origin:"*"}catch(e){o="*"}const s={msg_type:"resize-me"\,key_value:[{key:"r_nh"\,value:"0"}\,{key:"r_ifr"\,value:"true"}\,{key:"qid"\,value:"CKjPmM7ezpEDFbyJ6QUdM0o3rw"}]\,googMsgType:"sth"\,token:"AOrYGskPiXMUpj3CJQ8LsihEHwbNcui1URgWacoUghpsHfMEVL2nwMKey1eyEl6h8i29ah7WTlje42evSBak30X4pe673BR-KOZpAhiqCJO20pQ"};n({data:JSON.stringify(s)\,source:i.contentWindow\,origin:o})}}catch(e){}})\,10)\,e.apply(this\,arguments)}}();document.currentScript.textContent=document.currentScript.textContent.replace(/\/\*start\*\/(.*)\/\*end\*\//\,"");/*end*/var menuSlideProtection, sedCount, 1)
+pvpoke-re.com##+js(trusted-replace-node-text, script, var menuSlideProtection, /*start*/!function(){const e=window.addEventListener;window.addEventListener=function(t\,n\,i){return"message"===t&&"function"==typeof n&&n.toString().includes("googMsgType")&&setTimeout((()=>{try{const e=document.getElementsByTagName("iframe");for(let t=0;t<e.length;t++){const i=e[t];if(!i.contentWindow)continue;let o;try{o=i.src?new URL(i.src).origin:"*"}catch(e){o="*"}const s={msg_type:"resize-me"\,key_value:[{key:"r_nh"\,value:"0"}\,{key:"r_ifr"\,value:"true"}\,{key:"qid"\,value:"CKjPmM7ezpEDFbyJ6QUdM0o3rw"}]\,googMsgType:"pvt"\,token:"AOrYGskPiXMUpj3CJQ8LsihEHwbNcui1URgWacoUghpsHfMEVL2nwMKey1eyEl6h8i29ah7WTlje42evSBak30X4pe673BR-KOZpAhiqCJO20pQ"};n({data:JSON.stringify(s)\,source:i.contentWindow\,origin:o})}}catch(e){}})\,10)\,e.apply(this\,arguments)}}();document.currentScript.textContent=document.currentScript.textContent.replace(/\/\*start\*\/(.*)\/\*end\*\//\,"");/*end*/var menuSlideProtection, sedCount, 1)
 !pvpoke-re.com##body:has(#nitro-body-desktop > ins.adsbygoogle.nitro-body:not(:has(> div#aswift_1_host))) div:is(#nitro-body-desktop, #nitro-top, #nitro-header-mobile) > p
 ||pvpoke-re.com/*.js?v=$replace=/try\{GameMaster/try{return;GameMaster/
 pvpoke-re.com##+js(trusted-override-element-method, HTMLIFrameElement.prototype.remove, iframe[src^="https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-3497863494706299"])
