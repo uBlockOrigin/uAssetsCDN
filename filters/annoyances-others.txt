@@ -1,5 +1,5 @@
 ! Title: uBlock filters – Other Annoyances
-! Last modified: Fri, 23 Jan 2026 08:46:14 +0000
+! Last modified: Fri, 23 Jan 2026 13:03:53 +0000
 ! Expires: 7 days
 ! Description: Filters optimized for uBlock Origin, to be used with EasyList's and/or Adguard's "Other Annoyances" list(s)
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -97,15 +97,35 @@ foxaholic.com##+js(ra, onkeydown|onselectstart|oncontextmenu, body[onkeydown*="_
 ! https://github.com/uBlockOrigin/uAssets/issues/27684#issuecomment-3708579962
 isekaitube.com##+js(rpnt, script, "copyRProtection":true, "copyRProtection":false)
 
+! Lyrics sites
+! https://github.com/uBlockOrigin/uAssets/issues/7018
 ! https://github.com/uBlockOrigin/uAssets/issues/14193
 ! https://github.com/uBlockOrigin/uAssets/issues/31563
+! https://github.com/uBlockOrigin/uAssets/issues/31568
+! https://github.com/uBlockOrigin/uAssets/issues/4408
 !#if env_firefox
+utaten.com##.lyricBody[oncontextmenu]:remove-attr(/oncontextmenu|onselectstart/)
 oricon.co.jp##div.all-lyrics:remove-attr(/oncontextmenu|onselectstart|onmousedown/)
+j-lyric.net##body[oncontextmenu]:remove-attr(/oncontextmenu|onselectstart/)
 !#else
+utaten.com##+js(ra, oncontextmenu|onselectstart, .lyricBody[oncontextmenu], complete)
 oricon.co.jp##+js(ra, oncontextmenu|onselectstart|onmousedown, .all-lyrics[oncontextmenu], complete)
+j-lyric.net##+js(ra, oncontextmenu|onselectstart, body[oncontextmenu], complete)
 !#endif
+||utaten.com/css/print.css
+utaten.com##.lyricBody:style(-webkit-touch-callout: default !important; -webkit-user-select: text !important; -khtml-user-select: text !important; -moz-user-select: text !important; -ms-user-select: text !important; user-select: text !important; -webkit-tap-highlight-color: revert !important; cursor: revert !important;)
 oricon.co.jp##+js(aeld, dragstart, , elements, .all-lyrics)
 oricon.co.jp##.all-lyrics:style(-webkit-touch-callout: default !important; -webkit-user-select: text !important; -khtml-user-select: text !important; -moz-user-select: text !important; -ms-user-select: text !important; user-select: text !important; -webkit-tap-highlight-color: revert !important; cursor: revert !important;)
+j-lyric.net##+js(rpnt, style, @media print {body { display: none !important; }})
+! https://github.com/uBlockOrigin/uAssets/issues/8069
+! https://github.com/uBlockOrigin/uAssets/issues/31567
+lyrical-nonsense.com##+js(rmnt, script, contextmenu)
+lyrical-nonsense.com##.olyrictext, .olyrictext-tv, .sbs-row:style(-webkit-touch-callout: default !important; -webkit-user-select: text !important; -khtml-user-select: text !important; -moz-user-select: text !important; -ms-user-select: text !important; user-select: text !important; -webkit-tap-highlight-color: revert !important; cursor: revert !important;)
+! https://github.com/uBlockOrigin/uAssets/issues/31566
+togetogebox.org##+js(rmnt, style, -ms-user-select: none)
+! https://github.com/uBlockOrigin/uAssets/issues/31569
+s.awa.fm##+js(aeld, contextmenu, [native code], elements, #__next)
+s.awa.fm##div[unselectable="on"] p[class]:style(-webkit-touch-callout: default !important; -webkit-user-select: text !important; -khtml-user-select: text !important; -moz-user-select: text !important; -ms-user-select: text !important; user-select: text !important; -webkit-tap-highlight-color: revert !important; cursor: revert !important;)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/31565
 !#if env_firefox
@@ -887,9 +907,6 @@ animeunity.it##+js(ra, oncontextmenu)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/4368#issuecomment-449866993
 theartofnakedwoman.*##+js(aopw, intializemarquee)
-
-! https://github.com/uBlockOrigin/uAssets/issues/4408
-j-lyric.net##+js(ra, oncontextmenu|onselectstart)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/4409
 cagesideseats.com##+js(nostif, (), 1500)
@@ -2148,10 +2165,6 @@ suedkurier.de##*:style(-webkit-touch-callout: default !important; -webkit-user-s
 utamap.com##+js(ra, oncontextmenu)
 utamap.com##*:style(-webkit-touch-callout: default !important; -webkit-user-select: text !important; -moz-user-select: text !important; -ms-user-select: text !important; user-select: text !important;)
 
-! https://github.com/uBlockOrigin/uAssets/issues/7018
-utaten.com##+js(ra, oncontextmenu|onselectstart, , stay)
-utaten.com##.lyricBody:style(-webkit-touch-callout: default !important; -webkit-user-select: text !important; -moz-user-select: text !important; -ms-user-select: text !important; user-select: text !important;)
-
 ! mp3fy .com anti adb warning
 @@||mp3fy.com^$ghide
 
@@ -3169,9 +3182,6 @@ igniel.com##*:style(-webkit-touch-callout: default !important; -webkit-user-sele
 
 ! https://github.com/AdguardTeam/AdguardFilters/issues/66004
 hentaialtadefinizione.it##+js(aopw, onload)
-
-! https://github.com/uBlockOrigin/uAssets/issues/8069
-lyrical-nonsense.com##+js(aeld, copy)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/8072
 alltechnerd.com##+js(aopw, document.oncontextmenu)
@@ -7858,21 +7868,6 @@ foodnavigator.com##+js(rpnt, script, CopyrightLayer, abc)
 ! liddread.com anti right click, select
 liddread.com##+js(rmnt, script, /wpcp|contextmenu|unselectable/)
 liddread.com##*:style(-webkit-touch-callout: default !important; -webkit-user-select: text !important; -khtml-user-select: text !important; -moz-user-select: text !important; -ms-user-select: text !important; user-select: text !important; -webkit-tap-highlight-color: revert !important; cursor: revert !important;)
-
-! https://github.com/uBlockOrigin/uAssets/issues/31566
-togetogebox.org##+js(rmnt, style, -ms-user-select: none)
-
-! https://github.com/uBlockOrigin/uAssets/issues/31567
-lyrical-nonsense.com##+js(rmnt, style, moz-user-select:none)
-lyrical-nonsense.com##+js(rmnt, script, contextmenu)
-
-! https://github.com/uBlockOrigin/uAssets/issues/31568
-j-lyric.net##+js(set, document.body.oncontextmenu, null)
-j-lyric.net##+js(set, document.body.onselectstart, null)
-
-! https://github.com/uBlockOrigin/uAssets/issues/31569
-awa.fm##*:style(-webkit-touch-callout: default !important; -webkit-user-select: text !important; -moz-user-select: text !important; -ms-user-select: text !important; user-select: text !important;)
-awa.fm##+js(aeld, contextmenu, [native code])
 
 ! https://github.com/AdguardTeam/AdguardFilters/issues/223238
 canuckaudiomart.com##+js(rmnt, script, as_init)
