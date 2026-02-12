@@ -1,12 +1,22 @@
-! Title: uBlock filters – Experimental
+diff name:ublock-annoyances lines:7 checksum:5ac9f71d20
+d3 2
+a4 2
+! Last modified: Wed, 11 Feb 2026 21:34:37 +0000
+! Diff-Path: ../patches/2026.2.12.197.patch#ublock-annoyances
+a2836 2
+@@||startpage.com^$script,1p
+startpage.com#@#.a-bg-result
+diff name:ublock-badware lines:3 checksum:e10e951118
+d4 1
+a4 1
+! Diff-Path: ../patches/2026.2.12.197.patch#ublock-badware
+diff name:ublock-experimental lines:17 checksum:0e6179efba
+d3 2
+a4 2
 ! Last modified: Thu, 12 Feb 2026 00:41:38 +0000
-! Expires: 1 day
-! Description: Experimental filters
-! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
-! Homepage: https://github.com/uBlockOrigin/uAssets
-! Forums: https://github.com/uBlockOrigin/uAssets/issues
-
-! fake buffering on the initial load
+! Diff-Path: ../patches/2026.2.12.197.patch#ublock-experimental
+d9 21
+a29 11
 ! disable quick fix
 www.youtube.com#@#+js(trusted-rpnt, script, (function serverContract(), (()=>{if("YOUTUBE_PREMIUM_LOGO"===ytInitialData?.topbar?.desktopTopbarRenderer?.logo?.topbarLogoRenderer?.iconImage?.iconType||location.href.startsWith("https://www.youtube.com/tv#/")||location.href.startsWith("https://www.youtube.com/embed/"))return;document.addEventListener("DOMContentLoaded"\,(function(){const t=()=>{const t=document.getElementById("movie_player");if(!t)return;if(!t.getStatsForNerds?.()?.debug_info?.startsWith?.("SSAP\, AD"))return;const e=t.getProgressState?.();e&&e.duration>0&&(e.loaded<e.duration||e.duration-e.current>1)&&t.seekTo?.(e.duration)};t()\,new MutationObserver((()=>{t()})).observe(document\,{childList:!0\,subtree:!0})}));const t={apply:(t\,e\,o)=>{const n=o[0];return"function"==typeof n&&n.toString().includes("onAbnormalityDetected")&&(o[0]=function(){})\,Reflect.apply(t\,e\,o)}};window.Promise.prototype.then=new Proxy(window.Promise.prototype.then\,t)})();(function serverContract(), sedCount, 1)
 www.youtube.com#@#+js(trusted-edit-inbound-object, JSON.stringify, 0, ..client[?.clientName=="WEB"]+={"clientScreen":"CHANNEL"})
@@ -16,19 +26,111 @@ www.youtube.com##+js(trusted-rpnt, script, (function serverContract(), '(()=>{if
 www.youtube.com##+js(trusted-json-edit-xhr-request, [?..context.client.mainAppWebInfo.graftUrl^="https://www.youtube.com/watch"]..playbackContext[?.contentPlaybackContext]+={"adPlaybackContext":{"adType":"AD_TYPE_INSTREAM"}}, propsToMatch, /\/(player|get_watch)/)
 www.youtube.com##+js(trusted-json-edit-xhr-response, '..playerConfig.granularVariableSpeedConfig+={"minimumPlaybackRate":25,"maximumPlaybackRate":200}', propsToMatch, /\/(player|get_watch)/)
 ! "This content isn't available"
-! https://github.com/AdguardTeam/AdguardFilters/issues/223300#issuecomment-3794205618
 www.youtube.com##+js(trusted-prune-inbound-object, JSON.stringify, 1, context.client.configInfo.appInstallData, playbackContext)
 www.youtube.com##+js(trusted-prune-inbound-object, JSON.stringify, 1, context.client.configInfo.appInstallData, playerRequest)
-
-!#if cap_html_filtering
-! www.twitch.tv/esl_dota2
-||ttvnw.net/v1/playlist$xhr,3p,replace=/#EXT-X-DATERANGE:ID="(stitched-ad|maf-ad|source|trigger)"\S+\n|#EXT-X-DATERANGE:ID=\S+?CLASS="twitch-(?:stream-source|trigger|maf-ad)"\S+\n|#EXT-X-DATERANGE:\S+?CLASS="twitch-ad-quartile".+?(?=(#EXT-X-DATERANGE|$))|(\n#EXT-X-DISCONTINUITY\s|#EXT-X-TWITCH-PREFETCH\S+)//gs
-www.twitch.tv##[data-a-target="video-ad-label"]
-www.twitch.tv##[data-a-target="video-ad-countdown"]
-www.twitch.tv##button[aria-label="Leave feedback for this Ad"]
-www.twitch.tv##button[aria-label="Learn more about this ad"]
-www.twitch.tv##:matches-path(/^\/[0-9_a-z]+$/) .video-player__overlay > .follow-panel-overlay.tw-transition[aria-hidden="false"]
-www.twitch.tv##:matches-path(/^\/[0-9_a-z]+$/) .top-bar--pointer-enabled > div > .tw-media-card-stat
-www.twitch.tv##:matches-path(/^\/[0-9_a-z]+$/) [data-a-target="video-ref"]:has(.video-player__overlay > .follow-panel-overlay.tw-transition[aria-hidden="false"]) + div[class^="Layout-sc-"][hidden=""]:style(display:block !important;)
-www.twitch.tv##:matches-path(/^\/[0-9_a-z]+$/) div.video-player__overlay > div[class*="InjectLayout-sc-"] > div.player-overlay-background--darkness-3
-!#endif
+diff name:ublock-filters lines:11 checksum:d5b154ef27
+d3 2
+a4 2
+! Last modified: Thu, 12 Feb 2026 01:00:32 +0000
+! Diff-Path: ../patches/2026.2.12.197.patch#ublock-filters
+d7914 1
+a7914 5
+||nytimes.com/games-assets/v2/*.js$script,replace=/shouldRenderAd:\(\)=>d&&/shouldRenderAd:()=>false&&/,domain=www.nytimes.com
+www.nytimes.com##+js(trusted-replace-argument, String.prototype.includes, this, json:"subscribed", condition, /^anon$/)
+www.nytimes.com##+js(trusted-replace-argument, matchMedia.call, 1, json:"none", condition, max-width)
+www.nytimes.com##+js(trusted-json-edit-fetch-response, ..show_ads=false, propsToMatch, /statsig/initialize?)
+www.nytimes.com##+js(set, Object.prototype.hasAd, false)
+diff name:ublock-privacy lines:3 checksum:a53c4c039e
+d4 1
+a4 1
+! Diff-Path: ../patches/2026.2.12.197.patch#ublock-privacy
+diff name:ublock-quick-fixes lines:9 checksum:4875bbc9c3
+d3 2
+a4 2
+! Last modified: Thu, 12 Feb 2026 00:42:43 +0000
+! Diff-Path: ../patches/2026.2.12.197.patch#ublock-quick-fixes
+d21 8
+a28 3
+www.youtube.com##+js(trusted-rpnt, script, (function serverContract(), (()=>{if("YOUTUBE_PREMIUM_LOGO"===ytInitialData?.topbar?.desktopTopbarRenderer?.logo?.topbarLogoRenderer?.iconImage?.iconType||location.href.startsWith("https://www.youtube.com/tv#/")||location.href.startsWith("https://www.youtube.com/embed/"))return;document.addEventListener("DOMContentLoaded"\,(function(){const t=()=>{const t=document.getElementById("movie_player");if(!t)return;if(!t.getStatsForNerds?.()?.debug_info?.startsWith?.("SSAP\, AD"))return;const e=t.getProgressState?.();e&&e.duration>0&&(e.loaded<e.duration||e.duration-e.current>1)&&t.seekTo?.(e.duration)};t()\,new MutationObserver((()=>{t()})).observe(document\,{childList:!0\,subtree:!0})}));const t={apply:(t\,e\,o)=>{const n=o[0];return"function"==typeof n&&n.toString().includes("onAbnormalityDetected")&&(o[0]=function(){})\,Reflect.apply(t\,e\,o)}};window.Promise.prototype.then=new Proxy(window.Promise.prototype.then\,t)})();(function serverContract(), sedCount, 1)
+www.youtube.com##+js(trusted-edit-inbound-object, JSON.stringify, 0, ..client[?.clientName=="WEB"]+={"clientScreen":"CHANNEL"})
+www.youtube.com##+js(trusted-json-edit-fetch-request, ..client[?.clientName=="WEB"]+={"clientScreen":"CHANNEL"}, propsToMatch, /\/(player|get_watch)/)
+diff name:ublock-unbreak lines:3 checksum:29cacf1153
+d4 1
+a4 1
+! Diff-Path: ../patches/2026.2.12.197.patch#ublock-unbreak
+diff name:easylist lines:71 checksum:20bdaa235b
+d4 2
+a5 2
+! Last modified: Wed, 11 Feb 2026 22:02:47 +0000
+! Diff-Path: ../patches/2026.2.12.197.patch#easylist
+a18734 1
+||anourastallar.shop^
+a24312 1
+||confinementroguerecital.com^
+a24420 1
+||conveniencesloot.com^
+a25128 1
+||cupcakeeverywhere.com^
+a25486 1
+||dalliedjapaneesarpo.cyou^
+a35159 1
+||hxuyy9hvntyu36.rest^
+a36765 1
+||ixqhfwkppwbr.xyz^
+a37030 1
+||jdcwuqcwgcqqa.space^
+a37926 1
+||jwrjazissmaaa.space^
+a41015 1
+||lyopieifcjaqb.site^
+a41895 1
+||mgpixpolnxap.com^
+a42416 1
+||mojikjxxuy.com^
+a43744 1
+||nfyrucfzdi.com^
+a44762 1
+||oacswwccezmvt.site^
+a46290 1
+||owndangle.com^
+a47518 1
+||pinaxedited.cyou^
+a47579 1
+||pirojkisertive.shop^
+a48367 1
+||prayakonigashu.cfd^
+a49770 1
+||qjuivujlbdghsxa.com^
+a50358 1
+||r4y8c8f7oj1hx8mu.cfd^
+a51582 1
+||rilletsshivoo.com^
+a52419 1
+||rwvhaphtkfs.com^
+a52892 1
+||sceptreempusa.cfd^
+a56448 1
+||temperxylidin.cfd^
+a56954 1
+||tipreeflyway.qpon^
+a57938 1
+||tuhpgkaxhtr.com^
+a58946 1
+||unroomyskis.qpon^
+a60517 1
+||vowelsubnet.cyou^
+a62732 1
+||xgvnuoxwwnfxs.website^
+a62906 1
+||xndskduqxqxud.website^
+a63887 1
+||yqmlfthhrzvuk.site^
+a64768 1
+||zswcbalotnicg.online^
+a64771 1
+||ztdwsmfwkezgs.space^
+d68554 1
+diff name:easyprivacy lines:3 checksum:7e2c8a1bc8
+d5 1
+a5 1
+! Diff-Path: ../patches/2026.2.12.197.patch#easyprivacy

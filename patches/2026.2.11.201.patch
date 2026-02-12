@@ -1,29 +1,38 @@
-diff name:ublock-annoyances lines:8 checksum:11bb89e6b3
+diff name:ublock-annoyances lines:11 checksum:5ac9f71d20
 d3 2
 a4 2
-! Last modified: Wed, 11 Feb 2026 15:32:37 +0000
-! Diff-Path: ../patches/2026.2.11.1252.patch#ublock-annoyances
+! Last modified: Wed, 11 Feb 2026 21:34:37 +0000
+! Diff-Path: ../patches/2026.2.12.197.patch#ublock-annoyances
 a140 1
 @@||jigsawplanet.com^$ghide
+a2835 2
+@@||startpage.com^$script,1p
+startpage.com#@#.a-bg-result
 a4128 1
 mail.yahoo.com##+js(trusted-replace-argument, navigator.registerProtocolHandler, 0, noopFunc, condition, mailto)
-diff name:ublock-badware lines:3 checksum:522fdb16fa
+diff name:ublock-badware lines:3 checksum:e10e951118
 d4 1
 a4 1
-! Diff-Path: ../patches/2026.2.11.1252.patch#ublock-badware
-diff name:ublock-experimental lines:7 checksum:d37f8ca240
+! Diff-Path: ../patches/2026.2.12.197.patch#ublock-badware
+diff name:ublock-experimental lines:13 checksum:0e6179efba
 d3 2
 a4 2
-! Last modified: Wed, 11 Feb 2026 15:00:38 +0000
-! Diff-Path: ../patches/2026.2.11.1252.patch#ublock-experimental
-d10 1
-d26 1
-d32 5
-diff name:ublock-filters lines:47 checksum:a058256d2d
+! Last modified: Thu, 12 Feb 2026 00:41:38 +0000
+! Diff-Path: ../patches/2026.2.12.197.patch#ublock-experimental
+d9 1
+a9 1
+! disable quick fix
+d11 21
+a31 4
+www.youtube.com#@#+js(trusted-edit-inbound-object, JSON.stringify, 0, ..client[?.clientName=="WEB"]+={"clientScreen":"CHANNEL"})
+www.youtube.com#@#+js(trusted-json-edit-fetch-request, ..client[?.clientName=="WEB"]+={"clientScreen":"CHANNEL"}, propsToMatch, /\/(player|get_watch)/)
+! experimental
+www.youtube.com##+js(trusted-rpnt, script, (function serverContract(), '(()=>{if("YOUTUBE_PREMIUM_LOGO"===ytInitialData?.topbar?.desktopTopbarRenderer?.logo?.topbarLogoRenderer?.iconImage?.iconType||location.href.startsWith("https://www.youtube.com/tv#/")||location.href.startsWith("https://www.youtube.com/embed/"))return;window.ytInitialPlayerResponse=window.ytInitialPlayerResponse||{},document.addEventListener("DOMContentLoaded",(function(){const e=()=>{const e=document.getElementById("movie_player");if(!e)return;const t=e.getProgressState?.();if(t&&t.duration>0&&(t.loaded<t.duration||t.duration-t.current>1)){if(!e.getStatsForNerds?.()?.debug_info?.startsWith?.("SSAP, AD")){const t=e.getPlayerResponse?.();if("no_ads"in t||"adPlacements"in t||"adSlots"in t||"playerAds"in t){const o=t.videoDetails?.videoId;window.ytInitialPlayerResponse?.videoDetails?.videoId!==o&&(window.ytInitialPlayerResponse.storyboards=t.storyboards,e.loadVideoById(o,t.playerConfig?.playbackStartConfig?.startSeconds??0))}return}e.seekTo?.(t.duration)}};e(),new MutationObserver((()=>{e()})).observe(document,{childList:!0,subtree:!0})}));const e={apply:(e,t,o)=>{const n=o[0];return"function"==typeof n&&n.toString().includes("onAbnormalityDetected")&&(o[0]=function(){}),Reflect.apply(e,t,o)}};window.Promise.prototype.then=new Proxy(window.Promise.prototype.then,e);const t={apply:(e,t,o)=>{let n=Reflect.apply(e,t,o);const r=n?.videoDetails?.videoId;return r&&location.search.includes(r)&&window.ytInitialPlayerResponse?.storyboards?.playerStoryboardSpecRenderer&&(n.storyboards=window.ytInitialPlayerResponse.storyboards,window.ytInitialPlayerResponse.storyboards={}),n}};window.JSON.parse=new Proxy(window.JSON.parse,t),window.location.href.includes("/watch?")&&"BADGE_STYLE_TYPE_MEMBERS_ONLY"!==ytInitialData?.contents?.twoColumnWatchNextResults?.results?.results?.contents?.[0]?.videoPrimaryInfoRenderer?.badges?.[0]?.metadataBadgeRenderer?.style&&"CONTENT_CHECK_REQUIRED"!==window.ytInitialPlayerResponse?.playabilityStatus?.status&&window.addEventListener("load",(()=>{const e=async function(e){let t=document.getElementById(e);for(;!t;)t=await new Promise((t=>setTimeout((()=>t(document.getElementById(e))),500)));return t}("movie_player"),t=window.location.search,o=new URLSearchParams(t).get("v"),n=new URLSearchParams(t).get("t")??0,r=document.querySelectorAll("body > script:not([src]):not([type])");let a=!1;for(const e of r){let t=e.innerHTML;if(t.includes("var ytInitialPlayerResponse")){(t.includes("adPlacements")||t.includes("adSlots")||e.includes("playerAds"))&&(a=!0);break}}if(!e||!o||!a)return;const s=parseInt(n,10);e.then((function(e){e.loadVideoById(o,s)}))}))})();(function serverContract()', sedCount, 1)
+diff name:ublock-filters lines:54 checksum:d5b154ef27
 d3 2
 a4 2
-! Last modified: Wed, 11 Feb 2026 18:01:35 +0000
-! Diff-Path: ../patches/2026.2.11.1252.patch#ublock-filters
+! Last modified: Thu, 12 Feb 2026 01:00:32 +0000
+! Diff-Path: ../patches/2026.2.12.197.patch#ublock-filters
 a7691 2
 filespayouts.com##+js(aeld, click, document.createElement)
 filespayouts.com###normal-box
@@ -32,6 +41,13 @@ a7872 3
 bgmiconfig.ink##.ad-zone
 stackmint.ink,bgmiconfig.ink,inkvoyage.xyz##+js(rpnt, script, /10;|6;/, 1;, condition, progress)
 messycloud.com##div.ad-zone
+d7911 1
+a7911 5
+||nytimes.com/games-assets/v2/*.js$script,replace=/shouldRenderAd:\(\)=>d&&/shouldRenderAd:()=>false&&/,domain=www.nytimes.com
+www.nytimes.com##+js(trusted-replace-argument, String.prototype.includes, this, json:"subscribed", condition, /^anon$/)
+www.nytimes.com##+js(trusted-replace-argument, matchMedia.call, 1, json:"none", condition, max-width)
+www.nytimes.com##+js(trusted-json-edit-fetch-response, ..show_ads=false, propsToMatch, /statsig/initialize?)
+www.nytimes.com##+js(set, Object.prototype.hasAd, false)
 d8566 1
 a8566 1
 valhallas.click,valeriabelen.com,vegamoviies.*,verdragonball.online,vexmoviex.*,vfxmed.com,vidara.so,vidara.to,vidclouds.*,video.az,videostreaming.rocks,videowood.tv,vidlox.*,vidorg.net,vidtapes.com,vidz7.com,vikistream.com,vinovo.to,vipboxtv.*,vipleague.*,viprow.*,viral.wf,virpe.cc,visifilmai.org,viveseries.com,vladrustov.sx,volokit2.com,vstorrent.org##^script[data-cfasync]:has-text(/h=decodeURIComponent|popundersPerIP/)
@@ -67,38 +83,28 @@ a24231 3
 filecrate.store##+js(aeld, click, !adShown)
 vidara.so,vidara.to##+js(nowoif)
 twitchnosub.com/static/js/runtime.mq.js
-diff name:ublock-privacy lines:3 checksum:596c83769a
+diff name:ublock-privacy lines:3 checksum:a53c4c039e
 d4 1
 a4 1
-! Diff-Path: ../patches/2026.2.11.1252.patch#ublock-privacy
-diff name:ublock-quick-fixes lines:18 checksum:574a86c048
+! Diff-Path: ../patches/2026.2.12.197.patch#ublock-privacy
+diff name:ublock-quick-fixes lines:8 checksum:4875bbc9c3
 d3 2
 a4 2
-! Last modified: Wed, 11 Feb 2026 16:17:19 +0000
-! Diff-Path: ../patches/2026.2.11.1252.patch#ublock-quick-fixes
-d21 3
-a23 8
-www.youtube.com##+js(trusted-rpnt, script, (function serverContract(), '(()=>{if("YOUTUBE_PREMIUM_LOGO"===ytInitialData?.topbar?.desktopTopbarRenderer?.logo?.topbarLogoRenderer?.iconImage?.iconType||location.href.startsWith("https://www.youtube.com/tv#/")||location.href.startsWith("https://www.youtube.com/embed/"))return;window.ytInitialPlayerResponse=window.ytInitialPlayerResponse||{},document.addEventListener("DOMContentLoaded",(function(){const e=()=>{const e=document.getElementById("movie_player");if(!e)return;const t=e.getProgressState?.();if(t&&t.duration>0&&(t.loaded<t.duration||t.duration-t.current>1)){if(!e.getStatsForNerds?.()?.debug_info?.startsWith?.("SSAP, AD")){const t=e.getPlayerResponse?.();if("no_ads"in t||"adPlacements"in t||"adSlots"in t||"playerAds"in t){const o=t.videoDetails?.videoId;window.ytInitialPlayerResponse?.videoDetails?.videoId!==o&&(window.ytInitialPlayerResponse.storyboards=t.storyboards,e.loadVideoById(o,t.playerConfig?.playbackStartConfig?.startSeconds??0))}return}e.seekTo?.(t.duration)}};e(),new MutationObserver((()=>{e()})).observe(document,{childList:!0,subtree:!0})}));const e={apply:(e,t,o)=>{const n=o[0];return"function"==typeof n&&n.toString().includes("onAbnormalityDetected")&&(o[0]=function(){}),Reflect.apply(e,t,o)}};window.Promise.prototype.then=new Proxy(window.Promise.prototype.then,e);const t={apply:(e,t,o)=>{let n=Reflect.apply(e,t,o);const r=n?.videoDetails?.videoId;return r&&location.search.includes(r)&&window.ytInitialPlayerResponse?.storyboards?.playerStoryboardSpecRenderer&&(n.storyboards=window.ytInitialPlayerResponse.storyboards,window.ytInitialPlayerResponse.storyboards={}),n}};window.JSON.parse=new Proxy(window.JSON.parse,t),window.location.href.includes("/watch?")&&"BADGE_STYLE_TYPE_MEMBERS_ONLY"!==ytInitialData?.contents?.twoColumnWatchNextResults?.results?.results?.contents?.[0]?.videoPrimaryInfoRenderer?.badges?.[0]?.metadataBadgeRenderer?.style&&"CONTENT_CHECK_REQUIRED"!==window.ytInitialPlayerResponse?.playabilityStatus?.status&&window.addEventListener("load",(()=>{const e=async function(e){let t=document.getElementById(e);for(;!t;)t=await new Promise((t=>setTimeout((()=>t(document.getElementById(e))),500)));return t}("movie_player"),t=window.location.search,o=new URLSearchParams(t).get("v"),n=new URLSearchParams(t).get("t")??0,r=document.querySelectorAll("body > script:not([src]):not([type])");let a=!1;for(const e of r){let t=e.innerHTML;if(t.includes("var ytInitialPlayerResponse")){(t.includes("adPlacements")||t.includes("adSlots")||e.includes("playerAds"))&&(a=!0);break}}if(!e||!o||!a)return;const s=parseInt(n,10);e.then((function(e){e.loadVideoById(o,s)}))}))})();(function serverContract()', sedCount, 1)
-www.youtube.com##+js(trusted-json-edit-xhr-request, [?..context.client.mainAppWebInfo.graftUrl^="https://www.youtube.com/watch"]..playbackContext[?.contentPlaybackContext]+={"adPlaybackContext":{"adType":"AD_TYPE_INSTREAM"}}, propsToMatch, /\/(player|get_watch)/)
-www.youtube.com##+js(trusted-json-edit-xhr-response, '..playerConfig.granularVariableSpeedConfig+={"minimumPlaybackRate":25,"maximumPlaybackRate":200}', propsToMatch, /\/(player|get_watch)/)
-! "This content isn't available"
-www.youtube.com##+js(trusted-prune-inbound-object, JSON.stringify, 1, context.client.configInfo.appInstallData, playbackContext)
-www.youtube.com##+js(trusted-prune-inbound-object, JSON.stringify, 1, context.client.configInfo.appInstallData, playerRequest)
-!www.youtube.com##+js(trusted-edit-inbound-object, JSON.stringify, 0, ..client[?.clientName=="WEB"]+={"clientScreen":"CHANNEL"})
-!www.youtube.com##+js(trusted-json-edit-fetch-request, ..client[?.clientName=="WEB"]+={"clientScreen":"CHANNEL"}, propsToMatch, /\/(player|get_watch)/)
+! Last modified: Thu, 12 Feb 2026 00:42:43 +0000
+! Diff-Path: ../patches/2026.2.12.197.patch#ublock-quick-fixes
 d170 2
 a171 2
 japscan.*##div[yuharo]:remove()
 japscan.*##+js(norafif, _0x)
-diff name:ublock-unbreak lines:3 checksum:b916106175
+diff name:ublock-unbreak lines:3 checksum:29cacf1153
 d4 1
 a4 1
-! Diff-Path: ../patches/2026.2.11.1252.patch#ublock-unbreak
-diff name:easylist lines:538 checksum:09e5bba67c
+! Diff-Path: ../patches/2026.2.12.197.patch#ublock-unbreak
+diff name:easylist lines:601 checksum:20bdaa235b
 d4 2
 a5 2
-! Last modified: Wed, 11 Feb 2026 19:41:31 +0000
-! Diff-Path: ../patches/2026.2.11.1252.patch#easylist
+! Last modified: Wed, 11 Feb 2026 22:02:47 +0000
+! Diff-Path: ../patches/2026.2.12.197.patch#easylist
 a853 1
 ://loader.*.com/script/$script,third-party
 a859 1
@@ -125,6 +131,8 @@ a18311 1
 ||alinedio.shop^
 a18621 1
 ||anemiachoky.com^
+a18721 1
+||anourastallar.shop^
 a19304 1
 ||asterouhavenev.org^
 a19311 1
@@ -174,8 +182,14 @@ a24097 1
 ||colingthrope.cyou^
 a24273 1
 ||confidescoffs.cfd^
+a24274 1
+||confinementroguerecital.com^
+a24382 1
+||conveniencesloot.com^
 a24423 1
 ||coolishrocked.com^
+a25089 1
+||cupcakeeverywhere.com^
 a25119 1
 ||curiumuribagonet.qpon^
 a25137 1
@@ -186,6 +200,8 @@ a25219 1
 ||cwknyzwwvbqze.space^
 a25306 1
 ||cytodegoitres.cyou^
+a25442 1
+||dalliedjapaneesarpo.cyou^
 a25694 1
 ||dcnnnmaqh.com^
 a26041 1
@@ -287,6 +303,8 @@ a34508 1
 ||honestbroadcasting.com^
 a34935 1
 ||humyybubyvy.com^
+a35064 1
+||hxuyy9hvntyu36.rest^
 a35798 1
 ||impurehomework.pro^
 a35957 1
@@ -295,6 +313,10 @@ a36326 1
 ||iptydbyenzagm.site^
 a36440 1
 ||isoamidtrusion.com^
+a36666 1
+||ixqhfwkppwbr.xyz^
+a36931 1
+||jdcwuqcwgcqqa.space^
 a37001 1
 ||jeopardstrude.com^
 a37175 1
@@ -309,6 +331,8 @@ a37621 1
 ||jtikwgwijusih.website^
 a37719 1
 ||jumpystupid.pro^
+a37820 1
+||jwrjazissmaaa.space^
 a37835 1
 ||jxdykrphpqcnl.website^
 a37857 1
@@ -337,14 +361,20 @@ a40455 1
 ||loworiginatepalette.com^
 a40725 1
 ||lupulicsobby.cyou^
+a40895 1
+||lyopieifcjaqb.site^
 a40984 1
 ||madeupteamspupil.com^
 a41122 1
 ||mamotyhutchie.cfd^
 a41222 1
 ||markebchelate.cyou^
+a41772 1
+||mgpixpolnxap.com^
 a42190 1
 ||mnlbafoemhly.com^
+a42292 1
+||mojikjxxuy.com^
 a42388 1
 ||moolakithe.shop^
 a42440 1
@@ -355,12 +385,16 @@ a43147 1
 ||nacbqfjuv.com^
 a43296 1
 ||navyhalfclinical.com^
+a43615 1
+||nfyrucfzdi.com^
 a43743 1
 ||nikkuddripple.cfd^
 a43799 1
 ||nixeaperchmeltage.cfd^
 a44474 1
 ||nwiglmahe.com^
+a44630 1
+||oacswwccezmvt.site^
 a44838 1
 ||ocvappsa.com^
 a45568 1
@@ -369,6 +403,8 @@ a46064 1
 ||overestimatejerseyrefrigerator.com^
 a46110 1
 ||ovsepctiogvngxb.com^
+a46154 1
+||owndangle.com^
 a46417 1
 ||pajamasaccommodationaltogether.com^
 a46491 1
@@ -389,8 +425,12 @@ a47285 1
 ||piaffesfelix.cfd^
 a47357 1
 ||pilinhomered.com^
+a47372 1
+||pinaxedited.cyou^
 a47374 1
 ||pinderecphory.com^
+a47432 1
+||pirojkisertive.shop^
 a47937 1
 ||pop-ad.pages.dev^
 a47969 1
@@ -403,6 +443,8 @@ a48170 1
 ||pqidnaconivjv.site^
 a48196 1
 ||pr6oqpvrwtei48e33.cfd^
+a48214 1
+||prayakonigashu.cfd^
 a49130 1
 ||pv7e29ttex3j413iy2j.cfd^
 a49223 1
@@ -413,12 +455,15 @@ a49336 1
 ||qbafglhl.xyz^
 a49560 1
 ||qibwuklibbm.com^
+a49612 1
+||qjuivujlbdghsxa.com^
 a49990 1
 ||quijbdjywgcs.com^
 a50117 1
 ||qxjrhqhrq.com^
-a50197 1
+a50197 2
 ||r48vo3crt35h3r.rest^
+||r4y8c8f7oj1hx8mu.cfd^
 a50360 1
 ||rarietycaaba.com^
 a50555 1
@@ -437,6 +482,8 @@ a51390 1
 ||rigahums.cfd^
 a51411 1
 ||rikxrylynrgzf.online^
+a51412 1
+||rilletsshivoo.com^
 a51577 1
 ||rmorzoaxhg.com^
 a51645 1
@@ -445,10 +492,14 @@ a51982 1
 ||rsqaqetydyzhh.online^
 a52081 1
 ||rudechangingmetropolitan.com^
+a52245 1
+||rwvhaphtkfs.com^
 a52268 1
 ||rxidhevafwczq.online^
 a52388 1
 ||sacwumsf.com^
+a52716 1
+||sceptreempusa.cfd^
 a52734 1
 ||scholarly-track.pro^
 a53122 1
@@ -493,10 +544,16 @@ a55717 1
 ||swqavzfztuonn.online^
 a55948 1
 ||tall-difficulty.pro^
+a56250 1
+||temperxylidin.cfd^
 a56449 1
 ||theezanburroethnize.cfd^
+a56755 1
+||tipreeflyway.qpon^
 a57206 1
 ||tpioiqppexypy.online^
+a57738 1
+||tuhpgkaxhtr.com^
 a57871 1
 ||twerpuveitic.com^
 a57968 1
@@ -507,6 +564,8 @@ a58182 1
 ||ufjmjniirpxfm.site^
 a58315 1
 ||ujgssjktyezth.website^
+a58741 1
+||unroomyskis.qpon^
 a58922 1
 ||upgpiervbufvr.website^
 a58948 1
@@ -541,6 +600,8 @@ a60142 1
 ||vlnqumjleuqhg.space^
 a60189 1
 ||vmvwstuhensma.online^
+a60295 1
+||vowelsubnet.cyou^
 a60395 1
 ||vsfowtixgsjed.website^
 a60475 1
@@ -571,8 +632,12 @@ a62408 1
 ||xdlechibkgb.xyz^
 a62412 1
 ||xdnklhggcsyll.online^
+a62495 1
+||xgvnuoxwwnfxs.website^
 a62524 1
 ||xihoqsajpap.com^
+a62668 1
+||xndskduqxqxud.website^
 a62817 1
 ||xskzwcrthbwji.website^
 a62871 1
@@ -591,18 +656,22 @@ a63330 1
 ||yhtqjsomvhod.com^
 a63518 1
 ||ynwzcnth.com^
+a63640 1
+||yqmlfthhrzvuk.site^
 a63795 1
 ||yw12nynx4ijq2mvx.cfd^
 a64029 1
 ||zebkqpgyfxnbz.online^
 a64326 1
 ||zmvyqrpmtpqzc.online^
+a64518 1
+||zswcbalotnicg.online^
+a64521 1
+||ztdwsmfwkezgs.space^
 a66756 1
 ||agreementdaily.com^
 a68180 1
 ||gamerhit.co^$popup
-a68301 1
-||gryphline.com^$popup
 a69232 1
 ||ppwpn.com^$popup
 a69427 1
@@ -633,11 +702,11 @@ analdin.com,cockdude.com,coomer.st,gelbooru.com,kemono.cr##a[href*="/tsyndicate.
 d84696 1
 a84696 1
 @@||micro.rubiconproject.com/prebid/dynamic/$script,xmlhttprequest,domain=gamingbible.co.uk|la7.it|ladbible.com|sportbible.com|viki.com
-diff name:easyprivacy lines:8 checksum:8d4a295668
+diff name:easyprivacy lines:8 checksum:7e2c8a1bc8
 d4 2
 a5 2
 ! Last modified: Wed, 11 Feb 2026 10:33:21 +0000
-! Diff-Path: ../patches/2026.2.11.1252.patch#easyprivacy
+! Diff-Path: ../patches/2026.2.12.197.patch#easyprivacy
 d41559 1
 d54959 1
 a54959 1
