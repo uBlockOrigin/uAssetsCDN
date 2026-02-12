@@ -1,9 +1,8 @@
-name: Update CDN assets
+name: Update CDN assets (hourly)
 
 on:
-  # https://unix.stackexchange.com/questions/519538/how-to-set-cron-job-for-every-5-hours
   schedule:
-    - cron: '11 */1 * * *'
+    - cron: '0 * * * *'
   workflow_dispatch:
 
 jobs:
@@ -23,49 +22,58 @@ jobs:
             exit 1
           fi
           exit 0
-      - name: Clone uAssetsCDN
+
+      - name: Checkout repository
         uses: actions/checkout@v4
+
       - name: Copy shell script from uAssets
         run: |
           TMPDIR="$(mktemp -d)"
           git clone --depth=1 --single-branch --branch=master https://github.com/uBlockOrigin/uAssets.git "$TMPDIR"
-          cp -v "$TMPDIR"/tools/need-patch.mjs .
-          cp -v "$TMPDIR"/tools/make-diffpatch.sh .
-          cp -v "$TMPDIR"/tools/update-diffpatches.sh .
+          cp -v "$TMPDIR/tools/need-patch.mjs" .
+          cp -v "$TMPDIR/tools/make-diffpatch.sh" .
+          cp -v "$TMPDIR/tools/update-diffpatches.sh" .
+
       - name: Time check
         run: |
           UPDATE_PERIOD_IN_HOURS=5
           echo "CAN_DO=$(node ./need-patch.mjs delay="$UPDATE_PERIOD_IN_HOURS")" >> $GITHUB_ENV
+
       - name: Generate version string
         if: ${{ env.CAN_DO == 'yes' }}
         run: |
           TAGNAME=$(date -u "+%Y.%-m.%-d.")$(date -u "+%H*60+%M" | bc)
           echo "TAGNAME=$TAGNAME" >> $GITHUB_ENV
           echo "Version string is $TAGNAME"
+
       - name: Copy uAssets/filters to uAssetsCDN
         if: ${{ env.CAN_DO == 'yes' }}
         run: |
           TMPDIR="$(mktemp -d)"
           git clone --depth=1 --single-branch --branch=gh-pages https://github.com/uBlockOrigin/uAssets.git "$TMPDIR"
-          cp -v "$TMPDIR"/filters/*.txt filters/
-          cp -v "$TMPDIR"/thirdparties/*.txt thirdparties/
+          cp -v "$TMPDIR/filters/*.txt" filters/
+          cp -v "$TMPDIR/thirdparties/*.txt" thirdparties/
+
       - name: Copy uBlock/assets*.json to uAssetsCDN
         if: ${{ env.CAN_DO == 'yes' }}
         run: |
           TMPDIR="$(mktemp -d)"
           git clone --depth=1 --single-branch --branch=master https://github.com/gorhill/uBlock.git "$TMPDIR"
-          cp -v "$TMPDIR"/assets/assets*.json ublock/
+          cp -v "$TMPDIR/assets/assets*.json" ublock/
+
       - name: Create new patch
         if: ${{ env.CAN_DO == 'yes' }}
         run: |
           PATCHES_DIR="patches"
           ./make-diffpatch.sh "${{ env.TAGNAME }}" "$PATCHES_DIR"
+
       - name: Update existing patches
         if: ${{ env.CAN_DO == 'yes' }}
         run: |
           PATCHES_DIR="patches"
           FILTER_FILES=$(git ls-files --exclude-standard -- filters/*.min.txt thirdparties/*.txt)
           ./update-diffpatches.sh "$GITHUB_REPOSITORY" "$PATCHES_DIR" "$FILTER_FILES"
+
       - name: Commit changes, if any
         if: ${{ env.CAN_DO == 'yes' }}
         run: |
