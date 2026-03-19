@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Wed, 18 Mar 2026 16:23:51 +0000
-! Diff-Path: ../patches/2026.3.19.197.patch#ublock-filters
+! Last modified: Thu, 19 Mar 2026 08:48:31 +0000
+! Diff-Path: ../patches/2026.3.19.538.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -2016,6 +2016,10 @@ ashemaletube.com##.header-ads-wrapper
 ashemaletube.*##.js-toggle-content-wrapper a[href^="/link/out/"]:upward(.js-toggle-content-wrapper)
 ashemaletube.com##.ads-wrapper
 ashemaletube.*##.ad-wrap
+||ashemaletube.*/ads/$xhr
+||ashemaletube.*/ast/b/$frame
+ashemaletube.*##.fh-line
+ashemaletube.*##iframe[src*="/link/out/b/"]
 hotscope.tv##+js(nowoif)
 hotscope.tv##[style^="transform"]:has(#videoHolder)
 hotscope.tv##ul[style^="padding-top:"]
@@ -7588,11 +7592,12 @@ universitiesonline.xyz##+js(no-fetch-if, googlesyndication)
 universitiesonline.xyz##.popup
 universitiesonline.xyz##.overlay
 universitiesonline.xyz###tp-generate, #tp-snp2:style(display: block !important;)
-mahitimanch.in,5ghindi.in##+js(rpnt, script, /\d{4}/gm, 10, condition, count)
-mahitimanch.in,5ghindi.in##form button[id]:style(display: block !important; margin-top: 380px !important; margin-left: 10px !important; height: 70px !important; width: 260px !important; background: linear-gradient(to right,#eb3349 40%,#f45c43) ! important;)
-mahitimanch.in,5ghindi.in##form button[id], .box-main, .captcha-check:others()
-mahitimanch.in,5ghindi.in##+js(rpnt, script, /getElementById\('.*'\).*'block';/gm, getElementById('btn6').style.display = 'block';, condition, count)
-inshorturl.com##+js(rpnt, script, 3000), 10))
+||isproxy.eu^$script,domain=indiamaja.com|techautomobile.in|tech4auto.in|mahitimanch.in|jnvharidwar.org
+@@*$ghide,domain=indiamaja.com|techautomobile.in|tech4auto.in|mahitimanch.in|jnvharidwar.org
+indiamaja.com,techautomobile.in,tech4auto.in,mahitimanch.in,jnvharidwar.org##+js(noeval-if, /chp_?ad/)
+indiamaja.com,techautomobile.in,tech4auto.in,mahitimanch.in,jnvharidwar.org###link, #tp-timex-btn, #tp-text, #tp98:style(margin-top: 150px !important;)
+indiamaja.com,techautomobile.in,tech4auto.in,mahitimanch.in,jnvharidwar.org###link, #linkx, #btn6, #tp-timex-btn, #cf-widget, .Tag, #tp-text, #tp98, #plx, .box-main:others()
+indiamaja.com,techautomobile.in,tech4auto.in,mahitimanch.in,jnvharidwar.org##+js(rpnt, script, /\d{4}\);/gm, 800);, condition, count)
 filesupload.in##+js(no-fetch-if, adsbygoogle.js)
 filesupload.in###wpsafe-link:style(display: block !important;)
 /devfiles.pages.dev\/img\/[a-zA-Z0-9]{8,}.jpeg/$image
@@ -11095,6 +11100,7 @@ uploadrar.*##main > center > a.btn-primary
 uploadrar.*##form > center:has(.btn):has([href])
 uploadrar.*##.footer, span > .text-muted, .card, .m-2.submit-btn.btn-primary.btn
 uploadrar.*##.fs-5, p, ul, li, #how-to-open, .p-0.block, .download-controls, .ad-box + center
+uploadrar.*##.ad-label, .adsbygoogle
 uploadrar.*##+js(acs, document.documentElement, break;case $.)
 uploadrar.*##+js(nano-stb, /.?/, *)
 ||pixeltrey.com^
@@ -24556,3 +24562,4 @@ borntobefuck.com##.ads-overlay
 borntobefuck.com##.vast-container
 chatgpt.com##+js(trusted-json-edit, [?.type=="ads"].visibility.status="hidden")
 ourcoincash.xyz,softdevelopp.com##+js(noeval-if, Adblock)
+radio.net##+js(trusted-replace-argument, Array.prototype.includes, 0, json:"none", condition, /^755$/)
