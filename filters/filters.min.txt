@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Fri, 20 Mar 2026 20:27:58 +0000
-! Diff-Path: ../patches/2026.3.20.1363.patch#ublock-filters
+! Last modified: Sat, 21 Mar 2026 04:13:33 +0000
+! Diff-Path: ../patches/2026.3.21.284.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -10520,6 +10520,8 @@ disneyembed.wtf##+js(trusted-set-local-storage-item, locker_timestamp, $now$)
 embedtv.best##+js(nowoif, !embedtv.best)
 pkproject.net##+js(acs, setTimeout, adblock)
 pkproject.net##div[data-fuse]
+||imasdk.googleapis.com/js/sdkloader/ima3.js$redirect=google-ima.js,domain=recordplus.com
+@@||imasdk.googleapis.com/js/sdkloader/ima3_dai.js$domain=recordplus.com
 ! NOTE: Thai
 steamseries88.com##+js(rpnt, script, let playerType, 'window.addEventListener("load",()=>{if(typeof playMovie==="function"){playMovie()}});let playerType')
 ! NOTE: Turkish
@@ -10627,7 +10629,12 @@ animevietsub.*##.Adv
 /player/jwplayer-*/vast.js$script
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$redirect=noopjs,domain=vtvgo.vn,important
 ! cap3. pro
-cap3.pro##+js(trusted-replace-argument, String.prototype.includes, this, 'json:"mozilla/5.0 (windows nt 10.0; win64; x64) applewebkit/537.36 (khtml, like gecko) chrome/145.0.0.0 safari/537.36"', condition, mozilla/5.0)
+cap3.*##+js(trusted-replace-argument, String.prototype.includes, this, 'json:"mozilla/5.0 (windows nt 10.0; win64; x64) applewebkit/537.36 (khtml, like gecko) chrome/145.0.0.0 safari/537.36"', condition, mozilla/5.0)
+cap3.*#@##ad-wrapper
+cap3.*##+js(nowoif, popup=)
+cap3.*##+js(aeld, click, setTimeout)
+cap3.*##+js(aeld, click, ()}, elements, .art-control-fullscreen)
+||cap3.*/api/ads
 ! !SECTION: Non-English sites
 ! noadblocker.js "Enhanced Ad Blocker Detection Script"
 /^https:\/\/[a-z0-9]{6,10}\.[a-z]{2,3}\/js\d?\/noadblocker\.js(?:\?v=\d)?$/$script,1p,match-case
@@ -21450,7 +21457,7 @@ taste.com.au##.main-header:style(top: 0 !important)
 @@/prebid/*$script,domain=decompiler.com
 @@/javascripts/*prebid-ads/ads-prebid*.js^$script,domain=decompiler.com
 decompiler.com##+js(acs, document.getElementById, /adblock/i)
-decompiler.com##+js(rpnt, script, /window\.\w+\s*===\s*undefined/, false)
+decompiler.com##+js(rpnt, script, /window(?:\.\w+|\[['"`]\w+['"`]\])[\s\n]*===[\s\n]*undefined/)
 ! ytlarge detection
 @@||ytlarge.com^$ghide
 @@||googlesyndication.com^$script,xhr,domain=ytlarge.com
