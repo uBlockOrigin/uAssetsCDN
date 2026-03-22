@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Sun, 22 Mar 2026 09:44:24 +0000
-! Diff-Path: ../patches/2026.3.22.584.patch#ublock-filters
+! Last modified: Sun, 22 Mar 2026 12:21:46 +0000
+! Diff-Path: ../patches/2026.3.22.881.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -13108,6 +13108,8 @@ cambb.xxx,nudecams.xxx###adb
 ||vexfile.com/sw.js$script,1p
 ||vexfile.com/img/cofksar.png
 vexfile.com##.title-box > [href] > [src]
+vexfile.com##+js(rpnt, script, var TIMER_MS = 40000;, var TIMER_MS = 0;)
+vexfile.com##+js(rpnt, script, get_offers();, get_offers(); setTimeout(function(){ $('.offer-link:first').trigger('click'); }\, 100);)
 manga18fx.com##+js(aopr, exoNoExternalUI38djdkjDDJsio96)
 manga18fx.com##+js(nostif, fetch)
 manga18fx.com##.kadx
@@ -16829,8 +16831,6 @@ wepc.com##+js(aopr, HTMLIFrameElement)
 commands.gg,stardewids.com##body:style(background-image:none !important)
 commands.gg,stardewids.com##+js(aeld, , document.body)
 stardewids.com##+js(aeld, scroll)
-datanodes.to##+js(ra, disabled, .downloadbtn)
-datanodes.to###countdown
 windowspro.de#@##block-views-sponsoredpromo-block
 windowspro.de##+js(set, abpblocked, undefined)
 ! NSFW yesdownloader. com timer
@@ -17749,9 +17749,7 @@ telesrbija.com##+js(acs, Promise, Adb)
 ||api.lhkmedia.in^$3p
 ! javgg.net anti-adb on DL
 javgg.co,javgg.net#@##AD_160
-*$script,3p,redirect-rule=noopjs,domain=javguard.xyz
 *$script,3p,denyallow=cloudflare.com|fluidplayer.com|googleapis.com|strpst.com,domain=javcode.net|javgg.co|javgg.net
-javguard.xyz##body > div[class]:empty
 paketmu.com##+js(no-fetch-if, googlesyndication)
 !#if env_chromium
 rapid-cloud.co##+js(set, navigator.brave, undefined)
@@ -17793,9 +17791,6 @@ pervclips.com##+js(aopr, decodeURI)
 pervclips.com##.thumb_spots
 pervclips.com##.spot-after
 ||pervclips.com/tube/js/customscript.js
-||watchx.top^$csp=sandbox allow-forms allow-same-origin allow-scripts allow-modals allow-orientation-lock allow-pointer-lock allow-presentation allow-top-navigation
-watchx.top##div[style="position:fixed;inset:0px;z-index:100000;height:100%;width:100%"]
-watchx.top##+js(no-fetch-if, googlesyndication)
 ||tinypass.com^$script,domain=independent.co.uk
 the-independent.com###top-banner-wrapper
 @@||the-independent.com/_build/prebid$script,1p
@@ -17863,11 +17858,6 @@ zona-leros.com##+js(nostif, Adb)
 zona-leros.com##.store_fondo
 ||swarmmanga.com/*/custom.js
 swarmmanga.com##.c-sidebar
-*$script,domain=terafly.me,redirect-rule=noopjs
-terafly.me##+js(aopr, adsBlocked)
-||terafly.me^$csp=style-src *
-terafly.me##.qc-cmp2-container
-terafly.me##+js(nostif, checkAdblockUser)
 ! BetterJsPop-sites
 zedporn.com##+js(aopw, BetterJsPop)
 hiraethtranslation.com##.c-sidebar
@@ -17923,12 +17913,10 @@ claimlite.club##+js(noeval-if, blocker)
 gadgets.es##+js(set, DHAntiAdBlocker, true)
 gadgets.es##+js(set, isAdBlockActive, false)
 rackusreads.com##+js(set, DHAntiAdBlocker, true)
-elamigos-games.com,elamigos-games.net,elamigosgames.org,elamigosgamez.net##+js(nostif, checkAdblockUser)
-elamigos-games.com,elamigos-games.net,elamigosgames.org,elamigosgamez.net##.content_store
-elamigos-games.com,elamigos-games.net,elamigosgames.org,elamigosgamez.net##h3.my-4:has-text(/^Advertising/)
-elamigos-games.com,elamigos-games.net,elamigosgames.org,elamigosgamez.net##.iframeDiv
-elamigosgames.org##.store_fondo
-elamigosgames.org##.store_text
+elamigosgamez.net##+js(nostif, checkAdblockUser)
+elamigosgamez.net##.content_store
+elamigosgamez.net##h3.my-4:has-text(/^Advertising/)
+elamigosgamez.net##.iframeDiv
 *$script,domain=wp.pl|money.pl|o2.pl|parenting.pl|pudelek.pl|autokult.pl|gadzetomania.pl|fotoblogia.pl|komorkomania.pl|polygamia.pl|abczdrowie.pl|benchmark.pl|kafeteria.pl|pysznosci.pl|dobreprogramy.pl|genialne.pl|autocentrum.pl|jastrzabpost.pl|deliciousmagazine.pl,redirect-rule=noopjs
 ||imasdk.googleapis.com/js/sdkloader/ima3_debug.js$script,domain=o2.pl,redirect=google-ima.js:10
 @@*$ghide,domain=wp.pl|money.pl|o2.pl|parenting.pl|pudelek.pl|autokult.pl|gadzetomania.pl|fotoblogia.pl|komorkomania.pl|polygamia.pl|abczdrowie.pl|benchmark.pl|kafeteria.pl|pysznosci.pl|dobreprogramy.pl|genialne.pl|autocentrum.pl|jastrzabpost.pl|deliciousmagazine.pl
@@ -21253,11 +21241,14 @@ curseforge.com##:is(.project-description,div.project-detail__content) p > img[al
 modrinth.com,curseforge.com##+js(rmnt, h2, /creeperhost/i)
 arenascan.com##+js(aost, document.getElementById, adsBlocked)
 arenascan.com###floatcenter
-datanodes.to##+js(aeld, click, pop)
+datanodes.to##+js(ra, disabled, .downloadbtn)
+datanodes.to###countdown
+*$script,3p,denyallow=google.com|gstatic.com,domain=datanodes.to
 datanodes.to##[href^="https://cinemaunlocked.com"]
 datanodes.to##[href^="https://fmovies-hd.to"]
-*$script,3p,denyallow=google.com|gstatic.com,domain=datanodes.to
 datanodes.to##div[class] > center > a[href][rel="nofollow"][target="_blank"]
+datanodes.to##+js(aeld, click, pop)
+datanodes.to##+js(acs, String.fromCharCode, atob)
 ||dohggte.com^
 ||loadingfreerar.top^$all
 hidan.co,hidan.sh##+js(nowoif, !hidan.sh)
@@ -23841,6 +23832,7 @@ tube.shegods.com##+js(nowoif)
 tube.shegods.com##.main-gal > .right-gallery
 fileq.games##+js(nowoif, _blank)
 animekai.*##+js(nowoif, _blank)
+moontv.to,sflix.fi##+js(nowoif)
 ||animekai.*/sw.js^
 velo.outsideonline.com##main:style(margin-top: 10px !important)
 ! gulfnews.com multiple ads placeholders
