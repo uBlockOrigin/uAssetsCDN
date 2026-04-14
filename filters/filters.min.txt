@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Tue, 14 Apr 2026 03:13:27 +0000
-! Diff-Path: ../patches/2026.4.14.216.patch#ublock-filters
+! Last modified: Tue, 14 Apr 2026 09:32:20 +0000
+! Diff-Path: ../patches/2026.4.14.584.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -18132,17 +18132,18 @@ fakaza.*,fakaza2018.com,fakazahouse.com,fakazamusic.co,samsonghiphop.org,zamusic
 reshare.pm#@#.showads
 reshare.pm##+js(nowoif)
 ||googlesyndication.com^$script,redirect=noopjs,domain=flysas.com
-gamedrive.org##+js(aost, document.querySelector, /showModal|chooseAction|doAction|callbackAdsBlocked/)
-gamedrive.org##+js(acs, eval, replace)
-gamedrive.org##+js(aopr, b2a)
-gamedrive.org##+js(aeld, DOMContentLoaded, window.open)
 gamedrive.org##.code-block a[href][target="_blank"] > img[data-recalc-dims]
 gamedrive.org##a[href][target="_blank"][rel="noopener noreferrer"] > img
 gamedrive.org##.netflix-banner
 gamedrive.org##.hbo-banner
-!gamedrive.org##+js(rmnt, script, isOwner)
-gamedrive.org##+js(aeld, click, _shouldProcessLink)
+gamedrive.org##+js(aost, document.querySelector, /showModal|chooseAction|doAction|callbackAdsBlocked/)
 gamedrive.org##+js(acs,  String.fromCharCode, fetch)
+gamedrive.org##+js(acs, eval, replace)
+gamedrive.org##+js(aopr, b2a)
+!gamedrive.org##+js(rmnt, script, isOwner)
+gamedrive.org##+js(aeld, DOMContentLoaded, window.open)
+gamedrive.org##+js(aeld, click, _shouldProcessLink)
+gamedrive.org##+js(aeld, click, preventDefault)
 cybar.xyz,cybar.to##+js(aeld, click, open)
 cybar.xyz,cybar.to##+js(nowoif, cpmecs)
 cybar.xyz,cybar.to##+js(set-cookie, ads, off)
@@ -21361,10 +21362,9 @@ pianetalecce.it##+js(acs, document.getElementById, ablk)
 hiraethtranslation.com##+js(rmnt, script, adsSrc)
 chasingthedonkey.com##+js(nowoif)
 taste.com.au##.main-header:style(top: 0 !important)
-@@||codicibancari.it/*/prebid_*.js$domain=decompiler.com
+@@||codicibancari.it^$script,domain=decompiler.com
 decompiler.com##+js(acs, document.getElementById, /adblock/i)
-decompiler.com##+js(set, becpjiox, true)
-decompiler.com##+js(rpnt, script, /if.*?\(.*?\)/, if(false), condition, /\.style\.pointerEvents|\.style\.opacity|\.setAttribute\('hr'|\.createElement\("button"\)|\.addEventListener\("click"|window\['al'\+'ert'\]|oldButton\['replaceWith'\]/)
+decompiler.com##+js(rpnt, script, /if.*?\(.*?\)/, if(false), condition, /\.style\.pointerEvents|\.style\.opacity|\.setAttribute\('hr'|\.createElement\("button"\)|\.addEventListener\("click"|window\['al'\+'ert'\]|oldButton\['replaceWith'\]|' \+ '/)
 ! ytlarge detection
 @@||ytlarge.com^$ghide
 @@||googlesyndication.com^$script,xhr,domain=ytlarge.com
@@ -21374,7 +21374,7 @@ decompiler.com##+js(rpnt, script, /if.*?\(.*?\)/, if(false), condition, /\.style
 @@*$script,frame,xhr,1p,domain=ytlarge.com
 .com/ad/$~image,third-party,domain=~mediaplex.com|~warpwire.com|~wsj.com,badfilter
 .com/adz/$badfilter
-@@*$script,domain=ytlarge.com,denyallow=googletagmanager.com|googlesyndication.com|topcreativeformat.com
+ytlarge.com##.overflow-hidden.items-center.flex-col:has([id^="ezoic-pub-ad-"])
 ytlarge.com##ins.adsbygoogle[data-ad-slot]
 *.gif$domain=ytlarge.com,image
 seeklogo.com##+js(nowoif, shutterstock.com)
