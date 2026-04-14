@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Tue, 14 Apr 2026 09:32:20 +0000
-! Diff-Path: ../patches/2026.4.14.584.patch#ublock-filters
+! Last modified: Tue, 14 Apr 2026 15:01:27 +0000
+! Diff-Path: ../patches/2026.4.14.921.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -6168,10 +6168,6 @@ cryptonetos.ru##.popup
 northwalespioneer.co.uk##+js(aopr, _sp_.mms.startMsg)
 @@||indcit.com^$ghide
 ||google.com/adsense/domains/caf.js$script,redirect=noopjs,domain=jestrudo.pl
-modagamers.com##+js(acs, JSON.parse, atob)
-modagamers.com##+js(nostif, showModal)
-modagamers.com##+js(nano-stb)
-modagamers.com##+js(aopr, decodeURI)
 @@*$ghide,domain=pomponik.pl|iplsc.com
 cdn77.org##+js(set, xxSetting.adBlockerDetection, false)
 cdn77.org###layerName_preroll, #layerName_postroll
@@ -7876,19 +7872,30 @@ bigbtc.win,cryptofun.space###block-adb-enabled, #block-add-enabled, #block-adeb-
 bigbtc.win,cryptofun.space###main, #ielement, #mainnew:style(display: block !important;)
 bigbtc.win##div:has(> div[style] > div[id] > script[src^="//ads.themoneytizer.com"])
 @@*$ghide,domain=torupload.com|nathanmichaelphoto.com
-*$script,domain=torupload.com|nathanmichaelphoto.com,redirect-rule=noopjs
+*$script,redirect-rule=noop.js,domain=torupload.com|nathanmichaelphoto.com
+*$xhr,redirect-rule=nooptext,domain=torupload.com|nathanmichaelphoto.com
+*$frame,redirect-rule=noop.html,domain=torupload.com|nathanmichaelphoto.com
+*$object,redirect-rule=noopframe,domain=torupload.com|nathanmichaelphoto.com
 *$image,redirect-rule=32x32.png,domain=torupload.com|nathanmichaelphoto.com
-@@||pagead2.googlesyndication.com^$script,domain=nathanmichaelphoto.com|torupload.com
-@@||cdn4ads.com^$script,domain=nathanmichaelphoto.com|torupload.com
-torupload.com##+js(nano-sib, seconds--, *)
-nathanmichaelphoto.com,torupload.com##+js(rpnt, script, false, true, condition, opened)
-nathanmichaelphoto.com,torupload.com##+js(set, HTMLScriptElement.prototype.onerror, undefined)
-nathanmichaelphoto.com,torupload.com##+js(set, isAdblockActive, false)
-nathanmichaelphoto.com,torupload.com##+js(prevent-fetch, pub.clickadu)
-nathanmichaelphoto.com,torupload.com##+js(prevent-fetch, bing.com)
-@@||adsco.re^$script,domain=nathanmichaelphoto.com|torupload.com
-nathanmichaelphoto.com,torupload.com##+js(set, window._pao, {})
-nathanmichaelphoto.com,torupload.com##+js(set, window._pop, [])
+*$object,domain=torupload.com|nathanmichaelphoto.com
+torupload.com,nathanmichaelphoto.com##+js(nowoif, , 10, obj)
+@@||googleads.g.doubleclick.net/pagead/ads$subdocument,domain=nathanmichaelphoto.com
+@@||pagead2.googlesyndication.com^$script,domain=nathanmichaelphoto.com
+@@||cdn4ads.com^$script,domain=nathanmichaelphoto.com
+@@||adsco.re^$script,domain=nathanmichaelphoto.com
+@@||dash.ezmob.com/ss/js/ads.js$script,domain=nathanmichaelphoto.com
+torupload.com##+js(nano-sib, /seconds--|timeLeft--/, *)
+torupload.com##+js(trusted-replace-argument, document.addEventListener, 0, json:"click", condition, visibilitychange)
+torupload.com##+js(set, document.hidden, true)
+torupload.com,nathanmichaelphoto.com##+js(rpnt, script, false, true, condition, opened)
+torupload.com,nathanmichaelphoto.com##+js(set, HTMLScriptElement.prototype.onerror, undefined)
+torupload.com,nathanmichaelphoto.com##+js(set, window._pao, {})
+torupload.com,nathanmichaelphoto.com##+js(set, window._pop, [])
+torupload.com,nathanmichaelphoto.com##+js(set, isAdblockActive, false)
+torupload.com,nathanmichaelphoto.com##+js(trusted-replace-argument, document.querySelector, 0, json:"main", condition, /div-gpt-ad-dgking|\.GoogleActiveViewElement/)
+torupload.com,nathanmichaelphoto.com##+js(trusted-replace-argument, document.querySelectorAll, 0, json:"main", condition, /div-gpt-ad-|\.adsbygoogle/)
+torupload.com,nathanmichaelphoto.com##+js(trusted-replace-argument, document.getElementById, 0, json:"container", condition, adblock_detected)
+torupload.com,nathanmichaelphoto.com##+js(prevent-fetch, /pub\.clickadu|bing\.com)
 ||oundhertobeconsist.org^
 ||vampyrejibmen.com^
 healthmyst.com##+js(rmnt, script, /detectAdBlock|checkFakeAd|adBlockNotDetected/)
@@ -9454,7 +9461,7 @@ naughtyblogs.xyz,negative.tboys.ro,neservicee.com,netsentertainment.net,neuna.ne
 oatuu.org,oberschwaben-tipps.de,obituaryupdates.com,odekake-spots.com,officialpanda.com,ofppt.net,ofwork.net,okblaz.me,olamovies.store,onehack.us,onestringlab.com,onlinetechsamadhan.com,onlinetntextbooks.com,onneddy.com,onyxfeed.com,openstartup.tm,opiniones-empresas.com,oracleerpappsguide.com,orenoraresne.com,oromedicine.com,orunk.com,osteusfilmestuga.online,otakuliah.com,oteknologi.com,otokukensaku.jp,ottrelease247.com,ovnihoje.com##+js(noeval-if, /chp_?ad/)
 palofw-lab.com,paminy.com,pandaatlanta.com,pandanote.info,pantube.top,paolo9785.com,papafoot.click,papahd.club,paris-tabi.com,parisporn.org,parking-map.info,pasatiemposparaimprimir.com,pasokau.com,passionatecarbloggers.com,passportaction.com,pc-guru.it,pc-hobby.com,pc-spiele-wiese.de,pcgamedownload.net,pcgameszone.com,pdfstandards.net,pepar.net,personefamose.it,petitestef.com,pflege-info.net,phoenix-manga.com,phonefirmware.com,physics101.co.za,picgiraffe.com,pilsner.nu,piratemods.com,pitiurl.com,piximfix.com,plantatreenow.com,plaza.chu.jp,plc4free.com,pliroforiki-edu.gr,poapan.xyz,poco.rcccn.in,pogga.org,pokeca-chart.com,pondit.xyz,ponsel4g.com,poplinks.*,porlalibreportal.com,pornincest.net,pornfeel.com,porninblack.com,pornoenspanish.es,pornosubtitula2.com,portaldoaz.org,portaldosreceptores.org,portalyaoi.com,postazap.com,posturecorrectorshop-online.com,practicalkida.com,prague-blog.co.il,praveeneditz.com,premierftp.com,prensa.click,prensaesports.com,pressemedie.dk,pressurewasherpumpdiagram.com,pricemint.in,primemovies.pl,prismmarketingco.com,proapkdown.com,projuktirkotha.com,promiblogs.de,promimedien.com,promisingapps.com,protestia.com,psicotestuned.info,psychology-spot.com,publicdomainq.net,publicdomainr.net,publicidadtulua.com,pupuweb.com,putlog.net,pynck.com##+js(noeval-if, /chp_?ad/)
 r1.richtoon.top,rabo.no,ragnarokscanlation.*,rahim-soft.com,rail-log.net,railwebcams.net,ranjeet.best,ranourano.xyz,raulmalea.ro,rbs.ta36.com,rbscripts.net,rctechsworld.in,readallcomics.com,readfast.in,readhunters.xyz,realfreelancer.com,realtormontreal.ca,receptyonline.cz,recipenp.com,redbubbletools.com,redfaucet.site,reeell.com,renierassociatigroup.com,reportbangla.com,reprezentacija.rs,retire49.com,retrotv.org,reviewmedium.com,revistaapolice.com.br,rgmovies.*,ribbelmonster.de,rightdark-scan.com,rinconpsicologia.com,ritacandida.com,riwayat-word.com,rlshort.com,rocdacier.com,rocketrevise.com,rollingglobe.online,romaierioggi.it,romaniasoft.ro,roms4ever.com,romviet.com,roshy.tv,rottenlime.pw,roznamasiasat.com,rubyskitchenrecipes.uk,ruyamanga.com,rv-ecommerce.com,ryanmoore.marketing,ryansharich.com##+js(noeval-if, /chp_?ad/)
-s920221683.online.de,sabishiidesu.com,saekita.com,samanarthishabd.in,samovies.net,samrudhiglobal.com,samurai.rzword.xyz,samurai.wordoco.com,sanmiguellive.com,santhoshrcf.com,sararun.net,sarkariresult.social,satcesc.com,satoshifaucet.io,savegame.pro,sawwiz.com,scansatlanticos.com,schadeck.eu,sezia.com,schildempire.com,scholarshiplist.org,sciencebe21.in,scontianastro.com,scrap-blog.com,scripcheck.great-site.net,scriptsomg.com,searchmovie.wp.xdomain.jp,searchnsucceed.in,seasons-dlove.net,seirsanduk.com,seogroup.bookmarking.info,seoworld.in,seriu.jp,setsuyakutoushi.com,serieshdpormega.com,server-tutorials.net,serverbd247.com,sezia.com,shadagetech.com,shanurdu.com,sharphindi.in,sheikhmovies.*,shipseducation.com,shimauma-log.com,shittokuadult.net,shlly.com,shogaisha-shuro.com,shogaisha-techo.com,shopkensaku.com,shorttrick.in,showflix.*,showrovblog.com,shrinklinker.com,shrinkus.tk,shrivardhantech.in,sieradmu.com,siimanga.cyou,siirtolayhaber.com,sim-kichi.monster,sivackidrum.net,sk8therapy.fr,skardu.pk,skidrowreloaded.com,slawoslaw.pl,slowianietworza.pl,smallseotools.ai,smartinhome.pl,snowman-information.com,socebd.com,sociallyindian.com,softcobra.com,softrop.com,sohohindi.com,sosuroda.pl,sourds.net,south-park-tv.biz,soziologie-politik.de,sp500-up.com,space-faucet.com,spacestation-online.com,spardhanews.com,speculationis.com,spinoff.link,spiritparting.com,sport-97.com,sportsblend.net,ssdownloader.online,stablediffusionxl.com,stadelahly.net,stahnivideo.cz,starsgtech.in,start-to-run.be,startupjobsportal.com,stbemuiptvn.com,ster-blog.xyz,stimotion.pl,stireazilei.eu,stock-rom.com,streamseeds24.com,strefa.biz,studybullet.com,sufanblog.com,sukuyou.com,sullacollina.it,sumirekeiba.com,sundberg.ws,suneelkevat.com,super-ethanol.com,superpackpormega.com,surgicaltechie.com,suvvehicle.com,swietaslowianskie.pl,sylverkat.com,symboleslowianskie.pl,sysguides.com,swordalada.org,system32.ink##+js(noeval-if, /chp_?ad/)
+sabishiidesu.com,saekita.com,samovies.net,samrudhiglobal.com,samurai.rzword.xyz,samurai.wordoco.com,sanmiguellive.com,santhoshrcf.com,sararun.net,sarkariresult.social,satcesc.com,satoshifaucet.io,savegame.pro,sawwiz.com,scansatlanticos.com,schadeck.eu,sezia.com,schildempire.com,scholarshiplist.org,sciencebe21.in,scontianastro.com,scrap-blog.com,scripcheck.great-site.net,scriptsomg.com,searchmovie.wp.xdomain.jp,searchnsucceed.in,seasons-dlove.net,seirsanduk.com,seogroup.bookmarking.info,seoworld.in,seriu.jp,setsuyakutoushi.com,serieshdpormega.com,server-tutorials.net,serverbd247.com,sezia.com,shadagetech.com,shanurdu.com,sharphindi.in,sheikhmovies.*,shipseducation.com,shimauma-log.com,shittokuadult.net,shlly.com,shogaisha-shuro.com,shogaisha-techo.com,shopkensaku.com,shorttrick.in,showflix.*,showrovblog.com,shrinklinker.com,shrinkus.tk,shrivardhantech.in,sieradmu.com,siimanga.cyou,siirtolayhaber.com,sim-kichi.monster,sivackidrum.net,sk8therapy.fr,skardu.pk,skidrowreloaded.com,slawoslaw.pl,slowianietworza.pl,smallseotools.ai,smartinhome.pl,snowman-information.com,socebd.com,sociallyindian.com,softcobra.com,softrop.com,sohohindi.com,sosuroda.pl,sourds.net,south-park-tv.biz,soziologie-politik.de,sp500-up.com,space-faucet.com,spacestation-online.com,spardhanews.com,speculationis.com,spinoff.link,spiritparting.com,sport-97.com,sportsblend.net,ssdownloader.online,stablediffusionxl.com,stadelahly.net,stahnivideo.cz,starsgtech.in,start-to-run.be,startupjobsportal.com,stbemuiptvn.com,ster-blog.xyz,stimotion.pl,stireazilei.eu,stock-rom.com,streamseeds24.com,strefa.biz,studybullet.com,sufanblog.com,sukuyou.com,sullacollina.it,sumirekeiba.com,sundberg.ws,suneelkevat.com,super-ethanol.com,superpackpormega.com,surgicaltechie.com,suvvehicle.com,swietaslowianskie.pl,sylverkat.com,symboleslowianskie.pl,sysguides.com,swordalada.org,system32.ink,sztucznainteligencjablog.pl##+js(noeval-if, /chp_?ad/)
 talentstareducation.com,tamilanzone.com,tamilhit.tech,tamilnaadi.com,tamilultra.team,tamilultratv.co.in,tatsublog.com,taurus.topmanhuas.org,teachersupdates.net,team-rcv.xyz,teamkong.tk,teamupinternational.com,tech4auto.in,techacrobat.com,techastuces.com,techdriod.com,techedubyte.com,techforu.in,techiepirates.com,techiestalk.in,techkeshri.com,techlog.ta-yan.ai,technewslive.org,technewsrooms.com,technicalviral.com,technorj.com,technorozen.com,techoreview.com,techprakash.com,techsbucket.com,techstwo.com,techyhigher.com,techyrick.com,tecnomd.com,tecnoscann.com,tedenglish.site,tehnotone.com,telephone-soudan.com,teluguhitsandflops.com,temporeale.info,tenbaiquest.com,tespedia.com,testious.com,thangdangblog.com,thaript.com,the-mystery.org,theberserkmanga.com,thebigblogs.com,theconomy.me,thedigitaltheater.com,thedilyblog.com,thegamearcade.com,thegnomishgazette.com,theinternettaughtme.com,thejoblives.com,thelastgamestandingexp.com,theliveupdate.com,thenewsglobe.net,theprofoundreport.com,thermoprzepisy.pl,thesarkariresult.net,thesextube.net,thesleak.com,thesportsupa.com,thewambugu.com,theworldobits.com,thiagorossi.com.br,thosa.info,throwsmallstone.com,tiny-sparklies.com,tirumalatirupatiyatra.in,titfuckvideos.com,tnstudycorner.in,today-obits.com,todays-obits.com,toeflgratis.com,tokoasrimotedanpayet.my.id,toorco.com,topbiography.co.in,topfaucet.us,topnewsshow.com,topshare.in,topsworldnews.com,toptenknowledge.com,torrentdofilmeshd.net,torrentgame.org,totally.top,towerofgod.top,transgirlslive.com,trendflatt.com,trendohunts.com,trgtkls.org,trilog3.net,trovapromozioni.it,trucosonline.com,tsubasatr.org,tukangsapu.net,tuktukcinma.com,tunabagel.net,turkeymenus.com,turkishseriestv.net,tutorialesdecalidad.com,tutorialsduniya.com,tuxnews.it,tw.xn--h9jepie9n6a5394exeq51z.com,twobluescans.com##+js(noeval-if, /chp_?ad/)
 uciteljica.net,udebut.jp,udemyking.com,uiuxsource.com,ukigmoch.com,ultimate-catch.eu,underground.tboys.ro,uozzart.com,uploadbank.com,uprwssp.org,uqozy.com,usahealthandlifestyle.com,userupload.*,ustimz.com,ustvgo.live,utaitebu.com,utilidades.ecuadjsradiocorp.com,uur-tech.net##+js(noeval-if, /chp_?ad/)
 vegamoviese.*,vegas411.com,venus-and-mars.com,viciante.com.br,videodidixx.com,videosgays.net,villettt.kitchen,vintagepornfun.com,violablu.net,virabux.com,viralxns.com,virtual-youtuber.jp,visorsmr.com,visortecno.com,vitadacelebrita.com,vivrebordeaux.fr,vmorecloud.com,vnuki.net,voiceloves.com,voidtruth.com,voiranime1.fr,vpzserver.com,vstplugin.net##+js(noeval-if, /chp_?ad/)
@@ -14218,8 +14225,6 @@ notformembersonly.com###post-separate > p > .local-link
 unsplash.com##div[style^="--row-gutter"] > div a[href="/brands"]:upward(div[style^="--row-gutter"] > div)
 unsplash.com##div[data-test="SearchInFeedAd-AffiliateFallback-Container"]
 unsplash.com##div[data-test^="masonry-grid"] > div[style^="--row"] > div:not([itemprop="image"])
-@@||samuraiscan.com^$ghide
-samuraiscan.com##+js(acs, eval, replace)
 milanworld.net##+js(acs, $, test)
 chess.com##.board-layout-ad
 chess.com##body.board-layout.with-und:style(margin-right:0px!important)
@@ -16792,10 +16797,6 @@ rmweb.co.uk##.b-modal
 rmweb.co.uk##html:style(overflow: auto !important;)
 ||connatix.com^$script,domain=rmweb.co.uk
 ||invisioncic.com/*.gif$image,domain=rmweb.co.uk
-gourmetscans.net##+js(nostif, .data?)
-gourmetscans.net##[class^="publift-widget"]
-gourmetscans.net##.widget_custom_html ins:upward(.widget_custom_html)
-gourmetscans.net##+js(set-cookie, __gads, OK, , reload, 1)
 noor-book.com##+js(no-fetch-if, ads)
 theporndude.com##+js(trusted-set-cookie, wallpaper, click)
 @@||planhub.ca^$ghide
@@ -24607,7 +24608,8 @@ embedplayer.xyz##+js(trusted-replace-argument, document.querySelector, 0, json:"
 embedplayer.xyz##+js(nowoif)
 embedplayer.xyz##meta[name^="ads-"]:remove()
 ||embedplayer.xyz/embed/guard.js$script,1p
-@@||worder.cat/exitsplash.php$script,1p
+worder.cat##+js(set, ab.dt, false)
+@@||worder.cat/$script,1p
 worder.cat##.ads
 mlb.com##+js(json-prune-xhr-response, data.initPlaybackSession.adScenarios data.initPlaybackSession.adExperience.adExperienceTypes, , propsToMatch, /graphql)
 mlb.com##+js(trusted-json-edit-xhr-response, .data.initPlaybackSession.adExperience.adsEnabled=false, propsToMatch, /graphql)
