@@ -1,17 +1,17 @@
-diff name:ublock-annoyances lines:8 checksum:205a72045e
+diff name:ublock-annoyances lines:8 checksum:cac2dfc9ef
 d3 2
 a4 2
 ! Last modified: Tue, 14 Apr 2026 15:01:27 +0000
-! Diff-Path: ../patches/2026.4.16.584.patch#ublock-annoyances
+! Diff-Path: ../patches/2026.4.16.848.patch#ublock-annoyances
 d2711 3
 d2912 1
 a2912 1
 /wp-content/plugins/wccp-pro/*$domain=ferroviando.com.br|counciloflove.com|infokik.com|kulinarnastronamocy.pl|jafekri.com|reborntrans.com|truyenbanquyen.com|ezmanga.net|secondlifetranslations.com|piklodz.pl|koltry.life|kolnovel.com|theaircurrent.com
-diff name:ublock-badware lines:20 checksum:e830d7f8a0
+diff name:ublock-badware lines:20 checksum:244d6b4012
 d3 2
 a4 2
 ! Last modified: Tue, 14 Apr 2026 16:20:01 +0000
-! Diff-Path: ../patches/2026.4.16.584.patch#ublock-badware
+! Diff-Path: ../patches/2026.4.16.848.patch#ublock-badware
 a520 2
 /dc?pl=*&click_id=$doc
 ||dcrtb-pixel.com^$doc
@@ -28,18 +28,20 @@ a4521 1
 a4538 2
 ||studio-obs.net^$all
 ||loseyourip.com^$all
-diff name:ublock-experimental lines:3 checksum:52e11ac362
+diff name:ublock-experimental lines:3 checksum:76a84b4181
 d4 1
 a4 1
-! Diff-Path: ../patches/2026.4.16.584.patch#ublock-experimental
-diff name:ublock-filters lines:136 checksum:c7d7dfcb68
+! Diff-Path: ../patches/2026.4.16.848.patch#ublock-experimental
+diff name:ublock-filters lines:145 checksum:740c86e779
 d3 2
 a4 2
-! Last modified: Thu, 16 Apr 2026 09:43:49 +0000
-! Diff-Path: ../patches/2026.4.16.584.patch#ublock-filters
+! Last modified: Thu, 16 Apr 2026 12:31:59 +0000
+! Diff-Path: ../patches/2026.4.16.848.patch#ublock-filters
 d2744 1
-a4432 1
+a4432 3
 ranker.com##+js(nostif, /!/, 50)
+ranker.com##+js(set, Object.prototype.adBlockerPop, undefined)
+ranker.com##+js(set, admiral, undefined)
 a5406 2
 pcgames.de##.cms-teaser:has([href][target="_blank"])
 pcgames.de##.innerArticleModule
@@ -139,6 +141,13 @@ gamedrive.org##+js(aeld, DOMContentLoaded, window.open)
 d18144 1
 a18144 1
 gamedrive.org##+js(aeld, click, preventDefault)
+d20513 3
+a20515 3
+civitai.red,civitai.com,civitai.green##+js(no-fetch-if, googlesyndication)
+civitai.red,civitai.com,civitai.green##div:is(.shadow, .flex.w-full.justify-center[style=""], .flex.flex-col.items-center.justify-center.gap-2[style^="min-height:"]):has(a[href="/pricing"] img[alt="Please support civitai and creators by disabling adblock"]):remove()
+civitai.red,civitai.com,civitai.green##div[id][class^="mantine-"].flex.relative.box-content:style(min-height: 0px !important; visibility: collapse !important; padding: 0px !important;)
+a20516 1
+||advertising.civitai.com^$xhr
 d21363 1
 a21363 1
 @@||codicibancari.it^$script,domain=decompiler.com
@@ -161,7 +170,7 @@ comix.to##+js(nosiif, window.open)
 d24606 1
 a24606 2
 worder.cat##+js(set, ab.dt, false)
-@@||worder.cat/$script,1p
+worder.cat##+js(trusted-replace-argument, document.getElementById, 0, json:"header", condition, /[a-z][A-Z]/)
 a24607 6
 mlb.com##+js(json-prune-xhr-response, data.initPlaybackSession.adScenarios data.initPlaybackSession.adExperience.adExperienceTypes, , propsToMatch, /graphql)
 mlb.com##+js(trusted-json-edit-xhr-response, .data.initPlaybackSession.adExperience.adsEnabled=false, propsToMatch, /graphql)
@@ -169,39 +178,51 @@ newplayer.huaren.live,newplayer.huavod.net##+js(rpnt, script, '"ads"', '"ads":{}
 @@||lamontagne.fr^$script,1p
 lamontagne.fr##.w-full.mb-7.relative
 lamontagne.fr###cf-digiteka-player
-diff name:ublock-privacy lines:3 checksum:423dee0561
+diff name:ublock-privacy lines:3 checksum:f841a1298c
 d4 1
 a4 1
-! Diff-Path: ../patches/2026.4.16.584.patch#ublock-privacy
-diff name:ublock-quick-fixes lines:14 checksum:16bfa8ed1b
+! Diff-Path: ../patches/2026.4.16.848.patch#ublock-privacy
+diff name:ublock-quick-fixes lines:24 checksum:0e469f9b8f
 d3 2
 a4 2
-! Last modified: Wed, 15 Apr 2026 14:56:54 +0000
-! Diff-Path: ../patches/2026.4.16.584.patch#ublock-quick-fixes
+! Last modified: Thu, 16 Apr 2026 12:16:09 +0000
+! Diff-Path: ../patches/2026.4.16.848.patch#ublock-quick-fixes
 d148 1
 a148 4
 japscan.*##+js(acs, Promise.resolve, /jso\$|\(_0x|(['"`]\s*[-0-9A-Z_a-z]+\s*['"`]\,\s*){50\,}/)
 japscan.*##+js(trusted-set, aclib, 'json:{"isShowingPop":false}')
 japscan.*##+js(set, aclib.runInterstitial, {}, as, function)
 japscan.*##+js(trusted-replace-outbound-text, Function.prototype.toString, ( ) => value, 'runInterstitial(e){if(this.#fe.interstitial)return void this.#r.error("interstitial zone already loaded on page");this.#fe.interstitial=!0;const{zoneId:t,sub1:r,isAutoTag:n,collectiveZoneId:i,linkedZoneId:o,aggressivity:s,recordPageView:a,abTest:c,tagVersionSuffix:u}=e;if(!t)throw new Error("mandatory zoneId is not provided!");if(!we(t))throw new Error("zoneId is not a string!");this.#r.debug("loading interstitial on page");const l={zoneId:t,sub1:r,isAutoTag:n,collectiveZoneId:i,linkedZoneId:o,aggressivity:s,recordPageView:a,abTest:c,tagVersionSuffix:u,adcashGlobalName:this.#xe,adserverDomain:this.#v,adblockSettings:this.#s,uniqueFingerprint:this.#C,isLoadedAsPartOfLibrary:!1};if(this.#pe.add(t),this.#Ce.Interstitial)return l.isLoadedAsPartOfLibrary=!0,void new this.#Ce.Interstitial(l);if(window.Interstitial)new Interstitial(l);else{const e=document.createElement("script");e.type="text/javascript",e.src=`${location.protocol}//${this.#he}/script/interstitial.js`,e.setAttribute("a-lib","1"),e.onload=()=>{new Interstitial(l)},e.onerror=()=>{this.#r.error(`failed loading ${e.src}`)},document.head.appendChild(e)}}')
+d255 2
+a256 2
+@@*$ghide,domain=bg-gledai.*|gledaitv.*|bg-gledai.video|gledaitv.fan|gledaitv.live
+@@||pagead2.googlesyndication.com^$script,domain=bg-gledai.*|gledaitv.*|bg-gledai.video|gledaitv.fan|gledaitv.live
+a257 5
+gledaitv.*##+js(trusted-replace-argument, document.getElementById, 0, json:"body", condition, ad-detection-bait)
+gledaitv.*##+js(trusted-replace-argument, document.querySelector, 0, json:"body", condition, -id-)
+gledaitv.*##+js(set, scriptBlocked, false)
+gledaitv.*##+js(set, blocked, false)
+gledaitv.*##+js(set, testUrls, [])
 d356 1
 a356 2
 myanimelist.net##div[id$="_NXU_wrap"], div[id$="_NXU_TITLE_wrap"]
 ||ac.rule34.xxx^$badfilter
-diff name:ublock-unbreak lines:6 checksum:d7f6cf976d
+diff name:ublock-unbreak lines:6 checksum:3b3474558f
 d3 2
 a4 2
 ! Last modified: Thu, 16 Apr 2026 07:55:34 +0000
-! Diff-Path: ../patches/2026.4.16.584.patch#ublock-unbreak
+! Diff-Path: ../patches/2026.4.16.848.patch#ublock-unbreak
 a2816 1
 ||adman.gr^$media,domain=antenna.gr,redirect=noopmp3-0.1s
-diff name:easylist lines:1556 checksum:6c6c541775
+diff name:easylist lines:1611 checksum:8add68957c
 d4 2
 a5 2
-! Last modified: Thu, 16 Apr 2026 08:17:21 +0000
-! Diff-Path: ../patches/2026.4.16.584.patch#easylist
+! Last modified: Thu, 16 Apr 2026 10:48:04 +0000
+! Diff-Path: ../patches/2026.4.16.848.patch#easylist
 a12747 1
 ##.poki-ad-slot
+a15546 1
+||12z1ipxqizlzluv5xwcy1i35.rest^
 a15573 1
 ||172769f118.com^
 a15623 1
@@ -269,6 +290,8 @@ a17772 1
 ||ajugalknxcrmr.com^
 a17796 1
 ||akmvmuorzaz.in^
+a17820 1
+||alaliteinjects.shop^
 a17936 1
 ||alnvvfdgfowwz.website^
 a17987 1
@@ -299,6 +322,10 @@ a18514 1
 ||arilledclimant.qpon^
 a18591 1
 ||arwriptatfwe.in^
+a18650 1
+||asilusspirket.cfd^
+a18864 1
+||aucubaworkdayreviver.cfd^
 a18883 1
 ||aukgiecbioahe.website^
 a18930 1
@@ -326,6 +353,8 @@ a19300 1
 ||balteusrail.qpon^
 a19485 1
 ||bbyybvrspsjdp.site^
+a19495 1
+||bchsrazour.cyou^
 a19547 1
 ||beafuelerlazary.qpon^
 a19567 1
@@ -410,6 +439,8 @@ a20981 1
 ||bumkinsparaphs.com^
 a20987 1
 ||bundookbabiedhalogen.cfd^
+a21135 1
+||bxgvranswkjn.com^
 a21156 1
 ||bycvnfesmgozb.website^
 a21173 1
@@ -468,6 +499,8 @@ a22538 1
 ||coinerstenailchekhov.qpon^
 a22540 1
 ||cokersintil.qpon^
+a22551 1
+||colknunks.cyou^
 a22559 1
 ||colletsbummock.cfd^
 a22592 1
@@ -583,6 +616,8 @@ a25963 1
 ||eitmtqclpokfh.site^
 a25982 1
 ||ejibgrotomytx.site^
+a26018 1
+||eknuliwxhnarx.online^
 a26110 1
 ||elrbdrumbzgpx.online^
 a26243 1
@@ -641,6 +676,8 @@ a27325 1
 ||fbxpcqjjwfgbf.site^
 a27363 1
 ||fddhqgdshulwp.space^
+a27468 1
+||fermebrickel.qpon^
 a27474 1
 ||ferritegathers.com^
 a27514 1
@@ -661,6 +698,8 @@ a27851 1
 ||flexedclasp.cyou^
 a27962 1
 ||fmeeelobzlamc.space^
+a27968 1
+||fmmdeedxwmurs.space^
 a28041 1
 ||folliedrestio.cfd^
 a28072 1
@@ -693,6 +732,8 @@ a28595 1
 ||fvizlybgteujg.space^
 a28640 1
 ||fxlnmvwerzoiy.site^
+a28655 1
+||fxyfurcqwygxmtc.com^
 a28709 1
 ||gabboun.cfd^
 a28799 1
@@ -713,8 +754,9 @@ a29067 1
 ||gfpadcexzjelp.space^
 a29068 1
 ||gfqidzptkzihb.website^
-a29096 1
+a29096 2
 ||ggvlrpjqnqssl.website^
+||ggwaqeyxuxmgj.space^
 a29148 1
 ||giftedworker.pro^
 a29175 1
@@ -753,6 +795,8 @@ a29848 1
 ||groundedmine.com^
 a29860 1
 ||grown-collar.pro^
+a29913 1
+||gsfdbroaglwgy.website^
 a29946 1
 ||gthpikcqpuiqd.space^
 a30017 1
@@ -775,6 +819,8 @@ a30151 1
 ||h67oipv26pbif9xmhl435u7i8.cfd^
 a30177 1
 ||hafqulwpaa.in^
+a30258 1
+||handsome-check.pro^
 a30328 1
 ||harpingrumpy.shop^
 a30339 1
@@ -1080,6 +1126,8 @@ a43197 1
 ||nmgmbkvbqhglx.online^
 a43294 1
 ||nodiakcowponystared.cfd^
+a43344 1
+||noneneguige.cfd^
 a43581 1
 ||nqoqrotklafsb.space^
 a43630 1
@@ -1176,6 +1224,8 @@ a48030 1
 ||pogwinwcsnggrv.com^
 a48122 1
 ||pomsternonslipferth.cfd^
+a48653 1
+||prevueseugonicjilting.cyou^
 a48744 1
 ||prnvnyflftcrk.online^
 a48967 1
@@ -1185,6 +1235,8 @@ a49047 1
 a49251 2
 ||pttlghemsjghh.online^
 ||pttnkfbbyeywd.online^
+a49565 1
+||pvfmjxsvwgdqf.site^
 a49632 1
 ||pxaqlynwrcewm.site^
 a49729 1
@@ -1199,6 +1251,8 @@ a49777 1
 ||qahzdrhruieun.website^
 a49817 1
 ||qbkofavetnrgr.site^
+a49833 1
+||qbrkmdxsnklxu.space^
 a49868 1
 ||qcoirrkdtkwck.site^
 a50027 1
@@ -1215,6 +1269,8 @@ a50471 1
 ||qrwuyswhaniwb.space^
 a50482 1
 ||qsclrkolzugoc.site^
+a50507 1
+||qsuzotytrvysv.website^
 a50535 1
 ||qtpalfofvpsw.com^
 a50696 1
@@ -1237,6 +1293,8 @@ a51495 1
 ||recklesshumiliated.com^
 a51545 1
 ||recueilgarau.shop^
+a51598 1
+||reduceddiscresolute.com^
 a51703 1
 ||regrowsbisleypetits.cfd^
 a51746 1
@@ -1253,6 +1311,8 @@ a52225 1
 ||rgarcorsbqfss.online^
 a52442 1
 ||rimzjtybcvkpb.site^
+a52509 1
+||riwtlloayromo.site^
 a52565 1
 ||rkewggrtxdkkq.space^
 a52574 1
@@ -1263,6 +1323,8 @@ a52724 1
 ||rnqkdvlbmsggwln.com^
 a52787 1
 ||roddtenible.com^
+a52793 1
+||rodsmenmetrise.qpon^
 a52916 1
 ||rosawashtub.shop^
 a53028 1
@@ -1290,6 +1352,8 @@ a53483 1
 ||rwhsexks.com^
 a53541 1
 ||rxqbewfdeyyrv.website^
+a53546 1
+||rxvglcimc.com^
 a53584 1
 ||rytvdclek.com^
 a53614 1
@@ -1314,6 +1378,8 @@ a54766 1
 ||sfkkfxbhxsxja.site^
 a54796 1
 ||sgfjgtcdijeju.space^
+a54807 1
+||sgqzzpkraeymj.site^
 a54816 1
 ||shabanboffos.com^
 a54874 1
@@ -1463,6 +1529,8 @@ a60959 1
 ||ufqgdupfvtjfi.site^
 a61038 1
 ||uhikfiyuduuvl.website^
+a61147 1
+||ujq4bewbfwh4txwq98mxkov8.cfd^
 a61188 1
 ||ukuleletruong.cyou^
 a61302 1
@@ -1567,6 +1635,8 @@ a65269 1
 ||wishasolves.shop^
 a65317 1
 ||wjalcqsqwasehtb.com^
+a65548 1
+||wocjvdzogilmex.com^
 a65551 2
 ||woefuldealer.pro^
 ||woekovxdwvgqy.site^
@@ -1576,6 +1646,8 @@ a65611 1
 ||wooersbyously.cyou^
 a65619 1
 ||woolfamboyna.cyou^
+a65636 1
+||wordierbullier.shop^
 a65660 1
 ||worldlyvisit.pro^
 a65734 1
@@ -1639,6 +1711,8 @@ a67451 1
 ||ycpncnylkarvm.online^
 a67493 1
 ||ydspiawjyiux.com^
+a67511 1
+||yeastsavager.cyou^
 a67686 1
 ||yibhznphfqrwt.site^
 a67762 1
@@ -1752,17 +1826,20 @@ d88133 1
 d90066 1
 a90066 1
 @@||imasdk.googleapis.com/js/core/bridge*.html$subdocument,domain=~airtelxstream.in|~danet.vn|~einthusan.tv|~spotify.com
-diff name:easyprivacy lines:18 checksum:00816d60e1
+diff name:easyprivacy lines:21 checksum:51e3242f42
 d4 2
 a5 2
-! Last modified: Thu, 16 Apr 2026 08:17:21 +0000
-! Diff-Path: ../patches/2026.4.16.584.patch#easyprivacy
+! Last modified: Thu, 16 Apr 2026 10:48:04 +0000
+! Diff-Path: ../patches/2026.4.16.848.patch#easyprivacy
 d5293 1
 a6004 1
 ||statlytic.net^$third-party
 a6242 1
 ||urldefense.com^$third-party
 d7575 1
+d7626 1
+a7626 1
+||kindhush.com^$~xmlhttprequest
 a10837 1
 ||datadome00.id.me/tags.js
 a11328 1
