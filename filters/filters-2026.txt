@@ -1,5 +1,5 @@
 ! Title: uBlock filters (2026)
-! Last modified: Sat, 16 May 2026 18:27:40 +0000
+! Last modified: Sun, 17 May 2026 13:17:19 +0000
 ! Description: Filters optimized for uBlock, to be used along EasyList
 ! Homepage: https://github.com/uBlockOrigin/uAssets
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -116,6 +116,32 @@ zpaste.net,pixeldrain.com###sponsors
 zpaste.net##+js(rmnt, script, window.open)
 zpaste.net##a[onclick*="window.open"]
 ||amcnreil.pro^$all
+
+! https://github.com/uBlockOrigin/uAssets/issues/549
+! https://forums.lanik.us/viewtopic.php?f=64&t=40089
+steamplay.*##+js(aopr, btoa)
+steamplay.*##+js(aopw, Fingerprint2)
+steamplay.*##+js(aopr, console.clear)
+steamplay.*##+js(aopw, adcashMacros)
+slreamplay.*##+js(nano-stb, grecaptcha.ready, *)
+@@player*.html$frame,1p,domain=slreamplay.*
+*$frame,denyallow=google.com,domain=slreamplay.*|streampiay.*
+ext=$script,1p,domain=slreamplay.*
+||*ontent.steamplay.*^$all
+||steamplay.*^$csp=worker-src 'none';
+! https://github.com/uBlockOrigin/uAssets/issues/8244
+slreamplay.*,steamplay.*,steanplay.*,stemplay.*,streampiay.*##+js(nowoif)
+steanplay.*##+js(aeld, , BACK)
+steamplay.*,steanplay.*,stemplay.*##+js(aopr, jwplayer.utils.Timer)
+steamplay.*,steanplay.*##.ad
+straemplay.org,stre4mpay.one,slreamplay.*,steamplay.*,steanplay.*,stemplay.*,streampiay.*###uverlay
+steanplay.*##div[style*="z-index: 2147483647;"][style*="position: fixed;"]
+*$xhr,frame,3p,domain=steanplay.*,denyallow=spcdn.cc
+straemplay.org,stre4mpay.one,stre4mplay.*##.ad
+straemplay.org,stre4mpay.one,stre4mplay.*##+js(nowoif)
+straemplay.org,stre4mpay.one,stre4mplay.*##+js(aopr, puOverlay)
+straemplay.org,stre4mpay.one,stre4mplay.*##div[style*="z-index: 1000"][style*="background: transparent"]
+||btent.stre4mpay.one^$popup
 
 ! END: Rules from filters.txt
 
@@ -749,9 +775,10 @@ livetv.moviebite.cc##div[data-ad-container]
 livetv.moviebite.cc##div.w-full:has(> div[data-ad-container])
 
 ! https://github.com/uBlockOrigin/uAssets/issues/32613
-guessthemovie.name##+js(no-fetch-if, method:/head/i)
-guessthemovie.name##.fallback-side-ad
-||guessthemovie.name/ads/
+! https://github.com/uBlockOrigin/uAssets/issues/32945
+guessthemovie.name,guessthephrase.xyz##+js(no-fetch-if, method:/head/i)
+guessthemovie.name,guessthephrase.xyz##.fallback-side-ad
+/ads/*$domain=guessthemovie.name|guessthephrase.xyz
 
 ! https://github.com/uBlockOrigin/uAssets/issues/32630
 ||adultswim-vodlive.cdn.turner.com/csmp/live/$xhr,removeparam=caid,domain=adultswim.com
@@ -949,8 +976,12 @@ hotukdeals.com###comments > .box--content:has(#ad-belowDescription)
 hotukdeals.com##div.box--content:has(#ad-belowDetails)
 hotukdeals.com##div.box--content:has(#ad-belowComments)
 
-! https://github.com/uBlockOrigin/uAssets/issues/32940
-luisterradio.fm##div.max-w-full:has(> .uppercase)
-
 ! https://github.com/uBlockOrigin/uAssets/issues/32946
 indoav.app##+js(nowoif)
+
+! https://github.com/uBlockOrigin/uAssets/issues/32958
+rcostation.xyz##+js(rmnt, script, adbWarn)
+
+! https://www.reddit.com/r/uBlockOrigin/comments/1tf3ane/who_can_bypass_adblock_detection_on_this_site/
+xca.cymru##+js(acs, document.addEventListener, /popup/i)
+xca.cymru##+js(rmnt, script, .onerror)
