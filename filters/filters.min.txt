@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Sat, 23 May 2026 16:05:57 +0000
-! Diff-Path: ../patches/2026.5.23.1264.patch#ublock-filters
+! Last modified: Sun, 24 May 2026 04:29:03 +0000
+! Diff-Path: ../patches/2026.5.24.275.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -23561,7 +23561,8 @@ strmup.to##+js(acs, document.createElement, "'script'")
 *$script,3p,denyallow=cloudflare.com|cloudflare.net|fastly.net|gstatic.com|jsdelivr.net|jwpcdn.com,domain=s1p1cd.com|streamup.ws|strmup.to
 ||streamup.ws/assets/js/adblock.js$script,1p
 ||katfile.online^$image,domain=vidnest.live
-vidsonic.net##+js(rpnt, script, (detected && true), (false))
+vidsonic.net##+js(rpnt, script, if (_detectWebView()), return false;if (_detectWebView()))
+vidsonic.net##+js(aeld, error, /adblock/i)
 ! animenexus.in ad popups
 animenexus.in##+js(nowoif, _blank)
 html5.gamedistribution.com###gd__adblocker__overlay
@@ -23881,17 +23882,21 @@ mmsbee42.com,mmsmasala.com##+js(rmnt, script, /dismissAdBlock|533092QTEErr/)
 !#endif
 beamng.wesupply.cx##+js(set, importFAB, undefined)
 buickforums.com##+js(no-xhr-if, googlesyndication)
-||imasdk.googleapis.com/js/sdkloader/ima3.js$redirect=noopjs,domain=cloudwish.xyz|fapsharing.com|fc2stream.tv|gradehgplus.com|javindo.site|javindosub.site|kamehaus.net|mivalyo.com|mmvh01.xyz|movearnpre.com|mycloudz.cc|nekovid.xyz|smoothpre.com|trailerhg.xyz|vstream.id
-cloudwish.xyz,gradehgplus.com,javindo.site,javindosub.site,kamehaus.net,movearnpre.com,vstream.id,arabshentai.com>>,avtub.cx>>,javdo.cc>>,javenglish.cc>>,javhd.*>>,javhdz.*>>,roshy.tv>>,sextb.*>>##+js(set, uas, [])
+||imasdk.googleapis.com/js/sdkloader/ima3.js$redirect=noopjs,domain=pelispop.mov|cloudwish.xyz|fapsharing.com|fc2stream.tv|gradehgplus.com|javindo.site|javindosub.site|kamehaus.net|minochinos.com|mivalyo.com|mmvh01.xyz|movearnpre.com|mycloudz.cc|nekovid.xyz|smoothpre.com|trailerhg.xyz|vstream.id
+cloudwish.xyz,gradehgplus.com,javindo.site,javindosub.site,kamehaus.net,movearnpre.com,vstream.id##+js(set, uas, [])
+arabshentai.com>>,avtub.cx>>,javdo.cc>>,javenglish.cc>>,javhd.*>>,javhdz.*>>,roshy.tv>>,sextb.*>>##+js(set, uas, [])
 sextb.*>>##+js(nostif, ast)
 sextb.*>>##+js(trusted-set, premium, json:1)
 sextb.*>>##+js(nowoif)
 sextb.*>>##+js(trusted-override-element-method, HTMLAnchorElement.prototype.click, a[href][target="_blank"])
 sextb.net##.right:has(script)
 /assets/jquery/*.js?type=adult^$script,1p
+/assets/jquery/static.js?type=mainstream^$script,1p
 /wp-content/plugins/anti-adblocker/*
 /popup/earnvids.js
+/vast-player-oxserver.js
 ||non.arabshentai.com^
+||minochinos.com/assets/jquery/static.js
 sextb.*#@#.ad-placeholder:not(#detect, #detect_ad_empire, #filter_ads_by_classname, .adsbox)
 rockmods.net##.download-btn-group > a[href*="/4/"].simple-btn
 vegamoviese.blog##+js(nowoif)
@@ -25109,3 +25114,8 @@ kagane.org##+js(trusted-set-local-storage-item, dvt_p_ts, [$now$])
 kagane.org##+js(nowoif)
 enternity.gr##.ad_02
 enternity.gr##.aent-mis
+||deeplol.gg/images/ad/
+www.deeplol.gg##a[id^="add_to_Banner"]
+www.deeplol.gg###billboard
+www.deeplol.gg###desktop-takeover
+www.deeplol.gg###summoner_content_box div[class^="sc-"]:not(.bigTooltip, .diamond, [class*="flex"], [class*="master"], [class*="wrapper"], [id], [disabled], [style], [height], [width], [size]):has(> a[id^="add_to_Banner"])
