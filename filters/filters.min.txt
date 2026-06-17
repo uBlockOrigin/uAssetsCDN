@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Wed, 17 Jun 2026 04:30:09 +0000
-! Diff-Path: ../patches/2026.6.17.306.patch#ublock-filters
+! Last modified: Wed, 17 Jun 2026 09:57:50 +0000
+! Diff-Path: ../patches/2026.6.17.598.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -10556,6 +10556,7 @@ kuyhaa.me##+js(acs, document.addEventListener, window.open)
 ||kuyhaa.me/*.php
 ! NOTE: Japanese
 !bus-location.1507t.xyz##+js(nostif, ()=>{, 2501-)
+solispia.com##+js(trusted-rpnt, script, /document\.addEventListener\('DOMContentLoaded'\, function[\S\s]+?(const novelId\s*=\s*\d+;\s*const targetUrl\s*=.+?\d+";)[\S\s]+?verifying = true;\s*(try \{\s*const res[\S\s]+?ad_meta:)[\S\s]+?CMの準備中です...'\);\s*.*?\s*(try \{\s*const res[\S\s]+?return;\s*\})[\S\s]*/, document.addEventListener('DOMContentLoaded'\, async function(){$1 const sleep=ms=>new Promise(resolve=>setTimeout(resolve\,ms));$3 await sleep(5000+Math.floor(Math.random()*3000));$2 {"type":"reward"\,"amount": 2}})});const j=await res.json().catch(()=>null);}catch(e){}window.location.href=targetUrl;}))
 ! NOTE: Korean
 map.naver.com##+js(json-edit-xhr-response, .layers.*[?.metadata.name=="POI_Ads"], propsToMatch, /PCWeb_Real.json)
 pcmap.place.naver.com##+js(rpnt, script, document.write, window.__APOLLO_STATE__=JSON.parse(JSON.stringify(window.__APOLLO_STATE__));document.write)
@@ -10705,6 +10706,11 @@ cnnamador.com##+js(aeld, /^(click|mousedown|mousemove|touchstart|touchend|touchm
 cnnamador.com##.cards__item:has([href*="loboclick"])
 ||cnnamador.com/sw.js$script,1p
 ||adsloboclick.com^
+elamigosgames.net,elamigosgamez.net##+js(nostif, checkAdblockUser)
+elamigosgames.net,elamigosgamez.net##.content_store
+elamigosgames.net,elamigosgamez.net##.iframeDiv
+elamigosgamez.net##h3.my-4:has-text(/^Advertising/)
+||instant-gaming.com/api/banner/
 ! NOTE: Thai
 steamseries88.com##+js(rpnt, script, let playerType, 'window.addEventListener("load",()=>{if(typeof playMovie==="function"){playMovie()}});let playerType')
 ! NOTE: Turkish
@@ -18034,10 +18040,6 @@ claimlite.club##+js(noeval-if, blocker)
 gadgets.es##+js(set, DHAntiAdBlocker, true)
 gadgets.es##+js(set, isAdBlockActive, false)
 rackusreads.com##+js(set, DHAntiAdBlocker, true)
-elamigosgamez.net##+js(nostif, checkAdblockUser)
-elamigosgamez.net##.content_store
-elamigosgamez.net##h3.my-4:has-text(/^Advertising/)
-elamigosgamez.net##.iframeDiv
 *$script,domain=wp.pl|money.pl|o2.pl|parenting.pl|pudelek.pl|autokult.pl|gadzetomania.pl|fotoblogia.pl|komorkomania.pl|polygamia.pl|abczdrowie.pl|benchmark.pl|kafeteria.pl|pysznosci.pl|dobreprogramy.pl|genialne.pl|autocentrum.pl|jastrzabpost.pl|deliciousmagazine.pl,redirect-rule=noopjs
 ||imasdk.googleapis.com/js/sdkloader/ima3_debug.js$script,domain=o2.pl,redirect=google-ima.js:10
 @@*$ghide,domain=wp.pl|money.pl|o2.pl|parenting.pl|pudelek.pl|autokult.pl|gadzetomania.pl|fotoblogia.pl|komorkomania.pl|polygamia.pl|abczdrowie.pl|benchmark.pl|kafeteria.pl|pysznosci.pl|dobreprogramy.pl|genialne.pl|autocentrum.pl|jastrzabpost.pl|deliciousmagazine.pl
@@ -19877,7 +19879,7 @@ serially.it##+js(xml-prune, xpath(//*[name()="Period"][.//*[name()="BaseURL" and
 serially.it##+js(json-prune, ads)
 pkbiosfix.com##+js(nostif, show)
 pkbiosfix.com##+js(rmnt, script, AdBlock)
-autoscout24.*##+js(nostif, /Detect|adblock|style\.display|\[native code]|\.call\(null\)/)
+autoscout24.*##+js(nostif, /Detect|adblock|style\.display|\.call\(null\)/)
 autoscout24.*##div[class^="AdContentBanner"]
 ! scsport .live anti-adb
 scsport.live###ads-back
@@ -24518,7 +24520,7 @@ zpaste.net,pixeldrain.com###sponsors
 ||zshorte.net/*.html$frame,3p
 *$script,3p,denyallow=cloudflare.com|cloudflare.net|fastly.net|fastlylb.net|google.com|googleapis.com|gstatic.com|hwcdn.net|jquery.com|jsdelivr.net|jwplatform.com|jwpcdn.com|recaptcha.net|arc.io,domain=zpaste.net
 ||anime-jl.net^$3p,script
-zpaste.net##+js(rmnt, script, window.open)
+zpaste.net##+js(rmnt, script, /"\\|\\x/)
 zpaste.net##a[onclick*="window.open"]
 ||amcnreil.pro^$all
 steamplay.*##+js(aopr, btoa)
@@ -24893,7 +24895,7 @@ techsynchron.com##+js(set-local-storage-item, pbs_action_taken, true)
 techsynchron.com##+js(trusted-set-local-storage-item, pbs_action_time, $now$)
 techsynchron.com##+js(rmnt, script, const popup)
 techsynchron.com##.sh-aawp-box
-blogspot.com##.widget.HTML > .widget-content > .my-responsive-banner-container
+blogspot.com##.my-responsive-banner-container
 blogspot.com##.widget.HTML > .widget-content > #floating-footer.floating-footer
 sita.sk#@#.ads-box
 sita.sk##.branding
