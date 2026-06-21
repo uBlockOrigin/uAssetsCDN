@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Sat, 20 Jun 2026 18:56:54 +0000
-! Diff-Path: ../patches/2026.6.20.1223.patch#ublock-filters
+! Last modified: Sun, 21 Jun 2026 00:02:30 +0000
+! Diff-Path: ../patches/2026.6.21.18.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -21584,6 +21584,7 @@ taste.com.au##.main-header:style(top: 0 !important)
 ||server.ethicalads.io^$script,domain=decompiler.com,important
 ||media.ethicalads.io^$image,domain=decompiler.com,important
 ||yandex.ru^$script,domain=decompiler.com,important
+*$image,redirect-rule=32x32.png,domain=decompiler.com
 decompiler.com##+js(prevent-fetch, /ethicalads\.io|nitropay\.com/)
 ! ytlarge detection
 @@||ytlarge.com^$ghide
@@ -24613,7 +24614,7 @@ pdfdrive.to##+js(trusted-override-element-method, HTMLElement.prototype.click, [
 globetv.app##+js(trusted-set-local-storage-item, gtv_adfree_status_v1, '{"active":true,"checkedAt":$now$,"expiresAt":0,"emailMasked":null}')
 globetv.app##+js(nano-stb, adRendered, *, 0.001)
 globetv.app###preroll-overlay
-storiesig.info##+js(set, Object.prototype.clickAds.emit, noopFunc)
+! storiesig.info##+js(set, Object.prototype.clickAds.emit, noopFunc)
 storiesig.info##+js(nowoif, !storiesig)
 myvidplay.com##+js(nowoif)
 ||jsfilecdn.com^
@@ -25114,9 +25115,9 @@ cinehd.app##+js(no-fetch-if, method:HEAD)
 cinehd.app##.dark\:bg-black.pt-20.bg-white.w-full.z-10.relative > .lg\:px-8.md\:px-6.px-4.max-w-\[1440px\]:has(.native-ads-slot)
 ##body > #mdl-register.modal.anm-e.regnow
 /js/scriptjs/1/|$script,1p
-/^https:\/\/[a-z0-9-]{7,}\.(?:com|info)\/assets\/script$/$script,1p,match-case,to=com|info
-/^https:\/\/[a-z0-9-]{7,}\.(?:com|info)\/challenge\/(?:movie|show|episode)\/[\/a-z0-9-]+$/$doc,match-case,to=com|info
-/^https:\/\/[a-z0-9-]{7,}\.(?:com|info)\/(?:load|register)\/(?:movie|show|episode)\/[0-9]+(?:\/[0-9]{1,2}){0,2}\/?\?[a-z]+=[a-zA-Z0-9%&]+$/$doc,match-case,to=com|info
+/^https:\/\/[a-z0-9-]{7,}\.[a-z]{3,6}\/assets\/script$/$script,1p,match-case,to=~edu|~gov
+/^https:\/\/[a-z0-9-]{7,}\.[a-z]{3,6}\/challenge\/(?:movie|show|episode)\/[\/a-z0-9-]+$/$doc,match-case,to=~edu|~gov
+/^https:\/\/[a-z0-9-]{7,}\.[a-z]{3,6}\/(?:load|register)\/(?:movie|show|episode)\/[0-9]+(?:\/[0-9]{1,2}){0,2}\/?\?[a-z]+=[a-zA-Z0-9%&]+(?:&[a-z]+=[0-9a-z]+)?$/$doc,match-case,to=~edu|~gov
 ||sa-movie.com^$all
 ||w-solarmovies.com^$all
 ||proxyify.info^$all
@@ -25124,5 +25125,9 @@ cinehd.app##.dark\:bg-black.pt-20.bg-white.w-full.z-10.relative > .lg\:px-8.md\:
 ||dial2day.com^$all
 ||meimei-movie.com^$all
 ||clovermovies.com^$all
+||animevice.net^$all
+||gomoviescdn.online^$all
+||movienewsgo.xyz^$all
+||yifysearch.com^$all
 openlua.cloud##+js(set, HTMLScriptElement.prototype.onerror, undefined)
 @@||openlua.cloud^$ghide
