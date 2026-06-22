@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Mon, 22 Jun 2026 10:01:16 +0000
-! Diff-Path: ../patches/2026.6.22.742.patch#ublock-filters
+! Last modified: Mon, 22 Jun 2026 15:37:53 +0000
+! Diff-Path: ../patches/2026.6.22.1065.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -24933,8 +24933,16 @@ livetv.moviebite.cc##div.w-full:has(> div[data-ad-container])
 guessthemovie.name,guessthephrase.xyz##+js(no-fetch-if, method:/head/i)
 guessthemovie.name,guessthephrase.xyz##.fallback-side-ad
 /ads/*$domain=guessthemovie.name|guessthephrase.xyz
+@@||cdn-media.brightline.tv/config/v*.json$domain=adultswim.com
 ||adultswim-vodlive.cdn.turner.com/csmp/live/$xhr,removeparam=caid,domain=adultswim.com
 ||adultswim-vodlive.cdn.turner.com/csm/extlive/$xhr,removeparam=yo.po,domain=adultswim.com
+||adultswim-vodlive.cdn.turner.com/csm/extlive/$xhr,removeparam=yo.asd,domain=adultswim.com
+||medium.ngtv.io/v2/media/$removeparam=ssaiProfile,domain=adultswim.com
+!#if !ext_ubol
+@@||medium.ngtv.io/v2/media/live*$removeparam=ssaiProfile,domain=adultswim.com
+!#else
+@@||medium.ngtv.io/v2/media/live*$domain=adultswim.com
+!#endif
 viduro.top##+js(nowoif)
 ||viduro.top/api/heartbeat
 embedseek.xyz##+js(nowoif, _blank)
@@ -25179,3 +25187,4 @@ autoembed.app##section[aria-label="Sponsored content"]
 *$script,3p,denyallow=cloudflare.com,domain=empirenovel.com
 *$xhr,3p,denyallow=cloudflare.com|googleapis.com,domain=empirenovel.com
 ||empirenovel.com/po.js
+leakgallery.com##+js(aost, String.prototype.replace, decideForPlacement)
