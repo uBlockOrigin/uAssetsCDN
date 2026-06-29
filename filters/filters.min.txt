@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Mon, 29 Jun 2026 04:32:55 +0000
-! Diff-Path: ../patches/2026.6.29.295.patch#ublock-filters
+! Last modified: Mon, 29 Jun 2026 09:08:16 +0000
+! Diff-Path: ../patches/2026.6.29.595.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -7609,6 +7609,7 @@ akirabox.com,akirabox.to##+js(nowoif, _blank)
 akirabox.com,akirabox.to##+js(acs, setTimeout, decodeURIComponent(escape)
 akirabox.com,akirabox.to##+js(rmnt, script, (function(, excludes, document)
 akirabox.com,akirabox.to##+js(aeld, click, .href)
+akirabox.*##+js(remove-node-text, script, /var lw=\(\[\]\+!\[\]\)/)
 ||doubletag.run/tags/$script,domain=akirabox.to
 ||cfd/tags/$script,domain=akirabox.to
 ||shareease.link^$all
@@ -7784,7 +7785,7 @@ linkshortx.in##+js(set, blurred, false)
 ||acscdn.com/script/aclib.js$script,redirect-rule=noopjs
 coinclix.co##+js(trusted-replace-argument, document.getElementById, 0, json:"header", condition, /ad-chk|aads-frame/)
 ! file host popunders
-1cloudfile.com,akirabox.com,akirabox.to,bowfile.com,buzzheavier.com,bzzhr.co,bzzhr.to,cg-gamespc.net,datavaults.co,dodi-repacks.site,file-me.top,filemirage.com,fuckingfast.*,fuckingfast.co,game-repack.site,gamedrive.*,getfreegames.net,go.zovo.ink,koramaup.com,multiup.io,ranoz.gg,reloadedsteam.com,rootz.so,steamgg.net,steamunderground.net,swiftuploads.com,usersdrive.com,vik1ngfile.site,worldofpcgames.com,zeilink.net,zovo2.top,zpaste.net##+js(remove-node-text, script, /"\\|\\[ux]|\+\[\]/, excludes, self.__next)
+akirabox.com,akirabox.to,bowfile.com,buzzheavier.com,bzzhr.co,bzzhr.to,cg-gamespc.net,datavaults.co,dodi-repacks.site,file-me.top,filemirage.com,fuckingfast.*,fuckingfast.co,game-repack.site,gamedrive.*,getfreegames.net,go.zovo.ink,koramaup.com,multiup.io,ranoz.gg,reloadedsteam.com,rootz.so,steamgg.net,steamunderground.net,swiftuploads.com,usersdrive.com,vik1ngfile.site,worldofpcgames.com,zeilink.net,zovo2.top,zpaste.net##+js(remove-node-text, script, /"\\|\\[ux]|\+\[\]/, excludes, self.__next)
 1cloudfile.com,akirabox.com,akirabox.to,bowfile.com,buzzheavier.com,bzzhr.co,bzzhr.to,cg-gamespc.net,datavaults.co,dodi-repacks.site,file-me.top,filemirage.com,fuckingfast.*,fuckingfast.co,game-repack.site,gamedrive.*,getfreegames.net,go.zovo.ink,koramaup.com,multiup.io,ranoz.gg,reloadedsteam.com,rootz.so,steamgg.net,steamunderground.net,swiftuploads.com,usersdrive.com,vik1ngfile.site,worldofpcgames.com,zeilink.net,zovo2.top,zpaste.net##+js(set, Element.prototype.closest, falseFunc)
 ||cfd^$3p,popup,domain=1cloudfile.com|akirabox.com|akirabox.to|bowfile.com|buzzheavier.com|bzzhr.co|bzzhr.to|cg-gamespc.net|datavaults.co|dodi-repacks.site|file-me.top|filemirage.com|fuckingfast.*|fuckingfast.co|game-repack.site|gamedrive.*|getfreegames.net|go.zovo.ink|koramaup.com|multiup.io|ranoz.gg|reloadedsteam.com|rootz.so|steamgg.net|steamunderground.net|swiftuploads.com|usersdrive.com|vik1ngfile.site|worldofpcgames.com|zeilink.net|zovo2.top|zpaste.net
 /^https:\/\/[a-z0-9]+\.[a-z0-9]+\.cfd\/\?[a-z]+=[a-zA-Z0-9+/=:_-]+$/$3p,all,match-case
@@ -21665,6 +21666,8 @@ decompiler.com###adblockWarning
 decompiler.com##body > div.container:has(#banner)
 decompiler.com##+js(set, Image.prototype.getBoundingClientRect, undefined)
 decompiler.com##img[src*="media.ethicalads.io"]:style(width:240px !important;)
+decompiler.com##+js(set, Element.prototype.getBoundingClientRect, undefined)
+decompiler.com##+js(trusted-replace-argument, document.getElementById, 0, json:"adblockWarning", condition, artifactFileContent)
 ! ytlarge detection
 @@||ytlarge.com^$ghide
 @@||googlesyndication.com^$script,xhr,domain=ytlarge.com
@@ -22350,7 +22353,9 @@ genelify.com##^script:has-text(detectedAdblock)
 genelify.com##+js(rmnt, script, detectedAdblock)
 !#endif
 basseqwevewcewcewecwcw.xyz##+js(nowoif)
-sheepesports.com##+js(no-fetch-if, googlesyndication)
+sheepesports.com##+js(no-fetch-if, /googlesyndication|doubleclick/)
+sheepesports.com##div.h-full.p-4.xl\:block.hidden > .h-full:has-text(allowing ads)
+sheepesports.com##.min-w-0 > .min-w-0 > div > .border-b.justify-center.items-center.flex:has-text(allowing ads)
 ebook-hell.to##+js(nowoif)
 ||ebook-hell.to/jquery/jspololife.js
 ibooks.to##+js(rmnt, script, ai_adb)
@@ -25262,7 +25267,10 @@ interestingengineering.com##+js(nostif, =void 0)
 interestingengineering.com##.t-pt-3.t-gap-2.t-items-center.t-flex-col.t-flex.t-w-full:has-text(Advertisement)
 lineup11.net##+js(nostif, /\{[a-z]+\(\)\}/)
 lineup11.net##+js(nosiif, .value||)
+lineup11.net##+js(aeld, visibilitychange, .value&&)
 talksport.com##+js(rmnt, script, abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789)
 ||flybfree.ca/AdBlockDetect.js
 ||freemusiclessons4u.com/AdBlockDetect.js
 ||kingmahali.xyz/js/adBlockDetect.js
+chzzk.naver.com##+js(spoof-css, .banner_ad_wrapper, display, block)
+chzzk.naver.com##+js(no-xhr-if, /veta.naver.com\/vas|veta.naver.com\/gfp|veta.naver.com\/call/ method:OPTIONS)
