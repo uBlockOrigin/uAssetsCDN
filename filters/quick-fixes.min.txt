@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Quick fixes
 ! Expires: 12 hours
-! Last modified: Sat, 01 Aug 2026 12:00:08 +0000
-! Diff-Path: ../patches/2026.8.3.228.patch#ublock-quick-fixes
+! Last modified: Mon, 03 Aug 2026 11:33:45 +0000
+! Diff-Path: ../patches/2026.8.3.699.patch#ublock-quick-fixes
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/quick-fixes.txt ***
@@ -258,7 +258,7 @@ smsonline.cloud##+js(nostif, (new Error(, 3000-6000)
 smsonline.cloud##aside[class^="css-"]:has(> p:has-text(Advertisement) + ins.adsbygoogle)
 ||loader.nyitvatartas24.hu^
 bing.com##+js(no-xhr-if, /fd/ls/lsp.aspx)
-bing.com##+js(rpnt, script, function processEmbImg, `(()=>{if(!location.pathname.startsWith("/search"))return;if(document.querySelector("ol#b_results > li.b_algo > .b_title > h2 > a[id][ads]"))return;window.addEventListener("scroll",(()=>{for(const t of Object.keys(window).sort())if(t.endsWith("_lnk")){if(t.length<4)continue;document.querySelectorAll("ol#b_results > li.b_algo > .b_title > h2 > a#"+t.split("_lnk")[0]).forEach((t=>{t.setAttribute("ads","")}))}}))})();function processEmbImg`, sedCount, 1)
+bing.com##+js(trusted-replace-node-text, script, function processEmbImg, 'location.pathname.startsWith("/search")&&(document.querySelector("ol#b_results > li.b_algo > .b_title > h2 > a[id][ads]")||window.addEventListener("scroll",(()=>{for(const t of Object.keys(window).sort())"function"==typeof window[t]&&/^[a-z]+$/.test(t)&&document.querySelector("ol#b_results > li.b_algo > .b_title > h2 > a#"+t)?.setAttribute?.("ads","")})));function processEmbImg', sedCount, 1)
 bing.com##ol#b_results > li.b_algo:has(> .b_title > h2 > a[id][ads])
 bing.com##ol#b_results > li:has(> :is(.b_tpcn, .b_title, h2) a[href^="https://www.bing.com/aclk?"])
 bing.com##ol#b_results > li.b_algo:has(.b_lineclamp3:matches-css-before(content:/^url\(\Sdata:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAAAD.AAAA/))
@@ -380,6 +380,7 @@ gumtree.com#@#+js(trusted-set, experimentOverrides, json:"%5B%7B%20defaultValue%
 bus-location.1507t.xyz#@#.ad-area:not(.text-ad)
 bus-location.1507t.xyz##div[id]:empty:style(height: 1px !important; width 1px !important; position: fixed !important; z-index: 2147483647 !important;)
 bus-location.1507t.xyz##div[id]:has(> script[src^="https://adm.shinobi.jp"]):style(height: 1px !important; width 1px !important; position: fixed !important; z-index: 2147483647 !important;)
+||adm.shinobi.jp^$script,redirect=noop.js,domain=bus-location.1507t.xyz
 ||cloudfront.net/?$script,redirect=noopjs,domain=meuplayeronlinehd.com|multicanaistt.space
 meuplayeronlinehd.com##+js(rmnt, script, _0x, excludes, /source|URLSearchParams/)
 meuplayeronlinehd.com###player:style(display: block !important;)
