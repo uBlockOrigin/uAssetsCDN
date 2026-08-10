@@ -1,5 +1,5 @@
 ! Title: uBlock filters – Privacy
-! Last modified: Mon, 10 Aug 2026 03:55:42 +0000
+! Last modified: Mon, 10 Aug 2026 13:14:09 +0000
 ! Expires: 7 days
 ! Description: |
 !   Some of these filters make use of the `important` filter option,`
@@ -1001,6 +1001,12 @@ lit.link##+js(href-sanitizer, a[href^="/redirects/link-ad?redirectUrl=aHR0c"], ?
 ! https://github.com/uBlockOrigin/uAssets/issues/32641
 ||zsp1.ah.nl/*/URhttp*$doc,urlskip=/\/UR(http.+)/
 
+! https://github.com/uBlockOrigin/uAssets/issues/34036
+! tencent click trackers
+! https://c.pc.qq.com/ios.html?level=14&url=https://shitjournal.org/article/8ce50955-a676-4de5-b626-2b1f73e73f8c%2F&sublevel=293
+||c.pc.qq.com^$urlskip=?url
+||c.pc.qq.com^$urlskip=?pfurl
+
 ! Click Trackers
 ! https://reddit.com/r/uBlockOrigin/comments/14t3y1d/
 html.duckduckgo.com,lite.duckduckgo.com##+js(href-sanitizer, a[href^="//duckduckgo.com/l/?uddg="], ?uddg)
@@ -1113,6 +1119,12 @@ donanimhaber.com##+js(href-sanitizer, body a[href^="/ExternalLinkRedirect?"][hre
 ! https://www.f6s.com/company/zomato
 f6s.com##+js(aeld, , redirect)
 ||f6s.com/redirect?url=http*$doc,urlskip=?url
+! https://github.com/uBlockOrigin/uAssets/pull/34040
+||douban.com/link2/?url=http$doc,urlskip=?url
+douban.com##+js(href-sanitizer, body a[href^="https://www.douban.com/link2/?url=http"], ?url)
+! https://github.com/uBlockOrigin/uAssets/pull/34041
+||ref.gamer.com.tw/redir.php?url=http$doc,urlskip=?url
+gamer.com.tw##+js(href-sanitizer, body a[href^="https://ref.gamer.com.tw/redir.php?url=http"], ?url)
 
 ! https://github.com/uBlockOrigin/uAssets/issues/24675 - click tracking
 ||cdn.digg.com/fragments/homepage/static/view-frontpage.js
@@ -3196,8 +3208,8 @@ vaughn.live##+js(no-fetch-if, method:POST body:zaraz)
 ||vaughn.live/vsz/
 
 ! https://github.com/uBlockOrigin/uAssets/issues/33072#issuecomment-4937969164
-!x.com##+js(prevent-xhr, /i/api/1.1/flow/viewer.json)
-!x.com##+js(proxy-apply-config, {"dontProxyToString":true})
+x.com##+js(prevent-xhr, /i/api/1.1/flow/viewer.json)
+x.com##+js(proxy-apply-config, {"skipToString":true})
 
 ! https://github.com/uBlockOrigin/uAssets/issues/12635#issuecomment-4982050273
 telegraph.co.uk##.onward-journey

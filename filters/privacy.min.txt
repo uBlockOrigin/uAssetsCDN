@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Privacy
 ! Expires: 7 days
-! Last modified: Mon, 10 Aug 2026 03:55:42 +0000
-! Diff-Path: ../patches/2026.8.10.633.patch#ublock-privacy
+! Last modified: Mon, 10 Aug 2026 13:14:09 +0000
+! Diff-Path: ../patches/2026.8.10.911.patch#ublock-privacy
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/privacy.txt ***
@@ -503,6 +503,9 @@ lit.link##+js(href-sanitizer, a[href^="/redirects/link-ad?redirectUrl=aHR0c"], ?
 ||page.link/?link=http$doc,urlskip=?link
 ||www.amazon.*/gp/*.html?*&U=http$doc,urlskip=?U
 ||zsp1.ah.nl/*/URhttp*$doc,urlskip=/\/UR(http.+)/
+! tencent click trackers
+||c.pc.qq.com^$urlskip=?url
+||c.pc.qq.com^$urlskip=?pfurl
 ! Click Trackers
 html.duckduckgo.com,lite.duckduckgo.com##+js(href-sanitizer, a[href^="//duckduckgo.com/l/?uddg="], ?uddg)
 starstyle.com##+js(href-sanitizer, a[href^="https://go.skimresources.com/"][href*="&url=http"], ?url)
@@ -562,6 +565,10 @@ dogdrip.net##+js(href-sanitizer, body a[href^="/link.php?url=http"], ?url)
 donanimhaber.com##+js(href-sanitizer, body a[href^="/ExternalLinkRedirect?"][href*="url=http"], ?url)
 f6s.com##+js(aeld, , redirect)
 ||f6s.com/redirect?url=http*$doc,urlskip=?url
+||douban.com/link2/?url=http$doc,urlskip=?url
+douban.com##+js(href-sanitizer, body a[href^="https://www.douban.com/link2/?url=http"], ?url)
+||ref.gamer.com.tw/redir.php?url=http$doc,urlskip=?url
+gamer.com.tw##+js(href-sanitizer, body a[href^="https://ref.gamer.com.tw/redir.php?url=http"], ?url)
 ||cdn.digg.com/fragments/homepage/static/view-frontpage.js
 arstechnica.com,dermnetnz.org##.gsc-webResult a[data-cturl]:remove-attr(/^data-ct/)
 /detroitchicago/dpv.gif?$image
@@ -2006,8 +2013,8 @@ mashable.com##+js(href-sanitizer, a[href^="https://zdcs.link/"], ?u)
 ||prydwen.gg/api/v1/ping/
 vaughn.live##+js(no-fetch-if, method:POST body:zaraz)
 ||vaughn.live/vsz/
-!x.com##+js(prevent-xhr, /i/api/1.1/flow/viewer.json)
-!x.com##+js(proxy-apply-config, {"dontProxyToString":true})
+x.com##+js(prevent-xhr, /i/api/1.1/flow/viewer.json)
+x.com##+js(proxy-apply-config, {"skipToString":true})
 telegraph.co.uk##.onward-journey
 civitai.com##+js(no-fetch-if, faro.civitai.com)
 ||civitai.com/api/internal/pulse
