@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Sun, 16 Aug 2026 04:37:38 +0000
-! Diff-Path: ../patches/2026.8.16.414.patch#ublock-filters
+! Last modified: Sun, 16 Aug 2026 11:16:23 +0000
+! Diff-Path: ../patches/2026.8.16.690.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -25019,6 +25019,7 @@ borntobefuck.com##.vast-container
 chatgpt.com##+js(trusted-json-edit, [?.type=="ads"].visibility.status="hidden")
 chatgpt.com##+js(trusted-json-edit, ..suppress_ads=true)
 chatgpt.com##+js(json-prune, messages.*.ads messages.*.renderedAdsHtml)
+chatgpt.com##+js(trusted-replace-outbound-text, TextDecoder.prototype.decode, /^\{"type":\s*"ads"\,.*?("ads_request_id":.*?"ads_response_id"|"ads_response_id":.*?"ads_request_id"):.*\}$/, {})
 ourcoincash.xyz,softdevelopp.com##+js(noeval-if, Adblock)
 ||umamianal.vercel.app^$domain=willow.arlen.icu
 willow.arlen.icu##+js(nowoif)
@@ -25524,3 +25525,20 @@ cokcok.stream##+js(trusted-replace-node-text, script, '/const *_[a-z0-9]+ *= *{ 
 polenjournal.de##+js(aeld, load, ADBLOCK)
 vidneo.cc##+js(json-edit, ..playGateQueue)
 vidneo.cc##+js(json-prune-fetch-response, playerHeadScriptSnippets, , propsToMatch, /api/config)
+firmy.cz,garaz.cz,sreality.cz##^script:has-text(/adBottomWrap|doubleclick/)
+firmy.cz,garaz.cz,sreality.cz##+js(rmnt, script, /adBottomWrap|doubleclick/)
+firmy.cz,garaz.cz,sreality.cz##+js(aopr, shaman)
+sreality.cz##div[data-e2e="detail.banner.projektu-container"]
+sreality.cz##div[data-e2e="banner.projektu-container"]
+sreality.cz##div[data-e2e="leaderboard-container"]
+sreality.cz##div[data-e2e="middle-container"]
+||sreality.cz/api/v*/mortgage/offers
+garaz.cz##header[data-dot="tpl-mainHeader"] ~ div:has(section[data-dot="tpl-bottomContent"])
+garaz.cz##.mol-advert__ad-info-paragraph
+garaz.cz##.ogm-branding-advert + div[class]:empty
+garaz.cz##.ogm-advert-rectangle-inscreen
+garaz.cz##.ogm-seznam-recommends
+garaz.cz##.placeholder-wrapper
+garaz.cz##div[data-advert]
+cyklobazar.cz##+js(json-edit-fetch-response, .stories.*[?.storyType=="ad"], propsToMatch, cykloStories)
+cyklobazar.cz##curtain-ad
