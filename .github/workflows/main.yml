@@ -36,6 +36,10 @@ jobs:
         run: |
           UPDATE_PERIOD_IN_HOURS=5
           echo "CAN_DO=$(node ./need-patch.mjs delay="$UPDATE_PERIOD_IN_HOURS")" >> $GITHUB_ENV
+      - name: Workflow check
+        if: ${{ env.CAN_DO != 'yes' && github.event_name == 'workflow_dispatch' }}
+        run: |
+          echo "CAN_DO=yes" >> $GITHUB_ENV
       - name: Generate version string
         if: ${{ env.CAN_DO == 'yes' }}
         run: |
