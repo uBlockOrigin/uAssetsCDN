@@ -1,16 +1,17 @@
-diff name:ublock-annoyances lines:3 checksum:8b32b0333a
+diff name:ublock-annoyances lines:3 checksum:031fd9c8f7
 d4 1
 a4 1
-! Diff-Path: ../patches/2026.9.3.580.patch#ublock-annoyances
-diff name:ublock-badware lines:16 checksum:204427e649
+! Diff-Path: ../patches/2026.9.3.867.patch#ublock-annoyances
+diff name:ublock-badware lines:17 checksum:00d6d0795c
 d3 2
 a4 2
-! Last modified: Wed, 02 Sep 2026 15:55:02 +0000
-! Diff-Path: ../patches/2026.9.3.580.patch#ublock-badware
+! Last modified: Thu, 03 Sep 2026 09:57:53 +0000
+! Diff-Path: ../patches/2026.9.3.867.patch#ublock-badware
 a783 1
 ||cdn.streameet.top^$all
-a2360 1
+a2360 2
 ||sites.google.com/view/brewapp$doc
+||swewart.sbs^
 a3120 1
 ||openlive.chat^$all
 d3130 1
@@ -19,16 +20,25 @@ a3130 1
 d3784 1
 a3784 1
 /^https:\/\/[a-z]+\.[a-z]+\/[a-z]+\?rnd=[a-z0-9]{8}&ts=\d+$/$script,xhr,3p,match-case
-diff name:ublock-experimental lines:3 checksum:ff27d9620b
+diff name:ublock-experimental lines:3 checksum:4feea82e11
 d4 1
 a4 1
-! Diff-Path: ../patches/2026.9.3.580.patch#ublock-experimental
-diff name:ublock-filters lines:34 checksum:2275fc8472
+! Diff-Path: ../patches/2026.9.3.867.patch#ublock-experimental
+diff name:ublock-filters lines:48 checksum:120fb17de2
 d3 2
 a4 2
-! Last modified: Thu, 03 Sep 2026 09:19:01 +0000
-! Diff-Path: ../patches/2026.9.3.580.patch#ublock-filters
+! Last modified: Thu, 03 Sep 2026 13:35:50 +0000
+! Diff-Path: ../patches/2026.9.3.867.patch#ublock-filters
 d2647 2
+a7955 8
+!#if !ext_ubol
+/^https:\/\/[-0-9a-z]{5,}\.com\/\d{1,2}\/[0-9a-f]{32}\.js$/$script,3p,match-case
+!#else
+/^https:\/\/[-0-9a-z]{5,}\.com\/\d{1,2}\/[0-9a-f]{22,}\.js$/$script,3p,match-case
+!#endif
+!#if env_safari
+/^https:\/\/[-0-9a-z][-0-9a-z][-0-9a-z][-0-9a-z][-0-9a-z]+\.com\/\[0-9][0-9]?\/[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f]\.js$/$script,3p,match-case
+!#endif
 d9941 1
 a9941 1
 base64decode.org,fandom.com,gamewith.jp,sms24.me,urldecoder.org##^script:has-text(').join(String.fromCharCode')
@@ -44,46 +54,51 @@ fantasysports.yahoo.com,sports.yahoo.com##+js(prevent-innerHTML, script, loadRec
 fantasysports.yahoo.com,sports.yahoo.com##+js(json-prune, autoRecovery)
 d10501 2
 a10502 2
-*,~127.0.0.1,~amazon.*,~apple.com,~archlinux.org,~azure.com,~bsky.app,~bing.com,~bitwarden.com,~captcha-delivery.com,~chatango.com,~chatgpt.com,~chess.com,~claude.ai,~cloudflare.com,~codeberg.org,~dailymotion.com,~disqus.com,~ebay.*,~facebook.com,~fbsbx.com,~flickr.com,~gitea.com,~github.com,~gitlab.com,~google.com,~hcaptcha.com,~huggingface.co,~instagram.com,~kimi.com,~lichess.org,~linkedin.com,~live.com,~localhost,~mega.nz,~microsoft.com,~mozilla.org,~netflix.com,~openrouter.ai,~pinterest.com,~privacy-mgmt.com,~proton.me,~rakuten.co.jp,~rakuten.com,~recaptcha.net,~reddit.com,~spotify.com,~stripe.com,~stripecdn.com,~tiktok.com,~tinypass.com,~tumblr.com,~twitch.tv,~twitchcdn.net,~twitter.com,~virustotal.com,~vscode.dev,~vscode-cdn.net,~whatsapp.com,~wikipedia.org,~x.com,~yahoo.com,~yandex.*,~yandexcloud.net,~youtube.com,~www.digitalocean.com##+js(prevent-clipboard-write, /^mshta |^msiexec |^(bash <<<|curl -kfsSL) \$\(echo .+? base64 -d\b|^cmd \/c .*?\bcurl .+?(\.exe|\.bat)\b|^cmd .*?\bfor \/f .*?\bdelims .*?\bpow |^powershell .*?-w(indowStyle)? h(idden)?\b|^powershell .*?-NoP\b|^powershell .*?-ep bypass\b|^powershell .*?-EP (B|U)\b|^powershell.+?-ExecutionPolicy (Bypass|Unrestricted)|\\PowerShell\.exe.+?-ep bypass\b|^powershell.+?\biex\(|^powershell.+?Invoke-Expression|^powershell.+?Invoke-WebRequest|^powershell.+?-UseBasicParsing|^cmd .*?\/c .+? -nop .+? iex\b|^(cmd|powershell)\b.+?recaptcha|^(cmd|powershell)\b.+?#(Verification|     )|^(cmd|powershell)\b.+?     #|^osascript .+?\bcurl http|^curl -s\b.+?\| (bash|sh|zsh)\b|^\/bin\/(bash|sh|zsh) -c\b.+?\bcurl|^bash -c\b.+?\$\(curl|^python3? -c\b.+?\b(exec|urllib|subprocess)\b|^echo .+?base64 .+?\b(bash|osascript|z?sh)\b|openssl base64 -d|^curl\b .+?chmod \+x.+?&&|^(bash|sh|osascript)\b.+?recaptcha|^(bash|sh|osascript)\b.+?#(Verification|     )|^(bash|sh|osascript)\b.+?     #|^wget .+?\| (bash|sh)\b|^curl\b.+?-o\b.+?\/tmp\/.+?&&|^nc .+?-e \/bin\/(bash|sh)\b|^\/tmp\/.+?chmod \+x.+?&&|^wget -q.+?\.(sh|py|bin|elf)\b|^cmd .+?\bcertutil .+?\b(\.exe|\.bat)\b|^powershell .+?\birm .+?\.[a-z]+\/.+?powershell|\bpcalua(\.exe)? .*?\b(curl|powershell|saps|cmd)\b|^cmd .+?\bcmdkey .+?\bschtasks|^Invoke-Command .+?Base64String|^conhost .*?--headless .*?\bcmd\b|^iex\(i(rm|wr) |^irm .+? iex\b/msi, domAlert, 'Beware, uBlock Origin blocked a potential ClickFix attack: ${text}', excludeMatches, /Maintainer|Contributor|^git |^http|^import /i)
-community-scripts.org,massgrave.dev,natfrp.com#@#+js(prevent-clipboard-write, /^mshta |^msiexec |^(bash <<<|curl -kfsSL) \$\(echo .+? base64 -d\b|^cmd \/c .*?\bcurl .+?(\.exe|\.bat)\b|^cmd .*?\bfor \/f .*?\bdelims .*?\bpow |^powershell .*?-w(indowStyle)? h(idden)?\b|^powershell .*?-NoP\b|^powershell .*?-ep bypass\b|^powershell .*?-EP (B|U)\b|^powershell.+?-ExecutionPolicy (Bypass|Unrestricted)|\\PowerShell\.exe.+?-ep bypass\b|^powershell.+?\biex\(|^powershell.+?Invoke-Expression|^powershell.+?Invoke-WebRequest|^powershell.+?-UseBasicParsing|^cmd .*?\/c .+? -nop .+? iex\b|^(cmd|powershell)\b.+?recaptcha|^(cmd|powershell)\b.+?#(Verification|     )|^(cmd|powershell)\b.+?     #|^osascript .+?\bcurl http|^curl -s\b.+?\| (bash|sh|zsh)\b|^\/bin\/(bash|sh|zsh) -c\b.+?\bcurl|^bash -c\b.+?\$\(curl|^python3? -c\b.+?\b(exec|urllib|subprocess)\b|^echo .+?base64 .+?\b(bash|osascript|z?sh)\b|openssl base64 -d|^curl\b .+?chmod \+x.+?&&|^(bash|sh|osascript)\b.+?recaptcha|^(bash|sh|osascript)\b.+?#(Verification|     )|^(bash|sh|osascript)\b.+?     #|^wget .+?\| (bash|sh)\b|^curl\b.+?-o\b.+?\/tmp\/.+?&&|^nc .+?-e \/bin\/(bash|sh)\b|^\/tmp\/.+?chmod \+x.+?&&|^wget -q.+?\.(sh|py|bin|elf)\b|^cmd .+?\bcertutil .+?\b(\.exe|\.bat)\b|^powershell .+?\birm .+?\.[a-z]+\/.+?powershell|\bpcalua(\.exe)? .*?\b(curl|powershell|saps|cmd)\b|^cmd .+?\bcmdkey .+?\bschtasks|^Invoke-Command .+?Base64String|^conhost .*?--headless .*?\bcmd\b|^iex\(i(rm|wr) |^irm .+? iex\b/msi, domAlert, 'Beware, uBlock Origin blocked a potential ClickFix attack: ${text}', excludeMatches, /Maintainer|Contributor|^git |^http|^import /i)
+*,~127.0.0.1,~amazon.*,~apple.com,~archlinux.org,~azure.com,~bsky.app,~bing.com,~bitwarden.com,~captcha-delivery.com,~chatango.com,~chatgpt.com,~chess.com,~claude.ai,~cloudflare.com,~codeberg.org,~dailymotion.com,~disqus.com,~ebay.*,~facebook.com,~fbsbx.com,~flickr.com,~gitea.com,~github.com,~gitlab.com,~google.com,~hcaptcha.com,~huggingface.co,~instagram.com,~kimi.com,~lichess.org,~linkedin.com,~live.com,~localhost,~mega.nz,~microsoft.com,~mozilla.org,~netflix.com,~openrouter.ai,~pinterest.com,~privacy-mgmt.com,~proton.me,~rakuten.co.jp,~rakuten.com,~recaptcha.net,~reddit.com,~spotify.com,~stripe.com,~stripecdn.com,~tiktok.com,~tinypass.com,~tumblr.com,~twitch.tv,~twitchcdn.net,~twitter.com,~virustotal.com,~vscode.dev,~vscode-cdn.net,~whatsapp.com,~wikipedia.org,~x.com,~yahoo.com,~yandex.*,~yandexcloud.net,~youtube.com,~www.digitalocean.com##+js(prevent-clipboard-write, /^mshta |^msiexec |^(bash <<<|curl -kfsSL) \$\(echo .+? base64 -d\b|^cmd \/c .*?\bcurl .+?(\.exe|\.bat)\b|^cmd .*?\bfor \/f .*?\bdelims .*?\bpow |^powershell .*?-w(indowStyle)? h(idden)?\b|^powershell .*?-NoP\b|^powershell .*?-ep bypass\b|^powershell .*?-EP (B|U)\b|^powershell.+?-ExecutionPolicy (Bypass|Unrestricted)|\\PowerShell\.exe.+?-ep bypass\b|^powershell.+?\biex\(|^powershell.+?Invoke-Expression|^powershell.+?Invoke-WebRequest|^powershell.+?-UseBasicParsing|^cmd .*?\/c .+? -nop .+? iex\b|^(cmd|powershell)\b.+?recaptcha|^(cmd|powershell)\b.+?#(Verification|     )|^(cmd|powershell)\b.+?     #|^osascript .+?\bcurl http|^curl -s\b.+?\| (bash|sh|zsh)\b|^\/bin\/(bash|sh|zsh) -c\b.+?\bcurl|^bash -c\b.+?\$\(curl|^python3? -c\b.+?\b(exec|urllib|subprocess)\b|^echo .+?base64 .+?\b(bash|osascript|z?sh)\b|openssl base64 -d|^curl\b .+?chmod \+x.+?&&|^(bash|sh|osascript)\b.+?recaptcha|^(bash|sh|osascript)\b.+?#(Verification|     )|^(bash|sh|osascript)\b.+?     #|^wget .+?\| (bash|sh)\b|^curl\b.+?-o\b.+?\/tmp\/.+?&&|^nc .+?-e \/bin\/(bash|sh)\b|^\/tmp\/.+?chmod \+x.+?&&|^wget -q.+?\.(sh|py|bin|elf)\b|^cmd .+?\bcertutil .+?\b(\.exe|\.bat)\b|^powershell .+?\birm .+?\.[a-z]+\/.+?powershell|\bpcalua(\.exe)? .*?\b(curl|powershell|saps|cmd)\b|^cmd .+?\bcmdkey .+?\bschtasks|^Invoke-Command .+?Base64String|^c(onhost|md) .*?--headless |^iex\(i(rm|wr) |^irm .+? iex\b/msi, domAlert, 'Beware, uBlock Origin blocked a potential ClickFix attack: ${text}', excludeMatches, /Maintainer|Contributor|^git |^http|^import /i)
+community-scripts.org,massgrave.dev,natfrp.com#@#+js(prevent-clipboard-write, /^mshta |^msiexec |^(bash <<<|curl -kfsSL) \$\(echo .+? base64 -d\b|^cmd \/c .*?\bcurl .+?(\.exe|\.bat)\b|^cmd .*?\bfor \/f .*?\bdelims .*?\bpow |^powershell .*?-w(indowStyle)? h(idden)?\b|^powershell .*?-NoP\b|^powershell .*?-ep bypass\b|^powershell .*?-EP (B|U)\b|^powershell.+?-ExecutionPolicy (Bypass|Unrestricted)|\\PowerShell\.exe.+?-ep bypass\b|^powershell.+?\biex\(|^powershell.+?Invoke-Expression|^powershell.+?Invoke-WebRequest|^powershell.+?-UseBasicParsing|^cmd .*?\/c .+? -nop .+? iex\b|^(cmd|powershell)\b.+?recaptcha|^(cmd|powershell)\b.+?#(Verification|     )|^(cmd|powershell)\b.+?     #|^osascript .+?\bcurl http|^curl -s\b.+?\| (bash|sh|zsh)\b|^\/bin\/(bash|sh|zsh) -c\b.+?\bcurl|^bash -c\b.+?\$\(curl|^python3? -c\b.+?\b(exec|urllib|subprocess)\b|^echo .+?base64 .+?\b(bash|osascript|z?sh)\b|openssl base64 -d|^curl\b .+?chmod \+x.+?&&|^(bash|sh|osascript)\b.+?recaptcha|^(bash|sh|osascript)\b.+?#(Verification|     )|^(bash|sh|osascript)\b.+?     #|^wget .+?\| (bash|sh)\b|^curl\b.+?-o\b.+?\/tmp\/.+?&&|^nc .+?-e \/bin\/(bash|sh)\b|^\/tmp\/.+?chmod \+x.+?&&|^wget -q.+?\.(sh|py|bin|elf)\b|^cmd .+?\bcertutil .+?\b(\.exe|\.bat)\b|^powershell .+?\birm .+?\.[a-z]+\/.+?powershell|\bpcalua(\.exe)? .*?\b(curl|powershell|saps|cmd)\b|^cmd .+?\bcmdkey .+?\bschtasks|^Invoke-Command .+?Base64String|^c(onhost|md) .*?--headless |^iex\(i(rm|wr) |^irm .+? iex\b/msi, domAlert, 'Beware, uBlock Origin blocked a potential ClickFix attack: ${text}', excludeMatches, /Maintainer|Contributor|^git |^http|^import /i)
 d10504 1
 a10504 1
-sites.google.com##+js(prevent-clipboard-write, /^mshta |^msiexec |^(bash <<<|curl -kfsSL) \$\(echo .+? base64 -d\b|^cmd \/c .*?\bcurl .+?(\.exe|\.bat)\b|^cmd .*?\bfor \/f .*?\bdelims .*?\bpow |^powershell .*?-w(indowStyle)? h(idden)?\b|^powershell .*?-NoP\b|^powershell .*?-ep bypass\b|^powershell .*?-EP (B|U)\b|^powershell.+?-ExecutionPolicy (Bypass|Unrestricted)|\\PowerShell\.exe.+?-ep bypass\b|^powershell.+?\biex\(|^powershell.+?Invoke-Expression|^powershell.+?Invoke-WebRequest|^powershell.+?-UseBasicParsing|^cmd .*?\/c .+? -nop .+? iex\b|^(cmd|powershell)\b.+?recaptcha|^(cmd|powershell)\b.+?#(Verification|     )|^(cmd|powershell)\b.+?     #|^osascript .+?\bcurl http|^curl -s\b.+?\| (bash|sh|zsh)\b|^\/bin\/(bash|sh|zsh) -c\b.+?\bcurl|^bash -c\b.+?\$\(curl|^python3? -c\b.+?\b(exec|urllib|subprocess)\b|^echo .+?base64 .+?\b(bash|osascript|z?sh)\b|openssl base64 -d|^curl\b .+?chmod \+x.+?&&|^(bash|sh|osascript)\b.+?recaptcha|^(bash|sh|osascript)\b.+?#(Verification|     )|^(bash|sh|osascript)\b.+?     #|^wget .+?\| (bash|sh)\b|^curl\b.+?-o\b.+?\/tmp\/.+?&&|^nc .+?-e \/bin\/(bash|sh)\b|^\/tmp\/.+?chmod \+x.+?&&|^wget -q.+?\.(sh|py|bin|elf)\b|^cmd .+?\bcertutil .+?\b(\.exe|\.bat)\b|^powershell .+?\birm .+?\.[a-z]+\/.+?powershell|\bpcalua(\.exe)? .*?\b(curl|powershell|saps|cmd)\b|^cmd .+?\bcmdkey .+?\bschtasks|^Invoke-Command .+?Base64String|^conhost .*?--headless .*?\bcmd\b|^iex\(i(rm|wr) |^irm .+? iex\b/msi, domAlert, 'Beware. uBlock Origin blocked a potential ClickFix attack: ${text}', excludeMatches, /Maintainer|Contributor|^git |^http|^import /i)
+sites.google.com##+js(prevent-clipboard-write, /^mshta |^msiexec |^(bash <<<|curl -kfsSL) \$\(echo .+? base64 -d\b|^cmd \/c .*?\bcurl .+?(\.exe|\.bat)\b|^cmd .*?\bfor \/f .*?\bdelims .*?\bpow |^powershell .*?-w(indowStyle)? h(idden)?\b|^powershell .*?-NoP\b|^powershell .*?-ep bypass\b|^powershell .*?-EP (B|U)\b|^powershell.+?-ExecutionPolicy (Bypass|Unrestricted)|\\PowerShell\.exe.+?-ep bypass\b|^powershell.+?\biex\(|^powershell.+?Invoke-Expression|^powershell.+?Invoke-WebRequest|^powershell.+?-UseBasicParsing|^cmd .*?\/c .+? -nop .+? iex\b|^(cmd|powershell)\b.+?recaptcha|^(cmd|powershell)\b.+?#(Verification|     )|^(cmd|powershell)\b.+?     #|^osascript .+?\bcurl http|^curl -s\b.+?\| (bash|sh|zsh)\b|^\/bin\/(bash|sh|zsh) -c\b.+?\bcurl|^bash -c\b.+?\$\(curl|^python3? -c\b.+?\b(exec|urllib|subprocess)\b|^echo .+?base64 .+?\b(bash|osascript|z?sh)\b|openssl base64 -d|^curl\b .+?chmod \+x.+?&&|^(bash|sh|osascript)\b.+?recaptcha|^(bash|sh|osascript)\b.+?#(Verification|     )|^(bash|sh|osascript)\b.+?     #|^wget .+?\| (bash|sh)\b|^curl\b.+?-o\b.+?\/tmp\/.+?&&|^nc .+?-e \/bin\/(bash|sh)\b|^\/tmp\/.+?chmod \+x.+?&&|^wget -q.+?\.(sh|py|bin|elf)\b|^cmd .+?\bcertutil .+?\b(\.exe|\.bat)\b|^powershell .+?\birm .+?\.[a-z]+\/.+?powershell|\bpcalua(\.exe)? .*?\b(curl|powershell|saps|cmd)\b|^cmd .+?\bcmdkey .+?\bschtasks|^Invoke-Command .+?Base64String|^c(onhost|md) .*?--headless |^iex\(i(rm|wr) |^irm .+? iex\b/msi, domAlert, 'Beware. uBlock Origin blocked a potential ClickFix attack: ${text}', excludeMatches, /Maintainer|Contributor|^git |^http|^import /i)
 d10527 1
 a10527 1
 augsburger-allgemeine.de##div[id^="cx_"]
+a23951 2
+cerberusapp.com##^template:content(script):has-text(fetchAdsScript)
+cerberusapp.com##+js(acs, eval, fetchAdsScript)
+a23980 1
+leeapk.com##+js(nostif, start)
 a25677 5
 !#if ext_devbuild
 play.mercadolivre.com.br##+js(trusted-json-edit-fetch-response, $..durationInSeconds=0, propsToMatch, -ssai-vod-)
 play.mercadolivre.com.br##+js(mpegdash-prune, Period:has(> EventStream[schemeIdUri="urn:sva:advertising-wg:ad-id-signaling"]), /dash)
 !#endif
 /services/*^ix=*&rt=$script,3p
-diff name:ublock-privacy lines:7 checksum:f83ca44d30
+diff name:ublock-privacy lines:7 checksum:f2c50532c6
 d3 2
 a4 2
 ! Last modified: Thu, 03 Sep 2026 09:26:41 +0000
-! Diff-Path: ../patches/2026.9.3.580.patch#ublock-privacy
+! Diff-Path: ../patches/2026.9.3.867.patch#ublock-privacy
 a2073 2
 ||h.f1.impact-ad.jp/pub_click/$urlskip=/\/\d{6}\/\d{6}\/(https.+)/ -uricomponent
 ||analytics.meaww.com^
-diff name:ublock-quick-fixes lines:8 checksum:34986792f8
+diff name:ublock-quick-fixes lines:8 checksum:ceb4f42b4d
 d3 2
 a4 2
 ! Last modified: Wed, 02 Sep 2026 13:38:45 +0000
-! Diff-Path: ../patches/2026.9.3.580.patch#ublock-quick-fixes
+! Diff-Path: ../patches/2026.9.3.867.patch#ublock-quick-fixes
 d393 2
 d407 1
 a407 1
 sugoren.com#@#.widget
-diff name:ublock-unbreak lines:3 checksum:1be3f1305d
+diff name:ublock-unbreak lines:3 checksum:e802327064
 d4 1
 a4 1
-! Diff-Path: ../patches/2026.9.3.580.patch#ublock-unbreak
-diff name:easylist lines:758 checksum:7861715f36
+! Diff-Path: ../patches/2026.9.3.867.patch#ublock-unbreak
+diff name:easylist lines:895 checksum:ca1b9fcad3
 d4 2
 a5 2
-! Last modified: Thu, 03 Sep 2026 05:05:05 +0000
-! Diff-Path: ../patches/2026.9.3.580.patch#easylist
+! Last modified: Thu, 03 Sep 2026 11:44:08 +0000
+! Diff-Path: ../patches/2026.9.3.867.patch#easylist
 a15488 1
 ||0de7e3b709.com^
 a15640 1
@@ -128,6 +143,8 @@ a18643 1
 ||anulomadonated.shop^
 a18679 1
 ||aokhxalifwmhm.site^
+a18729 1
+||aplentymegrel.qpon^
 a18799 1
 ||apuxexhbpeqsm.website^
 a18993 1
@@ -150,6 +167,8 @@ a19812 1
 ||baningdingeyez.cyou^
 a19880 1
 ||basellaanchat.qpon^
+a19990 1
+||bbytakgwashdp.online^
 a20027 1
 ||bddhkkzwgaqju.site^
 a20059 1
@@ -170,6 +189,10 @@ a20559 1
 ||binwlhffwbmjl.site^
 a20593 1
 ||bitechemalmier.cfd^
+a20602 1
+||bitwiseanorn.cyou^
+a20635 1
+||bjoblfbaldpzj.site^
 a20658 1
 ||bkiqafdyvzpvb.space^
 a20832 1
@@ -180,6 +203,8 @@ a21219 1
 ||bqbwvfofginwp.online^
 a21369 1
 ||brizaazofier.shop^
+a21490 1
+||bszsykemrsywx.online^
 a21592 1
 ||bulkingpiffero.shop^
 a21598 1
@@ -188,8 +213,14 @@ a21651 1
 ||burrishcrowdle.qpon^
 a21665 1
 ||busmencoelar.cyou^
+a21672 1
+||butlecarina.cfd^
 a21835 1
 ||bztcjooivbndu.space^
+a21921 1
+||cagngroggy.com^
+a21953 1
+||callatsmalts.shop^
 a21964 1
 ||caltrappeacheslola.qpon^
 a22017 1
@@ -202,10 +233,14 @@ a22202 1
 ||catchupversate.qpon^
 a22461 1
 ||cerillaletches.cyou^
+a22553 1
+||chakrasoverlip.com^
 a22658 1
 ||chesountamped.cyou^
 a22726 1
 ||cholambranlelaccic.cfd^
+a22765 1
+||chumawihashing.cfd^
 a22887 1
 ||cjr364hqf9enhplwct7l9u9xwkx.cfd^
 a22999 1
@@ -220,6 +255,8 @@ a23477 1
 ||condignstigma.qpon^
 a23572 1
 ||contextelvira.cyou^
+a23706 1
+||corozosaims.qpon^
 a23730 1
 ||corvinacoy.cfd^
 a23816 1
@@ -252,8 +289,12 @@ a24739 1
 ||daturasthurgi.cfd^
 a24799 1
 ||dc649f3e46.com^
+a24861 1
+||deabbmojtqnub.online^
 a24888 1
 ||debordgenoa.cfd^
+a24954 1
+||deduitripperscavina.cfd^
 a25019 1
 ||dejectmedley.com^
 a25364 1
@@ -286,6 +327,8 @@ a26880 1
 ||eabwmonhlyumm.website^
 a26942 1
 ||eatersstoopsenflesh.cyou^
+a27250 1
+||eidoswarpers.cyou^
 a27254 1
 ||eightypotline.cfd^
 a27295 1
@@ -296,10 +339,14 @@ a27842 1
 ||epsbasbuiyhbm.space^
 a27871 1
 ||eqodnmjyvanim.space^
+a27921 1
+||erhrklifwxkq29r4nugiu.rest^
 a27923 1
 ||erikitelustre.com^
 a28233 1
 ||exciterspasmus.qpon^
+a28376 1
+||eyelineserfishthawier.cfd^
 a28736 1
 ||fcuzoswetczks.site^
 a28835 1
@@ -310,6 +357,8 @@ a29060 1
 ||filmswattled.cyou^
 a29147 1
 ||fissilescyphae.cfd^
+a29279 1
+||flenserhaidukdehorn.cyou^
 a29287 1
 ||flfngtjd.com^
 a29374 1
@@ -345,6 +394,8 @@ a31001 1
 a31282 2
 ||gqtvkxhycjthdx.com^
 ||gqvqlasfg.com^
+a31350 1
+||gravenosiered.qpon^
 a31384 1
 ||greggedisrate.shop^
 a31438 1
@@ -357,6 +408,8 @@ a31582 1
 ||guckshylodes.cyou^
 a31617 1
 ||gullsupbank.cfd^
+a31619 1
+||gulpingdinah.cfd^
 a31627 1
 ||gumschultz.cfd^
 a31866 1
@@ -379,6 +432,8 @@ a32693 1
 ||hnqqvagxfnrgr.website^
 a32779 1
 ||holsstola.qpon^
+a32858 1
+||horselykentish.cyou^
 a33074 1
 ||htwvovlpuoaaf.online^
 a33172 1
@@ -407,6 +462,8 @@ a34122 1
 ||inputcarping.com^
 a34274 1
 ||intimagluma.shop^
+a34526 1
+||isolineoutfitsverbene.qpon^
 a34628 1
 ||iumwsfnaegusu.space^
 a34714 1
@@ -417,6 +474,8 @@ a34783 1
 ||jacdpwhbc.com^
 a34889 1
 ||jbbtyboyepzsu.site^
+a34955 1
+||jdlrqjxfdxzjm.website^
 a35062 1
 ||jgcovosxstnnc.online^
 a35092 1
@@ -443,6 +502,8 @@ a35840 1
 ||kaingaloratehistie.cfd^
 a35935 1
 ||kcbwifgbxzubj.site^
+a36127 1
+||khamaltartish.qpon^
 a36304 1
 ||klarextqcjbis.space^
 a36404 1
@@ -453,6 +514,8 @@ a36787 1
 ||kyfrqnupucfnu.space^
 a36851 1
 ||laasfudoai.com^
+a36875 1
+||lactidealwise.shop^
 a36931 1
 ||lampedguilts.cfd^
 a37256 1
@@ -475,8 +538,12 @@ a38234 1
 ||luimangeao.cfd^
 a38378 1
 ||lxzduwepfkhiu.site^
+a38398 1
+||lynxeslentor.shop^
 a38426 1
 ||lz6gcju4lrmjip.rest^
+a38590 1
+||makarregal.qpon^
 a38680 1
 ||maooiyexpvwde.com^
 a38725 1
@@ -489,6 +556,8 @@ a39154 1
 ||mfatvdikutgoo.space^
 a39229 1
 ||mhkm5voqlh2wj96x.rest^
+a39270 1
+||midriffprosser.cyou^
 a39313 1
 ||milliontelfer.cfd^
 a39389 1
@@ -504,6 +573,8 @@ a39739 1
 a39905 2
 ||moxieoutwick.shop^
 ||moxotreaty.cfd^
+a40067 1
+||mu4z8vf3xib37y8jp2xkbtc5ef6wv7.rest^
 a40165 1
 ||murlainaten.qpon^
 a40231 1
@@ -538,44 +609,68 @@ a41887 1
 ||ocreashrug.shop^
 a41978 1
 ||oepejgxsdnfbsr.com^
+a41992 1
+||oextxwrxf6yrxy1p.cfd^
 a42144 1
 ||ohmageochred.com^
 a42171 1
 ||oilcampshift.qpon^
+a42196 1
+||ojfascbw.in^
+a42265 1
+||oljzzc14.xyz^
 a42308 1
 ||omguk.com^
 a42658 1
 ||orkeytippers.com^
 a42736 1
 ||ostendenlists.cyou^
+a42799 1
+||ougmxykcrtaud.space^
+a42936 1
+||ovonicvardacamuse.qpon^
 a43042 1
 ||oyculxffvtiap.website^
 a43107 1
 ||ozvwjlhfxloio.website^
 a43417 1
 ||patinaesarcina.com^
+a43441 1
+||paviorsdeodate.cyou^
 a43529 1
 ||pcodfpdleaaqlft.com^
 a43607 1
 ||pectinweskits.com^
 a43816 1
 ||peweevoyeusejotnian.cfd^
+a43992 1
+||picheytaxemesaurian.cyou^
 a44063 1
 ||pillulesiering.com^
+a44077 1
+||pimpsiowa.cfd^
 a44092 1
 ||pinierfriths.qpon^
 a44094 1
 ||pinkeysurging.qpon^
 a44100 1
 ||pinningimbrier.shop^
+a44108 1
+||pintoswall.qpon^
 a44113 1
 ||pioqjsnld.com^
 a44267 1
 ||plassprimsiecoontah.qpon^
+a44283 1
+||plausiblecleft.com^
 a44339 1
 ||plmxrxtntdbrr.space^
 a44438 1
 ||pnwluziushxjy.site^
+a44599 1
+||popgunsbalnea.cyou^
+a44603 1
+||poplinsguarabu.shop^
 a44668 1
 ||positumloxotic.qpon^
 a44675 1
@@ -586,6 +681,8 @@ a44881 1
 ||prepayfossils.cfd^
 a45154 1
 ||prosospraxis.cyou^
+a45317 1
+||ptisanbanuyoarizona.cyou^
 a45959 1
 ||qizbddwgcrbfu.online^
 a46044 1
@@ -624,12 +721,20 @@ a47645 1
 ||ripenedtola.com^
 a47777 1
 ||rmhewmmaeaenl.space^
+a47821 1
+||rnqcffpv.com^
 a47899 1
 ||rolledipocras.com^
+a47978 1
+||rotundoselago.com^
+a47988 1
+||rouleauorbed.qpon^
 a48088 1
 ||rrmlejjwebmv.top^
 a48146 1
 ||rteomxavwvnol.site^
+a48405 1
+||ryaqlyayyeba.top^
 a48537 1
 ||saigascopolar.shop^
 a48595 1
@@ -660,6 +765,8 @@ a49865 1
 ||skeifnoxial.qpon^
 a49898 1
 ||skinfulwinkled.cyou^
+a49973 1
+||slcfgxfpoubud.site^
 a50056 1
 ||slowinggourdcorvets.cfd^
 a50073 1
@@ -674,12 +781,21 @@ a50444 1
 ||sotzfabkmdzwt.space^
 a50478 1
 ||sowlbrumeswoodlot.qpon^
-a50502 1
+a50502 2
 ||spailsobvious.cfd^
+||spajgnyzbreeu.space^
 a50565 1
 ||speersgeigerrhebok.cfd^
+a50927 1
+||starevelites.com^
+a51119 1
+||storykialkee.cyou^
+a51162 1
+||streeksslirt.cyou^
 a51328 1
 ||succisatawhid.com^
+a51371 1
+||suinebrahman.cfd^
 a51391 1
 ||sumcdmkbznict.site^
 a51586 1
@@ -696,6 +812,10 @@ a51718 1
 ||sygvwadaxjesn.space^
 a51722 1
 ||syjpyfglqztin.space^
+a51724 1
+||sylviteneedier.cyou^
+a51870 1
+||takesflobby.cfd^
 a51888 1
 ||talsitcomparer.cfd^
 a51956 1
@@ -704,10 +824,18 @@ a52012 1
 ||tbhjykylmlcsc.space^
 a52024 1
 ||tbvfghdqzfgkm.website^
+a52047 1
+||tcsqcikxilqfq.site^
+a52199 1
+||tenebracaption.cfd^
+a52350 1
+||theelindaring.shop^
 a52435 1
 ||thoraxlaith.qpon^
 a52503 1
 ||thy7v872x26qot4.cfd^
+a52551 1
+||tientoannulet.shop^
 a52644 1
 ||tiretalmud.cyou^
 a52929 1
@@ -722,6 +850,8 @@ a53497 1
 ||ttoqvluihdcbr.site^
 a53647 1
 ||tutmenafb.qpon^
+a54154 1
+||ulibodymnqip.com^
 a54185 1
 ||umahvvivrpbfx.online^
 a54215 1
@@ -732,6 +862,8 @@ a54274 1
 ||unchidarrau.qpon^
 a54282 1
 ||uncomiclanely.com^
+a54359 1
+||unfitsraughty.qpon^
 a54482 1
 ||unpaperxeriff.cfd^
 a54520 1
@@ -742,6 +874,8 @@ a54609 1
 ||uoizyoqicwwyo.space^
 a54623 1
 ||uovvobtfxeekw.site^
+a54651 1
+||updartsstob.cyou^
 a55083 1
 ||vaazaraokaym.top^
 a55213 1
@@ -750,12 +884,20 @@ a55486 1
 ||vgsbdhmsmthec.site^
 a55538 1
 ||victalsaktism.shop^
+a55626 1
+||viniertrover.cyou^
 a55630 1
 ||vintoutfluerengue.cfd^
 a56059 1
 ||vucomsxylannahuan.cfd^
+a56100 1
+||vvskgwkxrdtaf.space^
 a56234 1
 ||w7p7mb2zt52xrl7yxokc.cfd^
+a56242 1
+||wacmidday.cyou^
+a56473 1
+||wazzeyvekavm.top^
 a56536 1
 ||wdbbnerscjscs.space^
 a56806 1
@@ -764,6 +906,8 @@ a56812 1
 ||whatdcampman.cyou^
 a57270 1
 ||wmwwmbqrqbqv.top^
+a57466 1
+||wpkxzrflnigyq.website^
 a57534 1
 ||wreckedscrawlyschuits.cfd^
 a57571 1
@@ -786,6 +930,8 @@ a58428 1
 ||xuzkqjhnleqoq.space^
 a58459 1
 ||xwavuyzxzansy.website^
+a58487 1
+||xx53ox69chu7fvm3cvnn5tz.cfd^
 a58665 1
 ||ybuimwfyzkzzf.space^
 a58677 2
@@ -802,6 +948,8 @@ a59016 1
 ||yntaegulwgqur.site^
 a59154 1
 ||yqkpihoutfeef.website^
+a59680 1
+||ziksqmromrsqpr.com^
 a59703 1
 ||zirducwpedro.in^
 a59917 1
@@ -812,6 +960,8 @@ a60006 1
 ||zsyzmsvvbkmex.site^
 a60060 1
 ||zunianwych.qpon^
+a60062 1
+||zurichmew.shop^
 a60163 1
 ||zymjzwakrmao.top^
 a70051 3
@@ -827,6 +977,8 @@ a76094 1
 elevenforum.com##[style="width:302px;padding-bottom:10px;text-align:center;height:265px;margin-bottom:15px;"]
 a76452 1
 wallapop.com##div[class^="search-page_SearchPage__topSky_"]
+a76776 1
+buildcores.com##li.group\/menu-item:has(a[href="/sponsored"])
 a76798 1
 wallapop.com##section[class*="_adSlot_"]
 a77043 1
@@ -838,15 +990,19 @@ a77821 1
 yahoo.com##.cls-ad-top-center
 a78321 1
 target.com#?#div[data-test="ListingPageProductListing"]:has(span:has-text(Sponsored))
-diff name:easyprivacy lines:45 checksum:edafb6d801
+diff name:easyprivacy lines:61 checksum:cfa895e9a0
 d4 2
 a5 2
-! Last modified: Thu, 03 Sep 2026 05:05:05 +0000
-! Diff-Path: ../patches/2026.9.3.580.patch#easyprivacy
+! Last modified: Thu, 03 Sep 2026 11:44:08 +0000
+! Diff-Path: ../patches/2026.9.3.867.patch#easyprivacy
 a3253 1
 .samsung.net/mail/*/status/update?$image
+a3474 1
+||addefend-platform.com^
 a7140 1
 ||consumerdebtnegotiation.com^
+a8306 1
+||pubbug.com^
 a8389 1
 ||redexecs.com^
 a8402 1
@@ -868,11 +1024,23 @@ a16003 1
 ||joomag.com/collect-bulk?
 a17092 1
 ||unleash.zenchef.com/api/frontend/client/metrics
+d17645 1
+a17645 1
+10tv.com,11alive.com,12news.com,12newsnow.com,13newsnow.com,13wmaz.com,5newsonline.com,9news.com,abc10.com,al.com,apnews.com,artforum.com,artnews.com,billboard.com,birdsandblooms.com,calgaryherald.com,calgarysun.com,cbs19.tv,cbs8.com,cleveland.com,crooksandliars.com,deadline.com,dpreview.com,driving.ca,familyhandyman.com,financialpost.com,firstcoastnews.com,fox43.com,fox61.com,goldderby.com,golfdigest.com,hollywoodreporter.com,indiewire.com,kare11.com,kcentv.com,kens5.com,kgw.com,kiiitv.com,king5.com,krem.com,ktvb.com,kvue.com,lehighvalleylive.com,lfpress.com,localmemphis.com,masslive.com,myfoxzone.com,nationalpost.com,nbcsports.com,newscentermaine.com,newswest9.com,nj.com,oregonlive.com,ottawacitizen.com,ottawasun.com,rd.com,robbreport.com,rollingstone.com,sherdog.com,sidereel.com,superherohype.com,syracuse.com,tasteofhome.com,techcrunch.com,thehealthy.com,thv11.com,torontosun.com,vancouversun.com,variety.com,vibe.com,wbir.com,wcnc.com,weareiowa.com,wfaa.com,wfmynews2.com,wgrz.com,whas11.com,windsorstar.com,wkyc.com,wltx.com,wnep.com,wqad.com,wthr.com,wtol.com,wtsp.com,wusa9.com,wwd.com,wwltv.com,wzzm13.com##+js(acs, document.getElementsByTagName, .pubads)
+d17648 1
+a17648 1
+al.com,attackofthefanboy.com,beavertonvalleytimes.com,destructoid.com,edmontonsun.com,gamepur.com,gamerjournalist.com,gameskinny.com,lehighvalleylivecom,lgbtqnation.com,macwelt.de,masslive.com,mlive.com,news8000.com,nj.com,oregonlive.com,pcwelt.de,pennlive.com,portlandtribune.com,primagames.com,progameguides.com,queerty.com,siliconera.com,silive.com,sporcle.com,techcrunch.com,thebeenews.com,themarysue.com,theoutlookonline.com,touchtapplay.com,wegotthiscovered.com##+js(aost, decodeURI, /(?=^(?!.*\.js))/)
+d17650 2
+a17651 2
+247sports.com,cbsnews.com,cbssports.com,indiewire.com,nypost.com,pagesix.com,pennlive.com##+js(rmnt, script, '"data-adm-url"')
+abc17news.com,al.com,artforum.com,artnews.com,awkward.com,awkwardmom.com,bailiwickexpress.com,barnsleychronicle.com,becomingpeculiar.com,bethcakes.com,blogher.com,bluegraygal.com,briefeguru.de,carmagazine.co.uk,cattime.com,cbr.com,chaptercheats.com,collider.com,comingsoon.net,commercialobserver.com,competentedigitale.ro,crafty.house,dailyvoice.com,decider.com,didyouknowfacts.com,dogtime.com,dualshockers.com,dustyoldthing.com,faithhub.net,femestella.com,footwearnews.com,freeconvert.com,frogsandsnailsandpuppydogtail.com,fsm-media.com,funtasticlife.com,fwmadebycarli.com,gamerant.com,gfinityesports.com,givemesport.com,gulflive.com,helloflo.com,homeglowdesign.com,honeygirlsworld.com,hotcars.com,howtogeek.com,insider-gaming.com,insurancejournal.com,jasminemaria.com,kion546.com,lehighvalleylive.com,lettyskitchen.com,lifeinleggings.com,liveandletsfly.com,lizzieinlace.com,localnews8.com,lonestarlive.com,madeeveryday.com,maidenhead-advertiser.co.uk,makeuseof.com,mardomreport.net,melangery.com,milestomemories.com,mlive.com,modernmom.com,momtastic.com,mostlymorgan.com,motherwellmag.com,movieweb.com,muddybootsanddiamonds.com,musicfeeds.com.au,nationalreview.com,nj.com,nordot.app,nothingbutnewcastle.com,nsjonline.com,oakvillenews.org,observer.com,pagesix.com,pennlive.com,pinkonthecheek.com,predic.ro,puckermom.com,qtoptens.com,realgm.com,robbreport.com,royalmailchat.co.uk,samchui.com,sandrarose.com,screenrant.com,sheknows.com,sherdog.com,sidereel.com,simpleflying.com,sloughexpress.co.uk,spacenews.com,sportsgamblingpodcast.com,spotofteadesigns.com,ssnewstelegram.com,stacysrandomthoughts.com,superherohype.com,tablelifeblog.com,thebeautysection.com,thecelticblog.com,thecurvyfashionista.com,thefashionspot.com,thegamer.com,thenerdyme.com,thenonconsumeradvocate.com,thethings.com,timesnews.net,topspeed.com,toyotaklub.org.pl,travelingformiles.com,tvline.com##+js(rmnt, script, '"v4ac1eiZr0"')
 a17731 2
 ! alfalfalfa.com,matometanews.com
 ||ipcheck.blogsys.jp^$redirect=noop.js,script
 a54969 1
 ||sidecar.unext.jp/track/
+a55508 1
+@@||agoda.net/cdn-supply-iam/static/js/webanalytics.$domain=agoda.com
 d55946 1
 a55946 1
 @@||googletagmanager.com/gtag/js$domain=17track.net|9to5mac.com|academy.com|acornonline.com|aena.es|afisha.timepad.ru|aliexpress.com|app.joinhandshake.com|carhartt-wip.com|cbslocal.com|checkout.ao.com|cmoa.jp|cnet.com|cram.com|devclass.com|dholic.co.jp|ecmweb.com|ejgiftcards.com|enmotive.com|espressif.com|euronics.ee|factory.pixiv.net|fanpage.it|farmaciabolli1833.it|game.anymanager.io|gamelog.apexlegends-leaksnews.com|globo.com|gmanetwork.com|herculesstands.com|homeinspector.org|honeystinger.com|hostingvergelijker.nl|huion.com|inforesist.org|kawasaki.com|kinepolis.be|kinepolis.ch|kinepolis.es|kinepolis.fr|kinepolis.lu|kinepolis.nl|liene-life.com|livongo.com|m.putlocker.how|malegislature.gov|mall.heiwa.jp|mirrativ.com|modehasen.de|mond.how|montcopa.org|mopar.com|nihontsushin.com|o2.co.uk|oko.sh|oxylabs.io|panflix.com.br|papajohns.com|plex.tv|pptvhd36.com|proxyorb.com|radiosarajevo.ba|redstoneonline.jp|rhbgroup.com|rintraccialamiaspedizione.it|royalcams.com|schwab.com|seatmaps.com|showroom-live.com|skylar.com|slink.ptit.edu.vn|sloways.eu|square-enix.com|starblast.io|supplementmart.com.au|ticketmaster.com|timparty.tim.it|toptal.com|trespa.info|truckspring.com|virginmedia.com|virginplus.ca|webstatus.dev|winefolly.com|winhappy.com|wps.com|xl-bygg.no|zf1.tohoku-epco.co.jp|zipair.net
