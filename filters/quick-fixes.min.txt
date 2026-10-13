@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Quick fixes
 ! Expires: 12 hours
-! Last modified: Tue, 13 Oct 2026 10:44:06 +0000
-! Diff-Path: ../patches/2026.10.13.953.patch#ublock-quick-fixes
+! Last modified: Tue, 13 Oct 2026 17:24:52 +0000
+! Diff-Path: ../patches/2026.10.13.1270.patch#ublock-quick-fixes
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/quick-fixes.txt ***
@@ -265,6 +265,7 @@ gledaitv.*##+js(trusted-replace-argument, document.querySelector, 0, json:"body"
 gledaitv.*##+js(set, scriptBlocked, false)
 gledaitv.*##+js(set, blocked, false)
 gledaitv.*##+js(set, testUrls, [])
+gledaitv.*##+js(nostif, adblock)
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$script,domain=bg-gledai.video,redirect=google-ima.js
 ||viads.com^$script,domain=bg-gledai.video,redirect=noopjs
 @@||ads.*.js|$script,3p,domain=seirsanduk.*|seir-sanduk.com|seirsanduk.com|seirsanduk.net|seirsanduk.online
@@ -376,9 +377,12 @@ meuplayeronlinehd.com###player:style(display: block !important;)
 openchat-review.me##+js(set-local-storage-item, BLOCKED_FLAG_KEY, $remove$)
 openchat-review.me##+js(aost, document.querySelectorAll, security.js)
 streamcash.to##+js(rmnt, script, /\${''}|body:JSON\.stringify/)
-streamcash.to##+js(trusted-replace-argument, document.getElementById, 0, '', condition, pv-notice)
-streamcash.to##span[id][style*="z-index: 2147483647;"]
-streamcash.to##div[id][style*="40px"]
+streamcash.to##+js(set, Element.prototype.attachShadow, noopFunc)
+streamcash.to##a[rel*="sp0nsored"]:upward(1)
+streamcash.to##+js(trusted-override-element-method, HTMLAnchorElement.prototype.click, a[target="_blank"])
+streamcash.to##div.video-js:style(z-index:2147483647 !important)
+||mjzeexubcswjka.com^
+||uijarxbm.com^
 decompiler.com##+js(set, OffscreenCanvas.prototype.getContext, undefined)
 decompiler.com##+js(nosiif, === false)
 decompiler.com##+js(aost, Element.prototype.removeChild, /blocked|tick/)
