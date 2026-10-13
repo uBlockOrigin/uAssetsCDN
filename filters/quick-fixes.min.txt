@@ -1,7 +1,7 @@
 ! Title: uBlock filters – Quick fixes
 ! Expires: 12 hours
-! Last modified: Mon, 12 Oct 2026 11:35:58 +0000
-! Diff-Path: ../patches/2026.10.13.459.patch#ublock-quick-fixes
+! Last modified: Tue, 13 Oct 2026 10:44:06 +0000
+! Diff-Path: ../patches/2026.10.13.953.patch#ublock-quick-fixes
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/quick-fixes.txt ***
@@ -84,6 +84,7 @@ www.youtube.com##+js(trusted-rpfr, '"adSlots"', '"no_ads"', /get_watch?)
 ! www.youtube.com##+js(trusted-replace-outbound-text, JSON.stringify, "contentCheckOk":false, "params":"yAEB"\,"contentCheckOk":false, condition, /^(?=.*"contentPlaybackContext":{")(?!.*"params":").*$/)
 /\.googlevideo\.com\/videoplayback\?expire=(?:[02-9]\d+|1[1-68-9]\d+|17[1-7]\d+)&/$xhr,3p,method=get,domain=www.youtube.com
 ||youtube.com/api/stats/atr?ns=*&ver=2&cmt=1.*&fs=0&*&euri&lact=$xhr,method=post,badfilter
+www.youtube.com###toast:has(> #text-container > yt-formatted-string#text.yt-notification-action-renderer)
 ! web.facebook.com,www.facebook.com##+js(json-prune, require.0.3.0.__bbox.require.[].3.1.__bbox.result.data.viewer.sideFeed.nodes.0.{-}.nodes.0.rhc_ad)
 ! web.facebook.com,www.facebook.com##+js(json-prune-xhr-response, data.viewer.sideFeed.nodes.0.{-}.nodes.0.rhc_ad, , propsToMatch, /api/graphql)
 web.facebook.com,www.facebook.com##+js(json-prune, require.0.3.0.__bbox.require.[].3.1.__bbox.result.data.viewer.sideFeedUnit.nodes.[].new_adverts.nodes.[-].sponsored_data)
@@ -514,7 +515,8 @@ genshin-soku.com,monhan-soku.com,xn--gckdevd5myivf.site,yamiisoku.com##+js(json-
 genshin-soku.com,monhan-soku.com,xn--gckdevd5myivf.site,yamiisoku.com##+js(prevent-innerHTML)
 genshin-soku.com,monhan-soku.com,xn--gckdevd5myivf.site,yamiisoku.com##+js(trusted-suppress-native-method, DOMParser.prototype.parseFromString, '"/<[Aa]/"')
 genshin-soku.com,monhan-soku.com,xn--gckdevd5myivf.site,yamiisoku.com##+js(no-fetch-if, method:POST)
-genshin-soku.com,monhan-soku.com,xn--gckdevd5myivf.site,yamiisoku.com##+js(rmnt, script, adsbygoogle)
+genshin-soku.com,monhan-soku.com,xn--gckdevd5myivf.site,yamiisoku.com##+js(rmnt, script, /adsby|console|data-ad|modal|requestAnimationFrame|srcdoc|tagName|text\/html|userAgent|visibility|zucks|^[\S\s]{3200\,}$|\\u00|ブロッカ/)
+genshin-soku.com,monhan-soku.com,xn--gckdevd5myivf.site,yamiisoku.com##^script[id]:not([src], :empty, #wp-emoji-settings)
 ligainsider.de##+js(trusted-replace-argument, document.getElementById, 0, '', condition, /^wall-backdrop$/)
 ligainsider.de##+js(nostif, /unknown|BLOCKED/i)
 iplookup.flagfox.net##.adsbygoogle
