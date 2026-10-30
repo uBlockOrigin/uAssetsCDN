@@ -1,5 +1,5 @@
 ! Title: uBlock₀ filters – Quick fixes
-! Last modified: Fri, 30 Oct 2026 08:23:53 +0000
+! Last modified: Fri, 30 Oct 2026 17:52:33 +0000
 ! Expires: 8 hours
 ! Description: Immediate, temporary filters to fix websites
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
@@ -59,6 +59,8 @@ www.youtube.com##+js(nano-stb, [native code], 17000, 0.001)
 www.youtube.com##+js(json-prune-fetch-response, adPlacements adSlots playerResponse.adPlacements playerResponse.adSlots [].playerResponse.adPlacements [].playerResponse.adSlots, , propsToMatch, /\/player(\?|$)/)
 ! https://github.com/uBlockOrigin/uAssets/issues/20586#issuecomment-2144781835
 www.youtube.com##+js(json-prune-fetch-response, adPlacements adSlots playerResponse.adPlacements playerResponse.adSlots, , propsToMatch, /playlist?)
+! https://github.com/uBlockOrigin/uAssets/issues/30157#issuecomment-6528457908
+m.youtube.com,www.youtube.com,www.youtube-nocookie.com##+js(json-prune-fetch-response, endpoint.watchEndpoint.unserializedPrefetchData.playerResponse.playerAds endpoint.watchEndpoint.unserializedPrefetchData.playerResponse.adPlacements endpoint.watchEndpoint.unserializedPrefetchData.playerResponse.adSlots, , propsToMatch, /resolve_url?)
 ! https://github.com/uBlockOrigin/uAssets/issues/20586#issuecomment-2271325338
 ! https://github.com/uBlockOrigin/uAssets/issues/20586#issuecomment-2308486423
 ! https://github.com/AdguardTeam/AdguardFilters/commit/61d89cebe154ca17932bedf61df5e2c7bd75bd7d
@@ -123,7 +125,6 @@ web.facebook.com,www.facebook.com##div[role="complementary"] a[attributionsrc][h
 web.facebook.com,www.facebook.com##div[role="complementary"] h3 span[style^="-webkit-box-orient:vertical"]:has-text(/^Sponsored$/)
 ! web.facebook.com,www.facebook.com##+js(rpnt, script, "x3m9kf2n":true\,, , condition, compat_iframe_token)
 web.facebook.com,www.facebook.com##+js(json-prune, require.0.3.0.__bbox.require.[].3.1.__bbox.result.data.serpResponse.results.edges.[-].rendering_strategy.view_model.story.sponsored_data.ad_id)
-web.facebook.com,www.facebook.com##+js(json-edit, ..node[?.*.__typename=="SponsoredData"])
 web.facebook.com,www.facebook.com##+js(json-edit, ..nodes.*[?.sponsored_data])
 web.facebook.com,www.facebook.com##+js(jsonl-edit-xhr-response, .data[?.category=="SPONSORED"].node, propsToMatch, /graphql)
 web.facebook.com,www.facebook.com##+js(jsonl-edit-xhr-response, ..node[?.*.__typename=="SponsoredData"], propsToMatch, /graphql)
@@ -310,8 +311,8 @@ bing.com##ol#b_results > li.b_algo:has(.b_lineclamp3:matches-css-before(content:
 ! https://www.reddit.com/r/uBlockOrigin/comments/197760n/adblock_detected_httpswwwbggledailive/
 ! https://github.com/uBlockOrigin/uAssets/issues/29059#issuecomment-3322889596
 ! https://github.com/uBlockOrigin/uAssets/issues/29059#issuecomment-3327077921
-@@*$image,xhr,domain=bg-gledai.*|gledaitv.*|bg-gledai.video|gledaitv.fan|gledaitv.live
-@@*$ghide,domain=bg-gledai.*|gledaitv.*|bg-gledai.video|gledaitv.fan|gledaitv.live
+@@*$image,xhr,domain=bg-gledai.*|gledaitv.*|cdn.gledaitv.*|bg-gledai.video|gledaitv.fan|gledaitv.live
+@@*$ghide,domain=bg-gledai.*|gledaitv.*|cdn.gledaitv.*|bg-gledai.video|gledaitv.fan|gledaitv.live
 @@||pagead2.googlesyndication.com^$script,domain=bg-gledai.*|gledaitv.*|bg-gledai.video|gledaitv.fan|gledaitv.live
 gledaitv.*###ad-overlay:remove()
 gledaitv.*##+js(trusted-replace-argument, document.getElementById, 0, json:"body", condition, ad-detection-bait)
@@ -320,11 +321,10 @@ gledaitv.*##+js(set, scriptBlocked, false)
 gledaitv.*##+js(set, blocked, false)
 gledaitv.*##+js(set, testUrls, [])
 gledaitv.*##+js(nostif, adblock)
-bg-gledai.video,gledaitv.*##+js(aopr, idiotHandlers)
-bg-gledai.video,gledaitv.*##+js(acs, document.createElement, ad-detection-bait)
-bg-gledai.video,gledaitv.*###gledai-block-notice
-bg-gledai.video,gledaitv.*##[id^="gledai-"][id$="-notice"]
-bg-gledai.video,gledaitv.*##[class*="gledai-"][class*="notice"]
+bg-gledai.video,gledaitv.*,cdn.gledaitv.*##+js(aopr, idiotHandlers)
+bg-gledai.video,gledaitv.*,cdn.gledaitv.*##+js(acs, document.createElement, ad-detection-bait)
+bg-gledai.video,gledaitv.*,cdn.gledaitv.*##:is([id*="access"],[id*="warning"],[id*="gledai"],[class*="access"],[class*="warning"],[class*="gledai"])
+bg-gledai.video,gledaitv.*,cdn.gledaitv.*##[id="noob-detection-bait"]:style(display:block!important;height:1px!important;width:1px!important;visibility:visible!important)
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$script,domain=bg-gledai.video,redirect=google-ima.js
 ||viads.com^$script,domain=bg-gledai.video,redirect=noopjs
 
