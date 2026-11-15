@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Sun, 15 Nov 2026 08:43:35 +0000
-! Diff-Path: ../patches/2026.11.15.554.patch#ublock-filters
+! Last modified: Sun, 15 Nov 2026 16:10:03 +0000
+! Diff-Path: ../patches/2026.11.15.1019.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -9844,7 +9844,7 @@ dogdrip.net##ins.adsbygoogle:style(height: 1px !important; visibility: hidden !i
 ||ads.adthrive.com/abd/abd.js$redirect=noopjs
 ||ads.adthrive.com/sites/*/ads.min.js$redirect=adthrive_abd.js,important
 ||helpers.publisherdesk.com/main.js
-||ash.automobile-catalog.com/core.js
+||ash.automobile-catalog.com^
 ://loader.*.js|$script,1p,domain=crosswordsolver.com|gutefrage.net|kreuzwortraetsel.de|motscroises.fr|oeffnungszeitenbuch.de|oraridiapertura24.it|word-grabber.com|wort-suchen.de|woxikon.de
 ||com/script/*.js|$script,3p,header=location:https://stg.*
 ||com/script/*.js|$script,3p,domain=sparkchess.com
@@ -10251,7 +10251,7 @@ comingsoon.net,superherohype.com##+js(trusted-suppress-native-method, HTMLScript
 ! Others
 /^https:\/\/[a-z]{3,}\.[a-z]{7,}\.[a-z]{2,4}\//$script,3p,header=location:https://stg.*
 /^https:\/\/[a-z]{3,}\.[a-z]{7,}\.[a-z]{2,4}\//$script,3p,header=x-xcxurl:https://*
-/^https:\/\/[a-z]{3,}\.[a-z]{7,}\.[a-z]{2,4}\/.{12,}/$script,3p,header=etag:w/"*-179*00000",to=~ai|~au|~be|~br|~ch|~cz|~es|~fr|~de|~dk|~hr|~io|~jp|~nl|~pl|~ru|~tv|~uk|~edu|~gov|~net|~ampproject.org|~amazonaws.com|~bootstrapcdn.com|~cloudflare.com|~cookiebot.com|~cookielaw.org|~dailymotion.com|~facebook.com|~googleapis.com|~gstatic.com|~instagram.com|~jwplatform.com|~jwplayer.com|~musixmatch.com|~myshoptet.com|~onesignal.com|~onetrust.com|~paypalobjects.com|~recurly.com|~tinypass.com|~twitter.com|~uservoice.com|~youtube.com
+/^https:\/\/[a-z]{3,}\.[a-z]{7,}\.[a-z]{2,4}\/.{15,}/$script,3p,header=etag:w/"*-179*00000",to=~ai|~au|~be|~br|~ch|~cz|~es|~fr|~de|~dk|~hr|~io|~jp|~nl|~pl|~ru|~tv|~uk|~edu|~gov|~net|~ampproject.org|~amazonaws.com|~bootstrapcdn.com|~cloudflare.com|~cookiebot.com|~cookielaw.org|~dailymotion.com|~facebook.com|~googleapis.com|~gstatic.com|~instagram.com|~jwplatform.com|~jwplayer.com|~musixmatch.com|~myshoptet.com|~onesignal.com|~onetrust.com|~paypalobjects.com|~recurly.com|~tinypass.com|~twitter.com|~uservoice.com|~youtube.com
 ! Specific
 /^https:\/\/[a-z]{3,}\.[a-z]{7,}\.[a-z]{2,4}\/([^\/]+\/)+[-_a-zA-Z0-9]{11,}$/$script,3p,match-case,domain=azlyrics.com|izurvive.com|kprofiles.com|nextchessmove.com|relogioonline.com.br|reneweconomy.com.au|telegraph.co.uk|vclock.com
 /^https:\/\/[a-z]{3,}\.[a-z]{7,}\.[a-z]{2,4}\/([^\/]+\/)+[-_a-zA-Z0-9]{5,10}$/$script,3p,match-case,domain=az-online.de|base64decode.org|carsized.com|euronews.com|fandom.com|fr.de|index.hr|spanjevandaag.com|urldecoder.org
@@ -10263,6 +10263,7 @@ comingsoon.net,superherohype.com##+js(trusted-suppress-native-method, HTMLScript
 az-online.de,azlyrics.com,base64decode.org,carsized.com,dictionary.cambridge.org,euronews.com,fandom.com,fr.de,index.hr,izurvive.com,kprofiles.com,nextchessmove.com,oxfordlearnersdictionaries.com,relogioonline.com.br,reneweconomy.com.au,spanjevandaag.com,telegraph.co.uk,urldecoder.org,vclock.com##+js(rmnt, script, /HTMLIFrameElement|JSON\[|_contentWindow/, excludes, self.__next)
 emojipedia.org##+js(json-edit, ..props[?.id=="ad-shield"].dangerouslySetInnerHTML, matches, /ad-shield/)
 gamebanana.com##+js(rmnt, script, /admiral|adshield/)
+index.hr##+js(nostif, getComputedStyle)
 ! fora software
 saabcentral.com##+js(acs, document.createElement, abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=)
 alkas.lt###stpd-tablet-1
@@ -18357,7 +18358,7 @@ bg-gledai.*##.smallbanner
 bg-gledai.*##.squarebanner
 /binance-banner.jpg$domain=bg-gledai.*
 bg-gledai.*##+js(acs, document.getElementById, adblock)
-bg-gledai.*###casing > center
+bg-gledai.*###casing > .adsbygoogle
 gledaitv.*##.adsbygoogle
 cdn.gledaitv.live##+js(noeval-if, String.fromCharCode)
 /js/detectorpro_*.js|$script
@@ -25387,6 +25388,9 @@ kaa.lt##+js(set, KAA.state.popads, undefined)
 kaa.lt##+js(aeld, , /popMagic|shield/)
 kaa.lt##+js(nosiif, enforceVideoShield)
 kaa.lt##+js(nowoif, _blank)
+kaa.lt##+js(aost, document.createElement, startOrchestrator)
+kaa.lt###fullscreen-ad-trap
+||kaa.lt/*x*.html^$frame,1p
 ||xgamehub.net/kaa/
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$redirect=noopjs,domain=nuovo.vidplayer.live
 nuovo.vidplayer.live##+js(trusted-json-edit, ..allowAdblock=true)
@@ -26443,3 +26447,7 @@ elektrotanya.com###ad-header4
 elektrotanya.com###ad-header3
 madamnazar.io##+js(no-fetch-if, method:HEAD)
 madamnazar.io##+js(nostif, /offsetHeight|error"/)
+applescoop.org##+js(rmnt, script, /probe|adblock|__asPicks/i)
+applescoop.org##.story-content .ad
+applescoop.org##.as-ad-rail
+applescoop.org##.as-ad
