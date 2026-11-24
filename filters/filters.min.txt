@@ -1,7 +1,7 @@
 ! Title: uBlock filters
 ! Expires: 5 days
-! Last modified: Tue, 24 Nov 2026 04:05:18 +0000
-! Diff-Path: ../patches/2026.11.24.356.patch#ublock-filters
+! Last modified: Tue, 24 Nov 2026 16:17:17 +0000
+! Diff-Path: ../patches/2026.11.24.1052.patch#ublock-filters
 ! Diff-Expires: 317 minutes
 ! License: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
 ! *** uAssets:filters/filters.txt ***
@@ -10946,11 +10946,12 @@ abezara.com,gogatv.org##+js(rmnt, script, /popunder/i)
 geo-film.org##+js(trusted-replace-argument, document.querySelectorAll, 0, json:".player-cards", condition, /^\.player-card$/)
 televiziebi.tv##.ads-baneri-1
 televiziebi.tv##.avc-asvl
+geosaitebi.tv##.avc-asv
 /preroll/*$domain=adjaranet.ai|geosaitebi.tv|kinolab.cc|qartulad.in|televiziebi.tv
+/banner/*$image,domain=geosaitebi.tv|televiziebi.tv
 ||geofilms.net/rolls/
 ||croconet.cam/api/ads/
 ||croconet.cam/ads/$media
-||televiziebi.tv/*/banner/
 ||cdn.jsdelivr.net/gh/nika39/*/vast.js^
 ! NOTE: German
 moz.de###bluum
@@ -19712,8 +19713,8 @@ pureleaks.net##+js(aopw, popName)
 ||chromeactions.com^$csp=frame-src
 ||mixesoft.com^$csp=frame-src
 ||mycinema.pro^$csp=frame-src
-snapwordz.com,toolxox.com##+js(rmnt, script, /adblock/i)
-snapwordz.com,toolxox.com##+js(no-fetch-if, googlesyndication)
+snapwordz.com##+js(rmnt, script, /adblock/i)
+snapwordz.com##+js(no-fetch-if, googlesyndication)
 afly.pro##+js(noeval-if, ads)
 iwanttfc.com##+js(set, settings.adBlockDetectionEnabled, false)
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$redirect=google-ima.js,domain=iwanttfc.com
@@ -20082,6 +20083,7 @@ x.com##article[data-testid="tweet"] a[href^="https://linkneverdiel.com"]
 ! x.com##+js(trusted-json-edit, .[?.media_entities.*.video_info.variants]..url_data.url="https://twitter.undefined")
 ! x.com##+js(nowoif, twitter.undefined)
 ! x.com##a[href="https://twitter.undefined/"]
+twitter.com,x.com,~platform.twitter.com##+js(json-prune-fetch-response, data.*.home_timeline_urt.instructions.[].entries.[-].content.content.promoted_metadata, , propsToMatch, /Home)
 jornadaperfecta.com##+js(rmnt, script, ad-block-activated)
 greentumble.com##.cp-module
 greentumble.com##html:style(overflow: auto !important)
@@ -24231,6 +24233,9 @@ leeapk.com##+js(rmnt, script, /adblock|abd/i)
 leeapk.com##+js(aeld, click, window.open)
 leeapk.com##+js(aeld, scroll, start)
 leeapk.com##+js(nostif, start)
+leeapk.com##+js(set, __lxCfg.global_links, '')
+leeapk.com##+js(nowoif)
+leeapk.com##+js(rmnt, script, inner.innerHTML)
 leeapk.com###ad-link
 ###zdn-adblock-overlay
 ! detection https://condorsoft.co/post/china-lidera-revolucion-seguridad-digital-criptografia-cuantica/9ZssEh9S
@@ -26422,3 +26427,6 @@ imgtag.co.kr##.itgp-ad
 dropdrive.rip##+js(trusted-set-attr, script, data-download-probe, 'ready')
 dropdrive.rip##+js(nostif, offsetHeight)
 knshow.com##+js(rmnt, script, .offsetHeight)
+toolxox.com##+js(trusted-replace-argument, Promise.prototype.then, 0, noopFunc, condition, toolxoxAdblock)
+||short.askingtips.com/*.php?url=$urlskip=?url
+||pages.dev/assets/js/devtools-guard.js
